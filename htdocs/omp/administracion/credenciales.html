@@ -1,0 +1,47 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Open MarcoPolo - Módulo Administración: Credenciales</title>
+<style type="text/css">
+<!--
+body {
+	margin-top: 20px;
+}
+-->
+</style>
+</head>
+
+<body bgcolor="#E8E8D0">
+
+<table border="0" width="100%">
+  <tr>
+    <td width="85" rowspan="2"><img src="\logo2.gif" width="80" height="80" align="middle"></td>
+    <td width="50%"><big>Institucion XXXXX</big><td align="right"><b><i>Módulo Administración</i></b>&nbsp;&nbsp;<img src="\omp.gif" width="80" height="62" align="middle" border="0"><br>
+    </td>
+  </tr>
+</table>
+
+<hr>
+
+<p align="center"><big><b>Generación de Credenciales</b></big></p>
+
+<form method="POST" action="/cgi-bin/wxis.exe/circula/administracion/">
+  <input type="hidden" name="IsisScript" value="circula/administracion/carnet.xis">
+	<table border="0" width="70%" cellpadding="2">
+
+    <tr align="center">
+      <td width="30%"><div align="left"><p><b>Listado selectivo.<br>
+      Ingese los documentos en lineas separadas<br>
+      (2 entradas mínimas)</b></td>
+      <td width="5%"><textarea rows="5" name="dnis" cols="20"></textarea>
+	<p><input type="submit"  value="Enviar"></td>
+    </tr>
+  </table>
+</form>
+
+<p><a href="menu.html">Volver al Menú</a></p>
+</body>
+</html>

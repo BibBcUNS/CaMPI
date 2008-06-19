@@ -1,0 +1,180 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <trace>BR1</trace>
+
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'/cipar.par')</pft></parm>
+  <field action="cgi" tag="100">invs_prestamo_A</field>
+  <field action="cgi" tag="110">invs_prestamo_B</field>
+  <field action="cgi" tag="120">_enviar_invs</field>
+  <field action="cgi" tag="130">documento</field>
+  <field action="replace" tag="120" split="occ"><pft>v120</pft></field>
+
+  <field action="replace" tag="100"><pft>if v100:'s' then replace(v100,'s','') fi</pft></field>
+  <field action="replace" tag="100"><pft>if v100:'S' then replace(v100,'S','') fi</pft></field>
+  <field action="replace" tag="110"><pft>if v110:'s' then replace(v110,'s','') fi</pft></field>
+  <field action="replace" tag="110"><pft>if v110:'S' then replace(v110,'S','') fi</pft></field>
+
+  <field action="replace" tag="100"><pft>if v100:'m' then replace(v100,'m','') fi</pft></field>
+  <field action="replace" tag="100"><pft>if v100:'M' then replace(v100,'M','') fi</pft></field>
+  <field action="replace" tag="110"><pft>if v110:'m' then replace(v110,'m','') fi</pft></field>
+  <field action="replace" tag="110"><pft>if v110:'M' then replace(v110,'M','') fi</pft></field>
+  
+  <list action="load" previous="delete"><pft>(v100/v110)</pft></list>
+
+  <display>
+      <html>
+	<head>
+	</head>	
+	<body bgcolor="#E8E8D0" onblur="window.close()">
+	<TABLE bgcolor="#F5A307" BORDER=1 WIDTH=100% style="font-family: sans-serif; font-size: 11pt">
+	<TR>	<TD Align="left">
+	<FONT FACE="MS SANS SERIF" SIZE=2 COLOR="black">
+	<B>El/los siguiente/s números de inventario son incorrectos:</B>
+	</FONT></TD>
+	</TABLE>
+	<TABLE bgcolor="#F9C99A" BORDER=1 WIDTH=100% style="font-family: sans-serif; font-size: 11pt">
+  </display>
+
+
+  <do task=list>
+    <field action=define tag=1001>Isis_Item</field>
+    <field action=define tag=1102>Isis_Total</field>
+    <field action="add" tag="5001" split="occ" previous="delete">0</field>
+
+
+    <loop>
+      <do task=search>
+        <parm name=db>exist</parm>
+	<parm name=gizmo>gizmo</parm>
+        <parm name=expression><pft>v1001</pft></parm>
+	<field action=define tag=1103>Isis_Total</field>
+	<field action="import" tag="5001">5001</field>
+	<field action="import" tag="120">120</field>
+	<field action="import" tag="130">130</field>
+
+	<loop>
+	<field action="import" tag="120">120</field>
+	<field action="import" tag="130">130</field>
+	<field action="import" tag="5001">5001</field>
+	<field action="import" tag="1001">1001</field>
+
+		<field action="add" tag="5001"><pft>
+		if val(v130)=val(v998^b[LAST]) then 
+			,if p(v120) then 
+				(if val(v120^y)=val(v1001[1]) then '1' else '0' fi),
+			fi,
+		fi,
+		if val(v130)<>val(v998^b[LAST]) then
+			,if v985='PRES' then '1' else '0' fi,
+		fi,
+		if v985<>'PERM' then 
+			,if v985<>'PRES' then '1' else '0' fi,
+		fi,
+		</pft></field>
+		<field action="export" tag="5001">5001</field>
+	      <display><pft>
+		if val(v130)=val(v998^b[LAST]) then 
+			,if p(v120) then 
+				(if val(v120^y)=val(v1001[1]) then 
+				'<TR><TD WIDTH="20%"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Inventario: ',v1001[1],'<TD WIDTH="*"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#FF0000>NO MARCO LA DEVOLUCIÓN!!!</FONT></B></TD></tr>' 
+				 fi),
+			fi,
+		fi,
+		if val(v130)<>val(v998^b[LAST]) then
+			,if v985='PRES' then 
+				'<TR><TD WIDTH="20%"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Inventario: ',v1001[1],'<TD WIDTH="*"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#FF0000>LIBRO PRESTADO!!!! A: ',mhl,v998[LAST],'</FONT></B></TD></tr>'
+			fi,
+		fi,
+		if v985<>'PERM' then 
+			,if v985<>'PRES' then 
+				'<TR><TD WIDTH="20%"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Inventario: ',v1001[1],'<TD WIDTH="*"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#FF0000>NO SE PRESTA A DOMICILIO!!! (',mhl,v985,')</FONT></B></TD></tr>'
+			fi,
+		fi,
+		</pft></display>
+
+        </loop>
+      </do>
+	<field action="add" tag="5001"><pft>if val(v1103)=0 then '1' else '0' fi</pft></field>
+	<field action="export" tag="5001">5001</field>
+      <display><pft>if val(v1103)=0 then 
+				'<TR><TD WIDTH="20%"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Inventario: ',v1001[1],'<TD WIDTH="*"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#FF0000>NO EXISTE EN LA BASE DE DATOS!!!!</FONT></B></TD></tr>'
+			 fi
+	</pft></display>
+    </loop>
+	<field action="replace" tag="5001"><pft>f(rsum(v5001+|,|),1,0)</pft></field>
+  </do>
+	<display></table></display>
+
+	<display><pft>if val(v5001)>0 then '<tr><td>
+		<SCRIPT LANGUAGE="JavaScript">
+		<!-- Begin
+		window.opener.verifica.enviar.value = "0";
+		if (window.opener.verifica.enviar.value == ',"'"n0,'0',"'"n0,' || window.opener.verifica._enviar.value == ',"'"n0,'0',"'"n0,') {alert (',"'"n0,'No se puede enviar el formulario.\nPosibles errores:\n--> No se ha marcado una devolución.\n--> No se ha indicado un libro a prestar\n--> Error en un número de inventario.',"'"n0,');}
+		window.focus()
+		// End -->
+		</script>
+		</td></tr>' 
+	else 
+		'<tr><td>
+		<SCRIPT LANGUAGE="JavaScript">
+		<!-- Begin
+		window.opener.verifica.enviar.value = "1";
+		if (window.opener.verifica.enviar.value == ',"'"n0,'1',"'"n0,') {
+			window.opener.control.submit();
+			window.close()}
+		// End -->
+		</script>
+		</td></tr>' 
+	fi
+	</pft></display>
+
+</section>
+</IsisScript>
+
+

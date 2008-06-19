@@ -1,0 +1,207 @@
+<!-- /* ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<!-- Esta script actualiza la base de existencias a partir de la base bibliográfica y también analiza la base de existencias para 
+detectar los números de inventario que fueron sacados de la base bibliográfica -->
+
+<IsisScript>
+  <section>
+
+    <display><pft>'Content-type: text/html'/#</pft></display>
+	
+	<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+	
+    <display><pft>
+      '<html><body bgcolor="#E8E8D0">',
+      '<table border="0" width="100%">',
+      '<tr>',
+        '<td width="50%"><big>',ref(['config']1,v7),'</big><small><br>',
+          'Fecha: ',
+            select s(date)*16.1
+              case '0': ,'Domingo, ',
+              case '1': ,'Lunes, ',
+              case '2': ,'Martes, ',
+              case '3': ,'Miércoles, ',
+              case '4': ,'Jueves, ',
+              case '5': ,'Viernes, ',
+              case '6': ,'Sábado, ',
+            endsel,
+            mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)
+			'  --  ',mid(date(datetime),10,9),
+          '</small><big></big>',
+        '</td>',
+        '<td width="50%" align="right">',
+          '<em>Módulo Circulación <img src="\omp.gif" width="59" height="45" align="middle"></em>',
+        '</td>',
+      '</table><hr>',
+    </pft></display>
+    <display><p align="center"><h2>Actualización de Inventarios</h2></display>   
+
+    <!-- considerar que MARC es el diccionario por inventario dentro de la base bibliográfica, c:\OpenMP\Bases\MARCMP\exist\exist.*  -->
+	<!-- y también considerar que MARC es la base bibliográfica, c:\OpenMP\Bases\MARCMP\MARCMP.*  -->
+	<!-- considerar que EXIST es la base de existencias, c:\OpenMP\Bases\exist\exist.*-->
+	
+  <display><pft>'<h4>Actualizando diccionarios</h4>'</pft></display>
+
+  <display><pft>'Diccionario de inventarios bibliográfico'</pft></display>
+	<do task="fullinvertion">
+		<parm name="db">marc</parm>
+		<parm name="fst"><pft>cat('marc.fst')</pft></parm>
+		<field action="define" tag="1102">Isis_Status</field>
+			<loop>
+			</loop>		
+	<display><pft>'.......Inversion terminada, status: ',v1102|<br>|/#</pft></display>			
+	</do>
+	
+<do task="mfnrange">
+  <parm name=db>config</parm>
+  <loop>
+	</loop>
+</do>
+
+	<display><pft>'Diccionario de existencias'</pft></display>
+	<do task="fullinvertion">
+		<parm name="db">exist</parm>
+		<parm name="fst"><pft>cat('exist.fst')</pft></parm>
+		<field action="define" tag="1102">Isis_Status</field>
+			<loop>
+			</loop>			
+		<display><pft>'......Inversion terminada, status: ',v1102/#</pft></display>
+	</do>    
+	
+
+<do task="mfnrange">
+  <parm name=db>config</parm>
+  <loop>
+	</loop>
+</do>	
+	
+
+	
+	
+  <display><pft>'<h4>Analizando incorporación de nuevos inventarios</h4>'</pft></display>
+    
+	<do task="mfnrange">
+		<parm name="db">marc</parm>
+		<parm name="from">1</parm>
+		<loop>
+		
+		<!-- v2001 es el campo de inventario tomado de la configuración -config- y tiene todos los inventarios del registro bibliográfico -->
+			<field action="add" tag="2001" split="occ"><htmlpft><pft>'[pft](',ref(['config']1,v1),'/)[/pft]'</pft></htmlpft></field>
+
+		<!-- v5010 es una cadena binaria. Si contiene un 1 es porque el inventario no se halla en la base de existencias. -->			
+			<field action="add" tag="5010" split=occ><pft>'0,',(if l(['exist']v2001)<1 then '1,' fi)</pft></field>
+
+		<!-- Si el valor de la cadena es 0, significa que no hay inventarios nuevos a incorporar a la base de existencia -->
+			<flow action="skip"><pft>if rsum(v5010)<1 then 'Next' fi</pft></flow>
+
+			<list action="delete">Now</list>
+			
+		<!-- la lista carga solamente los inventarios nuevos a incorporar a existencia -->		
+			<list action="load"><pft>(if l(['exist']v2001)<1 then v2001/ fi)</pft></list> 
+			
+		    <do task=list>
+		      <field action=define tag=1001>Isis_Item</field>
+		      <field action=define tag=1002>Isis_Current</field>
+		      <loop>
+
+				<display><pft>'Incorporando Inventario: ',v1001,'<br>'</pft></display>
+		        <do task=update>
+					<parm name=db>exist</parm>
+					<parm name="fst"><pft>cat('exist.fst')</pft></parm>
+					<parm name=mfn>New</parm>
+					<field action=define tag=1102>Isis_Status</field>
+		            <update>
+		              <field action="import" tag="list">1001</field> <!-- Isis_Item -->
+		              <field action="add" tag="977"><pft>v1001</pft></field> <!-- Inventario del reg. hijo -->
+		              <field action="add" tag="985">PERM</field> <!-- Disponibilidad -->
+		              <field action="delete" tag="list">1001</field>
+		              <write>Unlock</write>
+		              <display><pft>
+		                if val(v1102)>0 then 
+		                  'ERROR: !, no se logró grabar el reg. hijo ',v977/
+										fi</pft></display>
+									<field action="export" tag="list">1102</field>
+		            </update>
+		        </do>
+			  </loop>
+			</do>
+ 		</loop>
+	</do>
+			
+	<display><pft>'<h4>Analizando inventarios dados de baja</h4>'</pft></display>
+  
+  	<do task="mfnrange">
+		<parm name="db">exist</parm>
+		<loop>
+		
+		<!-- si el inventario de la base existencia en 977 se encuentra en la base bibliográfica, continúa; de lo contrario borra el registro -->		
+		<flow action="skip"><pft>if l(['marc']v977)>0 then 'Next' fi</pft></flow>
+		
+		<display><pft>'Borrando inventario: ',v977,'<br>'</pft></display>
+		
+			<do task=update>
+		        <parm name=db>exist</parm>
+				<parm name="fst"><pft>cat('exist.fst')</pft></parm>
+		        <parm name=mfn><pft>mfn</pft></parm>
+				<field action=define tag=1102>Isis_Status</field>
+				<field action=define tag=1011>Isis_Lock</field>
+				<parm name="lockid">Admin</parm>
+		            <update>
+						<write>Delete</write>
+						<display><pft>
+		                if val(v1102)>0 then 
+		                  'ERROR: !, no se logró borrar el reg. hijo ',v977/
+										fi</pft></display>
+						<field action="export" tag="list">1102</field>
+		            </update>
+		    </do>
+		
+ 		</loop>
+	</do>
+	
+  <display><pft>'<p>Proceso finalizado !<br><a href="JavaScript:history.go(-1)">Volver</a></p>'</pft></display>
+    
+
+</section>
+</IsisScript>

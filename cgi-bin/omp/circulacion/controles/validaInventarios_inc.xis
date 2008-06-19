@@ -1,0 +1,36 @@
+<!-- verifica que los números de inventario sean válidos.
+No se considera un error la repeticion de inventarios.
+v3000: lista de inventarios separados por salto de linea 
+v3002: lista de todos los inventarios (inv_prestamos#A + inv_prestamos#B)-->
+
+<flow action="jump"><pft>if v5000:'Error' then 'FinValidaInventario' fi</pft></flow>
+
+<!-- si no hay préstamos para hacer, aborta -->
+<flow action="jump"><pft>if a(v3002) or nocc(v3002)=0 then 'FinValidaInventario' fi</pft></flow>
+
+<!-- Se borran los campos que vamos a utilizar en este script, debido al include de otros scripts -->
+<field action=delete tag=4000>ALL</field>
+
+<list action=load previous="delete"><pft>(v3002/)</pft></list>
+
+<do task=list>
+   <field action="define" tag=1001>Isis_Current</field>
+   <field action="define" tag=1002>Isis_Item</field>
+   <loop>
+      <field action="import" tag="4000">4000</field>
+      <!-- total de posting para el inventario (v4001)-->
+      <field action="replace" tag="4001"><pft>f(npost(['exist']v1002),1,0)</pft></field>
+      <field action="add" tag="4000"><pft>if val(v4001)=0 then v1002 fi</pft></field>
+      <field action="export" tag="4000">4000</field>
+   </loop>
+</do>
+
+<field action="replace" tag="5000"><pft>
+   if v4000='' then
+      mhl,'ok'
+   else
+      mhl,'Error: Número/s de inventario inexistente/s: ',(v4000|;|)
+   fi
+</pft></field>
+
+<label>FinValidaInventario</label>

@@ -1,0 +1,10 @@
+W:MOVI  
+F:MOVI  
+S:MOVI  
+***
+Lector                                            1 1000 0 0
+Documento                                         2 1000 0 0
+Fecha                                             3 1000 0 0
+Operacion                     tpvibmsrclo         4 1000 0 1
+Operario                                          5 1000 0 0
+terminal_ip                                       6 1000 0 0

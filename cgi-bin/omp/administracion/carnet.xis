@@ -1,0 +1,162 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+<section>
+<!--  <trace>On</trace> -->
+
+  <display><pft>'Content-type: text/html'/#</pft></display>
+
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  <field action=cgi tag=100>dni</field>
+  <field action=cgi tag=101>inclusive</field>
+  <field action=cgi tag=102>dnis</field>
+  <field action=replace tag=102 split=occ><pft>(v102/)</pft></field>
+
+  <flow action=jump><pft>if p(v102) then 'CARGARDNIS' fi</pft></flow>
+
+  <do task=mfnrange>
+    <parm name=db>lector</parm>
+    <parm name=gizmo>gizmo</parm>
+    <loop>
+      <list action=load>
+        <pft>if p(v13) and s(mpl,v13)<>'^a^b^c' then 
+                '^a',v1,'^b',v2,'^c',f(val(v4),1,0) fi</pft></list>
+    </loop>
+  </do>
+  <flow action=jump>MOSTRAR</flow>
+
+  <label>CARGARDNIS</label>
+
+  <list action=load><pft>(v102/)</pft></list>
+  <do task=list>
+    <field action=define tag=1001>Isis_Item</field>
+    <loop>
+      <field action=import tag=2000>2000</field>
+      <do task=search>
+        <parm name=db>lector</parm>
+        <parm name=expression><pft>v1001</pft></parm>
+        <parm name=gizmo>gizmo</parm>
+        <loop>
+          <field action=import tag=2000>2000</field>
+          <field action=add tag=2000>
+            <pft>'^a',v1,'^b',v2,'^c',f(val(v4),1,0)</pft></field>
+          <field action=export tag=2000>2000</field>
+        </loop>
+      </do>
+      <field action=export tag=2000>2000</field>
+    </loop>
+  </do>
+
+  <list action=delete>now</list>
+  <list action=load><pft>(v2000/)</pft></list>
+  <field action=delete tag=2000>all</field>  
+
+  <label>MOSTRAR</label>
+
+  <display>
+    <body>
+    <table width="643" height="1" border="1" cellspacing="6" bordercolorlight="#000000"
+     bordercolordark="#000000" bordercolor="#000000" align=center>
+  </display>
+
+  <do task=list>
+    <field action=define tag=1001>Isis_Item</field>
+    <parm name=sort><pft>v1001^a</pft></parm>
+
+    <field action=add tag=102>?</field>
+    <field action=add tag=103>0</field>
+    <loop>
+      <field action=import tag=list>100,101,102,103</field>
+
+      <flow action=jump><pft>if a(v100) or v102='mostrar' then 'MOSTRAR' fi</pft></flow>
+
+      <flow action=skip><pft>if val(v100)<>val(v1001^b) then 'Next' fi</pft></flow>
+
+      <field action=replace tag=102>mostrar</field>
+      <field action=export previous=delete tag=102>102</field>
+
+      <flow action=skip><pft>if a(v101) then 'Next' fi</pft></flow>
+
+      <label>MOSTRAR</label>
+
+      <field action=replace tag=103><pft>f(val(v103)+1,1,0)</pft></field>
+      <display><pft>
+        if v103='2' or v103='4' or v103='6' or v103='8' or v103='10' then 
+          '<td width="20" height="130">
+             <p align="right">&nbsp;</p>
+           </td>'
+        fi,
+        '<td width="300" background="',getenv('PATH_INFO'),'images/logouner.jpg" height="164">
+           <p ALIGN="CENTER"><font size="4">Institución XXXXX<br>
+             </font><font size="2">Universidad u Organismo</font></p>
+           <p ALIGN="CENTER"><b><u><font face="Arial" size="2">
+             <img border="0" src="/circula/circulacion/fotos/',v1001^b,'.jpg"
+             width="95" height="76" align="left">Credencial de Lector</font>
+             </u></b></p>
+           <p ALIGN="CENTER"><b><font face="Arial" size="2">',v1001^a,'</font></b></p>
+           <p ALIGN="CENTER"><font face="IDAutomationHC39M">*',v1001^b,'*</font></p>
+         </td>'
+        if v103='2' or v103='4' or v103='6' or v103='8' or v103='10' then 
+          '<tr>
+            <td width="300" height="1" align="center"><font size="1">.</font></td>
+            <td width="20" height="1" align="center"><font size="1">.</font></td>
+            <td width="300" height="1" align="center"><font size="1">.</font></td>
+           </tr>'
+        fi,
+      </pft></display>
+
+      <flow action=skip><pft>if val(v103)=10 then 'Quit' fi</pft></flow>
+
+      <field action=export previous=delete tag=103>103</field>
+    </loop>
+  </do>
+
+ <display></table>
+<br><br><u>Códigos de barra</u><br><i>
+Copyright © 1999-2006 IDAutomation.com, Inc. IDAutomation is a registered trademark of IDAutomation.com, Inc. All other trademarks mentioned are the property of their respective owners. Agreement Version 6.7.
+</i>
+</body></display>
+
+</section>
+</IsisScript>

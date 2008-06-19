@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>Operación [pft]MFN(4)[/pft]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#E8E8D0">
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><b>Institucion XXXXX</b></td>
+    <td width="12%"> 
+      <p align="right">[pft]mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)[/pft]<br>[pft]date(DATETIME)[/pft]
+    <td width="10%"></td>
+    <td width="33%"><b>Institucion XXXXX</b></td>
+    <td width="12%"> 
+      <p align="right">[pft]mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)[/pft]<br>[pft]date(DATETIME)[/pft]
+    </tr>
+</table>
+<br>	
+<table border="0" width="100%">
+	<tr><td width="7%"><b>Operación: [pft]mfn(4)[/pft]</b></td><td width="38%">
+		<p align="right"><b>[pft]v1[/pft]<br>DNI [pft]v2[/pft]</b>
+                <td width="10%">
+                
+    <td width="7%"><b>Operación: [pft]mfn(4)[/pft]</b>
+    <td width="38%">
+      <p align="right"><b>[pft]v1[/pft]<br>
+        DNI [pft]v2[/pft]</b> 
+    </tr>
+	[pft]
+    if rsum((if v4^t:'dev' then '1,' else '0,' fi))>0 then 
+	'</table><table border="0" width="100%" bgcolor="transparent" cellspacing="0">'/
+		'<tr>'/
+            '<td width="45%" bgcolor="#F5A307"><b>Devoluciones:</b>'/
+            '<td width="10%">'/
+            '<td width="45%" bgcolor="#F5A307"><b>Devoluciones:</b>'/
+        '</tr>'/
+		(
+		'<tr>'/
+			'<td width="45%" bgcolor="#FFF9E1">Inv.',v4^i,', Inv.',v4^b/
+			'<td width="10%">'/
+			'<td width="45%" bgcolor="#FFF9E1">Inv.',v4^i,', Inv.',v4^b/
+		'</tr>'/
+		)
+	'</table>'/
+	'<br>'/
+	fi
+	[/pft]
+	[pft]
+    if rsum((if v4^t:'pre' then '1,' else '0,' fi))>0 then 
+    '<table border="0" width="100%" bgcolor="transparent" cellspacing="0">'/
+        '<tr>'/
+            '<td width="45%" bgcolor="#F5A307" colspan="2"><b>Préstamos:</b>'/
+            '<td width="10%">'/
+            '<td width="45%" bgcolor="#F5A307" colspan="2"><b>Préstamos:</b>'/
+        '</tr>'/
+		(
+		'<tr>'/
+			'<td width="10%" align="center" bgcolor="#FFF9E1"><b>Vto.',v4^v,'</b><br>Inv.',v4^i/
+			'<td width="35%" bgcolor="#FFF9E1">',v4^b/
+			'<td width="10%">'/
+			'<td width="10%" align="center" bgcolor="#FFF9E1"><b>Vto.',v4^v'</b><br>Inv.',v4^i/
+			'<td width="35%" bgcolor="#FFF9E1">',v4^b/
+		'</tr>'/
+		)
+	'</table>'/
+	fi
+	[/pft]
+	<br>
+	[pft]
+	(
+		if v4^t:'san' then  
+  	  '<table border="0" width="100%" bgcolor="TRANSPARENT" cellspacing="0">'/
+    	    '<tr><td width="45%" bgcolor="#FFF9E1"><font color="#FF0000">SANCIONADO HASTA EL ',v4^v,'</font></td></tr>'/
+			'<td width="10%">'/
+  	      '<tr><td width="45%" bgcolor="#FFF9E1"><font color="#FF0000">SANCIONADO HASTA EL ',v4^v,'</font></td></tr>'/
+    	'</table>'/
+		fi
+	)
+	[/pft]
+	<p>&nbsp;</p>
+	<table border="0" width="100%">
+		<tr>
+			<td width="30%" style="border-top: thin solid rgb(0,0,0)" align="center">[pft]mhl,v1[/pft]<br>Lector</td>
+			<td width="40%"></td>
+			<td width="30%" style="border-top: thin solid rgb(0,0,0)" align="center">[pft]mhl,v5[/pft]<br>Operador</td>
+		</tr>
+	</table>
+</body>
+</html>

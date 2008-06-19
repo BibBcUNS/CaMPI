@@ -1,0 +1,17 @@
+<!-- verifica que si el usuario tiene una suspención vigente -->
+	
+<flow action="jump"><pft>if v5000:'Error' then 'FinSanciones' fi</pft></flow>
+
+<field action="replace" tag="4000"><pft>ref(['lector']l(['lector']v3002),v10)</pft></field> <!-- total de posting para el id_usuario -->
+<field action="replace" tag="4001"><pft>ref(['lector']l(['lector']v3002),v11[last]^v)</pft></field> <!-- total de posting para el id_usuario -->
+
+<field action="add" tag="5000">
+	<pft>  
+		if (s(mpu,v4000)<>'HABILITADO') then 
+			mhl,'Error: Usuario <b>SUSPENDIDO</b> hasta el <b>',v4001,'</b>.'
+		fi
+	</pft>
+</field>
+
+		  
+<label>FinSanciones</label>

@@ -1,0 +1,101 @@
+
+<table border="0" bgcolor="#FAEFC7" width="100%">
+  <tr>
+    <td width="40%"><big>Registro de Lector: </big>
+      [pft]if v120:'Nuevo' then v120 else 'MFN: ',f(val(mfn),1,0) fi[/pft]</td>
+    <td>
+    <td><big>
+			[pft]
+				select v120 
+					case 'Registro Nuevo':  'Complete los datos del nuevo registro',
+					case 'Presentar':       'Edición del registro',
+					case 'Grabar':	        'Grabado del registro',
+					case 'Borrar':	        'Borrado del registro'
+				endsel[/pft]</td></tr>
+</table>
+
+
+<form name="form_abm" method="POST" action="/cgi-bin/wxis.exe/circula/administracion/" onsubmit="return verificar_datos()" target="Verifica">
+  <input type="hidden" name="IsisScript" value="circula/administracion/verificar_alta.xis">
+  <table border="1" bgcolor="#FAEFC7" align="center">
+    <tr>
+      <td width="20%" bgcolor="#F9C99A"><b>Nombre</b></td>
+      <td width="40%"><input type="text" name="nombre" size="40" value="[pft]v1[/pft]"></td>
+      <td width="20%" bgcolor="#F9C99A"><b>Documento</b></td>
+      <td><input type="text" name="documento" size="15" value="[pft]v2[/pft]">
+					<input type="hidden" name="documento_anterior" value="[pft]v2[/pft]"></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#F9C99A"><b>Domicilio (local)</b></td>
+      <td width="40%"><input type="text" name="domicilio" size="40" value="[pft]v6[/pft]"></td>
+      <td width="20%" bgcolor="#F9C99A"><b>Teléfono (local)</b></td>
+      <td><input type="text" name="telefono" size="15" value="[pft]v7[/pft]"></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#F9C99A"><b>Domicilio (origen)</b></td>
+      <td width="40%"><input type="text" name="domicilio_origen" size="40" value="[pft]v14[/pft]"></td>
+      <td width="20%" bgcolor="#F9C99A"><b>Teléfono (origen)</b></td>
+      <td><input type="text" name="telefono_origen" size="15" value="[pft]v15[/pft]"></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#F9C99A"><b>Categoría</b></td>
+      <td width="40%"><input type="text" name="categoria" size="40" value="[pft]v3[/pft]"></td>
+      <td width="20%" bgcolor="#F9C99A"><b>Legajo</b></td>
+      <td><input type="text" name="legajo" size="15" value="[pft]v4[/pft]"></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#F9C99A"><b>e@mail</td>
+      <td width="40%"><input type="text" name="email" size="40" value="[pft]v12[/pft]"></td>
+      <td width="20%" bgcolor="#F9C99A"><b>Matrícula</b></td>
+      <td><input type="text" name="matricula" size="15" value="[pft]v5[/pft]"></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#F9C99A"><b>Estado</td>
+      <td width="40%"><input type="text" name="estado" size="30" value="[pft]v10[/pft]"></td>
+      <td width="20%" bgcolor="#F9C99A"><b>Sanciones</b></td>
+      <td><input type="text" name="sanciones" size="25" value="[pft]v11+|%|[/pft]"></td>
+    </tr>    <tr>
+      <td colspan="3" bgcolor="#F9C99A"><b>Vigencia de Datos</td>
+      <td><input type="text" name="vigencia_datos" size="10" value="[pft]
+	if val(s(v16)*6.4,s(v16)*3.2,s(v16)*0.2) < val(s(date).8) then
+		'31/12/',s(date).4,
+	else 
+		,v16,
+	fi[/pft]"></td>
+    </tr>
+  </table>
+  [pft]
+    if p(v8) then 
+'    <input type="Hidden" name="prestamos" value="',(v8/),'">'/ fi,
+    if p(v9) then 
+'    <input type="Hidden" name="reservas" value="',(v9/),'">'/ fi,
+    if p(v17) then 
+'    <input type="Hidden" name="observaciones_lector" value="',(v17/),'">'/ fi,[/pft]
+	<br>
+  
+	[pft]
+'    <input type="hidden" name="id_operador" value="',v300,'">'/
+'    <input type="hidden" name="link_regreso" value="',v400,'">'/
+		select v120 
+			case 'Registro Nuevo':  
+'    <input type="hidden" name="mfn_lector" value="New">'/
+'    <input type="submit" value="Grabar" name="opcion">'/
+'    <input type="Button" value="Cancelar" name="opcion" onclick="Javascript:history.go(-1)">'/		
+  		case 'Presentar':
+'		 <input type="hidden" name="mfn_lector" value="',mfn,'">'/
+'    <input type="submit" value="Grabar" name="opcion">'/
+			if p(v400) then
+'    <input type="submit" value="Borrar" name="opcion">'/
+			fi
+'	   <input type="submit" value="Cancelar" name="opcion" onclick="window.document.form_abm.documento.value=window.document.form_abm.documento_anterior.value">'/					
+			case 'Borrar':
+'		 <input type="hidden" name="mfn_lector" value="',mfn,'">'/
+' 	 <input type="submit" value="Cancelar" name="opcion">'/
+'    <input type="submit" value="Confirma el BORRADO ?" name="opcion">'/
+		endsel
+  [/pft]
+
+</form>
+</body>
+</html>
+ 

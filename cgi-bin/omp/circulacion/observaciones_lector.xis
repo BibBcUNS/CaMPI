@@ -1,0 +1,110 @@
+<IsisScript>
+<trace>!On</trace>
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+  <field action=cgi tag=100>operador</field>
+  <field action=cgi tag=101>mfn_lector</field>	
+  <field action=cgi tag=102>opcion</field>
+
+  <flow action=jump><pft>v102</pft></flow>
+  <flow action=exit>1</flow>
+
+  <label>PRESENTAR</label>
+
+	<display><htmlpft>
+		<html>
+			<head>
+				<title>Open MarcoPolo - Observaciones de [pft]ref(['lector']val(v101),v1)[/pft]</title>
+			</head>
+			<body onload="moveTo(200,100); document.form_observa.Descripcion.focus()">
+	</htmlpft></display>
+
+	<do task=mfnrange>
+    <parm name=db>lector</parm>
+    <parm name=from><pft>v101</pft></parm>
+    <parm name=count>1</parm>
+		<parm name="gizmo">oemansi</parm>
+    <field action=define tag=1102>Isis_Status</field>
+    <loop>
+		  <field action=cgi tag=100>operador</field>
+		  <field action=cgi tag=101>mfn_lector</field>	
+		  <field action=cgi tag=102>opcion</field>
+		  <display><htmlpft>
+				<pft>cat(getenv('PATH_TRANSLATED'),'plantilla_observaciones.htm')</pft></htmlpft></display>
+		</loop>
+  </do>
+
+  <display><htmlpft>
+	  [pft]
+    if val(v1102)>0 then 
+      '<h2 class="alerta">No se pudo acceder al registro !</h2>'/
+			'<a href="Javascript:history.go(-1)">Regresar</a>'/ fi
+		[/pft]
+		</body>
+		</html></htmlpft></display>
+  
+	<flow action=exit>Now</flow>
+	
+  <label>AGREGAR</label>
+	
+	<parm name="uctab"><pft>cat('uc.tab')</pft></parm> <!-- Se convierten del ansi al ascii los códigos especiales que van al diccionario -->
+	<parm name="actab"><pft>cat('ac.tab')</pft></parm> <!-- Se convierten del ansi al ascii los códigos especiales que van al diccionario -->
+	
+	<do task="mfnrange">
+    <parm name=db>lector</parm>
+    <parm name=from><pft>v101</pft></parm>
+   	<parm name="gizmo">gizmo</parm>
+		<parm name="count">1</parm>
+		<field action=define tag=1102>Isis_Status</field>
+		<field action=define tag=1011>Isis_Lock</field>
+		<loop>
+			<field action="import" tag="list">100</field>
+			<do task="update">
+		    <parm name=db>lector</parm>
+		    <parm name=mfn><pft>mfn</pft></parm>
+				<parm name="lockid"><pft>v100</pft></parm>
+			  <field action=define tag=1102>Isis_Status</field>
+			  <field action=define tag=1011>Isis_Lock</field>
+
+				<update>
+					<field action="import" tag="list" previous="delete">1/1000</field>
+					<field action="cgi" tag="171">Fecha</field>
+					<field action="cgi" tag="172">Tipo</field>
+					<field action="cgi" tag="173">Descripcion</field>						
+					<field action="add" tag="17" previous="add"><pft>"^f"v171,"^t"v172,"^d"v173</pft></field>
+					<field action="delete" tag="list">100,171,172,173</field>
+					<write>Unlock</write>
+				</update>
+		         	<parm name="gizmo">ansioem</parm>	
+				<update>
+					<write>Lock</write>
+				</update>
+			</do>
+
+		</loop>
+	</do>
+	
+  <display><htmlpft>
+		<html>
+		<head>
+		<LINK REL="stylesheet" TYPE="text/css" HREF="[pft]getenv('PATH_INFO')[/pft]estilos/mp.css">
+		</head>
+		<body bgcolor="#E8E8D0">	
+		<p>&nbsp;</p><p>&nbsp;</p>
+		<table width="100%">
+			<tr>
+				<td align="center">
+					[pft]if val(v1102)<=0 then 'Grabación Exitosa !' else 'Error: ',v1102 fi[/pft]</td></tr>
+			<tr>
+				<td><a href="Javascript:window.close()">Cerrar Ventana</a></td></tr>
+		</table>
+	
+	</htmlpft></display>
+
+</section>
+</IsisScript>
+
+

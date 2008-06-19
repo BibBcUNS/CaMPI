@@ -1,0 +1,13 @@
+<!-- Controles: se aplican sobre los préstamos a realizar -->
+
+<include>/circula/circulacion/controles/verificaEstadoUsuario_inc.xis</include>
+<include>/circula/circulacion/controles/validaInventarios_inc.xis</include>
+<include>/circula/circulacion/controles/verificaDispInv_inc.xis</include>
+<include>/circula/circulacion/controles/verificaPresDup_inc.xis</include>
+<include>/circula/circulacion/controles/verificaLimPresUsuario_inc.xis</include>
+<include>/circula/circulacion/controles/verificaEspRes_inc.xis</include>
+
+<!-- No se utilizarán (consultar) -->
+<!-- include>/circula/circulacion/controles/validarVarios.xis</include -->
+<!-- include>/circula/circulacion/controles/validaOperador_inc.xis</include -->
+<!-- include>/circula/circulacion/controles/validarUsuario_inc.xis</include -->

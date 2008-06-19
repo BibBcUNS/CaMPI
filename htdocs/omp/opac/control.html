@@ -1,0 +1,87 @@
+<html>
+
+<head>
+<title>Open MarcoPolo - Módulo OPAC</title>
+<SCRIPT language="JavaScript1.1">
+<!--
+// La variable ultimo contiene el termino escrito en el campo from
+function inicializa() {
+	ultimo = "";
+}
+
+// Esta funcion ejecuta el submit cuando se escribe en el campo
+// from; esta opcion se revisa cada 1 segundo luego de que se 
+// oprime una tecla. El submit unicamente envia el formulario 
+// si el campo from cambio desde el "ultimo" valor tomado
+function tiempo() {
+	if (window.document.form_dicc.from.value != ultimo) {
+		ultimo = window.document.form_dicc.from.value;
+		window.document.form_dicc.submit();
+	}
+}
+
+// Las siguiente funciones permiten el efecto grafico de seleccion
+// de los botones que controlan el diccionario. Los archivos graficos
+// de las cuatro opciones (todosterminos, titulo, autor, palcla)
+// tienen como nombre de archivo bf_[opcion].gif para la imagen que
+// se visualiza cuando el mouse pasa sobre la opcion; bb_[opcion].gif
+// cuando el mouse sale de la imagen y bs_[opcion].gif es la imagen
+// de la opcion seleccionada.
+
+function FocusImgOn(OptionName) {
+	window.document.images[OptionName].src = "images/bf_" + OptionName + ".gif";
+}
+function FocusImgOff(OptionName) {
+	switch(OptionName) {
+		case 'todosterminos': t = 0; break; 
+		case 'titulo': t = 1; break; 
+		case 'autor': t = 2; break; 
+		case 'palcla': t = 3; break; 
+	}
+	if (window.document.form_dicc.tipo[t].checked) {	
+		window.document.images[OptionName].src = "images/bs_" + OptionName + ".gif";
+	} else {
+		window.document.images[OptionName].src = "images/bb_" + OptionName + ".gif";
+	}
+}
+function ClickOption(OptionName) {
+	window.document.images["todosterminos"].src = "images/bb_todosterminos.gif";
+	window.document.images["titulo"].src = "images/bb_titulo.gif";
+	window.document.images["autor"].src = "images/bb_autor.gif";
+	window.document.images["palcla"].src = "images/bb_palcla.gif";
+	window.document.images[OptionName].src= "images/bs_" + OptionName + ".gif";
+	window.document.form_dicc.submit();
+}
+//-->
+</SCRIPT>
+</head>
+<body bgcolor="#E8E8D0" onload='inicializa()'>
+    <form action="/cgi-bin/wxis.exe/circula/opac/" method="post" name="form_dicc" target="diccio" 
+		onSubmit="if (window.document.form_dicc.from.value =='') {
+		alert ('   No se permite enviar la\nsolicitud con el campo vacío');
+		return false;}
+		else {
+   		return true;}">
+	<input type="hidden" name="IsisScript" value="circula/opac/diccio.xis">&nbsp;<img src="images/expresion.gif" width="176" height="92"><br>
+	<input type="radio" value="todosterminos" name="tipo" onclick="ClickOption('todosterminos');" checked><img name="todosterminos" src="images/bs_todosterminos.gif" align="absbottom" 
+		onmouseover="FocusImgOn('todosterminos');"
+		onmouseout="FocusImgOff('todosterminos');"
+		onclick="window.document.form_dicc.tipo[0].click();" width="143" height="21"><br>
+	<input type="radio" value="titulo" name="tipo" onclick="ClickOption('titulo');"><img name="titulo" src="images/bb_titulo.gif" align="absbottom" 
+		onmouseover="FocusImgOn('titulo');"
+		onmouseout="FocusImgOff('titulo');"
+		onclick="window.document.form_dicc.tipo[1].click();" width="98" height="18"><br>
+	<input type="radio" value="autor" name="tipo" onclick="ClickOption('autor');"><img name="autor" src="images/bb_autor.gif" align="absbottom" 
+		onmouseover="FocusImgOn('autor');"
+		onmouseout="FocusImgOff('autor');"
+		onclick="window.document.form_dicc.tipo[2].click();" width="98" height="18"><br>
+	<input type="radio" value="palcla" name="tipo" onclick="ClickOption('palcla');"><img name="palcla" src="images/bb_palcla.gif" align="absbottom" 
+		onmouseover="FocusImgOn('palcla');"
+		onmouseout="FocusImgOff('palcla');"
+		onclick="window.document.form_dicc.tipo[3].click();" width="124" height="18">
+	<center><img src="images/primerasletras.gif" width="145" height="24"></center>
+	&nbsp;<img src="images/teclado.gif" width="32" height="17">&nbsp;&nbsp;<input type="text" name="from" size="20" onkeyup='setTimeout("tiempo()",100)'>
+    </form>
+</body>
+</html>
+	

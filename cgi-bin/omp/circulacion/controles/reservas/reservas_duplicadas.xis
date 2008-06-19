@@ -1,0 +1,46 @@
+<!-- 
+Verificar Reservas duplicadas para el usuario
+Es decir si el usuario ya tiene reservado material similar (misma parte).
+Recibimos los mfn de partes en v4000. Si es cero el material no tiene reserva.
+Salida en 5000: El error encontrado. Vacio en caso de no encontrar error.
+-->
+
+<flow action="jump"><pft>if v5000:'Error' then 'FinValidaResDup' fi</pft></flow>
+
+<list action="delete">now</list>
+<list action="load" type="list"><pft>(v2020/)</pft></list>
+<do task=list>
+	<field action="define" tag=4000>Isis_Item</field>
+	<loop>
+		<field action="import" tag="list">3002,4002</field>
+		<!-- Armo la lista de id_usuarios de la reserva en cuestión -->
+		
+		<!-- Si el material no tiene reserva entonces no podrá duplicarse la misma,
+		por lo cual saltamos al siguiente registro. -->
+		<flow action=skip><pft>if (v4000='0') then 'Next' fi</pft></flow>
+		
+		<field action="replace" tag="2900"><pft>
+			ref(['reservas']val(v4000),'~',(v2^i,'~'))
+		</pft></field>
+		
+		<!-- verifico si el id de usuario está entre los que tienen reservado -->
+		<field action="add" tag="4002"><pft>
+			if (v2900:v3002)
+			then
+				ref(['reservas']val(v4000),v1),
+			fi
+		</pft></field>
+		
+		<field action="export" tag="4002">4002</field>
+	</loop>
+</do>
+
+<field action="replace" tag="5000">
+	<pft>
+	if (not v4002='') then 
+		'Error: Ya tiene una reserva regitrada para el siguiente material:  <ul>',('<li>',v4002,'</li>'),'</ul>'
+	fi
+	</pft>
+</field>
+
+<label>FinValidaResDup</label>

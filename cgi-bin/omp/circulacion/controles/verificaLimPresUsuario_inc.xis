@@ -1,0 +1,47 @@
+<!--
+Verificar si el usuario alcanzó el límite de préstamos.
+Se asume que el usuario es válido, los inventarios existen y son prestables.
+
+v3002: lista de todos los inventarios a prestar (invs_prestamo_A + invs_prestamo_B)
+v3003: lista de todos los inventarios a devolver
+v3004: documento
+
+Obs.: Este control depende de la política de la biblioteca, por lo que la lógica y las restricciones
+se deberán programar de acuerdo a la particularidad del caso.
+ -->
+
+<!--
+Pasos:
+   si el limite de prestamos de usuario >= prestados + a prestar - devoluciones entonces
+                     v2010              >=   v2020   +   v2030   -    v2040
+      ok
+   sino
+      Error: Límite de préstamos superado.
+ -->
+
+<flow action="jump"><pft>if v5000:'Error' then 'FinValidaLimPrestamos' fi</pft></flow>
+
+<!-- Obtenemos el tipo de usuario dado el documento -->
+<field action="replace" tag="2000"><pft>ref(['lector']l(['lector']v3004),v3)</pft></field>
+
+<!-- Obtenemos el límite de préstamos dado el tipo de usuario -->
+<field action="replace" tag="2010"><pft>ref(['tipo_lector']l(['tipo_lector']v2000),v10)</pft></field>
+
+<!-- Obtenemos el total de préstamos actuales del usuario -->
+<field action="replace" tag="2020"><pft>ref(['lector']l(['lector']v3004),f(nocc(v8),1,0))</pft></field>
+
+<!-- Obtenemos el total de préstamos a realizar al usuario -->
+<field action="replace" tag="2030"><pft>f(nocc(v3002),1,0)</pft></field>
+
+<!-- Obtenemos el total de devoluciones a realizar al usuario -->
+<field action="replace" tag="2040" split="occ"><pft>f(nocc(v3003),1,0)</pft></field>
+
+<field action="replace" tag="5000"><pft>
+   if val(v2010) >= val(v2020) + val(v2030) - val(v2040) then
+      'ok'
+   else
+      'Error: Límite de préstamos superado.'
+   fi
+</pft></field>
+
+<label>FinValidaLimPrestamos</label>

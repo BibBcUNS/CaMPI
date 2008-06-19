@@ -1,0 +1,47 @@
+<!--
+Verifica que el usuario no supere el límite de reservas
+Límite 1: Límite total de reservas para el tipo de usuario.
+Límite 2: Límite de reservas respecto al típo de usuario y tipo de objeto. (pendiente) 
+-->
+
+<!--
+Campos utilizados:
+	2020	Lista de MFNs
+-->
+
+<flow action="jump"><pft>if v5000:'Error' then 'FinLimites' fi</pft></flow>
+
+
+<list action="delete">now</list>
+<!-- En 2020 viene la lista de mfn en reservas (reservas a realizar) -->
+<list action="load" type="list"><pft>(v2020/)</pft></list> 
+
+<!-- Obtengo la categoría del usuario -->
+<field action="replace" tag="4005"><pft>ref(['lector']l(['lector']v3002),v3)</pft></field>
+
+<!-- Obtengo el límite de reservas para el usuario -->
+<field action="replace" tag="4010"><pft>ref(['tipo_lector']l(['tipo_lector']v4005),v12)</pft></field>
+
+<!-- Obtengo la cantidad de reservas de dicho usuario -->
+<field action="replace" tag="4015"><pft>f(npost(['reservas']'RES='v3002),1,0)</pft></field>
+
+<!-- Obtengo la cantidad de reservas a realizar -->
+<field action="replace" tag="4020"><pft>f(nocc(v2020),1,0)</pft></field>
+
+
+<!--display><pft>
+'Categoria usuario:',		v4005,'<br>',
+'Límite de reservas:',	v4010,'<br>',
+'Reservas vigentes:',	v4015,'<br>',
+'Reservas a realizar:',	v4020,'<br>'
+</pft></display-->
+
+<field action="replace" tag="5000"><pft>
+	if (val(v4015)+val(v4020)) > val(v4010) then
+		'Error: Excede el límite de reservas.<br>',
+		'El usuario tiene registrada <b>',v4015,'</b> reserva/s e intenta realizar <b>',v4020,'</b> reserva/s más (<b>total=',f(val(v4015)+val(v4020),1,0),'</b>).<br>',
+		'El límite establecido para el usuario (',v4005,') es de <b>',v4010,'</b> reservas.<br>'
+	fi
+</pft></field>
+
+<label>FinLimites</label>

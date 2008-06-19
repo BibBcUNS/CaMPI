@@ -1,0 +1,21 @@
+W:LECTORNUEVO 
+F:LECTOR
+S:LECTOR
+***
+Nombre                                            1 1000 0 0
+Documento                                         2 1000 0 0
+Categoria                                         3 1000 0 0
+Legajo                                            4 1000 0 0
+Matricula                                         5 1000 0 0
+Domicilio                                         6 1000 0 0
+Telefono                                          7 1000 0 0
+Prestamos                     ipvb                8 1000 0 1
+Reservas                                          9 1000 0 1
+Estado                                            10 1000 0 0
+Sancion                       dfv                 11 1000 0 1
+Email                                             12 1000 0 0
+Foto                          abc                 13 1000 0 0
+Domicilio_origen                                  14 1000 0 0
+Telefono_origen                                   15 1000 0 0
+Vto. Datos                                        16 1000 0 0
+Observaciones                 ftd                 17 1000 0 1

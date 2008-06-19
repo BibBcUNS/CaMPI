@@ -1,0 +1,9 @@
+config.*=C:\OpenMP\apache\www\OMP\bases\config\config.*
+marc.*=C:\OpenMP\apache\www\OMP\bases\marc\marc.*
+gizmo.*=C:\OpenMP\apache\www\OMP\bases\gizmo\gizmo.*
+lector.*=C:\OpenMP\apache\www\OMP\bases\lector\lector.*
+exist.*=C:\OpenMP\apache\www\OMP\bases\exist\exist.*
+partes.*=C:\OpenMP\apache\www\OMP\bases\partes\partes.*
+isbd.pft=C:\OpenMP\apache\www\OMP\bases\marc\omp_isbdopac.pft
+consulta.pft=C:\OpenMP\apache\www\OMP\bases\marc\omp_consultaopac.pft
+CI_TEMPDIR=C:\OpenMP\apache\www\OMP\bases\temp

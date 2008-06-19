@@ -1,0 +1,142 @@
+<!--  ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+<trace>BR1</trace>
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  <field action=cgi tag=100>criterio</field>
+  <field action=cgi tag=110>expresion</field>
+
+
+  <display><htmlpft>
+      <html>
+	<head>
+	<SCRIPT LANGUAGE="JavaScript">
+	<!--
+
+	function asignar(documento) {
+		window.parent.superior.form_libre_deuda.numero_dni.value = "";
+		window.parent.superior.form_libre_deuda.numero_dni.value = documento;
+		window.parent.superior.form_consulta_lector.expresion.value = "";
+		window.parent.superior.form_consulta_lector.expresion.value = documento;
+	}
+
+	//  End -->
+	</script>
+	</head>
+
+	<body bgcolor="#E8E8D0">
+  </htmlpft></display>
+
+  <flow action=jump><pft>if citype(v110)<>'A' then 'dni' fi</pft></flow>
+
+  <do task=keyrange>
+    <parm name=db>lector</parm>
+    <parm name=from><pft>v110</pft></parm>
+    <parm name=count>30</parm>
+    <field action=define tag=1102>Isis_Total</field>
+    <field action=define tag=1103>Isis_Key</field>
+    <field action=define tag=1104>Isis_Current</field>
+    <loop>
+      <display><pft>if val(v1104)=1 then 
+        '<table border="1" width="100%" bgcolor="#FFFFF">
+         <tr><td width="60%" align="center" bgcolor="#F5A307">
+           <b>Lector</b></td>
+         <td width="20%" align="center" bgcolor="#F5A307">
+           <b>Documento</b></td>
+         </tr>' fi
+      </pft></display>
+      <do task=search>
+        <parm name=db>lector</parm>
+        <parm name=expression><pft>v1103</pft></parm>
+        <parm name=gizmo>gizmo</parm>
+        <loop>
+					<list action="load" type="freq"><pft>'^a',replace(v1,' ',''),'^b',v2,'^c',v1</pft></list> <!-- en ^a se borran los espacios para un mejor ordenamiento -->
+        </loop>
+      </do>
+    </loop>
+  </do>
+	
+
+	<do task="list">
+	<field action="define" tag="1001">Isis_Item</field>
+		<loop>
+       <display><pft>
+        '<tr>
+          <td width="60%">',v1001^c,'</td>
+          <td width="20%" align="center"><a href="JavaScript:asignar(',"'"n0,v1001^b,"'"n0,')">',v1001^b,'</a></td></tr>
+         </tr>',</pft></display>
+		</loop>
+	</do>
+      <display></table></display>
+	
+<!--  <display><pft>if val(v1102)=0 then 
+   '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display> -->
+  <flow action=exit>1</flow>
+
+  <label>dni</label>
+
+  <do task=search>
+    <parm name=db>lector</parm>
+    <parm name=expression><pft>v110</pft></parm>
+    <parm name=count>1</parm>
+    <parm name=gizmo>gizmo</parm>
+    <field action=define tag=1102>Isis_Total</field>
+    <loop>
+      <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'consulta_lector.html')</pft></htmlpft></display>
+    </loop>
+  </do>
+  <display><pft>if val(v1102)=0 then 
+   '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display>
+  <flow action=exit>1</flow>
+
+  <label>SALIDA</label>
+
+  <display><p>&nbsp;</p>
+   <center><h2>No se ha indicado una expresión</h3></center></display></section>
+</IsisScript>
+
+

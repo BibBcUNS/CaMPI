@@ -1,0 +1,129 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+<section>
+	
+  <display><pft>'Content-type: text/html'/#</pft></display>
+
+<trace>BR1</trace>
+
+	<display><pft>
+		'<html><body bgcolor="#E8E8D0">'</pft></display>	
+
+         <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+	<field action=cgi tag=2002>paginas</field>	
+	<field action=cgi tag=2003>inventarios</field>		
+	<field action="add" tag="2004">5</field> <!-- Cantidad de etiquetas por fila-->	
+	<field action="add" tag="2005">80</field> <!-- Cantidad de etiquetas por pagina-->	
+
+	<!-- list action="load" type="sort"><pft>(v2003/)</pft></list -->
+	<list action="load" type="list"><pft>(v2003/)</pft></list>
+
+  <do task=list>
+    <field action="define" tag="1001">Isis_Item</field>
+    <field action=define tag=1002>Isis_Total</field>
+    <field action=define tag=1003>Isis_Current</field>
+
+
+
+		<!-- parm name="sort"><pft>f(val(v1001),5,0)</pft></parm -->
+
+		<field action="add" tag="3000">0</field> <!-- contador de 1 a 4 que indica el loop acutal -->
+		<field action="add" tag="3001">0</field> <!-- contador de 1 a 80 que indica el loop acutal -->
+    <loop>
+
+			<field action="import" tag="list">2004,2005,3000,3001</field>
+			<field action="replace" tag="3001"><pft> /* si el contador llega a 81 se inicializa */
+				if v3001=v2005 then '1' else f(val(v3001)+1,1,0) fi</pft></field>
+			<display><pft>  /* si se inicia la pagina abre la tabla */
+				if v3001='1' then '<table border="0" bgcolor="White">'/ fi</pft></display>				
+
+			<field action="replace" tag="3000"><pft> /* si el contador llega a 5 se inicializa */
+				if v3000=v2004 then '1' else f(val(v3000)+1,1,0) fi</pft></field>
+			<display><pft>  /* si comienza una nueva fila la abre */
+				if v3000='1' then '<tr>'/ fi</pft></display>
+
+			<field action="add" tag="3002"><pft> /* nro. inventario (si existe), 0 -> si no existe */
+				f(l(['exist']v1001),1,0)</pft></field> 
+
+			<!-- display><pft>'<td align="center" width="140" height="62">',
+				ref(['exist']l(['exist']v1001), 
+						'<font face="IDAutomationHC39M" size="6">*',v977),'*</td>'/
+				</pft></display -->
+
+			<display><pft>'<td align="center" width="150" height="50">',
+				if v3002='0' then 'Inventario inexistente<br>',v1001,'</td>'/ 
+				else
+				ref(['exist']l(['exist']v1001), 
+				'<font face="IDAutomationHC39M">*',v977),'*</td>'/
+				fi</pft></display>
+
+
+
+			<display><pft>  /* si se completa la fila se cierra */
+				if v3000=v2004 then '</tr>'/ fi</pft></display>
+			<display><pft>  /* si se completa la pagina se cierra la tabla */
+				if v3001=v2005 then '</table><br>'/ fi</pft></display>
+
+			<field action="export" tag="list">3000,3001</field>
+    </loop>
+
+  </do>
+
+	<field action="replace" tag="3000"><pft>if f(val(v2004)-val(v3000),1,0)='0' then '1' else f(val(v2004)-val(v3000),1,0) fi</pft></field>
+	<do>
+		<parm name="count"><pft>v3000</pft></parm>
+		<loop>
+			<display><pft>'<td>&nbsp;</td>'/</pft></display>
+		</loop>
+	</do>
+
+	<display></tr></table><br><br><u>Códigos de barra</u><br><i>
+Copyright © 1999-2006 IDAutomation.com, Inc. IDAutomation is a registered trademark of IDAutomation.com, Inc. All other trademarks mentioned are the property of their respective owners. Agreement Version 6.7.
+</i>
+</body></display>
+
+</section>
+</IsisScript>

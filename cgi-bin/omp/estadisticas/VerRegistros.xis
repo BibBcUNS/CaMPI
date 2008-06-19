@@ -1,0 +1,71 @@
+<IsisScript>
+<section>
+
+  <display><pft>'Content-type: text/html'/#</pft></display>
+	<trace>!BR</trace>
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+  <field action=cgi tag=100>Expresion</field>
+
+	  
+  <display><htmlpft>
+      <html>
+			<head>
+				<title>Open MarcoPolo - Módulo Estadísticas: Movimientos</title>
+			</head>
+			
+			<SCRIPT language="JavaScript">
+			<!--
+			-->
+			</SCRIPT>
+
+      <body topmargin="0" bgcolor="#E8E8D0">
+			<a name="top"></a>
+      <table border="0" width="100%">
+      <tr>
+        <td width="50%"><h4>[pft]ref(['config']1,v7),[/pft]</h4>
+        </td>
+        <td width="50%" align="right">
+          <h5>Open MarcoPolo - Módulo Estadísticas<br>
+          Fecha:
+	[pft]select s(date)*16.1
+              case '0': ,'Domingo, ',
+              case '1': ,'Lunes, ',
+              case '2': ,'Martes, ',
+              case '3': ,'Miércoles, ',
+              case '4': ,'Jueves, ',
+              case '5': ,'Viernes, ',
+              case '6': ,'Sábado, ',
+           endsel,
+           mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)[/pft]
+			</h5></td>
+      </table><hr>
+			<link rel="stylesheet" href="[pft]getenv('PATH_INFO')[/pft]estilos.css" type="text/css">
+	</htmlpft></display>						
+	
+  <do task=search>
+    <parm name=db>movi</parm>
+    <parm name=expression><pft>v100</pft></parm>
+		<parm name="gizmo">oemansi</parm>
+    <field action=define tag=1001>Isis_Current</field>
+    <field action=define tag=1002>Isis_Total</field>
+    <loop>
+			<field action="import" tag="list">100</field> <!-- expresión de búsqueda -->
+			<display><htmlpft>
+				<pft>cat(getenv('PATH_TRANSLATED'),'plantilla_registros.htm')</pft></htmlpft></display>
+	  </loop>
+  </do>
+
+ 
+	
+	<display>
+	
+	</body>
+	</html>
+	
+	</display>
+</section>
+</IsisScript>
+
+
+

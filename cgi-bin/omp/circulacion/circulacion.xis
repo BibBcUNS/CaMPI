@@ -1,0 +1,376 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+
+
+<function name="mostrar_error" action="add" tag="3000">
+<!-- Esta función trata el error mostrando el motivo y abortando la script -->
+	<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_error.html')</pft></htmlpft></display>
+	<flow action="exit">Now</flow>
+</function>
+
+<function name="valida_operador" action="add" tag="3000">
+	<!-- Esta función valida al operarrio. 
+	El campo 3000 contiene los datos del operario en el formato:
+	^inombre de usuario
+	^pclave de acceso
+	Esta función retorna en v3000 el "Apellido, Nombre" si esta correctamente validado o sino "error" -->
+
+  <do task="search">
+    <parm name="db">opera</parm>
+    <parm name="expression"><pft>v3000^i</pft></parm>
+    <parm name="count">1</parm>
+    <loop>
+			<field action="import" tag="list">3000</field>
+      <field action="replace" tag="3000"><pft>
+        if s(mpu,v1)=s(mpu,v3000^i) and s(mpu,v2)=s(mpu,v3000^p) then 
+					mhl,v3^a,", ",v3^b
+				else 
+					mhl,'error'
+				fi
+      </pft></field>
+      <field action="export" previous="delete" tag="list">3000</field>
+    </loop>
+  </do>
+  <return action="export" tag="list">3000</return>
+</function>
+
+<function name="prestar" action="add" tag="3000">
+<!-- 
+Esta función modifica la existencia de la base exist del inventario v3000^i, prestando el material al usuario
+Apellido, Nombre que viene en v3000^a, cuyo documento viene en v3000^b, desde el v3000^c hasta el v3000^d
+-->
+
+	<field action="add" tag="3001"><pft>f(l(['exist']v3000^i),1,0)</pft></field>
+	<field action="replace" tag="3000"><pft>if val(v3001)=0 then 'Error: Inventario (',v3000^i,') no encontrado en exist' fi</pft></field>
+	<flow action="jump"><pft>if v3000:'Error' then 'FinPrestar' fi</pft></flow>
+	
+	<do task="update">
+		<parm name="db">exist</parm>
+		<parm name="mfn"><pft>v3001</pft></parm>
+		<parm name="fst"><pft>cat('exist.fst')</pft></parm>
+  	<field action="define" tag="1102">Isis_Status</field>
+  	<field action="define" tag="1103">Isis_RecordStatus</field>
+		<field action="define" tag="1011">Isis_Lock</field>
+		<update>
+			<field action="replace" tag="985">PRES</field>
+			<field action="import" tag="998" previous="add">3000</field>
+			<field action="replace" tag="998" split="occ"><pft>if nocc(v998)>3 then (v998[2..4])</pft></field>
+			<write>Unlock</write>
+			<field action="export" tag="list">1102,1103</field>
+		</update>
+		<field action="replace" tag="3000"><pft>if val(v1102)>0 or val(v1103)>0 then 'Error. Isis_Status',v1102,' Isis_RecordStatus: ',v1103 else 'ok' fi</pft></field>
+	</do>
+
+	<call name="apuntar_operacion">
+		<pft>
+		'^tprestamo',																/* tipo de operacion */
+		'^i',v3001^i,																/* inventario */
+		ref(['biblio']val(v3001),@papeleta.pft,)		/* datos bibliográficos (^btitulo/autor,^cclasificación,^rmfn,^ldgm) */
+		'^p',v3000^c 																/* fecha del préstamo */
+		'^v',v3000^d																/* fecha de vencimiento */
+		</pft>
+	</call>
+
+	<label>FinPrestar</label>	
+	<return action="export" tag="list">3000</return>
+</function>
+
+<function name="devolver" action="add" tag="3000">
+<!-- 
+Esta función modifica la existencia de la base exist del inventario v3000^i, cuyo lockid viene en v3000^l,
+volviendo su estado a PERM -->
+
+<!-- TO DO: considerar que el inventario puede tener sufijos para indicar el turno -->	
+	<field action="add" tag="3001"><pft>f(l(['exist']v3000^i),1,0)</pft></field>
+	<field action="replace" tag="3000"><pft>if val(v3001)=0 then 'Error: Inventario (',v3000^i,') no encontrado en exist' fi</pft></field>
+	<flow action="jump"><pft>if v3000:'Error' then 'FinDevolver' fi</pft></flow>
+	
+	<do task="update">
+		<parm name="db">exist</parm>
+		<parm name="mfn"><pft>v3001</pft></parm>
+		<parm name="fst"><pft>cat('exist.fst')</pft></parm>
+		<parm name="lockid"><pft>v3000^l</pft></parm>
+  	<field action="define" tag="1102">Isis_Status</field>
+  	<field action="define" tag="1103">Isis_RecordStatus</field>
+		<field action="define" tag="1011">Isis_Lock</field>
+		<update>
+			<field action="replace" tag="985">PERM</field>
+			<write>Unlock</write>
+			<field action="export" tag="list">998,1102,1103</field>
+		</update>
+		<field action="replace" tag="3000"><pft>if val(v1102)>0 or val(v1103)>0 then 'Error. Isis_Status',v1102,' Isis_RecordStatus: ',v1103 else 'ok' fi</pft></field>
+	</do>
+
+	<field action="add" tag="3002"><pft> /* define si la devolución está retrasada */
+	   if val(s(v998^v[LAST])*6.4,s(v998^v[LAST])*3.2,s(v998^v[LAST])*0.2) > val(s(date).8) then 
+		 	'n'
+		 else 
+		 	's'
+	   fi</pft></field>
+	
+	<call name="apuntar_operacion">
+		<pft>
+		'^tdevolucion',																/* tipo de operacion */
+		'^i',v3001^i,																	/* inventario */
+		ref(['biblio']val(v3001),@papeleta.pft,)			/* datos bibliográficos (^btitulo/autor,^cclasificación,^rmfn,^ldgm) */
+		'^p',v998^c[LAST]															/* fecha del préstamo */
+		'^v',v998^d[LAST]															/* fecha de vencimiento */
+		'^m',v3002																		/* define si la devolución es morosa (s) o no (n) */
+		</pft>
+	</call>
+
+	<label>FinDevolver</label>	
+	<return action="export" tag="list">3000</return>
+</function>
+
+<function name="redefinir_cipar" action="add" tag="3000">
+<!--  Esta función redefine el cipar para que biblo apunte a la base cuyo prefijo viene indicado en el 
+inventario v3000, ej. R.1234
+Considerar que el caracter "." del ejemplo es configurable
+-->
+
+	<field action="add" tag="5000" split="occ"><pft>cat('c:\openmp\bases\scripts\config.txt')</pft></field> <!-- Coloca en v5000 todos los parámetros de configuración -->
+
+	<!-- v5001 contendra el caracter utilizado para separar el prefijo del nro. de inventario -->
+	<field action="add" tag="5001"><pft>
+		(if v5000.1<>'#' and v5000:'Separador prefijo de inventario=' then 
+			mid(v5000,size('Campo Inventario=')+1,
+			instr(v5000,';')-size('Campo Inventario=')-1) fi)</pft></field>
+	<!-- v5002 contendra el path alutilizado para separar el prefijo del nro. de inventario -->
+	<field action="add" tag="5002"><pft>
+		(if v5000.1<>'#' and v5000:'Path cipar=' then 
+			mid(v5000,size('Path cipar=')+1,
+			instr(v5000,';')-size('Path cipar=')-1) fi)</pft></field>
+	
+	<field action="add" tag="3001"><pft>mid(v3000,1,instr(v3000,v5001)-1)</pft></field> <!-- tiene el prefijo -->
+	<field action="replace" tag="3001"><pft>"predeterminada"n3001</pft></field> <!-- asume la base predeterminada si no esta el prefijo -->
+	<field action="add" tag="3002"><pft>mid(v3000,instr(v3000,v5001)+1,size(v3000))</pft></field> <!-- tiene el inventario -->
+	<field action="add" tag="3003"><pft>ref(['bases']l(['bases']v3001),v3)</pft></field> <!-- tiene el patch de la base -->
+	<field action="add" tag="3004"><pft>ref(['bases']l(['bases']v3001),v1)</pft></field> <!-- tiene el nombre de la base -->
+	<field action="add" tag="3005" split="occ"><pft>cat(v5002)</pft></field>
+	<field action="replace" tag="3005" split="occ"><pft>(replace(v3005,'[path]',v3003[1])/)</pft></field>
+	<field action="replace" tag="3005" split="occ"><pft>(replace(v3005,'[base]',v3004[1])/)</pft></field>
+	
+	<parm name="cipar"><pft>(v3005/)</pft></parm> <!-- redefine aqui el cipar -->
+	
+</function>
+
+<function name="liberar_updEstado_usuario" action="add" tag="3000">
+<!-- Esta función actualiza el registro v3000^m del usuario, actualizando el estado (indicado en v3000^e)
+en caso de que este sancionado y que la misma halla caducado. Tambien considera si el operador indica una sanción.
+Además libera el registro. El lockid está definido por v3000^l.
+Retorna en v3000 "ok" o el error de la operación-->
+
+	<field action="replace" tag="3000"><pft>if val(v3000^m)=0 then 'Error: Usuario indefinido' fi</pft></field>
+	<flow action="skip"><pft>if val(v3000^m)=0 then 'Quit' fi</pft></flow> <!-- si no se define un mfn válido aborta -->
+	
+	<field action="cgi" tag="3001">vto_sancion</field>
+	<do task="update">
+		<parm name="db">lector</parm>
+		<parm name="mfn"><pft>v3000^m</pft></parm>
+		<parm name="lockid"><pft>v3000^l</pft></parm>
+  	<field action="define" tag="1102">Isis_Status</field>
+  	<field action="define" tag="1103">Isis_RecordStatus</field>
+  	<field action="define" tag="1011">Isis_Lock</field>
+		<update>
+			<field action="import" tag="list">3001</field>
+	    <field action="replace" tag="10"><pft>
+				if p(v3001) then
+					'Sancionado'	
+				else
+		      if s(mpu,v10):'SANCIONADO' and val(s(v11^v[last])*6.4,s(v11^v[last])*3.2,s(v11^v[last])*0.2) < val(s(date).8) then
+	  	    	mpl,'Habilitado' 
+					fi
+			 	fi
+			</pft></field>
+			<field action="replace" tag="11" previous="add"><pft>v3001</pft></field> <!-- si está presente una sanción la agrega, formato ^ddias^ffecha^vvto.^orecurrencia -->
+			<write>Unlock</write>
+			<field action="export" tag="list">1102,1103</field>
+		</update>
+		<field action="replace" tag="3000"><pft>if val(v1102)>0 or val(v1103)>0 then 'Error al grabar el registro Lector. Isis_Status',v1102,' Isis_RecordStatus: ',v1103 else 'ok' fi</pft></field>
+		<return action="export" tag="list">3000</return>
+	</do>
+	
+	<call name="apuntar_operacion">
+		<pft>if p(v3001) then
+		'^tsancion',							/* tipo de operacion */
+		v3001											/* ^ddías de sanción^ffecha actual^vfecha vto.^onro. recuerrencia */
+		</pft>
+	</call>
+</function>
+
+<function name="apuntar_operacion" action="add" tag="3000">
+<!-- Esta función agrega un item a una lista en el formato del campo v4 de la base movi -->
+	<list action="load" type="list"><pft>v3000</pft></list>
+</function>
+
+<function name="grabar_movi" action="add" tag="3000">
+<!-- Esta función graba todos las operaciones en un nuevo registro de la base movi.
+Trae en v3000^l el id_operario para el lockid y el nombre en v3000^n
+Retorna el mfn de la operación o Error en caso de fallas.
+-->
+	<field action="cgi" tag="3000">id</field>
+	<do task="update">
+		<parm name="db">movi</parm>
+		<parm name="mfn">New</parm>
+    <parm name="lockid"><pft>v3000^l</pft></parm>
+    <parm name="fst"><pft>cat('movi.fst')</pft></parm>
+  	<field action="define" tag="1102">Isis_Status</field>
+  	<field action="define" tag="1103">Isis_RecordStatus</field>
+  	<field action="define" tag="1011">Isis_Lock</field>
+		<update>
+			<field action="cgi" tag="1">nombre_usuario</field>
+			<field action="cgi" tag="2">id_usuario</field>
+			<field action=add tag=3><pft>
+          '^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^h',mid(date,10,6)</pft></field>
+			<do task="list">
+				<field action="define" tag="1001">Isis_Item</field>
+				<loop>
+					<field action="export" tag="4">1001</field>
+				</loop>
+			</do>
+			<field action="import" tag="list">3000</field>
+			<field action="add" tag="5"><pft>ref(['opera']l(['opera']v3000^l),v3)</pft></field>
+			<field action="delete" tag="list">3000</field>
+      <field action="add" tag="6"><pft>getenv('REMOTE_ADDR')</pft></field>
+			<field action="delete" tag="list">1001</field>
+			<write>Unlock</write>
+			<field action="add" tag="4000"><pft>mfn</pft></field>
+			<field action="export" tag="list">4000</field> <!-- Nro. de la operación -->
+		</update>
+		<field action="replace" tag="3000"><pft>if val(v1102)>0 or val(v1103)>0 then 'Error. Isis_Status',v1102,' Isis_RecordStatus: ',v1103 else v4000 fi</pft></field>
+		<return action="export" tag="list">3000</return>
+	</do>
+</function>
+
+<function name="imprimir_papeleta" action="add" tag="3000">
+<!-- Esta función imprime la papeleta de la operación v3000 de la base movi -->
+	<do task="mfnrange">
+	  <parm name="db">movi</parm>
+	  <parm name="from"><pft>v3000</pft></parm>
+	  <parm name="count">1</parm>
+	  <parm name="gizmo">oem2ansi</parm>
+	  <field action="define" tag="1102">Isis_Status</field>
+	  <loop>
+			<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_papeleta.html')</pft></htmlpft></display>
+	  </loop>
+	</do>
+</function>
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+	<trace>!BR</trace>
+	
+  <field action="cgi" tag="4000">path_cipar</field>
+	<parm name="cipar"><pft>cat(v4000)</pft></parm>
+	
+	<field action="cgi" tag="4001">id_operador</field>
+	<field action="replace" tag="4001"><pft>'^i',replace(v4001,'-','^p')</pft></field>
+	<call name="valida_operador"><pft>v4001</pft></call> <!-- verifica el operador -->
+	<call name="mostrar_error"><pft>if v3000[LAST]:'Error' then v3000[LAST] fi</pft></call> 
+
+	<!-- Devoluciones -->
+	<field action="cgi" tag="4004">inv_devoluciones</field>
+	<do>
+		<parm name="count"><pft>if p(v4004) then f(nocc(v4004),1,0) else '999' fi</pft></parm>
+		<field action="define" tag="1001">Isis_Current</field>
+		<loop>
+			<field action="import" tag="list">4001,4004</field>
+			<flow action="skip"><pft>"Quit"n4004</pft></flow> <!-- si no hay devoluciones aborta -->
+			<field action="occ" tag="1003" from="4004"><pft>v1001</pft></field> <!-- deja solamente la ocurrencia #v1001 de v4004 -->
+			<call name="redefinir_cipar"><pft>v1003</pft></call>
+			<call name="devolver"><pft>'^i',v1003,'^l',v4001^i</pft></call>
+			<call name="mostrar_error"><pft>if v3000[LAST]:'Error' then v3000[LAST] fi</pft></call>
+		</loop>
+	</do>
+	
+	<!-- Préstamos -->
+	<field action="cgi" tag="4005" split="occ">inv_prestamo#A</field>
+	<do>
+		<parm name="count"><pft>if p(v4005) then f(nocc(v4005),1,0) else '99999' fi</pft></parm>
+		<field action="define" tag="1001">Isis_Current</field>
+		<field action="define" tag="1002">Isis_Total</field>
+		<loop>
+			<field action="import" tag="list">4005</field>
+			<flow action="skip"><pft>"Quit"n4005</pft></flow> <!-- si no hay prestamos aborta -->
+			<field action="occ" tag="1003" from="4005"><pft>v1001</pft></field> <!-- deja solamente la ocurrencia #v1001 de v4005 -->
+			<field action="cgi" tag="1004">vencimiento#A</field>
+			<field action="cgi" tag="1005">nombre_usuario</field>
+			<field action="cgi" tag="1006">id_usuario</field>
+			<call name="redefinir_cipar"><pft>1003</pft></call>
+			<call name="prestar"><pft>'^i',v1003,'^a',v1005,'^b',v1005,'^c',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^c',v1004,</pft></call>
+			<call name="mostrar_error"><pft>if v3000[LAST]:'Error' then v3000[LAST] fi</pft></call>
+		</loop>
+	</do>
+	
+	<field action="cgi" tag="4006" split="occ">inv_prestamo#B</field>
+	<do>
+		<parm name="count"><pft>if p(v4006) then f(nocc(v4006),1,0) else '99999' fi</pft></parm>
+		<field action="define" tag="1001">Isis_Current</field>
+		<field action="define" tag="1002">Isis_Total</field>
+		<loop>
+			<field action="import" tag="list">4006</field>
+			<flow action="skip"><pft>"Quit"n4006</pft></flow> <!-- si no hay prestamos aborta -->
+			<field action="occ" tag="1003" from="4006"><pft>v1001</pft></field> <!-- deja solamente la ocurrencia #v1001 de v4006 -->
+			<field action="cgi" tag="1004">vencimiento#A</field>
+			<field action="cgi" tag="1005">nombre_usuario</field>
+			<field action="cgi" tag="1006">id_usuario</field>
+			<call name="redefinir_cipar"><pft>1003</pft></call>			
+			<call name="prestar"><pft>'^i',v1003,'^a',v1005,'^b',v1005,'^c',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^c',v1004,</pft></call>
+			<call name="mostrar_error"><pft>if v3000[LAST]:'Error' then v3000[LAST] fi</pft></call>
+		</loop>
+	</do>
+
+	<field action="cgi" tag="4007">vto_sancion</field>
+	<field action="cgi" tag="4008">id_usuario</field>
+	
+	<call name="liberar_updEstado_usuario"><pft>'^m',f(l(['lector']v4002),1,0),'^l',v4003,'^e',</pft></call>
+	<call name="grabar_movi">Now</call>
+	<call name="mostrar_error"><pft>if v3000[LAST]:'Error' then v3000[LAST] fi</pft></call>
+	
+	<call name="imprimir_papeleta"><pft>v3000[LAST]</pft></call>
+
+</section>
+</IsisScript>

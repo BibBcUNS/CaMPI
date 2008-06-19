@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>Consulta al Sistema Mesa de Entradas</title>
+<SCRIPT language="JavaScript1.1">
+	<!--
+		function tiempo() {
+			parent.principal.location = '/circula/opac/presentar.html';
+		}
+		//-->
+	</SCRIPT>
+</head>
+<body bgcolor="#E8E8D0" onLoad='setTimeout("tiempo()",360000)'>
+<h2 align="center">
+<a name="tope"></a><a name="tope">Bienvenido al Sistema&nbsp;<br>MarcoPolo<br>
+</a>
+<i>Interfaz de consulta On-line</i></h2>
+<hr>
+<table border="0" width="100%">
+  <tr>
+    <td width="25%"><img border="0" src="../images/resolucion.gif" align="left" hspace="5" width="69" height="79">La interfaz de consulta está preparada para una resolución de 800x600
+      dpi.</td>
+    <td width="50%">
+      <h4 align="center"><img border="0" src="../images/comics.gif" width="177" height="171"><br>ABGRA<br>
+      </h4>
+    </td>
+    <td width="25%"><img border="0" src="../images/javascript.gif" align="left" hspace="4" width="55" height="79">Contiene ingredientes en lenguaje JavaScript, que pueden ser ignorados si su
+browser no tiene capacidad para interpretarlos.</td>
+  </tr>
+</table>
+<p>&nbsp;<font face="Arial">La pantalla se encuentra dividida en cuatro secciones, la <A
+ href="#primera" >primera secci&oacute;n</A> corresponde a la confecci&oacute;n de la expresi&oacute;n de b&uacute;squeda, la<A href="#segunda"> segunda secci&oacute;n</A> visualiza el diccionario de t&eacute;rminos disponibles en la base de datos, la <A href="#tercera">tercera secci&oacute;n</A> muestra las b&uacute;squedas realizadas con anterioridad y la<A href="#cuarta"> cuarta secci&oacute;n</A> corresponde al &aacute;rea de visualizaci&oacute;n de los resultados de la b&uacute;squeda.</FONT>
+</p>
+<A href="#tope" name="primera"><img src="../images/tope.gif" align="right" alt="Ir al comienzo" border="0" width="63" height="20"></a>
+<h3><u>Primera Secci&oacute;n:</u></h3>
+<IMG alt="Expresi&oacute;n de b&uacute;squeda" src="../images/frame_cabeza.jpg" width="558" height="95">
+<p><font face="Arial">
+Se observa una caja de texto que permite ingresar la expresi&oacute;n de b&uacute;squeda deseada. All&iacute; se pueden colocar los t&eacute;rminos de b&uacute;squeda y aplicarles los operadores booleanos a los 
+efectos de mejorar el procedimiento.</FONT></P>
+<blockquote>
+  <p><em><small><font face="Arial">Ejemplo: PROGRAMA *  BECAS (es decir, que los dos
+	t&eacute;rminos Programa y Becas se deben encontrar en el
+	resultado)</FONT></SMALL></EM></P>
+</BLOCKQUOTE>
+<p><font face="Arial">
+	El sistema cuenta con botones que incluyen las operaciones tradicionales de la 
+	l&oacute;gica	booleana.</FONT></P>
+<p><FONT face=Arial>
+	El bot&oacute;n&nbsp;
+	<IMG align="middle" alt="Bot&oacute;n Y" src="../images/B_y.jpg" width="40" height="24">&nbsp;realiza la 
+	intersecci&oacute;n de conjuntos.<BR>
+	El bot&oacute;n&nbsp;
+	<IMG align="middle" alt="Bot&oacute;n O" src="../images/B_o.jpg" width="40" height="24">&nbsp;permite la 
+	exclusi&oacute;n de conjuntos.<BR>
+	El bot&oacute;n&nbsp;
+	<IMG align="middle" alt="Bot&oacute;n No" src="../images/B_no.jpg" width="40" height="24">&nbsp;representa la 
+	negaci&oacute;n</FONT></P>
+<p><font face="Arial">Tambi&eacute;n se incorporaron&nbsp; los botones 
+	<IMG alt="Par&eacute;ntesis abierto" src="../images/b_parentesisa.jpg" width="40" height="24">&nbsp;
+	<IMG alt="Par&eacute;ntesis cerrado" src="../images/b_parentesisc.jpg" width="40" height="24">&nbsp;
+	<IMG alt="Entre par&eacute;ntesis" src="../images/b_parentesisac.jpg" width="40" height="24">&nbsp; para la 
+	inclusi&oacute;n de par&eacute;ntesis en la expresi&oacute;n de b&uacute;squeda con el 
+	objeto de restringir las expresiones y establecer prioridades en resoluci&oacute;n de 
+	los operadores.</FONT></P>
+<blockquote>
+  <p><font face="Arial"><small><em>Ejemplo: si se quiere buscar una solicitud de 
+	Vi&aacute;tico de un viaje a Rectorado o Uruguay, la expresi&oacute;n de 
+  b&uacute;squeda debe formularse de la siguiente manera: </EM></SMALL></FONT><br>
+  <font face="Arial"><small><em>VIATICO * (RECTORADO + URUGUAY)</EM></SMALL></FONT></P>
+</BLOCKQUOTE>
+<p><font face="Arial">
+	El bot&oacute;n&nbsp;
+	<IMG align="absmiddle" alt="Buscar" src="../images/B_buscar.jpg" width="87" height="34">
+	&nbsp;ejecuta la operaci&oacute;n de b&uacute;squeda presentando el resultado 
+	en la <A href="#cuarta">cuarta secci&oacute;n</A>.</FONT></P>
+<p><font face="Arial">
+	El bot&oacute;n&nbsp;<IMG align="absmiddle" alt="Borrar" src="../images/B_borrar.jpg" width="72" height="25">
+	&nbsp;permite limpiar el cuadro de texto eliminando la expresi&oacute;n de 
+	b&uacute;squeda ingresada.</FONT></P>
+<p><font face="Arial">
+	El bot&oacute;n&nbsp;	
+	<IMG align="absmiddle" alt="Deshacer" src="../images/B_deshacer.jpg" width="94" height="34">
+	&nbsp;permite borrar el &uacute;ltimo t&eacute;rmino ingresado en la expresi&oacute;n 
+	de b&uacute;squeda.</FONT></P>
+<p><font face="Arial">El botón &nbsp;<img border="1" src="../images/tipomaterial.gif" width="92" height="24">&nbsp;&nbsp;permite
+seleccionar el tipo de material de la obra. Se puede elegir entre:</font> <font face="Arial">Libro,
+Tesis, Artículo o Video Tape. Los registros encontrados por la expresión
+indicada se ajustarán al tipo de material seleccionado.</font></P>
+<A href="#tope" name="segunda">
+	<IMG align="right" alt="Ir al comienzo" border="0" src="../images/tope.gif" width="63" height="20"></a>
+	<h3><u>Segunda Secci&oacute;n:</u></h3>
+<p><IMG align=right alt="Diccionario" src="../images/frame_diccio.jpg" width="206" height="537">
+<font FACE="Arial">Para facilitar la elaboraci&oacute;n de la expresi&oacute;n de
+b&uacute;squeda, el sistema presenta el <strong>Diccionario de 
+t&eacute;rminos</STRONG> permitiendo ser visualizado seg&uacute;n:</FONT></P>
+<font FACE="Arial">
+<blockquote>
+  <ul>
+    <li>Todos los t&eacute;rminos</FONT>
+    <li><font face="Arial">Título
+    <li>Autor, &oacute;</font>
+    <li><font face="Arial">Palabras claves 
+    </LI></UL></BLOCKQUOTE>
+<p>Como opci&oacute;n predeterminada est&aacute; seleccionado <strong>Todos los t&eacute;rminos</strong>.
+Por lo cual, al ingresar a la p&aacute;gina, se visualiza el mismo desde el comienzo del diccionario.</p>
+</font>
+<p><font FACE="Arial">Si se desea visualizar el Diccionario a partir de alg&uacute;n t&eacute;rmino, simplemente se escribe el mismo o sus letras iniciales en el recuadro de texto que se encuentra debajo de las opciones. Autom&aacute;ticamente el Diccionario visualiza los t&eacute;rminos
+que se aproximan al texto ingresado.</font></p>
+<p><font FACE="Arial">Una vez posicionado en el t&eacute;rmino deseado, se hace click con&nbsp; el mouse sobre el mismo e inmediatamente es incorporado en la expresi&oacute;n de b&uacute;squeda.</font></p>
+<p><font FACE="Arial">Si se pretende que la palabra o elemento a buscar corresponda a una palabra del
+Título, bastar&aacute; con clickear en la opci&oacute;n <strong>Título</strong>.</font></p>
+<blockquote>
+  <p><font FACE="Arial"><em><small>Nota: el sistema no permite colocar desde
+	el Diccionario dos t&eacute;rminos adyacentes, los mismos deben estar 
+	concatenados con un operador booleano.</small></em>
+  </font></p>
+</blockquote>
+<font FACE="Arial"><p>En la parte derecha aparece una barra de desplazamiento que permiten recorrer el <strong>Diccionario</strong>, pudi&eacute;ndose observar los t&eacute;rminos posteriores o anteriores a los actualmente visualizados.</p>
+<p>Si el acceso a internet se encuentra demorado, puede obviar esta utilidad
+indicando directamente la expresión de búsqueda en la <a href="#primera">Primera
+Sección</a>.</font></p>
+<a name="tercera" href="#tope">
+	<img src="../images/tope.gif"  align="right" alt="Ir al comienzo" border="0" width="63" height="20"></a>
+<h3><u>Tercera Secci&oacute;n:</u></h3>
+<font FACE="Arial"><p>Si se desean visualizar nuevamente los registros recuperados en los procedimientos anteriores, se puede recurrir a la informaci&oacute;n almacenada en el hist&oacute;rico de b&uacute;squedas
+realizadas con anterioridad.</p></font>
+<p><img src="../images/frame_busqant.jpg" width="610" height="28"></p>
+<font FACE="Arial"><p>Para recuperar las expresiones ingresadas, se debe hacer un click con el mouse sobre la expresión <i><b>Presione aqu&iacute; para ver el listado de b&uacute;squedas anteriores</b></i> y se desplegar&aacute; la lista con las expresiones de b&uacute;squedas ejecutadas; visualiz&aacute;ndose en primer lugar la expresi&oacute;n m&aacute;s reciente.</p>
+<p>Al hacer click en un <b>t&eacute;rmino</b>, el mismo se incorpora a la expresi&oacute;n de b&uacute;squeda dando la posibilidad de agregarle nuevos t&eacute;rminos o ejecutar la b&uacute;squeda tal cual est&aacute;.</font></p>
+<a name="cuarta" href="#tope">
+	<img src="../images/tope.gif" align="right" alt="Ir al comienzo" border="0" width="63" height="20"></a>
+<h3><u>Cuarta Secci&oacute;n:</u></h3>
+<p><font face="Arial">Esta secci&oacute;n corresponde al &aacute;rea donde se muestra la presente ayuda y es la que se utiliza para presentar los registros encontrados en la b&uacute;squeda</font></p>
+<p><font face="Arial">Al pie de cada registro aparece la opción&nbsp; <img border="0" src="../images/formatosvisualizacion.gif" width="111" height="23">&nbsp;&nbsp;que
+permite seleccionar un formato de visualización más completo (únicamente para
+la intranet).&nbsp;<br>
+Así también, en los materiales disponibles para el servicio de préstamo,
+aparece la opción&nbsp;&nbsp;<img border="0" src="../images/solicitudmaterial.gif" width="119" height="30">&nbsp;&nbsp;que
+permite adelantar el pedido, registrando en la base de usuarios la solicitud.
+Esto no debe interpretarse como reserva, este pedido estará sujeto a la
+disponibilidad y condiciones existentes al momento de retirar la obra.</font></p>
+<p><font face="Arial">Si el resultado de la búsqueda arroja m&aacute;s de 10 registros, se presentar&aacute; al final de la lista los botones:</font></p>
+<p align="center"><img src="../images/volver.gif" align="absmiddle" width="70" height="46"><font face="Arial"> 
+para visualizar los 10 resultados anteriores.</font></p>
+<p align="center"><img src="../images/seguir.gif" align="absmiddle" width="70" height="46"><font face="Arial"> 
+para visualizar los pr&oacute;ximos registros encontrados.</font></p>
+</body>
+</html>

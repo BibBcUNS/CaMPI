@@ -1,0 +1,85 @@
+<html>
+
+<head>
+<title>Open MarcoPolo - Módulo Administración: Libre Deuda</title>
+
+	<SCRIPT language="JavaScript">
+	<!--
+			
+	function consulta_obra() {
+		consulta=window.open('consulta_obra.html','Consulta_Autores','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=500,height=400');
+	}
+			
+	function contar_inventarios() {
+		textarea = window.document.form_inventarios.inventarios.value;
+		contador = 0;
+		for ( x = 0; x <= textarea.length; x++ ) {
+			if ( escape(textarea.substring(x,x+1)) == '%0D') {
+				++contador;
+			}
+			if (textarea.length > 0 && contador == 0) {contador = 1 };
+			window.document.form_consulta.contador_inventarios.value = contador;
+			if (contador >= 80 && window.document.form_consulta.avisado.value == '0') {
+				window.document.form_consulta.avisado.value = '1';
+				alert ('Se ha completado la hoja')}
+			
+		}
+	}
+
+	//-->
+	</SCRIPT>
+<style type="text/css">
+<!--
+body {
+	margin-top: 20px;
+}
+-->
+</style>
+
+</head>
+
+<body bgcolor="#E8E8D0">
+
+<table border="0" width="100%">
+  <tr>
+    <td width="85" rowspan="2"><img src="\logo2.gif" width="80" height="80" align="middle"></td>
+    <td width="50%"><big>Institucion XXXXX</big><td align="right"><b><i>Módulo Administración</i></b>&nbsp;&nbsp;<img src="\omp.gif" width="80" height="62" align="middle" border="0"><br>
+    </td>
+  </tr>
+</table>
+
+<hr>
+<table width="758"  cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td colspan="2" width="500">
+    	<p align="center"><b><big>Constancia de Libre Deuda</big></b></p>
+    </td>
+    </tr>
+    <tr>
+    <td colspan="2" >
+	    <form method="POST" action="/cgi-bin/wxis.exe/circula/administracion/" name="form_libre_deuda" target="_parent">
+	    <input type="hidden" name="IsisScript" value="circula/administracion/libre_deuda.xis">
+	    Nota D.B. Nº&nbsp;<input type="text" name="numero_nota" value="  /08" size="6"><br>
+	    DNI Número&nbsp;<input type="text" name="numero_dni" size="10">(Ingrese el número sin puntos)
+	    <input type="radio" name="sexo" value="masculino" checked>Masculino&nbsp;&nbsp;&nbsp;
+	    <input type="radio" name="sexo" value="femenino">Femenino<br>
+	    <input type="submit" value="Enviar">
+	    </form>
+    </td>
+  </tr>
+  <tr>
+    <td>
+		<form method="POST" action="/cgi-bin/wxis.exe/circula/administracion/" name="form_consulta_lector" target="inferior">
+		Consulta de Lectores:&nbsp; 
+		      <input type="hidden" name="IsisScript" value="/circula/administracion/consulta_lector.xis">
+		      <input type="radio" name="criterio" value="lector" checked>Lector&nbsp;(DNI o Nombre)<br>
+		      <input type="text" name="expresion" size="15"><input type="submit" value="Enviar"><input type="reset" value="Limpiar"> </td>
+		</form>
+   </td>
+   <td>
+	<a href="menu.html" target="_parent">Volver al Menú</a>
+  </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Open MarcoPolo - Módulo OPAC</title>
+</head>
+
+<script language="JavaScript">
+<!--
+	function presentar_formato() {
+		window.document.form_presentarformato.MFN.value = window.opener.document.form_formatos.MFN.value;
+		window.document.form_presentarformato.Formato.value = window.opener.document.form_formatos.Formato.value;		
+		window.document.form_presentarformato.submit();
+	}
+
+-->
+	</script>
+
+<body onload="moveTo(220,200); presentar_formato()">
+
+<form name="form_presentarformato" action="/cgi-bin/wxis.exe/circula/opac/" method="post">
+	<input type="Hidden" name="IsisScript" value="circula/opac/formatos.xis">
+	<input type="Hidden" name="MFN">
+	<input type="Hidden" name="Formato">
+</form>
+<p align="center"><font size="+2">Cargando...</font></p>
+</body>
+</html>

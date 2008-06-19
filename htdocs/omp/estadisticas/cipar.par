@@ -1,0 +1,10 @@
+config.*=../bases/config/config.*
+lector.*=../bases/lector/lector.*
+opera.*=../bases/opera/opera.*
+biblo.*=../bases/exist/exist.*
+movi.*=../bases/movi/movi.*
+txt_htm.*=../bases/gizmo/gizmo.*
+gizmo.*=../bases/gizmo/gizmo.*
+oemansi.*=../bases/oemansi/oemansi.*
+ansioem.*=../bases/ansioem/ansioem.*
+CI_TEMPDIR=../bases/Temp

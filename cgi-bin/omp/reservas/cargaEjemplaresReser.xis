@@ -1,0 +1,129 @@
+<IsisScript>
+<section>
+<trace>On</trace>
+<display><pft>'Content-type: text/html'/#</pft></display>
+
+<!--este script considera una base de datos biblgrafica Catalis MARC21
+Los datos de existencias se almacenan en un campo local 859, 
+el cual tiene la estructura que se describe a continuación: 
+ $b: sección/colección específica donde el ítem se encuentra
+ $p: inventario (identificación de la pieza)
+ $3: parte (ej. "Vol. 1", "Parte II", "Tomo 3") 
+ 
+ En función de esta información crea una tabla de base de datos donde
+ cada registro contiene (en campo 1, repetible) lo inventarios que corresponden
+ a la misma parte de una obra determinada.
+-->
+
+<!-- parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm -->
+<!-- perfil=general/feriado -->
+
+<!-- field action="cgi" tag="5001">Perfil</field -->
+<!-- display><pft>if a(v5001) then 'Error:'/,'Debe Indicar el parámetro "Perfil" (ej. Perfil=General)'/ fi</pft></display -->
+<!-- flow action="exit"><pft>"Now"n5001</pft></flow -->
+<!-- flow action="exit"><pft>if a(v5001) then "1" else fi</pft></flow -->
+
+<file action="create" type="database">reser</file> <!-- crea/inicializa la base reserva -->
+<!-- recorre la base bibliografica completa -->
+<do task="mfnrange">
+	<parm name="db">biblo2</parm>
+
+	<loop>
+
+	    <!-- filtro para incluir registros bibliograficos en la base de reservas 
+	    ejemplo: solo obras monograficas
+	    no inluir por ej analiticas -->
+
+		<!--flow action="skip"><pft>if (not v5:'m') then 'Next' fi</pft></flow-->
+		<!-- fin filtro -->
+
+
+		<!-- se crea una lista (conjunto) con cada una de las partes de la obra.
+		     Se agrega un elemento a la lista según lo siguiente:
+		       * parte: Si la ocurrencia tiene nro. de inventario y tiene parte definida
+		       * #: Si la ocurrencia tiene nro. de inventario y no tiene parte definida -->
+		       
+		<!-- inicializo la lista de partes -->       
+		<list action=delete>now</list>
+
+		<!--
+		Creo la lista (conjunto) de partes.
+		Algoritmo:
+			Por cada ejemplar (cada occ de 859)
+				Si el mismo tiene inventario p(v859^p)
+					si no tiene parte ''
+						agrego a la lista #
+					sino (o sea que tiene paret
+						agrego la parte a la lista ^3
+					fin si
+				fin si
+			fin por cad
+		-->
+		<list action=load type=freq>			
+			<pft>(if p(v859^p) then if v859^3='' then '#' else v859^3 fi, fi /)</pft> 
+		</list>
+
+		<!-- Recorro la lista de partes (CD, V.1, V.2, etc.) -->
+		<do task=list>
+			<parm name=sort><pft>v2002</pft></parm>
+			<field action=define tag=2001>Isis_Current</field>
+			<field action=define tag=2002>Isis_Item</field>
+
+			<loop>
+			    <field action=import tag=859>859</field>
+
+				<!-- los valores posibles del subcampo e (estado de reservabilidad) son:
+				consulta (solo se presta en condiciones especiales, por ej: los fines de semana), 
+				prestable (se presta regularmente), 
+				tesoro (no sale nunca de la biblioteca)
+				
+				se guarda en el subcampo ^i el nro de inventario
+				en el subcampo ^e el estado
+				
+				Referencias:
+				En 3001 se genera la lista de los ejemplares (v859) correspondientes
+				a la parte en cuestion.
+				v2002[1]='#' corresponde a los ejemplares que no tienen parte.				
+				-->
+				
+				<field action="add" tag="3001" split="occ"><pft>							
+					(if (v2002[1]='#' and v859^3='') or v859^3 = v2002[1] then '^i',v859^p,'^e',
+						if v859^b.2='su' then 'prestable' 
+						  else  'tesoro'
+						fi,/ 
+					fi)
+				</pft></field>
+
+				<!-- se crea el reg en la base reser para una parte de la obra
+				En el campo uno (repetible) estarán todos los inventarios correspondientes
+				a los ejemplares de la parte -->
+				<do task="update">
+    				<parm name="db">reser</parm>
+    				<parm name="mfn">New</parm>
+					<parm name="fst"><pft>cat('reser.fst')</pft></parm>
+				    <field action="define" tag="1102">Isis_Status</field>
+				    <field action="define" tag="1011">Isis_Lock</field>
+				    <update>
+						<field action="import" tag=3001>3001</field>
+						<!-- Inventarios con estados -->
+						<field action="add" tag="1" split="occ"><pft>(v3001/)</pft></field> 
+
+						<!-- Cantidad de ejemplares de consulta/disponibles -->
+						<!-- los inventarios que figuran con estado consulta -->
+						<field action="add" tag="4"><pft>(if v3001^e='consulta' then '1' fi)</pft></field> 
+						<field action="replace" tag="4"><pft>f(size(v4),1,0)</pft></field> 
+
+						<field action="delete" tag="list">3001</field>
+						<!-- display><pft>'Creando: Inv.',v3001[1],' con ',f(nocc(v1)-1,1,0),' reg. hijos asociado/s '/</pft></display>
+						<!-- Incorpora el Perfil indicado a traves del cgi (Perfil) -->
+						<!-- field action="cgi" tag="5">Perfil</field -->
+						<write>Unlock</write>		
+				    </update>
+				</do>
+			</loop>
+		</do>			
+	</loop>
+</do>
+
+</section>
+</IsisScript>

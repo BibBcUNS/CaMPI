@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>Open MarcoPolo - Módulo Administración</title>
+</head>
+<link href="\mp.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+body {
+	margin-top: 20px;
+}
+-->
+</style>
+<body bgcolor="#E8E8D0" topmargin="0">
+<table border="0" width="100%">
+  <tr>
+    <td width="85" rowspan="2"><img src="\logo2.gif" width="80" height="80" align="middle"></td>
+    <td width="50%"><big>BIBLIOTECA JERONIMO SPADACCIOLI</big><td align="right"><b><i>Módulo Administración</i></b>&nbsp;&nbsp;<img src="\omp.gif" width="80" height="62" align="middle" border="0"><br>
+    </td>
+  </tr>
+</table>
+<hr>
+<table border="0" width="80%">
+  <tr>
+    <td colspan="2" bgcolor="#FDD08E"><strong>Altas y Modificaciones de Lectores</strong></td>
+  </tr>
+  <tr>
+    <td width="70%"><form method="POST" action="/cgi-bin/wxis.exe/circula/administracion/">
+      <input type="hidden" name="IsisScript" value="/circula/administracion/abmlector.xis">
+      <input type="hidden" name="opcion" value="Presentar">
+      <strong>Lector: <input type="text" name="credencial" size="10">
+      <input type="radio" name="id_lector" value="documento" checked>
+      DNI <input type="radio" name="id_lector" value="mfn">
+      MFN&nbsp;&nbsp; <input type="submit" value="Presentar">
+    </form></td>
+    <td width="30%">
+    <form method="POST" action="/cgi-bin/wxis.exe/circula/administracion/">
+      <input type="hidden" name="IsisScript" value="/circula/administracion/abmlector.xis">
+      <input type="hidden" name="opcion" value="Registro Nuevo">
+      <input type="hidden" name="invocado" value="menu.html">
+      <input type="submit" value="Crear Nuevo Registro">
+    </form></strong>
+    </td>
+    </form>
+  </tr>
+  <tr>
+    <td bgcolor="#FDD08E"><strong>Circulación Bibliográfica</strong></td>
+    <td bgcolor="#FDD08E"><strong>Otros procedimientos</strong></td>
+  </tr>
+  <tr>
+    <td>
+    	<form name="form_listados" method="POST" action="/cgi-bin/wxis1.exe/circula/administracion/">
+    	 <input type="hidden" name="IsisScript" value="/circula/administracion/listados.xis">
+	 <input type="Hidden" name="Orden" value="Prestamo">	
+        <input type="radio" value="morosos" name="opcion"><strong>Listado de morosos<br>
+        <input type="radio" value="prestamos" name="opcion">Prestamos del día (Estadística)<br>
+        <input type="radio" value="id_recibos" name="opcion" checked>Devoluciones del día (Identificación de recibos)<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Ordenamiento:
+				<select onchange="window.document.form_listados.Orden.value=this.value;" style="font-size : xx-small">
+				<option value="Prestamo" selected>Nro. Papeleta</option>
+				<option value="Devolucion">Cronológico</option>							
+				</select><br>
+        <input type="radio" value="circulante" name="opcion">Prestamos en circulaci&oacute;n<br>				
+        <input type="submit" value="Enviar" name="B1"></strong>
+        <input type="reset" value="Restablecer" name="B2"> 
+       </form>
+    </td>
+    <td width="51%" valign="top"><b><a href="etiquetas.html">Códigos de Barra libros</a><br>
+			<a href="credenciales.html">Generación de credenciales</a><br>
+			<a href="libre_deuda.html">Emisión de Libre Deuda</a></b></td>
+  </tr>
+  <tr>
+   <td colspan="2" bgcolor="#FDD08E"><strong>Base Bibliográfica</strong></td>
+  </tr>
+  <tr>
+    <td>
+		<form action="/cgi-bin/wxis.exe/circula/administracion/" method="post">
+			<input type="submit" value="Actualizar inventarios">
+			<input type="hidden" name="IsisScript" value="/circula/administracion/make_InvNuevos.xis">
+		</form>
+	</td>
+    <td>	
+		<form action="/cgi-bin/wxis.exe/circula/administracion/" method="post">
+			<input type="submit" value="Control de consistencia de inventarios">
+			<input type="hidden" name="IsisScript" value="/circula/administracion/check_consistencia.xis">
+		</form>    
+	</td>
+  </tr>
+ 
+</table>
+</body>

@@ -1,0 +1,22 @@
+<IsisScript>
+<section>
+<trace>Off</trace>
+
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm
+	
+	<do task="keyrange">
+	<parm name="db">movi</parm>
+	<parm name="from">TERMINAL=</parm>
+	<parm name="to">TERMINAL=999</parm>
+	<field action="define" tag="1001">Isis_Key</field>
+		<loop>
+			<field action="replace" tag="1001"><pft>replace(v1001,'TERMINAL=','')</pft></field>
+			<field action="export" tag="4002" previous="add">1001</field>
+		</loop>
+	</do>
+
+	<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_terminales.htm')</pft></htmlpft></display>
+	
+</section>
+</IsisScript>
