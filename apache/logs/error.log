@@ -1,0 +1,12 @@
+[Mon Mar 17 21:49:08 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Mon Mar 17 21:49:37 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Mon Mar 17 21:49:40 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Mon Mar 17 21:49:59 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Mon Mar 17 21:51:19 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Mon Mar 17 21:51:26 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Mon Mar 17 21:51:30 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Mon Mar 17 21:51:31 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Mon Mar 17 21:51:32 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Mon Mar 17 21:51:33 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Mon Mar 17 21:51:34 2008] [crit] (2)No such file or directory: make_sock: failed to get a socket for port 80
+[Thu Jun 19 16:14:42 2008] [error] [client 127.0.0.1] File does not exist: /campi/htdocs/biblioteca/circulacion/images/logo.gif
