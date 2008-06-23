@@ -56,13 +56,13 @@ function ClickOption(OptionName) {
 </SCRIPT>
 </head>
 <body bgcolor="#E8E8D0" onload='inicializa()'>
-    <form action="/cgi-bin/wxis.exe/circula/opac/" method="post" name="form_dicc" target="diccio" 
+    <form action="/cgi-bin/wxis.exe/omp/opac/" method="post" name="form_dicc" target="diccio" 
 		onSubmit="if (window.document.form_dicc.from.value =='') {
 		alert ('   No se permite enviar la\nsolicitud con el campo vacío');
 		return false;}
 		else {
    		return true;}">
-	<input type="hidden" name="IsisScript" value="circula/opac/diccio.xis">&nbsp;<img src="images/expresion.gif" width="176" height="92"><br>
+	<input type="hidden" name="IsisScript" value="omp/opac/diccio.xis">&nbsp;<img src="images/expresion.gif" width="176" height="92"><br>
 	<input type="radio" value="todosterminos" name="tipo" onclick="ClickOption('todosterminos');" checked><img name="todosterminos" src="images/bs_todosterminos.gif" align="absbottom" 
 		onmouseover="FocusImgOn('todosterminos');"
 		onmouseout="FocusImgOff('todosterminos');"

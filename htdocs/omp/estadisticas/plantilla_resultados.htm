@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="[pft]getenv('PATH_INFO')[/pft]estilos.css" type="text/css">
 <table width="100%">
 	<tr>
-	  <td width="50%">BIBLIOTECA JERONIMO SPADACCIOLI</td>
+	  <td width="50%">Institucion XXXXX</td>
 	  <td width="50%" align="right">
 	    <h5>Open MarcoPolo - Módulo Estadísticas<br>
 	    Fecha:
@@ -94,12 +94,12 @@
 	<input type="Hidden" name="Tipo_Grafico">
 </form>
  
-<form action="/cgi-bin/wxis.exe/circula/estadisticas/" method="post" name="form_VerRegistros" target="Registros">
-	<input type="hidden" name="IsisScript" value="circula/estadisticas/verregistros.xis">
+<form action="/cgi-bin/wxis.exe/omp/estadisticas/" method="post" name="form_VerRegistros" target="Registros">
+	<input type="hidden" name="IsisScript" value="omp/estadisticas/verregistros.xis">
 	<input type="Hidden" name="Expresion">
 </form>
-<form action="/cgi-bin/wxis.exe/circula/estadisticas/" method="post" name="form_Ranking" target="frame_datos">
-	<input type="hidden" name="IsisScript" value="circula/estadisticas/ranking.xis">
+<form action="/cgi-bin/wxis.exe/omp/estadisticas/" method="post" name="form_Ranking" target="frame_datos">
+	<input type="hidden" name="IsisScript" value="omp/estadisticas/ranking.xis">
 	<input type="Hidden" name="campo">
 [pft]
 (

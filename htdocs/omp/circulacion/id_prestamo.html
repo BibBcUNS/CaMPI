@@ -54,8 +54,8 @@ function focus_expresion() {
 >
 <font face="Arial" size="3">
 
-<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/circula/circulacion/" onclick="javascript:focus_expresion();">
-  <input type="hidden" name="IsisScript" value="circula/circulacion/consulta.xis">
+<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" onclick="javascript:focus_expresion();">
+  <input type="hidden" name="IsisScript" value="omp/circulacion/consulta.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td width="100%"><strong>Consulta</strong></td></tr>
@@ -72,7 +72,7 @@ function focus_expresion() {
   </table>
 </form>
 
-<form name="form_devolucion" method="POST" action="/cgi-bin/wxis.exe/circula/circulacion/"
+<form name="form_devolucion" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/"
 	onsubmit="
 		if (window.document.form_id.operador.value =='') {
 			window.document.form_id.operador.focus();
@@ -87,7 +87,7 @@ function focus_expresion() {
 				return true;}
 			}
 	">
-  <input type="hidden" name="IsisScript" value="circula/circulacion/devolucion.xis">
+  <input type="hidden" name="IsisScript" value="omp/circulacion/devolucion.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
 		<tr>
 			<td width="100%"><strong>Devolución</strong></td></tr>
@@ -101,7 +101,7 @@ function focus_expresion() {
 </form>
 
 
-<form name="form_id" method="POST" action="/cgi-bin/wxis.exe/circula/circulacion/"
+<form name="form_id" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/"
  	onSubmit="
 		if (window.document.form_id.operador.value =='') {
 			window.document.form_id.operador.focus();
@@ -114,7 +114,7 @@ function focus_expresion() {
 				return true;
 		">
 
-  <input type="hidden" name="IsisScript" value="circula/circulacion/prestamo.xis">
+  <input type="hidden" name="IsisScript" value="omp/circulacion/prestamo.xis">
 	<input type="hidden" name="opcion" value="ID">
 	<table border="0" width="100%">
     <tr>
@@ -134,8 +134,8 @@ function focus_expresion() {
 </form>
 </font>
 
-    <form action="/cgi-bin/wxis.exe/circula/circulacion/" method="post" name="form_identi" target="identificacion">
-	<input type="hidden" name="IsisScript" value="circula/circulacion/identificacion.xis">
+    <form action="/cgi-bin/wxis.exe/omp/circulacion/" method="post" name="form_identi" target="identificacion">
+	<input type="hidden" name="IsisScript" value="omp/circulacion/identificacion.xis">
 	<input type="hidden" name="id_operador">
      </form>
 

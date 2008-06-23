@@ -334,8 +334,8 @@ body {
     </td>
   </tr>
 </table>
-<form action="/cgi-bin/wxis.exe/circula/estadisticas/" method="post" name="form_stat" target="Resultados" onsubmit="return Procesar()">
-	<input type="Hidden" name="IsisScript" value="circula/estadisticas/estadistica.xis">
+<form action="/cgi-bin/wxis.exe/omp/estadisticas/" method="post" name="form_stat" target="Resultados" onsubmit="return Procesar()">
+	<input type="Hidden" name="IsisScript" value="omp/estadisticas/estadistica.xis">
 	<input type="hidden" name="operaciones">
   <input type="hidden" name="turno">	
   <input type="hidden" name="fecha">
@@ -605,20 +605,20 @@ body {
 
 </form>
 
-<form name="form_usuario" action="/cgi-bin/wxis.exe/circula/estadisticas/" target="listado">
-	<input type="Hidden" name="IsisScript" value="circula/estadisticas/consulta_usuario.xis">
+<form name="form_usuario" action="/cgi-bin/wxis.exe/omp/estadisticas/" target="listado">
+	<input type="Hidden" name="IsisScript" value="omp/estadisticas/consulta_usuario.xis">
 	<input type="Hidden" name="Nombre">
 	<input type="Hidden" name="NroDoc">
 	<input type="Hidden" name="TipoConsulta">
 </form>
 
-<form name="form_cargabibliotecarios" action="/cgi-bin/wxis.exe/circula/estadisticas/" target="bibliotecarios">
-	<input type="Hidden" name="IsisScript" value="circula/estadisticas/consulta_bibliotecarios.xis">
+<form name="form_cargabibliotecarios" action="/cgi-bin/wxis.exe/omp/estadisticas/" target="bibliotecarios">
+	<input type="Hidden" name="IsisScript" value="omp/estadisticas/consulta_bibliotecarios.xis">
 	<input type="Hidden" name="Nombre">
 </form>
 
-<form name="form_cargaterminales" action="/cgi-bin/wxis.exe/circula/estadisticas/" target="terminales">
-	<input type="Hidden" name="IsisScript" value="circula/estadisticas/consulta_terminales.xis">
+<form name="form_cargaterminales" action="/cgi-bin/wxis.exe/omp/estadisticas/" target="terminales">
+	<input type="Hidden" name="IsisScript" value="omp/estadisticas/consulta_terminales.xis">
 	<input type="Hidden" name="Nombre">
 </form>
 

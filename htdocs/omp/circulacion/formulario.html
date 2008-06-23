@@ -132,7 +132,7 @@
 
 '<table width="100%">
   <tr>
-    <td width="24%"><img src="/circula/circulacion/fotos/',v2,'.jpg" width="128" height="96" align="middle"  OnError="this.src=',"'"n0,'/circula/circulacion/fotos/falta_foto.gif',"'"n0,'"></td>',
+    <td width="24%"><img src="/omp/circulacion/fotos/',v2,'.jpg" width="128" height="96" align="middle"  OnError="this.src=',"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,'"></td>',
    '<td width="76%"><big>',v1,'</big>',", ",v3,
    if v2001:'1' then '<br><marquee bgcolor="#FFF0C4" border="0" style="color: rgb(191,51,83); font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',fi,
    '<br><a href="JavaScript:presenta_observaciones()"><font face="Arial" size="3">Observaciones al Lector</font></a>',
@@ -152,8 +152,8 @@ fi
   fi)
 fi,'<p>',
 
-'<form name="control" method="POST" action="/cgi-bin/wxis.exe/circula/circulacion/" style="margin-bottom: 0">
-  <input type="hidden" name="IsisScript" value="/circula/circulacion/prestamo.xis">
+'<form name="control" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" style="margin-bottom: 0">
+  <input type="hidden" name="IsisScript" value="/omp/circulacion/prestamo.xis">
   <input type="hidden" name="opcion" value="WRITE">
   <input type="hidden" name="operacion" value="MODIFICA">
   <input type="hidden" name="Vto_AB">
@@ -209,7 +209,7 @@ if p(v8) then
       fi,
       if s(mdu,v8^i.1) : 'X' then mhl,' ? ' else mhl,' Inv: ' fi,
       v8^i,if p(v8^o) then '<br>'v8^o fi,'</td>',
-   '<td width="10%">','<div id=',"'"n0,'renovacion_',f(iocc,1,0),"'"n0,'><a onclick="javascript:window.document.control.devolucion_',f(iocc,1,0),'.click();window.document.control.invs_prestamo_A.value += ',"'"n0,replace(v8^i,' ',''),'\n',"'"n0,';renovar(',"'"n0,f(iocc,1,0),"'"n0,')"><img src="\circula\circulacion\images\renovar.gif"></a></div>','</td>',
+   '<td width="10%">','<div id=',"'"n0,'renovacion_',f(iocc,1,0),"'"n0,'><a onclick="javascript:window.document.control.devolucion_',f(iocc,1,0),'.click();window.document.control.invs_prestamo_A.value += ',"'"n0,replace(v8^i,' ',''),'\n',"'"n0,';renovar(',"'"n0,f(iocc,1,0),"'"n0,')"><img src="\omp\circulacion\images\renovar.gif"></a></div>','</td>',
    '<td width="60%">',v8^b,'</td>',
    '<td align="center" width="15%"',
       if v2001:'1' then ' bgcolor="#BF3353">! ' else '>' fi,
@@ -285,7 +285,7 @@ fi,
 	<DIV id=popCal_1 
 	style="BORDER-RIGHT: 2px ridge; BORDER-TOP: 2px ridge; Z-INDEX: 100; VISIBILITY: hidden; BORDER-LEFT: 2px ridge;  BORDER-BOTTOM: 2px ridge; POSITION: absolute" 
 	onclick=event.cancelBubble=true>
-	<IFRAME name=popFrame_1 src="\circula\circulacion\popcjs.htm" 
+	<IFRAME name=popFrame_1 src="\omp\circulacion\popcjs.htm" 
 	frameBorder=0 width=183 scrolling=no height=188></IFRAME></DIV>
 	
 	<SCRIPT event=onclick() 
@@ -306,7 +306,7 @@ fi,
 	<DIV id=popCal_2 
 	style="BORDER-RIGHT: 2px ridge; BORDER-TOP: 2px ridge; Z-INDEX: 100; VISIBILITY: hidden; BORDER-LEFT: 2px ridge;  BORDER-BOTTOM: 2px ridge; POSITION: absolute" 
 	onclick=event.cancelBubble=true>
-	<IFRAME name=popFrame_2 src="\circula\circulacion\popcjs.htm" 
+	<IFRAME name=popFrame_2 src="\omp\circulacion\popcjs.htm" 
 	frameBorder=0 width=183 scrolling=no height=188></IFRAME></DIV>
 	
 	<SCRIPT event=onclick() 
@@ -364,8 +364,8 @@ if ref(['config']1,v9)='si' then
 					<td align="center">',v2030^o,'º</td>
 					<td>
 						<form name="eliminar_',f(iocc,1,0),'" method="POST"
-							action="/cgi-bin/wxis.exe/circula/circulacion/" valign="middle">
-							<input type="hidden" name="IsisScript"   value="circula/circulacion/reserva_eliminar.xis">
+							action="/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
+							<input type="hidden" name="IsisScript"   value="omp/circulacion/reserva_eliminar.xis">
 							<input type="hidden" name="usuario_id"  value="',v2[1],'">
 							<input type="hidden" name="operario_id" value="',v2002[1],'">
 							<input type="hidden" name="reserva_id"  value="^b',v2030^b,'^c',v2030^c,'^p',v2030^p,'">
@@ -381,8 +381,8 @@ if ref(['config']1,v9)='si' then
 		</tr>
 		<tr>
 			<td>
-				<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/circula/circulacion/">
-				<input type="hidden" name="IsisScript" value="circula/circulacion/consulta.xis">
+				<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/">
+				<input type="hidden" name="IsisScript" value="omp/circulacion/consulta.xis">
 				<input type="hidden" name="criterio" value="otro">
 				<input type="hidden" name="usuario_id" value="',v2,'">
 				<input type="hidden" name="operario_id" value="',v2002,'">
@@ -392,7 +392,7 @@ if ref(['config']1,v9)='si' then
 						<td width="100%"><strong><u>R</u>eservar material: </strong>
 						<input type="text" name="expresion" size="15" accesskey="r">
 						<input type="submit" value="Enviar">
-						<a href="/circula/circulacion/marc_fst.txt" target="new">?</a>
+						<a href="/omp/circulacion/marc_fst.txt" target="new">?</a>
 					</tr>					
 				</table>
 				</form>
@@ -402,8 +402,8 @@ if ref(['config']1,v9)='si' then
 
 fi,
 
-'<form name="verifica" method="POST" action="/cgi-bin/wxis.exe/circula/circulacion/" target="VERIFICA">
-  <input type="hidden" name="IsisScript" value="/circula/circulacion/control.xis">
+'<form name="verifica" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" target="VERIFICA">
+  <input type="hidden" name="IsisScript" value="/omp/circulacion/control.xis">
   <input type="hidden" name="invs_prestamo_A">
   <input type="hidden" name="invs_prestamo_B">
   <input type="hidden" name="enviar">
@@ -413,8 +413,8 @@ fi,
   <input type="hidden" name="documento" value="',v2,'">
 </form>
 
-<form name="form_observaciones" method="POST" action="/cgi-bin/wxis.exe/circula/circulacion/" target="Observaciones">  
-	<input type="hidden" name="IsisScript" value="/circula/circulacion/observaciones_lector.xis">  
+<form name="form_observaciones" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" target="Observaciones">  
+	<input type="hidden" name="IsisScript" value="/omp/circulacion/observaciones_lector.xis">  
 	<input type="hidden" name="opcion" value="PRESENTAR">  
 	<input type="hidden" name="operador" value="',v2002,'">  
 	<input type="hidden" name="mfn_lector" value="',v2003,'">

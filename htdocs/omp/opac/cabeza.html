@@ -35,7 +35,7 @@ function enviar() {
 function elimina() {
 	anterior='';
 	window.document.formulario1.expresion.value ='';
-	parent.principal.location = '/circula/opac/presentar.html';
+	parent.principal.location = '/omp/opac/presentar.html';
 }
 
 function asignar_otro(seleccionado) {
@@ -99,14 +99,14 @@ function tiempo() {
 
 </head>
 <body bgcolor="#E8E8D0" onload='anterior = ""'>
-<form action="/cgi-bin/wxis.exe/circula/opac/" target="principal" name="formulario1" method="post"
+<form action="/cgi-bin/wxis.exe/omp/opac/" target="principal" name="formulario1" method="post"
 	onSubmit=
 	"if (window.document.formulario1.expresion.value =='') {
 		alert ('   No se permite enviar la\nsolicitud con el campo vacío');
 		return false;}
 	else {
 	   	return true;}">
-	<input type="hidden" name="IsisScript" value="circula/opac/buscar.xis">
+	<input type="hidden" name="IsisScript" value="omp/opac/buscar.xis">
 	<table>
 	<tr>
 		<td width="65%">&nbsp;<img src="images/tecladoconcable.gif" align="absbottom" width="267" height="23"></td>
@@ -188,8 +188,8 @@ function tiempo() {
   <input type="hidden" name="from" value="1">
 </form>
 
-<form action="/cgi-bin/wxis.exe/circula/opac/" method="post" name="busqueda_ant" target="bus_ant">
-<input type="hidden" name="IsisScript" value="circula/opac/busqant.xis">
+<form action="/cgi-bin/wxis.exe/omp/opac/" method="post" name="busqueda_ant" target="bus_ant">
+<input type="hidden" name="IsisScript" value="omp/opac/busqant.xis">
   <input type="hidden" name="valor_search_01" value=" <--- Presione aquí para ver las búsquedas anteriores --->">
   <input type="hidden" name="valor_search_02">
   <input type="hidden" name="valor_search_03">

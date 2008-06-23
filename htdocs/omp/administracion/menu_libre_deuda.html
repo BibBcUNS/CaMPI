@@ -57,8 +57,8 @@ body {
     </tr>
     <tr>
     <td colspan="2" >
-	    <form method="POST" action="/cgi-bin/wxis.exe/circula/administracion/" name="form_libre_deuda" target="_parent">
-	    <input type="hidden" name="IsisScript" value="circula/administracion/libre_deuda.xis">
+	    <form method="POST" action="/cgi-bin/wxis.exe/omp/administracion/" name="form_libre_deuda" target="_parent">
+	    <input type="hidden" name="IsisScript" value="omp/administracion/libre_deuda.xis">
 	    Nota D.B. Nº&nbsp;<input type="text" name="numero_nota" value="  /08" size="6"><br>
 	    DNI Número&nbsp;<input type="text" name="numero_dni" size="10">(Ingrese el número sin puntos)
 	    <input type="radio" name="sexo" value="masculino" checked>Masculino&nbsp;&nbsp;&nbsp;
@@ -69,9 +69,9 @@ body {
   </tr>
   <tr>
     <td>
-		<form method="POST" action="/cgi-bin/wxis.exe/circula/administracion/" name="form_consulta_lector" target="inferior">
+		<form method="POST" action="/cgi-bin/wxis.exe/omp/administracion/" name="form_consulta_lector" target="inferior">
 		Consulta de Lectores:&nbsp; 
-		      <input type="hidden" name="IsisScript" value="/circula/administracion/consulta_lector.xis">
+		      <input type="hidden" name="IsisScript" value="/omp/administracion/consulta_lector.xis">
 		      <input type="radio" name="criterio" value="lector" checked>Lector&nbsp;(DNI o Nombre)<br>
 		      <input type="text" name="expresion" size="15"><input type="submit" value="Enviar"><input type="reset" value="Limpiar"> </td>
 		</form>

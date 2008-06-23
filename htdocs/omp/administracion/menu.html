@@ -14,7 +14,7 @@ body {
 <table border="0" width="100%">
   <tr>
     <td width="85" rowspan="2"><img src="\logo2.gif" width="80" height="80" align="middle"></td>
-    <td width="50%"><big>BIBLIOTECA JERONIMO SPADACCIOLI</big><td align="right"><b><i>Módulo Administración</i></b>&nbsp;&nbsp;<img src="\omp.gif" width="80" height="62" align="middle" border="0"><br>
+    <td width="50%"><big>Institucion XXXXX</big><td align="right"><b><i>Módulo Administración</i></b>&nbsp;&nbsp;<img src="\omp.gif" width="80" height="62" align="middle" border="0"><br>
     </td>
   </tr>
 </table>
@@ -24,8 +24,8 @@ body {
     <td colspan="2" bgcolor="#FDD08E"><strong>Altas y Modificaciones de Lectores</strong></td>
   </tr>
   <tr>
-    <td width="70%"><form method="POST" action="/cgi-bin/wxis.exe/circula/administracion/">
-      <input type="hidden" name="IsisScript" value="/circula/administracion/abmlector.xis">
+    <td width="70%"><form method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">
+      <input type="hidden" name="IsisScript" value="/omp/administracion/abmlector.xis">
       <input type="hidden" name="opcion" value="Presentar">
       <strong>Lector: <input type="text" name="credencial" size="10">
       <input type="radio" name="id_lector" value="documento" checked>
@@ -33,8 +33,8 @@ body {
       MFN&nbsp;&nbsp; <input type="submit" value="Presentar">
     </form></td>
     <td width="30%">
-    <form method="POST" action="/cgi-bin/wxis.exe/circula/administracion/">
-      <input type="hidden" name="IsisScript" value="/circula/administracion/abmlector.xis">
+    <form method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">
+      <input type="hidden" name="IsisScript" value="/omp/administracion/abmlector.xis">
       <input type="hidden" name="opcion" value="Registro Nuevo">
       <input type="hidden" name="invocado" value="menu.html">
       <input type="submit" value="Crear Nuevo Registro">
@@ -48,8 +48,8 @@ body {
   </tr>
   <tr>
     <td>
-    	<form name="form_listados" method="POST" action="/cgi-bin/wxis1.exe/circula/administracion/">
-    	 <input type="hidden" name="IsisScript" value="/circula/administracion/listados.xis">
+    	<form name="form_listados" method="POST" action="/cgi-bin/wxis1.exe/omp/administracion/">
+    	 <input type="hidden" name="IsisScript" value="/omp/administracion/listados.xis">
 	 <input type="Hidden" name="Orden" value="Prestamo">	
         <input type="radio" value="morosos" name="opcion"><strong>Listado de morosos<br>
         <input type="radio" value="prestamos" name="opcion">Prestamos del día (Estadística)<br>
@@ -74,15 +74,15 @@ body {
   </tr>
   <tr>
     <td>
-		<form action="/cgi-bin/wxis.exe/circula/administracion/" method="post">
+		<form action="/cgi-bin/wxis.exe/omp/administracion/" method="post">
 			<input type="submit" value="Actualizar inventarios">
-			<input type="hidden" name="IsisScript" value="/circula/administracion/make_InvNuevos.xis">
+			<input type="hidden" name="IsisScript" value="/omp/administracion/make_InvNuevos.xis">
 		</form>
 	</td>
     <td>	
-		<form action="/cgi-bin/wxis.exe/circula/administracion/" method="post">
+		<form action="/cgi-bin/wxis.exe/omp/administracion/" method="post">
 			<input type="submit" value="Control de consistencia de inventarios">
-			<input type="hidden" name="IsisScript" value="/circula/administracion/check_consistencia.xis">
+			<input type="hidden" name="IsisScript" value="/omp/administracion/check_consistencia.xis">
 		</form>    
 	</td>
   </tr>
