@@ -105,9 +105,9 @@ Apellido, Nombre que viene en v3000^a, cuyo documento viene en v3000^b, desde el
 
 	<call name="apuntar_operacion">
 		<pft>
-		'^tprestamo',																/* tipo de operacion */
-		'^i',v3001^i,																/* inventario */
-		ref(['biblio']val(v3001),@papeleta.pft,)		/* datos bibliográficos (^btitulo/autor,^cclasificación,^rmfn,^ldgm) */
+		'^tprestamo',					/* tipo de operacion */
+		'^i',v3001^i,					/* inventario */
+		ref(['biblio']val(v3001),@papeleta.pft,)	/* datos bibliográficos (^btitulo/autor,^cclasificación,^rmfn,^ldgm) */
 		'^p',v3000^c 																/* fecha del préstamo */
 		'^v',v3000^d																/* fecha de vencimiento */
 		</pft>
