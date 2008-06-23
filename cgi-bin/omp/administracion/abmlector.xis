@@ -82,7 +82,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 								return false
 							}
 						}else{ <!-- No es un registro nuevo y no hay nada que verificar (no cambia el documento), modifica la script del formualrio para invocar directamente a abmlector.xis-->
-							window.document.form_abm.IsisScript.value="circula/administracion/abmlector.xis"; 
+							window.document.form_abm.IsisScript.value="omp/administracion/abmlector.xis"; 
 							window.document.form_abm.target="_self";
 							return true
 						}
@@ -141,7 +141,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 '       <h2 align="center">Lector inexistente !</h2>'/
 '			<SCRIPT LANGUAGE="JavaScript">'/
 '			<!--'/
-'			if (!parent.frames[2]) {window.document.write("<a href=/circula/administracion>Menú administración</a>")};'/
+'			if (!parent.frames[2]) {window.document.write("<a href=/omp/administracion>Menú administración</a>")};'/
 '			//  End -->'/
 '			</script>'/
 '			</body>'/
@@ -170,7 +170,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 			endsel,
 			'<SCRIPT LANGUAGE="JavaScript">'/
 			'<!--'/
-			'if (!parent.frames[2]) {window.document.write("<a href=/circula/administracion>Menú administración</a>")};'/
+			'if (!parent.frames[2]) {window.document.write("<a href=/omp/administracion>Menú administración</a>")};'/
 			'//  End -->'/
 			'</script>'/
 		fi</pft></display>
@@ -193,7 +193,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 					endsel,
 					'<SCRIPT LANGUAGE="JavaScript">'/
 					'<!--'/
-					'if (!parent.frames[2]) {window.document.write("<a href=/circula/administracion>Menú administración</a>")};'/
+					'if (!parent.frames[2]) {window.document.write("<a href=/omp/administracion>Menú administración</a>")};'/
 					'//  End -->'/
 					'</script>'/
 				fi</pft></display>
@@ -275,7 +275,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 			endsel,
 			'<SCRIPT LANGUAGE="JavaScript">'/
 			'<!--'/
-			'if (!parent.frames[2]) {window.document.write("<a href=/circula/administracion>Menú administración</a>")};'/
+			'if (!parent.frames[2]) {window.document.write("<a href=/omp/administracion>Menú administración</a>")};'/
 			'//  End -->'/
 			'</script>'/
 			'</body>'/
@@ -314,7 +314,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
   	fi,
 		'<SCRIPT LANGUAGE="JavaScript">'/
 		'<!--'/
-		'if (!parent.frames[2]) {window.document.write("<a href=/circula/administracion>Menú administración</a>")};'/
+		'if (!parent.frames[2]) {window.document.write("<a href=/omp/administracion>Menú administración</a>")};'/
 		'//  End -->'/
 		'</script>'/
 
@@ -340,7 +340,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 		'<h2 align="center">Operación cancelada</h2>'/
 		'<SCRIPT LANGUAGE="JavaScript">'/
 		'<!--'/
-		'if (!parent.frames[2]) {window.document.write("<a href=/circula/administracion>Menú administración</a>")};'/
+		'if (!parent.frames[2]) {window.document.write("<a href=/omp/administracion>Menú administración</a>")};'/
 		'//  End -->'/
 		'</script>'/
 		'</body>'/
@@ -393,7 +393,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
     fi,
 	'<SCRIPT LANGUAGE="JavaScript">'/
 	'<!--'/
-	'if (!parent.frames[2]) {window.document.write("<a href=/circula/administracion>Menú administración</a>")};'/
+	'if (!parent.frames[2]) {window.document.write("<a href=/omp/administracion>Menú administración</a>")};'/
 	'//  End -->'/
 	'</script>'/
   </pft></display>

@@ -68,10 +68,10 @@
 	}
 
 	function ventana_reserva(mfn) {					
-					location.href = "http://localhost/cgi-bin/wxis.exe/circula/circulacion/?IsisScript=circula/circulacion/reserva_form.xis&mfn="+mfn+"&usuario_id="+usuario_id+"&operario_id="+operario_id;
+					location.href = "http://localhost/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/reserva_form.xis&mfn="+mfn+"&usuario_id="+usuario_id+"&operario_id="+operario_id;
 					/* Así se hace en una ventana nueva:
 						var ventana = window.open("","","width=600,height=450,top=10,left=15,resizable=yes,scrollbars=yes;location=yes");
-						ventana.location.href = "http://localhost/cgi-bin/wxis.exe/circula/circulacion/?IsisScript=circula/circulacion/reserva_form.xis&mfn="+mfn;
+						ventana.location.href = "http://localhost/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/reserva_form.xis&mfn="+mfn;
 					*/
 	}
 	
@@ -218,15 +218,15 @@
   
   <field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogación (v6) -->
   <display><pft>
-  	'<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/circula/circulacion/">
+  	'<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/">
 	<input type="button" name="volver" value="<< Volver" onClick="javascript:history.back()">
-  	<input type="hidden" name="IsisScript" value="circula/circulacion/consulta.xis">
+  	<input type="hidden" name="IsisScript" value="omp/circulacion/consulta.xis">
 	<input type="hidden" name="criterio" value="otro">
 	<input type="hidden" name="usuario_id" value="',v120,'">
 	<input type="hidden" name="operario_id" value="',v130,'">
 	<input type="text" name="expresion" size="15" accesskey="r" value="',v110,'">
 	<input type="submit" value="Buscar">
-	<a href="/circula/circulacion/marc_fst.txt" target="new">?</a>
+	<a href="/omp/circulacion/marc_fst.txt" target="new">?</a>
 	<br><br>'
 	</pft></display>
   <do task=search>

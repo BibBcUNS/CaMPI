@@ -59,7 +59,7 @@
 			'<SCRIPT language="JavaScript">'/
 				'<!--'/
 				'function enviarReclamo(Id) {'/
-				'	win=window.open("http://localhost/circula/administracion/vacio.html","RECLAMO","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=1,copyhistory=0,width=400,height=300")'/
+				'	win=window.open("http://localhost/omp/administracion/vacio.html","RECLAMO","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=1,copyhistory=0,width=400,height=300")'/
 				'	document.getElementById(Id).target=win.name;'/
 				'	document.getElementById(Id).submit()'/
 				' // document.getElementById("Mail"+Id).style.visibility="hidden"'/
@@ -170,7 +170,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 			 		 if p(v1100^z) then 
          	  '<td width="50%" colspan="2" bgcolor="#F9C99A">Lector: <b>',mhl,v1100^a,'</b></td>'/
 				 		'<td bgcolor="#F9C99A" align="center"><div id=',"'"n0,'MailFormId#',v1100^x,"'"n0,'><a href="JavaScript:enviarReclamo(',"'FormId#"v1100^x"'",')">Reclamar por email</a></div>'/
-				 		'<form id="FormId#',v1100^x,'" method="post" action="/circula/administracion/reclamo_moroso/reclamo.php">'/
+				 		'<form id="FormId#',v1100^x,'" method="post" action="/omp/administracion/reclamo_moroso/reclamo.php">'/
 				 		'  <input type="hidden" name="nombre" value="',v1100^a,'">'/, 
 					  '  <input type="hidden" name="email" value="',v1100^z,'">'/,
 					  '  <input type="hidden" name="material[]" value="',mid(v1100^b,instr(v1100^b,')')+1,size(v1100^b)),' (prestado: ',v1100^p,'; vencimiento: ',v1100^v,')">'/,

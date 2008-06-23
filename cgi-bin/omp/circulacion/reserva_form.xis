@@ -95,7 +95,7 @@ En caso de no ser submit se Muestra el Formulario
 </pft></field>
 
 <!-- Realizo los controles y verifico el resultoado. -->
-<include>circula/circulacion/controles/reservas/controles_inc.xis</include>
+<include>omp/circulacion/controles/reservas/controles_inc.xis</include>
 
 <!-- Si el resultado fue exitoso paso a realizar la reserva. En caso contrario muestro el error y luego el formulario -->
 <flow action=jump><pft>if(not v5000:'Error') then 'CONTROL_OK' fi</pft></flow>
@@ -207,7 +207,7 @@ En caso de no ser submit se Muestra el Formulario
 </do>
 
 <display>
-	<img src="/circula/circulacion/images/ok.gif">
+	<img src="/omp/circulacion/images/ok.gif">
 	<font color="green">La reserva se ha realizado correctamente</font><br><br>
 </display>
 
@@ -223,7 +223,7 @@ En caso de no ser submit se Muestra el Formulario
 		<field action="import" tag="list">2060,3002,3004</field>
 		<display>
 			<form action="">
-			<input type="hidden" name="IsisScript" value="/circula/circulacion/reserva_form.xis">
+			<input type="hidden" name="IsisScript" value="/omp/circulacion/reserva_form.xis">
 		</display>
 		<display><pft>'
 			<input type="hidden" name="mfn" value="',mfn(0),'">

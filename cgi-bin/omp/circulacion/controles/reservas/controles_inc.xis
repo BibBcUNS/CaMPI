@@ -21,11 +21,11 @@ verificar_limites:
 -->
 
 <!-- Decidimos no validar el operador dado que se realiza dicho control para poder acceder a las operaciones -->
-<include>circula/circulacion/controles/reservas/valida_usuario.xis</include>
-<include>circula/circulacion/controles/reservas/sanciones.xis</include>
-<include>circula/circulacion/controles/reservas/dev_atrazadas.xis</include>
-<include>circula/circulacion/controles/reservas/id_partes_validos.xis</include>
-<include>circula/circulacion/controles/reservas/reservas_duplicadas.xis</include>
-<include>circula/circulacion/controles/reservas/limites.xis</include>
-<include>circula/circulacion/controles/reservas/tiene_prestado.xis</include>
-<include>circula/circulacion/controles/reservas/todos_prestados.xis</include>
+<include>omp/circulacion/controles/reservas/valida_usuario.xis</include>
+<include>omp/circulacion/controles/reservas/sanciones.xis</include>
+<include>omp/circulacion/controles/reservas/dev_atrazadas.xis</include>
+<include>omp/circulacion/controles/reservas/id_partes_validos.xis</include>
+<include>omp/circulacion/controles/reservas/reservas_duplicadas.xis</include>
+<include>omp/circulacion/controles/reservas/limites.xis</include>
+<include>omp/circulacion/controles/reservas/tiene_prestado.xis</include>
+<include>omp/circulacion/controles/reservas/todos_prestados.xis</include>

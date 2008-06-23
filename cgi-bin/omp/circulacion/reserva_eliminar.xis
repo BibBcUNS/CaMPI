@@ -69,9 +69,9 @@
 
 <display><pft>
 	if (val(v1102)=0) then
-		'<img src="/circula/circulacion/images/ok.gif"> La reserva se a eliminado correctamente.<br>',
+		'<img src="/omp/circulacion/images/ok.gif"> La reserva se a eliminado correctamente.<br>',
 	else
-		'<img src="/circula/circulacion/images/error.gif"> Error!: No fue posible eliminar la reserva. (',v1102,')'
+		'<img src="/omp/circulacion/images/error.gif"> Error!: No fue posible eliminar la reserva. (',v1102,')'
 	fi,
 	'</body>'
 </pft></display>

@@ -1012,8 +1012,8 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
      </pft>
   </display>
 
-  <display><pft>'<form name="form_abm" method="POST" action="/cgi-bin/wxis.exe/circula/administracion/">',/
-				'<input type="hidden" name="IsisScript" value="/circula/administracion/abmlector.xis">',/
+  <display><pft>'<form name="form_abm" method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">',/
+				'<input type="hidden" name="IsisScript" value="/omp/administracion/abmlector.xis">',/
 				'<input type="hidden" name="opcion" value="Presentar">',/
 				'<input type="hidden" name="credencial">',/
 				'<input type="hidden" name="id_operador" value="',v110^i,'">',/

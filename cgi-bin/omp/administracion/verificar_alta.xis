@@ -76,7 +76,7 @@
 					</tr>
 					<tr>
 					    <td width="70%">Asignado a:<br>[pft],v1,'<b><br>Documento: ',v2,'</b>'[/pft]</td>
-							<td><img src="/circula/circulacion/fotos/[pft],v2,[/pft].jpg" width="128" height="96" align="middle" OnError="this.src=[pft]"'"n0,'/circula/circulacion/fotos/falta_foto.gif',"'"n0,[/pft]"></td>
+							<td><img src="/omp/circulacion/fotos/[pft],v2,[/pft].jpg" width="128" height="96" align="middle" OnError="this.src=[pft]"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,[/pft]"></td>
 					</tr>
 					</table>
 					<td></td>
@@ -93,7 +93,7 @@
 			'</table>'/
 			'<SCRIPT LANGUAGE="JavaScript">'/
 			'<!-- Begin'/
-			'		window.opener.document.form_abm.IsisScript.value="circula/administracion/abmlector.xis";'/
+			'		window.opener.document.form_abm.IsisScript.value="omp/administracion/abmlector.xis";'/
 			'		window.opener.document.form_abm.documento_anterior.value=window.opener.document.form_abm.documento.value;'/
 			'		window.opener.focus();'/
  			'		window.close();'/

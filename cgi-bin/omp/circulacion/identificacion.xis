@@ -73,7 +73,7 @@ El campo v2000 que es exportado como v1000 valdrá ok si el usuario está correcta
 
 <section>
   <display><pft>'Content-type: text/html'/#</pft></display>
-  <display><html><body background="/circula/circulacion/images/fondo_operario.jpg" topmargin="12"></display>
+  <display><html><body background="/omp/circulacion/images/fondo_operario.jpg" topmargin="12"></display>
 
 
   <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>

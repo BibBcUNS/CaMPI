@@ -46,7 +46,7 @@ v3004: documento
 <field action="replace" tag="110"><pft>if v110:'m' then replace(v110,'m','') fi</pft></field>
 <field action="replace" tag="110"><pft>if v110:'M' then replace(v110,'M','') fi</pft></field>
 
-<include>/circula/circulacion/controles/controles_inc.xis</include>
+<include>/omp/circulacion/controles/controles_inc.xis</include>
 
   <display>
       <html>

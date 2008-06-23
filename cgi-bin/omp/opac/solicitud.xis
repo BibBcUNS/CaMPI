@@ -78,7 +78,7 @@
 
 		function volver(Descripcion) {
 			window.document.solicitud.Item_Seleccionado.value = Descripcion;
-			window.open('/circula/opac/solicitud.html','Solicitud','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,alwaysRaised=1,width=500,height=400');
+			window.open('/omp/opac/solicitud.html','Solicitud','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,alwaysRaised=1,width=500,height=400');
 			window.document.solicitud.submit();
 			}
 		//-->
@@ -137,9 +137,9 @@
 			      <td width="50%"><input type="password" name="legajo" size="8"></td>
  			    </tr-->
 			    <tr>
-			      <td width="80%" align="right" colspan="2"><img src="/circula/opac/images/bot_enviar.jpg" onclick="enviar()">
-						<img src="/circula/opac/images/bot_limpiar.jpg" onclick="limpiar()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<img src="/circula/opac/images/bot_cancelar.jpg" onclick="window.close()">
+			      <td width="80%" align="right" colspan="2"><img src="/omp/opac/images/bot_enviar.jpg" onclick="enviar()">
+						<img src="/omp/opac/images/bot_limpiar.jpg" onclick="limpiar()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<img src="/omp/opac/images/bot_cancelar.jpg" onclick="window.close()">
 			      </td>
 			    </tr>
 			  </table>
@@ -256,8 +256,8 @@
 
 	<display></font></i><br><br><font face="Arial"><strong>Presione el botón <i>«Grabar»</i> para grabar su pedido ó <i>«Cancelar»</i> para abandonar este proceso<br><br>
 
-	<img src="/circula/opac/images/bot_grabar.jpg"   onclick="grabe_cancele('GRABAR')">
-	<img src="/circula/opac/images/bot_cancelar.jpg" onclick="grabe_cancele('FIN_BLOQUEO')"><br>
+	<img src="/omp/opac/images/bot_grabar.jpg"   onclick="grabe_cancele('GRABAR')">
+	<img src="/omp/opac/images/bot_cancelar.jpg" onclick="grabe_cancele('FIN_BLOQUEO')"><br>
 	</display>
 		
 
@@ -333,7 +333,7 @@
 			<write>Unlock</write>
 			<display><pft>'<font face="Arial"><i><strong>',if v1102='0' then v1,', su pedido ha sido 
 			registrado satisfactoriamente.<br>¡Gracias por su consulta!' else '¡ERROR! Su pedido no ha sido registrado' fi,'</strong></i></font><br><br>'</pft></display>
-			<display><center><img src="/circula/opac/images/bot_cerrar.jpg" onclick="window.close()"></center></display>
+			<display><center><img src="/omp/opac/images/bot_cerrar.jpg" onclick="window.close()"></center></display>
 		</update>
 
 	</do>
@@ -364,7 +364,7 @@
 		<display><p align="center"><font face="Arial" color="#FF0000"><strong><small>
 			&lt;&lt;&lt;&lt;&lt;&lt;&nbsp;&nbsp; OPERACIÓN CANCELADA&nbsp;&nbsp; &gt;&gt;&gt;&gt;&gt;
 			</small></strong></font></p>
-		<center><img src="/circula/opac/images/bot_cerrar.jpg" onclick="window.close()"></center>
+		<center><img src="/omp/opac/images/bot_cerrar.jpg" onclick="window.close()"></center>
 		</display>
 		<flow action=exit>1</flow>
 
@@ -379,8 +379,8 @@
 		</form>
 
 	<center><H3><font face="Arial" color="#FF0000">USUARIO NO RECONOCIDO EN EL SISTEMA</FONT></H1>
-	<img src="/circula/opac/images/bot_cerrar.jpg" onclick="window.close()">
-	<img src="/circula/opac/images/bot_volver.jpg" onclick="volver('</display><display><pft>v4000</pft></display><display>')">
+	<img src="/omp/opac/images/bot_cerrar.jpg" onclick="window.close()">
+	<img src="/omp/opac/images/bot_volver.jpg" onclick="volver('</display><display><pft>v4000</pft></display><display>')">
 	</center></display>
 	
 	<flow action=exit>1</flow>
