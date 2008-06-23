@@ -1,0 +1,8 @@
+<!-- 2010 indica si es SO windows -->
+<field action="replace" tag="2010"><pft>
+	if getenv('SERVER_SOFTWARE') : 'Win' or getenv('OS') : 'Win' then
+		'WIN'
+	else
+		'LINUX'
+	fi
+</pft></field>		

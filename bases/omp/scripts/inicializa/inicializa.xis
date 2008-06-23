@@ -1,0 +1,50 @@
+<IsisScript><section>
+<trace>On</trace>
+
+ 
+<!-- Esta script inicializa la base de existencias y la base de partes a partir de los registros
+de la base bibliogràfica (biblo).
+
+Para la base de existencias se toman el nombre de la base de datos y los datos de existencia del 
+campo expresado en el parámetro "Campo Inventario" del archivo config.txt y como nombre de base 
+de datos se toma ...
+ 
+Para la base de partes se toman el nombre de base de datos, el nùmero de control del registro 
+bibliográfico y la identificación de parte; y un campo repetible con todos los inventarios 
+respectivos...
+-->
+	<include>./definir_SO.xis</include>
+	
+	<include>./leer_config.xis</include>
+	
+	<include>./crear_biblo.xis</include>
+
+	<include>./crear_partes.xis</include>
+
+	<include>./crear_exist.xis</include>
+	
+	<include>./crear_config.xis</include>
+
+	<include>./crear_gizmos.xis</include>
+
+	<include>./crear_opera.xis</include>
+	
+	<include>./crear_cipars.xis</include>
+
+	<include>./reescr_htmls.xis</include>
+
+	<!--include>./limpiar_lector.xis</include-->
+	<include>./crear_lector_demo.xis</include>
+	<!--include>  ¿¿?? ./limpiar_politicas.xis</include-->
+	<include>./crear_politicas_demo.xis</include>
+	<include>./crear_tipo_lector_demo.xis</include>
+
+	<include>./crear_movi.xis</include>
+
+	<include>./crear_reservas.xis</include>
+
+	
+<!-- Listo, FIN-->
+
+</section>
+</IsisScript>

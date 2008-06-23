@@ -1,0 +1,155 @@
+<IsisScript>
+<section>
+
+ <display><pft>'Content-type: text/html'/#</pft></display>
+ <parm name=cipar><pft>
+    cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+ <display><pft>
+   '<html><body bgcolor="#E8E8D0">',
+   '<table border="0" width="100%">',
+   '<tr>',
+     '<td width="50%"><big>',ref(['config']1,v7),'</big><small><br>',
+       'Fecha: ',
+         select s(date)*16.1
+           case '0': ,'Domingo, ',
+           case '1': ,'Lunes, ',
+           case '2': ,'Martes, ',
+           case '3': ,'Miércoles, ',
+           case '4': ,'Jueves, ',
+           case '5': ,'Viernes, ',
+           case '6': ,'Sábado, ',
+         endsel,
+         mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'  --  ',mid(date(datetime),10,9),
+       '</small><big></big>',
+     '</td>',
+     '<td width="50%" align="right">',
+       '<em>Sistema de Circulación <img src="/omp.gif" width="59" height="45" align="middle"></em>',
+     '</td>',
+   '</table><hr>',
+ </pft></display>
+ <display><p align="center"><big>Actualización de Inventarios</big></p></display>   
+		
+
+	<!-- v5001 contiene el tag y el subcampo correspondiente al inventario de la base bibliográfica -->
+  <field action="add" tag="5001"><pft>ref(['config']1,v1)</pft></field>
+
+		<!-- v5009 define el formato de catalogación -->
+		<field action="add" tag="5009"><pft>ref(['config']1,v6)</pft></field>
+				  
+    <parm name=cipar><pft>
+			'biblo.*=/var/www/html/omp/bases/',v5009,'/exist/exist.*'/
+			'biblo.mst=/var/www/html/omp/bases/',v5009,'/',v5009,'.mst'/
+			'biblo.xrf=/var/www/html/omp/bases/',v5009,'/',v5009,'.xrf'/
+			'exist.*=/var/www/html/omp/bases/exist/exist.*'/
+			'CI_TEMPDIR=/var/www/html/omp/temp'/</pft></parm>
+
+<!-- No invierte el primer registro de la base existencia, RARISIMO -->
+
+<display><pft>'Aguarde... Invirtiendo diccionarios'/#</pft></display>
+
+<file action=create type=output>/var/www/html/omp/bases/scripts/cipar.par</file>
+<display><pft>
+			'biblo.*=/var/www/html/omp/bases/',v5009,'/exist/exist.*'/
+			'biblo.mst=/var/www/html/omp/bases/',v5009,'/',v5009,'.mst'/
+			'biblo.xrf=/var/www/html/omp/bases/',v5009,'/',v5009,'.xrf'/
+			'exist.*=/var/www/html/omp/bases/exist/exist.*'/
+			'CI_TEMPDIR=/var/www/html/omp/temp'/</pft></display>
+<file action=close type=output>Now</file>
+
+<display><pft>system('/var/www/html/omp/bases/scripts/mx /var/www/html/omp/bases/scripts/cipar=cipar.par exist fst=@exist.fst fullinv=exist')</pft></display>
+<display><pft>system('/var/www/html/omp/bases/scripts/mx /var/www/html/omp/bases/scripts/cipar=cipar.par biblo fst=@biblo.fst fullinv=biblo')</pft></display>
+
+<!-- Recorre la base de existencia y verifica que el inventario figure en el diccionario de la base bibliográfica -->
+<display><pft>/#'Control de integridad de ',v5009,' contra /var/www/html/omp/Bases\Exist'/#</pft></display>
+<do task="mfnrange">
+  <parm name=db>exist</parm>
+  <loop>
+		<field action=add tag=9990><pft>f(npost(['biblo']v977),1,0)</pft></field>
+	
+		<flow action="skip"><pft>if val(v9990)=1 then 'Next' fi</pft></flow>
+		<display><pft>
+			'Inv: ',v977,' (mfn: ',mfn(0),
+			if val(v9990)=0 then ') Se encuentra en la base Exist pero no figura en la base bibliografica'/ 
+			else
+			  ') Se encuentra en la base Exist y figura repetido (',v9990,' veces) en la base bibliografica'/ 
+			fi
+			</pft></display>
+	</loop>
+</do>
+
+<!-- Recorre la base Biblio y verifica que el inventario figure en el diccionario de la base existencia -->
+<display><pft>/#'Control de integridad de /var/www/html/omp/bases/exist contra ',v5009/#</pft></display>
+<do task="mfnrange">
+  <parm name=db>biblo</parm>
+  <loop>
+		<field action="import" tag="list">5001</field> <!-- campo que contiene el nro. de inventario -->
+		<!-- v2001 tiene todos los inventarios del registro bibliográfico -->
+		<field action="add" tag="2001" split="occ"><htmlpft><pft>'[pft](',v5001,'/)[/pft]'</pft></htmlpft></field>
+   
+   	<list action="delete">Now</list>
+    <list action="load"><pft>(v2001/)</pft></list> <!-- carga la lista con todos los nro. de inventarios -->
+
+    <do task=list>
+      <field action=define tag=1001>Isis_Item</field>
+      <field action=define tag=1002>Isis_Current</field>
+      <loop>
+				<field action=add tag=9990><pft>f(npost(['exist']v1001),1,0)</pft></field>
+        <display><pft>
+					if val(v9990)=0 then 'Inv: ',v1001,' (mfn: ',mfn(0),') Es inexistente en Exist'/ 
+					else
+					  if val(v9990)>1 then 'Inv: ',v1001,' (mfn: ',mfn(0),') Se encuentra repetido (',v9990,' veces) en Exist '/ fi
+					fi</pft></display>
+      </loop>
+    </do>
+    
+	</loop>
+</do>
+
+<!-- Verifica que el contenido del campo inventario figure en el diccionario -->
+<display><pft>/#'Control del diccionario de la base bibliografica (',v5009")"/#</pft></display>
+<list action="delete">Now</list>
+<do task="mfnrange">
+  <parm name=db>biblo</parm>
+  <loop>
+		<field action="import" tag="list">5001</field> <!-- campo que contiene el nro. de inventario -->
+		<!-- v2001 tiene todos los inventarios del registro bibliográfico -->
+		<field action="add" tag="2001" split="occ"><htmlpft><pft>'[pft](',v5001,'/)[/pft]'</pft></htmlpft></field>
+
+		<flow action="skip"><pft>if a(v2001) or rsum('0,',(if npost(v2001)>1 then '1,' fi))=0 then 'Next' fi</pft></flow>
+		<list action="load"><pft>(if npost(v2001)>1 then '^m',mfn(0),'^i',v2001/ fi)</pft></list>
+	</loop>
+</do>
+<do task="list">
+	<field action="define" tag="1001">Isis_Item</field>
+	<parm name="sort"><pft>v1001^i</pft></parm>
+	<loop>
+		<display><pft>
+       'Inv: ',v1001^i,' Se encuentra repetido en el registro: ',v1001^m/</pft></display>
+	</loop>
+</do>
+
+<!-- Recorre la base y verifica que el contenido del campo inventario figure en el diccionario -->
+<display><pft>/#'Control del diccionario de la base existencias (Exist)'/#</pft></display>
+<list action="delete">Now</list>
+<do task="mfnrange">
+  <parm name=db>exist</parm>
+  <loop>
+		<flow action="skip"><pft>if npost(['exist']v977)=1 then 'Next' fi</pft></flow>
+		<list action="load"><pft>'^m',mfn(0),'^i',v977/</pft></list>
+	</loop>
+</do>
+<do task="list">
+	<field action="define" tag="1001">Isis_Item</field>
+	<parm name="sort"><pft>v1001^i</pft></parm>
+	<loop>
+		<display><pft>'Inv: ',v1001^i,' se encuentra repetido en el registro: ',v1001^m/</pft></display>
+	</loop>
+</do>
+
+<display><pft>
+   '</body>'/
+	 '</html">'/
+</display></pft>
+
+</section>
+</IsisScript>

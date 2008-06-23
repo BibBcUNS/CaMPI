@@ -1,0 +1,27 @@
+<field action=replace tag=2000><pft>
+	'gizmo.*=',v5006,'/opera/opera.*'/
+</pft></field>
+<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi</pft></field>
+<parm name="cipar"><pft>v2000</pft></parm>
+
+<display><pft>'Creacion de las base OPERA...'/</pft></display>
+
+<display><pft>
+			if v2010='WIN' then
+				system(ref(['config']1,
+							'cd ',v5,'\opera&',
+							'"',v4,'" iso=opera_win.iso create=opera now -all&',
+							'"',v4,'" opera fst=@opera.fst fullinv=opera'
+						)
+					)
+			else
+					system(ref(['config']1,
+							'cd "',v5,'/opera";'
+							'"',v4,'" iso=opera_lin.iso create=opera now -all;',
+							'"',v4,'" opera fst=@opera.fst fullinv=opera'
+						)
+					)
+			fi
+		</pft></display>
+
+		<display><pft>'listo'/#</pft></display>

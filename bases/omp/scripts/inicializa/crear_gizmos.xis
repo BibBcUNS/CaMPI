@@ -1,0 +1,70 @@
+<field action=replace tag=2000><pft>
+	'gizmo.*=',v5006,'/gizmo/gizmo.*'/
+</pft></field>
+<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi</pft></field>
+<parm name="cipar"><pft>v2000</pft></parm>
+
+<display><pft>'Creacion de las bases GIZMO...'/</pft></display>
+
+<display><pft>'GIZMO...'/</pft></display>
+<display><pft>
+			if v2010='WIN' then
+				system(ref(['config']1,
+							'cd ',v5,'\gizmo&',
+							'"',v4,'" iso=gizmo_win.iso create=gizmo now -all&',
+							'"',v4,'" gizmo fst=@gizmo.fst fullinv=gizmo'
+						)
+					)
+			else
+					system(ref(['config']1,
+							'cd "',v5,'/gizmo";'
+							'"',v4,'" iso=gizmo_lin.iso create=gizmo now -all;',
+							'"',v4,'" gizmo fst=@gizmo.fst fullinv=gizmo'
+						)
+					)
+			fi
+		</pft></display>
+
+<display><pft>'ANSIOEM...'/</pft></display>
+
+<display><pft>
+			if v2010='WIN' then
+				system(ref(['config']1,
+							'cd ',v5,'\ansioem&',
+							'"',v4,'" iso=ansioem_win.iso create=ansioem now -all&',
+							'"',v4,'" ansioem fst=@ansioem.fst fullinv=ansioem'
+						)
+					)
+			else
+					system(ref(['config']1,
+							'cd "',v5,'/ansioem";'
+							'"',v4,'" iso=ansioem_lin.iso create=ansioem now -all;',
+							'"',v4,'" ansioem fst=@ansioem.fst fullinv=ansioem'
+						)
+					)
+			fi
+		</pft></display>
+
+<display><pft>'OEMANSI...'/</pft></display>
+
+<display><pft>
+			if v2010='WIN' then
+				system(ref(['config']1,
+							'cd ',v5,'\oemansi&',
+							'"',v4,'" iso=oemansi_win.iso create=oemansi now -all&',
+							'"',v4,'" oemansi fst=@oemansi.fst fullinv=oemansi'
+						)
+					)
+			else
+					system(ref(['config']1,
+							'cd "',v5,'/oemansi";'
+							'"',v4,'" iso=oemansi_lin.iso create=oemansi now -all;',
+							'"',v4,'" oemansi fst=@oemansi.fst fullinv=oemansi'
+						)
+					)
+			fi
+</pft></display>
+
+
+		
+		<display><pft>'listo'/#</pft></display>

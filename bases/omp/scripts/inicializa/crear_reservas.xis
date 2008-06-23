@@ -1,0 +1,9 @@
+<field action=replace tag=2000><pft>
+	'reservas.*=',v5006,'/reservas/reservas.*'/
+</pft></field>
+<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi</pft></field>
+<parm name="cipar"><pft>v2000</pft></parm>
+
+<display><pft>'Creacion de la base RESERVAS...'/</pft></display>
+<file action="create" type="database">reservas</file> <!-- borra los registros de la base movimiento -->
+<display><pft>'listo'/#</pft></display>
