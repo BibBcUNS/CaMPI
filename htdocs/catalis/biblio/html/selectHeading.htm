@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--  (c) 2003-2004  Fernando J. Gómez - CONICET - INMABB  -->
+
+<!-- ATENCION: El uso de la función position() de XPath genera un error
+		al usar MSXML3; por ese motivo usamos fieldblock[i] en lugar de 
+		fieldblock[position()=i], con lo cual ya no parece necesario 
+		el uso de MSXML4.
+		Lo extraño es que al pasar de MSXML3 a MSXML4, cambia la forma de
+		contar los índices: 1-based en MSXML4, 0-based en MSXML3.
+-->
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="pragma" content="no-cache">
+<title>Autorizar Campo</title>
+<link rel="stylesheet" type="text/css" href="../css/catalis.css">
+<!--script language="JavaScript" type="text/javascript" src="../js/catalis.js"></script-->
+
+<script language="JavaScript" type="text/javascript">
+var callerWindowObject = dialogArguments;  
+
+// XML con los datos de MARC21
+var xmlMARC21 = callerWindowObject.xmlMARC21;
+
+// Tags deshabilitados
+var disabledTags = callerWindowObject.disabledTags;
+
+// Idioma
+var LANG = callerWindowObject.LANG;
+
+var blocksNumber = xmlMARC21.selectNodes("marc21_bibliographic/fieldblock").length;
+
+
+//------------------------------------------------------------------------------
+function selectedTags()
+//------------------------------------------------------------------------------
+{
+	tags = new Array();
+	// Primero, los tags ingresados manualmente
+	if ( document.getElementById("tagBox").value.search(/\d{3}/ ) != -1 ) {
+		tags = document.getElementById("tagBox").value.split(/\s+|\s*,\s*|\./);
+	}
+	// Luego, los tags seleccionados en las listas de campos
+	var allTags = document.getElementsByTagName("INPUT");
+	for (var i=0; i<allTags.length; i++) {
+		if ( allTags[i].type == "checkbox" && allTags[i].checked ) {
+			tags.push(allTags[i].value);
+		}
+	}
+	return tags;
+} 
+
+//------------------------------------------------------------------------------
+function handleOK()
+//------------------------------------------------------------------------------
+{
+	returnValue = selectedTags();
+	window.close();
+}
+
+//------------------------------------------------------------------------------
+function handleCancel()
+//------------------------------------------------------------------------------
+{
+	window.close();
+}
+
+//------------------------------------------------------------------------------
+function mouseOut(obj)
+//------------------------------------------------------------------------------
+{
+	obj.className = ( obj.index != activeBlockIndex ) 
+					? "blockNav blockNavNormal"
+					: "blockNav blockNavActive";
+}
+
+
+//------------------------------------------------------------------------------
+function buildBlock(i)
+//------------------------------------------------------------------------------
+{
+	var tagList = xmlMARC21.selectSingleNode("marc21_bibliographic/fieldblock[" + (i) + "]/text()").nodeValue.split(",");
+	var HTMLstring = "<table border='0' width='100%' style='background: #EEE;'>";
+	for (var j=0; j < tagList.length; j++)
+	{
+		//alert("datafield[@tag=" + tagList[j] + "]/@label-eng");
+		var tag = tagList[j];
+		if ( "|||" == tag ) {
+			HTMLstring += "<tr><td colspan='3' style='height: 1px; background: #999;'></td></tr>"; 
+		}
+		else {
+			var fieldLabel = xmlMARC21.selectNodes("marc21_bibliographic/datafield[@tag=" + tag + "]/@label-" + LANG)[0].value.replace("--","&#8212;"); 
+			var repet = xmlMARC21.selectNodes("marc21_bibliographic/datafield[@tag=" + tag + "]/@repet")[0].value;
+			var disabled = ( disabledTags[tag] ) ? "disabled" : "";
+			var labelClass = ( disabledTags[tag] ) ? "disabledLabel" : "";
+			HTMLstring += "<tr><td style='vertical-align: top; width: 20px'>" 
+						+ "<input type='checkbox' value='" + tag + "' id='f" + tag + "' " + disabled + "></td>"
+						+ "<td valign='top' width='32'><label style='font-weight: bold' for='f" + tag + "' class='" + labelClass + "'>"
+						+ "<b>" + tag + "</b></label></td>"
+						+ "<td valign='top'><label style='font-weight: bold' for='f" + tag + "' class='" + labelClass + "'>" + fieldLabel + "</label>"
+						//+ " (" + repet + ")"
+						+ "</td></tr>";
+		}
+		/*
+		var newInput = document.createElement("input");
+		newInput.type = "checkbox";
+		var newText = document.createTextNode(marcFields[fieldBlocks[i].id][j]);
+		var newBR = document.createElement("BR");
+		fieldBlocks[i].appendChild(newInput);
+		fieldBlocks[i].appendChild(newText);
+		fieldBlocks[i].appendChild(newBR);
+		*/
+	}
+	HTMLstring += "</table>";
+	return HTMLstring;
+}
+	
+	
+//------------------------------------------------------------------------------
+function showBlock(blockIndex)
+//------------------------------------------------------------------------------
+{
+	//ATENCION: buildBlock sólo la primera vez que es llamado, de lo contrario
+	// se pierden los checks ya marcados
+	if ( !built[blockIndex] ) {
+		fieldBlocks[blockIndex].innerHTML = buildBlock(blockIndex);
+		built[blockIndex] = true;
+	}
+	document.getElementById("block" + activeBlockIndex).style.display = "none";
+	document.getElementById("block" + blockIndex).style.display = "block";
+	document.getElementById("nav" + activeBlockIndex).className = "blockNav blockNavNormal";
+	document.getElementById("nav" + blockIndex).className = "blockNav blockNavActive";
+	activeBlockIndex = blockIndex;
+}
+
+
+//------------------------------------------------------------------------------
+function init()
+//------------------------------------------------------------------------------
+{
+	window.returnValue = null;
+	
+	document.onkeydown = function(evt) {
+		var evt = (evt) ? evt : window.event;
+		if ( evt.keyCode == 27 ) {
+			handleCancel();
+		}
+	}
+	//document.getElementById("btnOK").onclick = handleOK;
+	//document.getElementById("btnCancel").onclick = handleCancel;
+	
+	//document.getElementById("Form").onsubmit = function() {
+	//	handleOK();
+	//	return false;
+	//}
+	
+}
+
+
+// -----------------------------------------------------------------------------
+function setFocus()
+// -----------------------------------------------------------------------------
+{
+	// dialogArguments = window object of main window
+	if ( callerWindowObject.selectedSubfieldBox ) {
+		callerWindowObject.selectedSubfieldBox.focus();
+	}
+}
+
+window.onload = init;
+window.onunload = setFocus;
+</script>
+
+<style type="text/css">
+	body,table {
+		font-family: verdana;
+		font-size: 13px;
+		background: #CDC7A9;
+	}
+	body {
+		margin: 1em;
+	}
+	#result_frame {
+		width: 580px;
+		height: 300px;
+		border:2px solid black;
+	}
+</style>
+</head>
+
+<body>
+123
+<div>	
+		<form id="Form"
+				action="/cgi-bin/catalis_pack/wxis.exe"
+				method="GET"
+				target="result_frame">
+			<input type="hidden" name="IsisScript" value="catalis/xis/catalis.xis">
+			<input type="hidden" name="userid" value="xx">
+			<input type="hidden" name="db" value="auto">
+			<input type="hidden" name="tarea" value="BUSCAR_AUTO">
+			<input type="hidden" name="reverse" value="">
+			
+			<b>Búsqueda de Autoridades:</b>&nbsp;&nbsp;
+			<input type="text"  name="busq_kw" size="30">
+			<input type="submit" class="marcEditButton" style="height: 21px;" value="Buscar">
+		</form>
+	</div>
+<iframe id="result_frame" name="result_frame"  frameborder="0">
+
+</iframe>
+
+</body>
+</html>
