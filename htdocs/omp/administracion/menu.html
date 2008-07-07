@@ -20,6 +20,25 @@ body {
 </table>
 <hr>
 <table border="0" width="80%">
+<tr>
+    <td colspan="2" bgcolor="#FDD08E"><strong>Altas y Modificaciones del Calendario</strong></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+	
+	  <form method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">
+      <input type="hidden" name="IsisScript" value="/omp/administracion/calendario.xis">
+      <input type="hidden" name="opcion" value="EDICION">
+	  <strong>Año: <input type="text" name="anio" size="4"></strong>
+      	  
+      <input type="radio" name="opcion" value="EDICION" checked>Editar 
+	  <input type="radio" name="opcion" value="ANIONUEVO">Crear año
+  
+	  <input type="submit" value="Ejecutar">
+      </form>
+	</td>
+  </tr>
+
   <tr>
     <td colspan="2" bgcolor="#FDD08E"><strong>Altas y Modificaciones de Lectores</strong></td>
   </tr>
