@@ -29,7 +29,7 @@
 /*solo las terminales con las direcciones ip que se mencionan pueden visualizar los datos del préstamo o el estado del material*/
 
 	   ref(['exist']l(['exist']v7777[1]),
-	   if v985:'PRES' then '<br><img src="/biblioteca/opac/images/prestado1.gif" alt="',
+	   if v985:'PRES' then '<br><img src="/omp/opac/images/prestado1.gif" alt="',
 				if s(getenv('REMOTE_ADDR'))='127.0.0.1' then mhl,v998[LAST] fi,'">' 
 		 fi,
   	 if v985:'EXTRAVIADO' then '<br><img src="/biblioteca/opac/images/inve.gif" alt="',

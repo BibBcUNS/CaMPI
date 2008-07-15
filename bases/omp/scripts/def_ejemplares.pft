@@ -18,8 +18,5 @@
 			    	then 'CONS'
 				fi,
 		    fi,
-	else 
-	 if p(v859) then '^i',v859^p,'^sPERM' fi,
-			
 	fi,
 /)

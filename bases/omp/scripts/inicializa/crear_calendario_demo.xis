@@ -1,0 +1,21 @@
+<display><pft>'Creacion una base CALENDARIO de prueba...'/</pft></display>
+
+<display><pft>
+			if v2010='WIN' then
+				system(ref(['config']1,
+							'cd ',v5,'\calendario&',
+							'"',v4,'" iso=calendario_win.iso create=calendario now -all&',
+							'"',v4,'" calendario fst=@calendario.fst fullinv=calendario'
+						)
+					)
+			else
+					system(ref(['config']1,
+							'cd "',v5,'/calendario";'
+							'"',v4,'" iso=calendario_lin.iso create=calendario now -all;',
+							'"',v4,'" calendario fst=@calendario.fst fullinv=calendario'
+						)
+					)
+			fi
+</pft></display>
+
+<display><pft>'listo'/#</pft></display>

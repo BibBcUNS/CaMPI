@@ -1,5 +1,5 @@
 <!-- Se reescriben los archivos html, reemplazando el nombre de la institución por el indicado en el parámetro -->
-	<field action=replace tag=2020><pft>v5004,'/biblioteca/administracion/menu.html'</pft></field>
+	<field action=replace tag=2020><pft>v5004,'/administracion/menu.html'</pft></field>
 	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
 	
 	<field action="add" tag="8888" split="occ"><pft>cat(v2020)</pft></field>
@@ -8,7 +8,7 @@
 	<display><pft>(v8888/)</pft></display>
 	<file action="close" type="output">now</file>	
 <!---->	
-	<field action=replace tag=2020><pft>v5004,'/biblioteca/circulacion/logo_prestamo.html'</pft></field>
+	<field action=replace tag=2020><pft>v5004,'/circulacion/logo_prestamo.html'</pft></field>
 	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
 			
 	<field action="replace" tag="8888" split="occ"><pft>cat(v2020)</pft></field>
@@ -17,7 +17,7 @@
 	<display><pft>(v8888/)</pft></display>
 	<file action="close" type="output">now</file>
 <!---->
-	<field action=replace tag=2020><pft>v5004,'/biblioteca/opac/buscar.html'</pft></field>
+	<field action=replace tag=2020><pft>v5004,'/opac/buscar.html'</pft></field>
 	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
 		
 	<field action="replace" tag="8888" split="occ"><pft>cat(v2020)</pft></field>
@@ -26,7 +26,7 @@
 	<display><pft>(v8888/)</pft></display>
 	<file action="close" type="output">now</file>
 <!---->
-	<field action=replace tag=2020><pft>v5004,'/biblioteca/opac/presentar.html'</pft></field>
+	<field action=replace tag=2020><pft>v5004,'/opac/presentar.html'</pft></field>
 	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
 			
 	<field action="replace" tag="8888" split="occ"><pft>cat(v2020)</pft></field>
@@ -35,7 +35,7 @@
 	<display><pft>(v8888/)</pft></display>
 	<file action="close" type="output">now</file>
 <!---->		
-	<field action=replace tag=2020><pft>v5004,'/biblioteca/opac/ayuda/ayuda.htm'</pft></field>
+	<field action=replace tag=2020><pft>v5004,'/opac/ayuda/ayuda.htm'</pft></field>
 	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
 	
 	<field action="replace" tag="8888" split="occ"><pft>cat(v2020)</pft></field>
@@ -44,7 +44,7 @@
 	<display><pft>(v8888/)</pft></display>
 	<file action="close" type="output">now</file>
 <!---->
-	<field action=replace tag=2020><pft>v5004,'/biblioteca/estadisticas/plantilla_resultados.htm'</pft></field>
+	<field action=replace tag=2020><pft>v5004,'/estadisticas/plantilla_resultados.htm'</pft></field>
 	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
 	
 	<field action="replace" tag="8888" split="occ"><pft>cat(v2020)</pft></field>
@@ -53,7 +53,7 @@
 	<display><pft>(v8888/)</pft></display>
 	<file action="close" type="output">now</file>		
 <!---->
-	<field action=replace tag=2020><pft>v5004,'/biblioteca/administracion/reclamo_moroso.php'</pft></field>
+	<field action=replace tag=2020><pft>v5004,'/administracion/reclamo_moroso.php'</pft></field>
 	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
 	
 	<field action="replace" tag="8888" split="occ"><pft>cat(v2020)</pft></field>

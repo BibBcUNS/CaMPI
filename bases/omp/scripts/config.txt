@@ -14,7 +14,7 @@ Nombre Institucion=Institucion XXXXX;
 # Debe ser el directorio donde se encuentran, y el nombre de los archivos .mst y .xrf correspondiente. Ejemplo:
 # Path base bibliografica=C:\isis\bibun\bibun.*;
 
-Path base bibliografica=C:\OpenMP----campi\Bases\catalis_pack\catalis\demo\biblio.*;
+Path base bibliografica=C:\wamp\www antes de parana\catalis\bases\biblio3.*;
 	
 # Indique el formato de catalogación,
 # valores posibles: CEPAL, BIBUN, MARCMP, LILACS, OIT (en minúscula)
@@ -27,32 +27,25 @@ Formato Cataloga=MARC;
 
 Campo Inventario=v859^p;
 
-# Indique el campo y subcampo que contiene el valor de sección/colección.
-# Este valor será utilizado para definir diferentes políticas de prestamo de acuerdo al material.
-# En caso de no utilizar dicho valor especificarlo con vacio.
-# En caso de existir dicho valor, el tag (nro de campo) debe ser el mismo que el de inventario.
-# Campo Estado=;
-# Campo Estado=v852^s;
-
-Campo Estado=v859^b;
-
 # Indique el directorio que contiendrá las base del sistema de circulación
 # No incluir la barra al final del path.
 # Path bases=c:\apache\www\bases;
 
-Path bases=C:\CaMPI\bases;
+Path bases=C:\wamp\www\campi\estructurado\bases\omp;
 
 # Indique el directorio donde residen los documentos “públicos” accesibles vía HTTP
 # El mismo valor configurado en Document_Root dentro de la configuración de apache.
 # No incluir la barra al final del path.
 
-Path htdocs=C:\CaMPI\htdocs;
+Path htdocs=C:\wamp\www\campi\estructurado\htdocs\omp;
 
-# Indique el directorio en el que se encuentra el utilitario mx y demÃ¡s utilitarios
+# Indique el directorio en el que se encuentra el utilitario MX y demas utilitarios
 # Ejemplo:
 # Path mx=c:\cisis\mx;
+# O se puede poner simplemente "mx" si ya está en el path.
+# Path mx=mx;
 
-Path mx=C:\CaMPI\bin\cisis\mx;
+Path mx=mx;
 
 # A continuación indicamos si habilitar o no la opción de reserva
 # Ejemplos:

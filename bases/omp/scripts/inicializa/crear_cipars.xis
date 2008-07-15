@@ -34,7 +34,7 @@
 	<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
 
 	<!-- v2020 será utilizado para indicar el path y nombre de archivos (por si hay que reemplazar "/") -->
-	<field action=replace tag=2020><pft>v5004,'/biblioteca/circulacion/cipar.par'</pft></field>
+	<field action=replace tag=2020><pft>v5004,'/circulacion/cipar.par'</pft></field>
 	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
 	
 	<file action="create" type="output"><pft>v2020</pft></file>
@@ -57,7 +57,7 @@
 	<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
 
     
-	<field action=replace tag=2020><pft>v5004,'/biblioteca/opac/cipar.par'</pft></field>
+	<field action=replace tag=2020><pft>v5004,'/opac/cipar.par'</pft></field>
 	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
 	
 	<file action="create" type="output"><pft>v2020</pft></file>
@@ -67,6 +67,7 @@
 	<display><pft>'creando cipar.par (administracion)'/</pft></display>	
 	<field action=replace tag=2000><pft>		
 		'config.*=',v5006,'/config/config.*'/	
+		'calendario.*=',v5006,'/calendario/calendario.*'/		
 		'exist.*=',v5006,'/exist/exist.*'/
 		'marc.mst=',v5006,'/',v5009,'/',v5009,'.mst'/
 		'marc.xrf=',v5006,'/',v5009,'/',v5009,'.xrf'/
@@ -103,7 +104,7 @@
 	<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
 	<display><pft>' '/#</pft></display>
 	
-	<field action=replace tag=2020><pft>v5004,'/biblioteca/administracion/cipar.par'</pft></field>
+	<field action=replace tag=2020><pft>v5004,'/administracion/cipar.par'</pft></field>
 	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
 	
 	<file action="create" type="output"><pft>v2020</pft></file>

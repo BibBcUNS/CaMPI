@@ -1,0 +1,48 @@
+<!-- ==================================================================
+ * CaMPI
+ * Copyright (c) ¿?
+ *
+ * Desarrolladores:
+ *
+ * Fuhr, Claudio 
+ * e-mail: claudiofuhr@gmail.com
+ * Asociación Bernardino Rivadavia
+ * Av. Colón 31
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ *
+ * Ferracutti, Victor
+ * e-mail: vmferra@uns.edu.ar
+ * Biblioteca Central, UNS
+ * Av. Alem 1253
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ */ -->
+
+<!--
+ * ABM del Calendario
+-->
+
+<IsisScript>
+<section>  
+<display><pft>'Content-type: text/html'/#</pft></display>
+<trace>!BR</trace>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+<field action=cgi tag=100>anio</field> <!-- año a partir del cual mostrará -->
+<field action=replace tag=110><pft>f(l(['calendario']v100),1,0)</pft></field>
+
+<display>
+<pft>
+	if val(v110)>0 then
+		ref(['calendario']val(v110),v1,'~',v2,'~',v3,'~',v4,'~',v5,'~',v6,'~',v7,'~',v8,'~',v9,'~',v10,'~',v11,'~',v12)
+	else
+		'error: Año no encontrado'	
+	fi
+</pft>
+</display>
+</section>
+</IsisScript>

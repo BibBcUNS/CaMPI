@@ -23,7 +23,7 @@
        '</small><big></big>',
      '</td>',
      '<td width="50%" align="right">',
-       '<em>Sistema de Circulación <img src="/omp.gif" width="59" height="45" align="middle"></em>',
+       '<em>Sistema de Circulación <img src="/omp/omp.gif" width="59" height="45" align="middle"></em>',
      '</td>',
    '</table><hr>',
  </pft></display>
