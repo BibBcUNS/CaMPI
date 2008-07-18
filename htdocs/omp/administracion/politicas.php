@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Open MarcoPolo - Edición de Calendario</title>
+<title>Open MarcoPolo - Edición de Políticas</title>
 
 </head>
 <body bgcolor="#E8E8D0" topmargin="0">
@@ -85,66 +85,76 @@ function mostrar_mes ($_mes, $_datos, $_año) {
 	}
 }
 
-function editar_año($_año) {
-	global $mesArray;
-	// Invoco al wxis con calendario_leer.xis(año) para leer los datos de un año determinado.
-	$ptr_datos_año = fopen("http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_leer.xis&anio=$_año","r");
-	$datos_año = fread($ptr_datos_año,500);
-	fclose($ptr_datos_año);
-	// Se genera una lista de 0s y Puntos por cada mes, separada cada cadena por "~"
+function mostrar_politicas() {
+   $campos_nombre[0] = 'Tipo de Usuario';
+   $campos_nombre[1] = 'Tipo de Objeto';
+   $campos_nombre[2] = 'Cantidad de Préstamos';
+   $campos_nombre[3] = 'Días de Préstamo';
+   $campos_nombre[4] = 'Reservas';
+   $campos_nombre[5] = 'Espera';
+   $campos_nombre[6] = 'Suspensión x dev. atrasada';
+   $campos_nombre[7] = 'Suspensión x espera caida';
+   $campos_nombre[8] = 'Prestar misma obra';
+   
+	$ptr_politicas = fopen("http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/obtener_politicas.xis","r");
+	$politicas = fread($ptr_politicas,8192);
+	fclose($ptr_politicas);
 
-	// En caso que el script no encuentre el año en la BD devuelve "error".
-	if (!(strpos($datos_año,"error")===false)) {
-		$ptr_ultimo_año = fopen("http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_ultimo_anio.xis","r");
-		$ultimo_año = fread($ptr_ultimo_año,500);
-		fclose($ptr_ultimo_año);
-		echo "<font color=red>Error!: El año <b>$_año</b> no está definido.</font><br>";
-		echo "El último año definido es <b>$ultimo_año</b>";
-		echo '<br><br><input type=button onclick="javascript:window.close()" value="Cerrar la ventana">';
-		exit;	
+	$politicas_arreglo = explode('#',$politicas);
+
+    for ($i=0;$i<=count($politicas_arreglo)-1;$i++){	
+   	  $politicas_arreglo[$i] = explode('~',$politicas_arreglo[$i]);
 	}
-	$meses = explode('~',$datos_año);	
-	
+
 	// Muestro el título
-	echo '<h2 style="text-align=center">Edición de calendario - Año '.$_año.'</h2>';
+	echo '<h2 style="text-align=center">Políticas de Circulación</h2>';
 	
 	// Muestro el formulario
 	echo '<style>'.
-			'.dias_mes{padding:0px; width:20px; text-align=center; font-size:15px; font-weight:normal; height:30px}'.
+			'.dias_mes{padding:0px; width:80px; text-align=center; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
-	echo "<form action=calendario_guardar.php method=post>";
+	echo "<form action=politicas_abm.php method=post>";
 	echo "<table border=0 cellspacing=0 cellpadding=0><tr><td></td>";
 
-	// Esto muestra la numeración de los días (1..31) en la partre superior de la tabla
-	for ($i=1;$i<=31;$i++){
+	// Esto muestra los títulos de los atributos
+	for ($i=0;$i<=count($campos_nombre);$i++){
 		echo '<td class=dias_mes align=center>';
-		echo $i;
+		echo $campos_nombre[$i];
 		echo "</td>";
 	}
 	echo "</tr> ";
 	//>
 	
-	// Recorro los 12 meses en $meses[] y muestro los checkbox.
-	echo "</td>";
-	
-	for($i=0;$i<12;$i++) {
-		echo '<tr><td width=100 height=22><b>'.$mesArray[$i+1]."</b></td>";
-		mostrar_mes($i,$meses[$i],$_año);
+	// Recorro las políticas y las muestro con un radiobutton.
+	$politicas_cantidad = count($politicas_arreglo);
+	$atributos_cantidad = count($politicas_arreglo[1]);
+		
+	for($i=0;$i<$politicas_cantidad-1;$i++) {
+		echo '<tr><td width=100 height=22>
+		      <input type="radio" name="pol_nro" value='
+			  .$politicas_arreglo[$i][1]
+			  .'~'
+			  .$politicas_arreglo[$i][2]
+			  .'></td>';
+        for ($j=0;$j<=$atributos_cantidad;$j++) { 
+            echo '<td class=dias_mes align=center>';
+			echo $politicas_arreglo[$i][$j];
+			echo "</td>";		
+        }
 		echo '</tr>';
 	}
-	
-	// Esto muestra la numeración de los días (1..31) entre al final de la tabla
-	echo "<tr><td></td>";
-			for ($j=1;$j<=31;$j++){
-				echo '<td class=dias_mes align=center>';
-				echo $j;
-				echo "</td>";
-			}
-	echo "</tr> ";
-	echo "</table>";
-	echo "<input type=hidden name=anio value=".$_año.">";
-	echo '<br><input type=submit value=" Guardar ">';
+	echo '<tr><td colspan=';
+	echo $atributos_cantidad+1;
+	echo ' align="center">';
+	echo '<input type=submit name=opcion value="Crear">';
+	echo '  ';
+	echo '<input type=submit name=opcion value="Modificar">';
+	echo '  ';
+	echo '<input type=submit name=opcion value="Borrar">';
 	echo "</form>";
+	echo "</td></tr>";
+	echo "</table>";
+
 }
 
 //*******************************************************************//
@@ -234,7 +244,7 @@ if ($opcion=='EDICION') {
 	editar_año($año);
 }
 else {
-	crear_hasta_el_año($año);
+	mostrar_politicas();
 }
 
 ?>

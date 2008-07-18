@@ -20,13 +20,24 @@
 	<tr>
     <td colspan="2">
 	
-	  <form method="POST" action="calendario.php" target="new">
+	  <form method="POST" action="calendario.php" target="calendario" onsubmit="window.open('', 'calendario', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=420,width=750,scrollbars=no,status=no')">
 	  <strong>Año: <input type="text" name="anio" size="4"></strong>
       	  
       <input type="radio" name="opcion" value="EDICION" checked>Editar 
 	  <input type="radio" name="opcion" value="ANIONUEVO">Crear año
   
 	  <input type="submit" value="Ejecutar">
+      </form>
+	</td>
+  </tr>
+  	<tr>
+    	<td colspan="2" bgcolor="#FDD08E"><strong>Altas, Bajas y Modificaciones de Políticas de Circulación</strong></td>
+  	</tr>
+	<tr>
+    <td colspan="2">
+	
+	  <form method="POST" action="politicas.php" target="politicas" onsubmit="window.open('', 'politicas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=420,width=750,scrollbars=no,status=no')">
+	  <input type="submit" value="ABM de Políticas">
       </form>
 	</td>
   </tr>

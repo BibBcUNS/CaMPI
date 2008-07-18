@@ -68,6 +68,7 @@
 	<field action=replace tag=2000><pft>		
 		'config.*=',v5006,'/config/config.*'/	
 		'calendario.*=',v5006,'/calendario/calendario.*'/		
+		'politicas.*=',v5006,'/politicas/politicas.*'/		
 		'exist.*=',v5006,'/exist/exist.*'/
 		'marc.mst=',v5006,'/',v5009,'/',v5009,'.mst'/
 		'marc.xrf=',v5006,'/',v5009,'/',v5009,'.xrf'/
