@@ -4,7 +4,7 @@ ini_set('SMTP','smtp.aaa.bbb.ar');
 $time = date("h:i:s A");
 
 $mail_to = 'admin@aaa.bbb.ar';
-$subject = "[$_GET['userID'] - $time] Catalis ha generado un error";
+$subject = "[$_GET['userID'] - $time] Caetalis ha generado un error";
 $body = '';
 $body .= "time: $time\r\n";
 $body .= "userID: $_GET['userID']\r\n";

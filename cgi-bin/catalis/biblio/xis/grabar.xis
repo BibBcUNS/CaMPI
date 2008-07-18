@@ -9,6 +9,11 @@
 
 
 
+
+
+
+
+
 <!-- ATENCION: esta sección de la aplicación es crítica: ¿cómo sabemos
 	que la grabación la está haciendo un usuario autorizado, en la base
     "correcta", y que no está dañando los datos?

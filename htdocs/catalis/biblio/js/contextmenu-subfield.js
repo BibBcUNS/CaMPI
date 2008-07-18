@@ -8,6 +8,15 @@
 // =============================================================================
 
 
+
+
+
+
+
+
+
+
+
 // -----------------------------------------------------------------------------
 function canMoveUpSf(subfield) 
 // Determina si el subcampo subfield puede ubicarse una posición más arriba

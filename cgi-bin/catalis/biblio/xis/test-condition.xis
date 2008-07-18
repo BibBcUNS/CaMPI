@@ -13,6 +13,7 @@
 	=========================================================== -->
 
 
+
 <display><htmlpft><pft>cat('HEAD-RECORD-LIST.HTM')</pft></htmlpft></display>
 
 <cgitable><pft>
@@ -151,9 +152,9 @@
 							s(,@WH.PFT,),
 							'cid=',
 							s('tarea=EDITAR_REG',
-							  '&amp;mfn=',mfn(1),
-							  '&amp;userid=',v2002,
-							  '&amp;db=',v2104,
+							  '&mfn=',mfn(1),
+							  '&userid=',v2002,
+							  '&db=',v2104,
 							  '" onclick=top.viewRecordDetails(null,"',v001,'",top.g_RecordDisplayStyle);return(false)',
 							  ' target="hiddenIFRAME')
 					),

@@ -63,7 +63,7 @@
 
 <!-- Lectura del archivo de configuración. Los parámetros van al campo 6001 -->
 <!-- ATENCION: ¿podríamos utilizar variables de ambiente? (putenv + getenv) -->
-<field action="replace" tag="6000" split="occ"><pft>,cat(getenv('PATH_WXIS'),'catalis/config/catalis.conf'),</pft></field>
+<field action="replace" tag="6000" split="occ"><pft>,cat(getenv('PATH_WXIS'),'auto/config/catalis.conf'),</pft></field>
 
 <!-- 6001: opciones varias -->
 <field action="replace" tag="6001"><pft>
@@ -122,8 +122,8 @@
 	if v2001 = 'INICIAR_SESION' and a(v2104) then
 		/* Buscamos la primera base en la lista de bases para este usuario */
 		ref(
-			[v6003^b,'/catalis/users/users']
-			l([v6003^b,'/catalis/users/users']v2002),
+			[v6003^b,'/users/users']
+			l([v6003^b,'/users/users']v2002),
 			v5^*[1],
 		)
 	fi
@@ -136,9 +136,9 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <parm name="cipar"><pft>
 	/* ----- BASE DE DATOS (BIBLIOGRÁFICA) ----- */
-	'BIBLIO.*=',          v6003^b,'/catalis/',v2104,'/biblio.*'/
-	'CONTROL-NUMBER.TXT=',v6003^b,'/catalis/',v2104,'/cn.txt'/
-	'DB-DESCR.TXT=',      v6003^b,'/catalis/',v2104,'/db-descr.txt'/
+	'BIBLIO.*=',          v6003^b,'/auto/',v2104,'/biblio.*'/
+	'CONTROL-NUMBER.TXT=',v6003^b,'/auto/',v2104,'/cn.txt'/
+	'DB-DESCR.TXT=',      v6003^b,'/auto/',v2104,'/db-descr.txt'/
 	
 	/* ----- BASE DE DATOS (CLASIFICACION) ----- */
 	'MSC.*=',             v6003^b,'/opacmarc/msc2000/msc.*'/
@@ -151,30 +151,30 @@
 	'UC-ANSI.TAB=',       v6003^b,'/common/uc-ansi.tab'/
 	
 	/* ----- ARCHIVOS HTML ----- */
-	'CARTELES.HTM=',        v6003^c,'/catalis/html/carteles.htm'/
-	'DELETED-RECORD.HTM=',  v6003^c,'/catalis/html/deleted-record.htm'/
-	'DISPLAY-RECORD.HTM=',  v6003^c,'/catalis/html/display-record.htm'/
-	'EDITION-FORM.HTM=',    v6003^c,'/catalis/html/edition-form.htm'/
-	'ERROR-IP-NUMBER.HTM=', v6003^c,'/catalis/html/error-ip-number.htm'/
-	'HEAD.HTM=',            v6003^c,'/catalis/html/head.htm'/
-	'HEAD-RECORD-LIST.HTM=',v6003^c,'/catalis/html/head-recordList.htm'/
-	'HIDDEN-ELEM.HTM=',     v6003^c,'/catalis/html/hidden-elem.htm'/
-	'LOGIN.HTM=',           v6003^c,'/catalis/html/login.htm'/
-	'SAVED-RECORD.HTM=',    v6003^c,'/catalis/html/saved-record.htm'/
-	'SEARCH-PANEL.HTM=',    v6003^c,'/catalis/html/search-panel.htm'/
-	'SEND-KEYS.HTM=',       v6003^c,'/catalis/html/send-keys.htm'/
-	'TOOLBAR.HTM=',         v6003^c,'/catalis/html/toolbar.htm'/
-	'UPD-MAXMFN.HTM=',      v6003^c,'/catalis/html/updMaxMfn.htm'/
+	'CARTELES.HTM=',        v6003^c,'/html/carteles.htm'/
+	'DELETED-RECORD.HTM=',  v6003^c,'/html/deleted-record.htm'/
+	'DISPLAY-RECORD.HTM=',  v6003^c,'/html/display-record.htm'/
+	'EDITION-FORM.HTM=',    v6003^c,'/html/edition-form.htm'/
+	'ERROR-IP-NUMBER.HTM=', v6003^c,'/html/error-ip-number.htm'/
+	'HEAD.HTM=',            v6003^c,'/html/head.htm'/
+	'HEAD-RECORD-LIST.HTM=',v6003^c,'/html/head-recordList.htm'/
+	'HIDDEN-ELEM.HTM=',     v6003^c,'/html/hidden-elem.htm'/
+	'LOGIN.HTM=',           v6003^c,'/html/login.htm'/
+	'SAVED-RECORD.HTM=',    v6003^c,'/html/saved-record.htm'/
+	'SEARCH-PANEL.HTM=',    v6003^c,'/html/search-panel.htm'/
+	'SEND-KEYS.HTM=',       v6003^c,'/html/send-keys.htm'/
+	'TOOLBAR.HTM=',         v6003^c,'/html/toolbar.htm'/
+	'UPD-MAXMFN.HTM=',      v6003^c,'/html/updMaxMfn.htm'/
 	
 	/* ----- Usuarios, permisos ----- */
 	/*'IP-TABLE=',            v6003^c,'/catalis/config/ip-table.txt'/*/
-	'USERS.*=',             v6003^b,'/catalis/users/users.*'/
+	'USERS.*=',             v6003^b,'/users/users.*'/
 	
 	/* ----- PFT (compartidos con el OPAC) ----- */
-	'DOCUMENT-TYPE.PFT=', v6003^c,'/common/pft/doc-type.pft'/
-	'ETIQUETADO.PFT=',    v6003^c,'/common/pft/etiquetado.pft'/
-	'URLENCODE.PFT=',     v6003^c,'/common/pft/urlencode.pft'/
-	'WH.PFT=',            v6003^c,'/common/pft/wh.pft'/
+	'DOCUMENT-TYPE.PFT=', v6003^c,'/pft/doc-type.pft'/
+	'ETIQUETADO.PFT=',    v6003^c,'/pft/etiquetado.pft'/
+	'URLENCODE.PFT=',     v6003^c,'/pft/urlencode.pft'/
+	'WH.PFT=',            v6003^c,'/pft/wh.pft'/
 
 	'BIB-LIST-HEAD.HTM=', v6003^c,'/opacmarc/html/bib-list-head.htm'/
 	
@@ -290,21 +290,21 @@
 <!-- ----------------------------------------------------------------- -->
 <label>NEW_RECORDS</label>
 <!-- ----------------------------------------------------------------- -->
-<include>catalis/xis/new-records.xis</include>
+<include>auto/xis/new-records.xis</include>
 <flow action="jump">END</flow>
 
 
 <!-- ----------------------------------------------------------------- -->
 <label>BUSCAR</label>
 <!-- ----------------------------------------------------------------- -->
-<include>catalis/xis/buscar.xis</include>
+<include>auto/xis/buscar.xis</include>
 <flow action="jump">END</flow>
 
 
 <!-- ----------------------------------------------------------------- -->
 <label>MFN_RANGE</label>
 <!-- ----------------------------------------------------------------- -->
-<include>catalis/xis/mfnrange.xis</include>
+<include>auto/xis/mfnrange.xis</include>
 <flow action="jump">END</flow>
 
 
@@ -524,14 +524,14 @@
 <!-- ----------------------------------------------------------------- -->
 <label>GRABAR_REG</label>
 <!-- ----------------------------------------------------------------- -->
-<include>catalis/xis/grabar.xis</include>
+<include>auto/xis/grabar.xis</include>
 <flow action="jump">END</flow>
 
 
 <!-- ----------------------------------------------------------------- -->
 <label>TEST_CONDITION</label>
 <!-- ----------------------------------------------------------------- -->
-<include>catalis/xis/test-condition.xis</include>
+<include>auto/xis/test-condition.xis</include>
 <flow action="jump">END</flow>
 
 
@@ -545,14 +545,14 @@
 <!-- ----------------------------------------------------------------- -->
 <label>BORRAR_REG</label>
 <!-- ----------------------------------------------------------------- -->
-<include>catalis/xis/borrar.xis</include>
+<include>auto/xis/borrar.xis</include>
 <flow action="jump">END</flow>
 
 
 <!-- ----------------------------------------------------------------- -->
 <label>SHOW_KEYS</label>
 <!-- ----------------------------------------------------------------- -->
-<include>catalis/xis/showkeys.xis</include>
+<include>auto/xis/showkeys.xis</include>
 <flow action="jump">END</flow>
 
 

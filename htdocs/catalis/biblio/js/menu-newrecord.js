@@ -7,6 +7,11 @@
 //  Véase el archivo LICENCIA.TXT incluido en la distribución de Catalis
 // =============================================================================
 
+
+
+
+
+
 // -----------------------------------------------------------------------------
 function canDuplicate() 
 // ATENCION: revisar este criterio. 

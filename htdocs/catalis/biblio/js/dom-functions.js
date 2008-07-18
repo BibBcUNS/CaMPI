@@ -13,6 +13,14 @@
 
 
 
+
+
+
+
+
+
+
+
 // -----------------------------------------------------------------------------
 function crossBrowserNodeSelector(xmlObj,path)
 // Lo usamos para los casos en que se espera un FIRST_ORDERED_NODE_TYPE (9)

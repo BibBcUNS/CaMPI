@@ -5,6 +5,8 @@
 	Véase el archivo LICENCIA.TXT incluido en la distribución de Catalis
 	=========================================================== -->
 
+
+
 <field action="cgi" tag="2020">dictkey</field>
 <field action="cgi" tag="2021">reverse</field>
 <field action="cgi" tag="2022">index_type</field>

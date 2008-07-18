@@ -10,6 +10,11 @@
  */
 
 
+
+
+
+
+
 // -----------------------------------------------------------------------------
 function padWithZeros(num, totalLength)
 // Rellena num con ceros a la izquierda, hasta completar totalLength posiciones

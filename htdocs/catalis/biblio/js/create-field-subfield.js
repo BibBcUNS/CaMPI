@@ -7,6 +7,13 @@
 
 
 
+
+
+
+
+
+
+
 // -----------------------------------------------------------------------------
 function createFieldList(tags)
 // Recibe una lista de tags y, luego de validarlos, llama repetidamente a

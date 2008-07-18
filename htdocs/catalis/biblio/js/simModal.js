@@ -8,6 +8,15 @@
 // ************************************************************
 
 
+
+
+
+
+
+
+
+
+
 // Global flag for Navigator 4-only event handling branches.
 var Nav4 = ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4))
    

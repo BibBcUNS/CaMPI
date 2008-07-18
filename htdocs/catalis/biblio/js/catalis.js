@@ -7,6 +7,12 @@
 
 
 
+
+
+
+
+
+
 // Las dos funciones que siguen son alternativas para realizar la misma tarea:
 // traer un documento XML desde el servidor hasta el browser. Analizar pros y
 // contras de cada una.
@@ -119,6 +125,7 @@ function defineSomeVars() {
 			g_nonRepTags.push(tagList.snapshotItem(i).nodeValue);
 		}
 	}
+	
 	MARC_TAGS_NR = new RegExp(tags.substr(1));
 }
 
@@ -878,7 +885,7 @@ function showKeys()
 // -----------------------------------------------------------------------------
 {
 	var recordID = document.getElementById("marcEditForm").f001.value;
-	var url = SCRIPT_URL + "?IsisScript=catalis/xis/extract-keys.xis&amp;db=" + g_activeDatabase.name + "&amp;recordID=" + recordID;
+	var url = SCRIPT_URL + "?IsisScript=catalis/biblio/xis/extract-keys.xis&amp;db=" + g_activeDatabase.name + "&amp;recordID=" + recordID;
 	window.open(url, "", "height=450, width=740, scrollbars=yes, resizable=yes");
 }
 

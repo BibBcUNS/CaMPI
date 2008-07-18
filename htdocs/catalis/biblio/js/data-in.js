@@ -10,6 +10,11 @@
  */
 
 
+
+
+
+
+
 // ATENCION: En saved-record.htm hay código que probablemente podría reubicarse aquí.
 
 // -----------------------------------------------------------------------------
@@ -118,8 +123,11 @@ function createRecord(newRecParams)
 		document.getElementById("ejemplaresBtn").style.backgroundColor = "";
 	}
 	
+	
 	// Original record state = el contenido de la plantilla
 	originalRecord = serializeRecord(true,true,true,true);
+	
+	
 	
 	// Buttons
 	document.getElementById("btnGrabar").disabled = false;

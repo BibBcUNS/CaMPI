@@ -8,6 +8,12 @@
 // =============================================================================
 
 
+
+
+
+
+
+
 // -----------------------------------------------------------------------------
 function canMoveUpF(field)
 // Determina si el campo 'field' puede desplazarse una posición hacia arriba.

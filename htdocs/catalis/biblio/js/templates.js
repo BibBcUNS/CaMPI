@@ -14,6 +14,16 @@
  *  Véase el archivo LICENCIA.TXT incluido en la distribución de Catalis
  * =============================================================================
  */ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 /* Campo 008: lo mostramos separado en bloques: 00-17, 18-34, 35-39 */
 

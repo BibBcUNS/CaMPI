@@ -17,18 +17,7 @@ function importXML(sourceURL)
 // -----------------------------------------------------------------------------
 {
 
-
-
-
-
-
-
-
-
-
-
-
-	var xmlDoc;
+var xmlDoc;
 	
 	if (moz) {
 		xmlDoc = document.implementation.createDocument("", "", null);
@@ -1798,7 +1787,7 @@ function catalisMessage(msg,button)
 function init()
 // Funciones ejecutadas al finalizar la carga de la página principal.
 // -----------------------------------------------------------------------------
-{
+{ 
 	document.getElementById("cartelMsg").innerHTML += "<br><br>Ejecutando funciones de inicio...";
 	loadXML();          // Cargamos los documentos XML
 	defineSomeVars();

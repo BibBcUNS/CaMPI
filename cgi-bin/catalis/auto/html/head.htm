@@ -69,7 +69,7 @@
 			
 			if (REPORT_JS_ERRORS) {
 				var userID = "[pft]v2002[/pft]";
-				var myURL = "[pft]v6003^h[/pft]catalis/php/handleError.php"
+				var myURL = "[pft]v6003^h[/pft]php/handleError.php"
 					+ "?userID=" + escape(userID)
 					+ "&errorMessage=" + escape(errorMessage) 
 					+ "&url=" + escape(url) 
@@ -129,7 +129,7 @@
 		FIELD_BLOCK_PATTERN.other = /02[^02]|0[1367].|04[^3]|05[^2]|856/;
 		
 		// Directorio público (para documentos HTML, CSS, XML)
-		var HTDOCS = "[pft]v6003^h[/pft]catalis/";
+		var HTDOCS = "[pft]v6003^h[/pft]/";
 		
 		// URLs de ventanas auxiliares
 		var URL_AUTHORITY = HTDOCS + "html/authority.htm";
@@ -253,35 +253,34 @@
 		window.onload = handleLoad;
 	</script>
 	
-	<link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]catalis/css/catalis.css">
-	<link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/.css">
-	<link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/etiquetado.css">
+	<link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]css/catalis.css">
+	<link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]css/etiquetado.css">
 	
-	<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/simModal.js"></script>
+	<script type="text/javascript" src="[pft]v6003^h[/pft]js/simModal.js"></script>
 	
 	[pft]if p(v2001) and not 'FIN_SESION' : v2001 then[/pft]
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/catalis.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/create-field-subfield.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/eventHandlers.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/disable-keys.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/dom-functions.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/aux-windows.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/data-out.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/validate.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/data-in.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/import.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/menu-newrecord.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/punctuation.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/templates.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/isbncheck.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/contextmenu-field.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/contextmenu-subfield.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/2marc.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/marc2marcTagged.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/catalis.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/create-field-subfield.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/eventHandlers.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/disable-keys.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/dom-functions.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/aux-windows.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/data-out.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/validate.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/data-in.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/import.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/menu-newrecord.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/punctuation.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/templates.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/isbncheck.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/contextmenu-field.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/contextmenu-subfield.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/2marc.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/marc2marcTagged.js"></script>
 		
 	<!--	<script type="text/javascript" src="[pft]v6003^h[/pft]common/js/getMaterialType.js"></script> -->
-		<script type="text/javascript" src="[pft]v6003^h[/pft]common/js/isbn-hyphen.js"></script>
-		<script type="text/javascript" src="[pft]v6003^h[/pft]common/js/marc2.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/isbn-hyphen.js"></script>
+		<script type="text/javascript" src="[pft]v6003^h[/pft]js/marc2aacr.js"></script>
 	[pft]fi[/pft]
 </head>
 

@@ -8,6 +8,7 @@
 -->
 
 
+
 <field action="cgi" tag="4001">recordID</field>
 
 <!-- Identificamos el registro a borrar -->
