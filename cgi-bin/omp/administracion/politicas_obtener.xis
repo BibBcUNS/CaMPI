@@ -31,8 +31,14 @@
 <section>  
 <display><pft>'Content-type: text/html'/#</pft></display>
 <trace>!BR</trace>
+<field action=cgi tag=100>cual</field>
+<field action=cgi tag=1>expresion</field>
 <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 
+<flow action=jump><pft>v100</pft></flow>
+<flow action=exit>1</flow>
+
+<label>TODAS</label>
 
   <do task=mfnrange>
 
@@ -57,6 +63,24 @@
             <pft>v1,'#'</pft>
          </display>
      </loop>
+  </do>
+
+<flow action=exit>1</flow>
+
+<label>UNA</label>
+<field action=replace tag=110><pft>f(l(['politicas']'UO='v1),1,0)</pft></field>
+  <do task=mfnrange>
+    <parm name=db>politicas</parm>
+    <parm name=from><pft>v110</pft></parm>
+    <parm name=count>1</parm>
+    <loop>
+       <display>
+	     <pft>
+	       v1,'~',v2,'~',v10,'~',v11,'~',v12,'~',v13^d,'~',
+		   v14^x,'~',v15^d,'~',v20^p
+		 </pft>
+	   </display>
+    </loop>
   </do>
   
 </section>

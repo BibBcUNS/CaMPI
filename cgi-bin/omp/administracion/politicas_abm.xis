@@ -1,0 +1,64 @@
+<!-- ==================================================================
+ * CaMPI
+ * Copyright (c) ¿?
+ *
+ * Desarrolladores:
+ *
+ * Fuhr, Claudio 
+ * e-mail: claudiofuhr@gmail.com
+ * Asociación Bernardino Rivadavia
+ * Av. Colón 31
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ *
+ * Ferracutti, Victor
+ * e-mail: vmferra@uns.edu.ar
+ * Biblioteca Central, UNS
+ * Av. Alem 1253
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ */ -->
+
+<!--
+ * ABM políticas de circulación
+-->
+
+<IsisScript>
+<section>  
+<display><pft>'Content-type: text/html'/#</pft></display>
+<trace>!BR</trace>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+<field action=cgi tag=100>opcion</field>
+<display><pft>v100</pft></display>
+
+  <!-- do task=mfnrange>
+
+    <parm name=db>politicas</parm>
+    <loop>
+       <list action=load>
+	     <pft>
+	       v1,'~',v2,'~',v10,'~',v11,'~',v12,'~',v13^d,'~',
+		   v14^x,'~',v15^d,'~',v20^p
+		 </pft>
+	   </list>
+    </loop>
+
+  </do>
+
+  <do task=list>
+     <field action=define tag=1001>Isis_Current</field>
+     <field action=define tag=1002>Isis_Items</field>
+     <field action=define tag=1>Isis_Item</field>
+     <loop>
+         <display>
+            <pft>v1,'#'</pft>
+         </display>
+     </loop>
+  </do -->
+  
+</section>
+</IsisScript>
