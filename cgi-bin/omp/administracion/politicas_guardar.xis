@@ -50,7 +50,7 @@
 <field action=replace tag=20><pft>'^p',v20</pft></field>
 
 <field action=replace tag=110><pft>f(l(['politicas']'UO=',v1,'-',v2),1,0)</pft></field>
-<field action=replace tag=111><pft>f(l(['politicas']'UO=',v111),1,0)</pft></field>
+<field action=replace tag=112><pft>f(l(['politicas']'UO=',v111),1,0)</pft></field>
 
 <flow action=jump><pft>v100</pft></flow>
 <flow action=exit>1</flow>
@@ -83,11 +83,12 @@
 <do task=update>
 	<parm name=db>politicas</parm>
 	<parm name=mfn><pft>v110</pft></parm>
+	<parm name=fst><pft>cat('politicas.fst')</pft></parm>
 	<parm name=lockid><pft>v110</pft></parm>
 	<field action=define tag=1102>Isis_Status</field>
 	<field action=define tag=1103>Isis_Lock</field>
 	<update>
-		<field action=import tag=list>1,2,3,4,5,6,7,8,9,10,11,12</field>
+		<field action=import tag=list>1,2,10,11,12,13,14,15,20</field>
         <write>Unlock</write>
      </update>
 </do>
@@ -96,12 +97,13 @@
 
 <label>BORRAR</label>
 
-<display><pft>if val(v111)=0 then 'La política para el tipo de usuario y tipo de objeto NO EXISTE' fi</pft></display>
-<flow action=exit><pft>if val(v111)=0 then '1' fi</pft></flow>
+<display><pft>if val(v112)=0 then 'La política para el tipo de usuario y tipo de objeto NO EXISTE' fi</pft></display>
+<flow action=exit><pft>if val(v112)=0 then '1' fi</pft></flow>
 
 <do task=update>
 	<parm name=db>politicas</parm>
-	<parm name=mfn><pft>v111</pft></parm>
+	<parm name=mfn><pft>v112</pft></parm>
+	<parm name=fst><pft>cat('politicas.fst')</pft></parm>
 	<parm name=lockid><pft>v111</pft></parm>
 	<field action=define tag=1102>Isis_Status</field>
 	<field action=define tag=1103>Isis_Lock</field>

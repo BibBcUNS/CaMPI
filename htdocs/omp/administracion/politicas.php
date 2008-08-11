@@ -181,7 +181,7 @@ $ptr_politicas = fopen($url,"r");
 $ptr_politicas;
 $politicas = fread($ptr_politicas,8192);
 fclose($ptr_politicas);
-echo $politicas;
+
 }	
 
 //********************************************************************//
