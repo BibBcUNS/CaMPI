@@ -28,7 +28,7 @@
 <!-- Así sacabamos los inventario de la base lector...
 <field action="replace" tag="4000" split="occ"><pft>ref(['lector']l(['lector']v3002),(v8^i/))</pft></field>
 -->
-	
+
 <!-- Lista de partes prestadas -->
 <field action="replace" tag="4005" split="occ"><pft>(ref(['partes']l(['partes']v4000),v1/))</pft></field>
 <field action="replace" tag="4010"><pft>'~',(v4005,'~')</pft></field>
@@ -36,6 +36,7 @@
 <!-- Comparamos prestados con "a prestar" -->
 <list action="delete">now</list>
 <list action="load" type="list"><pft>(v2060/)</pft></list> <!-- Creo la lista con los items a reservar -->
+
 <do task="list">
 	<field action="define" tag="4000">Isis_Item</field> <!-- Item a reservar -->
 	<loop>

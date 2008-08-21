@@ -15,53 +15,55 @@ Si hay Esperas
  sino
     OK
 -->
-
+   
 <flow action="jump"><pft>if v5000:'Error' then 'verificaRes' fi</pft></flow>
-
+   
 <list action=load previous="delete"><pft>(v3002/)</pft></list>
 <do task="list">
 <field action="define" tag="1001">Isis_Item</field>
 <loop>
-   <!-- v1100: Identificador de la parte a la que pertenece el nro. de inv indicado  -->
-   <field action="replace" tag="1100"><pft>ref(['partes']l(['partes']v1001),v1)</pft></field>
-
-   <!-- v1102: Cadena para búsqueda -->
-   <field action="replace" tag="1102"><pft>v1100^b,'_',v1100^c,'_',v1100^p</pft></field>
-
-   <!-- v1103: mfn del registro correspondiente a la parte indicada -->
-   <field action="replace" tag="1103"><pft>f(l(['reservas']v1102),1,0)</pft></field>
-
-   <!-- v1104: Conjunto de espera asociado a la parte indicada (cadena de DNIs) -->
-   <field action="replace" tag="1104"><pft>ref(['reservas']val(v1103),'~',(v3^i,'~'))</pft></field>
-   <field action="replace" tag="1105"><pft>ref(['reservas']val(v1103),f(nocc(v3),1,0))</pft></field>
-
-   <!--  v1106: Cantidad total de ejemplares -->
-   <field action="replace" tag="2000" split="occ"><pft>ref(['partes']l(['partes']v1001),(v2/))</pft></field>
-   <field action="replace" tag="1106"><pft>f(nocc(v2000),1,0)</pft></field>
-
-   <!--  v1107: Lista de los inventarios hermanos -->
-   <field action="replace" tag="1107" split="occ"><pft>ref(['partes']l(['partes']v1001),(v2/))</pft></field> 
-
-   <!--  v1108: Cantidad de ejemplares prestados -->
-   <field action="replace" tag="1108"><pft>f(size((if ref(['exist']l(['exist']v1107),v985) = 'PRES' then '1' fi)),1,0)</pft></field>
-
-   <field action="replace" tag="5000"><pft>
-      if v1104<>'~~' then
-         if v1104:v3004 then
-            'OK'
-         else 
-            if (val(v1106)-val(v1108)-val(v1105)>0) then
-               'OK'
-            else
-               'Error: Objeto en espera para otro Usuario'
-            fi
-         fi
-      else
-         'OK'
-      fi
-   </pft></field>
-   <field action="export" tag="5000">5000</field>
+	<field action=import tag=3004>3004</field>
+	
+	<!-- v1100: Identificador de la parte a la que pertenece el nro. de inv indicado  -->
+	<field action="replace" tag="1100"><pft>ref(['partes']l(['partes']v1001),v1)</pft></field>
+	
+	<!-- v1102: Cadena para búsqueda -->
+	<field action="replace" tag="1102"><pft>v1100^b,'_',v1100^c,'_',v1100^p</pft></field>
+	
+	<!-- v1103: mfn del registro correspondiente a la parte indicada -->
+	<field action="replace" tag="1103"><pft>f(l(['reservas']v1102),1,0)</pft></field>
+	
+	<!-- v1104: Conjunto de espera asociado a la parte indicada (cadena de DNIs) -->
+	<field action="replace" tag="1104"><pft>ref(['reservas']val(v1103),'~',(v3^i,'~'))</pft></field>
+	<field action="replace" tag="1105"><pft>ref(['reservas']val(v1103),f(nocc(v3),1,0))</pft></field>
+	
+	<!--  v1106: Cantidad total de ejemplares -->
+	<field action="replace" tag="2000" split="occ"><pft>ref(['partes']l(['partes']v1001),(v2/))</pft></field>
+	<field action="replace" tag="1106"><pft>f(nocc(v2000),1,0)</pft></field>
+	
+	<!--  v1107: Lista de los inventarios hermanos. 
+	Nota: Este dato ya fue evaluado dos lineas arriba (corregir) -->
+	<field action="replace" tag="1107" split="occ"><pft>ref(['partes']l(['partes']v1001),(v2/))</pft></field> 
+	
+	<!--  v1108: Cantidad de ejemplares prestados -->
+	<field action="replace" tag="1108"><pft>f(size((if ref(['exist']l(['exist']v1107),v985) = 'PRES' then '1' fi)),1,0)</pft></field>
+	
+	<field action="replace" tag="5000"><pft>
+	  if v1104<>'~~' then
+	     if v1104:v3004 then
+	        'OK'
+	     else 
+	        if (val(v1106)-val(v1108)-val(v1105)>0) then
+	           'OK'
+	        else
+	           'Error: Objeto en espera para otro Usuario'
+	        fi
+	     fi
+	  else
+	     'OK'
+	  fi
+	</pft></field>
+	<field action="export" tag="5000">5000</field>
 </loop>
 </do>
-
 <label>verificaRes</label>

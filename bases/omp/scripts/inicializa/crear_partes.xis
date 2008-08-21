@@ -103,7 +103,7 @@ Actualizará la base Partes cuya estructura es:
  					    <field action="import" tag=5500>5500</field>
    					    <field action="import" tag=2002>2002</field>
    						<field action="import" tag=3001>3001</field>
-						<field action="add" tag="1" split="occ"><pft>'^b',v5009,'^c',v5500,if v2002='#' then '' else '^p',v2002 fi</pft></field> 
+						<field action="add" tag="1" split="occ"><pft>'^b',v5009,'^c',v5500,'^p',if v2002='#' then '' else v2002 fi</pft></field> 
 						<field action="add" tag="2" split="occ"><pft>(v3001/)</pft></field> 
 						<field action="delete" tag="list">2002,3001,5009,5500</field>
 						

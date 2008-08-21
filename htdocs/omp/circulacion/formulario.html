@@ -339,12 +339,11 @@ if ref(['config']1,v9)='si' then
 			</td>
 		</tr>
 		<tr>
-		<td colspan="2">
-			<strong>Reservas registradas:</strong>',
+		<td colspan="2">',
 			if p(v2030) then
-			'<table border="1" width="100%" bgcolor="FFFFFF" cellpadding="8">
+			'<table border="1" width="100%" bgcolor="FFFFFF" cellpadding="4">
 				<tr valign="middle">
-					<th>Material</th><th>Fecha / hora</th><th>Posición</th><th>Eliminar</th></tr>
+					<th align="left">Reservas registradas</th><th>Posición</th><th>Fecha / hora</th><th>Eliminar</th></tr>
 					',('<tr valign="middle"><td>',
 					ref(['opac_circulacion']l(['opac_circulacion']'LC='v2030^c),
 						'<font color="blue"><b>',
@@ -360,9 +359,9 @@ if ref(['config']1,v9)='si' then
 					if v2030^p<>'' then 'Parte: ',v2030^p,'</font><br>' fi,
 					'<font color="gray">^b',v2030^b,'^c',v2030^c,'^p',v2030^p,'<br>'
 					'</td>
-					<td align="center">',v2030^f,'<br>',v2030^h,'</td>
-					<td align="center">',v2030^o,'º</td>
-					<td>
+					<td align="center" width="10%">',v2030^o,'º</td>
+					<td align="center" width="15%">',v2030^f,'<br>',v2030^h,'</td>					
+					<td align="center" width="12%">
 						<form name="eliminar_',f(iocc,1,0),'" method="POST"
 							action="/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
 							<input type="hidden" name="IsisScript"   value="omp/circulacion/reserva_eliminar.xis">
@@ -379,6 +378,46 @@ if ref(['config']1,v9)='si' then
 			fi
 		'</td>
 		</tr>
+		
+		<td colspan="2">',
+			if p(v2031) then
+			'<table border="1" width="100%" bgcolor="FFFFFF" cellpadding="4">
+				<tr valign="middle">
+					<th align="left">Esperas registradas</th><th>Fecha / hora</th><th>Eliminar</th></tr>
+					',('<tr valign="middle"><td>',
+					ref(['opac_circulacion']l(['opac_circulacion']'LC='v2031^c),
+						'<font color="blue"><b>',
+							if v100^9='' then
+							v100^a," "v100^b," "v100^c," "v100^d," "v100^e,
+								else
+							v100^9, " "v100^d,
+							fi,'</b> : ',
+							v245^a," "v245^b,
+						'</font><br>
+						'),
+		
+					if v2031^p<>'' then 'Parte: ',v2031^p,'</font><br>' fi,
+					'<font color="gray">^b',v2031^b,'^c',v2031^c,'^p',v2031^p,'<br>'
+					'</td>
+					<td align="center" width="15%">',v2031^f,'<br>',v2031^h,'</td>
+					<td align="center" width="12%">
+						<form name="eliminar_',f(iocc,1,0),'" method="POST"
+							action="/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
+							<input type="hidden" name="IsisScript"   value="omp/circulacion/espera_eliminar.xis">
+							<input type="hidden" name="usuario_id"  value="',v3[1],'">
+							<input type="hidden" name="operario_id" value="',v2002[1],'">
+							<input type="hidden" name="reserva_id"  value="^b',v2031^b,'^c',v2031^c,'^p',v2031^p,'">
+							<input type="submit" value="Eliminar">
+						</form>
+					</td>
+				</tr>'),			
+			'</table>',
+			else
+				' El usuario no registra reservas'
+			fi
+		'</td>
+		</tr>
+		
 		<tr>
 			<td>
 				<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/">
@@ -387,7 +426,7 @@ if ref(['config']1,v9)='si' then
 				<input type="hidden" name="usuario_id" value="',v2,'">
 				<input type="hidden" name="operario_id" value="',v2002,'">
 	
-				<table border=0" width="100%" cellpadding="0" cellspacing="0">
+				<table border="0" width="100%" cellpadding="0" cellspacing="0">
 					<tr>
 						<td width="100%"><strong><u>R</u>eservar material: </strong>
 						<input type="text" name="expresion" size="15" accesskey="r">
@@ -398,6 +437,7 @@ if ref(['config']1,v9)='si' then
 				</form>
 			</td>
 		</tr>
+		
 	</table>',
 
 fi,

@@ -143,7 +143,14 @@ En caso de no ser submit se Muestra el Formulario
 			<field action=define tag=1011>Isis_Lock</field>
 			<update>
 				<field action="import" tag=list>2031,3002,3010</field>
-				<field action=add tag=2><pft>'^i',v3002,'^o',v2031,'^f',v3010^f,'^h',v3010^h</pft></field>
+				<field action=add tag=2><pft>
+					'^i',v3002,
+					'^o',v2031,
+					'^f',v3010^f,
+					'^h',v3010^h,
+					'^u',v3004,
+					'^p',getenv('REMOTE_ADDR')
+					</pft></field>
 				<field action="delete" tag="list">2031,3002,3010</field>
 				<write>Unlock</write>
 			</update>
@@ -162,9 +169,16 @@ En caso de no ser submit se Muestra el Formulario
 			<field action=define tag=1102>Isis_Status</field>
 			<field action=define tag=1011>Isis_Lock</field>
 			<update>
-				<field action="import" tag=list>2031,3002,3010,4001</field>
+				<field action="import" tag=list>2031,3002,3004,3010,4001</field>
 				<field action="replace" tag=1><pft>v4001</pft></field>
-				<field action=add tag=2><pft>'^i',v3002,'^o1',v2031,'^f',v3010^f,'^h',v3010^h</pft></field>
+				<field action=add tag=2><pft>
+					'^i',v3002,
+					'^o1',v2031,
+					'^f',v3010^f,
+					'^h',v3010^h,
+					'^u',v3004,
+					'^p',getenv('REMOTE_ADDR')
+				</pft></field>
 				<field action="delete" tag="list">2031,3002,3010,4001</field>
 				<write>Unlock</write>
 			</update>
@@ -253,15 +267,15 @@ En caso de no ser submit se Muestra el Formulario
 			<!-- Hay que parametrizar la el nombre/path/prefijo de la BD. Fijamos 'MARC' -->
 			<display><pft>
 				if (v1000='#') then
-					'<input type="hidden" name="partes_id" value="','^bmarc^c',v1,'^p">'
+					'<input type="hidden" name="partes_id" value="','^bMARC^c',v1,'^p">'
 				fi
 			</pft></display>			
 			<flow action="skip"><pft>if (v1000='#') then 'Quit' fi</pft></flow>
-			<field action="replace" tag="1005"><pft>'~^bmarc^c',v1,'^p',v1000,'~'</pft></field>
+			<field action="replace" tag="1005"><pft>'~^bMARC^c',v1,'^p',v1000,'~'</pft></field>
 			<display><pft>
 					'<input type="checkbox" name="partes_id" ',
 					if (v1002='1' or v2061:v1005) then 'checked' fi,
-					' value="','^bmarc^c',v1,'^p',if v1000='#' then '' else v1000 fi,'">',
+					' value="','^bMARC^c',v1,'^p',if v1000='#' then '' else v1000 fi,'">',
 					if v1000='#' then 'Parte única' else v1000 fi,'<br>',
 			</pft></display>			
 		</loop
