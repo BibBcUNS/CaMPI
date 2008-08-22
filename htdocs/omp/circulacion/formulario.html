@@ -404,7 +404,7 @@ if ref(['config']1,v9)='si' then
 						<form name="eliminar_',f(iocc,1,0),'" method="POST"
 							action="/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
 							<input type="hidden" name="IsisScript"   value="omp/circulacion/espera_eliminar.xis">
-							<input type="hidden" name="usuario_id"  value="',v3[1],'">
+							<input type="hidden" name="usuario_id"  value="',v2[1],'">
 							<input type="hidden" name="operario_id" value="',v2002[1],'">
 							<input type="hidden" name="reserva_id"  value="^b',v2031^b,'^c',v2031^c,'^p',v2031^p,'">
 							<input type="submit" value="Eliminar">
@@ -413,7 +413,7 @@ if ref(['config']1,v9)='si' then
 				</tr>'),			
 			'</table>',
 			else
-				' El usuario no registra reservas'
+				' El usuario no registra Esperas'
 			fi
 		'</td>
 		</tr>

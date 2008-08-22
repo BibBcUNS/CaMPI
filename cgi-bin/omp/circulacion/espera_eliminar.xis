@@ -1,0 +1,103 @@
+<IsisScript>
+
+<include>omp/circulacion/menor_inc.xis</include>
+
+<section>
+<display><pft>'Content-type: text/html'/#</pft></display>
+<display>
+<html>
+	<head>
+		<title>Eliminación de Espera</title>
+	</head>
+	<body bgcolor="#E8E8D0">
+</display>
+
+<display>
+	<input type="button" name="usuario" value="  [usuario]  " onClick="javascript:top.frames['indice'].document.form_id.submit();"<br>
+</display>
+
+<trace>!BR</trace>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+<field action=cgi tag=2000>reserva_id</field>
+<field action=cgi tag=2001>usuario_id</field>
+<field action=cgi tag=2002>operario_id</field>
+
+<display><pft>
+  	'<center>',
+  	ref(['lector']l(['lector']v2001),
+	  	'<font style="color:#039"><big>',v1,'</big></font>',", ",v3,
+	   	if v2001:'1' then
+	   		' <marquee bgcolor="#FFF0C4" border="0" style="color: rgb(191,51,83); font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',
+	   	fi,   	
+   ),
+   '</center><hr>'
+   </pft>
+</display>
+
+<!-- Obtengo el mfn de la reserva con reserva_id -->
+<field action=replace tag=2005><pft>f(l(['reservas']v2000^b,'_',v2000^c,'_',v2000^p),1,0)</pft></field>
+
+<do task=update>
+	<parm name=db>reservas</parm>
+	<parm name=mfn><pft>v2005</pft></parm>
+	<field action=define tag=1101>Isis_Lock</field>
+	<field action=define tag=1102>Isis_Status</field>
+	<parm name=lockid><pft>v2002</pft></parm>
+	<update>
+		<field action=import tag=list>2001,2002</field> <!-- id del lector -->
+		<!-- 4001: Número de espera del lector en cuestión -->
+		<field action=replace tag=4001><pft>(if v3^i=v2001[1] then f(iocc,1,0) fi)</pft></field>
+		<!-- Elimino la ocurrencia correspondiente del campo v3 -->
+		<field action=delete tag=3><pft>v4001</pft></field>
+		<field action=delete tag=4001>ALL</field>
+		
+		<!-- A continuación paso la reserva más antigua a espera -->
+		<!-- Lo hago en el caso de que existan reservas registradas (v2) -->
+		<flow action=jump><pft>if nocc(v2)=0 then 'no_hay_reservas'	fi</pft></flow>			
+				<!-- genero la lista de timestamps con formato "aammddhhmmss" -->
+				<field action=replace tag=5 split=occ><pft>
+				(v2^f*8.4,v2^f*3.2,v2^f.2,v2^h.2,v2^h*3.2,v2^h*6.2/)
+				</pft></field>
+				<!-- Busco el timestamp más chico usando la funcion menor. -->				
+				<call name=menor><pft>(v5/)</pft></call>
+				<!-- Salida en v30 (^o^t, órden y timestamp respectivamente) -->
+		<label>no_hay_reservas</label>
+		
+		<!-- Obtengo la hora y fecha -->
+		<field action=replace tag=3010><pft>date</pft></field>
+		<field action=replace tag=3010><pft>
+			'^f',mid(v3010,7,2),'/',mid(v3010,5,2),'/',mid(v3010,1,4),
+			'^h',mid(v3010,10,2),':',mid(v3010,12,2),':',mid(v3010,14,2)
+		</pft></field>
+		
+		<!-- creo la espera correspondiente -->
+		<!-- Creo la espera v3 con el valor de v2 en la ocurrencia indicada por v30^o -->
+		<field action=occ tag=10 from=2><pft>v30^o</pft></field>
+		<field action=add tag=3><pft>
+			'^i',v10^i,
+			'^f',v3010^f,
+			'^h',v3010^h,
+			'^o',v2002,
+			'^p',getenv('REMOTE_ADDR')
+		</pft></field>
+	
+		<!-- Elimino la ocurrencia correspondiente de v2 -->
+		<field action=delete tag=2><pft>v30^o</pft></field>
+		
+	    <field action=delete tag=2001>ALL</field>
+	    <field action=delete tag=list>5,10,30,3010,2001,2002</field>
+	    <write>Unlock</write>
+	    <field action=export tag=list>1101,1102</field>
+     </update>
+</do>
+
+<display><pft>
+	if (val(v1102)=0) then
+		'<img src="/omp/circulacion/images/ok.gif"> La espera se a eliminado correctamente.<br>',
+	else
+		'<img src="/omp/circulacion/images/error.gif"> Error!: No fue posible eliminar la espera. (',v1102,')'
+	fi,
+	'</body>'
+</pft></display>
+</section>
+</IsisScript>
