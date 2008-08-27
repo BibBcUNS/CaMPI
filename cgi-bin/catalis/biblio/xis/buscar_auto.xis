@@ -1,77 +1,78 @@
-<!--
-   ===========================================================================
-	Catalis - buscar_auto.xis
-	
-	Realiza una búsqueda y presenta los resultados
+<display><htmlpft><pft>cat('HEAD-BUSQUEDA-AUTO.HTM')</pft></htmlpft></display>
 
-	La solicitud de búsqueda puede provenir de:
-		1. El formulario de búsqueda "Por palabras clave"
-		2. Un click sobre un término del diccionario
-		
-	El target es el iframe para resultados de búsquedas.
-	
-	(c) 2003-2005  Fernando J. Gómez - CONICET - INMABB
-    Véase el archivo LICENCIA.TXT incluido en la distribución de Catalis
-   ===========================================================================
--->
+<flow action=jump><pft>if v2018='' then 'END_BUS' fi</pft></flow>
 
-<!-- <display><htmlpft><pft>cat('HEAD-RECORD-LIST.HTM')</pft></htmlpft></display>-->
+<display><htmlpft>
 
-<cgitable><pft>
-	'3005 busq_kw'/           /* keyword */
-	'3006 busq_ec'/           /* entidad catalogadora */
-	'3009 dictionaryTerm'/    /* término del diccionario */
-	'2006 from'/
-</pft></cgitable>
+<script language="JavaScript" type="text/javascript">
 
-<field action="replace" tag="2006"><pft>v2006,"1"n2006</pft></field>
+function handleSearchSubmit(){
+	alert("handleSearchSubmit");
+	returnValue = {query: this.query.value};
+	window.close();
+	return false;
+}
 
-<!-- ¿Expresión vacía? -->
-<!--flow action="jump"><pft>if s(v3005,v3006) > '' then 'EXPRESION_OK' fi</pft></flow>
-<field action="replace" tag="3010">*</field>
-<flow action="jump">END</flow-->
+//------------------------------------------------------------------------------
+function handleOK()
+//------------------------------------------------------------------------------
+{
+	returnValue = {heading: "34"};
+	window.close();
+}
+
+//------------------------------------------------------------------------------
+function handleCancel()
+//------------------------------------------------------------------------------
+{
+	window.close();
+}
+//------------------------------------------------------------------------------
+function init()
+//------------------------------------------------------------------------------
+{
+	window.returnValue = null;
+	document.getElementById("btnOK").onclick = handleOK;
+	document.getElementById("btnCancel").onclick = handleCancel;
+	document.getElementById("theForm").onsubmit = function() {
+		handleOK();
+		return false;
+	}
+}
 
 
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<label>EXPRESION_OK</label>
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+// -----------------------------------------------------------------------------
+function setFocus()
+// -----------------------------------------------------------------------------
+{
+	// dialogArguments = window object of main window
+	if ( callerWindowObject.selectedSubfieldBox ) {
+		callerWindowObject.selectedSubfieldBox.focus();
+	}
+}
 
-<!-- Expresión de búsqueda -->
-<!-- TO-DO: admitir el uso de operadores booleanos -->
-<field action="replace" tag="3010"><pft>
-	if p(v3006) then                /* búsqueda por entidad catalogadora */ 
-		'-EC=',v3006
-	else if p(v3009) then           /* búsqueda de un término del diccionario */
-		v3009,
-	else if p(v3005) then           /* búsqueda por palabras clave */
-		select s(mpu,v3005.2,mpl)
-			case 'A:' : v3005*2,'$/(9104)',  /* Author */
-			case 'T:' : v3005*2,'$/(9204)',  /* Titles */
-			case 'S:' : v3005*2,'$/(9604)',  /* Subject */
-			case 'N:' : v3005*2,'$/(9504)',  /* Notes */
-			elsecase 
-				replace(replace(replace(v3005,
-					' or ','$+'),
-					' OR ','$+'),
-					' ','$*'),
-				'$',
-		endsel,
-	fi,fi,fi,
-</pft></field>
+window.onload = init;
+window.onunload = setFocus;
+</script>
 
-<!-- Realizamos la búsqueda -->
+
+
+<div style="margin: 1em 0;">
+<form id="theForm" action="javascript:void(0)">
+</htmlpft></display>
+
+
 <do task="search">
-	<parm name="db">BIBLIO</parm>
-	<parm name="expression"><pft>v3010</pft></parm>
+	<parm name="db">AUTO</parm>
+	<parm name="expression"><pft>v2018</pft></parm>
 	<define>1002 Isis_Total</define>
 	<define>1005 Isis_Keys</define>
 	<loop><!-- set v1002 --></loop>
 	<flow action="skip"><pft>if val(v1002) > 100 then 'Quit' fi</pft></flow>
 	<loop>
-		<field action="import" tag="list">3006</field>
 		<list action="load" type="list">
 			<pft>
-				'^k',mpu, v100^a, v110^a, v111^a, v130^a, v150^a,mpl,
+				'^k',mpu, v100^a, v110^a, v111^a, v130^a,
 				'^m',mfn,
 			</pft>
 		</list>
@@ -81,6 +82,7 @@
 
 <!-- Encabezamiento para la página de resultados -->
 <display><htmlpft>
+<iframe  name="result_auto">
 	<table width="100%" cellspacing="0" cellpadding="3" align="center" style="font-family: verdana; font-size: 13px; margin-bottom: 1px; table-layout: fixed;" border="0">
 		<tr>
 			<td style="text-align: right; border-top: 1px solid brown; background: #EEDFCC; width: 110px;">Su búsqueda:</td>
@@ -117,20 +119,20 @@
 		</tr>
 	</table>
 </htmlpft></display>
-
-<flow action="jump"><pft>if val(v1002) > 100 then 'END' fi</pft></flow>
-
+<flow action="jump"><pft>if val(v1002) > 100 then 'END_BUS' fi</pft></flow>
 
 <display>
 	<script language="JavaScript" type="text/javascript">
 		top.resultSet = new Array(); // Borramos los datos de la búsqueda previa
 	</script>
 </display>
-	
+
+
 <!-- Comienzo de la lista de resultados -->
 <display>
 	<table id="resultTable" width="100%" cellspacing="0" cellpadding="6" border="0">
 </display>
+
 
 <!-- Recorremos la lista ordenada de resultados -->
 <do task="list">
@@ -149,17 +151,8 @@
 			<loop>
 				<field action="import" tag="list">1001,1002,1005,2000,2002,2104,6001</field>
 				
-				<!-- Control number instead of counter -->
-				<!--field action="replace" tag="1001"><pft>v001</pft></field-->
-				
-				<!-- v6001^m: mostrar Mención de responsabilidad -->
-				<!-- v6001^g: mostrar DGM -->
-				<!-- v6001^u: SCRIPT_URL -->
-				<!--field action="replace" tag="6001"><pft>'^g1^s1^m1^u',v6001^u</pft></field-->
-				
 				<hl>
-					<!--display><pft>'v1005: 'v1005|~|</pft></display-->
-					
+				
 					<parm name="prefix"><span class="hl"></parm>
 					<parm name="suffix"></span></parm>
 					
@@ -223,41 +216,18 @@
 
 <display>
 	</table>  <!-- fin de la lista de resultados -->
+</iframe>
 </display>
 
-<!-- Si no son necesarios los botones, nos vamos -->
-<flow action="jump"><pft>if val(v1002) <= 20 then 'END' fi</pft></flow>
-
 <display><htmlpft>
-	<div style="margin: 10px; padding: 4px; border: 0px solid #999; text-align: center;">
-	
-	<!-- Botón "ANTERIORES" -->
-	<form action="[pft]v6001^u[/pft]" method="get" style="display: inline;">
-		<input type="hidden" name="IsisScript" value="[pft]v2000[/pft]">
-		<input type="hidden" name="userid" value="[pft]v2002[/pft]">
-		<input type="hidden" name="tarea" value="BUSCAR">
-		<input type="hidden" name="db" value="[pft]v2104[/pft]">
-		<input type="hidden" name="busq_kw" value="[pft]v3005[/pft]">
-		<input type="hidden" name="dictionaryTerm" value="[pft]v3009[/pft]">
-		<input type="hidden" name="from" value="[pft]f(val(v2006)-20,1,0)[/pft]">
-		<button class="resultsButton" onclick="this.form.submit()"
-		        [pft]if val(v2006) = 1 then ' disabled="disabled" ' fi[/pft]
-		        >< Anteriores/button>
-	</form>
+<div align="center" style="margin-top: 10px;">
+	<button id="btnOK" class="marcEditButton" accesskey="A"><u>A</u>ceptar</button>
+	<button id="btnCancel" class="marcEditButton" accesskey="C"><u>C</u>ancelar</button>
+</div>
+</form>
+</div>
 
-	<!-- Botón "SIGUIENTES" -->
-	<form action="[pft]v6001^u[/pft]" method="get" style="display: inline;">
-		<input type="hidden" name="IsisScript" value="[pft]v2000[/pft]">
-		<input type="hidden" name="userid" value="[pft]v2002[/pft]">
-		<input type="hidden" name="tarea" value="BUSCAR">
-		<input type="hidden" name="db" value="[pft]v2104[/pft]">
-		<input type="hidden" name="busq_kw" value="[pft]v3005[/pft]">
-		<input type="hidden" name="dictionaryTerm" value="[pft]v3009[/pft]">
-		<input type="hidden" name="from" value="[pft]f(val(v2006)+20,1,0)[/pft]">
-		<button class="resultsButton" onclick="this.form.submit()"
-		        [pft]if val(v2006) >= val(v1002) - 20 then ' disabled="disabled" ' fi[/pft]
-		        >Siguientes ></button>
-	</form>
-	
-	</div>
 </htmlpft></display>
+
+<label>END_BUS</label>
+<display>Fin de la Búsqueda</display>

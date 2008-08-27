@@ -8,11 +8,6 @@
  * =============================================================================
  */
  
- 
- 
- 
- 
- 
  // TO-DO: sería mejor que las ventanas tuviesen el tamaño correcto al ser creadas, en
  // lugar de efectuar un ajuste posterior en sus dimensiones (en máquinas lentas, causa
  // un efecto algo molesto).

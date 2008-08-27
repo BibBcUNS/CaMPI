@@ -16,18 +16,13 @@ function canDuplicate()
 	return answer;
 }
 
-
-
-
-
-
-
 // -----------------------------------------------------------------------------
 function showNewRecordMenu(evt)
 // -----------------------------------------------------------------------------
 {
 	//event.srcElement.blur();   // el blur() ahora está en el srcElement
 	
+
 	var theDocument;
 	if (ie) theDocument = oPopup.document;
 	else if (moz) theDocument = document;

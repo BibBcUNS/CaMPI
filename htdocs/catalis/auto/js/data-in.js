@@ -215,6 +215,11 @@ function showRecordInForm(receivedRecord)
 
 	originalRecord = serializeRecord(true,true,true,true);
 	
+	// Post-it note
+	postItNote = receivedRecord.postItNote;
+	document.getElementById("postItNoteBtn").style.backgroundColor = ( postItNote != "" ) ? POSTITNOTE_BGCOLOR : "";
+	document.getElementById("postItNoteBtn").title = ( postItNote != "" ) ? postItNote.substr(2).replace(/\^\w/g,"\n\n") : "";
+
 	// Buttons
 	var userCanWrite = ( g_activeDatabase.userLevel == 3 || ( g_activeDatabase.userLevel == 2 && g_currentUser == receivedRecord.createdBy ) );
 	document.getElementById("btnGrabar").disabled = !userCanWrite;
@@ -260,6 +265,7 @@ function showRecordDetails(receivedRecord)
 	document.getElementById("marcDisplayDiv").style.display = "none";
 	//document.getElementById("aacrDisplayDiv").style.display = "none";
 	document.getElementById("etiqDisplayDiv").style.display = "none";
+	document.getElementById("postItNoteDiv").style.display = "none";
 	document.getElementById(recordDisplayStyle + "DisplayDiv").style.display = "block";
 
 	// Botones
@@ -271,7 +277,7 @@ function showRecordDetails(receivedRecord)
 	//document.getElementById("aacrDisplayBtn").style.backgroundColor = "";
 	document.getElementById("marcDisplayBtn").style.backgroundColor = "";
 	document.getElementById("etiqDisplayBtn").style.backgroundColor = "";
-	
+	document.getElementById("postItNoteDisplayBtn").style.backgroundColor = "";	
 	document.getElementById(recordDisplayStyle + "DisplayBtn").style.backgroundColor = DISPLAY_STYLE_BGCOLOR;
 	
 	switch (recordDisplayStyle) {
@@ -281,14 +287,19 @@ function showRecordDetails(receivedRecord)
 			var f003 = receivedRecord.f003;
 			var f005 = receivedRecord.f005;
 			var f008 = receivedRecord.f008;
-			//var postItNote = receivedRecord.postItNote;
+		/*	var postItNote = receivedRecord.postItNote;*/
 			var recordDisplay = marc2marcTagged(leader, f001, f003, f005, f008, marcDatafields);
 			break;
 	
 		case "etiq" :
 			var recordDisplay = receivedRecord.etiq;
 			break;
-		
+		/*
+		case "postItNote" :
+			var recordDisplay = receivedRecord.postItNote.replace(/\n/g,"<br>");
+			break;
+		*/
+	
 	}
 
 	var container = document.getElementById(recordDisplayStyle + "DisplayDiv");
@@ -308,8 +319,8 @@ function showRecordDetails(receivedRecord)
 	document.getElementById("hiddenFORM").recordID.value = receivedRecord.f001;
 	
 	// Habilitamos el botón Anotaciones sólo si hay anotaciones	
-	document.getElementById("postItNoteDisplayBtn").disabled = ( "" == receivedRecord.postItNote );
-	
+	/*document.getElementById("postItNoteDisplayBtn").disabled = ( "" == receivedRecord.postItNote );
+	*/
 	// Quitamos el cartel de "Solicitando registro"
 	document.getElementById("cartel").style.display = "none";
 

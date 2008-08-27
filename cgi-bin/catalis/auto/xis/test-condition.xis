@@ -152,9 +152,9 @@
 							s(,@WH.PFT,),
 							'cid=',
 							s('tarea=EDITAR_REG',
-							  '&mfn=',mfn(1),
-							  '&userid=',v2002,
-							  '&db=',v2104,
+								'&mfn=',mfn(1),
+							 	'&&userid=',v2002,
+							 	'&&db=',v2104,
 							  '" onclick=top.viewRecordDetails(null,"',v001,'",top.g_RecordDisplayStyle);return(false)',
 							  ' target="hiddenIFRAME')
 					),

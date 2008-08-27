@@ -6,14 +6,6 @@
 // =============================================================================
 
 
-
-
-
-
-
-
-
-
 // -----------------------------------------------------------------------------
 function createFieldList(tags)
 // Recibe una lista de tags y, luego de validarlos, llama repetidamente a
@@ -504,12 +496,19 @@ function createSubfield( code, sfText, label, fieldTag )
 		var btnCheck = document.createElement("button");
 		
 		btnCheck.onclick = function() { 
-			var winProperties = "font-size:10px; dialogWidth:630px; dialogHeight:450px; status:no; help:no";
-			var heading = showModalDialog(URL_SELECT_HEADING, window, winProperties);
-			if ( "undefined" == typeof(heading) || null == heading || heading.length == 0 ) {
-				return;  // abortamos
-			}
+			var winProperties = "font-size:15px; dialogWidth:1830px; dialogHeight:500px;";
 			
+			var answer = showModalDialog(URL_SELECT_HEADING, window, winProperties);
+			
+			
+				
+				//var heading = window.open(URL_SELECT_HEADING + &query=respuesta, 'hola','');
+				
+				//if ( "undefined" == typeof(heading) || null == heading || heading.length == 0 ) {
+				//	return;  // abortamos
+				//}
+			
+						
 			box.focus();
 		}
 		btnCheck.innerHTML = "Autorizar";

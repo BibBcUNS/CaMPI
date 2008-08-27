@@ -129,8 +129,8 @@
 		FIELD_BLOCK_PATTERN.other = /02[^02]|0[1367].|04[^3]|05[^2]|856/;
 		
 		// Directorio público (para documentos HTML, CSS, XML)
-		var HTDOCS = "[pft]v6003^h[/pft]/";  <!-- catalis/biblio -->
-	
+		var HTDOCS = "[pft]v6003^h[/pft]";  <!-- catalis/biblio -->
+		
 		// URLs de ventanas auxiliares
 		var URL_AUTHORITY = HTDOCS + "html/authority.htm";
 		var URL_CONFIRM_DIALOG = HTDOCS + "html/confirm.htm";
@@ -146,9 +146,11 @@
 		var URL_SAVING_RECORD = HTDOCS + "html/savingRecord.htm";
 		var URL_SELECT_FIELD = HTDOCS + "html/selectField.htm";
 		var URL_SELECT_SUBFIELD = HTDOCS + "html/selectSubfield.htm";
-		var URL_SELECT_HEADING = HTDOCS + "html/selectheading.htm";
 		var URL_SELECT_TEMPLATE = HTDOCS + "html/selectTemplate.htm";
-
+		//var URL_SELECT_HEADING = TDOCS + "html/selectHeading.htm";
+		
+		var URL_SELECT_HEADING = "[pft]v6001^u[/pft]?IsisScript=[pft]v2000[/pft]&userid=[pft]v2002[/pft]&tarea=BUSCAR_AUTO&db=auto&query=$";
+		
 		// Contenido inicial para el iframe de resultados
 		var SEARCH_RESULTS_IFRAME_SRC = "[pft]v6001^u[/pft]?IsisScript=[pft]v2000[/pft]&userid=[pft]v2002[/pft]&tarea=NEW_RECORDS&db=[pft]v2104[/pft]";
 		

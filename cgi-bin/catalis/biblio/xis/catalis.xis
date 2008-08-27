@@ -47,6 +47,7 @@
 	'2002 userid'/         /* identificación del usuario */
 	'2104 db'/             /* base de datos */
 	'2019 trace'/
+	'2018 query'/             /* query para busqueda de autoridades */
 </pft></cgitable>
 
 <!-- Descartamos una espuria 2da ocurrencia de v2000 en Linux (TO-DO: volver a revisar este extraño fenómeno) -->
@@ -133,6 +134,7 @@
 	'BIBLIO.*=',          v6003^b,'/biblio/',v2104,'/biblio.*'/
 	'CONTROL-NUMBER.TXT=',v6003^b,'/biblio/',v2104,'/cn.txt'/
 	'DB-DESCR.TXT=',      v6003^b,'/biblio/',v2104,'/db-descr.txt'/
+	'AUTO.*=',            v6003^b,'/auto/',v2104,'/biblio.*'/
 	
 	/* ----- BASE DE DATOS (CLASIFICACION) ----- */
 	'MSC.*=',             v6003^b,'/opacmarc/msc2000/msc.*'/
@@ -152,6 +154,7 @@
 	'ERROR-IP-NUMBER.HTM=', v6003^c,'/html/error-ip-number.htm'/
 	'HEAD.HTM=',            v6003^c,'/html/head.htm'/
 	'HEAD-RECORD-LIST.HTM=',v6003^c,'/html/head-recordList.htm'/
+	'HEAD-BUSQUEDA-AUTO.HTM=',v6003^c,'/html/head-busqueda-auto.htm'/
 	'HIDDEN-ELEM.HTM=',     v6003^c,'/html/hidden-elem.htm'/
 	'LOGIN.HTM=',           v6003^c,'/html/login.htm'/
 	'SAVED-RECORD.HTM=',    v6003^c,'/html/saved-record.htm'/

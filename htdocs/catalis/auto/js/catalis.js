@@ -1146,7 +1146,7 @@ function showKeys()
 // -----------------------------------------------------------------------------
 {
 	var recordID = document.getElementById("marcEditForm").f001.value;
-	var url = SCRIPT_URL + "?IsisScript=catalis/xis/extract-keys.xis&amp;db=" + g_activeDatabase.name + "&amp;recordID=" + recordID;
+	var url = SCRIPT_URL + "?IsisScript=catalis/auto/xis/extract-keys.xis&amp;db=" + g_activeDatabase.name + "&amp;recordID=" + recordID;
 	window.open(url, "", "height=450, width=740, scrollbars=yes, resizable=yes");
 }
 

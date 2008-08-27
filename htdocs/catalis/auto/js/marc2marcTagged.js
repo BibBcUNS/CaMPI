@@ -5,9 +5,6 @@
 //  Véase el archivo LICENCIA.TXT incluido en la distribución de Catalis
 // =============================================================================
 
-
-
-
 // =============================================================================
 function marc2marcTagged(leader, f001, f003, f005, f008, marcDatafields)
 //
@@ -29,8 +26,7 @@ function marc2marcTagged(leader, f001, f003, f005, f008, marcDatafields)
 	var HTMLstring = "<table id='marcTaggedTable' width='100%' cellspacing='0' cellpadding='2' border='0'>";
 	
 	// leader: el parámetro sólo contiene posiciones 05,06,17
-	
-	
+		
 	var fullLeader = "";
 	fullLeader += "·····";           /* Record length */
 	fullLeader += leader.charAt(0);  /* Record status */
@@ -61,11 +57,6 @@ function marc2marcTagged(leader, f001, f003, f005, f008, marcDatafields)
 	
 	HTMLstring += "<tr><td class='marctag'>005&nbsp;</td>";
 	HTMLstring += "<td colspan='3'>" + f005 + "</td></tr>";
-	
-
-	
-	
-	
 	
 	HTMLstring += "<tr><td class='marctag'>008&nbsp;</td>";
 	HTMLstring += "<td colspan='3'>" + f008 + "</td></tr>";
@@ -107,8 +98,17 @@ function marc2marcTagged(leader, f001, f003, f005, f008, marcDatafields)
 		}
 	}*/
 
-	// PostIt notes
-	
+		// PostIt notes
+/*
+	if ( postItNote ) {
+		HTMLstring += "<tr>";
+		HTMLstring += "<td class='marctag'>980&nbsp;</td>";		
+		HTMLstring += "<td class='indicator'>#</td>";
+		HTMLstring += "<td class='indicator'>#</td>";
+		HTMLstring += "<td class='fieldContent'><span class='subfield'>" + postItNote.replace(/\^(\w)/g," </span><span class='subfield'><b>$</b><b>$1</b> ") + "</span></td>";
+		HTMLstring += "</tr>";
+	}
+	*/
 	HTMLstring += "</table>";
 	
 	return(HTMLstring);

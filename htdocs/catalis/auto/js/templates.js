@@ -52,11 +52,12 @@ function loadTemplates() {
 	
 	
 		<!--  Plantilla de Autoridad para Título -->
+
 	templates["autoridad-titulo"] = {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
-		f008   : '#######n#aczzn####' + '##########' + '###ann######',
+		f008   : '######n|#ac|nnaabn' + '##########' + '|a#|ac#####d',
 		
 		datafields :
 			'130 #0^a^d\n' +
@@ -69,7 +70,7 @@ function loadTemplates() {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
-		f008   : '#######n#aczzn####' + '##########' + '###ann######',
+		f008   : '######n|#ac|nnaabn' + '##########' + '|a#|ac#####d',
 		
 		datafields :
 			'150 ##^a\n' +
