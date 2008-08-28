@@ -1,0 +1,139 @@
+<IsisScript>
+
+<include>omp/fecha_funciones.xis</include>
+
+<section>
+<display><pft>'Content-type: text/html'/#</pft></display>
+<trace>!BR</trace>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+<call name=SUMAH><pft>date/'9'</pft></call>
+
+<display><pft>'resultado de la suma: ',v9000</pft></display>
+
+<field action=replace tag=2000>left(date,8)</pft></field>
+
+<do task=mfnrange>
+	<parm name=db>reservas</parm>
+	<parm name=from>1</parm>
+    <loop>
+		<field action=import tag=2000>2000</field>
+		<list action=load><pft>(v3/)</pft></list>
+		<do task=list>
+			<field action=define tag=1001>Isis_Current</field>
+			<field action=define tag=1002>Isis_Items</field>
+			<field action=define tag=1>Isis_Item</field>
+			<loop>
+			    <!-- OBTENGO EL TIPO DE USUARIO EN v1500 -->
+				<field action=replace tag=1500><pft>ref(['lector']l(['lector']v1^i),v3)</pft></field>
+				<!--Los objetos de una parte pueden ser de tipo CONS u otro. Esto es, una parte podrá
+				tener objetos de a lo sumo 2 tipos uno de los cuales será CONS -->
+			    <!-- OBTENGO EL TIPO DE OBJETO EN v1504 -->
+				<field action=import tag=1501>v1</field>
+				<!-- Inventarios de la parte -->
+				<field action="replace" tag="1502" split="occ"><pft>ref(['partes']l(['partes']v1504),(v2/))</pft></field>
+				<!-- ejemplares con su estado (pres/perm) y cond de pres (v987)-->
+				<field action="replace" tag="1503" split="occ"><pft>
+					(
+					ref(['exist']l(['exist']v1502), '^i',v977,'^e',v985,'^c',v987/ )
+					)
+				</pft></field>
+				<!-- buscar el tipo distinto a CONS entre los objetos-->
+		        <field action="replace" tag="1504"><pft>
+					(if v1503<>'CONS' then v1503,break fi/) 
+				</pft></field>
+				<!-- OBTENGO CANTIDAD DE DIAS DE ESPERA EN v1510-->
+				<field action=replace tag=1510><pft>ref(['politicas']l(['politicas']'UO=',v1500,'-',v1504),v12</pft></field>
+
+			    <!-- OBTENGO EL ENESIMO DIA HABIL SIGUIENTE A LA FECHA DE LA ESPERA, 
+				DONDE N LO DEFINE LA POLITICA CORRESPONDIENTE. OJO SIN TERMINAR. -->
+				<call name=SUMAH><pft>v1^f*6,v1^f*3.2,v1^f*0.2,replace(v1^h,':','')/v1510</pft></call>
+			    <!-- ¿CORRESPONDE DAR DE BAJA LA ESPERA?-->
+				if v9000
+			</loop>
+		</do>
+
+		
+		
+        (si siguiente_dia_habil(v3^f 94^h)<=v2000 /)
+	</loop>
+</do>
+
+
+<!--
+RESERVAS:
+Campo 1: Identificador de la parte a ser reservada
+
+    * ^b base
+    * ^c Nro de Control (nro de registro bibliográfico)
+    * ^p Parte (puede ser <vacío> -cuando no tiene parte-)
+
+
+Campo 2: (Repetible) Cola de reservas
+
+    * ^i ID usuario (lector)
+    * ^f Fecha en que se realizó la reserva (dd/mm/aaaa)
+    * ^h Hora en que se realizó la reserva (hh:mm:ss)
+    * ^u Operador que realizó la operación de reserva
+    * ^p IP donde se realizó la reserva
+
+
+Campo 3: (Repetible) Conjunto de esperas
+
+    * ^i ID usuario (lector)
+    * ^f fecha inicio espera
+    * ^h hora inicio espera
+    * ^u Operador que produjo la espera
+    * ^p IP que produjo la espera
+
+
+MOVI:
+Campo 1: Apellido y nombre del Lector
+Campo 2: ID usuario (lector)
+Campo 3:
+
+    * ^f Fecha (dd/mm/aaaa)
+    * ^h Hora (hhmmss)
+
+Campo 4: Operación realizada
+
+    * ^t Transacción (préstamo, devolución, reserva)
+
+Campo 5: Operador que realizó la transacción
+Campo 6: IP de la PC en que se ralizó la transacción.
+
+Subcampos dependientes de la transacción (^t)
+
+Préstamo:
+
+    * ^i Inventario del material prestado
+    * ^p Fecha en que se realizó el préstamo (dd/mm/aaaa)
+    * ^v Vencimiento del préstamo (dd/m/aaaa)
+    * ^b Mención de Responsabilidad y Título del material.
+    * ^c Código Dewey
+    * ^r Número de control (nro. de registro bibliográfico)
+    * ^l Tipo de material
+
+
+Devolución:
+
+    * ^i Inventario
+    * ^p Fecha en que se realizó el prestamo (dd/mm/aaaa)
+    * ^v Vencimiento del préstamo (dd/m/aaaa)
+    * ^b Mensión de Responsabilidad y Título del material.
+    * ^c Código Dewey
+    * ^r Número de control (nro. de registro bibliográfico)
+    * ^l Tipo de material
+    * ^m <Este no se que es lo que tiene>
+    * ^d ID del usuario que pasa a espera por esta devolución(puede ser ausente).
+
+
+Reserva:
+
+    * ^b base
+    * ^c Nro de Control (nro. de registro bibliográfico)
+    * ^p Parte
+    * ^o Orden de prioridad en que fue asignado a la cola de reserva
+-->
+</section>
+</IsisScript>

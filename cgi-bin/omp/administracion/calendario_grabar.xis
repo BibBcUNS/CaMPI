@@ -72,6 +72,8 @@
         <field action=delete tag=10></field>
         <field action=delete tag=11></field>
         <field action=delete tag=12></field>
+		<field action=replace tag=901><pft>f(size(v1)+size(v2)+size(v3)+size(v4)+size(v5)+size(v6)+size(v7)+size(v8)+size(v9)+size(v10)+size(v11)+size(v12),1,0)
+		</pft></field>
         <write>Unlock</write>
      </update>
      </do>

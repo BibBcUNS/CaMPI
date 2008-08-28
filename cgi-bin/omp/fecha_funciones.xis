@@ -1,0 +1,217 @@
+<!--
+===========================================================================
+	fecha_funciones.xis
+	
+	Este script contiene funciones de fecha de acuerdo a la base calendario 
+	definida. Todas las funciones devuelven el resultado en el campo 9000.
+	
+	En el campo 8000 se tiene la cantidad de días del año actual.
+
+	RESTO: función auxiliar que devuelve el resto de la división entre dos
+	números enteros.
+	COCIENTE: función auxiliar que devuelve el cociente de la división entre 
+	dos	números enteros.
+	dividendo | divisor
+	          --------- 
+	  resto	   cociente
+	  
+	dividendo = (cociente * divisor) + resto
+	resto = dividendo - (cociente * divisor)
+	
+	SUMA: el primer parámetro es una fecha/hora y el segundo una cantidad de
+	días. El resultado es del tipo del primer parámetro, incrementado en la 
+	cantidad de días dada por el segundo.
+
+	SUMAH: el primer parámetro es una fecha/hora y el segundo una cantidad de
+	días. El resultado es la N-ésima fecha hábil siguiente al primer parámetro
+	donde N es el segundo parámetro.
+		
+	PENDIENTE: ¿Qué pasa cuando la base calendario no tiene definido un año?
+	
+	(c) 2008 - Víctor Ferracutti - vmferra@uns.edu.ar UNS
+	           Claudio Fuhr - claudiofuhr@gmail.com ABR
+	
+===========================================================================
+-->
+<function name=RESTO action=replace tag=100 split=occ>
+    <!--DIVIDENDO--> 
+    <field action=replace tag=500><pft>v100[1]</pft></field>
+	<!--DIVISOR--> 
+	<field action=replace tag=501><pft>v100[2]</pft></field>
+	<!--COCIENTE--> 
+	<field action=replace tag=502><pft>left(f(val(v500)/val(v501),1,6),instr(f(val(v500)/val(v501),1,6),'.')-1)</pft></field>
+	<!--RESTO--> 
+	<field action=replace tag=600><pft>f(val(v500)-(val(v502)*val(v501)),1,0)</pft></field>
+	<return action=export tag=5000>600</return>
+</function>
+
+<function name=COCIENTE action=replace tag=100 split=occ>
+    <!--DIVIDENDO--> 
+    <field action=replace tag=500><pft>v100[1]</pft></field>
+	<!--DIVISOR--> 
+	<field action=replace tag=501><pft>v100[2]</pft></field>
+	<!--COCIENTE--> 
+	<field action=replace tag=600><pft>left(f(val(v500)/val(v501),1,6),instr(f(val(v500)/val(v501),1,6),'.')-1)</pft></field>
+	<return action=export tag=5000>600</return>
+</function>
+
+<function name=SUMA action=replace tag=100 split=occ>
+
+    <!--AÑO--> 
+    <field action=replace tag=500><pft>v100[1]*0.4</pft></field>
+	<!--MES--> 
+	<field action=replace tag=501><pft>v100[1]*4.2</pft></field>
+	<!--DIA DEL MES--> 
+	<field action=replace tag=502><pft>v100[1]*6.2</pft></field>
+	<!--DIA DEL AÑO--> 
+	<field action=replace tag=503><pft>right(v100[1],3)</pft></field>
+	<!--CANTIDAD DE DIAS A SUMAR--> 	
+	<field action=replace tag=510><pft>v100[2]</pft></field>
+
+	<!--SUMO DIAS-->
+	<field action=replace tag=530><pft>f(val(v502)+val(v510),1,0)</pft></field>
+	
+	<label>CICLO</label>
+
+	<!--
+	DIAS EN EL AÑO ACTUAL. NO SE UTILIZA
+	Los días se cuenta entre 0 y 364 o 365 (bisiestos) cuando 
+	la cantidad de días es 365 y 366 respectivamente. 
+
+	<field action=replace tag=520><pft>ref(['calendario']l(['calendario']v500),v901)</pft></field>
+	-->	
+
+	<!--DIAS EN EL MES ACTUAL. CAMPO 521-->
+	<field action=replace tag=521><pft>
+		select val(v501) 
+			case 1: ,ref(['calendario']l(['calendario']v500),f(size(v1),1,0)), 
+			case 2: ,ref(['calendario']l(['calendario']v500),f(size(v2),1,0)), 
+			case 3: ,ref(['calendario']l(['calendario']v500),f(size(v3),1,0)), 
+			case 4: ,ref(['calendario']l(['calendario']v500),f(size(v4),1,0)), 
+			case 5: ,ref(['calendario']l(['calendario']v500),f(size(v5),1,0)), 
+			case 6: ,ref(['calendario']l(['calendario']v500),f(size(v6),1,0)), 
+			case 7: ,ref(['calendario']l(['calendario']v500),f(size(v7),1,0)), 
+			case 8: ,ref(['calendario']l(['calendario']v500),f(size(v8),1,0)), 
+			case 9: ,ref(['calendario']l(['calendario']v500),f(size(v9),1,0)), 
+			case 10: ,ref(['calendario']l(['calendario']v500),f(size(v10),1,0)), 
+			case 11: ,ref(['calendario']l(['calendario']v500),f(size(v11),1,0)), 
+			case 12: ,ref(['calendario']l(['calendario']v500),f(size(v12),1,0)), 
+		endsel,
+	</pft></field>
+
+	<!--COMPARO SI ME EXCEDO EN LA SUMA-->
+	<field action=replace tag=800><pft>if val(v530)<=val(v521) then 'TERMINO' else 'CICLO' fi</pft></field>
+
+	<!--ACTUALIZO VALORES PARA CICLAR-->
+	<!--CANTIDAD DE DÍAS QUE RESTAN POR ANALIZAR-->
+	<field action=replace tag=501><pft>if val(v530)>val(v521) then f(val(v501)+1,1,0) else v501 fi</pft></field>
+	<field action=replace tag=530><pft>if val(v530)>val(v521) then f(val(v530)-val(v521),1,0) else v530 fi</pft></field>
+	<field action=replace tag=500><pft>if val(v501)>12 then f(val(v500)+1,1,0) else v500 fi</pft></field>
+	<field action=replace tag=501><pft>if val(v501)>12 then '1' else v501 fi</pft></field>
+
+	<flow action=jump><pft>v800</pft></flow>
+	
+	<label>TERMINO</label>
+	<field action=replace tag=600><pft>v500,if val(v501)<10 then '0',v501 else v501 fi,if val(v530)<10 then '0',v530 else v530 fi</pft></field>
+    <return action=export tag=9000>600</return>
+</function>
+
+<function name=SUMAH action=replace tag=100 split=occ>
+
+    <!--AÑO--> 
+    <field action=replace tag=500><pft>v100[1]*0.4</pft></field>
+	<!--MES--> 
+	<field action=replace tag=501><pft>v100[1]*4.2</pft></field>
+	<!--DIA DEL MES--> 
+	<field action=replace tag=502><pft>v100[1]*6.2</pft></field>
+	<!--DIA DEL AÑO--> 
+	<field action=replace tag=503><pft>right(v100[1],3)</pft></field>
+	<!--CANTIDAD DE DIAS A SUMAR--> 	
+	<field action=replace tag=510><pft>v100[2]</pft></field>
+    <!--DIA HABILES RESTANTES EN EL MES-->
+	<field action=replace tag=540>ref(['calendario']l(['calendario']v500),f(size(replace(</field>
+	<field action=replace tag=540><pft>v540,'v',v501,'*',v502</pft></field>
+	<field action=replace tag=541>,'0','')),1,0))</field>
+	<field action=replace tag=540><pft>v540,v541</pft></field>
+	
+	<field action=replace tag=504><htmlpft><pft>'[pft]',v540,'[/pft]'</pft></htmlpft></field>
+
+	<!--COMPARO SI ME EXCEDO EN LA SUMA-->
+	<flow action=jump><pft>if val(v510)<=val(v504) then 'TERMINO' fi</pft></flow>
+
+	<field action=replace tag=510><pft>f(val(v510)-val(v504),1,0)</pft></field>
+	<field action=replace tag=501><pft>f(val(v501)+1,1,0)</pft></field>
+	<field action=replace tag=500><pft>if val(v501)>12 then f(val(v500)+1,1,0) else v500 fi</pft></field>
+	<field action=replace tag=501><pft>if val(v501)>12 then '1' else v501 fi</pft></field>
+	
+	<label>CICLO</label>
+
+	<!--DIAS HABILES EN EL MES ACTUAL. CAMPO 521-->
+
+	<field action=replace tag=521><pft>
+		select val(v501) 
+			case 1: ,ref(['calendario']l(['calendario']v500),f(size(replace(v1,'0','')),1,0)), 
+			case 2: ,ref(['calendario']l(['calendario']v500),f(size(replace(v2,'0','')),1,0)), 
+			case 3: ,ref(['calendario']l(['calendario']v500),f(size(replace(v3,'0','')),1,0)), 
+			case 4: ,ref(['calendario']l(['calendario']v500),f(size(replace(v4,'0','')),1,0)), 
+			case 5: ,ref(['calendario']l(['calendario']v500),f(size(replace(v5,'0','')),1,0)), 
+			case 6: ,ref(['calendario']l(['calendario']v500),f(size(replace(v6,'0','')),1,0)), 
+			case 7: ,ref(['calendario']l(['calendario']v500),f(size(replace(v7,'0','')),1,0)), 
+			case 8: ,ref(['calendario']l(['calendario']v500),f(size(replace(v8,'0','')),1,0)), 
+			case 9: ,ref(['calendario']l(['calendario']v500),f(size(replace(v9,'0','')),1,0)), 
+			case 10: ,ref(['calendario']l(['calendario']v500),f(size(replace(v10,'0','')),1,0)), 
+			case 11: ,ref(['calendario']l(['calendario']v500),f(size(replace(v11,'0','')),1,0)),
+			case 12: ,ref(['calendario']l(['calendario']v500),f(size(replace(v12,'0','')),1,0)), 
+		endsel,
+	</pft></field>
+	
+	<!--COMPARO SI ME EXCEDO EN LA SUMA-->
+	<flow action=jump><pft>if val(v510)<=val(v521) then 'TERMINO' fi</pft></flow>
+
+	<!--ACTUALIZO VALORES PARA CICLAR-->
+	<!--CANTIDAD DE DÍAS QUE RESTAN POR ANALIZAR-->
+	<field action=replace tag=510><pft>f(val(v510)-val(v521),1,0)</pft></field>
+	<field action=replace tag=501><pft>f(val(v501)+1,1,0)</pft></field>
+	<field action=replace tag=500><pft>if val(v501)>12 then f(val(v500)+1,1,0) else v500 fi</pft></field>
+	<field action=replace tag=501><pft>if val(v501)>12 then '1' else v501 fi</pft></field>
+
+	<flow action=jump><pft>'CICLO'</pft></flow>
+	
+	<label>TERMINO</label>
+
+    <!--RECUPERO LA STRING DE 0 y . DEL MES FINAL-->
+	<field action=replace tag=550><pft>
+		select val(v501) 
+			case 1: ,ref(['calendario']l(['calendario']v500),v1), 
+			case 2: ,ref(['calendario']l(['calendario']v500),v2), 
+			case 3: ,ref(['calendario']l(['calendario']v500),v3),
+			case 4: ,ref(['calendario']l(['calendario']v500),v4),
+			case 5: ,ref(['calendario']l(['calendario']v500),v5),
+			case 6: ,ref(['calendario']l(['calendario']v500),v6),
+			case 7: ,ref(['calendario']l(['calendario']v500),v7),
+			case 8: ,ref(['calendario']l(['calendario']v500),v8),
+			case 9: ,ref(['calendario']l(['calendario']v500),v9),
+			case 10: ,ref(['calendario']l(['calendario']v500),v10),
+			case 11: ,ref(['calendario']l(['calendario']v500),v11),
+			case 12: ,ref(['calendario']l(['calendario']v500),v12),
+		endsel,
+	</pft></field>
+
+	<field action=replace tag=552><pft>'0'</pft></field>
+	
+	<label>ENCUENTRO_DIA</label>
+			<field action=replace tag=551><pft>f(instr(v550,'.'),1,0)</pft></field>
+			<!--DIA DEL MES-->
+			<field action=replace tag=552><pft>f(val(v552)+val(v551),1,0)</pft></field>
+			<field action=replace tag=510><pft>f(val(v510)-1,1,0)</pft></field>
+			<!-- field action=replace tag=550><pft>right(v550,size(v550)-val(v551)+1)</pft></field -->
+
+			<field action=replace tag=550><pft>right(v550,size(v550)-(val(v551)+1))</pft></field>
+
+	<flow action=jump><pft>if val(v510)>0 then 'ENCUENTRO_DIA' fi</pft></flow>
+	
+    
+	<field action=replace tag=600><pft>v500,if val(v501)<10 then '0',v501 else v501 fi,if val(v552)<10 then '0',v552 else v552 fi</pft></field>
+    <return action=export tag=9000>600</return>
+
+</function>
