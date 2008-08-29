@@ -125,13 +125,10 @@ En caso de no ser submit se Muestra el Formulario
 
 		<!-- 2030: recupero todos los id_usuario que reservaron el material en cuestión -->
 		<field action=replace split=occ tag=2030><pft>ref(['reservas']l(['reservas']v4002),(v2/))</pft></field>
-		<!-- 2031: cuento la cantidad de reservas que tiene el material y sumo uno -->
-		<field action=replace split=occ tag=2031><pft>f(nocc(v2030)+1,1,0)</pft></field>
 		
 		<!-- Esto pone timestam en lugar de horden "AAAAMMDD HHMMSS" -->
-		<!-- field action=replace split=occ tag=2031><pft>left(date,15)</pft></field -->
-		<display><pft>'<font style="color:gray"><b>',v4001,':</b> Posición ',v2031,'</font><br>'</pft></display>
-		<field action="add" tag="3050"><pft>'^treserva',v4001,'^o',v2031</pft></field>
+		<display><pft>'<font style="color:gray"><b>',v4001,'</font><br>'</pft></display>
+		<field action="add" tag="3050"><pft>'^treserva',v4001</pft></field>
 
 		<do task="update">
 		    <parm name="db">reservas</parm>
@@ -142,24 +139,23 @@ En caso de no ser submit se Muestra el Formulario
 			<field action=define tag=1102>Isis_Status</field>
 			<field action=define tag=1011>Isis_Lock</field>
 			<update>
-				<field action="import" tag=list>2031,3002,3010</field>
+				<field action="import" tag=list>3002,3010</field>
 				<field action=add tag=2><pft>
 					'^i',v3002,
-					'^o',v2031,
 					'^f',v3010^f,
 					'^h',v3010^h,
 					'^u',v3004,
 					'^p',getenv('REMOTE_ADDR')
 					</pft></field>
-				<field action="delete" tag="list">2031,3002,3010</field>
+				<field action="delete" tag="list">3002,3010</field>
 				<write>Unlock</write>
 			</update>
 		</do>
 
 	<flow action=jump>listo</flow>
 	<label>el_registro_NO_existe</label>
-	<display><pft>'<font style="color:gray"><b>',v4001,':</b> Posición 1<br></font>'</pft></display>
-	<field action="add" tag="3050"><pft>'^treserva',v4001,'^o1</pft></field>
+	<display><pft>'<font style="color:gray"><b>',v4001,'</font><br>'</pft></display>
+	<field action="add" tag="3050"><pft>'^treserva',v4001</pft></field>
 		<do task="update">
 		    <parm name=db>reservas</parm>
 		    <parm name="fst"><pft>cat('reservas.fst')</pft></parm>
@@ -169,17 +165,16 @@ En caso de no ser submit se Muestra el Formulario
 			<field action=define tag=1102>Isis_Status</field>
 			<field action=define tag=1011>Isis_Lock</field>
 			<update>
-				<field action="import" tag=list>2031,3002,3004,3010,4001</field>
+				<field action="import" tag=list>3002,3004,3010,4001</field>
 				<field action="replace" tag=1><pft>v4001</pft></field>
 				<field action=add tag=2><pft>
 					'^i',v3002,
-					'^o1',v2031,
 					'^f',v3010^f,
 					'^h',v3010^h,
 					'^u',v3004,
 					'^p',getenv('REMOTE_ADDR')
 				</pft></field>
-				<field action="delete" tag="list">2031,3002,3010,4001</field>
+				<field action="delete" tag="list">3002,3010,4001</field>
 				<write>Unlock</write>
 			</update>
 		</do>

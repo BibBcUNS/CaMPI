@@ -46,94 +46,93 @@
 <include>omp/circulacion/menor_inc.xis</include>
 
 <function name=verificarReservas tag=1 action=replace>
-		<!-- Verifica si existe alguna reserva para el inventario devuelto.
-		En caso de existir, la primera reserva (menor timestamp) pasa a espera (v3)-->
+        <!-- Verifica si existe alguna reserva para el inventario devuelto.
+        En caso de existir, la primera reserva (menor timestamp) pasa a espera (v3)-->
 
-			<!-- Recupero el ID de la parte -->
-			<field action=replace tag=2><pft>ref(['partes']l(['partes']v1^i),v1)</pft></field>
-			<!-- Busco el registro en reservas (mfn) -->
-			<field action=replace tag=3><pft>f(l(['reservas']v2^b,'_',v2^c,'_',v2^p),1,0)</pft></field>
-		
-			<!-- Si no hay reservas finalizo la función -->
-			<flow action=jump><pft>if val(v3)=0 then 'fin_reserva'	fi</pft></flow>
-			
-			<!-- Esto es el caso en que HAY reservas -->
-			<!-- Busco la reserva más "vieja" en el registro.
-			O sea, el nro de occ de v2 con el timestamp más chico -->
-			
-			<!-- en v4 pongo todas las ocurrencias de v2 (las reservas propiamente) -->
-			<field action=replace tag=4 split=occ><pft>ref(['reservas']val(v3),(v2/))</pft></field>
+            <!-- Recupero el ID de la parte -->
+            <field action=replace tag=2><pft>ref(['partes']l(['partes']v1^i),v1)</pft></field>
+            <!-- Busco el registro en reservas (mfn) -->
+            <field action=replace tag=3><pft>f(l(['reservas']v2^b,'_',v2^c,'_',v2^p),1,0)</pft></field>
+        
+            <!-- Si no hay reservas finalizo la función -->
+            <flow action=jump><pft>if val(v3)=0 then 'fin_reserva'  fi</pft></flow>
+            
+            <!-- Esto es el caso en que HAY reservas -->
+            <!-- Busco la reserva más "vieja" en el registro.
+            O sea, el nro de occ de v2 con el timestamp más chico -->
+            
+            <!-- en v4 pongo todas las ocurrencias de v2 (las reservas propiamente) -->
+            <field action=replace tag=4 split=occ><pft>ref(['reservas']val(v3),(v2/))</pft></field>
 
-			<!-- Si no hay reservas finalizo la función -->
-			<flow action=jump><pft>if nocc(v4)=0 then 'fin_reserva'	fi</pft></flow>
-			
-			<!-- en v5 pongo todos los timestamps  "aammddhhmmss", cada uno como una ocurrencia diferente -->
-			<field action=replace tag=5 split=occ><pft>
-				(v4^f*8.4,v4^f*3.2,v4^f.2,v4^h.2,v4^h*3.2,v4^h*6.2/)
-			</pft></field>
-			<!--display><pft>('v5: ',v5,'.-<br>')</pft></display->
+            <!-- Si no hay reservas finalizo la función -->
+            <flow action=jump><pft>if nocc(v4)=0 then 'fin_reserva' fi</pft></flow>
+            
+            <!-- en v5 pongo todos los timestamps  "aammddhhmmss", cada uno como una ocurrencia diferente -->
+            <field action=replace tag=5 split=occ><pft>
+                (v4^f*8.4,v4^f*3.2,v4^f.2,v4^h.2,v4^h*3.2,v4^h*6.2/)
+            </pft></field>
+            <!--display><pft>('v5: ',v5,'.-<br>')</pft></display->
 
-			<!-- Busco el timestamp más chico usando la funcion menor. -->			
-			<call name=menor><pft>(v5/)</pft></call>
-			<!-- Salida en v30 (^o^t, órden y timestamp respectivamente) -->
-			
-			<!-- Obtengo la hora y fecha -->
-			<field action=replace tag=3010><pft>date</pft></field>
-			<field action=replace tag=3010><pft>
-				'^f',mid(v3010,7,2),'/',mid(v3010,5,2),'/',mid(v3010,1,4),
-				'^h',mid(v3010,10,2),':',mid(v3010,12,2),':',mid(v3010,14,2)
-			</pft></field>
+            <!-- Busco el timestamp más chico usando la funcion menor. -->          
+            <call name=menor><pft>(v5/)</pft></call>
+            <!-- Salida en v30 (^o^t, órden y timestamp respectivamente) -->
+            
+            <!-- Obtengo la hora y fecha -->
+            <field action=replace tag=3010><pft>date</pft></field>
+            <field action=replace tag=3010><pft>
+                '^f',mid(v3010,7,2),'/',mid(v3010,5,2),'/',mid(v3010,1,4),
+                '^h',mid(v3010,10,2),':',mid(v3010,12,2),':',mid(v3010,14,2)
+            </pft></field>
 
-			<!-- Tengo que pasar el registro de reserva a espera de v2 a v3-->						
-			<do task=update>
-			<parm name=db>reservas</parm>
-			<parm name=mfn><pft>v3</pft></parm>
-			<parm name=lockid><pft>v1^o</pft></parm>
-			<field action=define tag=1102>Isis_Status</field>
-			<field action=define tag=1011>Isis_Lock</field>			
-			<update>
-				<field action=import tag=list>30,3010</field>
-				<field action=import tag=35>1</field> <!-- Para tener el ID del operador -->
-				
-				<!-- Creo la espera v3 con el valor de v2 en la ocurrencia indicada por v30^o -->
-				<field action=occ tag=10 from=2><pft>v30^o</pft></field>
-				<field action=replace tag=3030><pft>v10^i</pft></field> <!-- exporto el id del usuario que pasa a espera -->
-				<field action=export tag=3030>3030</field>
-				<field action=add tag=3><pft>
-					'^i',v10^i,
-					'^f',v3010^f,
-					'^h',v3010^h,
-					'^o',v35^o,
-					'^p',getenv('REMOTE_ADDR')
-				</pft></field>
+            <!-- Tengo que pasar el registro de reserva a espera de v2 a v3-->                      
+            <do task=update>
+            <parm name=db>reservas</parm>
+            <parm name=mfn><pft>v3</pft></parm>
+            <parm name=lockid><pft>v1^o</pft></parm>
+            <field action=define tag=1102>Isis_Status</field>
+            <field action=define tag=1011>Isis_Lock</field>         
+            <update>
+                <field action=import tag=list>30,3010</field>
+                <field action=import tag=35>1</field> <!-- Para tener el ID del operador -->
+                
+                <!-- Creo la espera v3 con el valor de v2 en la ocurrencia indicada por v30^o -->
+                <field action=occ tag=10 from=2><pft>v30^o</pft></field>
+                <field action=replace tag=3030><pft>v10^i</pft></field> <!-- exporto el id del usuario que pasa a espera -->
+                <field action=export tag=3030>3030</field>
+                <field action=add tag=3><pft>
+                    '^i',v10^i,
+                    '^f',v3010^f,
+                    '^h',v3010^h,
+                    '^o',v35^o,
+                    '^p',getenv('REMOTE_ADDR')
+                </pft></field>
 
-				<!-- Elimino la ocurrencia correspondiente de v2 -->
-				<field action=delete tag=2><pft>v30^o</pft></field>
-				<!-- Uso v4000 como temporal para mantener v2 -->
-				<field action=replace tag=4000 split=occ><pft>(v2/)</pft></field> 
-				<!-- Elimino todas las ocurrencias de v2 -->
-				<field action=delete tag=2>all</field>
-				<!-- Creo v2 a partir de v4000 (si contiene alguna ocurrencia) -->
-				<flow action=jump><pft>if nocc(v4000)=0 then 'fin_crear_v2' fi</pft></flow>
-				<field action=add tag=2 split=occ><pft>
-					(
-						'^i',v4000^i,
-						'^o', if (val(v4000^o) < val(v4001[1])) then v4000^o else f(val(v4000^o)-1,1,0) fi,
-						'^f',v4000^f,
-						'^h',v4000^h,
-						'^u',v4000^u,
-						'^p',v4000^p
-						/
-					)
-				</pft></field>
-				<label>fin_crear_v2</label>
-				<field action=delete tag=list>10,30,35,3010,3030,4000</field>
-				<write>Unlock</write>
-			</update>		
-			</do>
-	<field action=export tag=3030>3030</field>
+                <!-- Elimino la ocurrencia correspondiente de v2 -->
+                <field action=delete tag=2><pft>v30^o</pft></field>
+                <!-- Uso v4000 como temporal para mantener v2 -->
+                <field action=replace tag=4000 split=occ><pft>(v2/)</pft></field> 
+                <!-- Elimino todas las ocurrencias de v2 -->
+                <field action=delete tag=2>all</field>
+                <!-- Creo v2 a partir de v4000 (si contiene alguna ocurrencia) -->
+                <flow action=jump><pft>if nocc(v4000)=0 then 'fin_crear_v2' fi</pft></flow>
+                <field action=add tag=2 split=occ><pft>
+                    (
+                        '^i',v4000^i,
+                        '^f',v4000^f,
+                        '^h',v4000^h,
+                        '^u',v4000^u,
+                        '^p',v4000^p
+                        /
+                    )
+                </pft></field>
+                <label>fin_crear_v2</label>
+                <field action=delete tag=list>10,30,35,3010,3030,4000</field>
+                <write>Unlock</write>
+            </update>
+            </do>
+    <field action=export tag=3030>3030</field>
 
-<label>fin_reserva</label>			
+<label>fin_reserva</label>          
 
 </function> <!-- end verificarReservas -->
 
@@ -270,17 +269,17 @@ El campo v2000 que es exportado como v1000 valdrá ok si el lector fue encontrado
      <field action=define tag=1102>Isis_Status</field>
      <field action=define tag=1011>Isis_Lock</field>
      <update>
-		<field action=replace tag=10><pft>
-			if v10:'Sancionado' and p(v11) 
-			then 
-				if s(v11[last]^v*6,v11[last]^v*3.2,v11[last]^v.2) < s(date).8
-					then 'Habilitado'
-					else 'Sancionado'
-				fi,
-			else
-				'Habilitado'
-			fi
-		</pft></field>
+        <field action=replace tag=10><pft>
+            if v10:'Sancionado' and p(v11) 
+            then 
+                if s(v11[last]^v*6,v11[last]^v*3.2,v11[last]^v.2) < s(date).8
+                    then 'Habilitado'
+                    else 'Sancionado'
+                fi,
+            else
+                'Habilitado'
+            fi
+        </pft></field>
         <write>Unlock</write>
      </update>
 </do>
@@ -332,31 +331,31 @@ El campo v2000 que es exportado como v1000 valdrá ok si el lector fue encontrado
     <parm name="db">reservas</parm>
     <parm name="expression"><pft>v2</pft></parm>
     <loop>
-    	<field action="import" tag="150">2</field>
-    	<field action="import" tag="list">2030</field>
-    	<field action="add" tag="2030"><pft>(if v2^i=v150[1] then v1[1],v2 fi)</pft></field>
-    	<field action="export" tag="list">2030</field>    	
-	</loop>
-	</do>
+        <field action="import" tag="150">2</field>
+        <field action="import" tag="list">2030</field>
+        <field action="add" tag="2030"><pft>(if v2^i=v150[1] then v1[1],v2 fi)</pft></field>
+        <field action="export" tag="list">2030</field>      
+    </loop>
+    </do>
 
-	<!-- v2031 tendrá tantas ocurrencias como Esperas posea -->
+    <!-- v2031 tendrá tantas ocurrencias como Esperas posea -->
     <do task="search">
     <parm name="db">reservas</parm>
     <parm name="expression"><pft>v2</pft></parm>
     <loop>
-    	<field action="import" tag="150">2</field>
-    	<field action="import" tag="list">2031</field>
-    	<field action="add" tag="2031"><pft>(if v3^i=v150[1] then v1[1],v3 fi)</pft></field>
-    	<field action="export" tag="list">2031</field>    	
-	</loop>
-	</do>
-	
-	<label>fin lista reservas</label>
+        <field action="import" tag="150">2</field>
+        <field action="import" tag="list">2031</field>
+        <field action="add" tag="2031"><pft>(if v3^i=v150[1] then v1[1],v3 fi)</pft></field>
+        <field action="export" tag="list">2031</field>      
+    </loop>
+    </do>
+    
+    <label>fin lista reservas</label>
 
-	<field action=import tag=1000>1000,2030</field>
+    <field action=import tag=1000>1000,2030</field>
     <field action=replace tag=2002><pft>v1000^b</pft></field> <!-- v2002 contiene id operario -->
     <field action=add tag=2003><pft>mfn</pft></field>      <!-- v2003 tiene el mfn del lector -->
-	  <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'formulario.html')</pft></htmlpft></display>
+      <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'formulario.html')</pft></htmlpft></display>
   </loop>
 </do>
 
@@ -409,7 +408,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
     <display><pft>if v1011^i<>v1000^b then 
       '<p>&nbsp;</p><center>
        <h2>Se ha superado el tiempo de espera, vuelva a identificar el Lector</h2></center><br>
-	Isis_Lock:-',v1011^i,'-  Id. del bibliotecario:-',v1000^b,'-' fi
+    Isis_Lock:-',v1011^i,'-  Id. del bibliotecario:-',v1000^b,'-' fi
     </pft></display>
 
     <flow action=exit><pft>if v1011^i<>v1000^b then '1' fi</pft></flow>
@@ -422,26 +421,26 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
     <flow action=jump><pft>if a(v1000^d) then 'CONTROL_SANCION' fi</pft></flow>
 
     <field action=add tag=1100 split=occ><pft>
-	v1000^d.2/,v1000^d*2.2/v1000^d*4.2/,v1000^d*6.2/,v1000^d*8.2/,
-	v1000^d*10.2/,v1000^d*12.2/,v1000^d*14.2/,v1000^d*16.2/,v1000^d*18.2/,
-	v1000^d*20.2/,v1000^d*22.2/,v1000^d*24.2/,v1000^d*26.2/,v1000^d*28.2/,
-	v1000^d*30.2/,v1000^d*32.2/,v1000^d*34.2/,v1000^d*36.2/,v1000^d*38.2/,
-	v1000^d*40.2/,v1000^d*42.2/,v1000^d*44.2/,v1000^d*46.2/,v1000^d*48.2/,
-	v1000^d*50.2/,v1000^d*52.2/,v1000^d*54.2/,v1000^d*56.2/,v1000^d*58.2/,
-	v1000^d*60.2/,v1000^d*62.2/,v1000^d*64.2/,v1000^d*66.2/,v1000^d*68.2/,
-	v1000^d*70.2/,v1000^d*72.2/,v1000^d*74.2/,v1000^d*76.2/,v1000^d*78.2/,
-	v1000^d*80.2/,v1000^d*82.2/,v1000^d*84.2/,v1000^d*86.2/,v1000^d*88.2/,
-	v1000^d*90.2/,v1000^d*92.2/,v1000^d*94.2/,v1000^d*96.2/,v1000^d*98.2/,
-	v1000^d*100.2/,v1000^d*102.2/,v1000^d*104.2/,v1000^d*106.2/,v1000^d*108.2/,
-	v1000^d*110.2/,v1000^d*112.2/,v1000^d*114.2/,v1000^d*116.2/,v1000^d*118.2/,
-	v1000^d*120.2/,v1000^d*122.2/,v1000^d*124.2/,v1000^d*126.2/,v1000^d*128.2/,
-	v1000^d*130.2/,v1000^d*132.2/,v1000^d*134.2/,v1000^d*136.2/,v1000^d*138.2/,
-	v1000^d*140.2/,v1000^d*142.2/,v1000^d*144.2/,v1000^d*146.2/,v1000^d*148.2/,
-	v1000^d*150.2/,v1000^d*152.2/,v1000^d*154.2/,v1000^d*156.2/,v1000^d*158.2/,
-	v1000^d*160.2/,v1000^d*162.2/,v1000^d*164.2/,v1000^d*166.2/,v1000^d*168.2/,
-	v1000^d*170.2/,v1000^d*172.2/,v1000^d*174.2/,v1000^d*176.2/,v1000^d*178.2/,
-	v1000^d*180.2/,v1000^d*182.2/,v1000^d*184.2/,v1000^d*186.2/,v1000^d*188.2/,
-	v1000^d*190.2/,v1000^d*192.2/,v1000^d*194.2/,v1000^d*196.2/,
+    v1000^d.2/,v1000^d*2.2/v1000^d*4.2/,v1000^d*6.2/,v1000^d*8.2/,
+    v1000^d*10.2/,v1000^d*12.2/,v1000^d*14.2/,v1000^d*16.2/,v1000^d*18.2/,
+    v1000^d*20.2/,v1000^d*22.2/,v1000^d*24.2/,v1000^d*26.2/,v1000^d*28.2/,
+    v1000^d*30.2/,v1000^d*32.2/,v1000^d*34.2/,v1000^d*36.2/,v1000^d*38.2/,
+    v1000^d*40.2/,v1000^d*42.2/,v1000^d*44.2/,v1000^d*46.2/,v1000^d*48.2/,
+    v1000^d*50.2/,v1000^d*52.2/,v1000^d*54.2/,v1000^d*56.2/,v1000^d*58.2/,
+    v1000^d*60.2/,v1000^d*62.2/,v1000^d*64.2/,v1000^d*66.2/,v1000^d*68.2/,
+    v1000^d*70.2/,v1000^d*72.2/,v1000^d*74.2/,v1000^d*76.2/,v1000^d*78.2/,
+    v1000^d*80.2/,v1000^d*82.2/,v1000^d*84.2/,v1000^d*86.2/,v1000^d*88.2/,
+    v1000^d*90.2/,v1000^d*92.2/,v1000^d*94.2/,v1000^d*96.2/,v1000^d*98.2/,
+    v1000^d*100.2/,v1000^d*102.2/,v1000^d*104.2/,v1000^d*106.2/,v1000^d*108.2/,
+    v1000^d*110.2/,v1000^d*112.2/,v1000^d*114.2/,v1000^d*116.2/,v1000^d*118.2/,
+    v1000^d*120.2/,v1000^d*122.2/,v1000^d*124.2/,v1000^d*126.2/,v1000^d*128.2/,
+    v1000^d*130.2/,v1000^d*132.2/,v1000^d*134.2/,v1000^d*136.2/,v1000^d*138.2/,
+    v1000^d*140.2/,v1000^d*142.2/,v1000^d*144.2/,v1000^d*146.2/,v1000^d*148.2/,
+    v1000^d*150.2/,v1000^d*152.2/,v1000^d*154.2/,v1000^d*156.2/,v1000^d*158.2/,
+    v1000^d*160.2/,v1000^d*162.2/,v1000^d*164.2/,v1000^d*166.2/,v1000^d*168.2/,
+    v1000^d*170.2/,v1000^d*172.2/,v1000^d*174.2/,v1000^d*176.2/,v1000^d*178.2/,
+    v1000^d*180.2/,v1000^d*182.2/,v1000^d*184.2/,v1000^d*186.2/,v1000^d*188.2/,
+    v1000^d*190.2/,v1000^d*192.2/,v1000^d*194.2/,v1000^d*196.2/,
 </pft></field>
 
 
@@ -464,17 +463,17 @@ y crear el registro de movimientos (MOVI). -->
       <parm name=reverse>On</parm>
       <loop>
         <field action=import tag=8>8</field>
-        <!-- Estamos dentro de <do search lector> -->
+        <!-- Estamos dentro de <do update lector> -->
         <field action=occ tag=3000 from=8><pft>v1001</pft></field>
         
-     	<!-- v1000^b se utiliza para el lockid (id operador) -->
+        <!-- v1000^b se utiliza para el lockid (id operador) -->
         <field action=import tag=1000>1000,2001</field>
 
         <!-- verifico reservas -->
-		<call name=verificarReservas><pft>'^i',v3000^i,'^o',v1000[1]^b</pft></call>
-		<!-- En caso de generar una espera el id del usuario se retorna en v3030 -->	
-		<field action=replace tag=3000><pft>v3000,"^d"v3030</pft></field>	
-		                
+        <call name=verificarReservas><pft>'^i',v3000^i,'^o',v1000[1]^b</pft></call>
+        <!-- En caso de generar una espera el id del usuario se retorna en v3030 -->    
+        <field action=replace tag=3000><pft>v3000,"^d"v3030</pft></field>   
+                        
         <flow action=jump><pft>if s(mpu,v3000^i.1):'X' then 'FIN_BLOQUEO' fi</pft></flow>
 
         <do task=search>
@@ -489,8 +488,8 @@ y crear el registro de movimientos (MOVI). -->
           </loop>
         </do>
         <field action=replace tag=3000><pft>
-         	if val(v1103)=0 or val(v1102)>0 then '^tdevolucion^i',v3000^i,'^p',v3000^p,'^b!',
-          	'Error ',v1102,', fallo la busqueda en la base bibliografica^v',v3000^v fi
+            if val(v1103)=0 or val(v1102)>0 then '^tdevolucion^i',v3000^i,'^p',v3000^p,'^b!',
+            'Error ',v1102,', fallo la busqueda en la base bibliografica^v',v3000^v fi
         </pft></field> 
 
         <flow action=jump><pft>if val(v1103)=0 or val(v1102)>0 then 'FIN_BLOQUEO' fi</pft></flow>
@@ -507,7 +506,7 @@ y crear el registro de movimientos (MOVI). -->
             <field action=export previous=delete tag=list>1102</field>
           </update>
         </do>
-			
+            
         <field action=replace tag=3000><pft>
          if val(v1102)>0 then '^tdevolucion^i',v3000^i,'^p',v3000^p,'^b!',
            'Error ',v1102,', fallo el bloqueo en la base bibliografica^v',v3000^v,
@@ -515,7 +514,7 @@ y crear el registro de movimientos (MOVI). -->
         </pft></field>
 
         <label>FIN_BLOQUEO</label>
-		<field action=replace tag=3000><pft>if s(mpu,v3000^i.1):'X' then mpl,'^tdevolucion',v3000 fi</pft></field>
+        <field action=replace tag=3000><pft>if s(mpu,v3000^i.1):'X' then mpl,'^tdevolucion',v3000 fi</pft></field>
 
 <!-- Seguidamente se agrega el subcampo v3000^m el que indica si la devolución fue realizada fuera de término (moroso) "s" o "n". Advertir que los prestamos en sala tiene un subcampo ^o que indica la hora de entrega: ^osala, 12:00 hs. o ^osala, 20:00 hs. según el turno-->
 
@@ -565,7 +564,7 @@ y crear el registro de movimientos (MOVI). -->
 se utiliza la función convertir_fecha para llevar los días al formato dd/mm/aaaa
 que devuelve el resultado en el campo v1100.
 Se agrega una ocurrencia nueva al campo v3000 que tendrá la información de la sanción:
-	^tsancion^ddias^ffecha hoy^vfecha vto^ocant. de sanciones
+    ^tsancion^ddias^ffecha hoy^vfecha vto^ocant. de sanciones
 -->
 
     <flow action=jump><pft>if a(v1000^e) or v1000^e='0' then 'PRESTAMOS' fi</pft></flow>
@@ -629,7 +628,7 @@ La siguiente lista contiene por cada item el subcampo ^ttipo de operacion ("pres
       (if v3000^t='devolucion' and s(mpu,v3000^i.1)<>'X' and v3000^b.1<>'!' 
        then v3000^i/ fi)</pft></field>
 
-	  <do task=list>
+      <do task=list>
       <field action=define tag=1001>Isis_Item</field>
       <loop>
         <field action=add tag=3000><pft>
@@ -651,23 +650,26 @@ v3001 contiene las devoluciones, v1000^b se utiliza para bloquear la exist mas a
           <field action=define tag=1103>Isis_Total</field>
           <loop>
             <field action=import tag=list>1000,1001</field>
-						
-						<do task="search">
-							<parm name="db">marc</parm>
-							<parm name="expression"><pft>v1001^i</pft></parm> <!-- busca en la base marc por inventario -->
-							<loop>
-								<field action="add" tag="5001"><pft>@papeleta.pft</pft></field> <!-- Obtiene el resumen del material -->
-								<field action="export" tag="list">5001</field>
-							</loop>
-						</do>
-						
+                        
+                        <do task="search">
+                            <parm name="db">marc</parm>
+                            <parm name="expression"><pft>v1001^i</pft></parm> <!-- busca en la base marc por inventario -->
+                            <loop>
+                                <field action="add" tag="5001"><pft>@papeleta.pft</pft></field> <!-- Obtiene el resumen del material -->
+                                <field action="export" tag="list">5001</field>
+                            </loop>
+                        </do>
+                        
             <field action=add tag=3000><pft>
-							if s(mpu,v985):'PERM' then s(mpl,v1001,v5001,) 
+                            if s(mpu,v985):'PERM' then s(mpl,v1001,v5001,) 
                 else if s(mpu,v985):'PRES' then 'PRES' 
                        else s(mpl,v1001,'^b!Material no disponible, revise el campo v985') fi fi
             </pft></field>
 <!-- 
-Si el material está prestado continua para considerar el caso de una renovación, si está prestado a otro lector salta a FIN_LOOP_A, sino a BLOQUEO. Para el caso de una renovación el programa busca el inventario del préstamo dentro del campo devoluciones (v3001) -->
+Si el material está prestado continua para considerar el caso de una renovación,
+si está prestado a otro lector salta a FIN_LOOP_B, sino a BLOQUEO.
+Para el caso de una renovación el programa busca el inventario del préstamo
+dentro del campo devoluciones (v3001) -->
 
             <flow action=jump><pft>
               if v3000='PRES' then 
@@ -723,6 +725,49 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
           </loop> 
         </do>        <!-- cierra el <do task=search> de exist -->
 
+        <!-- Podremos poner acá las quitar la espera -->
+        <!-- Corroboramos si el usuario presenta una espera para el material prestado.
+        En dicho caso eliminamos la espera de la base RESERVA -->
+        
+        <!-- Obtengo el ID de la parte -->
+        <field action=replace tag=3350><pft>ref(['partes']l(['partes']v1001^i),v1^b,'_',v1^c,'_',v1^p)</pft></field>
+        <!-- Obtengo el mfn en reservas -->
+        <field action=replace tag=3351><pft>f(l(['reservas']v3350),1,0)</pft></field>
+        <flow action=jump><pft>if v3351='0' then 'no_actualizar_reservas' fi</pft></flow>
+            <!-- Lista de ID de lectores con espera -->
+            <field action=replace tag=3355><pft>ref(['reservas']val(v3351),(v3^i+|~|))</pft></field>
+            <!-- Obtengo el ID del lector -->
+            <field action=import tag=2>2</field>
+            <!--display><pft>'<font size=20>v2: ',v2,'</font><br>'</pft></display>
+            <display><pft>'<font size=20>v3355: ',v3355,'</font><br>'</pft></display-->
+            
+            <flow action=jump><pft>if not v3355:v2 then 'no_actualizar_reservas' fi</pft></flow>
+            
+            <!-- ACA ACTUALIZO RESERVAS -->
+            <do task=update>
+                <parm name=db>reservas</parm>
+                <parm name=mfn><pft>v3351</pft></parm>
+                <parm name=lockid><pft>V1000^b</pft></parm>
+                <field action=define tag=1102>Isis_Status</field>
+                <field action=define tag=1011>Isis_Lock</field>                
+                <update>
+                    <display>Actualizando reservas...<br></display>
+                    <field action=import tag=50>2</field>
+                    <field action=replace tag=55><pft>(if v3^i=v50[1] then f(iocc,1,0) fi)</pft></field>
+                    <field action=delete tag=3><pft>v55</pft></field>
+                    <field action=delete tag=list>50,55</field>
+                    <display><pft>
+                        'v50: ',v50,'<br>',
+                        'v55: ',v55,'<br>',
+                        'v53: ',('*.',v53,'<br>'),'<br>',
+                    </pft></display>
+                    <write>Unlock</write>
+                </update>
+            </do>
+        
+        <label>no_actualizar_reservas</label>
+        
+        
         <field action=replace tag=3000><pft>if val(v1102)>0 or val(v1103)=0 then
           s(mpl,v1001,'^b!Error ',v1102,', fallo la busqueda en la base bibliografica') fi
         </pft></field>
@@ -775,16 +820,16 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
       <field action=define tag=1011>Isis_Lock</field>
       <update>
 
-		<!-- Los campos 1 y 2 (AyN/dni) de LECTOR se agregan a la base.
-		Recordar que v3000 tiene todas las operaciones: prestamos, devoluciones y sanciones -->
+        <!-- Los campos 1 y 2 (AyN/dni) de LECTOR se agregan a la base.
+        Recordar que v3000 tiene todas las operaciones: prestamos, devoluciones y sanciones -->
         <field action=import tag=list>1,2,3,1000,3000,3030</field>
-		<field action=add tag=13><pft>v3</pft></field>
+        <field action=add tag=13><pft>v3</pft></field>
         <field action=replace tag=3><pft>
           '^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^h',mid(date,10,6)
         </pft></field>
 
         <list action=delete>now</list>
-        <list action=load><pft>(v3000/)</pft></list>			
+        <list action=load><pft>(v3000/)</pft></list>            
         <field action=delete tag=3000>ALL</field>    <!--v3000 se vuelve a generar en el list -->
         <do task=list>
           <field action=define tag=1001>Isis_Item</field>
@@ -900,7 +945,7 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
        '</tr>
       </table><br>'
     </pft></display>
-		
+        
     <label>IMPRIMIR_LECTOR</label>
 
     <list action=delete>now</list>
@@ -911,7 +956,7 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
       <parm name=gizmo>txt_htm</parm>
       <field action=define tag=1102>Isis_Status</field>
       <loop>
-        <display><pft>			
+        <display><pft>          
           '<table border="0" width="100%">
             <tr><td width="7%"><b>Operación: ',mfn,'</b>',
                '<td width="38%"><p align="right"><b>',v1.40,'<br>DNI ',v2,'</b>
@@ -1039,7 +1084,7 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
     <display><pft>
        if s(mpu,v10):'SANCIONADO' then 
          '<br>
-					<marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">S A N C I O N A D O !</marquee>
+                    <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">S A N C I O N A D O !</marquee>
           <table border="0" width="100%" bgcolor="transparent" cellspacing="0">
            <tr><td width="45%" bgcolor="#FFF9E1">
                 <font color="#FF0000">SANCIONADO hasta el ',v11^v[last],'</font>
@@ -1070,7 +1115,7 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
           '<td width="30%" style="border-top: thin solid rgb(0,0,0)" align="center">',
             mhl,v5,'<br>Operador</td>',
           '</table>'
-					
+                    
         </pft></display>
       </loop>
     </do>
@@ -1082,6 +1127,7 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
 
 <section>
   <display><pft>'Content-type: text/html'/#</pft></display>
+  <trace>BR</trace>
   <parm name="buffersize">120000</parm>
   <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
   <field action=cgi tag=1000>opcion</field>
@@ -1092,9 +1138,9 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
 
   <label>ID</label>
   <display>
-	<HTML>
-	<HEAD>
-	</head>	
+    <HTML>
+    <HEAD>
+    </head> 
   </display>
   <display><pft>
       '<body  bgcolor="#E8E8D0" onload="window.document.form_abm.credencial.value=parent.indice.form_id.lector.value">',
@@ -1130,11 +1176,11 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
   </display>
 
   <display><pft>'<form name="form_abm" method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">',/
-				'<input type="hidden" name="IsisScript" value="/omp/administracion/abmlector.xis">',/
-				'<input type="hidden" name="opcion" value="Presentar">',/
-				'<input type="hidden" name="credencial">',/
-				'<input type="hidden" name="id_operador" value="',v110^i,'">',/
-	    '</form>',/
+                '<input type="hidden" name="IsisScript" value="/omp/administracion/abmlector.xis">',/
+                '<input type="hidden" name="opcion" value="Presentar">',/
+                '<input type="hidden" name="credencial">',/
+                '<input type="hidden" name="id_operador" value="',v110^i,'">',/
+        '</form>',/
    </pft></display>
 
   <flow action=jump><pft>if v1000<>'ok' then 'EXIT' fi</pft></flow>
@@ -1271,21 +1317,21 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
   <field action=cgi tag=242>dias_prestamo_B</field>
   <field action=replace tag=700 split=occ>
     <pft>
-	v700^x/v701^x/v702^x/v703^x/v704^x/v705^x/v706^x/v707^x/v708^x/v709^x/
-	v710^x/v711^x/v712^x/v713^x/v714^x/v715^x/v716^x/v717^x/v718^x/v719^x/
-	v720^x/v721^x/v722^x/v723^x/v724^x/v725^x/v726^x/v727^x/v728^x/v729^x/
-	v730^x/v731^x/v732^x/v733^x/v734^x/v735^x/v736^x/v737^x/v738^x/v739^x/
-	v740^x/v741^x/v742^x/v743^x/v744^x/v745^x/v746^x/v747^x/v748^x/v749^x/
-	v750^x/v751^x/v752^x/v753^x/v754^x/v755^x/v756^x/v757^x/v758^x/v759^x/
-	v760^x/v761^x/v762^x/v763^x/v764^x/v765^x/v766^x/v767^x/v768^x/v769^x/
-	v770^x/v771^x/v772^x/v773^x/v774^x/v775^x/v776^x/v777^x/v778^x/v779^x/
-	v780^x/v781^x/v782^x/v783^x/v784^x/v785^x/v786^x/v787^x/v788^x/v789^x/
-	v790^x/v791^x/v792^x/v793^x/v794^x/v795^x/v796^x/v797^x/v798^x/v799^x</pft>
+    v700^x/v701^x/v702^x/v703^x/v704^x/v705^x/v706^x/v707^x/v708^x/v709^x/
+    v710^x/v711^x/v712^x/v713^x/v714^x/v715^x/v716^x/v717^x/v718^x/v719^x/
+    v720^x/v721^x/v722^x/v723^x/v724^x/v725^x/v726^x/v727^x/v728^x/v729^x/
+    v730^x/v731^x/v732^x/v733^x/v734^x/v735^x/v736^x/v737^x/v738^x/v739^x/
+    v740^x/v741^x/v742^x/v743^x/v744^x/v745^x/v746^x/v747^x/v748^x/v749^x/
+    v750^x/v751^x/v752^x/v753^x/v754^x/v755^x/v756^x/v757^x/v758^x/v759^x/
+    v760^x/v761^x/v762^x/v763^x/v764^x/v765^x/v766^x/v767^x/v768^x/v769^x/
+    v770^x/v771^x/v772^x/v773^x/v774^x/v775^x/v776^x/v777^x/v778^x/v779^x/
+    v780^x/v781^x/v782^x/v783^x/v784^x/v785^x/v786^x/v787^x/v788^x/v789^x/
+    v790^x/v791^x/v792^x/v793^x/v794^x/v795^x/v796^x/v797^x/v798^x/v799^x</pft>
   </field>
 
   <display><pft>
-		'<body  bgcolor="#E8E8D0" onload="this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then '; print()' fi,'">',
-		'<font face="Draft 10cpi">'</pft></display>
+        '<body  bgcolor="#E8E8D0" onload="this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then '; print()' fi,'">',
+        '<font face="Draft 10cpi">'</pft></display>
 
 <!--v230 tendrá todos los préstamos a realizar en una línea nueva -->
   <field action=add tag=230><pft>v231/v232</pft></field>
@@ -1299,8 +1345,8 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
   </pft></field>
 
 <!-- a lector se le entregan los siguientes datos:
-	'modifica',	id_operador,	mfn_lector,	devoluciones,
-	dias_sancion, invs_prestamo, fecha_prestamo -->
+    'modifica', id_operador,    mfn_lector, devoluciones,
+    dias_sancion, invs_prestamo, fecha_prestamo -->
    
   <call name=lector>
     <pft>'^a',v120,'^b',v100,'^c',v110,'^d',v700,'^e',v220,'^f',v230,'^g',v240,</pft>

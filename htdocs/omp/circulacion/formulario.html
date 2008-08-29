@@ -343,7 +343,7 @@ if ref(['config']1,v9)='si' then
 			if p(v2030) then
 			'<table border="1" width="100%" bgcolor="FFFFFF" cellpadding="4">
 				<tr valign="middle">
-					<th align="left">Reservas registradas</th><th>Posición</th><th>Fecha / hora</th><th>Eliminar</th></tr>
+					<th align="left">Reservas registradas</th><th>Fecha / hora</th><th>Eliminar</th></tr>
 					',('<tr valign="middle"><td>',
 					ref(['opac_circulacion']l(['opac_circulacion']'LC='v2030^c),
 						'<font color="blue"><b>',
@@ -359,7 +359,6 @@ if ref(['config']1,v9)='si' then
 					if v2030^p<>'' then 'Parte: ',v2030^p,'</font><br>' fi,
 					'<font color="gray">^b',v2030^b,'^c',v2030^c,'^p',v2030^p,'<br>'
 					'</td>
-					<td align="center" width="10%">',v2030^o,'º</td>
 					<td align="center" width="15%">',v2030^f,'<br>',v2030^h,'</td>					
 					<td align="center" width="12%">
 						<form name="eliminar_',f(iocc,1,0),'" method="POST"
@@ -374,7 +373,7 @@ if ref(['config']1,v9)='si' then
 				</tr>'),			
 			'</table>',
 			else
-				' El usuario no registra reservas'
+				' El usuario no registra Reservas'
 			fi
 		'</td>
 		</tr>

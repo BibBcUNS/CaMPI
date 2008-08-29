@@ -45,20 +45,14 @@
 	<update>
 		<field action=import tag=2001>2001</field>	
 		<field action=replace tag=4000 split=occ><pft>(v2/)</pft></field> <!-- temporal para mantener v2 -->
-		<field action=replace tag=4001 split=occ><pft>(if v2^i=v2001[1] then v2^o fi)</pft></field> <!-- órden del usuario -->
 		<field action=delete tag=2>ALL</field>
 		<!-- Elimino la ocurrencia correspondiente al usuario y al resto modifico el órden según corresponda -->
 		<field action=add tag=2 split=occ><pft>
 			(
-				if (not v4000^i=v2001[1]) then,
-					'^i',v4000^i,
-					'^o', if (val(v4000^o) < val(v4001[1])) then v4000^o else f(val(v4000^o)-1,1,0) fi,
-					'^f',v4000^f,
-					'^h',v4000^h,
-					/
-				fi,			
+				if (not v4000^i=v2001[1]) then  v4000/	fi
 			)
 		</pft></field>
+		
 		<field action=delete tag=4000>ALL</field>
 		<field action=delete tag=4001>ALL</field>
 	    <field action=delete tag=2001>ALL</field>
