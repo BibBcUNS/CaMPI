@@ -756,11 +756,11 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
                     <field action=replace tag=55><pft>(if v3^i=v50[1] then f(iocc,1,0) fi)</pft></field>
                     <field action=delete tag=3><pft>v55</pft></field>
                     <field action=delete tag=list>50,55</field>
-                    <display><pft>
+                    <!--display><pft>
                         'v50: ',v50,'<br>',
                         'v55: ',v55,'<br>',
                         'v53: ',('*.',v53,'<br>'),'<br>',
-                    </pft></display>
+                    </pft></display-->
                     <write>Unlock</write>
                 </update>
             </do>
@@ -1127,7 +1127,7 @@ A continaución se bloquean la base bibliográfica para conocer si el registro del
 
 <section>
   <display><pft>'Content-type: text/html'/#</pft></display>
-  <trace>BR</trace>
+  <trace>!BR</trace>
   <parm name="buffersize">120000</parm>
   <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
   <field action=cgi tag=1000>opcion</field>
