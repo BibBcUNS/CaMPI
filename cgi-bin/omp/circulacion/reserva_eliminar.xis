@@ -52,13 +52,43 @@
 				if (not v4000^i=v2001[1]) then  v4000/	fi
 			)
 		</pft></field>
+		<field action=replace tag=4050><pft>
+		(if (v4000^i=v2001[1]) then  '^f',v4000^f,'^h',v4000^f	fi)
+		</pft></field>
+		<field action=export tag=4050>4050</field>
 		
 		<field action=delete tag=4000>ALL</field>
 		<field action=delete tag=4001>ALL</field>
 	    <field action=delete tag=2001>ALL</field>
+	    <field action=delete tag=4050>ALL</field>
 	    <write>Unlock</write>
 	    <field action=export tag=list>1101,1102</field>
      </update>
+</do>
+
+<!-- Obtengo la fecha y hora -->
+<field action=add tag=3010><pft>
+	'^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^h',mid(date,10,2),':',mid(date,12,2),':',mid(date,14,2)
+</pft></field>
+
+<do task=update>
+<parm name=db>movi</parm>
+<parm name=mfn>New</parm>
+<parm name=fst><pft>cat('movi.fst')</pft></parm>
+<field action=define tag=1102>Isis_Status</field>
+<field action=define tag=1011>Isis_Lock</field>
+<update>
+	<field action=import tag=list>2000,2001,2002,4050</field> 
+	<!-- importa parte_id (2000), el DNI (2001), el operario (2002), fecha/hora de reserva (4050) -->
+	<field action=add tag=1><pft>ref(['lector']l(['lector']v2001),v1)</pft></field>
+	<field action=add tag=2><pft>v2001</pft></field>
+	<field action=import tag=3>3010</field>
+	<field action=replace tag=4><pft>'^telimina_reserva',v2000,v4050</pft></field>
+	<field action=import tag=5>2002</field>
+	<field action=add tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
+	<field action="delete" tag="list">2000,2001,2002</field>
+	<write>Unlock</write>
+	</update>
 </do>
 
 <display><pft>
