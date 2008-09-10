@@ -14,6 +14,7 @@
 	<parm name=db>reservas</parm>
 	<parm name=from>1</parm>
     <loop>
+		<field action=replace tag=1901><pft>v1</pft></field>
 		<field action=replace tag=1900><pft>mfn(1)</pft></field>
 		<field action=import tag=2000>2000</field>
 		<list action=load><pft>(v3/)</pft></list>
@@ -104,7 +105,7 @@
 				<label>FIN_BAJAR_ESPERA</label>
 			</loop>
 		</do>
-
+		<flow action=jump><pft>if a(v5555) then 'NO_GRABAR_EN_MOVI' fi</pft></flow>
 		<do task=update>
 			 <parm name=db>movi</parm>
 			 <parm name=mfn>New</parm>
@@ -113,6 +114,7 @@
 			 <field action=define tag=1103>Isis_Lock</field>
 			 <parm name=lockid>ID</parm>
 			 <update>
+			    <field action=import tag=1>1901</field>
 				<field action=import tag=7>5555</field>
 				<field action=replace tag=553><pft>date</pft></field>				
 				<field action=add tag=3><pft>'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2</pft></field>
@@ -123,16 +125,13 @@
 				<write>Unlock</write>
 			 </update>
 		  </do>
-		  
+		  <label>NO_GRABAR_EN_MOVI</label>
 		  <display><pft>'Ha/n caído ',f(nocc(v5555)/3,1,0),' espera/s.'</pft></display>
 	</loop>
 </do>
 
 
 <!--
-
-FALTA GRABAR EN MOVI, VERIFICAR EL ID DEL USUARIO QUE ESTÁ REALIZANDO LA OPERACION
-Y VERIFICAR SI ESTÁN BIEN PUESTOS LOS BLOQUEOS
 
 RESERVAS:
 Campo 1: Identificador de la parte a ser reservada
