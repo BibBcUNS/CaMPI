@@ -1,0 +1,23 @@
+<IsisScript>
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+
+	<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+	<field action=cgi tag=100>user</field>
+
+	<do task=search>
+	<parm name=db>opera</parm>
+	<parm name=expression><pft>v100</pft></parm>
+	<loop>
+		<field action=replace tag=200><pft>v2</pft></field>
+		<field action=export tag=200>200</field>
+	</loop>
+    </do>
+
+	<display><pft>if p(v200) then v200 else 'NO EXISTE' fi</pft></display>
+	
+</section>
+</IsisScript>
+
+
