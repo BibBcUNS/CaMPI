@@ -1,6 +1,5 @@
 <IsisScript>
 <section>
-<trace>!BR</trace>
 <!-- LISTA DE TAGS:
 
 Parametros:
@@ -17,7 +16,7 @@ Uso local:
 
 <display><pft>'Content-type: text/html'/</pft></display>
 <display><pft>'Set-Cookie: CUSTOMER=WILE_E_COYOTE;'/#</pft></display>
-<trace>!BR</trace>
+
 
 <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 <!-- ENCABEZADO DE PÁGINA -->
@@ -118,70 +117,52 @@ En caso de no ser submit se Muestra el Formulario
 <field action="define" tag=4001>Isis_Item</field>
 <loop>
 	<field action="replace" tag="4002"><pft>v4001^b,'_',v4001^c,'_',v4001^p</pft></field>
-	<field action="import" tag=list>3002,3004,3010,3050</field>
-	<flow action=jump><pft>if (l(['reservas']v4002)=0) then 'el_registro_NO_existe' fi</pft></flow>
+	<field action="import" tag=list>3002,3004,3010</field>
+	<!--flow action=jump><pft>if (l(['reservas']v4002)=0) then 'el_registro_NO_existe' fi</pft></flow-->
 
-	<label>el_registro_existe</label>
+	<!--label>el_registro_existe</label-->
 
-		<!-- 2030: recupero todos los id_usuario que reservaron el material en cuestión -->
-		<field action=replace split=occ tag=2030><pft>ref(['reservas']l(['reservas']v4002),(v2/))</pft></field>
-		
-		<!-- Esto pone timestam en lugar de horden "AAAAMMDD HHMMSS" -->
-		<display><pft>'<font style="color:gray"><b>',v4001,'</font><br>'</pft></display>
-		<field action="add" tag="3050"><pft>'^treserva',v4001</pft></field>
-
-		<do task="update">
-		    <parm name="db">reservas</parm>
-		    <parm name="fst"><pft>cat('reservas.fst')</pft></parm>
-		    <parm name=mfn><pft>f(l(['reservas']v4002),1,0)</pft></parm>
-			<parm name=expire>90</parm>
-			<parm name=lockid><pft>v3004</pft></parm>
-			<field action=define tag=1102>Isis_Status</field>
-			<field action=define tag=1011>Isis_Lock</field>
-			<update>
-				<field action="import" tag=list>3002,3010</field>
-				<field action=add tag=2><pft>
-					'^i',v3002,
-					'^f',v3010^f,
-					'^h',v3010^h,
-					'^u',v3004,
-					'^p',getenv('REMOTE_ADDR')
-					</pft></field>
-				<field action="delete" tag="list">3002,3010</field>
-				<write>Unlock</write>
-			</update>
-		</do>
-
-	<flow action=jump>listo</flow>
-	<label>el_registro_NO_existe</label>
+	<!-- 2030: recupero todos los id_usuario que reservaron el material en cuestión -->
+	<field action=replace split=occ tag=2030><pft>ref(['reservas']l(['reservas']v4002),(v2/))</pft></field>
+	
+	<!-- Esto pone timestam en lugar de horden "AAAAMMDD HHMMSS" -->
 	<display><pft>'<font style="color:gray"><b>',v4001,'</font><br>'</pft></display>
-	<field action="add" tag="3050"><pft>'^treserva',v4001</pft></field>
-		<do task="update">
-		    <parm name=db>reservas</parm>
-		    <parm name="fst"><pft>cat('reservas.fst')</pft></parm>
-		    <parm name=mfn>New</parm>
-			<parm name=expire>90</parm>
-			<parm name=lockid><pft>v3004</pft></parm>
-			<field action=define tag=1102>Isis_Status</field>
-			<field action=define tag=1011>Isis_Lock</field>
-			<update>
-				<field action="import" tag=list>3002,3004,3010,4001</field>
-				<field action="replace" tag=1><pft>v4001</pft></field>
-				<field action=add tag=2><pft>
-					'^i',v3002,
-					'^f',v3010^f,
-					'^h',v3010^h,
-					'^u',v3004,
-					'^p',getenv('REMOTE_ADDR')
+	
+	<field action=replace tag=5000><pft>f(l(['reservas']v4002),1,0)</pft></field>
+	
+	<do task="update">
+	    <parm name="db">reservas</parm>
+	    <parm name="fst"><pft>cat('reservas.fst')</pft></parm>
+	    <parm name=mfn><pft>if v5000='0' then 'New' else v5000 fi</pft></parm>
+		<parm name=expire>90</parm>
+		<parm name=lockid><pft>v3004</pft></parm>
+		<field action=define tag=1102>Isis_Status</field>
+		<field action=define tag=1011>Isis_Lock</field>
+		<update>
+			<field action="import" tag=list>3002,3010,3004</field>
+			
+			<!-- esto lo hago para unificar reservas con nuevo registro o registro existente -->
+			<flow action=jump><pft>"registro_existente"d1</pft></flow>
+			<field action=import tag=1>4001</field>
+			<label>registro_existente</label>
+			
+			<field action=add tag=2><pft>
+				'^i',v3002,
+				'^f',v3010^f,
+				'^h',v3010^h,
+				'^u',v3004,
+				'^p',getenv('REMOTE_ADDR')
 				</pft></field>
-				<field action="delete" tag="list">3002,3010,4001</field>
-				<write>Unlock</write>
-			</update>
-		</do>
+			<field action=replace tag=4050><pft>'^i',v3002,'^f',v3010^f,'^h',v3010</pft></field> <!-- ID-fecha-hora -->
+			<field action=replace tag=4040><pft>v1</pft></field>
+			<field action=export tag=list>4040,4050</field>
+			<field action=delete tag=list>3002,3004,3010,4040,4050</field>
+			<write>Unlock</write>
+		</update>
+	</do>
 
 	<label>listo</label>
-	<field action="export" tag="list">3050</field>
-
+	<field action=export tag=list>4040,4050</field>
 	</loop>
 </do>
 
@@ -203,14 +184,15 @@ En caso de no ser submit se Muestra el Formulario
 <field action=define tag=1102>Isis_Status</field>
 <field action=define tag=1011>Isis_Lock</field>
 <update>
-	<field action=import tag=list>3002</field> <!-- importa el AyN, DNI, los datos del préstamo (v8 de lector) y el operario -->
+	<field action=import tag=list>3002,4040,4050</field> <!-- En 3002 el ID del Lector. En 4050 datos de la res -->
 	<field action=add tag=1><pft>ref(['lector']l(['lector']v3002),v1)</pft></field>
 	<field action=add tag=2><pft>v3002</pft></field>
 	<field action=import tag=3>3010</field>
-	<field action=import tag=4>3050</field>
+	<field action=replace tag=4><pft>'^treserva',v4040</pft></field>
 	<field action=import tag=5>3004</field>
 	<field action=add tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
-	<field action="delete" tag="list">3002,3004,2002</field>
+	<field action=add tag=7><pft>'RN=',v4050,'^u',v5,'^p',v6</pft></field>
+	<field action="delete" tag="list">2002,3002,3004,4040,4050</field>
 	<write>Unlock</write>
 	</update>
 </do>

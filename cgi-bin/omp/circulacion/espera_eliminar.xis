@@ -47,7 +47,12 @@
         <field action=import tag=list>2001,2002</field> <!-- id del lector -->
         <!-- 4001: Número de espera del lector en cuestión -->
         <field action=replace tag=4001><pft>(if v3^i=v2001[1] then f(iocc,1,0) fi)</pft></field>
-        <!-- Elimino la ocurrencia correspondiente del campo v3 -->
+        
+        <!-- En 4050 exporto los datos de la espera caida -->
+        <field action=occ tag=4050 from=3><pft>v4001</pft></field>
+        <field action=export tag=list>4050</field> <!-- espera caida -->
+        
+        <!-- Elimino la ocurrencia correspondiente del campo v3 -->       
         <field action=delete tag=3><pft>v4001</pft></field>
         <field action=delete tag=4001>ALL</field>
         
@@ -61,38 +66,45 @@
                 <!-- Busco el timestamp más chico usando la funcion menor. -->              
                 <call name=menor><pft>(v5/)</pft></call>
                 <!-- Salida en v30 (^o^t, órden y timestamp respectivamente) -->
+        
+		        <!-- Obtengo la hora y fecha -->
+		        <field action=replace tag=3010><pft>date</pft></field>
+		
+		        <field action=replace tag=3010><pft>
+		            '^f',mid(v3010,7,2),'/',mid(v3010,5,2),'/',mid(v3010,1,4),
+		            '^h',mid(v3010,10,2),':',mid(v3010,12,2),':',mid(v3010,14,2)
+		        </pft></field>
+		        
+		        <!-- creo la espera correspondiente -->
+		        <!-- Creo la espera v3 con el valor de v2 en la ocurrencia indicada por v30^o -->
+		        <field action=occ tag=10 from=2><pft>v30^o</pft></field>
+		        <field action=add tag=3><pft>
+		            '^i',v10^i,
+		            '^f',v3010^f,
+		            '^h',v3010^h,
+		            '^o',v2002,
+		            '^p',getenv('REMOTE_ADDR')
+		        </pft></field>
+		    
+		        <field action=replace tag=4051><pft>v10</pft></field> <!-- reserva caida-->
+		        <field action=replace tag=4052><pft> <!-- espera nueva -->
+		        	'^i',v10^i,'^f',v3010^f,'^h',v3010^h,'^o',v2002,'^p',getenv('REMOTE_ADDR')
+		        </pft></field>
+		        <field action=export tag=list>4051,4052</field>
+		        
+		        <!-- Elimino la ocurrencia correspondiente de v2 -->
+		        <field action=delete tag=2><pft>v30^o</pft></field>
+		        
         <label>no_hay_reservas</label>
-        <label></label>
-        <!-- Obtengo la hora y fecha -->
-        <label></label>
-        <field action=replace tag=3010><pft>date</pft></field>
-
-        <field action=replace tag=3010><pft>
-            '^f',mid(v3010,7,2),'/',mid(v3010,5,2),'/',mid(v3010,1,4),
-            '^h',mid(v3010,10,2),':',mid(v3010,12,2),':',mid(v3010,14,2)
-        </pft></field>
         
-        <!-- creo la espera correspondiente -->
-        <!-- Creo la espera v3 con el valor de v2 en la ocurrencia indicada por v30^o -->
-        <field action=occ tag=10 from=2><pft>v30^o</pft></field>
-        <field action=add tag=3><pft>
-            '^i',v10^i,
-            '^f',v3010^f,
-            '^h',v3010^h,
-            '^o',v2002,
-            '^p',getenv('REMOTE_ADDR')
-        </pft></field>
-    
-        <!-- Elimino la ocurrencia correspondiente de v2 -->
-        <field action=delete tag=2><pft>v30^o</pft></field>
-        
-        <field action=delete tag=2001>ALL</field>
-        <field action=export tag=4055>10</field>
-        <field action=delete tag=list>5,10,30,3010,2001,2002</field>
+        <field action=delete tag=list>5,10,30,3010,2001,2002,4001,4050,4051,4052</field>
         <write>Unlock</write>
         <field action=export tag=list>1101,1102</field>
      </update>
 </do>
+
+<!-- No registro en la base movi si ocurre un error en la grabación -->
+<flow action=jump><pft>if val(v1102)<>0 then 'fin_update_movi' fi</pft></flow>
 
 <!-- Obtengo la fecha y hora -->
 <field action=add tag=3010><pft>
@@ -106,43 +118,20 @@
 <field action=define tag=1102>Isis_Status</field>
 <field action=define tag=1011>Isis_Lock</field>
 <update>
-    <field action=import tag=list>2000,2001,2002</field> 
-    <!-- importa parte_id (2000), el DNI (2001), el operario (2002), fecha/hora de reserva (4050) -->
-    <field action=add tag=1><pft>ref(['lector']l(['lector']v2001),v1)</pft></field>
-    <field action=add tag=2><pft>v2001</pft></field>
-    <field action=import tag=3>3010</field>
-    <field action=replace tag=4><pft>'^telimina_reserva',v2000,v4050</pft></field>
-    <field action=import tag=5>2002</field>
-    <field action=add tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
-    <field action="delete" tag="list">2000,2001,2002</field>
-    <field action=export tag=1011>1011</field>
-    <write>Unlock</write>
-    </update>
-</do>
-
-<!-- No registro en la base movi si ocurre un error en la grabación -->
-<flow action=jump><pft>if val(v1102)<>0 then 'fin_update_movi' fi</pft></flow>
-
-<field action=replace tag=4055><pft>'^n',v4055^i</pft></field>
-
-<do task=update>
-<parm name=db>movi</parm>
-<parm name=mfn>New</parm>
-<parm name=fst><pft>cat('movi.fst')</pft></parm>
-<field action=define tag=1102>Isis_Status</field>
-<field action=define tag=1011>Isis_Lock</field>
-<update>
-    <field action=import tag=list>2000,2001,2002,4050,4055</field> 
+    <field action=import tag=list>2000,2001,2002,4050,4051,4052</field> 
     <!-- importa parte_id (2000), el DNI (2001), el operario (2002),
-    fecha/hora de reserva (4050), DNI de la nueva espera (4050) -->
+    DNI de la nueva espera (4050) -->
     <field action=add tag=1><pft>ref(['lector']l(['lector']v2001),v1)</pft></field>
     <field action=add tag=2><pft>v2001</pft></field>
     <field action=import tag=3>3010</field>
-    <field action=replace tag=4><pft>'^telimina_espera',v2000,v4050,v4055</pft></field>
+    <field action=replace tag=4><pft>'^telimina_espera',v2000</pft></field>
     <field action=import tag=5>2002</field>
     <field action=add tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
+    <field action=add tag=7><pft>"EC="v4050</pft></field>
+    <field action=add tag=7><pft>"RC="v4051</pft></field>
+    <field action=add tag=7><pft>"EN="v4052</pft></field>
     <field action=export tag=1102>1102</field>
-    <field action="delete" tag="list">2000,2001,2002</field>
+    <field action="delete" tag="list">2000,2001,2002,4050,4051,4052</field>
     <write>Unlock</write>
     </update>
 </do>
