@@ -3,6 +3,10 @@
 <title>Open MarcoPolo - Edición de Políticas</title>
 
 </head>
+<?php
+session_start();
+if (isset($_SESSION["s_username"])) {
+?>
 <body bgcolor="#E8E8D0" topmargin="0">
 
 <?php
@@ -212,4 +216,9 @@ endif;
 ?>
 
 </body>
+<?php
+}else{
+echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.html>";
+}
+?>
 </html>

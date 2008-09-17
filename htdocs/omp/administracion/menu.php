@@ -3,6 +3,10 @@
 <title>Menú del sistema MarcoPolo</title>
 <!--script language=javascript type=text/javascript src=js/popup_calendar.js-->
 </head>
+<?php
+session_start();
+if (isset($_SESSION["s_username"])) {
+?>
 <body bgcolor="#E8E8D0" topmargin="0">
 <table border="0" width="100%">
   <tr>
@@ -138,3 +142,9 @@
  
 </table>
 </body>
+<?php
+}else{
+echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.html>";
+}
+?>
+</html>

@@ -15,7 +15,7 @@ if($userpwd != $password) {
 echo "Login incorrecto";
 }else{
 $_SESSION["s_username"] = $username;
-echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=menu.html>";
+echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=menu.php>";
 }
 }
 ?> 

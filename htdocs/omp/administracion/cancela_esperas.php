@@ -3,6 +3,10 @@
 <title>Open MarcoPolo - Cancela Esperas Vencidas</title>
 
 </head>
+<?php
+session_start();
+if (isset($_SESSION["s_username"])) {
+?>
 <body bgcolor="#E8E8D0" topmargin="0">
 
 <?php
@@ -18,4 +22,9 @@ $url="http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/admin
 ?>
 
 </body>
+<?php
+}else{
+echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.html>";
+}
+?>
 </html>
