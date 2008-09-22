@@ -29,7 +29,8 @@
 	PENDIENTE: ¿Qué pasa cuando la base calendario no tiene definido un año?
 	
 	(c) 2008 - Víctor Ferracutti - vmferra@uns.edu.ar UNS
-	           Claudio Fuhr - claudiofuhr@gmail.com ABR
+	           		Claudio Fuhr - claudiofuhr@gmail.com ABR
+	           		Jeronimo Spadaccioli
 	
 ===========================================================================
 -->
@@ -148,9 +149,9 @@
 	<field action=replace tag=501><pft>if val(v501)>12 then '1' else v501 fi</pft></field>
 	
 	<label>CICLO</label>
-
+	<!--empiezo a contar desde el primer día-->
+	<field action=replace tag=502>0</field>
 	<!--DIAS HABILES EN EL MES ACTUAL. CAMPO 521-->
-
 	<field action=replace tag=521><pft>
 		select val(v501) 
 			case 1: ,ref(['calendario']l(['calendario']v500),f(size(replace(v1,'0','')),1,0)), 
@@ -177,7 +178,7 @@
 	<field action=replace tag=501><pft>f(val(v501)+1,1,0)</pft></field>
 	<field action=replace tag=500><pft>if val(v501)>12 then f(val(v500)+1,1,0) else v500 fi</pft></field>
 	<field action=replace tag=501><pft>if val(v501)>12 then '1' else v501 fi</pft></field>
-	<field action=replace tag=502>1</field>
+	
 
 	<flow action=jump><pft>'CICLO'</pft></flow>
 	
@@ -209,17 +210,18 @@
 	
 	<label>ENCUENTRO_DIA</label>
 			<field action=replace tag=551><pft>f(instr(v550,'.'),1,0)</pft></field>
+
 			<!--DIA DEL MES-->
 			<field action=replace tag=552><pft>f(val(v552)+val(v551),1,0)</pft></field>
 			<field action=replace tag=510><pft>f(val(v510)-1,1,0)</pft></field>
 			<!-- field action=replace tag=550><pft>right(v550,size(v550)-val(v551)+1)</pft></field -->
 
-			<field action=replace tag=550><pft>right(v550,size(v550)-(val(v551)+1))</pft></field>
+			<field action=replace tag=550><pft>right(v550,size(v550)-val(v551))</pft></field>
 
 	<flow action=jump><pft>if val(v510)>0 then 'ENCUENTRO_DIA' fi</pft></flow>
-	
     
 	<field action=replace tag=600><pft>v500,if val(v501)<10 then '0',f(val(v501),1,0) else v501 fi,if val(v552)<10 then '0',f(val(v552),1,0) else v552 fi</pft></field>
+	
     <return action=export tag=9000>600</return>
 
 </function>
