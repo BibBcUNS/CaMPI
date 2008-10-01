@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="[pft]getenv('PATH_INFO')[/pft]estilos.css" type="text/css">
 <table width="100%">
 	<tr>
-	  <td width="50%">Institucion XXXXX</td>
+	  <td width="50%">Universidad Nacional del Sur</td>
 	  <td width="50%" align="right">
 	    <h5>Open MarcoPolo - Módulo Estadísticas<br>
 	    Fecha:
