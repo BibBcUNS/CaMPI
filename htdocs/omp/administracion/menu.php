@@ -124,7 +124,7 @@ if (isset($_SESSION["s_username"])) {
 		<td>
 		<form action="/cgi-bin/wxis.exe/omp/administracion/" method="post">
 		<input type="submit" value="         Actualizar inventarios         "></td><td>En caso que no utilize indicadores para inventarios nuevos y dados de baja<br> (el sistema lo detecta automáticamente)
-		<input type="hidden" name="IsisScript" value="omp/administracion/actualizar_inv.xis">
+		<input type="hidden" name="IsisScript" value="omp/administracion/actualizar_bases.xis">
 		</form>
 		</td></tr></table>
 	</td>

@@ -1,0 +1,29 @@
+<IsisScript><section>
+<trace>!On</trace>
+
+ 
+<!--
+Esta script:
+
+* Regenera la base de partes a partir de los registros de la base bibliogràfica (biblo).
+* Regenera la base biblio (Bibliografica en OMP)
+* Actualiza la base de existencias (exist)
+
+ 
+Para la base de partes se toman el nombre de base de datos,
+el nùmero de control del registro bibliográfico y la identificación de parte;
+y un campo repetible con todos los inventarios respectivos...
+-->
+	<display><pft>'Content-type: text/html'/#</pft></display>
+	<trace>!BR</trace>
+	<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>	
+	
+	<include>omp/administracion/archivos_actualiza/leer_base_config.xis</include>
+	<include>omp/administracion/archivos_actualiza/crear_biblo.xis</include>
+	<include>omp/administracion/archivos_actualiza/crear_partes.xis</include>
+
+	
+	<!-- Listo, FIN-->
+
+</section>
+</IsisScript>
