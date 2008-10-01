@@ -2,7 +2,7 @@
         <!-- Verifica si existe alguna reserva para el inventario devuelto.
         En caso de existir, la primera reserva (menor timestamp) pasa a espera (v3)
         Recibe como parametro ^i el invatrario y ^o el operador (para lockid)
-        Salida: -->
+        -->
 
             <!-- Recupero el ID de la parte -->
             <field action=replace tag=2><pft>ref(['partes']l(['partes']v1^i),v1)</pft></field>
@@ -75,6 +75,7 @@
                     '^i',v10^i,
                     '^f',v3010^f,
                     '^h',v3010^h,
+                    '^e',v35^i
                 </pft></field>
  				<field action=export tag=list>4050</field>
                 

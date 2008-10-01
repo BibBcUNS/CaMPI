@@ -68,3 +68,10 @@
 	(if v5000.1<>'#' and v5000:'Nombre Institucion=' then 
 		mid(v5000,size('Nombre Institucion=')+1,
 		instr(v5000,';')-size('Nombre Institucion=')-1) fi)</pft></field>						
+
+<!-- v5011 define el Nombre de la Institucion -->
+<field action="add" tag="5011"><pft>
+	(if v5000.1<>'#' and v5000:'Fecha de devolucion=' then 
+		mid(v5000,size('Fecha de devolucion=')+1,
+		instr(v5000,';')-size('Fecha de devolucion=')-1) fi)</pft></field>						
+

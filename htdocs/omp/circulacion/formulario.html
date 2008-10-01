@@ -12,48 +12,61 @@
 
 
 	function verificar() {
+		
+		// si se selecciona la fecha de vto. a través del almanaque carga este valor en el formulario control
+		// modificando el valor del select
+		// window.document.control.dias_vto_A Retorna un valor booleano (true|false). Es para comprobar
+		// si se están utilizando fechas de vto manual o se calculan posteriormente de acuerdo a las políticas.
 
-	// si se selecciona la fecha de vto. a través del almanaque carga este valor en el formulario control
-	// modificando el valor del select
-	if (window.document.control.dias_vto_A.value != "----") {
-		window.document.control.dias_prestamo_A.options[window.document.control.dias_prestamo_A.selectedIndex].value = window.document.control.dias_vto_A.value;}
-	if (window.document.control.dias_vto_B.value != "----") {
-		window.document.control.dias_prestamo_B.options[window.document.control.dias_prestamo_B.selectedIndex].value = window.document.control.dias_vto_B.value;}
-
-	window.document.verifica._enviar_invs.value = "";
-	window.document.verifica._devoluciones_invs.value = "";
-	
-	for (j = 0; j < 100; j++) {
-		element = "dev_" + j;
-
-		if (document.getElementById(element)) { 
-		if (document.getElementById(element).status) 
-			{window.document.verifica._enviar.value = "1";
-  	         window.document.verifica._devoluciones_invs.value += window.document.getElementById(element).value + "\n"}
-		else {window.document.verifica._enviar_invs.value = document.getElementById(element).value + "\n"}
+		if (window.document.control.dias_vto_A && window.document.control.dias_vto_A.value != "----") {
+			window.document.control.dias_prestamo_A.options[window.document.control.dias_prestamo_A.selectedIndex].value = window.document.control.dias_vto_A.value;
 		}
-	}
 			
-	if (window.document.control.invs_prestamo_A.value != "") {
-	window.document.verifica.invs_prestamo_A.value = window.document.control.invs_prestamo_A.value};
-	if (window.document.control.invs_prestamo_B.value != "") {
-	window.document.verifica.invs_prestamo_B.value = window.document.control.invs_prestamo_B.value};
-	if (window.document.control.invs_prestamo_A.value != "" || window.document.control.invs_prestamo_B.value != "") 
-		{
-		window.open("[pft]getenv('PATH_INFO')[/pft]/aguarde.html","VERIFICA","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,copyhistory=0,width=400,height=200");
-		window.document.verifica.submit();
-		}
-	if (window.document.control.invs_prestamo_A.value == "" && window.document.control.invs_prestamo_B.value == "" && window.document.verifica._enviar.value == "1" && window.document.control.devolucion_1) 
-		{
-		window.document.control.submit();
+		if (window.document.control.dias_vto_B && window.document.control.dias_vto_B.value != "----") {
+			window.document.control.dias_prestamo_B.options[window.document.control.dias_prestamo_B.selectedIndex].value = window.document.control.dias_vto_B.value;}
+
+		window.document.verifica._enviar_invs.value = "";
+		window.document.verifica._devoluciones_invs.value = "";
+
+		for (j = 0; j < 100; j++) {
+			element = "dev_" + j;	
+			if (document.getElementById(element)) { 
+				if (document.getElementById(element).status) {
+					window.document.verifica._enviar.value = "1";
+		  	        window.document.verifica._devoluciones_invs.value += window.document.getElementById(element).value + "\n"
+		  	    }
+				else {
+					window.document.verifica._enviar_invs.value = document.getElementById(element).value + "\n"
+				}
+			}
 		}
 
-	if (window.document.control.devolucion_1) { 
-		if (window.document.control.invs_prestamo_A.value == "" && window.document.control.invs_prestamo_B.value == "" && window.document.verifica._enviar.value == "0") 
-		{alert ("No se puede enviar el formulario.\nPosibles errores:\n--> No se ha marcado una devolución.\n--> No se ha indicado un libro a prestar.");}}
-	else {
-		if (window.document.control.invs_prestamo_A.value == "" && window.document.control.invs_prestamo_B.value == "") 
-		{alert ("No se puede enviar el formulario.\nError:\n--> No se ha indicado un libro a prestar.");}
+		if (window.document.control.invs_prestamo_A.value != "") {
+			window.document.verifica.invs_prestamo_A.value = window.document.control.invs_prestamo_A.value
+		}
+
+		if (window.document.control.invs_prestamo_B && window.document.control.invs_prestamo_B.value != "") {
+			window.document.verifica.invs_prestamo_B.value = window.document.control.invs_prestamo_B.value
+		}
+
+		if (window.document.control.invs_prestamo_A.value != "" || (window.document.control.invs_prestamo_B && window.document.control.invs_prestamo_B.value != "")) {
+			window.open("[pft]getenv('PATH_INFO')[/pft]/aguarde.html","VERIFICA","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,copyhistory=0,width=400,height=200");
+			window.document.verifica.submit();
+		}
+
+		if (window.document.control.invs_prestamo_A.value == "" && (!window.document.control.invs_prestamo_B || window.document.control.invs_prestamo_B.value == "") && window.document.verifica._enviar.value == "1" && window.document.control.devolucion_1) {
+			window.document.control.submit();
+		}
+
+		if (window.document.control.devolucion_1) { 
+			if (window.document.control.invs_prestamo_A.value == "" && (!window.document.control.invs_prestamo_B || window.document.control.invs_prestamo_B.value == "") && window.document.verifica._enviar.value == "0") {
+				alert ("No se puede enviar el formulario.\nPosibles errores:\n-- > No se ha marcado una devolución.\n-- > No se ha indicado un libro a prestar.");
+			}
+		}
+		else {
+			if (window.document.control.invs_prestamo_A.value == "" && (!window.document.control.invs_prestamo_B || window.document.control.invs_prestamo_B.value == "")) {
+				alert ("No se puede enviar el formulario.\nError:\n-- > No se ha indicado un libro a prestar.");
+			}
 		}
 	}
 
@@ -127,10 +140,9 @@
 	// End -->
 	</script>
 
-
 [pft]mhl,
 
-'<table width="100%">
+'<table width="100%" border="0">
   <tr>
     <td width="24%"><img src="/omp/circulacion/fotos/',v2,'.jpg" width="128" height="96" align="middle"  OnError="this.src=',"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,'"></td>',
    '<td width="76%"><big>',v1,'</big>',", ",v3,
@@ -269,66 +281,81 @@ Sanc. Previas:
 fi,
 
 '<table border="0" width="100%">
-<tr>
-<td valign="top" >
-<table border="0" width="100%">
-  <tr>
-    <td width="100%" colspan="2" bgcolor="F5A307">
-      <strong>Pr&eacutestamos, indique los Nro. de Inventario</strong></td></tr>
-  <tr>
-    <td valign="top" width="126"><p align="center"><strong>Inventarios<br>
-    </strong><textarea rows="5" name="invs_prestamo_A" cols="12"></textarea><br>
-    Días de Vigencia:<br>
-    <select name="dias_prestamo_A" size="1"  onclick="window.document.control.dias_vto_A.value=',"'"n0,'----',"'"n0,';">
-    </select><br>
-
-	<DIV id=popCal_1 
-	style="BORDER-RIGHT: 2px ridge; BORDER-TOP: 2px ridge; Z-INDEX: 100; VISIBILITY: hidden; BORDER-LEFT: 2px ridge;  BORDER-BOTTOM: 2px ridge; POSITION: absolute" 
-	onclick=event.cancelBubble=true>
-	<IFRAME name=popFrame_1 src="\omp\circulacion\popcjs.htm" 
-	frameBorder=0 width=183 scrolling=no height=188></IFRAME></DIV>
-	
-	<SCRIPT event=onclick() 
-	for=document>popCal_1.style.visibility = "hidden";</SCRIPT>
-
-	    Calendario:<INPUT style="TEXT-ALIGN: center" readOnly value="----" name="dias_vto_A" size="10">
-	    <INPUT onclick="window.document.control.Vto_AB.value=',"'"n0,'A',"'"n0,'; popFrame_1.fPopCalendar(dias_vto_A,dias_vto_A,popCal_1);
-			    return false;" 
-		   type=button value=V>
-
-	</td>
-    <td valign="top" width="126"><p align="center"><strong>Inventarios<br>
-    </strong><textarea rows="5" name="invs_prestamo_B" cols="10"></textarea><br>
-    Días de Vigencia:<br>
-    <select name="dias_prestamo_B" size="1"  onclick="window.document.control.dias_vto_B.value=',"'"n0,'----',"'"n0,';">
-    </select><br>
-
-	<DIV id=popCal_2 
-	style="BORDER-RIGHT: 2px ridge; BORDER-TOP: 2px ridge; Z-INDEX: 100; VISIBILITY: hidden; BORDER-LEFT: 2px ridge;  BORDER-BOTTOM: 2px ridge; POSITION: absolute" 
-	onclick=event.cancelBubble=true>
-	<IFRAME name=popFrame_2 src="\omp\circulacion\popcjs.htm" 
-	frameBorder=0 width=183 scrolling=no height=188></IFRAME></DIV>
-	
-	<SCRIPT event=onclick() 
-	for=document>popCal_2.style.visibility = "hidden";</SCRIPT>
-
-	    Calendario:<INPUT style="TEXT-ALIGN: center" readOnly value="----" name="dias_vto_B" size="10">
-	    <INPUT onclick="window.document.control.Vto_AB.value=',"'"n0,'B',"'"n0,'; popFrame_2.fPopCalendar(dias_vto_B,dias_vto_B,popCal_2);
-			    return false;" 
-		   type=button value=V>
-
-
-  </td>
+        <tr>
+                <td width="100%" colspan="3" bgcolor="F5A307">
+                <strong>Pr&eacutestamos, indique los Nro. de Inventario</strong></td></tr>
+        <tr>
+                <!-- prestamos A -->
+                <td valign="middle" width="40%">
+                        <p align="center"><strong>Inventarios<br>
+                        </strong><textarea rows="5" name="invs_prestamo_A" cols="12"></textarea><br>
+                        
+                        ',if ref(['config']1,v10)='manual' then '
+                        Días de Vigencia:<br>
+                        <select name="dias_prestamo_A"
+                                    size="1"
+                                    onclick="window.document.control.dias_vto_A.value=',"'"n0,'----',"'"n0,';">
+                        </select><br>
+                        
+                        <DIV id=popCal_1 style="BORDER-RIGHT: 2px ridge; BORDER-TOP: 2px ridge; Z-INDEX: 100; VISIBILITY: hidden; BORDER-LEFT: 2px ridge;  BORDER-BOTTOM: 2px ridge; POSITION: absolute" onclick=event.cancelBubble=true>
+                        <IFRAME name=popFrame_1
+                                       src="\omp\circulacion\popcjs.htm"
+                                       frameBorder=0
+                                       width=183
+                                       scrolling=no
+                                       height=188>
+                        </IFRAME></DIV>
+                        
+                        <SCRIPT event=onclick() for=document>popCal_1.style.visibility = "hidden";</SCRIPT>
+                        
+                        <center>
+                        Calendario:
+                        <INPUT style="TEXT-ALIGN: center" readOnly value="----" name="dias_vto_A" size="10">
+                        <INPUT onclick="window.document.control.Vto_AB.value=',"'"n0,'A',"'"n0,'; popFrame_1.fPopCalendar(dias_vto_A,dias_vto_A,popCal_1);return false;" type=button value=V>
+                        </center>
+                        ',fi,'
+            	</td>
+    
+                <!-- prestamos B -->',
+                if ref(['config']1,v10)='manual' then
+                '<td valign="top" width="40%">
+                        <p align="center"><strong>Inventarios<br>
+                        </strong><textarea rows="5" name="invs_prestamo_B" cols="12"></textarea><br>
+                        Días de Vigencia:<br>
+                        <select name="dias_prestamo_B"
+                                    size="1"
+                                    onclick="window.document.control.dias_vto_B.value=',"'"n0,'----',"'"n0,';">
+                        </select><br>
+                
+                    	<DIV id=popCal_2 style="BORDER-RIGHT: 2px ridge; BORDER-TOP: 2px ridge; Z-INDEX: 100; VISIBILITY: hidden; BORDER-LEFT: 2px ridge;  BORDER-BOTTOM: 2px ridge; POSITION: absolute" onclick=event.cancelBubble=true>
+                    	<IFRAME name=popFrame_2
+                                       src="\omp\circulacion\popcjs.htm" 
+                                       frameBorder=0
+                                       width=183
+                                       scrolling=no
+                                       height=188>
+                        </IFRAME></DIV>
+                	
+                    	<SCRIPT event=onclick() for=document>popCal_2.style.visibility = "hidden";</SCRIPT>
+                    
+                        <center>
+                        Calendario:
+                        <INPUT style="TEXT-ALIGN: center" readOnly value="----" name="dias_vto_B" size="10">
+                        <INPUT onclick="window.document.control.Vto_AB.value=',"'"n0,'B',"'"n0,'; popFrame_2.fPopCalendar(dias_vto_B,dias_vto_B,popCal_2); return false;" type=button value=V>
+                        </center>
+                </td>
+                ',fi,'
+                </td>
+                        <td valign="top">
+                        <p align="center">&nbsp;</p>
+                        <p><input type="button" value="  Enviar      " onclick="verificar();return false;"></p>
+                        <p><input type="reset"   value="  Limpiar    " onclick="borrar()"></p>
+                        <p><input type="button" value="  Cancelar " onclick="cancelar();"></p>
+                </td>
   </tr>
 </table>
-</td>
-    <td valign="top" width="77"><p align="center">&nbsp;</p>
-    <p><input type="button" value="Enviar" onclick="verificar();return false;"></p>
-    <p><input type="reset" value="Limpiar" onclick="borrar()"></p>
-    <p><input type="button" value="Cancelar" onclick="cancelar();"></td>
-  </tr>
- </table>
- </form>
+
+</form>
 <br>',
 
 if ref(['config']1,v9)='si' then

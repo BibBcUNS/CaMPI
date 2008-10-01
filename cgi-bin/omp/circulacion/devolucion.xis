@@ -300,6 +300,7 @@ Se exporta el campo v2000 con OK o código error -->
         			<parm name="gizmo">oemansi</parm>
         			<loop>
         			    <field action=add tag=3005><pft>mfn(1)</pft></field>
+        			    <field action=replace tag=1000 split=occ><pft>(if v7^*='EN=' then v7^e fi)</pft></field> <!-- pongo aca las reservas -->
         				<display><htmlpft><pft>
         						cat(getenv('PATH_TRANSLATED'),'devolucion_exitosa.html')
         				</pft></htmlpft></display>              

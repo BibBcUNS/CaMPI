@@ -20,6 +20,7 @@
 		'politicas.*=',v5006,'/politicas/politicas.*'/
 		'tipo_lector.*=',v5006,'/politicas/tipo_lector.*'/
 		'tipo_objeto.*=',v5006,'/politicas/tipo_objeto.*'/
+		'calendario.*=',v5006,'/calendario/calendario.*'/		
 		'txt_htm.*=',v5006,'/gizmo/gizmo.*'/
 		'oemansi.*=',v5006,'/oemansi/oemansi.*'/
 		'ansioem.*=',v5006,'/ansioem/ansioem.*'/

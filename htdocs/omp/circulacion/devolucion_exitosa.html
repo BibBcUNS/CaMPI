@@ -12,12 +12,23 @@
 		parent.indice.consultas.expresion.value = documento
 
 	}
-
+	
+	function mostrar_reservas() {
+		[pft]
+			if p(v1000) then
+				'alert("Se registran RESERVAS para los siguientes ejemplares:\n\n ',
+	                    		('\t- ',v1000+|\n|),
+	                    '")'
+			fi
+		[/pft]		
+	}
+	
+	
 	//  End -->
 	</script>
 </head>
 
-<body bgcolor="#E8E8D0" onload="parent.indice.form_devolucion.inventario.value = '';">
+<body bgcolor="#E8E8D0" onload="mostrar_reservas();parent.indice.form_devolucion.inventario.value = '';">
 <P>&nbsp;</P>
 <table align="center" cellspacing="1" cellpadding="1" border="0" width="75%">
 <tr>

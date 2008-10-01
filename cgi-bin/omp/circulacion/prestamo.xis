@@ -45,86 +45,86 @@
 
 <include>omp/circulacion/menor_inc.xis</include>
 <include>omp/circulacion/verif_reservas_inc.xis</include>
+<include>omp/fecha_funciones.xis</include>
 
 <function name=operador action=replace tag=1000>
-
-<!-- Esta función valida al operarrio. 
-El campo 1000 contiene los datos del operador en el formato:
-^inombre de usuario
-^pclave de acceso
-El campo v2000 que es exportado como v1000 valdrá ok si el usuario está correctamente validado -->
-
-  <field action=add tag=2000>0</field>
-  <do task=search>
-    <parm name=db>opera</parm>
-    <parm name=expression><pft>v1000^i</pft></parm>
-    <parm name=count>1</parm>
-    <loop>
-      <field action=import tag=1000>1000</field>
-      <field action=add tag=2000><pft>
-        if s(mpu,v1)=s(mpu,v1000^i) and s(mpu,v2)=s(mpu,v1000^p) 
-         then mhl,'ok' else mhl,'error' fi
-      </pft></field>
-      <field action=export previous=delete tag=2000>2000</field>
-    </loop>
-  </do>
-  <return action=export tag=1000>2000</return>
+        <!-- Esta función valida al operarrio. 
+        El campo 1000 contiene los datos del operador en el formato:
+        ^inombre de usuario
+        ^pclave de acceso
+        El campo v2000 que es exportado como v1000 valdrá ok si el usuario está correctamente validado -->
+        
+        <field action=add tag=2000>0</field>
+        <do task=search>
+        <parm name=db>opera</parm>
+        <parm name=expression><pft>v1000^i</pft></parm>
+        <parm name=count>1</parm>
+        <loop>
+          <field action=import tag=1000>1000</field>
+          <field action=add tag=2000><pft>
+            if s(mpu,v1)=s(mpu,v1000^i) and s(mpu,v2)=s(mpu,v1000^p) 
+             then mhl,'ok' else mhl,'error' fi
+          </pft></field>
+          <field action=export previous=delete tag=2000>2000</field>
+        </loop>
+        </do>
+        <return action=export tag=1000>2000</return>
 </function>
 
 
 <function name=convertir_fecha action=replace tag=1000>
-<!--
-Esta función devuelve en formato dd/mm/aaaa, la fecha actual mas el desplazamiento en días especificado en v1000.
-v1001 tiene la fecha en el formato: ^d..^m..^a....
-v1002 acumula a la fecha actual el desplazamiento en dias
-v1003 es el mes
-v1004 es el año
-v1005 es 0 si el año es bisiesto
-v1006 tiene la cantidad de días del mes
--->
-
-  <field action=add tag=1001><pft>'^a',s(date).4,'^m',s(date)*4.2,'^d',s(date)*6.2</pft></field>
-  <field action=add tag=1002><pft>f(val(v1001^d)+val(v1000),2,0)</pft></field>
-  <field action=add tag=1003><pft>v1001^m</pft></field>
-  <field action=add tag=1004><pft>v1001^a</pft></field>
-
-  <label>CICLO</label>
-
-  <field action=replace tag=1005><pft>s(f(val(v1004)/4,3,1))*4.1</pft></field>
-  <field action=replace tag=1006><pft>
-    select val(v1003)
-      case 1: '31',
-      case 2: '28',
-      case 3: '31',
-      case 4: '30',
-      case 5: '31',
-      case 6: '30',
-      case 7: '31',
-      case 8: '31',
-      case 9: '30',
-      case 10: '31',
-      case 11: '30',
-      case 12: '31',
-    endsel
-  </pft></field>
-<!-- A continuación se corrige el mes de febrero si el año es bisiesto -->
-  <field action=replace tag=1006>
-    <pft>if val(v1005)=0 and val(v1003)=2 then f(val(v1006)+1,2,0) fi</pft>
-  </field>
-<!-- Se produce el salto si se llego a una fecha valida -->
-  <flow action=jump><pft>if val(v1002) <= val(v1006) then 'SIGUE' fi</pft></flow>
-  <field action=replace tag=1002><pft>f(val(v1002)-val(v1006),2,0)</pft></field>
-  <field action=replace tag=1003><pft>f(val(v1003)+1,2,0)</pft></field>
-  <flow action=jump><pft>if val(v1003) <= 12 then 'CICLO' fi</pft></flow>
-  <field action=replace tag=1003>01</field>
-  <field action=replace tag=1004><pft>f(val(v1004)+1,4,0)</pft></field>
-  <flow action=jump>CICLO</flow>
-
-  <label>SIGUE</label>
-
-  <field action=replace tag=1001><pft>v1002,'/',v1003,'/',v1004</pft></field>
-  <field action=replace tag=1001><pft>replace(v1001,' ','0')</pft></field>
-  <return action=export previous=delete tag=1100>1001</return>
+        <!--
+        Esta función devuelve en formato dd/mm/aaaa, la fecha actual mas el desplazamiento en días especificado en v1000.
+        v1001 tiene la fecha en el formato: ^d..^m..^a....
+        v1002 acumula a la fecha actual el desplazamiento en dias
+        v1003 es el mes
+        v1004 es el año
+        v1005 es 0 si el año es bisiesto
+        v1006 tiene la cantidad de días del mes
+        -->
+        
+        <field action=add tag=1001><pft>'^a',s(date).4,'^m',s(date)*4.2,'^d',s(date)*6.2</pft></field>
+        <field action=add tag=1002><pft>f(val(v1001^d)+val(v1000),2,0)</pft></field>
+        <field action=add tag=1003><pft>v1001^m</pft></field>
+        <field action=add tag=1004><pft>v1001^a</pft></field>
+        
+        <label>CICLO</label>
+        
+        <field action=replace tag=1005><pft>s(f(val(v1004)/4,3,1))*4.1</pft></field>
+        <field action=replace tag=1006><pft>
+        select val(v1003)
+          case 1: '31',
+          case 2: '28',
+          case 3: '31',
+          case 4: '30',
+          case 5: '31',
+          case 6: '30',
+          case 7: '31',
+          case 8: '31',
+          case 9: '30',
+          case 10: '31',
+          case 11: '30',
+          case 12: '31',
+        endsel
+        </pft></field>
+        <!-- A continuación se corrige el mes de febrero si el año es bisiesto -->
+        <field action=replace tag=1006>
+        <pft>if val(v1005)=0 and val(v1003)=2 then f(val(v1006)+1,2,0) fi</pft>
+        </field>
+        <!-- Se produce el salto si se llego a una fecha valida -->
+        <flow action=jump><pft>if val(v1002) <= val(v1006) then 'SIGUE' fi</pft></flow>
+        <field action=replace tag=1002><pft>f(val(v1002)-val(v1006),2,0)</pft></field>
+        <field action=replace tag=1003><pft>f(val(v1003)+1,2,0)</pft></field>
+        <flow action=jump><pft>if val(v1003) <= 12 then 'CICLO' fi</pft></flow>
+        <field action=replace tag=1003>01</field>
+        <field action=replace tag=1004><pft>f(val(v1004)+1,4,0)</pft></field>
+        <flow action=jump>CICLO</flow>
+        
+        <label>SIGUE</label>
+        
+        <field action=replace tag=1001><pft>v1002,'/',v1003,'/',v1004</pft></field>
+        <field action=replace tag=1001><pft>replace(v1001,' ','0')</pft></field>
+        <return action=export previous=delete tag=1100>1001</return>
 </function>
 <!-- la función regresa en v1100 el resultado en el formato dd/mm/aaaa -->
 
@@ -146,31 +146,35 @@ v1000^g: días para el vencimiento del prestamo (uno por préstamo separado por CR
 
 <label>BLOQUEO</label>
 <!--
-Esta parte busca el lector por la credencial ingresada y bloquea el registro, para presentar luego el formulario.htm que permitirá indicar los préstamos, devoluciones y sanciones.
-v1000^b=id operador, v1000^c=credencial del lector
-El campo v2000 que es exportado como v1000 valdrá ok si el lector fue encontrado y bloqueado correctamente. El campo v2001 contiene el mfn del registro del lector (en caso de que se encuentre) -->
+Esta parte busca el lector por la credencial ingresada y bloquea el registro, para presentar luego
+el formulario.htm que permitirá indicar los préstamos, devoluciones y sanciones.
+
+v1000^b=id operador
+v1000^c=credencial del lector
+
+El campo v2000 que es exportado como v1000 valdrá ok si el lector fue encontrado y bloqueado correctamente.
+El campo v2001 contiene el mfn del registro del lector (en caso de que se encuentre) -->
 
 <field action=add tag=2000>0</field>
 <field action=add tag=2001>0</field>
 <field action=replace tag=1000>
   <pft>'^a',v1000^a,'^b',v1000^b,'^c',v1000^c</pft></field>
 <do task=search>
-  <parm name=db>lector</parm>
-  <parm name=expression><pft>v1000^c</pft></parm>
-  <parm name=count>1</parm>
-  <loop>
-    <field action=add tag=2000><pft>'ok'</pft></field>
-    <field action=add tag=2001><pft>mfn</pft></field>
-    <field action=export previous=delete tag=2000>2000</field>
-    <field action=export previous=delete tag=2001>2001</field>
-  </loop>
+		<parm name=db>lector</parm>
+		<parm name=expression><pft>v1000^c</pft></parm>
+		<parm name=count>1</parm>
+		<loop>
+				<field action=add tag=2000><pft>'ok'</pft></field>
+				<field action=add tag=2001><pft>mfn</pft></field>
+				<field action=export previous=delete tag=2000>2000</field>
+				<field action=export previous=delete tag=2001>2001</field>
+		</loop>
 </do>
 
 <flow action=jump><pft>if v2000<>'ok' then 'FIN_BLOQUEO' fi</pft></flow>
 
-<!-- Bloqueo del registro lector, el mfn fue exportado en v2001 del loop anterior -->
-
-<!-- por acá vamos a controlar si cayó la suspensión -->
+<!-- Controlamos si cayó la suspensión, actualizamos lector (agregado por jero)
+y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 <do task=update>
      <parm name=db>lector</parm>
      <parm name=mfn><pft>v2001</pft></parm>
@@ -178,102 +182,127 @@ El campo v2000 que es exportado como v1000 valdrá ok si el lector fue encontrado
      <field action=define tag=1102>Isis_Status</field>
      <field action=define tag=1011>Isis_Lock</field>
      <update>
-        <field action=replace tag=10><pft>
-            if v10:'Sancionado' and p(v11) 
-            then 
-                if s(v11[last]^v*6,v11[last]^v*3.2,v11[last]^v.2) < s(date).8
-                    then 'Habilitado'
-                    else 'Sancionado'
-                fi,
-            else
-                'Habilitado'
-            fi
-        </pft></field>
-        <write>Unlock</write>
+     		<flow action=jump><pft>if ref(['config']1,v10)='manual' or a(v8) then 'fin_recalcular' fi</pft></flow>
+			     	<!-- calcula las nuevas fechas de vto -->
+			        <list action=delete>now</list>
+			        <list action=load type=list><pft>(v8/)</pft></list>
+			        <do task=list>
+			        <field action=define tag=1001>Isis_Item</field>
+					<loop>
+							<field action=import tag=list>3</field>
+							<!-- tipo objeto: -->
+							<field action=replace tag=2344><pft>ref(['exist']l(['exist']v1001^i),v987)</pft></field>
+							<!-- días prestamo v2 tiene la credencial del lector): -->
+							<field action=replace tag=2345><pft>ref(['politicas']l(['politicas']'UO=',v3,'-',v2344),v11)/</pft></field>
+							<!-- fecha de préstamo: -->
+							<field action=replace tag=2346><pft>v1001^p*6.4,v1001^p*3.2,v1001^p*0.2</pft></field> 
+		
+							<call name=SUMAH><pft>v2346/v2345</pft></call> <!-- sumo a la fecha de prestamo (v2346) la cantidad de días de prestamo (v2345) -->
+							
+							<field action=replace tag=3000><pft>v9000*6.2,'/',v9000*4.2,'/',v9000*0.4</pft></field>
+							<field action=export previous=add tag=3000>3000</field>
+					</loop>
+			        </do>
+			        <display><pft>'v3000=',v3000,'<br>'</pft></display>
+			        <!-- formo las cadenas para el reemplazo de las fechas -->
+			        <field action=replace tag=2000 split=occ><pft>('^v',v8^v/)</pft></field> <!-- fechas de dev. registradas (a ser reemplazada) -->
+			        <field action=replace tag=3000 split=occ><pft>('^v',v3000/)</pft></field> <!-- nueva fecha de devolución -->
+			        
+			        <!-- por cada ocurrencia del v8 se creo una occ de v2000 (fecha orig) y v3000 (nva fecha) -->
+					<field action=replace tag=8 split=occ><pft>(replace(v8,v2000,v3000)/)</pft></field>
+			<label>fin_recalcular</label>
+	
+
+     		<!-- controlo la suspensión -->
+	        <field action=replace tag=10><pft>
+	            if v10:'Sancionado' and p(v11) 
+	            then 
+	                if s(v11[last]^v*6,v11[last]^v*3.2,v11[last]^v.2) < s(date).8
+	                    then 'Habilitado'
+	                    else 'Sancionado'
+	                fi,
+	            else
+	                'Habilitado'
+	            fi
+	        </pft></field>
+	        <field action=delete tag=list>2000,3000</field>
+	        <write>Unlock</write>
      </update>
 </do>
 
-
+<!-- Bloqueo del registro lector, el mfn fue exportado en v2001 del loop anterior -->
 <do task=update>
-  <parm name=db>lector</parm>
-  <parm name=mfn><pft>v2001</pft></parm>
-  <parm name=lockid><pft>v1000^b</pft></parm>
-  <parm name=expire>90</parm>
-  <field action=define tag=1102>Isis_Status</field>
-  <field action=define tag=1011>Isis_Lock</field>
-  <update>
+<parm name=db>lector</parm>
+<parm name=mfn><pft>v2001</pft></parm>
+<parm name=lockid><pft>v1000^b</pft></parm>
+<parm name=expire>90</parm>
+<field action=define tag=1102>Isis_Status</field>
+<field action=define tag=1011>Isis_Lock</field>
+<update>
     <write>Lock</write>
     <field action=add tag=2000><pft>if val(v1102)=0 then 'ok' else v1102 fi</pft></field>
     <field action=export tag=2000>2000</field>
-  </update>
+</update>
 </do>
 
+<!-- finalizamos la operación si no es posible bloquear -->
 <flow action=jump><pft>if v2000<>'ok' then 'FIN_BLOQUEO' fi</pft></flow>
 
+<!-- Lectura de base lector para verificar: Si está moroso, reservas y esperas. -->
 <do task=mfnrange>
-  <parm name=db>lector</parm>
-  <parm name=from><pft>v2001</pft></parm>
-  <parm name=count>1</parm>
-  <parm name=gizmo>txt_htm</parm>
-  <loop>
+<parm name=db>lector</parm>
+<parm name=from><pft>v2001</pft></parm>
+<parm name=count>1</parm>
+<parm name=gizmo>txt_htm</parm>
+<loop>
 
-<!-- v2001 tendrá tantas ocurrencias como v8 (prestamos) y en cada una de ellas un 1 si el préstamo está moroso, sino 0 -->
+        <!-- v2001 tendrá tantas ocurrencias como v8 (prestamos)
+        y en cada una de ellas un 1 si el préstamo está moroso, sino 0 -->
+        
+        <field action=add split=occ tag=2001><pft>
+                (if p(v8) then 
+                  if s(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) > s(s(date).8) then '0'/
+                  else if s(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < s(s(date).8) then '1'/
+                       else if a(v8^o) then '0'/
+                            else select s(v8^o).1
+                                 case 'm': if mid(date,10,6) > '100000' then 
+                                              '1'/ else '0'/ fi,
+                                 case 's': if mid(date,10,4) >                               s(mid(v8^o,7,2),mid(v8^o,10,2)) then '1'/ else '0'/ fi,
+                                 endsel,
+                            fi
+                       fi
+                   fi else '0' fi)
+        </pft></field>
 
-    <field action=add split=occ tag=2001><pft>
-    (if p(v8) then 
-      if s(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) > s(s(date).8) then '0'/
-      else if s(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < s(s(date).8) then '1'/
-           else if a(v8^o) then '0'/
-                else select s(v8^o).1
-                     case 'm': if mid(date,10,6) > '100000' then 
-                                  '1'/ else '0'/ fi,
-                     case 's': if mid(date,10,4) >                               s(mid(v8^o,7,2),mid(v8^o,10,2)) then '1'/ else '0'/ fi,
-                     endsel,
-                fi
-           fi
-       fi else '0' fi)</pft>
-    </field>
+        <!-- v2030 tendrá tantas ocurrencias como reservas posea -->
+        <!-- v2031 tendrá tantas ocurrencias como Esperas posea -->
+        <flow action=jump><pft>if ref(['config']1,v9)='no' then 'fin lista reservas' fi</pft></flow>
+        <do task="search">
+        <parm name="db">reservas</parm>
+        <parm name="expression"><pft>v2</pft></parm>
+        <loop>
+                <field action="import" tag="150">2</field>
+                <field action="import" tag="list">2030,2031</field>
+                <field action="add" tag="2030"><pft>(if v2^i=v150[1] then v1[1],v2 fi)</pft></field> <!-- reservas -->
+                <field action="add" tag="2031"><pft>(if v3^i=v150[1] then v1[1],v3 fi)</pft></field> <!-- esperas -->
+                <field action="export" tag="list">2030,2031</field>      
+        </loop>
+        </do>
 
-<!-- v2030 tendrá tantas ocurrencias como reservas posea -->
-<flow action=jump><pft>if ref(['config']1,v9)='no' then 'fin lista reservas' fi</pft></flow>
-    <do task="search">
-    <parm name="db">reservas</parm>
-    <parm name="expression"><pft>v2</pft></parm>
-    <loop>
-        <field action="import" tag="150">2</field>
-        <field action="import" tag="list">2030</field>
-        <field action="add" tag="2030"><pft>(if v2^i=v150[1] then v1[1],v2 fi)</pft></field>
-        <field action="export" tag="list">2030</field>      
-    </loop>
-    </do>
+        <label>fin lista reservas</label>
 
-    <!-- v2031 tendrá tantas ocurrencias como Esperas posea -->
-    <do task="search">
-    <parm name="db">reservas</parm>
-    <parm name="expression"><pft>v2</pft></parm>
-    <loop>
-        <field action="import" tag="150">2</field>
-        <field action="import" tag="list">2031</field>
-        <field action="add" tag="2031"><pft>(if v3^i=v150[1] then v1[1],v3 fi)</pft></field>
-        <field action="export" tag="list">2031</field>      
-    </loop>
-    </do>
-    
-    <label>fin lista reservas</label>
-
-    <field action=import tag=1000>1000,2030</field>
-    <field action=replace tag=2002><pft>v1000^b</pft></field> <!-- v2002 contiene id operario -->
-    <field action=add tag=2003><pft>mfn</pft></field>      <!-- v2003 tiene el mfn del lector -->
-      <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'formulario.html')</pft></htmlpft></display>
-  </loop>
+        <field action=import tag=1000>1000,2030</field>
+        <field action=replace tag=2002><pft>v1000^b</pft></field> 	<!-- v2002 contiene id operario -->
+        <field action=add tag=2003><pft>mfn</pft></field>      			<!-- v2003 tiene el mfn del lector -->
+        
+        <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'formulario.html')</pft></htmlpft></display>
+</loop>
 </do>
 
-
-
-
 <label>FIN_BLOQUEO</label>
-<return action=export tag=1000>2000</return>
 <!-- la rutina corta y regresa con v1000 en 'ok' si el lector fue bloqueado, sino con el código de error (Isis_Status) -->
+<return action=export tag=1000>2000</return>
+
 
 <label>CANCELA</label>
 
@@ -325,8 +354,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <label>DEVOLUCIONES</label>
         
         <!-- si no hay devoluciones salto toda esta seccion -->
-        <!-- En v1000^d se recibe la lista de préstamos a ser devuelto (los nros) -->
-        
+        <!-- En v1000^d se recibe la lista de préstamos a ser devuelto (los nros) -->        
         <flow action=jump><pft>if a(v1000^d) then 'CONTROL_SANCION' fi</pft></flow>
         
         <field action=add tag=1100 split=occ><pft>
@@ -375,16 +403,17 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 <!-- Estamos dentro de <do update lector> -->
                 <field action=occ tag=3000 from=8><pft>v1001</pft></field>
                 
+                <!-- importo el tipo de Usuario  -->
+                <field action=import tag=2343>3</field>
+                
                 <!-- v1000^b se utiliza para el lockid (id operador) -->
                 <field action=import tag=1000>1000,2001</field>
         
-                <!-- verifico reservas -->
+                <!-- verifico reservas, por cada inventarios -->
                 <call name=verificarReservas><pft>'^i',v3000^i,'^o',v1000[1]^b</pft></call>
                 <field action=export tag=list previous=add>4050</field>
-                <!-- En caso de generar una espera el id del usuario se retorna en v3030 -->    
-                <!-- la siguiente linea agregaba al campo 3030^d el ID del usuario con nueva espera -->
-                <!--field action=replace tag=3000><pft>v3000,"^d"v3030</pft></field-->
-                                
+                <!-- en 4050 se obtienen las las Reservas Caidas (RC) y Esperas Nuevas (EN) -->
+                                                
                 <flow action=jump><pft>if s(mpu,v3000^i.1):'X' then 'FIN_BLOQUEO' fi</pft></flow>
         
                 <do task=search>
@@ -399,13 +428,14 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 </loop>
                 </do> <!-- serarch exit -->
                 
+                <!-- Controlamos si hubo un error en la busqueda del inventario -->
                 <field action=replace tag=3000><pft>
                     if val(v1103)=0 or val(v1102)>0 then '^tdevolucion^i',v3000^i,'^p',v3000^p,'^b!',
                     'Error ',v1102,', fallo la busqueda en la base bibliografica^v',v3000^v fi
-                </pft></field> 
-        
+                </pft></field>       
                 <flow action=jump><pft>if val(v1103)=0 or val(v1102)>0 then 'FIN_BLOQUEO' fi</pft></flow>
                       
+                <!-- bloqueo el mfn correspondiente en exist -->
                 <do task=update>
                 <parm name=db>exist</parm>
                 <parm name=mfn><pft>v2000</pft></parm>
@@ -419,6 +449,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 </update>
                 </do> <!-- update exist -->
                     
+                <!-- verificamos si la base se pudo bloquear correctamente -->
                 <field action=replace tag=3000><pft>
                  if val(v1102)>0 then '^tdevolucion^i',v3000^i,'^p',v3000^p,'^b!',
                    'Error ',v1102,', fallo el bloqueo en la base bibliografica^v',v3000^v,
@@ -429,25 +460,57 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 
                 <field action=replace tag=3000><pft>if s(mpu,v3000^i.1):'X' then mpl,'^tdevolucion',v3000 fi</pft></field>
         
-                <!-- Seguidamente se agrega el subcampo v3000^m el que indica si la devolución fue realizada fuera de término (moroso) "s" o "n". Advertir que los prestamos en sala tiene un subcampo ^o que indica la hora de entrega: ^osala, 12:00 hs. o ^osala, 20:00 hs. según el turno-->
-        
-                <field action=replace tag=3000><pft>
-                 if v300^b.1<>'!' then s(mpl,v3000,'^m'),
-                   if val(s(v3000^v)*6.4,s(v3000^v)*3.2,s(v3000^v)*0.2) > val(s(date).8) then 'n'
-                   else if val(s(v3000^v)*6.4,s(v3000^v)*3.2,s(v3000^v)*0.2) < val(s(date).8) then 's'
-                        else if a(v3000^o) then 'n'
-                             else select s(mpu,v3000^o).1
-                                  case 'm': if s(mid(date(datetime),10,2),mid(date(datetime),13,2),mid(date(datetime),16,2)) > '230000' then 
-                                               's' else 'n' fi,
-                                  case 's': if val(mid(date,10,4)) > 
-                                               val(s(mid(v3000^o,7,2),mid(v3000^o,10,2))) then
-                                                 's'/ else 'n'/ fi,
-                                  endsel,
-                             fi
-                        fi
-                   fi
-                 fi
-                </pft></field>
+                <!-- Seguidamente se agrega el subcampo v3000^m el que indica si la devolución fue
+                realizada fuera de término (moroso) "s" o "n".
+                Advertir que los prestamos en sala tiene un subcampo ^o que indica
+                la hora de entrega: ^osala, 12:00 hs. o ^osala, 20:00 hs. según el turno-->
+        		
+                <!-- El control lo hacemos de acuerdo a config (v10 = manual | politicas) -->
+                
+                
+                <label>FECHA_DEV_manual</label>
+               			 
+						<field action=replace tag=3000><pft>
+						 if v3000^b.1<>'!' then s(mpl,v3000,'^m'),
+						   if val(s(v3000^v)*6.4,s(v3000^v)*3.2,s(v3000^v)*0.2) > val(s(date).8) then 'n'
+						   else if val(s(v3000^v)*6.4,s(v3000^v)*3.2,s(v3000^v)*0.2) < val(s(date).8) then 's'
+						        else if a(v3000^o) then 'n'
+						             else select s(mpu,v3000^o).1
+						                  case 'm': if s(mid(date(datetime),10,2),mid(date(datetime),13,2),mid(date(datetime),16,2)) > '230000' then 
+						                               's' else 'n' fi,
+						                  case 's': if val(mid(date,10,4)) > 
+						                               val(s(mid(v3000^o,7,2),mid(v3000^o,10,2))) then
+						                                 's'/ else 'n'/ fi,
+						                  endsel,
+						             fi
+						        fi
+						   fi
+						 fi
+						</pft></field>						
+						<flow action=jump>FIN_moroso</flow>
+		                
+				<label>FECHA_DEV_politicas</label>
+						<!-- recalculamos la fecha de devolución para controlar (por si se agregó algún feriado) -->
+						
+						<!-- tipo objeto: -->
+						<field action=replace tag=2344><pft>ref(['exist']l(['exist']v3000^i),v987)</pft></field>
+						<!-- días prestamo (v2343 tiene la credencial del lector): -->
+						<field action=replace tag=2345><pft>ref(['politicas']l(['politicas']'UO=',v2343[1],'-',v2344),v11)/</pft></field>
+						<!-- fecha de préstamo: -->
+						<field action=replace tag=2346><pft>v3000^p*6.4,v3000^p*3.2,v3000^p*0.2</pft></field> 
+
+						<call name=SUMAH><pft>v2346/v2345</pft></call>
+						<!-- en v9000 obtenemos la fecha de devolución correspondiente -->
+						
+						<field action=replace tag=3000><pft>
+							if v300^b.1<>'!' then s(mpl,v3000,'^m'),
+								if s(date).8 <= v9000 then 'n' else 's' fi
+							fi
+						</pft></field>						
+						<flow action=jump>FIN_moroso</flow>
+						
+				<label>FIN_moroso</label>
+				
                 <field action=export previous=add tag=list>3000</field>
         
                 <!-- Si hay algún error no se borra el préstamo -->
@@ -492,8 +555,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <field action=add tag=3000><pft>'^tsancion',v11[last],'^o',f(nocc(v11),1,0)</pft></field>
         <field action=delete tag=1100>ALL</field>
         
-        <label>PRESTAMOS</label>
         
+        <label>PRESTAMOS</label>
         <display><pft>if s(mpu,v10)<>'HABILITADO' and p(v1000^f) then 
           '<marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error ! </marquee>
            <p align="center" bgcolor="#FFFF9B" style="color: rgb(191,51,83)">
@@ -506,8 +569,35 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <flow action=jump>
         <pft>if s(mpu,v10)<>'HABILITADO' or a(v1000^f) then 'GRABAR' fi</pft></flow>
 
-        <field action=add tag=1100 split=occ><pft>v1000^f</pft></field>
-        <field action=add tag=1101 split=occ><pft>v1000^g</pft></field>
+        <field action=add tag=1100 split=occ><pft>v1000^f</pft></field> <!-- Invs a prestar -->
+
+        <flow action=jump><pft>'fecha_',ref(['config']1,v10)</pft></flow>
+
+        <label>fecha_manual</label>
+		        <field action=add tag=1101 split=occ><pft>v1000^g</pft></field> <!-- Fechas de devo, una x cada inv. -->
+		        <flow action=jump>fin_fechas_dev</flow>
+        
+        <label>fecha_politicas</label>        
+        		<!-- estoy en Lector, por lo tanto en v3 tengo el tipo de usuario -->
+                <field action=replace tag=1101 split=occ><pft>(ref(['exist']l(['exist']v1100),v987)/)</pft></field>
+                <field action=replace tag=1101 split=occ><pft>(ref(['politicas']l(['politicas']'UO=',v3[1],'-',v1101),v11)/)</pft></field>
+                
+                <list action=delete>now</list>
+                <list action=load type=list><pft>(v1101/)</pft></list>
+                <field action=delete tag=1101>ALL</field>                
+                
+                <do task=list>
+                <field action=define tag=1200>Isis_Item</field>
+                <loop>
+                		<call name=SUMAH><pft>date/v1200</pft></call>
+                		<field action=replace tag=1101><pft>v9000*6.2,'/',v9000*4.2,'/',v9000*0.4</pft></field>
+                		<field action=export previous=add tag=1101>1101</field>
+                </loop>
+                </do>
+		        <flow action=jump>fin_fechas_dev</flow>
+		        <field action=delete tag=1200>ALL</field>
+        <label>fin_fechas_dev</label>
+
         <!-- 
         Recordar:
         v1000^f: inventarios de los prestamos a entregar separados por lineas (CR). Considerar que se puede indicar un material no cargado a la base EXIST indicando como nro. de inventario un valor que comience con una x, ej. x2322, xMercado 99,ago
@@ -519,7 +609,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         -->
         <list action=delete>now</list>
         <list action=load type=list><pft>
-          (if p(v1100) then '^tprestamo^i',
+             (if p(v1100) then '^tprestamo^i',
              if s(mpu,v1100):'M' or s(mpu,v1100):'S' then
                 left(v1100,size(v1100)-1),
                 select s(right(v1100,1))
@@ -534,7 +624,6 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
              fi,mpl,
              '^p',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^v',v1101/ fi)
         </pft></list>
-
         <!-- Se crea un campo auxiliar v3001 con los inventarios de las devoluciones -->
 
         <field action=add split=occ tag=3001><pft>
@@ -549,7 +638,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                    s(mpl,v1001,'^b~Material sin referencia (sin cargar en la base bibliográfica)') fi
                 </pft></field>        
                 
-                <flow action=jump><pft>if s(mpu,v1001^i.1) : 'X' then 'FIN_LOOP_A' fi</pft></flow>        
+                <flow action=jump><pft>if s(mpu,v1001^i.1) : 'X' then 'FIN_LOOP_A' fi</pft></flow>
                 <!-- Si es un material sin referencia salta y no bloquea el registro.
                 v3001 contiene las devoluciones, v1000^b se utiliza para bloquear la exist mas abajo  -->
         
@@ -637,7 +726,6 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 </loop> 
                 </do> <!-- search exist -->
         
-                <!-- Podremos poner acá las quitar la espera -->
                 <!-- Corroboramos si el usuario presenta una espera para el material prestado.
                 En dicho caso eliminamos la espera de la base RESERVA -->
                 
@@ -654,9 +742,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                     <display><pft>'<font size=20>v3355: ',v3355,'</font><br>'</pft></display-->
                     
                     <flow action=jump><pft>if not v3355:v2 then 'no_actualizar_reservas' fi</pft></flow>
-                    <!-- ACA ACTUALIZO RESERVAS -->
-                    <!--field action=import tag=list>4050</field-->
                     
+                    <!-- ACA ACTUALIZO RESERVAS -->                    
                     <do task=update>
                     <parm name=db>reservas</parm>
                     <parm name=mfn><pft>v3351</pft></parm>
@@ -664,7 +751,6 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                     <field action=define tag=1102>Isis_Status</field>
                     <field action=define tag=1011>Isis_Lock</field>                
                     <update>
-                        <!--field action=import tag=list>4050</field-->
                         <field action=import tag=50>2</field>
                         <field action=replace tag=55><pft>(if v3^i=v50[1] then f(iocc,1,0) fi)</pft></field>
                         <field action=occ tag=4000 from=3><pft>v55</pft></field>
@@ -688,6 +774,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                     <label>FIN_LOOP_A</label>
             
                    <field action=export tag=3000 previous=add>3000</field>
+
         </loop>
         </do>  <!-- list -->
 
@@ -900,7 +987,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <field action=define tag=1102>Isis_Status</field>
         <loop>
                 <list action=load type=list>
-                <pft>(if v4^t:'devolucion' then mpl,v4/ fi)</pft></list>
+                	<pft>(if v4^t:'devolucion' then mpl,v4/ fi)</pft>
+                </list>
         </loop>
         </do> <!-- mfnrange movi -->
 
@@ -1043,237 +1131,288 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         </loop>
         </do> <!-- mfnrange movi -->
 
+        <label>ALERTAR_OBJETOS_RESERVADOS</label>
+
+        <do task=mfnrange>
+        <parm name=db>movi</parm>
+        <parm name=from><pft>v1100</pft></parm>
+        <parm name=count>1</parm>
+        <parm name=gizmo>txt_htm</parm>
+        <field action=define tag=1102>Isis_Status</field>
+        <loop>
+        	<!-- generlo la lista de inventarios que generaron esperas -->
+            <field action=replace tag=1000 split=occ><pft>
+                (if (v7^*='EN=') then v7^e/ fi)
+            </pft></field>
+            <flow action=jump><pft>if a(v1000) then 'no_hay_reservas' fi</pft></flow>
+            
+            <label>si_hay_reservas</label>
+            
+                <display><pft>
+                    '<script>
+                    	function mostrar_reservas() {',
+	                    	'alert("Se registran RESERVAS para los siguientes ejemplares:\n\n ',
+	                    		('\t-',v1000+|\n|),
+	                    	'")
+	                    }
+	                </script>'
+                </pft></display>
+            	<flow action=skip>Quit</flow>
+            	
+            <label>no_hay_reservas</label>
+
+				<display><pft>
+					'<script>function mostrar_reservas(){}</script>'
+				</pft></display>
+                
+        </loop>
+        </do> <!-- mfnrange movi -->
+        
 </update>
 </do> <!-- update lector -->
 
 </function>
 
+
 <section>
-  <display><pft>'Content-type: text/html'/#</pft></display>
-  <trace>!BR</trace>
-  <parm name="buffersize">120000</parm>
-  <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
-  <field action=cgi tag=1000>opcion</field>
-    <flow action=jump><pft>v1000</pft></flow>
+		<display><pft>'Content-type: text/html'/#</pft></display>
+		<trace>!BR</trace>
+		<parm name="buffersize">120000</parm>
+		<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+		<field action=cgi tag=1000>opcion</field>
+		<flow action=jump><pft>v1000</pft></flow>
   
+		<!-- Esta parte valida al operario y presenta al lector -->
 
-<!-- Esta parte valida al operario y presenta al lector -->
+		<label>ID</label>
+		
+		<!-- mostramos el encabezado de la pagina -->
+		<display>
+		<HTML>
+		<HEAD>
+		</head> 
+		</display>
+		<display><pft>
+				  '<body  bgcolor="#E8E8D0" onload="window.document.form_abm.credencial.value=parent.indice.form_id.lector.value">',
+				  '<font face="Draft 10cpi">',
+				  '<table border="0" width="100%">',
+				  '<tr>',
+					    '<td width="50%"><big>',ref(['config']1,v7),'</big>',
+					    '</td>',
+					    '<td width="50%" align="right">',
+						      '<em>Open MarcoPolo - Módulo Circulación</em><br>',
+						      'Fecha: ',
+						       mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),' 'mid(date(datetime),10,9)
+					    '</td>',
+				  '</table><hr>'/
+		</pft></display>
 
-  <label>ID</label>
-  <display>
-    <HTML>
-    <HEAD>
-    </head> 
-  </display>
-  <display><pft>
-      '<body  bgcolor="#E8E8D0" onload="window.document.form_abm.credencial.value=parent.indice.form_id.lector.value">',
-      '<font face="Draft 10cpi">',
-      '<table border="0" width="100%">',
-      '<tr>',
-        '<td width="50%"><big>',ref(['config']1,v7),'</big>',
-        '</td>',
-        '<td width="50%" align="right">',
-          '<em>Open MarcoPolo - Módulo Circulación</em><br>',
-          'Fecha: ',
-           mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),' 'mid(date(datetime),10,9)
-        '</td>',
-      '</table><hr>'/
-   </pft></display>
+		<!-- recibimos los parametros del formulario form_id -->
+		<field action=cgi tag=100>lector</field>
+		<field action=cgi tag=110>operador</field>
+		
+		<!-- si no es recibido alguno de los parametros anteriores se aborta la operacion luego de mostrar el error -->
+		<display><pft>if a(v100) or a(v110) then '<p>&nbsp;</p><center><h2>Datos incompletos, debe indicar el Lector y el Bibliotecario</h2></center>' fi</pft></display>		
+		<flow action=jump><pft>if a(v100) or a(v110) then 'EXIT' fi</pft></flow>
+		
+		<!-- 110 tiene algo como "id-key" lo convertimos a "^iid^pkey -->
+		<field action=replace tag=110><pft>'^i',replace(v110,'-','^p')</pft></field>
+		
+		<!-- a operador se le entregan los siguientes valores: id operador(^i), clave del mismo(^p) -->		
+		<call name=operador><pft>v110</pft></call>
+		<display>
+		 <pft>if v1000<>'ok' then 
+		   '<p>&nbsp;</p><center><h2>Bibliotecario mal indicado</h2></center>' fi
+		 </pft>
+		</display>
 
-  <field action=cgi tag=100>lector</field>
-  <field action=cgi tag=110>operador</field>
+		<!-- comienza el formulario para prestamos y devoluciones -->
+		<display><pft>
+					'<form name="form_abm" method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">',/
+			            '<input type="hidden" name="IsisScript" value="/omp/administracion/abmlector.xis">',/
+			            '<input type="hidden" name="opcion" value="Presentar">',/
+			            '<input type="hidden" name="credencial">',/
+			            '<input type="hidden" name="id_operador" value="',v110^i,'">',/
+		    		'</form>',/
+		</pft></display>
+		
+		<flow action=jump><pft>if v1000<>'ok' then 'EXIT' fi</pft></flow>
+		
+		<!-- a lector se le entregan los siguientes valores: 'bloqueo',id operador, lector -->
+  		<call name=lector><pft>'^aBLOQUEO^b',v110^i,'^c',v100</pft></call>
+  		
+		<display><pft>
+				if v1000<>'ok' then 
+					   '<p>&nbsp;</p><center><h2>No se pudo recuperar el registro del lector</h2></center>',
+					   '<p><big>Error: ',v1000, 
+					      select v1000
+					      case '0': '. Lector Inexistente !</big>',
+					      case '2': '. Registro tomado por otro operador !</big>',
+					      case '5': '. Registro tomado por otro operador !</big>',
+					      endsel,
+			    fi
+		</pft></display>
 
-  <display><pft>if a(v100) or a(v110) then '<p>&nbsp;</p><center><h2>Datos incompletos, debe indicar el Lector y el Bibliotecario</h2></center>' fi</pft></display>
+		<flow action=jump>EXIT</flow>
 
-  <flow action=jump><pft>if a(v100) or a(v110) then 'EXIT' fi</pft></flow>
+		<!-- Esta parte procesa los datos del formulario (prestamos, sanciones y devoluciones) -->
 
-  <field action=replace tag=110><pft>'^i',replace(v110,'-','^p')</pft></field>
+		<label>WRITE</label>
+		
+		<field action=cgi tag=100>operador</field>
+		<field action=cgi tag=110>mfn_lector</field>
+		<field action=cgi tag=120>operacion</field>
+		<field action=cgi tag=700>devolucion_1</field>
+		<field action=cgi tag=701>devolucion_2</field>
+		<field action=cgi tag=702>devolucion_3</field>
+		<field action=cgi tag=703>devolucion_4</field>
+		<field action=cgi tag=704>devolucion_5</field>
+		<field action=cgi tag=705>devolucion_6</field>
+		<field action=cgi tag=706>devolucion_7</field>
+		<field action=cgi tag=707>devolucion_8</field>
+		<field action=cgi tag=708>devolucion_9</field>
+		<field action=cgi tag=709>devolucion_10</field>
+		<field action=cgi tag=710>devolucion_11</field>
+		<field action=cgi tag=711>devolucion_12</field>
+		<field action=cgi tag=712>devolucion_13</field>
+		<field action=cgi tag=713>devolucion_14</field>
+		<field action=cgi tag=714>devolucion_15</field>
+		<field action=cgi tag=715>devolucion_16</field>
+		<field action=cgi tag=716>devolucion_17</field>
+		<field action=cgi tag=717>devolucion_18</field>
+		<field action=cgi tag=718>devolucion_19</field>
+		<field action=cgi tag=719>devolucion_20</field>
+		<field action=cgi tag=720>devolucion_21</field>
+		<field action=cgi tag=721>devolucion_22</field>
+		<field action=cgi tag=722>devolucion_23</field>
+		<field action=cgi tag=723>devolucion_24</field>
+		<field action=cgi tag=724>devolucion_25</field>
+		<field action=cgi tag=725>devolucion_26</field>
+		<field action=cgi tag=726>devolucion_27</field>
+		<field action=cgi tag=727>devolucion_28</field>
+		<field action=cgi tag=728>devolucion_29</field>
+		<field action=cgi tag=729>devolucion_30</field>
+		<field action=cgi tag=730>devolucion_31</field>
+		<field action=cgi tag=731>devolucion_32</field>
+		<field action=cgi tag=732>devolucion_33</field>
+		<field action=cgi tag=733>devolucion_34</field>
+		<field action=cgi tag=734>devolucion_35</field>
+		<field action=cgi tag=735>devolucion_36</field>
+		<field action=cgi tag=736>devolucion_37</field>
+		<field action=cgi tag=737>devolucion_38</field>
+		<field action=cgi tag=738>devolucion_39</field>
+		<field action=cgi tag=739>devolucion_40</field>
+		<field action=cgi tag=740>devolucion_41</field>
+		<field action=cgi tag=741>devolucion_42</field>
+		<field action=cgi tag=742>devolucion_43</field>
+		<field action=cgi tag=743>devolucion_44</field>
+		<field action=cgi tag=744>devolucion_45</field>
+		<field action=cgi tag=745>devolucion_46</field>
+		<field action=cgi tag=746>devolucion_47</field>
+		<field action=cgi tag=747>devolucion_48</field>
+		<field action=cgi tag=748>devolucion_49</field>
+		<field action=cgi tag=749>devolucion_50</field>
+		<field action=cgi tag=750>devolucion_51</field>
+		<field action=cgi tag=751>devolucion_52</field>
+		<field action=cgi tag=752>devolucion_53</field>
+		<field action=cgi tag=753>devolucion_54</field>
+		<field action=cgi tag=754>devolucion_55</field>
+		<field action=cgi tag=755>devolucion_56</field>
+		<field action=cgi tag=756>devolucion_57</field>
+		<field action=cgi tag=757>devolucion_58</field>
+		<field action=cgi tag=758>devolucion_59</field>
+		<field action=cgi tag=759>devolucion_60</field>
+		<field action=cgi tag=760>devolucion_61</field>
+		<field action=cgi tag=761>devolucion_62</field>
+		<field action=cgi tag=762>devolucion_63</field>
+		<field action=cgi tag=763>devolucion_64</field>
+		<field action=cgi tag=764>devolucion_65</field>
+		<field action=cgi tag=765>devolucion_66</field>
+		<field action=cgi tag=766>devolucion_67</field>
+		<field action=cgi tag=767>devolucion_68</field>
+		<field action=cgi tag=768>devolucion_69</field>
+		<field action=cgi tag=769>devolucion_70</field>
+		<field action=cgi tag=770>devolucion_71</field>
+		<field action=cgi tag=771>devolucion_72</field>
+		<field action=cgi tag=772>devolucion_73</field>
+		<field action=cgi tag=773>devolucion_74</field>
+		<field action=cgi tag=774>devolucion_75</field>
+		<field action=cgi tag=775>devolucion_76</field>
+		<field action=cgi tag=776>devolucion_77</field>
+		<field action=cgi tag=777>devolucion_78</field>
+		<field action=cgi tag=778>devolucion_79</field>
+		<field action=cgi tag=779>devolucion_80</field>
+		<field action=cgi tag=780>devolucion_81</field>
+		<field action=cgi tag=781>devolucion_82</field>
+		<field action=cgi tag=782>devolucion_83</field>
+		<field action=cgi tag=783>devolucion_84</field>
+		<field action=cgi tag=784>devolucion_85</field>
+		<field action=cgi tag=785>devolucion_86</field>
+		<field action=cgi tag=786>devolucion_87</field>
+		<field action=cgi tag=787>devolucion_88</field>
+		<field action=cgi tag=788>devolucion_89</field>
+		<field action=cgi tag=789>devolucion_90</field>
+		<field action=cgi tag=790>devolucion_91</field>
+		<field action=cgi tag=791>devolucion_92</field>
+		<field action=cgi tag=792>devolucion_93</field>
+		<field action=cgi tag=793>devolucion_94</field>
+		<field action=cgi tag=794>devolucion_95</field>
+		<field action=cgi tag=795>devolucion_96</field>
+		<field action=cgi tag=796>devolucion_97</field>
+		<field action=cgi tag=797>devolucion_98</field>
+		<field action=cgi tag=798>devolucion_99</field>
+		<field action=cgi tag=799>devolucion_100</field>
+		<field action=cgi tag=220>dias_sancion</field>
+		<field action=cgi tag=231>invs_prestamo_A</field>
+		<field action=cgi tag=232>invs_prestamo_B</field>
+		<field action=cgi tag=241>dias_prestamo_A</field>
+		<field action=cgi tag=242>dias_prestamo_B</field>
+        
+		
+		<!-- Devoluciones -->
+		<field action=replace tag=700 split=occ>
+		<pft>
+			v700^x/v701^x/v702^x/v703^x/v704^x/v705^x/v706^x/v707^x/v708^x/v709^x/
+			v710^x/v711^x/v712^x/v713^x/v714^x/v715^x/v716^x/v717^x/v718^x/v719^x/
+			v720^x/v721^x/v722^x/v723^x/v724^x/v725^x/v726^x/v727^x/v728^x/v729^x/
+			v730^x/v731^x/v732^x/v733^x/v734^x/v735^x/v736^x/v737^x/v738^x/v739^x/
+			v740^x/v741^x/v742^x/v743^x/v744^x/v745^x/v746^x/v747^x/v748^x/v749^x/
+			v750^x/v751^x/v752^x/v753^x/v754^x/v755^x/v756^x/v757^x/v758^x/v759^x/
+			v760^x/v761^x/v762^x/v763^x/v764^x/v765^x/v766^x/v767^x/v768^x/v769^x/
+			v770^x/v771^x/v772^x/v773^x/v774^x/v775^x/v776^x/v777^x/v778^x/v779^x/
+			v780^x/v781^x/v782^x/v783^x/v784^x/v785^x/v786^x/v787^x/v788^x/v789^x/
+			v790^x/v791^x/v792^x/v793^x/v794^x/v795^x/v796^x/v797^x/v798^x/v799^x</pft>
+		</field>
 
-<!-- a operador se le entregan los siguientes valores: id operador(^i), clave del mismo(^p) -->
+		<!-- la función javascript "mostrar_reservas()" aletra si algún elemento devuelto presenta una reserva -->		
+  		<display><pft>
+		        '<body  bgcolor="#E8E8D0" onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then '; print()' fi,'">',
+		        '<font face="Draft 10cpi">'
+        </pft></display>
 
-  <call name=operador><pft>v110</pft></call>
-  <display>
-     <pft>if v1000<>'ok' then 
-       '<p>&nbsp;</p><center><h2>Bibliotecario mal indicado</h2></center>' fi
-     </pft>
-  </display>
+		<!--v230 tendrá todos los préstamos a realizar (inventarios separados por espacio)
+		en una línea nueva.
+		En caso de fechas de devolucion de acuerdo a politicas solo tendra lugar v231 (Pres A)-->
+		<field action=add tag=230><pft>v231/v232</pft></field>
+		
+		<!--v240 tendrá tantas lineas como préstamos halla y en cada una la fecha de vto.
+		en formato dd/mm/aaaa. Este campo tendrá valor solo si las fechas de devolución son manuales.-->
+		<field action=replace tag=231 split=occ><pft>(v231/)</pft></field>
+		<field action=replace tag=232 split=occ><pft>(v232/)</pft></field>
+		<field action=add tag=240><pft>
+				(if p(v231) then v241[1]/ fi),(if p(v232) then v242[1]/ fi)
+		</pft></field>
 
-  <display><pft>'<form name="form_abm" method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">',/
-                '<input type="hidden" name="IsisScript" value="/omp/administracion/abmlector.xis">',/
-                '<input type="hidden" name="opcion" value="Presentar">',/
-                '<input type="hidden" name="credencial">',/
-                '<input type="hidden" name="id_operador" value="',v110^i,'">',/
-        '</form>',/
-   </pft></display>
+		
+		<!-- a lector se le entregan los siguientes datos:
+			modifica (v120), id_operador (v100),    mfn_lector (v110),
+			devoluciones (v700),	dias_sancion (v220),
+			invs_prestamo (v230), fecha_prestamo (v240, vigencia manual) -->
+        
 
-  <flow action=jump><pft>if v1000<>'ok' then 'EXIT' fi</pft></flow>
-
-<!-- a lector se le entregan los siguientes valores: 'bloqueo',id operador, lector -->
-
-  <call name=lector><pft>'^aBLOQUEO^b',v110^i,'^c',v100</pft></call>
-  <display>
-     <pft>if v1000<>'ok' then 
-       '<p>&nbsp;</p><center><h2>No se pudo recuperar el registro del lector</h2></center>',
-       '<p><big>Error: ',v1000, 
-          select v1000
-          case '0': '. Lector Inexistente !</big>',
-          case '2': '. Registro tomado por otro operador !</big>',
-          case '5': '. Registro tomado por otro operador !</big>',
-          endsel,
-        fi
-     </pft>
-  </display>
-
-  <flow action=jump>EXIT</flow>
-
-<!-- Esta parte procesa los datos del formulario (prestamos, sanciones y devoluciones) -->
-
-  <label>WRITE</label>
-
-  <field action=cgi tag=100>operador</field>
-  <field action=cgi tag=110>mfn_lector</field>
-  <field action=cgi tag=120>operacion</field>
-  <field action=cgi tag=700>devolucion_1</field>
-  <field action=cgi tag=701>devolucion_2</field>
-  <field action=cgi tag=702>devolucion_3</field>
-  <field action=cgi tag=703>devolucion_4</field>
-  <field action=cgi tag=704>devolucion_5</field>
-  <field action=cgi tag=705>devolucion_6</field>
-  <field action=cgi tag=706>devolucion_7</field>
-  <field action=cgi tag=707>devolucion_8</field>
-  <field action=cgi tag=708>devolucion_9</field>
-  <field action=cgi tag=709>devolucion_10</field>
-  <field action=cgi tag=710>devolucion_11</field>
-  <field action=cgi tag=711>devolucion_12</field>
-  <field action=cgi tag=712>devolucion_13</field>
-  <field action=cgi tag=713>devolucion_14</field>
-  <field action=cgi tag=714>devolucion_15</field>
-  <field action=cgi tag=715>devolucion_16</field>
-  <field action=cgi tag=716>devolucion_17</field>
-  <field action=cgi tag=717>devolucion_18</field>
-  <field action=cgi tag=718>devolucion_19</field>
-  <field action=cgi tag=719>devolucion_20</field>
-  <field action=cgi tag=720>devolucion_21</field>
-  <field action=cgi tag=721>devolucion_22</field>
-  <field action=cgi tag=722>devolucion_23</field>
-  <field action=cgi tag=723>devolucion_24</field>
-  <field action=cgi tag=724>devolucion_25</field>
-  <field action=cgi tag=725>devolucion_26</field>
-  <field action=cgi tag=726>devolucion_27</field>
-  <field action=cgi tag=727>devolucion_28</field>
-  <field action=cgi tag=728>devolucion_29</field>
-  <field action=cgi tag=729>devolucion_30</field>
-  <field action=cgi tag=730>devolucion_31</field>
-  <field action=cgi tag=731>devolucion_32</field>
-  <field action=cgi tag=732>devolucion_33</field>
-  <field action=cgi tag=733>devolucion_34</field>
-  <field action=cgi tag=734>devolucion_35</field>
-  <field action=cgi tag=735>devolucion_36</field>
-  <field action=cgi tag=736>devolucion_37</field>
-  <field action=cgi tag=737>devolucion_38</field>
-  <field action=cgi tag=738>devolucion_39</field>
-  <field action=cgi tag=739>devolucion_40</field>
-  <field action=cgi tag=740>devolucion_41</field>
-  <field action=cgi tag=741>devolucion_42</field>
-  <field action=cgi tag=742>devolucion_43</field>
-  <field action=cgi tag=743>devolucion_44</field>
-  <field action=cgi tag=744>devolucion_45</field>
-  <field action=cgi tag=745>devolucion_46</field>
-  <field action=cgi tag=746>devolucion_47</field>
-  <field action=cgi tag=747>devolucion_48</field>
-  <field action=cgi tag=748>devolucion_49</field>
-  <field action=cgi tag=749>devolucion_50</field>
-  <field action=cgi tag=750>devolucion_51</field>
-  <field action=cgi tag=751>devolucion_52</field>
-  <field action=cgi tag=752>devolucion_53</field>
-  <field action=cgi tag=753>devolucion_54</field>
-  <field action=cgi tag=754>devolucion_55</field>
-  <field action=cgi tag=755>devolucion_56</field>
-  <field action=cgi tag=756>devolucion_57</field>
-  <field action=cgi tag=757>devolucion_58</field>
-  <field action=cgi tag=758>devolucion_59</field>
-  <field action=cgi tag=759>devolucion_60</field>
-  <field action=cgi tag=760>devolucion_61</field>
-  <field action=cgi tag=761>devolucion_62</field>
-  <field action=cgi tag=762>devolucion_63</field>
-  <field action=cgi tag=763>devolucion_64</field>
-  <field action=cgi tag=764>devolucion_65</field>
-  <field action=cgi tag=765>devolucion_66</field>
-  <field action=cgi tag=766>devolucion_67</field>
-  <field action=cgi tag=767>devolucion_68</field>
-  <field action=cgi tag=768>devolucion_69</field>
-  <field action=cgi tag=769>devolucion_70</field>
-  <field action=cgi tag=770>devolucion_71</field>
-  <field action=cgi tag=771>devolucion_72</field>
-  <field action=cgi tag=772>devolucion_73</field>
-  <field action=cgi tag=773>devolucion_74</field>
-  <field action=cgi tag=774>devolucion_75</field>
-  <field action=cgi tag=775>devolucion_76</field>
-  <field action=cgi tag=776>devolucion_77</field>
-  <field action=cgi tag=777>devolucion_78</field>
-  <field action=cgi tag=778>devolucion_79</field>
-  <field action=cgi tag=779>devolucion_80</field>
-  <field action=cgi tag=780>devolucion_81</field>
-  <field action=cgi tag=781>devolucion_82</field>
-  <field action=cgi tag=782>devolucion_83</field>
-  <field action=cgi tag=783>devolucion_84</field>
-  <field action=cgi tag=784>devolucion_85</field>
-  <field action=cgi tag=785>devolucion_86</field>
-  <field action=cgi tag=786>devolucion_87</field>
-  <field action=cgi tag=787>devolucion_88</field>
-  <field action=cgi tag=788>devolucion_89</field>
-  <field action=cgi tag=789>devolucion_90</field>
-  <field action=cgi tag=790>devolucion_91</field>
-  <field action=cgi tag=791>devolucion_92</field>
-  <field action=cgi tag=792>devolucion_93</field>
-  <field action=cgi tag=793>devolucion_94</field>
-  <field action=cgi tag=794>devolucion_95</field>
-  <field action=cgi tag=795>devolucion_96</field>
-  <field action=cgi tag=796>devolucion_97</field>
-  <field action=cgi tag=797>devolucion_98</field>
-  <field action=cgi tag=798>devolucion_99</field>
-  <field action=cgi tag=799>devolucion_100</field>
-  <field action=cgi tag=220>dias_sancion</field>
-  <field action=cgi tag=231>invs_prestamo_A</field>
-  <field action=cgi tag=232>invs_prestamo_B</field>
-  <field action=cgi tag=241>dias_prestamo_A</field>
-  <field action=cgi tag=242>dias_prestamo_B</field>
-  <field action=replace tag=700 split=occ>
-    <pft>
-    v700^x/v701^x/v702^x/v703^x/v704^x/v705^x/v706^x/v707^x/v708^x/v709^x/
-    v710^x/v711^x/v712^x/v713^x/v714^x/v715^x/v716^x/v717^x/v718^x/v719^x/
-    v720^x/v721^x/v722^x/v723^x/v724^x/v725^x/v726^x/v727^x/v728^x/v729^x/
-    v730^x/v731^x/v732^x/v733^x/v734^x/v735^x/v736^x/v737^x/v738^x/v739^x/
-    v740^x/v741^x/v742^x/v743^x/v744^x/v745^x/v746^x/v747^x/v748^x/v749^x/
-    v750^x/v751^x/v752^x/v753^x/v754^x/v755^x/v756^x/v757^x/v758^x/v759^x/
-    v760^x/v761^x/v762^x/v763^x/v764^x/v765^x/v766^x/v767^x/v768^x/v769^x/
-    v770^x/v771^x/v772^x/v773^x/v774^x/v775^x/v776^x/v777^x/v778^x/v779^x/
-    v780^x/v781^x/v782^x/v783^x/v784^x/v785^x/v786^x/v787^x/v788^x/v789^x/
-    v790^x/v791^x/v792^x/v793^x/v794^x/v795^x/v796^x/v797^x/v798^x/v799^x</pft>
-  </field>
-
-  <display><pft>
-        '<body  bgcolor="#E8E8D0" onload="this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then '; print()' fi,'">',
-        '<font face="Draft 10cpi">'</pft></display>
-
-<!--v230 tendrá todos los préstamos a realizar en una línea nueva -->
-  <field action=add tag=230><pft>v231/v232</pft></field>
-
-
-<!--v240 tendrá tantas lineas como préstamos halla y en cada una la fecha de vto. en formato dd/mm/aaaa -->
-  <field action=replace tag=231 split=occ><pft>(v231/)</pft></field>
-  <field action=replace tag=232 split=occ><pft>(v232/)</pft></field>
-  <field action=add tag=240><pft>
-    (if p(v231) then v241[1]/ fi),(if p(v232) then v242[1]/ fi)
-  </pft></field>
-
-<!-- a lector se le entregan los siguientes datos:
-    'modifica', id_operador,    mfn_lector, devoluciones,
-    dias_sancion, invs_prestamo, fecha_prestamo -->
-   
-  <call name=lector>
-    <pft>'^a',v120,'^b',v100,'^c',v110,'^d',v700,'^e',v220,'^f',v230,'^g',v240,</pft>
-  </call>
+		<call name=lector>
+		<pft>'^a',v120,'^b',v100,'^c',v110,'^d',v700,'^e',v220,'^f',v230,'^g',v240,</pft>
+		</call>
 
 <label>EXIT</label>
 
