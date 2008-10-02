@@ -16,9 +16,6 @@
 <!-- v5002 define la ubicación y los archivos que componen la base bibliográfica -->
 <field action="add" tag="5002"><pft>ref(['config']1,v3)</pft></field>
 
-<!-- v5003 define el tag y subcampo que define la sección/colección de los inventarios -->	
-<field action="add" tag="5003"><pft>ref(['config']1,v2)</pft></field>
-
 <!-- v5004 define el path de la carpeta pública vía HTTP -->
 <field action="add" tag="5004"><pft>ref(['config']1,v8)</pft></field>
 

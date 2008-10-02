@@ -8,15 +8,20 @@
 		'^i',
 			v859^p
 		'^s',
-		    if (v859^b*0.2='SU') or (v859^b*0.2='su') or (v859^b*0.2='Su') or (v859^b*0.2='sU') 
-				or (v859^b*0.2='sB')  or (v859^b*0.2='sA')
-				or	(v859^b*0.2='C.') or (v859^b*0.2='c.')
-				or (v859^b='S') or (v859^b='s')
-		    then 'PERM'
-		    else
-				if (v859^b.4='CONS' or v859^b.4='Cons' or v859^b.4='cons')
-			    	then 'CONS'
-				fi,
-		    fi,
+			if v859^w<>''
+			then
+				'BAJA'
+			else
+			    if (v859^b*0.2='SU') or (v859^b*0.2='su') or (v859^b*0.2='Su') or (v859^b*0.2='sU') 
+					or (v859^b*0.2='sB')  or (v859^b*0.2='sA')
+					or	(v859^b*0.2='C.') or (v859^b*0.2='c.')
+					or (v859^b='S') or (v859^b='s')
+			    then 'PERM'
+			    else
+					if (v859^b.4='CONS' or v859^b.4='Cons' or v859^b.4='cons')
+				    	then 'CONS'
+					fi,
+			    fi,
+			fi,
 	fi,
 /)

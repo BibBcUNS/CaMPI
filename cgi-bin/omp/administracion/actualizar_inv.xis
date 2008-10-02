@@ -140,18 +140,17 @@ bibliográfica. Esta verificación debe ser relizada por el proceso check_consiste
     	<field action=export tag=2517>2517</field>
     </loop>
     </do-->
-    <do task=keyrange>
-    <parm name=db>marc_invent</parm>
-    <field action=define tag=1001>Isis_Current</field>
-    <field action=define tag=1>Isis_Key</field>
-    <field action=define tag=2>Isis_Postings</field>
-    <loop>
-       <field action=import tag=2517>2517</field>
-       <field action=replace tag=2517>
-          <pft>v2517,if val(v1)<>0 then if val(v2) > 1 then '~',v1 fi fi</pft>
-       </field>
-       <field action=export tag=2517>2517</field>
-    </loop>
+<do task=keyrange>
+<parm name=db>marc_invent</parm>
+<field action=define tag=1001>Isis_Current</field>
+<field action=define tag=1>Isis_Key</field>
+<field action=define tag=2>Isis_Postings</field>
+<loop>
+   <field action=replace tag=2517>
+	  <pft>v2517,if val(v1)<>0 then if val(v2) > 1 then '~',v1 fi fi</pft>
+   </field>
+   <field action=export tag=2517>2517</field>
+</loop>
 </do>
 	
 <!-- Recorro los registros de la base BIBLO -->

@@ -29,7 +29,7 @@
 		'exist.*=',v5006,'/exist/exist.*'/
 		'opac_circulacion.*=',v5006,'/',v5009,'/',v5009,'.*'/
 		'consulta.pft=',v5006,'/',v5009,'/omp_consultaopac.pft'/		
-		'omp_tit_aut.pft=',v5006,'/',v5009,'/omp_tit_aut.pft'/		
+		'omp_tit_aut.pft=',v5006,'/',v5009,'/omp_tit_aut.pft'/
 		'CI_TEMPDIR=',v5006,'/temp'/		
 	</pft></field>		
 	<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
@@ -102,7 +102,7 @@
 		'dicc_invent.xrf=',v5006,'/exist/exist.xrf'/
 		'log_baja_prestados.txt=',v5004,'/log_baja_prestados.txt'/
 		'log_inventarios_duplicados.txt=',v5004,'/log_inventarios_duplicados.txt'/
-		'def_estados.pft=',v5006,'/scripts/def_estados.pft'/
+		'def_ejemplares.pft=',v5006,'/scripts/def_ejemplares.pft'/
 		'CI_TEMPDIR=',v5006,'/temp'/
 	</pft></field>		
 	<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
