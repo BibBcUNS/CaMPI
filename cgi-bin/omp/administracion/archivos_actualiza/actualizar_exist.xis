@@ -25,7 +25,7 @@ El path del MX y de las bases se busca en la base CONFIG -->
 <file action="create" type="output">log_baja_prestados.txt</file>
 <file action="close" type="output">now</pft></file>
 
-<!-- Generamos una lista con los inventarios que estan duplicados en la base BIBLO -->
+<!-- Generamos una lista con los inventarios que están duplicados en la base BIBLO -->
 <!-- Durante el proceso dichos inventarios serán saltados -->
 <do task=keyrange>
 <parm name=db>marc_invent</parm>
@@ -46,20 +46,21 @@ El path del MX y de las bases se busca en la base CONFIG -->
 <parm name="db">marc</parm>
 <!--parm name="count">10</parm-->
 
-	 <!-- inicializamos los contadores de ejemplares (modificados/incorporados/eliminados/error al eliminar) -->
+	<!-- inicializamos los contadores de ejemplares (modificados/incorporados/eliminados/error al eliminar/sin cambios) -->
 	<field action=replace tag=2600>0</field>
 	<field action=replace tag=2601>0</field>
 	<field action=replace tag=2602>0</field>
 	<field action=replace tag=2603>0</field> 
+	<field action=replace tag=2604>0</field> 
 	<loop>
-    	<field action=import tag=list>2600,2601,2602,2603,2517</field>
+    	<field action=import tag=list>2600,2601,2602,2603,2604,2517</field>
     	<!-- Importamos contadores + lista de inventarios duplicados -->
-    	
+
 		<!-- v2001 contiendrá todos los inventarios y el valor de sección/colección del registro bibliográ¡fico.
-		Cada ocurrencia del campo tendrá el siguiente formato:  "^iInvantario^sSección" -->
+		Cada ocurrencia del campo tendrá el siguiente formato:  "^iInventario^sSección" -->
 		
 		<field action="add" tag="2001" split="occ"><pft>@def_ejemplares.pft</pft></field>	
-		<display><pft>(v2001,'-')</pft></display>
+
 		<!-- carga la lista con todos los nro. de inventarios y sección/colección -->
 		<list action="delete">Now</list>
 		<list action="load"><pft>(v2001/)</pft></list>
@@ -71,26 +72,25 @@ El path del MX y de las bases se busca en la base CONFIG -->
 		<field action=define tag=1002>Isis_Current</field>
 		<loop>
 			<!-- Importamos los tags contadores -->
-			<field action=import tag=list>2600,2601,2602,2603</field>
+			<field action=import tag=list>2600,2601,2602,2603,2604</field>
 			<!-- Importamos el indicador de tag de sección/colección y la lista de inventarios duplicados -->
 			<field action=import tag=list>2517</field>
 			<!-- Importamos el mfn de biblo en el campo v3333 -->
 			<field action=import tag=3333>3333</field>
 
-			
 			<!-- Separamos el inventario de la sección/colección -->
 			<!-- 2510: inventario -->
 			<field action="replace" tag="2510"><pft>v1001^i</pft></field>
-			
+
 			<!-- 2511: Tipo de objeto. En mayúscula (mhu) -->
 			<field action="replace" tag="2500"><pft>mhu,v1001^s</pft></field>		
-			
+
 			<!-- Salteamos el registro si no tiene definido el inventario -->		
 			<flow action=jump><pft>if (v2510='' or v2510='0') then 'FIN' fi</pft></flow>
-			
+
 			<!-- Si es un inventario duplicado registramos el log en un archivo . Luego salteamos el registro, jump 'FIN' -->		
 			<flow action=jump><pft>if (not v2517:v2510) then 'NO_DUPLICADO' fi</pft></flow>
-			
+
 					<!-- En caso que sea duplicado... -->
 					<field action=replace tag=2525><pft>DATE</pft></field>
 					<file action="append" type="output">log_inventarios_duplicados.txt</file>
@@ -104,7 +104,7 @@ El path del MX y de las bases se busca en la base CONFIG -->
 					<file action="close" type="output">now</pft></file>
 					<display><pft>'<font color="red"><b>Advertencia!:</b> Inventario DUPLICADO: </font>',v2510,' (mfn: ',v3333,')<br></pft></display>
 					<flow action=jump>FIN</flow>
-			
+
 			<label>NO_DUPLICADO</label>
 
 			<!-- v2520: verificamos si el inventario está en exist: INV_ESTA / INV_NO_ESTA -->
@@ -117,7 +117,7 @@ El path del MX y de las bases se busca en la base CONFIG -->
 
 			<!-- v2515: mfn en exist correspondiente al inventario en cuestión (puede ser 0 y no se utiliza) -->
 			<field action="replace" tag="2515"><pft>f(l(['dicc_invent']v2510),1,0)</pft></field>
-			
+
 			<flow action=jump><pft>
 				if v2500='BAJA'
 				then if v2520='INV_ESTA'
@@ -130,11 +130,10 @@ El path del MX y de las bases se busca en la base CONFIG -->
 					fi
 				fi
 			</pft></flow>
-			
-			
+
 			<label>ELIMINAR_DE_EXIST</label>
 			<!-- En el caso que haya que dar de baja un ejemplar -->
-					
+
 					<!-- En el tag 2530 verificamos si el ejemplar está prestado.
 					En ese caso registramos el log y salamos al ejemplar siguiente (jump 'FIN') -->
 					<field action=replace tag=2530><pft>ref(['exist']l(['dicc_invent']v2510),v985)</pft></field>
@@ -144,10 +143,10 @@ El path del MX y de las bases se busca en la base CONFIG -->
 		
 							<!-- incrementamos el contador correspondiente a efecto informativo -->
 						    <field action=replace tag=2603><pft>f(val(v2603)+1,1,0)</pft></field>
-						    
+
 							<!-- Recuperamos la fecha/hora del sistema -->
 						    <field action=replace tag=2525><pft>DATE</pft></field>
-						    
+
 						    <!-- Almasenamos el log en el archivo correspondiente -->
 							<file action="append" type="output">log_baja_prestados.txt</file>
 						  		<display><pft>'(',mid(v2525,7,2),'/',mid(v2525,5,2),'/',mid(v2525,1,4),' ',mid(v2525,10,2),':',mid(v2525,12,2),')',/</pft></display>
@@ -157,16 +156,16 @@ El path del MX y de las bases se busca en la base CONFIG -->
 						  		<display><pft>c4,'mfn exsist: ',v2515,/</pft></display>
 						  		<display><pft>c4,'estado: ',v2530,/</pft></display>
 							<file action="close" type="output">now</pft></file>
-							
+
 							<!-- Mostramos en pantalla el error correspondiente -->
 							<display><pft>'<font color="red"><b>Advertencia!:</b> No se puede dar de baja porque está prestado: </font> Inventario: ',v2510,'<br></pft></display>
 							<flow action=jump>FIN</flow>
-						
+
 					<label>NO_ESTA_PRESTADO</label>
 							<!-- En este caso borramos el registro de la base EXIST -->
 							<!-- Incrementamos el contador correspondiente a efecto informativo -->
 						    <field action=replace tag=2602><pft>f(val(v2602)+1,1,0)</pft></field>
-						    	
+
 						    <!-- Realizamos el borrado propiamente dicho -->				
 							<do task=update>
 							<parm name=db>exist</parm>
@@ -176,26 +175,24 @@ El path del MX y de las bases se busca en la base CONFIG -->
 							<field action=define tag=1102>Isis_Status</field>
 							<field action=define tag=1011>Isis_Lock</field>
 							<update>
-							  <write>Delete</write>
-							  <!-- Mostramos en pantalla un mensaje de error en caso que existiera. Luego finalizamos el proceso -->
-							  <display><pft>
+								<write>Delete</write>
+								<!-- Mostramos en pantalla un mensaje de error en caso que existiera. Luego finalizamos el proceso -->
+								<display><pft>
 							    if val(v1102)>0 then 
 							      'ERROR: !, no se logró borrar el reg. hijo ',v977/
-												fi</pft></display>
-											<field action="export" tag="list">1102</field>
+								fi
+								</pft></display>
+								<field action="export" tag="list">1102</field>
 							</update>
 							</do>
-		
+
 							<!-- controlamos el resultado del borrado. En caso de error terminamos la ejecución -->
 				            <flow action="exit"><pft>if val(v1102)>0 then 'Now' fi</pft></flow>
 					        <flow action=jump>FIN</flow>
-					
+
 			<label>ACTUALIZAR_EN_EXIST</label>
 			<!-- Si el inventario está y tenemos que actualizar el estado en exist -->
-					<!-- incrementamos el contador correspondiente a efecto informativo -->
-				    <field action=replace tag=2600><pft>f(val(v2600)+1,1,0)</pft></field>
-				
-
+		
 				    <!-- Realizamos la actualización propiamente dicha -->
 					<!-- Hasta ahora lo único que podría ser modificado es el valor de Tipo de Objeto -->
 				    <do task=update>
@@ -206,8 +203,14 @@ El path del MX y de las bases se busca en la base CONFIG -->
 					<field action=define tag=1102>Isis_Status</field>
 					<field action=define tag=1011>Isis_Lock</field>
 					<update>
-						<field action="delete" tag="list">987</field>
-						<field action=import tag=987>2500</field> <!-- Actualizamos el Tipo de Objeto -->
+						<field action=import tag="list">2500,2600,2604</field> <!-- Actualizamos el Tipo de Objeto -->
+						
+						<!-- incrementamos el contador correspondiente a efecto informativo -->
+						<field action=replace tag=2600><pft>if v2500 <> v987 then f(val(v2600)+1,1,0) else v2600 fi</pft></field>
+						<field action=replace tag=2604><pft>if v2500 = v987 then f(val(v2604)+1,1,0) else v2604 fi</pft></field>
+						<field action="replace" tag="987"><pft>v2500</pft></field>
+						<field action="export" tag="list">2600,2604</field>
+						<field action="delete" tag="list">2500,2600,2604</field>
 						<write>Unlock</write>						
 		              	<!-- En caso de producirse un error, Mostramos en pantalla el mensaje correspondiente. Luego finalizamos el proceso -->
 						<display><pft>
@@ -215,7 +218,7 @@ El path del MX y de las bases se busca en la base CONFIG -->
 							'ERROR: !, no se logró borrar el reg. hijo ',v977/
 							fi
 						</pft></display>
-						<field action="export" tag="list">1102</field>
+						<field action="export" tag="1102">1102</field>
 					</update>
 					</do>
 					
@@ -250,17 +253,16 @@ El path del MX y de las bases se busca en la base CONFIG -->
 			        <!-- controlamos el resultado del borrado. En caso de error terminamos la ejecución -->
 	            	<flow action="exit"><pft>if val(v1102)>0 then 'Now' fi</pft></flow>
 		        	<flow action=jump>FIN</flow>
-		
-			
+
 			<label>FIN</label>
 			<!-- Exportamos los contadores -->
-			<field action=export tag=list>2600,2601,2602,2603</field>
+			<field action=export tag=list>2600,2601,2602,2603,2604</field>
 
 		</loop>		
 		</do>
-		
+
 		<!-- Exportamos los contadores -->
-		<field action=export tag=list>2600,2601,2602,2603</field>
+		<field action=export tag=list>2600,2601,2602,2603,2604</field>
 	
 	</loop>    	
 </do>
@@ -271,7 +273,8 @@ El path del MX y de las bases se busca en la base CONFIG -->
 	'<tr><td>Ejemplares MODIFICADOS</td><td>', v2600, '</td></tr>'
 	'<tr><td>Ejemplares INCORPORADOS</td><td>', v2601, '</td></tr>',
 	'<tr><td>Ejemplares DADOS DE BAJA</td><td>', v2602, '</td></tr>',
-	'<tr><td><b>Ejemplares que no se pueden dar de baja por estar prestado</b></td><td><b>', v2603, '</td></b></tr>',
+	'<tr><td>Ejemplares SIN CAMBIOS</td><td>', v2604, '</td></tr>',
+	'<tr><td><b>Ejemplares que no se pueden dar de baja por estar prestados</b></td><td><b>', v2603, '</td></b></tr>',
 	'</tr></table><br>',
 	'<span style="font-size:1.3em; color:#0C0; font-weight:bold;">Terminado: El proceso de actualización finalizó correctamente.</span>'
 </pft></display>
