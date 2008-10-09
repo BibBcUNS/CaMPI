@@ -6,17 +6,6 @@
 <title>Open MarcoPolo - Módulo Circulación</title>
 <SCRIPT language="JavaScript1.1">
 <!--
-
-function tiempo() {
-
-	if (window.document.form_id.operador.value != "") {
-		if (window.document.form_id.operador.value != ultimo) {
-			ultimo = window.document.form_id.operador.value;
-			window.document.form_identi.id_operador.value = ultimo;
-			window.document.form_identi.submit();}
-		}
-	
-	}
 	
 function determinar() {
 			text=window.document.consultas.expresion.value;
@@ -74,18 +63,12 @@ function focus_expresion() {
 
 <form name="form_devolucion" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/"
 	onsubmit="
-		if (window.document.form_id.operador.value =='') {
-			window.document.form_id.operador.focus();
-			alert('Debe indentificarse como operador')
-			return false;
-		}else{
-			if (window.document.form_devolucion.inventario.value =='') {
+		if (window.document.form_devolucion.inventario.value =='') {
 				alert('Debe indicar algun inventario')
 				return false;
-			}else{
-				window.document.form_devolucion.operador.value=window.document.form_id.operador.value;
-				return true;}
-			}
+		}else{
+			window.document.form_devolucion.operador.value=window.document.form_id.operador.value;
+			return true;}
 	">
   <input type="hidden" name="IsisScript" value="omp/circulacion/devolucion.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
@@ -103,14 +86,10 @@ function focus_expresion() {
 
 <form name="form_id" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/"
  	onSubmit="
-		if (window.document.form_id.operador.value =='') {
-			window.document.form_id.operador.focus();
-			return false;}
-		else 
-			if (window.document.form_id.lector.value =='') {
+		if (window.document.form_id.lector.value =='') {
 				window.document.form_id.lector.focus();
 				return false;}
-			else
+		else
 				return true;
 		">
 
@@ -120,8 +99,17 @@ function focus_expresion() {
     <tr>
       <td width="100%"><strong>Identificación</strong></td></tr>
     <tr>
-      <td width="100%"><u>O</u>perador:<br>
-      <input type="password" name="operador" size="10" ONKEYPRESS='setTimeout("tiempo()",2000)' accesskey="o"></td></tr>
+      <td width="100%">
+      <input type="hidden" name="operador" value=<?php 
+	    session_start();
+	    $usuario=$_SESSION["s_username"];
+		$url="http://127.0.0.1/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
+		$ptr_grabar_datos = fopen($url,"r");
+		$grabar_datos = fread($ptr_grabar_datos,500);
+		fclose($ptr_grabar_datos);
+	    echo $usuario.'-'.$grabar_datos;?>>
+	  </td>
+	 </tr>
     <tr>
       <td width="100%"><u>L</u>ector: <br>
       <input type="text" name="lector" size="15" accesskey="l"></td></tr>
@@ -133,12 +121,6 @@ function focus_expresion() {
   </table>
 </form>
 </font>
-
-    <form action="/cgi-bin/wxis.exe/omp/circulacion/" method="post" name="form_identi" target="identificacion">
-	<input type="hidden" name="IsisScript" value="omp/circulacion/identificacion.xis">
-	<input type="hidden" name="id_operador">
-     </form>
-
 
 </body>
 </html>

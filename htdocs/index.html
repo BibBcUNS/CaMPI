@@ -12,11 +12,15 @@ function invocar_opac() {
 	}
 
 function invocar_circulacion() {
-	window.open('omp/circulacion/circulacion.html','CIRCULACION','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=1,copyhistory=0,width=790,height=545')
+	window.open('omp/circulacion/login_form.php','CIRCULACION','left=0,top=0,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=790,height=545')
 	}	
-
+	
+function invocar_administracion() {
+	window.open('omp/administracion/login_form.php','ADMINISTRACION','left=0,top=0,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=790,height=545')
+	}	
+	
 function invocar_stat() {
-	window.open('omp/estadisticas/index.htm','ESTADISTICAS','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=790,height=545')
+	window.open('omp/estadisticas/index.htm','ESTADISTICAS','left=0,top=0,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=790,height=545')
 	}	
 	
 //-->
@@ -49,7 +53,7 @@ function invocar_stat() {
 		<TD colspan="2"  height="75" align="center">
 			<a href="javascript:invocar_circulacion()">Préstamos, devoluciones y reservas</a>
 			<br>
-			<a href="omp/administracion/login.html">Administración</a>
+			<a href="javascript:invocar_administracion()">Administración</a>
 			<br>
 			<a href="JavaScript:invocar_stat()">Estadísticas</a>
 		</TD>

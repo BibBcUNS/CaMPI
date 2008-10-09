@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Menú del sistema MarcoPolo</title>
+<title>CaMPI - Módulo Administración</title>
 <!--script language=javascript type=text/javascript src=js/popup_calendar.js-->
 </head>
 <?php
@@ -179,7 +179,7 @@ $anios = explode  ('~', $anios_calendario);
 </body>
 <?php
 }else{
-echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.html>";
+echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php>";
 }
 ?>
 </html>
