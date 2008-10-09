@@ -7,6 +7,13 @@
 session_start();
 if (isset($_SESSION["s_username"])) {
 ?>
+
+<?php
+$ptr_anios_calendario = fopen("http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_anios.xis","r");
+$anios_calendario = fread($ptr_anios_calendario,1000);
+fclose($ptr_anios_calendario);
+$anios = explode  ('~', $anios_calendario);
+?>
 <body bgcolor="#E8E8D0" topmargin="0">
 <table border="0" width="100%">
   <tr>
@@ -23,14 +30,42 @@ if (isset($_SESSION["s_username"])) {
   	</tr>
 	<tr>
     <td colspan="2">
-	
-	  <form method="POST" action="calendario.php" target="calendario" onsubmit="window.open('', 'calendario', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=420,width=750,scrollbars=no,status=no')">
-	  <strong>Año: <input type="text" name="anio" size="4"></strong>
-      	  
-      <input type="radio" name="opcion" value="EDICION" checked>Editar 
-	  <input type="radio" name="opcion" value="ANIONUEVO">Crear año
+
+	  <form method="POST" name="calendario_edicion" action="calendario.php" target="calendario" onsubmit="window.open('', 'calendario', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,scrollbars=yes,status=no')">
+
+	  	<script>
+			function alertselected(){
+				index= document.calendario_edicion.anio.selectedIndex;
+				anio= document.calendario_edicion.anio[index].value;
+				if (anio=="NUEVO") {
+					document.getElementById("nuevo").style.display="";
+					document.getElementById("submit").value="Crear";
+				}
+				else {
+					document.getElementById("nuevo").style.display="none";
+					document.getElementById("submit").value="Editar";
+				}
+			}
+		</script>
+		  
+	    <strong>Año: <select name=anio onChange="alertselected()">    
+				<?php
+					$cant = count($anios);
+					for($i=$cant-1;$i>=0;$i--) {
+						echo '<option value="'.$anios[$i].'">'.$anios[$i].'</option>';
+					}
+				?>
+				<option value=NUEVO onselect="alert(hola)">NUEVO</option>
+		</select></strong>
+ 	  	<span id="nuevo" style="display:none">
+ 	  	<input id="anio_nuevo" type="text" name="anio_nuevo" size="4">
+ 	  	</span>
+	  
+      
+      <!--input type="radio" name="opcion" value="EDICION" checked>Editar 
+	  <input type="radio" name="opcion" value="ANIONUEVO">Crear año-->
   
-	  <input type="submit" value="Ejecutar">
+	  <input id="submit" type="submit" value="Editar">
       </form>
 	</td>
   </tr>

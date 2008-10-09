@@ -51,7 +51,12 @@
     </tr>
     <tr>
       <td width="20%" bgcolor="#F9C99A"><b>Estado</td>
-      <td width="40%"><input type="text" name="estado" size="30" value="[pft]v10[/pft]"></td>
+      <td width="40%">
+      	<select name="estado">
+      		<option value="Habilitado" [pft]if s(mhu,v10).3='HAB' then 'selected' fi,mhl[/pft]>Habilitado</option>
+      		<option value="Sancionado" [pft]if s(mhu,v10).3='SAN' then 'selected' fi,mhl[/pft]>Sancionado</option>
+      	</select>
+      </td>
       <td width="20%" bgcolor="#F9C99A"><b>Sanciones</b></td>
       <td><input type="text" name="sanciones" size="25" value="[pft]v11+|%|[/pft]"></td>
     </tr>    <tr>

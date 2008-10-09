@@ -140,7 +140,8 @@ v1000^c: credencial del lector, este campo está invertido en el diccionario
 v1000^d: devoluciones en el formato ###..#, donde cada # es un número de dos cifras que representa a la ocurrencia del campo v8 (prestamo)
 v1000^e: días de sanción
 v1000^f: inventario/s de los prestamos a entregar
-v1000^g: días para el vencimiento del prestamo (uno por préstamo separado por CR) -->
+v1000^g: días para el vencimiento del prestamo (uno por préstamo separado por CR)
+v1000^p: manual/politicas: Indica la forma de aplicar vencimientos y sanciones-->
 
 <flow action=jump><pft>v1000^a</pft></flow>
 
@@ -182,8 +183,12 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
      <field action=define tag=1102>Isis_Status</field>
      <field action=define tag=1011>Isis_Lock</field>
      <update>
-     		<flow action=jump><pft>if ref(['config']1,v10)='manual' or a(v8) then 'fin_recalcular' fi</pft></flow>
-			     	<!-- calcula las nuevas fechas de vto -->
+     		<flow action=jump><pft>if ref(['config']1,v10)='manual' then 'fin_recalcular' fi</pft></flow>
+					<!-------------------------------------------------------------			
+					 ---- calcula las nuevas fechas de vto de los prestamos -----
+					 -------------------------------------------------------------->
+					 <flow action=jump><pft>if a(v8) then 'no_hay_prestamos' fi</pft></flow>
+			     	<!-- calcula las nuevas fechas de vto de los prestamos -->
 			        <list action=delete>now</list>
 			        <list action=load type=list><pft>(v8/)</pft></list>
 			        <do task=list>
@@ -198,18 +203,36 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 							<field action=replace tag=2346><pft>v1001^p*6.4,v1001^p*3.2,v1001^p*0.2</pft></field> 
 		
 							<call name=SUMAH><pft>v2346/v2345</pft></call> <!-- sumo a la fecha de prestamo (v2346) la cantidad de días de prestamo (v2345) -->
-							
+
 							<field action=replace tag=3000><pft>v9000*6.2,'/',v9000*4.2,'/',v9000*0.4</pft></field>
 							<field action=export previous=add tag=3000>3000</field>
 					</loop>
 			        </do>
-			        <display><pft>'v3000=',v3000,'<br>'</pft></display>
 			        <!-- formo las cadenas para el reemplazo de las fechas -->
 			        <field action=replace tag=2000 split=occ><pft>('^v',v8^v/)</pft></field> <!-- fechas de dev. registradas (a ser reemplazada) -->
 			        <field action=replace tag=3000 split=occ><pft>('^v',v3000/)</pft></field> <!-- nueva fecha de devolución -->
 			        
 			        <!-- por cada ocurrencia del v8 se creo una occ de v2000 (fecha orig) y v3000 (nva fecha) -->
 					<field action=replace tag=8 split=occ><pft>(replace(v8,v2000,v3000)/)</pft></field>
+					
+					<label>no_hay_prestamos</label>
+					 <!-------------------------------------------------------------
+					 --- calcula las nuevas fechas de vto de las suspenciones ---
+					 -------------------------------------------------------------->
+					<flow action=jump><pft>if a(v11) then 'no_hay_sanciones' fi</pft></flow>
+					
+					<list action=delete>Now</list>
+			        <list action=load type=list><pft>(v11/)</pft></list>
+			        <field action=delete tag=11>ALL</field>			        
+				        <do task=list>
+				        <field action=define tag=1000>Isis_Item</field>
+							<loop>
+									<call name=SUMAH><pft>v1000^f*6.4,v1000^f*3.2,v1000^f*0.2,/,v1000^d</pft></call>
+									<field action=replace tag=11><pft>'^d',v1000^d,'^f',v1000^f,'^v',mid(v9000,7,2),'/',mid(v9000,5,2),'/',mid(v9000,1,4)</pft></field>
+									<field action=export previous=add tag=11>11</field>
+							</loop>
+						</do>
+					<label>no_hay_sanciones</label>
 			<label>fin_recalcular</label>
 	
 
@@ -225,7 +248,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 	                'Habilitado'
 	            fi
 	        </pft></field>
-	        <field action=delete tag=list>2000,3000</field>
+	        <field action=delete tag=list>1001,2000,3000</field>
 	        <write>Unlock</write>
      </update>
 </do>
@@ -267,7 +290,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
                             else select s(v8^o).1
                                  case 'm': if mid(date,10,6) > '100000' then 
                                               '1'/ else '0'/ fi,
-                                 case 's': if mid(date,10,4) >                               s(mid(v8^o,7,2),mid(v8^o,10,2)) then '1'/ else '0'/ fi,
+                                 case 's': if mid(date,10,4) > s(mid(v8^o,7,2),mid(v8^o,10,2)) then '1'/ else '0'/ fi,
                                  endsel,
                             fi
                        fi
@@ -466,7 +489,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 la hora de entrega: ^osala, 12:00 hs. o ^osala, 20:00 hs. según el turno-->
         		
                 <!-- El control lo hacemos de acuerdo a config (v10 = manual | politicas) -->
-                
+                <flow action=jump><pft>'FECHA_DEV_',ref(['config']1,v10)</pft></flow>
+
                 
                 <label>FECHA_DEV_manual</label>
                			 
@@ -495,20 +519,43 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 						<!-- tipo objeto: -->
 						<field action=replace tag=2344><pft>ref(['exist']l(['exist']v3000^i),v987)</pft></field>
 						<!-- días prestamo (v2343 tiene la credencial del lector): -->
-						<field action=replace tag=2345><pft>ref(['politicas']l(['politicas']'UO=',v2343[1],'-',v2344),v11)/</pft></field>
+						<field action=replace tag=2345><pft>ref(['politicas']l(['politicas']'UO=',v2343,'-',v2344),v11)/</pft></field>
 						<!-- fecha de préstamo: -->
 						<field action=replace tag=2346><pft>v3000^p*6.4,v3000^p*3.2,v3000^p*0.2</pft></field> 
 
 						<call name=SUMAH><pft>v2346/v2345</pft></call>
 						<!-- en v9000 obtenemos la fecha de devolución correspondiente -->
+						<field action=replace tag=9010><pft>v9000</pft></field>
 						
 						<field action=replace tag=3000><pft>
 							if v300^b.1<>'!' then s(mpl,v3000,'^m'),
 								if s(date).8 <= v9000 then 'n' else 's' fi
 							fi
-						</pft></field>						
-						<flow action=jump>FIN_moroso</flow>
-						
+						</pft></field>
+						<flow action=jump><pft>if v3000^m='n' then 'FIN_moroso' fi</pft></flow>
+								<!-- En caso de ser moroso calculamos la sancion (aca se modifica el valor de v9000)-->
+								<call name=RESTAH><pft>v9010,/,s(date).8</pft></call>
+								<field action=replace tag=9020><pft>v9000</pft></field>
+								<!-- recupero el multiplicador para calcular los dias de suspension (en politicas, v14^x -->
+								<field action=replace tag=9030><pft>ref(['politicas']l(['politicas']'UO=',v2343,'-',v2344),v14^x)/</pft></field>
+								<!-- calculo los dias de supencion -->
+								<field action=replace tag=9040><pft>f(val(v9020)*val(v9030),1,0)</pft></field>
+								<!--display><pft>('<b>Días suspención=',v9040,'</b><BR>')</pft></display-->
+								<call name=SUMAH><pft>date,/,v9040</pft></call>
+								<field action=replace tag=9000><pft>mid(v9000,7,2),'/',mid(v9000,5,2),'/',mid(v9000,1,4)</pft></field>
+								
+								<!-- creo el campo de suspencion -->
+								<field action=add tag=11><pft>
+          								'^d',v9040,'^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^v',v9000</pft>
+        						</field>
+        						 <field action=replace tag=10>Sancionado</field>
+        						<field action=export tag=10>10</field>
+        						<field action=export previous=add tag=11>11</field>
+        						<field action=add tag=3000><pft>'^tsancion',v11</pft></field>
+								
+								
+								<!--flow action=exit>Now</flow-->
+												
 				<label>FIN_moroso</label>
 				
                 <field action=export previous=add tag=list>3000</field>
@@ -543,6 +590,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         ^tsancion^ddias^ffecha hoy^vfecha vto^ocant. de sanciones
         -->
         
+        <!-- En teoría no debería entrar en este caso si no está habilitado el formulario de sanciones -->
         <flow action=jump><pft>if a(v1000^e) or v1000^e='0' then 'PRESTAMOS' fi</pft></flow>
         
         <field action=add tag=1100>0</field>
@@ -594,8 +642,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 		<field action=export previous=add tag=1101>1101</field>
                 </loop>
                 </do>
-		        <flow action=jump>fin_fechas_dev</flow>
 		        <field action=delete tag=1200>ALL</field>
+		        <flow action=jump>fin_fechas_dev</flow>
         <label>fin_fechas_dev</label>
 
         <!-- 
@@ -784,9 +832,9 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
             mpl,'^i',v3000^i,'^b',v3000^b,'^p',v3000^p,'^v',v3000^v,
               if p(v3000^o) then '^o',v3000^o fi, '^c',v3000^c,'^l',v3000^l/, fi,fi)
         </pft></field>
-        <field action=delete tag=list>1001,1100,1101,3001</field>
         
         <label>GRABAR</label>
+        <field action=delete tag=list>1001,1100,1101,3001</field>
         
         <field action=export tag=list>1000,3000,4050</field>
         <field action=delete tag=list>1000,3000,4050</field>
@@ -1179,6 +1227,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		<trace>!BR</trace>
 		<parm name="buffersize">120000</parm>
 		<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+		<field action=replace tag=2222><pft>ref(['config']1,v10)</pft></field>
 		<field action=cgi tag=1000>opcion</field>
 		<flow action=jump><pft>v1000</pft></flow>
   
@@ -1238,8 +1287,9 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		
 		<flow action=jump><pft>if v1000<>'ok' then 'EXIT' fi</pft></flow>
 		
-		<!-- a lector se le entregan los siguientes valores: 'bloqueo',id operador, lector -->
-  		<call name=lector><pft>'^aBLOQUEO^b',v110^i,'^c',v100</pft></call>
+		<!-- a lector se le entregan los siguientes valores: 'bloqueo',id operador, lector.
+		v2222 Indica la forma de aplicar políticas: manual/politicas -->
+  		<call name=lector><pft>'^aBLOQUEO^b',v110^i,'^c',v100,'^p',v2222</pft></call>
   		
 		<display><pft>
 				if v1000<>'ok' then 
@@ -1407,11 +1457,12 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		<!-- a lector se le entregan los siguientes datos:
 			modifica (v120), id_operador (v100),    mfn_lector (v110),
 			devoluciones (v700),	dias_sancion (v220),
-			invs_prestamo (v230), fecha_prestamo (v240, vigencia manual) -->
+			invs_prestamo (v230), fecha_prestamo (v240, vigencia manual)
+			v2222 Indica la forma de aplicar políticas: manual/politicas -->
         
 
 		<call name=lector>
-		<pft>'^a',v120,'^b',v100,'^c',v110,'^d',v700,'^e',v220,'^f',v230,'^g',v240,</pft>
+		<pft>'^a',v120,'^b',v100,'^c',v110,'^d',v700,'^e',v220,'^f',v230,'^g',v240,'^p',v2222</pft>
 		</call>
 
 <label>EXIT</label>

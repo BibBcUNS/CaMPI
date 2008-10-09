@@ -1,3 +1,6 @@
+<!-- La función que indica los días que son sábados y domingos....
+hasta la versión de php que tengo, funsiona solo hasta el 17 de Enero de 2038 -->
+
 <html>
 <head>
 <title>Open MarcoPolo - Edición de Calendario</title>
@@ -12,10 +15,10 @@ if (isset($_SESSION["s_username"])) {
 <?php
 // recibo el parámetro $anio a ser creado/editado
 $año=$_POST['anio'];
-$opcion=$_POST['opcion'];
+$año_nuevo=$_POST['anio_nuevo'];
 
 // Defino un arreglo de nombre de Meses para la visualización
-$mesArray = array(
+/*$mesArray = array(
 							1 => "Enero",
 							2 => "Febrero",
 							3 => "Marzo",
@@ -28,8 +31,24 @@ $mesArray = array(
 							10 => "Octubre",
 							11 => "Noviembre",
 							12 => "Diciembre"
-					);
-					
+					);*/
+$mesArray = array(
+							1 => "ENERO",
+							2 => "FEBRERO",
+							3 => "MARZO",
+							4 => "ABRIL",
+							5 => "MAYO",
+							6 => "JUNIO",
+							7 => "JULIO",
+							8 => "AGOSTO",
+							9 => "SEPTIEMBRE",
+							10 => "OCTUBRE",
+							11 => "NOVIEMBRE",
+							12 => "DICIEMBRE"
+);
+
+
+
 // Defino un arreglo de nombres de días.
 $semanaArray = array(
 							"Mon" => "Lunes",
@@ -66,12 +85,49 @@ function sabado_domingo($_dia, $_mes, $_año) {
 // Muestra en pantalla una lista de checkbox, uno para cada dia del mes.
 // Recibe el año y mes en cuestión, y una cadena con 0s y Puntos correspondientes al mes.
 function mostrar_mes ($_mes, $_datos, $_año) {
-	$cant_dias = strlen($_datos);	
+	global $mesArray;
+	echo '<span style="border:1px solid grey;width:180px;height:205; margin=0px 0px; padding-top=8px;text-align:center">'.$mesArray[$_mes+1];
+	$cant_dias = strlen($_datos);
+	echo "<table border=0><tr>";
+	$dia_sem = dia_semana(1, $_mes+1, $_año);
+	
+	switch($dia_sem){
+		case 'Lunes':
+			$pos=0;
+			break;	
+		case 'Martes':
+			echo "<td></td>";
+			$pos=1;
+			break;
+		case 'Miercoles':
+			echo "<td></td><td></td>";
+			$pos=2;
+			break;
+		case 'Jueves':
+			echo "<td></td><td></td><td></td>";
+			$pos=3;
+			break;
+		case 'Viernes':
+			echo "<td></td><td></td><td></td><td></td>";
+			$pos=4;
+			break;
+		case 'Sábado':
+			echo "<td></td><td></td><td></td><td></td><td></td>";
+			$pos=5;
+			break;
+		case 'Domingo':
+			echo "<td></td><td></td><td></td><td></td><td></td><td></td>";
+			$pos=6;
+			break;
+	}
+	
 	//for($i=0;$i<$cant_dias;$i++){
 	for($i=0;$i<31;$i++){
-		$estilo = "width:20px;";
-		if ($i%5==0)
-			{$estilo .= "border-left:1px solid black;";}
+		$estilo = "width:0px;height:0px;padding:0px;margin:10px;";
+		if ($pos%7==0){
+				echo '</tr><tr>';
+		}
+		$pos = $pos + 1;
 		//else	{$estilo .= "border-left:1px solid gray;";	}
 			
 		//if ($i==30) {$estilo .= "border-right:1px solid gray;";}
@@ -81,12 +137,15 @@ function mostrar_mes ($_mes, $_datos, $_año) {
 			if (sabado_domingo($i+1,$_mes+1,$_año)){
 				$estilo .= 'background-color:FBB;';
 			}
-			echo '<td style="'.$estilo.'"><input type=checkbox '.$checked.' name='.$_mes. '[]'.' value='.$i.'></td>';
+			echo '<td style="'.$estilo.'"><font style="font-size:11.5px;"><center>'.($i+1).'<br><input type=checkbox style="height:13px;width:13px;margin-right:3px;margin-left:3px" '.$checked.' name='.$_mes. '[]'.' value='.$i.'><center></font></td>';
 		}
 		else {
 			echo '<td style="'.$estilo.'">&nbsp;</td>';		
 		}
 	}
+	echo "</table></span>";
+
+	
 }
 
 function editar_año($_año) {
@@ -109,45 +168,31 @@ function editar_año($_año) {
 	}
 	$meses = explode('~',$datos_año);	
 	
-	// Muestro el título
-	echo '<h2 style="text-align=center">Edición de calendario - Año '.$_año.'</h2>';
 	
 	// Muestro el formulario
 	echo '<style>'.
 			'.dias_mes{padding:0px; width:20px; text-align=center; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
 	echo "<form action=calendario_guardar.php method=post>";
-	echo "<table border=0 cellspacing=0 cellpadding=0><tr><td></td>";
-
-	// Esto muestra la numeración de los días (1..31) en la partre superior de la tabla
-	for ($i=1;$i<=31;$i++){
-		echo '<td class=dias_mes align=center>';
-		echo $i;
-		echo "</td>";
-	}
-	echo "</tr> ";
-	//>
-	
-	// Recorro los 12 meses en $meses[] y muestro los checkbox.
-	echo "</td>";
-	
-	for($i=0;$i<12;$i++) {
-		echo '<tr><td width=100 height=22><b>'.$mesArray[$i+1]."</b></td>";
-		mostrar_mes($i,$meses[$i],$_año);
-		echo '</tr>';
-	}
-	
-	// Esto muestra la numeración de los días (1..31) entre al final de la tabla
-	echo "<tr><td></td>";
-			for ($j=1;$j<=31;$j++){
-				echo '<td class=dias_mes align=center>';
-				echo $j;
-				echo "</td>";
-			}
-	echo "</tr> ";
-	echo "</table>";
 	echo "<input type=hidden name=anio value=".$_año.">";
-	echo '<br><input type=submit value=" Guardar ">';
+	
+	// Muestro el título
+	echo '<h2 style="display:inline;margin-right:245px;">Edición de calendario - Año '.$_año.'</h2>';
+	
+	echo '<input type=submit value=" Guardar ">&nbsp;';
+	echo '<input type=button onclick="javascript:window.close()" value="Cerrar">';
+	echo '<br><br>';
+
+	
+	echo "<table border=0 cellspacing=0><tr>";
+	for($i=0;$i<12;$i++) {
+		echo '<td style="vertical-align: top">';
+		mostrar_mes($i,$meses[$i],$_año);
+		echo "</td>";
+		if (($i+1)%4==0) {echo "</tr><tr>";}
+	}
+	echo "</tr></table>";
+	
 	echo "</form>";
 }
 
@@ -156,7 +201,6 @@ function editar_año($_año) {
 //*******************************************************************//
 
 function grabar_año($_año, $meses) {
-	echo "Creando año $_año: ";
 	$url="http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_nuevo.xis".
 			"&anio=$_año";
 	
@@ -171,7 +215,8 @@ function grabar_año($_año, $meses) {
 	$grabar_datos = fread($ptr_grabar_datos,500);
 	fclose($ptr_grabar_datos);
 	
-	echo "$grabar_datos<br>";
+	
+	//echo "$grabar_datos<br>";
 }
 
 function cant_dias_mes($_mes, $_año) {
@@ -212,33 +257,34 @@ function crear_hasta_el_año($año){
 	$ultimo_año = fread($ptr_ultimo_año,500);
 	fclose($ptr_ultimo_año);
 	
-	if ($año - $ultimo_año < 10) {
+	if ($año - $ultimo_año <= 10) {
 		if ($año>$ultimo_año) {
 			for($año_actual=$ultimo_año+1;$año_actual<=$año;$año_actual++){
 				crear_año($año_actual);
 			}
 		}
 		else {
-			echo "<font color=red>Error!: El año <b>$año</b> ya está definido</font><br>";
-			echo "El último año definido es <b>$ultimo_año</b>.";
+			echo "<font color=red>El año ya está definido</font>";
 		}
 	}
 	else {
-		echo "<font color=red>Error!: No es posible crear más de 10 calendarios en una operación</font><br>";
+		echo "<font color=red>Error!: No es posible crear más de 10 años de calendarios en una operación</font><br>";
 		echo "El último año definido es <b>$ultimo_año</b>.";
+		echo '<br><br><input type=button onclick="javascript:window.close()" value="Cerrar la ventana">';
+		exit;
 	}
-echo '<br><br><input type=button onclick="javascript:window.close()" value="Cerrar la ventana">';
 }
 
 //*******************************************************************//
 
 
 
-if ($opcion=='EDICION') {
-	editar_año($año);
+if ($año=='NUEVO') {
+	crear_hasta_el_año($año_nuevo);
+	editar_año($año_nuevo);
 }
 else {
-	crear_hasta_el_año($año);
+	editar_año($año);
 }
 
 ?>
