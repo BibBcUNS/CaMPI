@@ -6,7 +6,7 @@
 
 session_start();
 if (isset($_SESSION["s_username"])) {
-echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=circulacion.php>";
+echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=menu.php>";
 }else{
 ?>
 
