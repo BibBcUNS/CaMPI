@@ -1,0 +1,12 @@
+!ID 0
+!v001!id
+!v002!key
+!v003!^aBIBLIOTECARIO^bInvitado
+!v005!circulacion
+!v005!administracion
+
+
+
+
+
+
