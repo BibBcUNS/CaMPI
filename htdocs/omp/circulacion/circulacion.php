@@ -7,8 +7,8 @@
 session_start();
 if (isset($_SESSION["s_username"])) {
 ?>
-<frameset cols="155,*" onload="moveTo(0,0);">
-  <frameset rows="91%,*">
+<frameset cols="25%,*" onload="moveTo(0,0)">
+  <frameset rows="80%,*">
 	  <frame name="indice" src="id_prestamo.php" target="principal">
 	  <frame name="identificacion" src="identificacion.php" target="principal">
   </frameset>

@@ -39,25 +39,40 @@ function focus_expresion() {
 </SCRIPT>
 </head>
 
-<body bgcolor="#E8E8D0" topmargin="5" leftmargin="5" rightmargin="5"
->
-<font face="Arial" size="3">
+<body bgcolor="#E8E8D0" topmargin="10" leftmargin="2" rightmargin="2" style="font-face:Arial;font-size:11pt;">
 
-<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" onclick="javascript:focus_expresion();">
-  <input type="hidden" name="IsisScript" value="omp/circulacion/consulta.xis">
+<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" onclick="javascript:focus_expresion();"
+ onsubmit="
+		if (window.document.consultas.expresion.value =='$' || window.document.consultas.expresion.value =='') {
+				alert('Debe indicar una expresión válida')
+				return false;
+		}else{  return true;}
+	">
+  <input type="hidden" name="IsisScript" value="omp/circulacion/consulta_campi.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
     <tr>
-      <td width="100%"><strong>Consulta</strong></td></tr>
+      <td width="100%"><strong>Consultar por</strong></td></tr>
     <tr>
-			<td width="100%"><input type="radio" name="criterio" value="inv" checked>Inventario</td></tr>
+		<td width="100%">
+		<input type="radio" name="criterio" value="inv" checked>Inventario
+		</td>
+	</tr>
     <tr>
-      <td width="100%"><input type="radio" name="criterio" value="mfn">Nro Reg.</td></tr>
+		<td width="100%">
+		<input type="radio" name="criterio" value="nc">Nº Control
+		</td>
+	</tr>
     <tr>
-      <td width="100%"><input type="radio" name="criterio" value="lector">Lector</td></tr>
+		<td width="100%">
+		<input type="radio" name="criterio" value="lector">Usuario
+		</td>
+	</tr>
     <tr>
-      <td width="100%"><u>B</u>uscar: <br>
-      <input type="text" name="expresion" size="15" accesskey="b"><br>
-      <input type="submit" value="Enviar"><input type="reset" value="Limpiar"></td></tr>
+      <td width="100%">
+	   <input type="text" name="expresion" size="13" value="" accesskey="b">
+	   <input type="submit" value="Buscar">
+	  </td>
+	</tr>
   </table>
 </form>
 
@@ -73,13 +88,13 @@ function focus_expresion() {
   <input type="hidden" name="IsisScript" value="omp/circulacion/devolucion.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
 		<tr>
-			<td width="100%"><strong>Devolución</strong></td></tr>
+			<td width="100%"><strong>Devolver x inventario</strong></td></tr>
     <tr>
-      <td width="100%"><u>I</u>nventario: <br>
-      <input type="text" name="inventario" size="5" accesskey="I">
+      <td width="100%"><input type="text" name="inventario" value="" size="7" accesskey="I">
+	        <input type="submit" value="Devolver">
 			<input type="Hidden" name="operador">
 			<input type="Hidden" name="clave">			
-      <input type="submit" value="Enviar"></td></tr>
+      </td></tr>
   </table>
 </form>
 
@@ -97,7 +112,7 @@ function focus_expresion() {
 	<input type="hidden" name="opcion" value="ID">
 	<table border="0" width="100%">
     <tr>
-      <td width="100%"><strong>Identificación</strong></td></tr>
+      <td width="100%"><strong>Estado de cuenta x ID.</strong></td></tr>
     <tr>
       <td width="100%">
       <input type="hidden" name="operador" value=<?php 
@@ -111,11 +126,13 @@ function focus_expresion() {
 	  </td>
 	 </tr>
     <tr>
-      <td width="100%"><u>L</u>ector: <br>
-      <input type="text" name="lector" size="15" accesskey="l"></td></tr>
+      <td width="100%">
+	  <input type="text" name="lector" size="10" accesskey="l">
+	  <input type="submit" value="Buscar">
+	  </td>
+	</tr>
     <tr>
       <td width="100%">
-        <center><input type="submit" value="      Enviar      "></center><!-- input type="reset" value="Limpiar" onclick="window.document.form_identi.id_operador.value = '';window.document.form_identi.submit()"--><br>
         <input type="button" value="Limpiar Lector" onclick="window.document.form_id.lector.value='';window.document.form_id.lector.focus()">
         </td></tr>
   </table>

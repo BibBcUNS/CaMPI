@@ -77,7 +77,8 @@
 <parm name="cipar"><pft>v2000</pft></parm>
 <!-- Se crea el archivo biblo.fst para luego realizar un invertido por nro de inventario -->
 <file action="create" type="output">biblo.fst</file>
-<display><pft>'1 0 (',v5001,'/)'</pft></display>
+<display><pft>'1 0 (',v5001,'/)'#</pft></display>
+<display><pft>'1 0 (|NC=|v1/)'</pft></display>
 <file action="close" type="output">now</pft></file>
 
 <!-- realizo el invertido  por inventarios función de biblo.fst -->
