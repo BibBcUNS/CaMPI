@@ -97,7 +97,10 @@
   <flow action=jump><pft>if p(v110) or v100='prestamos' then v100 else 'SALIDA' fi</pft></flow>
 
   <label>nc</label>
-  
+	<!--  La búsqueda por NC (nº de control) e inv (inventario) son equivalentes solo 
+	que el invertido para los NC utiliza el prefijo NC=. Para cada libro mostrado, se
+	muestran las partes, y para cada parte, los ejemplares prestados/reservados/en espera -->
+	
   <label>inv</label>
 	<field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogación (v6) -->
 	
@@ -107,26 +110,51 @@
     <parm name=gizmo>gizmo</parm>
     <field action=define tag=1102>Isis_Total</field>
     <loop>
+		<!-- MUESTRO INFORMACIÓN DEL LIBRO -->
 		<field action="add" tag="7777" split="occ"><htmlpft><pft>'[pft](',ref(['config']1,v1),'/)[/pft]'</pft></htmlpft></field>
 		<field action="import" tag="list">5009</field>
 		<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'bibliografia_',v5009,'.html')</pft></htmlpft></display>
-		<list action=delete>now</list>
-		<list action=load type=freq><pft>(v7777/)</pft></list>
-		<do task=list>
-			 <field action=define tag=1001>Isis_Current</field>
-			 <field action=define tag=1002>Isis_Items</field>
-			 <field action=define tag=1>Isis_Item</field>
-			 <loop>
-				<do task="search">
-					<parm name="db">exist</parm>
-					<parm name="expression"><pft>v1</pft></parm>
-					<parm name="gizmo">gizmo</parm>
-					<loop>
-						<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'exist.html')</pft></htmlpft></display>
+		<do task=search>
+			<parm name=db>partes</parm>
+		    <parm name=expression><pft>'MARC_',v1,'$'</pft></parm>
+		    <parm name=gizmo>gizmo</parm>
+		    <field action=define tag=1102>Isis_Total</field>
+		    <loop>
+				<!-- MUESTRO INFORMACIÓN DE LA PARTE -->
+				<!-- MUESTRO EL ENCABEZADO DE LA PARTE SI HAY MAS DE UNA-->
+				<display><htmlpft><pft>if val(v1102)>1 then cat(getenv('PATH_TRANSLATED'),'parte.html') fi</pft></htmlpft></display>
+				<do task=search>
+					<parm name=db>reservas</parm>
+				    <parm name=expression><pft>'MARC_',v1^c,'_',v1^p</pft></parm>
+				    <parm name=gizmo>gizmo</parm>
+				    <field action=define tag=1102>Isis_Total</field>
+				    <loop>
+						<!-- MUESTRO INFORMACIÓN DE ESPERAS/RESERVAS -->
+						<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'res_esp.html')</pft></htmlpft></display>
 					</loop>
-				</do>			 
-			 </loop>
-		</do>			
+				</do>	
+				
+				<list action=delete>now</list>
+				<list action=load type=freq><pft>(v2/)</pft></list>
+				<do task=list>
+					 <field action=define tag=1001>Isis_Current</field>
+					 <field action=define tag=1002>Isis_Items</field>
+					 <field action=define tag=1>Isis_Item</field>
+					 <loop>
+						<do task="search">
+							<parm name="db">exist</parm>
+							<parm name="expression"><pft>v1</pft></parm>
+							<parm name="gizmo">gizmo</parm>
+							<loop>
+								<!-- MUESTRO INFORMACIÓN DEL EJEMPLAR PRESTADO -->
+								<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'exist.html')</pft></htmlpft></display>
+							</loop>
+						</do>			 
+					 </loop>
+				</do>			
+			
+		    </loop>
+        </do>
     </loop>
   </do>
   <display><pft>if val(v1102)=0 then 
