@@ -52,7 +52,7 @@
 if p(v111) then
 	proc('a29¦ ¦a30¦ ¦a31¦ ¦'),      /* llamado desde h-browse.xis */
 else
-	proc('a29¦¦a30¦¦a31¦¦'),  /* llamado al generar el OPAC */
+	proc('a29¦¦a30¦¦a31¦¦'),    /* llamado al generar el OPAC */
 fi,
 
 
