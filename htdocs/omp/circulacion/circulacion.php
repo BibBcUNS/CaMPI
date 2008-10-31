@@ -1,10 +1,10 @@
+<?php session_start(); ?>
 <html>
 <head>
 <title>CaMPI - Módulo Circulación</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
 <?php
-session_start();
 if (isset($_SESSION["s_username"])) {
 ?>
 <frameset cols="25%,*" onload="moveTo(0,0)">

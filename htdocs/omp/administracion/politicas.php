@@ -1,18 +1,19 @@
+<?php session_start(); ?>
 <html>
 <head>
 <title>Open MarcoPolo - Edición de Políticas</title>
 
 </head>
 <?php
-session_start();
 if (isset($_SESSION["s_username"])) {
 ?>
 <body bgcolor="#E8E8D0" topmargin="0">
 
 <?php
 // recibo el parámetro $anio a ser creado/editado
-$año=$_POST['anio'];
-$opcion=$_POST['opcion'];
+if (isset($_POST['opcion'])) {
+	$opcion=$_POST['opcion'];
+}
 
 // Defino un arreglo de nombre de Meses para la visualización
 $campos_nombre = array(
@@ -32,8 +33,9 @@ $campos_nombre = array(
 //*******************************************************************//
 function mostrar_politicas() {
    global $campos_nombre;
+   global $SERVER_NAME;
    
-	$ptr_politicas = fopen("http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_obtener.xis&cual=TODAS","r");
+	$ptr_politicas = fopen("http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_obtener.xis&cual=TODAS","r");
 	$politicas = fread($ptr_politicas,8192);
 	fclose($ptr_politicas);
 
@@ -51,11 +53,11 @@ function mostrar_politicas() {
 			'.dias_mes{padding:0px; width:80px; text-align=center; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
 	echo "<form action=politicas.php method=post>";
-	echo "<table border=0 cellspacing=0 cellpadding=0><tr><td></td>";
+	echo "<table border=1 cellspacing=0 cellpadding=0><tr><td></td>";
 
 	// Esto muestra los títulos de los atributos
-	for ($i=0;$i<=count($campos_nombre);$i++){
-		echo '<td class=dias_mes align=center>';
+	for ($i=0;$i<count($campos_nombre);$i++){
+		echo "<td class=dias_mes align=center>";
 		echo $campos_nombre[$i];
 		echo "</td>";
 	}
@@ -67,13 +69,13 @@ function mostrar_politicas() {
 	$atributos_cantidad = count($politicas_arreglo[0]);
 		
 	for($i=0;$i<$politicas_cantidad-1;$i++) {
-		echo '<tr><td width=100 height=22>
+		echo '<tr><td width=100 height=22 align="center">
 		      <input type=radio name=pol_nro value="'
 			  .$politicas_arreglo[$i][0]
 			  .'-'
 			  .$politicas_arreglo[$i][1]
 			  .'"></td>';
-        for ($j=0;$j<=$atributos_cantidad;$j++) { 
+        for ($j=0;$j<$atributos_cantidad;$j++) { 
             echo '<td class=dias_mes align=center>';
 			echo $politicas_arreglo[$i][$j];
 			echo "</td>";		
@@ -82,7 +84,7 @@ function mostrar_politicas() {
 	}
 	echo '<tr><td colspan=';
 	echo $atributos_cantidad+1;
-	echo ' align="center">';
+	echo ' align="center"><br>';
 	echo '<input type=submit name=opcion value="Crear">';
 	echo '  ';
 	echo '<input type=submit name=opcion value="Modificar">';
@@ -129,8 +131,9 @@ echo "</table>";
 //*******************************************************************//
 function editar_politica() {
    global $campos_nombre;
+   global $SERVER_NAME;
 
-   $url="http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_obtener.xis&cual=UNA&expresion=".$_POST['pol_nro'];
+   $url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_obtener.xis&cual=UNA&expresion=".$_POST['pol_nro'];
 
 	$ptr_politicas = fopen($url,"r");
 	$politicas = fread($ptr_politicas,8192);
@@ -170,6 +173,7 @@ echo "</table>";
 //*******************************************************************//
 function guardar_politica() {
    global $campos_nombre;
+   global $SERVER_NAME;
 
 $parametros_guardar='record='.$_POST['registro'];
 
@@ -179,7 +183,7 @@ for ($i=0;$i<=(count($campos_nombre)-1);$i++)
 	$parametros_guardar=$parametros_guardar."&campo".$i."=".$_POST[$campo_actual];
    }
 
-$url="http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_guardar.xis&".$parametros_guardar;
+$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_guardar.xis&".$parametros_guardar;
 
 $ptr_politicas = fopen($url,"r");
 $ptr_politicas;
@@ -192,26 +196,32 @@ fclose($ptr_politicas);
 //***********************BORRA UNA POLITICA*************************//
 //*******************************************************************//
 function borrar_politica() {
- $url="http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_guardar.xis&record=BORRAR&expresion=".$_POST['pol_nro'];
+ $url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_guardar.xis&record=BORRAR&expresion=".$_POST['pol_nro'];
  $ptr_politicas = fopen($url,"r");
  $politicas = fread($ptr_politicas,8192);
  fclose($ptr_politicas);
 }
 //*******************************************************************//
 
-if($_POST["opcion"]=='Crear'):
-     crear_politica();
-elseif($_POST["opcion"]=='Modificar'):
-     editar_politica();
-elseif($_POST["opcion"]=='Guardar'):
-	 guardar_politica();
+if (isset($_POST["opcion"])) {
+	if ($_POST["opcion"]=='Crear'):
+		 crear_politica();
+	elseif($_POST["opcion"]=='Modificar'):
+		 editar_politica();
+	elseif($_POST["opcion"]=='Guardar'):
+		 guardar_politica();
+		 mostrar_politicas();
+	elseif($_POST["opcion"]=='Borrar'):
+		 borrar_politica();
+		 mostrar_politicas();
+	else:
+		 mostrar_politicas();
+	endif;
+}
+else {
 	 mostrar_politicas();
-elseif($_POST["opcion"]=='Borrar'):
-	 borrar_politica();
-	 mostrar_politicas();
-else:
-     mostrar_politicas();
-endif;
+}
+
 
 ?>
 

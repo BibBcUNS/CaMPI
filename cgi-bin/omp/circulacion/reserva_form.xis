@@ -223,6 +223,7 @@ En caso de no ser submit se Muestra el Formulario
 		'</pft></display>
 
 		<list action=delete>now</list>
+
 		<list action="load" type="freq">			
 			<pft>(if p(v859^p)
 					then
@@ -243,11 +244,11 @@ En caso de no ser submit se Muestra el Formulario
 			<field action="import" tag=list>1,2061</field>
 			<!-- Hay que parametrizar la el nombre/path/prefijo de la BD. Fijamos 'MARC' -->
 			<display><pft>
-				if (v1000='#') then
+				if (v1000='#' and val(v1002)<2) then
 					'<input type="hidden" name="partes_id" value="','^bMARC^c',v1,'^p">'
 				fi
 			</pft></display>			
-			<flow action="skip"><pft>if (v1000='#') then 'Quit' fi</pft></flow>
+			<flow action="skip"><pft>if (v1000='#' and val(v1002)<2) then 'Quit' fi</pft></flow>
 			<field action="replace" tag="1005"><pft>'~^bMARC^c',v1,'^p',v1000,'~'</pft></field>
 			<display><pft>
 					'<input type="checkbox" name="partes_id" ',
@@ -256,10 +257,10 @@ En caso de no ser submit se Muestra el Formulario
 					if v1000='#' then 'Parte única' else v1000 fi,'<br>',
 			</pft></display>			
 		</loop
-			<display><br></display>
+			><display><br></display>
 		</do>
 </loop
-</do>
+></do>
 
 <display>
 		<input type="submit" name="submit" value="Confirmar reserva">

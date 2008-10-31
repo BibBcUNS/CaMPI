@@ -3,10 +3,10 @@ Verifica que el usuario no supere el límite de reservas
 Límite 1: Límite total de reservas para el tipo de usuario.
 Límite 2: Límite de reservas respecto al típo de usuario y tipo de objeto. (pendiente) 
 -->
-
+<trace>!BR</trace>
 <!--
 Campos utilizados:
-	2020	Lista de MFNs
+	2020	Lista de MFNs de la base reservas
 -->
 
 <flow action="jump"><pft>if v5000:'Error' then 'FinLimites' fi</pft></flow>

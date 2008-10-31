@@ -14,6 +14,7 @@ function cant_dias_mes($_mes, $_anio) {
 }
 
 function crear_cadena_mes($datos_mes, $_mes, $_anio) {
+	global $SERVER_NAME;
 	$cant_dias_no_habiles = count($datos_mes);
 	$dias='';
 	for($i=0;$i<$cant_dias_no_habiles;$i++){
@@ -34,7 +35,7 @@ function crear_cadena_mes($datos_mes, $_mes, $_anio) {
 	return $cadena;
 }
 
-$url="http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_grabar.xis".
+$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_grabar.xis".
 		"&anio=$anio";
 
 

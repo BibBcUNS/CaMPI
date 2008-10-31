@@ -1,3 +1,4 @@
+<?php  session_start(); ?>
 <html>
 
 <head>
@@ -116,9 +117,8 @@ function focus_expresion() {
     <tr>
       <td width="100%">
       <input type="hidden" name="operador" value=<?php 
-	    session_start();
 	    $usuario=$_SESSION["s_username"];
-		$url="http://127.0.0.1/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
+		$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
 		$ptr_grabar_datos = fopen($url,"r");
 		$grabar_datos = fread($ptr_grabar_datos,500);
 		fclose($ptr_grabar_datos);

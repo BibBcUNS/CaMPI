@@ -1,15 +1,15 @@
+<?php session_start(); ?>
 <html>
 <head>
 <title>CaMPI - Módulo Administración</title>
 <!--script language=javascript type=text/javascript src=js/popup_calendar.js-->
 </head>
 <?php
-session_start();
 if (isset($_SESSION["s_username"])) {
 ?>
 
 <?php
-$ptr_anios_calendario = fopen("http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_anios.xis","r");
+$ptr_anios_calendario = fopen("http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_anios.xis","r");
 $anios_calendario = fread($ptr_anios_calendario,1000);
 fclose($ptr_anios_calendario);
 $anios = explode  ('~', $anios_calendario);

@@ -1,10 +1,9 @@
+<?php session_start(); ?>
 <html>
 <head>
 <title>CaMPI</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <?php
-
-session_start();
 if (isset($_SESSION["s_username"])) {
 echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=menu.php>";
 }else{
@@ -26,8 +25,8 @@ echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=menu.php>";
 <tr>
 <td align='center'>
 	<?php
-	if ($_GET['error']=='si'){
-	echo "<br><font color='red'>Ingrese usuario y contraseña válidos</font><br><br>";
+	if (isset($_SESSIOM["s_username"]) && $_GET['error']=='si'){
+	echo "<br><font color='red'>Ingrese usuario y contrase&ntilde;a v&aacute;lidos</font><br><br>";
 	} else {
 	}
 	?>

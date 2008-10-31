@@ -1,22 +1,20 @@
+<?php session_start();?>
 <html>
 <head>
 <title>CaMPI</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <?php
-
-session_start();
 if (isset($_SESSION["s_username"])) {
 echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=circulacion.php>";
 }else{
 ?>
 
 </head>
-
-<body>
+<body bgcolor="#FFFFFF">
 <table  border="0" width="500" align="center" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="center"><img src="../../images/campi.png" border="0"></td>
-		<td align="center"><h3>Circulación - Módulo de Circulación</h3></td>
+		<td align="center"><h3>Circulaci&oacute;n - M&oacute;dulo de Circulaci&oacute;n</h3></td>
 	</tr>
 </table>
 
@@ -26,8 +24,8 @@ echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=circulacion.php>";
 <tr>
 <td align='center'>
 	<?php
-	if ($_GET['error']=='si'){
-	echo "<br><font color='red'>Ingrese usuario y contraseña válidos</font><br><br>";
+	if (isset($_GET["error"]) && $_GET["error"]=='si'){
+	echo "<br><font color='red'>Ingrese usuario y contrase&ntilde;a v&aacute;lidos</font><br><br>";
 	} else {
 	}
 	?>

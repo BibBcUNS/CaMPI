@@ -1,13 +1,13 @@
+<?php session_start(); ?>
 <!-- La función que indica los días que son sábados y domingos....
 hasta la versión de php que tengo, funsiona solo hasta el 17 de Enero de 2038 -->
 
 <html>
 <head>
-<title>Open MarcoPolo - Edición de Calendario</title>
+<title>CaMPI - Edición de Calendario</title>
 
 </head>
 <?php
-session_start();
 if (isset($_SESSION["s_username"])) {
 ?>
 <body bgcolor="#E8E8D0" topmargin="0">
@@ -150,15 +150,16 @@ function mostrar_mes ($_mes, $_datos, $_año) {
 
 function editar_año($_año) {
 	global $mesArray;
+	global $SERVER_NAME;
 	// Invoco al wxis con calendario_leer.xis(año) para leer los datos de un año determinado.
-	$ptr_datos_año = fopen("http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_leer.xis&anio=$_año","r");
+	$ptr_datos_año = fopen("http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_leer.xis&anio=$_año","r");
 	$datos_año = fread($ptr_datos_año,500);
 	fclose($ptr_datos_año);
 	// Se genera una lista de 0s y Puntos por cada mes, separada cada cadena por "~"
 
 	// En caso que el script no encuentre el año en la BD devuelve "error".
 	if (!(strpos($datos_año,"error")===false)) {
-		$ptr_ultimo_año = fopen("http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_ultimo_anio.xis","r");
+		$ptr_ultimo_año = fopen("http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_ultimo_anio.xis","r");
 		$ultimo_año = fread($ptr_ultimo_año,500);
 		fclose($ptr_ultimo_año);
 		echo "<font color=red>Error!: El año <b>$_año</b> no está definido.</font><br>";
@@ -201,7 +202,8 @@ function editar_año($_año) {
 //*******************************************************************//
 
 function grabar_año($_año, $meses) {
-	$url="http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_nuevo.xis".
+	global $SERVER_NAME;
+	$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_nuevo.xis".
 			"&anio=$_año";
 	
 	for($i=0;$i<12;$i++){
@@ -253,7 +255,8 @@ function es_int($numero){
 }
 
 function crear_hasta_el_año($año){
-	$ptr_ultimo_año = fopen("http://127.0.0.1/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_ultimo_anio.xis","r");
+	global $SERVER_NAME;
+	$ptr_ultimo_año = fopen("http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_ultimo_anio.xis","r");
 	$ultimo_año = fread($ptr_ultimo_año,500);
 	fclose($ptr_ultimo_año);
 	

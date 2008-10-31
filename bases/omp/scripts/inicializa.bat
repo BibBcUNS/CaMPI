@@ -1,1 +1,1 @@
-"./wxis" "IsisScript=./inicializa/inicializa.xis"
+"wxis" "IsisScript=./inicializa/inicializa.xis"
