@@ -4,8 +4,8 @@
 <title>CaMPI</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <?php
-if (isset($_SESSION["s_username"])) {
-echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=circulacion.php>";
+if (isset($_SESSION["s_username"]) && $_SESSION["s_permiso"]=='circulacion') {
+ echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=circulacion.php>";
 }else{
 ?>
 

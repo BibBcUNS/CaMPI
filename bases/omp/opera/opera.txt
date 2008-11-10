@@ -5,6 +5,15 @@
 !v005!circulacion
 !v005!administracion
 
+!ID 0
+!v001!mostrador
+!v002!123
+!v003!^aAtención al Público^bCirculación
+!v005!circulacion
+
+
+
+
 
 
 

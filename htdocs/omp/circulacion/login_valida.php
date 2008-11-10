@@ -7,14 +7,15 @@ $password=$_POST['password'];
 if ($password==NULL or $username==NULL) {
 echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php?error=si>";
 }else{
-$cadena_archivo = "http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/userpwd.xis&user=".$username;
+ $cadena_archivo = "http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/userpwd.xis&user=".$username."&pwd=".$password."&modulo=circulacion";
 $ptr_userpwd = fopen($cadena_archivo, "r");
-$userpwd = fread($ptr_userpwd,8192);
+$exito = fread($ptr_userpwd,8192);
 fclose($ptr_userpwd);
-if($userpwd != $password) {
+if($exito != 'OK') {
 echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php?error=si>";
 }else{
 $_SESSION["s_username"] = $username;
+$_SESSION["s_permiso"] = 'circulacion';
 echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=circulacion.php>";
 }
 }

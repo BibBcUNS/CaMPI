@@ -7,15 +7,16 @@ $password=$_POST['password'];
 if ($password==NULL or $username==NULL) {
 echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php?error=si>";
 }else{
-$cadena_archivo = "http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/userpwd.xis&user=".$username;
+ $cadena_archivo = "http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/userpwd.xis&user=".$username."&pwd=".$password."&modulo=administracion";
 $ptr_userpwd = fopen($cadena_archivo, "r");
-$userpwd = fread($ptr_userpwd,8192);
+$exito = fread($ptr_userpwd,8192);
 fclose($ptr_userpwd);
-if($userpwd != $password) {
-echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php?error=si>";
+ if($exito != 'OK') {
+ echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php?error=si>";
 }else{
 $_SESSION["s_username"] = $username;
-echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=menu.php>";
+$_SESSION["s_permiso"] = 'administracion';
+ echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=menu.php>";
 }
 }
 ?> 
