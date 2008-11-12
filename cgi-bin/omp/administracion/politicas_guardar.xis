@@ -57,7 +57,7 @@
 
 <label>NUEVO</label>
 
-<display><pft>if val(v110)<>0 then 'Ya existe una política para el tipo de usuario y tipo de objeto' fi</pft></display>
+<display><pft>if val(v110)<>0 then 'CREAR_EXISTENTE' fi</pft></display>
 <flow action=exit><pft>if val(v110)<>0 then '1' fi</pft></flow>
 
 <do task=update>
@@ -77,7 +77,7 @@
 
 <label>EXISTENTE</label>
 
-<display><pft>if val(v110)=0 then 'La política para el tipo de usuario y tipo de objeto NO EXISTE' fi</pft></display>
+<display><pft>if val(v110)=0 then 'MODIFICAR_INEXISTENTE' fi</pft></display>
 <flow action=exit><pft>if val(v110)=0 then '1' fi</pft></flow>
 
 <do task=update>

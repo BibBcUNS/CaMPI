@@ -10,7 +10,7 @@ if (isset($_SESSION["s_username"])) {
 <body bgcolor="#E8E8D0" topmargin="0">
 
 <?php
-// recibo el parámetro $anio a ser creado/editado
+// recibo el parámetro opcion
 if (isset($_POST['opcion'])) {
 	$opcion=$_POST['opcion'];
 }
@@ -74,7 +74,7 @@ function mostrar_politicas() {
 			  .$politicas_arreglo[$i][0]
 			  .'-'
 			  .$politicas_arreglo[$i][1]
-			  .'"></td>';
+			  .'" checked></td>';
         for ($j=0;$j<$atributos_cantidad;$j++) { 
             echo '<td class=dias_mes align=center>';
 			echo $politicas_arreglo[$i][$j];
@@ -122,6 +122,11 @@ echo '<br><input type=submit name=opcion value="Guardar">';
 echo '  ';
 echo '<input type=reset name=opcion value="Limpiar">';
 echo "</form>";
+
+echo "<form action=politicas.php method=post>";
+echo '<input type=submit name=opcion value="Cancelar">';
+echo "</form>";
+
 echo "</td></tr>";
 echo "</table>";
 
@@ -155,7 +160,12 @@ for ($i=0;$i<=(count($campos_nombre)-1);$i++)
    {
 	echo "<tr><td class=fila_titulo>";
 	echo $campos_nombre[$i];
-	echo "</td><td><input type=text name=campo".$i." value=".$politicas_arreglo[$i]."></td></tr>";
+	if ($campos_nombre[$i]=='Tipo de Usuario' or $campos_nombre[$i]=='Tipo de Objeto') {
+	   echo "</td><td><input type=text name=campo".$i." value=".$politicas_arreglo[$i]." disabled='disabled'></td></tr>";
+	}
+	else {
+       echo "</td><td><input type=text name=campo".$i." value=".$politicas_arreglo[$i]."></td></tr>";	
+	}
    }
 	
 echo '<tr><td colspan="2" align="center">';
@@ -163,6 +173,11 @@ echo '<br><input type=submit name=opcion value="Guardar">';
 echo '  ';
 echo '<input type=reset name=opcion value="Limpiar">';
 echo "</form>";
+
+echo "<form action=politicas.php method=post>";
+echo '<input type=submit name=opcion value="Cancelar">';
+echo "</form>";
+
 echo "</td></tr>";
 echo "</table>";
 
@@ -189,6 +204,7 @@ $ptr_politicas = fopen($url,"r");
 $ptr_politicas;
 $politicas = fread($ptr_politicas,8192);
 fclose($ptr_politicas);
+return $politicas;
 
 }	
 
@@ -209,8 +225,13 @@ if (isset($_POST["opcion"])) {
 	elseif($_POST["opcion"]=='Modificar'):
 		 editar_politica();
 	elseif($_POST["opcion"]=='Guardar'):
-		 guardar_politica();
-		 mostrar_politicas();
+		 if (guardar_politica()=='CREAR_EXISTENTE') {
+			echo '<h2 style="text-align=center;color:red">La identificación de la política ya existe. Cree una política nueva!</h2>';
+			crear_politica();
+		 }
+		 else {
+		   mostrar_politicas();
+		 }
 	elseif($_POST["opcion"]=='Borrar'):
 		 borrar_politica();
 		 mostrar_politicas();

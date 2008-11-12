@@ -86,7 +86,7 @@ $anios = explode  ('~', $anios_calendario);
 	<tr>
     <td colspan="2">
 	
-	  <form method="POST" action="politicas.php" target="politicas" onsubmit="window.open('', 'politicas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=420,width=750,scrollbars=no,status=no')">
+	  <form method="POST" action="politicas.php" target="politicas" onsubmit="window.open('', 'politicas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=450,width=750,scrollbars=no,status=no')">
 	  <input type="submit" value="ABM de Políticas">
       </form>
 	</td>
