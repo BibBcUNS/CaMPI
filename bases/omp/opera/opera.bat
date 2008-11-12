@@ -7,7 +7,7 @@
 @echo off
 
 :: Necesitamos asegurar una línea en blanco final
-echo.>>opera.txt
+::echo.>>opera.txt
 
 :: Creamos la base de usuarios
 id2i opera.txt create=opera
