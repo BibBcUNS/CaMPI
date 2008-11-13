@@ -1,8 +1,8 @@
 <p>&nbsp;</p>
 <table border="1" bgcolor="#FFFFFF" width="90%">
  	<tr>
-   	<td width="12%" align="center" bgcolor="#F5A307"><b>NC</b></td>
-   	<td width="88%" align="center" bgcolor="#F5A307"><b>BIBLIOGRAFIA<b></td>
+   	<td width="12%" align="center" bgcolor="#F3B32C"><b>NC</b></td>
+   	<td width="88%" align="center" bgcolor="#F3B32C"><b>BIBLIOGRAFIA<b></td>
   </tr>
   <tr>
     <td>
@@ -12,13 +12,18 @@
     </td>
     <td>
 [pft]
-	/* Indicar un formato de visualización resumido (autor título) que se usará en las consultas */
- if s(v100,v110,v111)>'' then 
-   v100^a,v110^a,v111^a
- else
-   x1
- fi,
- v245^a,
+	/* Indicar un formato de visualización resumido (título / autor) que se usará en las consultas */
+   v245^a,' ',
+   if p(v245^b) then
+      v245^b,' ',
+   else
+      ' / '
+   fi,
+   if s(v100,v110,v111)>'' then 
+      v100^a,v110^a,v111^a
+   else
+      x1
+   fi,
 [/pft]
 </tr>
 </table>
