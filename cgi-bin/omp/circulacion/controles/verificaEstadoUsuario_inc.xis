@@ -34,7 +34,7 @@ Se asume que el DNI ya esta validado -->
    fi
    if p(v4001) then
       if p(v4000) then '<br>' fi,
-      'Error: Devolución atrasada:',(v4001|;|)
+      'Error: Devolución atrasada:',(v4001+|;|)
    fi
 </pft></field>
 
