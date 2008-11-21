@@ -974,11 +974,10 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <!-- Se muestra el encabezado del recibo: lector y el nro. de operación -->
         <display><pft>
           if val(v1102) > 0 then 
-            '<marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">',
-              '¡¡ Error en la base MOVI !! </marquee>',
-            '<p bgcolor="#FF0000" aling="center">',
-            'No se pudo crear el registro de movimientos, pero las operaciones fueron realizadas',
-            '. Controle el estado de la base. Error: ',v1102 fi,
+		    '<marquee width="90%" style="color: #FFFF9B; font-weight: bold;
+			background: #5277AE; font-size: 20px;">¡¡ Error en la base MOVI !! </marquee>',
+            '<p>No se pudo crear el registro de movimientos, pero las operaciones fueron realizadas.</p> ',
+            '<p>Controle el estado de la base.</p> <p>Error: ',v1102 ,'</p>',fi,
         </pft></display>
     
         <!-- Si no se pudo crear el registro de movimientos la rutina se interrumpe, debido a que el resto de las operaciones se realiza con este registro -->
@@ -1011,7 +1010,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
           <field action=define tag=1102>Isis_Status</field>
           <loop>
             <display><pft>          
-              '<table border="0" width="100%">
+              '<table border="0" width="90%">
                 <tr><td width="7%"><b>Operación: ',mfn,'</b>',
                    '<td width="38%"><p align="right"><b>',v1.40,'<br>DNI ',v2,'</b>
                     <td width="10%">
@@ -1046,27 +1045,27 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <parm name=reverse>On</parm>
         <loop>
                 <display><pft>if val(v1002)=1 then
-                  '<table border="0" width="100%" bgcolor="transparent" cellspacing="0">
+                  '<table border="0" width="90%" bgcolor="transparent" cellspacing="0">
                    <tr>
-                     <td width="45%" bgcolor="#F5A307"><b>Devoluciones:</b>
-                     <td width="10%">
-                     <td width="45%" bgcolor="#F5A307"><b>Devoluciones:</b>
+                     <th width="45%">Devoluciones:</th>
+                     <td width="10%">&nbsp;</td>
+                     <th width="45%">Devoluciones:</th>
                    </tr>',fi
                 </pft></display>
                 
                 <display><pft>
-                  '<tr><td width="45%" '
-                        if (v1001^b.1:'!') then 'bgcolor="#FFFF9B">
+                  '<tr><td width="45%"> '
+                        if (v1001^b.1:'!') then 
                 <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error ! </marquee>'
-                        else 'bgcolor="#FFF9E1">' fi,
-                        'Inv. ',v1001^i,', ',v1001^b.60,
-                      '<td width="10%">
-                       <td width="45%" ',
-                        if (v1001^b.1:'!') then 'bgcolor="#FFFF9B">
+						fi,
+                        '<p>Inv. ',v1001^i,', ',v1001^b.60,
+                      '</p></td><td width="10%">&nbsp;</td>
+                       <td width="45%"> ',
+                        if (v1001^b.1:'!') then 
                 <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error ! </marquee>'
-                        else 'bgcolor="#FFF9E1">' fi,
-                        'Inv. ',v1001^i,', ',v1001^b.60,
-                  '</tr>',
+                        fi,
+                        '<p>Inv. ',v1001^i,', ',v1001^b.60,
+                  '</p></td></tr>',
                 </pft></display>
         </loop>
         </do> <!-- list -->
@@ -1095,43 +1094,41 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <loop>
                 <display><pft>if val(v1002)=1 then
                 '<br>
-                   <table border="0" width="100%" bgcolor="transparent" cellspacing="0">
+                   <table border="0" width="90%" bgcolor="transparent" cellspacing="0">
                    <tr>
-                     <td width="45%" bgcolor="#F5A307" colspan="2"><b>Préstamos:</b>
-                     <td width="10%">
-                     <td width="45%" bgcolor="#F5A307" colspan="2"><b>Préstamos:</b>
+                     <th width="45%" colspan="2">Préstamos:</th>
+                     <td width="10%">&nbsp;</td>
+                     <th width="45%" colspan="2">Préstamos:</th>
                    </tr>',fi
                </pft></display>
         
                <display><pft>
-                 '<tr><td width="10%" align="center" bgcolor="#FFF9E1"><b>Vto.',v1001^v.5,
-                       if p(v1001^o) then '<br><font color="#FF0000">', 
+                 '<tr><td width="10%" align="center" style="color: #FF0000; font-weight: bold">Vto.',v1001^v.5,
+                       if p(v1001^o) then '<br>', 
                           select s(v1001^o).1
                             case 'm': '10:00 hs.',
                             case 's': right(v1001^o,8),
                           endsel,
-                          '</font>',
                        fi,
-                       '</b><br>Inv.',v1001^i,
-                       '<td width="35%" ',
-                        if (v1001^b.1:'!') then 'bgcolor="#FFFF9B">
+                       '<br>Inv.',v1001^i,
+                       '</td><td width="35%" >',
+                        if (v1001^b.1:'!') then 
                  <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error !</marquee>'
-                        else 'bgcolor="#FFF9E1">' fi,v1001^b.60,
-                      '<td width="10%">',
-                      '<td width="10%" align="center" bgcolor="#FFF9E1"><b>Vto.',v1001^v.5,
-                       if p(v1001^o) then '<br><font color="#FF0000">', 
+                        fi,v1001^b.60,
+                      '</td><td width="10%">&nbsp;</td>',
+                      '<td width="10%" align="center" style="color: #FF0000; font-weight: bold">Vto.',v1001^v.5,
+                       if p(v1001^o) then '<br>', 
                           select s(v1001^o).1
                             case 'm': '10:00 hs.',
                             case 's': right(v1001^o,8),
                           endsel,
-                          '</font>',
                        fi,
-                      '</b><br>Inv.',v1001^i,
-                      '<td width="35%" ',
-                        if (v1001^b.1:'!') then 'bgcolor="#FFFF9B">
+                      '<br>Inv.',v1001^i,
+                       '</td><td width="35%" >',
+                        if (v1001^b.1:'!') then 
                  <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error !</marquee>'
-                        else 'bgcolor="#FFF9E1">' fi,v1001^b.60,
-                  '</tr>',
+                        fi,v1001^b.60,
+                  '</td></tr>',
                 </pft></display>
         </loop>
         </do>   <!-- list -->
@@ -1143,16 +1140,14 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <display><pft>
            if s(mpu,v10):'SANCIONADO' then 
              '<br>
-                        <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">S A N C I O N A D O !</marquee>
-              <table border="0" width="100%" bgcolor="transparent" cellspacing="0">
-               <tr><td width="45%" bgcolor="#FFF9E1">
-                    <font color="#FF0000">SANCIONADO hasta el ',v11^v[last],'</font>
-                   <td width="10%">
-                   <td width="45%" bgcolor="#FFF9E1">
-                     <font color="#FF0000">SANCIONADO hasta el ',v11^v[last],'</font>
+                <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold" width="90%">S A N C I O N A D O !</marquee>
+              <table border="0" width="90%" bgcolor="transparent" cellspacing="0">
+               <tr><td width="45%"><p>SANCIONADO hasta el',v11^v[last],'</p></td>
+                   <td width="10%">&nbsp;</td>
+                   <td width="45%"><p>SANCIONADO hasta el',v11^v[last],'</p></td>
                </tr>
-              </table>'
-           fi
+              </table>',
+           fi/
         </pft></display>
     
         <label>IMPRIMIR_FIRMAS</label>
@@ -1236,25 +1231,55 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		<label>ID</label>
 		
 		<!-- mostramos el encabezado de la pagina -->
-		<display>
-		<HTML>
-		<HEAD>
-		</head> 
-		</display>
-		<display><pft>
-				  '<body  bgcolor="#E8E8D0" onload="window.document.form_abm.credencial.value=parent.indice.form_id.lector.value">',
-				  '<font face="Draft 10cpi">',
-				  '<table border="0" width="100%">',
-				  '<tr>',
-					    '<td width="50%"><big>',ref(['config']1,v7),'</big>',
-					    '</td>',
-					    '<td width="50%" align="right">',
-						      '<em>Open MarcoPolo - Módulo Circulación</em><br>',
-						      'Fecha: ',
-						       mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),' 'mid(date(datetime),10,9)
-					    '</td>',
-				  '</table><hr>'/
-		</pft></display>
+<display>
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Circulación</title>
+    <link rel="stylesheet" type="text/css" href="/omp/circulacion/css/style.css" />
+  </head>
+  <body onload="window.document.form_abm.credencial.value=parent.indice.form_id.lector.value">
+  <center>
+    <div id="head"> 
+		  <div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
+		  <div id="logo"><img src="/omp/circulacion/images/logocampicir.gif"   width="120" height="54" ></div>
+		  </div>
+		 
+      <div id="menu">
+        <ul>
+          <li>
+            <a href="/index.html" target=_blank>
+			Principal</a>
+          </li>
+		  <li>&nbsp;</li>
+          <li  class="active">
+            <a href="*" >Circulación</a>
+          </li><li>&nbsp;</li>
+          <li>
+            <a href="/omp/administracion/login_form.php"  target=_blank>		
+			Administración</a>
+          </li><li>&nbsp;</li>
+          <li>
+            <a href="/omp/estadisticas/index.htm" target=_blank>Estadísticas</a>
+          </li><li>&nbsp;</li>
+		  <li>
+             <a href="/catalis/catalogacion.htm" target=_blank>Catalogación</a>
+          </li><li>&nbsp;</li>
+		  <li>
+            <a href= 
+			"http://cabbib2.cnea.gov.ar/cgi-bin/opacmarc/wxis?IsisScript=opac/xis/opac.xis&db=celtic" 
+			target=_blank>OPAC</a>
+          </li><li>&nbsp;</li>
+        </ul>
+      </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div class="top"></div>
+								<div class="content">
+<!----------------------------------------------------------------------------->	
+</display>
 
 		<!-- recibimos los parametros del formulario form_id -->
 		<field action=cgi tag=100>lector</field>
@@ -1436,7 +1461,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 
 		<!-- la función javascript "mostrar_reservas()" aletra si algún elemento devuelto presenta una reserva -->		
   		<display><pft>
-		        '<body  bgcolor="#E8E8D0" onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then '; print()' fi,'">',
+		        '<body  onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then '; print()' fi,'">',
 		        '<font face="Draft 10cpi">'
         </pft></display>
 
@@ -1466,6 +1491,20 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		</call>
 
 <label>EXIT</label>
-
+<display>
+<!----------------------------------------------------------------------------->	
+ 
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div></center>
+  </body>
+</html>
+</display>
 </section>
 </IsisScript>

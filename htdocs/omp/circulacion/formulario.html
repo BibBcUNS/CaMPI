@@ -146,9 +146,9 @@
   <tr>
     <td width="24%"><img src="/omp/circulacion/fotos/',v2,'.jpg" width="128" height="96" align="middle"  OnError="this.src=',"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,'"></td>',
    '<td width="76%"><big>',v1,'</big>',", ",v3,
-   if v2001:'1' then '<br><marquee bgcolor="#FFF0C4" border="0" style="color: rgb(191,51,83); font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',fi,
+   if v2001:'1' then '<br><marquee bgcolor="#FF0000" width=90% style="color: #FFFF9B; font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',fi,
    '<br><a href="JavaScript:presenta_observaciones()"><font face="Arial" size="3">Observaciones al Lector</font></a>',
-   if p(v17) then '&nbsp;&nbsp;<font face="Arial" size="3"><strong> (Consúltelas!)</strong></font>' fi,
+   if p(v17) then '&nbsp;&nbsp;<p><strong> (Consúltelas!)</strong></p>' fi,
    '</td>
   </tr>
 </table>',
@@ -162,7 +162,7 @@ fi
  (if p(v11) then if iocc=nocc(v11) then
    '<blink><big><font color="#FF0000">',if s(v11^v*6,v11^v*3.2,v11^v.2) < s(date).8 then ' Estuvo ' fi,'SANCIONADO hasta el ',v11^v,'</font></big></blink>', fi
   fi)
-fi,'<p>',
+fi,
 
 '<form name="control" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" style="margin-bottom: 0">
   <input type="hidden" name="IsisScript" value="/omp/circulacion/prestamo.xis">
@@ -174,11 +174,11 @@ fi,'<p>',
 
 
 if p(v8) then 
-'<table border="1" width="100%" bgcolor="FFFFFF">',
+'<table border="1" width="90%" bgcolor="FFFFFF">',
  '<tr>',
-   '<td width="100%" colspan="3" bgcolor="F5A307"><strong>Marque las devoluciones</strong>',
+   '<td width="100%" colspan="3" ><strong>Marque las devoluciones</strong>',
      if nocc(v8) > 99 then ' (solo las primeras 99)' fi,'</td>',
-   '<td bgcolor="F5A307"><strong>Entrega/Vto.</strong>',
+   '<td><strong>Entrega/Vto.</strong>',
  '</tr>',
 
 	'<SCRIPT LANGUAGE="JavaScript">
@@ -235,7 +235,7 @@ fi,
 if p(v9) then 
 '<table border="1" width="100%" bgcolor="FFFFFF">',
  '<tr>',
-   '<td width="100%" colspan="3" bgcolor="F5A307"><strong>Ha consultado</strong></td></tr>',
+   '<td width="100%" colspan="3"  ><strong>Ha consultado</strong></td></tr>',
 (
  '<tr>',
    '<td width="100%">',mhl,v9,'</td></tr>',
@@ -280,10 +280,9 @@ Sanc. Previas:
 
 fi,
 
-'<table border="0" width="100%">
-        <tr>
-                <td width="100%" colspan="3" bgcolor="F5A307">
-                <strong>Pr&eacute;stamos, indique los nros. de Inventario</strong></td></tr>
+'<table border="0" width="90%">
+       
+        <th colspan="3" >Pr&eacute;stamos, indique los nros. de Inventario</th>
         <tr>
                 <!-- prestamos A -->
                 <td valign="middle" width="40%">
@@ -359,12 +358,8 @@ fi,
 <br>',
 
 if ref(['config']1,v9)='si' then
-	'<table border="0" width="100%" cellspacing="10">
-		<tr>
-			<td width="100%" colspan="2" bgcolor="F5A307">
-			<strong>Reservas</strong>
-			</td>
-		</tr>
+	'<table border="0" width="90%" cellspacing="10">
+			<th colspan="2" >Reservas</th>
 		<tr>
 		<td colspan="2">',
 			if p(v2030) then
@@ -452,13 +447,12 @@ if ref(['config']1,v9)='si' then
 				<input type="hidden" name="usuario_id" value="',v2,'">
 				<input type="hidden" name="operario_id" value="',v2002,'">
 	
-				<table border="0" width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-						<td width="100%"><strong><u>R</u>eservar material: </strong>
-						<input type="text" name="expresion" size="15" accesskey="r">
-						<input type="submit" value="Enviar">
-						<a href="/omp/circulacion/marc_fst.txt" target="new">?</a>
-					</tr>					
+				<table border="0" width="90%" cellpadding="0" cellspacing="0">
+					<tr><th width="60%"><u>R</u>eservar material: </th>
+					<td width="15%">&nbsp;&nbsp;<input type="text" name="expresion" size="15" accesskey="r">&nbsp;&nbsp;</td>
+					<td align="right" width="10%"><input type="submit" value="Enviar">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td width="5%"><a href="/omp/circulacion/marc_fst.txt" target="new">?</a></td>
+					</tr>			
 				</table>
 				</form>
 			</td>
@@ -489,6 +483,6 @@ fi,
 <script>
     iniciar();
 </script>
-</font>'
+'
 [/pft] 
 

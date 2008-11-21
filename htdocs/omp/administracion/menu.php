@@ -1,7 +1,9 @@
 <?php session_start(); ?>
-<html>
-<head>
-<title>CaMPI - Módulo Administración</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <!--script language=javascript type=text/javascript src=js/popup_calendar.js-->
 </head>
 <?php
@@ -14,20 +16,47 @@ $anios_calendario = fread($ptr_anios_calendario,1000);
 fclose($ptr_anios_calendario);
 $anios = explode  ('~', $anios_calendario);
 ?>
-<body bgcolor="#E8E8D0" topmargin="0">
-<table border="0" width="100%">
-  <tr>
-    <td width="85" rowspan="2"><img src="images/logo.gif" width="80" height="80" align="middle"></td>
-    <td width="50%"><big>Biblioteca Central - UNS</big><td width="50%" align="right"><b><i>Sistema de Circulación <a href="/index.htm"><img src="/omp/omp.gif" width="80" height="62" align="middle" border="0"></a></i></b><br>
-    </td>
-  </tr>
-</table>
-<hr>
-      
-<table border="0" width="80%">
-	<tr>
-    	<td colspan="2" bgcolor="#FDD08E"><strong>Altas y Modificaciones del Calendario</strong></td>
-  	</tr>
+  <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
+		  <div id="logo"><img src="/images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+		 
+      <div id="menu">
+        <ul>
+          <li>
+            <a href="/index.html" target=_self>
+			Principal</a>
+          </li>
+          <li>
+             <a href="/omp/circulacion/login_form.php"  target=_self> Circulación</a>
+          </li>
+          <li  class="active">
+            <a href="*">Administración</a>
+          </li>
+          <li>
+            <a href="/omp/estadisticas/index.htm" target=_self>Estadísticas</a>
+          </li>
+		  <li>
+             <a href="catalis/catalogacion.htm" target=_self>
+			 Catalogación</a>
+          </li>
+		  <li>
+            <a href= "/cgi-bin/opacmarc/wxis.exe?IsisScript=opac/xis/opac.xis&db=demo&showForm=simple" 
+			target=_self>OPAC</a>
+          </li>
+        </ul>
+      </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
+<center>      
+<table border="0" width="90%">
+    <th colspan="2">Altas y Modificaciones del Calendario</th>
 	<tr>
     <td colspan="2">
 
@@ -69,9 +98,7 @@ $anios = explode  ('~', $anios_calendario);
       </form>
 	</td>
   </tr>
-  <tr>
-    	<td colspan="2" bgcolor="#FDD08E"><strong>Cancela Esperas Vencidas</strong></td>
-  	</tr>
+    <th colspan="2">Cancela Esperas Vencidas</th>
 	<tr>
     <td colspan="2">
 	
@@ -80,9 +107,7 @@ $anios = explode  ('~', $anios_calendario);
       </form>
 	</td>
   </tr>
-    	<tr>
-    	<td colspan="2" bgcolor="#FDD08E"><strong>Altas, Bajas y Modificaciones de Políticas de Circulación</strong></td>
-  	</tr>
+    <th colspan="2">Altas, Bajas y Modificaciones de Políticas de Circulación</th>
 	<tr>
     <td colspan="2">
 	
@@ -91,10 +116,7 @@ $anios = explode  ('~', $anios_calendario);
       </form>
 	</td>
   </tr>
-  
-  <tr>
-    <td colspan="2" bgcolor="#FDD08E"><strong>Altas y Modificaciones de Lectores</strong></td>
-  </tr>
+    <th colspan="2">Altas y Modificaciones de Lectores</th>
   <tr>
     <td width="70%"><form method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">
       <input type="hidden" name="IsisScript" value="omp/administracion/abmlector.xis">
@@ -114,10 +136,10 @@ $anios = explode  ('~', $anios_calendario);
     </td>
     </form>
   </tr>
-  <tr>
-    <td bgcolor="#FDD08E"><strong>Circulación Bibliográfica</strong></td>
-    <td bgcolor="#FDD08E"><strong>Otros procedimientos</strong></td>
-  </tr>
+  
+    <th>Circulación Bibliográfica</th>
+    <th>Otros procedimientos</th>
+
   <tr>
     <td>
     	<form name="form_listados" method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">
@@ -141,12 +163,10 @@ $anios = explode  ('~', $anios_calendario);
 			<a href="credenciales.html">Generación de credenciales</a><br>
 			<a href="libre_deuda.html">Emisión de Libre Deuda</a></b></td>
   </tr>
-  <tr>
-   <td colspan="2" bgcolor="#FDD08E">
-   		<strong>Base Bibliográfica. </strong>
-   		<i>Dispare esta acción cada vez que incorpora o modifica un inventario</i>
-   	</td>
-  </tr>
+   <th colspan="2">Base Bibliográfica. 
+   		<i><font size="2">Dispare esta acción cada vez que incorpora o modifica un inventario</font></i>
+   	</th>
+
   <tr>
 	<td colspan="2">
 		<form action="/cgi-bin/wxis.exe/omp/administracion/" method="post">
@@ -174,9 +194,22 @@ $anios = explode  ('~', $anios_calendario);
     <td>	
     </td>
   </tr>
- 
 </table>
-</body>
+</center>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div>
+  </body>
 <?php
 }else{
 echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php>";

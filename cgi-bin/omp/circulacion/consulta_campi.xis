@@ -42,21 +42,24 @@
  */ -->
 
 <IsisScript>
-<trace>BR1</trace>
 
 <section>
   <display><pft>'Content-type: text/html'/#</pft></display>
+  <trace>BR1</trace>
   <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  
   <field action=cgi tag=100>criterio</field>
   <field action=cgi tag=110>expresion</field>
   <field action=cgi tag=120>usuario_id</field>
   <field action=cgi tag=130>operario_id</field>
-
-
+ 
   <display><htmlpft>
-      <html>
-	<head>
-	<SCRIPT LANGUAGE="JavaScript">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Circulacion</title>
+    <link rel="stylesheet" type="text/css" href="/omp/circulacion/css/style.css" />
+		<SCRIPT LANGUAGE="JavaScript">
 	<!--
 
 	function asignar(documento) {
@@ -80,20 +83,53 @@
 	
 	//  End -->
 	</script>
-	</head>
 
-	<body bgcolor="#E8E8D0">
-	 <table border="0" width="100%">
-	    <tr>
-		<td width="50%"><big>[pft]ref(['config']1,v7)[/pft]</big></td>
-		<td width="50%" align="right"><em>Open MarcoPolo - Módulo Circulación</em>
-		<br>Fecha: 
-  </htmlpft></display>
-  <display><pft>mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),' 'mid(date(datetime),10,9)
-        '</td>',
-      '</table><hr>',
-   </pft></display>
+  </head>
+  <body>
+  <center>
+    <div id="head"> 
+		  <div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
+		  <div id="logo"><img src="/omp/circulacion/images/logocampicir.gif"   width="120" height="54" ></div>
+		  </div>
+		 
+      <div id="menu">
+        <ul>
+          <li>
+            <a href="/index.html" target=_blank>
+			Principal</a>
+          </li>
+		  <li>&nbsp;</li>
+          <li  class="active">
+            <a href="*" >Circulación</a>
+          </li><li>&nbsp;</li>
+          <li>
+            <a href="/omp/administracion/login_form.php"  target=_blank>		
+			Administración</a>
+          </li><li>&nbsp;</li>
+          <li>
+            <a href="/omp/estadisticas/index.htm" target=_blank>Estadísticas</a>
+          </li><li>&nbsp;</li>
+		  <li>
+             <a href="/catalis/catalogacion.htm" target=_blank>Catalogación</a>
+          </li><li>&nbsp;</li>
+		  <li>
+            <a href= 
+			"http://cabbib2.cnea.gov.ar/cgi-bin/opacmarc/wxis?IsisScript=opac/xis/opac.xis&db=celtic" 
+			target=_blank>OPAC</a>
+          </li><li>&nbsp;</li>
+        </ul>
+      </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div class="top"></div>
+								<div class="content">
+           <br><br> 
+<!----------------------------------------------------------------------------->		    </htmlpft></display> 
 
+
+ 
   <flow action=jump><pft>if p(v110) or v100='prestamos' then v100 else 'SALIDA' fi</pft></flow>
 
   <label>nc</label>
@@ -102,6 +138,7 @@
 	muestran las partes, y para cada parte, los ejemplares prestados/reservados/en espera -->
 	
   <label>inv</label>
+ <trace>BR</trace>
 	<field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogación (v6) -->
 	
   <do task=search>
@@ -159,6 +196,21 @@
   </do>
   <display><pft>if val(v1102)=0 then 
    '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display>
+<display>
+<!----------------------------------------------------------------------------->	
+<br><br> 
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div></center>
+  </body>
+</html>
+</display>
   <flow action=exit>1</flow>
 
   <label>lector</label>
@@ -174,12 +226,12 @@
     <field action=define tag=1104>Isis_Current</field>
     <loop>
       <display><pft>if val(v1104)=1 then 
-        '<table border="1" width="100%" bgcolor="#FFFFF">
-         <tr><td width="60%" align="center" bgcolor="#F5A307">
-           <b>Lector</b></td>
-         <td width="20%" align="center" bgcolor="#F5A307">
-           <b>Documento</b></td>
-         </tr>' fi
+        '<table border="1" width="90%" bgcolor="#FFFFF">
+         <th width="60%" align="center">
+           <b>Lector</b></th>
+         <th width="20%" align="center">
+           <b>Documento</b></th>
+         ' fi
       </pft></display>
       <do task=search>
         <parm name=db>lector</parm>
@@ -207,6 +259,21 @@
 	
 <!--  <display><pft>if val(v1102)=0 then 
    '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display> -->
+<display>
+<!----------------------------------------------------------------------------->	
+<br><br> 
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div></center>
+  </body>
+</html>
+</display>   
   <flow action=exit>1</flow>
 
   <label>otro</label>
@@ -264,6 +331,21 @@
   </do>
   <display><pft>if val(v1102)=0 then 
    '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display>
+<display>
+<!----------------------------------------------------------------------------->	
+<br><br> 
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div></center>
+  </body>
+</html>
+</display>
   <flow action=exit>1</flow>
   
   <label>dni</label>
@@ -280,6 +362,21 @@
   </do>
   <display><pft>if val(v1102)=0 then 
    '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display>
+   <display>
+<!----------------------------------------------------------------------------->	
+<br><br> 
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div></center>
+  </body>
+</html>
+</display>
   <flow action=exit>1</flow>
 
   <label>prestamos</label>
@@ -307,10 +404,42 @@
       <list action=delete>now</list>
     </loop>
   </do>
+  <display>
+<!----------------------------------------------------------------------------->	
+<br><br> 
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div></center>
+  </body>
+</html>
+</display>
   <flow action=exit>1</flow>
 
   <label>SALIDA</label>
 
   <display><p>&nbsp;</p>
-   <center><h2>No se ha indicado una expresión</h3></center></display></section>
+   <center><h2>No se ha indicado una expresión</h3></center></display>
+<display>
+<!----------------------------------------------------------------------------->	
+<br><br> 
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div></center>
+  </body>
+</html>
+</display>   
+   
+  </section>
 </IsisScript>

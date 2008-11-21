@@ -7,8 +7,8 @@
 <?php
 if (isset($_SESSION["s_username"])) {
 ?>
-<frameset cols="25%,*" onload="moveTo(0,0)">
-  <frameset rows="80%,*">
+<frameset cols="20%,*" onload="moveTo(0,0)">
+  <frameset rows="70%,*">
 	  <frame name="indice" src="id_prestamo.php" target="principal">
 	  <frame name="identificacion" src="identificacion.php" target="principal">
   </frameset>
@@ -20,7 +20,9 @@ if (isset($_SESSION["s_username"])) {
   </noframes>
 </frameset>
 <?php
-}else{
+}
+else
+{
 echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php>";
 }
 ?>

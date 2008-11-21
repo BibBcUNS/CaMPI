@@ -1,10 +1,39 @@
 <?php  session_start(); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <base target="principal">
+    <title>id_prestamo</title>
+<link rel="stylesheet" type="text/css" href="/omp/circulacion/css/style.css" />	
+<style type="text/css">
+<!--
+#lt1 {
+   float : left;
+   width : 203px;
+   margin : 0 1em 0 1em;
+   border : 1px solid #5277AE;
+   padding : 0;
+   background : #BEE4FF;
+   font-family: "Trebuchet MS", Verdana, sans-serif;
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<base target="principal">
-<title>Open MarcoPolo - Módulo Circulación</title>
+}
+
+
+#lt1 h2 {
+	margin:  0 -20px 0 0;
+	color: #fff;
+	text-align: center;
+	font-size : 130%;
+	background: #5277AE;
+}
+
+#lt1 td {   
+        font-size: 14px;
+}
+-->
+</style>
+
 <SCRIPT language="JavaScript1.1">
 <!--
 	
@@ -40,8 +69,11 @@ function focus_expresion() {
 </SCRIPT>
 </head>
 
-<body bgcolor="#E8E8D0" topmargin="10" leftmargin="2" rightmargin="2" style="font-face:Arial;font-size:11pt;">
-
+<body>
+ <body>
+   <br><br><br>
+   <div id="lt1">
+   <h2>MENU</h2>
 <form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" onclick="javascript:focus_expresion();"
  onsubmit="
 		if (window.document.consultas.expresion.value =='$' || window.document.consultas.expresion.value =='') {
@@ -116,13 +148,15 @@ function focus_expresion() {
       <td width="100%"><strong>Estado de cuenta x ID.</strong></td></tr>
     <tr>
       <td width="100%">
-      <input type="hidden" name="operador" value=<?php 
+      <input type="hidden" name="operador" value=
+	  <?php 
 	    $usuario=$_SESSION["s_username"];
 		$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
 		$ptr_grabar_datos = fopen($url,"r");
 		$grabar_datos = fread($ptr_grabar_datos,500);
 		fclose($ptr_grabar_datos);
-	    echo $usuario.'-'.$grabar_datos;?>>
+	    echo $usuario.'-'.$grabar_datos;?>
+		>
 	  </td>
 	 </tr>
     <tr>
@@ -138,6 +172,6 @@ function focus_expresion() {
   </table>
 </form>
 </font>
-
+</div>
 </body>
 </html>

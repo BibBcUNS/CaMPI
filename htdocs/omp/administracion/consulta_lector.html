@@ -1,55 +1,98 @@
-
-<table border="1" width="100%" bgcolor="#FFFFFF">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Módulo de Administración  </title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
+  <body>
+    <div id="head"> 
+		  <div id="title">Módulo de Administración
+		  <div id="logo"><img src="/images/logocampi2.gif"   width="156" height="71" ></div>
+		  </div>
+		 
+      <div id="menu">
+        <ul>
+          <li>
+            <a href="/index.html" target=_blank>Principal</a>
+          </li>
+          <li>
+             <a href="/omp/circulacion/login_form.php"  target=_blank> Circulación</a>
+          </li>
+          <li  class="active"><a href="*">Administración</a>
+          </li>
+          <li>
+            <a href="/omp/estadisticas/index.htm" target=_blank>Estadísticas</a>
+          </li>
+		  <li>
+             <a href="/catalis/catalogacion.htm" target=_blank>Catalogación</a>
+          </li>
+		  <li>
+            <a href= 
+			"http://cabbib2.cnea.gov.ar/cgi-bin/opacmarc/wxis?IsisScript=opac/xis/opac.xis&db=celtic" 
+			target=_blank>OPAC</a>
+          </li>
+        </ul>
+      </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div class="top"></div>
+								<div class="content">
+         
+<!----------------------------------------------------------------------------->	
+<div class="lector">
+<table>
+  <th>
+    <td align="center" width="100%" colspan="3">Ficha del lector</td>
+  </th>
   <tr>
-    <td align="center" bgcolor="#F5A307" width="100%" colspan="3"><big>Ficha del lector</big></td>
-  </tr>
-  <tr>
-    <td bgcolor="#FDD08E" width="25%"><b>Registro (MFN)</b></td>
+    <td  width="25%"><b>Registro (MFN)</b></td>
     <td width="54%">[pft]f(val(mfn),1,0)[/pft]</td>
     <td width="26%" rowspan="5"><p align="center"><img src="/omp/circulacion/fotos/[pft],v2,[/pft].jpg" width="128" height="96" align="middle" OnError="this.src=[pft]"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,[/pft]"></p></td>
-  </tr>
+  </tr></div>
   <tr>
-    <td bgcolor="FDD08E" width="25%"><b>Nombre</b></td>
+    <td  width="25%"><b>Nombre</b></td>
     <td width="54%">[pft]v1[/pft]</td>
   </tr>
   <tr>
-    <td bgcolor="FDD08E" width="25%"><b>Documento</b></td>
+    <td  width="25%"><b>Documento</b></td>
     <td width="54%">[pft]v2[/pft]</td>
   </tr>
   <tr>
-    <td bgcolor="FDD08E" width="25%"><b>Domicilio</b></td>
+    <td width="25%"><b>Domicilio</b></td>
     <td width="54%">[pft]v6[/pft]</td>
   </tr>
   <tr>
-    <td bgcolor="FDD08E" width="25%"><b>Teléfono</b></td>
+    <td width="25%"><b>Teléfono</b></td>
     <td width="54%">[pft]if p(v7) then v7 else 'No se indica' fi[/pft]</td>
   </tr>
   <tr>
-    <td bgcolor="FDD08E" width="25%"><b>Dom. de origen</b></td>
+    <td  width="25%"><b>Dom. de origen</b></td>
     <td width="54%" colspan="2">[pft]if p(v14) then v14 else 'No se indica' fi[/pft]</td>
   </tr>
   <tr>
-    <td bgcolor="FDD08E" width="25%"><b>Tel. de origen</b></td>
+    <td  width="25%"><b>Tel. de origen</b></td>
     <td width="54%" colspan="2">[pft]if p(v15) then v15 else 'No se indica' fi[/pft]</td>
   </tr>
   <tr>
-    <td bgcolor="FDD08E" width="25%"><b>E@mail</b></td>
+    <td width="25%"><b>E@mail</b></td>
     <td width="54%" colspan="2">[pft]if p(v12) then '<a href="mailto:',v12,'">',v12,'</a>' else 'No se indica' fi[/pft]</td>
   </tr>
   <tr>
-    <td bgcolor="FDD08E" width="25%"><b>Estado</b></td>
+    <td  width="25%"><b>Estado</b></td>
     <td width="54%" colspan="2"><strong><big>[pft]v10[/pft]</big></strong></td>
   </tr>
 [pft]	
   if p(v11) then
  '<tr>
-    <td bgcolor="FDD08E" width="25%"><b>Fin Sanción</b></td>
+    <td  width="25%"><b>Fin Sanción</b></td>
     <td width="54%" colspan="2">'if p(v11) then (v11^*,' Días - Fecha: ',v11^f,' Vencimiento: ',v11^v,'<br>') else 'No se indica' fi'</td>
   </tr>'
   fi,
   if p(v130) then
  '<tr>
-    <td bgcolor="FDD08E" width="25%"><b>Observaciones</b></td>
+    <td  width="25%"><b>Observaciones</b></td>
     <td width="54%" colspan="2"><strong><big><big><font color="red">',v130,'</font></big></big></strong></td>
   </tr>'
   fi,
@@ -60,16 +103,16 @@
 [pft]
   if p(v8) then
  '<table border="1" bgcolor="#FFFFFF">
-  <tr>
-    <td align="center" bgcolor="#F5A307" width="100%" colspan="8">
-      <big>Préstamos Vigentes</big></td>
-  </tr>
-  <tr bgcolor="FDD08E">
-     <td align="center" width="10%" align="center"><b>Inventario</b></td>
+  <th>
+    <td align="center"  width="100%" colspan="8">
+      Préstamos Vigentes</td>
+  </th>
+  <th >
+     <td align="center" width="10%"><b>Inventario</b></td>
      <td align="center" width="65%"><b>Descripción</b></td>
      <td align="center" width="15%"><b>Prestamo</b></td>
      <td align="center" width="15%"><b>Vencimiento</b></td>
-  </b></tr>',
+ </th>',
  ('<tr>
      <td width="10%" align="center">',v8^i,'</td>
      <td width="65%">',v8^b,'</td>
@@ -80,14 +123,14 @@
   
 if p(v9) then
  '<br>
- 	<table bgcolor="#FFFFFF" border="1">
+ 	<table border="1">
+  <th>
+    <td align="center" width="100%" colspan="3">Solicitudes por Internet</td>
+  </th>
   <tr>
-    <td align="center" bgcolor="#F5A307" width="100%" colspan="3"><b>Solicitudes por Internet</b></td>
-  </tr>
-  <tr bgcolor="#FDD08E"><b>
      <td width="10%" align="center"><b>Ubicación</b></td>
      <td align="center" width="90%"><b>Descripción</b></td>
-  </b></tr>',
+  </tr>',
  ('<tr>
     <td width="10%" align="center">',v9^s,'</td>
     <td width="90%">',v9^d,'</td>
@@ -96,3 +139,15 @@ if p(v9) then
   fi,
   if a(v8) and a(v9) then '<p><h3><center>No registra movimientos !</center></h3></p>' fi,
 [/pft]
+<!----------------------------------------------------------------------->
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div>
+  </body>
+</html>
