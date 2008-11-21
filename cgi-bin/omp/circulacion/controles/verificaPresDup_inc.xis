@@ -51,7 +51,7 @@ esta en la lista de los prestados al lector en cuestion. -->
 	  ó
 	  el lector intenta llevar más de 1 ejemplar de la parte (v3005:v4000) -->
       <field action="add" tag="3001">
-         <pft>if l(['partes']v1000)>0 and (((v3050:v4000) and (not v3060:v4000)) or (v3005:4000)) then v1000 fi</pft>
+         <pft>if l(['partes']v1000)>0 and (v3005:v4000 or (v3050:v4000 and (not v3060:v4000))) then v1000 fi</pft>
       </field>
 	  <field action="add" tag="3005">4000</field>
 	  <field action="export" tag="3005">3005</field>
