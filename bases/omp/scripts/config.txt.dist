@@ -19,10 +19,10 @@ Nombre Institucion=Institucion XXX;
 Path base bibliografica=C:\base\biblio.*;
     
 # Indique el formato de catalogación.
-# Valores posibles: CEPAL, BIBUN, MARCMP, LILACS, OIT (en minúscula).
-# Ejemplo: Formato Cataloga=MARC;
+# Valores posibles: cepal, bibun, marc, lilacs, oit (siempre en minúsculas).
+# Ejemplo: Formato Cataloga=marc;
 
-Formato Cataloga=MARC;
+Formato Cataloga=marc;
 
 # Indique el campo y subcampo que contiene el nro. de inventario.
 # Ejemplo:
