@@ -1,84 +1,64 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-<title>CaMPI</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>CaMPI </title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <div id="head">
+		  <div id="title">Sistema de Gestión Bibliotecario   
+		  <div id="logo"><img src="images/espaciologo.gif"   width="156" height="71" ></div>
+		  </div>
+		 
+      <div id="menu">
+        <ul>
+          <li class="active">
+            <a href="*" >Principal</a>
+          </li>
+          <li>
+            <a href="omp/circulacion/login_form.php" >Circulación</a>
+          </li>
+          <li>
+            <a href="omp/administracion/login_form.php"  target=_self>			
+			Administración</a>
+          </li>
+          <li>
+            <a href="/omp/estadisticas/index.htm" target=_blank>Estadísticas</a>
+          </li>
+		  <li>
+             <a href="catalis/catalogacion.htm" target=_self>
+			 Catalogación</a>
+          </li>
+		  <li>
+            <a href= "/cgi-bin/opacmarc/wxis.exe?IsisScript=opac/xis/opac.xis&db=demo&showForm=simple" 
+			target=_self>OPAC</a>
+          </li>
+        </ul>
+      </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
+<center><img src="images/logocampi.png"   width="413" height="196"><br><br><b>Integración de sistemas de código abierto de gestión bibliotecaria. <br>
+Catalis: módulo de catalogación y autoridades en MARC21, OPACMARC  y <br> Open MarcoPolo:  sistema de Circulación, Administración y Estadísticas</b></center>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  <center>
+	  <IMG SRC="images/loslogos.gif" WIDTH="535" HEIGHT="65" BORDER="0" >
+	  </center>
+	  </div>
+    </div>
+    <div id="end_body"></div>
 
-<SCRIPT language="JavaScript">
-<!--
-function invocar_opac() {
-//	window.open('opac/buscar.html','OPAC','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=790,height=545')
-	window.open('/cgi-bin/opacmarc/wxis.exe?IsisScript=opac/xis/opac.xis&db=demo&showForm=simple')
-	}
-
-function invocar_circulacion() {
-	window.open('omp/circulacion/login_form.php','CIRCULACION','left=0,top=0,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,copyhistory=0,width=800,height=600')
-	}	
-	
-function invocar_administracion() {
-	window.open('omp/administracion/login_form.php','ADMINISTRACION','left=0,top=0,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=790,height=545')
-	}	
-	
-function invocar_stat() {
-	window.open('omp/estadisticas/index.htm','ESTADISTICAS','left=0,top=0,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=790,height=545')
-	}	
-	
-	
-//-->
-</SCRIPT>
-
-<body bgcolor="#FFFFFF">
-
-<table  border="0" width="500" align="center" cellpadding="0" cellspacing="0">
-	<tr>
-		<td align="center"><img src="images/campi.png" border="0"></td>
-		<td align="center"><h3>Software pensado y creado para bibliotecas</h3></td>
-	</tr>
-</table>
-
-<table  border="1" width="500" align="center" bordercolor="#666666" cellpadding="0" cellspacing="0">
-	<tr bgcolor="#CCCCCC">
-		<td align="center"> <b>Catalogación</b></td>
-	</tr>
-	<tr>
-		<td  height="75" align="center">		
-			<a href="http://127.0.0.1/cgi-bin/catalis/wxis.exe?IsisScript=biblio/xis/catalis.xis">Edición de registros bibliográficos</a>
-			<br>
-			<a href="http://127.0.0.1/cgi-bin/catalis/wxis.exe?IsisScript=auto/xis/catalis.xis">Edición de registros de autoridades</a>
-		</td>
-	</tr>
-	<tr bgcolor="#CCCCCC">
-		<td align="center"><b>Circulación</b></td>
-	</tr>
-	<TR>
-		<TD colspan="2"  height="75" align="center">
-			<a href="javascript:invocar_circulacion()">Préstamos, devoluciones y reservas</a>
-			<br>
-			<a href="javascript:invocar_administracion()">Administración</a>
-			<br>
-			<a href="javascript:invocar_stat()">Estadísticas</a>
-		</TD>
-	</TR>
-	<tr bgcolor="#CCCCCC">
-		<td align="center"><b>Catálogo de acceso público en línea</b></td>
-	</tr>
-	<TR>
-		<TD colspan="2"  height="75" align="center">
-		Actualización<br>
-		<a href="javascript:invocar_opac()">Consulta</a><br>
-		</TD>
-	</TR>
-</table>
-<table  border="0" width="500" align="center" cellpadding="0" cellspacing="0">
-	<tr>
-		<td align="center"><img src="images/abr_78.jpg" border="0"></td>
-		<td align="center"><img src="images/ib-small-75_78.jpg" border="0"></td>
-		<td align="center"><img src="images/inmabb-80x80_78.jpg" border="0"></td>
-		<td align="center"><img src="images/uner_logo_78.jpg" border="0"></td>
-		<td align="center"><img src="images/uns_logo_78.gif" border="0"></td>
-
-	</tr>
-</table>
-</body>
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div>
+  </body>
 </html>
