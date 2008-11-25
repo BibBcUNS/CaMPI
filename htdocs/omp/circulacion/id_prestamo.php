@@ -165,10 +165,6 @@ function focus_expresion() {
 	  <input type="submit" value="Buscar">
 	  </td>
 	</tr>
-    <tr>
-      <td width="100%">
-        <input type="button" value="Limpiar Lector" onclick="window.document.form_id.lector.value='';window.document.form_id.lector.focus()">
-        </td></tr>
   </table>
 </form>
 </font>
