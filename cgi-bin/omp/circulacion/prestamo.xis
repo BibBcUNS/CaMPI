@@ -1055,13 +1055,13 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 
                 <display><pft>
                   '<tr><td width="45%"> '
-                        if (v1001^b.1:'!') then 
+                        if (v1001^b.1:'!') then '
                 <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error ! </marquee>'
 						fi,
                         '<p>Inv. ',v1001^i,', ',v1001^b.60,
                       '</p></td><td width="10%">&nbsp;</td>
                        <td width="45%"> ',
-                        if (v1001^b.1:'!') then 
+                        if (v1001^b.1:'!') then '
                 <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error ! </marquee>'
                         fi,
                         '<p>Inv. ',v1001^i,', ',v1001^b.60,
@@ -1112,7 +1112,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                        fi,
                        '<br>Inv.',v1001^i,
                        '</td><td width="35%" >',
-                        if (v1001^b.1:'!') then 
+                        if (v1001^b.1:'!') then '
                  <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error !</marquee>'
                         fi,v1001^b.60,
                       '</td><td width="10%">&nbsp;</td>',
@@ -1125,7 +1125,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                        fi,
                       '<br>Inv.',v1001^i,
                        '</td><td width="35%" >',
-                        if (v1001^b.1:'!') then 
+                        if (v1001^b.1:'!') then '
                  <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error !</marquee>'
                         fi,v1001^b.60,
                   '</td></tr>',
