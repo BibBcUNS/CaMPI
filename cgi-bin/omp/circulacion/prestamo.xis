@@ -1236,34 +1236,34 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>Circulación</title>
-    <link rel="stylesheet" type="text/css" href="/omp/circulacion/css/style.css" />
+    <link REL="stylesheet" TYPE="text/css" HREF="/omp/circulacion/css/style.css" />
   </head>
   <body onload="window.document.form_abm.credencial.value=parent.indice.form_id.lector.value">
   <center>
     <div id="head"> 
-		  <div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
-		  <div id="logo"><img src="/omp/circulacion/images/logocampicir.gif"   width="120" height="54" ></div>
+		  <div id="title"><p ALIGN="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
+		  <div id="logo"><img SRC="/omp/circulacion/images/logocampicir.gif"   width="120" HEIGHT="54" ></div>
 		  </div>
 		 
-      <div id="menu">
+      <!--div id="menu">
         <ul>
           <li>
-            <a href="/index.html" target=_blank>
+            <a HREF="/index.html" target=_blank>
 			Principal</a>
           </li>
 		  <li>&nbsp;</li>
           <li  class="active">
-            <a href="*" >Circulación</a>
+            <a HREF="*" >Circulación</a>
           </li><li>&nbsp;</li>
           <li>
-            <a href="/omp/administracion/login_form.php"  target=_blank>		
+            <a HREF="/omp/administracion/login_form.php"  target=_blank>		
 			Administración</a>
           </li><li>&nbsp;</li>
           <li>
-            <a href="/omp/estadisticas/index.htm" target=_blank>Estadísticas</a>
+            <a HREF="/omp/estadisticas/index.htm" target=_blank>Estadísticas</a>
           </li><li>&nbsp;</li>
 		  <li>
-             <a href="/catalis/catalogacion.htm" target=_blank>Catalogación</a>
+             <a HREF="/catalis/catalogacion.htm" target=_blank>Catalogación</a>
           </li><li>&nbsp;</li>
 		  <li>
             <a href= 
@@ -1271,13 +1271,13 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 			target=_blank>OPAC</a>
           </li><li>&nbsp;</li>
         </ul>
-      </div>
+      </div-->
     </div> 
     <div id="body_wrapper">
       <div id="body">
 					 <div id="all">
-					 			<div class="top"></div>
-								<div class="content">
+					 			<div CLASS="top"></div>
+								<div CLASS="content">
 <!----------------------------------------------------------------------------->	
 </display>
 
@@ -1302,11 +1302,11 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 
 		<!-- comienza el formulario para prestamos y devoluciones -->
 		<display><pft>
-					'<form name="form_abm" method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">',/
-			            '<input type="hidden" name="IsisScript" value="/omp/administracion/abmlector.xis">',/
-			            '<input type="hidden" name="opcion" value="Presentar">',/
-			            '<input type="hidden" name="credencial">',/
-			            '<input type="hidden" name="id_operador" value="',v110^i,'">',/
+					'<form name="form_abm" METHOD="POST" ACTION="/cgi-bin/wxis.exe/omp/administracion/">',/
+			            '<input TYPE="hidden" name="IsisScript" VALUE="/omp/administracion/abmlector.xis">',/
+			            '<input TYPE="hidden" name="opcion" VALUE="Presentar">',/
+			            '<input TYPE="hidden" name="credencial">',/
+			            '<input TYPE="hidden" name="id_operador" VALUE="',v110^i,'">',/
 		    		'</form>',/
 		</pft></display>
 		
@@ -1495,11 +1495,11 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 <!----------------------------------------------------------------------------->	
  
 								</div>
-								<div class="bottom"></div>
+								<div CLASS="bottom"></div>
 						</div>
-        <div class="clearer"></div>
+        <div CLASS="clearer"></div>
       </div>
-      <div class="clearer"></div>
+      <div CLASS="clearer"></div>
     </div>
     <div id="end_body"></div>
 		<div id="footer">Versión 0.1<br>(Julio 2008)</div></center>

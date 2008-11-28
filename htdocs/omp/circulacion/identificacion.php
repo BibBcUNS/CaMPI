@@ -12,8 +12,8 @@
 }
 #lt {
    float : left;
-   width : 203px;
-   margin :0 0 0 0.45em;
+   width : 170px;
+   margin : 0 0em 0 0em;
    border : 1px solid #5277AE;
    padding : 0;
    background : #BEE4FF;
@@ -37,16 +37,14 @@
  <body>
  <div id="body">
    <div id="lt"><br>
-<!--------------------------------------------------------->   
-<?php
-$usuario=$_SESSION["s_username"];
-$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/identificacion_id.xis&id_operador=".$usuario;
-$ptr_grabar_datos = fopen($url,"r");
-$grabar_datos = fread($ptr_grabar_datos,500);
-fclose($ptr_grabar_datos);
-echo '<b><p align="center">OPERADOR<br>'.$grabar_datos.'</b></p>';
-?>
-<!-------------------------------------------------------------------------->
+		<?php
+        $usuario=$_SESSION["s_username"];
+        $url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/identificacion_id.xis&id_operador=".$usuario;
+        $ptr_grabar_datos = fopen($url,"r");
+        $grabar_datos = fread($ptr_grabar_datos,500);
+        fclose($ptr_grabar_datos);
+        echo '<b><p align="center">OPERADOR<br>'.$grabar_datos.'</b></p>';
+        ?>
     </div>
  </div>		
   </body>

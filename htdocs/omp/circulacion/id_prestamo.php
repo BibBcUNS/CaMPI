@@ -10,7 +10,7 @@
 <!--
 #lt1 {
    float : left;
-   width : 203px;
+   width : 170px;
    margin : 0 1em 0 1em;
    border : 1px solid #5277AE;
    padding : 0;
@@ -30,7 +30,21 @@
 
 #lt1 td {   
         font-size: 14px;
+		vertical-align:middle;
 }
+
+
+#lt1 form{   
+       border:1px solid #5277AE;
+	   border-bottom-width:0px;
+	   padding:5px;
+}
+
+#lt1 input[type=submit]{
+	height:24px;
+}
+
+
 -->
 </style>
 
@@ -103,7 +117,7 @@ function focus_expresion() {
     <tr>
       <td width="100%">
 	   <input type="text" name="expresion" size="13" value="" accesskey="b">
-	   <input type="submit" value="Buscar">
+	   <!--input type="submit" value="Buscar"-->
 	  </td>
 	</tr>
   </table>
@@ -123,14 +137,22 @@ function focus_expresion() {
 		<tr>
 			<td width="100%"><strong>Devolver x inventario</strong></td></tr>
     <tr>
-      <td width="100%"><input type="text" name="inventario" value="" size="7" accesskey="I">
-	        <input type="submit" value="Devolver">
-			<input type="Hidden" name="operador">
-			<input type="Hidden" name="clave">			
+      <td width="100%">
+            <input type="text" name="inventario" value="" size="13" accesskey="I">
+            <!-- input type="submit" value="Devolver" -->
+            <input type="Hidden" name="operador">
+            <input type="Hidden" name="clave">			
       </td></tr>
   </table>
 </form>
 
+<?php 
+$usuario=$_SESSION["s_username"];
+$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
+$ptr_grabar_datos = fopen($url,"r");
+$grabar_datos = fread($ptr_grabar_datos,500);
+fclose($ptr_grabar_datos);
+?>
 
 <form name="form_id" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/"
  	onSubmit="
@@ -143,26 +165,14 @@ function focus_expresion() {
 
   <input type="hidden" name="IsisScript" value="omp/circulacion/prestamo.xis">
 	<input type="hidden" name="opcion" value="ID">
-	<table border="0" width="100%">
+	<table border="0" width="100%" cellpadding="0" cellpadding="">
     <tr>
-      <td width="100%"><strong>Estado de cuenta x ID.</strong></td></tr>
-    <tr>
-      <td width="100%">
-      <input type="hidden" name="operador" value=
-	  <?php 
-	    $usuario=$_SESSION["s_username"];
-		$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
-		$ptr_grabar_datos = fopen($url,"r");
-		$grabar_datos = fread($ptr_grabar_datos,500);
-		fclose($ptr_grabar_datos);
-	    echo $usuario.'-'.$grabar_datos;?>
-		>
-	  </td>
-	 </tr>
+      <td width="100%"><strong>Estado de cuenta x ID.</strong></td>
+    </tr>
     <tr>
       <td width="100%">
-	  <input type="text" name="lector" size="10" accesskey="l">
-	  <input type="submit" value="Buscar">
+      <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$grabar_datos; ?>">
+	  <input type="text" name="lector" size="13" accesskey="l"><input type="submit" value="Ver">
 	  </td>
 	</tr>
   </table>
