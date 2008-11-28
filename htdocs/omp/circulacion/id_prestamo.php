@@ -10,8 +10,8 @@
 <!--
 #lt1 {
    float : left;
-   width : 170px;
-   margin : 0 1em 2em 1em;
+   width : 130px;
+   margin : 0 0em 2em 0em;
    border : 1px solid #5277AE;
    padding : 0;
    background : #BEE4FF;
@@ -38,7 +38,7 @@
 #lt1 form{   
        border:1px solid #5277AE;
 	   border-bottom-width:0px;
-	   padding:5px;
+	   padding:10px 0px 10px 0px;
 }
 
 #lt1 input[type=submit]{
@@ -86,7 +86,7 @@ function focus_expresion() {
 
 <body>
  <body>
-   <br><br><br>
+   <br><br>
    <div id="lt1">
    <h2>MENU</h2>
 <form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" onclick="javascript:focus_expresion();"
@@ -117,7 +117,7 @@ function focus_expresion() {
 	</tr>
     <tr>
       <td width="100%">
-	   <input type="text" name="expresion" size="13" value="" accesskey="b">
+	   <input type="text" name="expresion" size="10" value="" accesskey="b">
 	   <!--input type="submit" value="Buscar"-->
 	  </td>
 	</tr>
@@ -139,7 +139,7 @@ function focus_expresion() {
 			<td width="100%"><strong>Devolver x inventario</strong></td></tr>
     <tr>
       <td width="100%">
-            <input type="text" name="inventario" value="" size="13" accesskey="I">
+            <input type="text" name="inventario" value="" size="10" accesskey="I">
             <!-- input type="submit" value="Devolver" -->
             <input type="Hidden" name="operador">
             <input type="Hidden" name="clave">			
@@ -168,12 +168,12 @@ $grabar_datos = fread($ptr_grabar_datos,500);
 	<input type="hidden" name="opcion" value="ID">
 	<table border="0" width="100%" cellpadding="0" cellpadding="">
     <tr>
-      <td width="100%"><strong>Estado de cuenta x ID.</strong></td>
+      <td width="100%"><strong>Ingrese ID. Usuario</strong></td>
     </tr>
     <tr>
       <td width="100%">
       <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$grabar_datos; ?>">
-	  <input type="text" name="lector" size="13" accesskey="l"><input type="submit" value="Ver">
+	  <input type="text" name="lector" size="8" accesskey="l"><input type="submit" value="Ver">
 	  </td>
 	</tr>
   </table>
@@ -181,7 +181,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
 </font>
 </div>
 
-<div id="lt1">
+<div id="lt1"><div id="lt1">
 		<?php
         $usuario=$_SESSION["s_username"];
         $url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/identificacion_id.xis&id_operador=".$usuario;
@@ -190,7 +190,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
         fclose($ptr_datos);
         echo '<center><b>OPERADOR<br></center>'.$datos.'</b>';
         ?>
-</div>
+</div></div>
 
 </body>
 </html>
