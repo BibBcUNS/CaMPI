@@ -49,6 +49,8 @@
   <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
   <field action=cgi tag=100>criterio</field>
   <field action=cgi tag=110>expresion</field>
+  <field action=cgi tag=111>tipo</field>
+  <field action=cgi tag=112>campo</field>
   <field action=cgi tag=120>usuario_id</field>
   <field action=cgi tag=130>operario_id</field>
 
@@ -79,11 +81,11 @@
 	operario_id="[pft]v130[/pft]";
 	
 	//  End -->
-	</script>
+	</SCRIPT>
 	</head>
 
 	<body bgcolor="#E8E8D0">
-	 <table border="0" width="100%">
+	 <TABLE border="0" width="100%">
 	    <tr>
 		<td width="50%"><big>[pft]ref(['config']1,v7)[/pft]</big></td>
 		<td width="50%" align="right"><em>Open MarcoPolo - Módulo Circulación</em>
@@ -91,7 +93,7 @@
   </htmlpft></display>
   <display><pft>mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),' 'mid(date(datetime),10,9)
         '</td>',
-      '</table><hr>',
+      '</TABLE><hr>',
    </pft></display>
 
   <flow action=jump><pft>if p(v110) or v100='prestamos' then v100 else 'SALIDA' fi</pft></flow>
@@ -169,7 +171,7 @@
     <field action=define tag=1104>Isis_Current</field>
     <loop>
       <display><pft>if val(v1104)=1 then 
-        '<table border="1" width="100%" bgcolor="#FFFFF">
+        '<TABLE border="1" width="100%" bgcolor="#FFFFF">
          <tr><td width="60%" align="center" bgcolor="#F5A307">
            <b>Lector</b></td>
          <td width="20%" align="center" bgcolor="#F5A307">
@@ -198,7 +200,7 @@
          </tr>',</pft></display>
 		</loop>
 	</do>
-      <display></table></display>
+      <display></TABLE></display>
 	
 <!--  <display><pft>if val(v1102)=0 then 
    '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display> -->
@@ -218,19 +220,84 @@
   
   <field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogación (v6) -->
   <display><pft>
-  	'<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/">
-	<input type="button" name="volver" value="<< Volver" onClick="javascript:history.back()">
+	'<input type="button" name="volver" value="<< Volver" onClick="javascript:history.back()">
+  	<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/">
   	<input type="hidden" name="IsisScript" value="omp/circulacion/consulta.xis">
 	<input type="hidden" name="criterio" value="otro">
 	<input type="hidden" name="usuario_id" value="',v120,'">
 	<input type="hidden" name="operario_id" value="',v130,'">
-	<input type="text" name="expresion" size="15" accesskey="r" value="',v110,'">
-	<input type="submit" value="Buscar">
-	<a href="/omp/circulacion/marc_fst.txt" target="new">?</a>
-	<br><br>'
+	
+	<table width="450" border="0">
+		<tr>
+			<td width="50%">
+				<input type="text" name="expresion" size="28" accesskey="r" value="',v110,'"><br />
+				<input type="checkbox" name="tipo" value="completa"',
+				if v111='completa' then 'checked' fi,
+				' />Palabras completa
+			</td>
+			<td width="20%">
+				<input type="radio" name="campo" value="autor" ',
+					if v112='autor' then 'checked' fi,
+					'/> Autor<br />
+				<input type="radio" name="campo" value="titulo" ',
+					if v112='titulo' then 'checked' fi,
+					'/> Título<br />
+			</td>
+			<td width="20%" align="center">
+				<input type="submit" value="Enviar"><br />
+				<a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
+			</td>
+			<td>
+			</td>
+		</tr>
+	</table>
+	
+	<br><br>
+	</form>'
 	</pft></display>
-  <do task=search>
-  	<!--field action="import" tag="list">110</field-->
+
+  	<!-- Formateo de la cadena de busqueda -->
+	<!-- esto es por si queremos quitar puntuaciones -->
+	<!--field action="replace" tag="110"><pft>replace(v110,':',' ')</pft></field>
+	<field action="replace" tag="110"><pft>replace(v110,'.',' ')</pft></field>
+	<field action="replace" tag="110"><pft>replace(v110,';',' ')</pft></field-->
+	<!-- elimino los espacios en blanco -->
+	<loop>
+		<field action=import tag="110">110</field>
+		<field action="replace" tag="110"><pft>replace(v110,'  ',' ')</pft></field>
+		<field action=export previous="replace" tag="110">110</field>
+		<flow action="skip"><pft>if instr(v110,'  ')=0 then 'Quit' else 'Next' fi</pft></flow>
+	</loop>
+	
+	<!-- resguardamos la cadena -->
+	<field action="replace" tag="115"><pft>v110</pft></field>
+	
+	<!-- vefificamos si se busca or palabra completa o prefijo -->
+	<field action="replace" tag="110"><pft>
+		if v111<>'completa' then
+			replace(v110,' ','$ '),'$'
+		fi
+	</pft></field>
+	
+	<!-- vefificamos si se busca titulo o autor -->
+	<field action="replace" tag="110"><pft>
+		if v112='autor' then
+			'AN=',replace(v110,' ',' AN=')
+		else
+		if v112='titulo' then
+			'~tit=',replace(v110,' ',' ~tit=')
+		fi,fi		
+	</pft></field>
+	
+	<!-- Agrego "and" en los espacios -->
+	<field action="replace" tag="110"><pft>
+			replace(v110,' ',' AND ')
+	</pft></field>
+
+
+	<!-- display><pft>'</b>',v110,'</b>'</pft></display-->
+    <do task=search>
+
     <parm name=db>opac_circulacion</parm>
     <parm name=expression><pft>v110</pft></parm>
     <parm name=gizmo>gizmo</parm>
@@ -251,7 +318,7 @@
 		<display><pft>'</td>
 			<td>
 				<input type="button" value="reservar" onclick="ventana_reserva(',mfn(0),');" style="float:right"></td>
-			</tr></table><br>'
+			</tr></TABLE><br>'
 		</pft></display>
 
 					

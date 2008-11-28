@@ -11,11 +11,12 @@
 #lt1 {
    float : left;
    width : 170px;
-   margin : 0 1em 0 1em;
+   margin : 0 1em 2em 1em;
    border : 1px solid #5277AE;
    padding : 0;
    background : #BEE4FF;
    font-family: "Trebuchet MS", Verdana, sans-serif;
+   vertical-align:middle;
 
 }
 
@@ -151,7 +152,7 @@ $usuario=$_SESSION["s_username"];
 $url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
 $ptr_grabar_datos = fopen($url,"r");
 $grabar_datos = fread($ptr_grabar_datos,500);
-fclose($ptr_grabar_datos);
+//fclose($ptr_grabar_datos);
 ?>
 
 <form name="form_id" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/"
@@ -179,5 +180,17 @@ fclose($ptr_grabar_datos);
 </form>
 </font>
 </div>
+
+<div id="lt1">
+		<?php
+        $usuario=$_SESSION["s_username"];
+        $url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/identificacion_id.xis&id_operador=".$usuario;
+        $ptr_datos = fopen($url,"r");
+        $datos = fread($ptr_datos,500);
+        fclose($ptr_datos);
+        echo '<center><b>OPERADOR<br></center>'.$datos.'</b>';
+        ?>
+</div>
+
 </body>
 </html>

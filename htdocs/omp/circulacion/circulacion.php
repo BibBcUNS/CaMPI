@@ -8,10 +8,7 @@
 if (isset($_SESSION["s_username"])) {
 ?>
 <frameset cols="20%,*" onload="moveTo(0,0)">
-  <frameset rows="*,130">
-	  <frame name="indice" src="id_prestamo.php" target="principal">
-	  <frame name="identificacion" src="identificacion.php" target="principal">
-  </frameset>
+  <frame name="indice" src="id_prestamo.php" target="principal">
   <frame name="principal" src="logo_prestamo.html" scrolling="auto">
   <noframes>
   <body>
