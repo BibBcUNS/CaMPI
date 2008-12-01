@@ -447,25 +447,13 @@ if ref(['config']1,v9)='si' then
 				<input type="hidden" name="usuario_id" value="',v2,'">
 				<input type="hidden" name="operario_id" value="',v2002,'">
 	
-					<h6><u>R</u>eservar material:</h6>
-                    <table width="100%" border="0">
-                    	<tr>
-                        	<td width="45%">
-                            	<input type="text" name="expresion" size="28" accesskey="r"><br />
-                            	<input type="checkbox" name="tipo" value="completa" />Palabras completa
-                            </td>
-                            <td width="20%">
-                                <input type="radio" name="campo" value="autor" /> Autor<br />
-                                <input type="radio" name="campo" value="titulo" /> Título<br />
-                            </td>
-                            <td width="20%" align="center">
-                                <input type="submit" value="Enviar"><br />
-								<a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                    </table>
+				<table border="0" width="90%" cellpadding="0" cellspacing="0">
+					<tr><th width="60%"><u>R</u>eservar material: </th>
+					<td width="15%">&nbsp;&nbsp;<input type="text" name="expresion" size="15" accesskey="r">&nbsp;&nbsp;</td>
+					<td align="right" width="10%"><input type="submit" value="Enviar">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td width="5%"><a href="/omp/circulacion/marc_fst.txt" target="new">?</a></td>
+					</tr>			
+				</table>
 				</form>
 			</td>
 		</tr>

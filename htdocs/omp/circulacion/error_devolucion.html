@@ -1,7 +1,8 @@
-<html>
-<head>
-	<title>Open MarcoPolo - Módulo Circulación</title>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Módulo de Circulación - MarcoPolo </title>
+    <link rel="stylesheet" type="text/css" href="/omp/circulacion/css/style.css" />			
 	<script language="JavaScript">
 	
 	function presenta_registro(dni) {
@@ -15,10 +16,47 @@
 </head>
 
 
-
-<body bgcolor="#E8E8D0" onload="parent.indice.form_devolucion.inventario.value = '';">
-
-<P>&nbsp;</P>
+<body onload="parent.indice.form_devolucion.inventario.value = '';">
+  <center>
+    <div id="head"> 
+		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
+		<div id="logo"><img src="/omp/circulacion/images/logocampicir.gif" width="120" height="54" ></div>
+		  </div>
+		 
+      <div id="menu">
+        <ul>
+          <li>
+            <a href="/index.html" target=_blank>
+			Principal</a>
+          </li>
+		  <li>&nbsp;</li>
+          <li  class="active">
+            <a href="*" >Circulación</a>
+          </li><li>&nbsp;</li>
+          <li>
+            <a href="/omp/administracion/login_form.php"  target=_blank>		
+			Administración</a>
+          </li><li>&nbsp;</li>
+          <li>
+            <a href="/omp/estadisticas/index.htm" target=_blank>Estadísticas</a>
+          </li><li>&nbsp;</li>
+		  <li>
+             <a href="/catalis/catalogacion.htm" target=_blank>Catalogación</a>
+          </li><li>&nbsp;</li>
+		  <li>
+            <a href= "/cgi-bin/opacmarc/wxis.exe?IsisScript=opac/xis/opac.xis&db=demo&showForm=simple" 
+			target=_blank>OPAC</a>
+          </li><li>&nbsp;</li>
+        </ul>
+      </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div class="top"></div>
+								<div class="content">
+         
+<!----------------------------------------------------------------------------->	
 <table align="center" cellspacing="1" cellpadding="1" border="0" width="80%">
 <tr>
     <th align="center" bgcolor="#FF0000"><font size="+2" color="#ffffff">[pft]v9001[/pft]</font></th>
@@ -27,6 +65,16 @@
     <td height="50">[pft]v9002[/pft]</td>
 </tr>
 </table>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
 
+		<div id="footer">Versión 0.1<br>(Julio 2008)</div></center>
 </body>
 </html>

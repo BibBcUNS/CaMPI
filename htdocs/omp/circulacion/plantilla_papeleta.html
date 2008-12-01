@@ -1,22 +1,23 @@
-<html>
-<head>
-<title>Operación [pft]MFN(4)[/pft]</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+   <title>Operación [pft]MFN(4)[/pft]</title>
+    <link rel="stylesheet" type="text/css" href="/omp/circulacion/css/style.css" />			
 
-<body bgcolor="#E8E8D0">
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><b>Institucion XXXXX</b></td>
-    <td width="12%"> 
-      <p align="right">[pft]mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)[/pft]<br>[pft]date(DATETIME)[/pft]
-    <td width="10%"></td>
-    <td width="33%"><b>Institucion XXXXX</b></td>
-    <td width="12%"> 
-      <p align="right">[pft]mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)[/pft]<br>[pft]date(DATETIME)[/pft]
-    </tr>
-</table>
-<br>	
+</head>
+<body>
+  <center>
+    <div id="head"> 
+		<div id="title"><p align="left"><br>Impresión de Comprobante</p></div>
+		  </div>
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div class="top"></div>
+								<div class="content">
+         
+<!----------------------------------------------------------------------------->
+	
 <table border="0" width="100%">
 	<tr><td width="7%"><b>Operación: [pft]mfn(4)[/pft]</b></td><td width="38%">
 		<p align="right"><b>[pft]v1[/pft]<br>DNI [pft]v2[/pft]</b>
@@ -31,9 +32,9 @@
     if rsum((if v4^t:'dev' then '1,' else '0,' fi))>0 then 
 	'</table><table border="0" width="100%" bgcolor="transparent" cellspacing="0">'/
 		'<tr>'/
-            '<td width="45%" bgcolor="#F5A307"><b>Devoluciones:</b>'/
-            '<td width="10%">'/
-            '<td width="45%" bgcolor="#F5A307"><b>Devoluciones:</b>'/
+            '<th width="45%"><b>Devoluciones:</b></th>'/
+            '<td width="10%">&nbsp;</td>'/
+            '<th width="45%" ><b>Devoluciones:</b></th>'/
         '</tr>'/
 		(
 		'<tr>'/
@@ -50,9 +51,9 @@
     if rsum((if v4^t:'pre' then '1,' else '0,' fi))>0 then 
     '<table border="0" width="100%" bgcolor="transparent" cellspacing="0">'/
         '<tr>'/
-            '<td width="45%" bgcolor="#F5A307" colspan="2"><b>Préstamos:</b>'/
-            '<td width="10%">'/
-            '<td width="45%" bgcolor="#F5A307" colspan="2"><b>Préstamos:</b>'/
+            '<th width="45%"  colspan="2"><b>Préstamos:</b></th>'/
+            '<td width="10%">&nbsp;</td>'/
+            '<th width="45%"  colspan="2"><b>Préstamos:</b></th>'/
         '</tr>'/
 		(
 		'<tr>'/
@@ -86,5 +87,12 @@
 			<td width="30%" style="border-top: thin solid rgb(0,0,0)" align="center">[pft]mhl,v5[/pft]<br>Operador</td>
 		</tr>
 	</table>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+      </div>
+    </div>
+    <div id="end_body"></div></center>	
 </body>
 </html>
