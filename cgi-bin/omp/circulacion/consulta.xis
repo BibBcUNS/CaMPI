@@ -84,7 +84,8 @@
 	</SCRIPT>
 	</head>
 
-	<body bgcolor="#E8E8D0">
+	<!--body bgcolor="#E8E8D0"-->
+	<body style="background: #f6f6f6">
 	 <TABLE border="0" width="100%">
 	    <tr>
 		<td width="50%"><big>[pft]ref(['config']1,v7)[/pft]</big></td>
@@ -307,7 +308,7 @@
 		<field action="import" tag="list">120,5009</field>
 		
 		<display>
-		<TABLE bgcolor="#F9C99A" BORDER=0 WIDTH=100% style="font-family: sans-serif; font-size: 11pt">
+		<TABLE bgcolor="#BEE4FF" BORDER=0 WIDTH=100% style="font-family: sans-serif; font-size: 11pt; border:2px solid #5277AE">
 		<tr><td>
 		</display>
 		

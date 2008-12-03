@@ -83,59 +83,61 @@
 	}
 
 	function iniciar() {
-		var _Fecha = new Date();
-		_Fecha.setFullYear([pft]left(date,4)[/pft]);
-		_Fecha.setMonth([pft]f(val(mid(date,5,2))-1,1,0)[/pft]);
-		_Fecha.setDate([pft]mid(date,7,2)[/pft]);
-		var j = 0;
-		for (i = 0; i < 61; i++) {
-	        var _QueDia = _Fecha.getDay();
-		switch (_QueDia) {
-			case 1 : _QueDia = "Lunes   "; break;
-	 	 	case 2 : _QueDia = "Martes  "; break;
-			case 3 : _QueDia = "Mierco. "; break; 
-			case 4 : _QueDia = "Jueves  "; break;
-			case 5 : _QueDia = "Viernes "; break;
-			case 6 : _QueDia = "Sábado  ";
+		if (window.document.control.dias_prestamo_A) {
+			var _Fecha = new Date();
+			_Fecha.setFullYear([pft]left(date,4)[/pft]);
+			_Fecha.setMonth([pft]f(val(mid(date,5,2))-1,1,0)[/pft]);
+			_Fecha.setDate([pft]mid(date,7,2)[/pft]);
+			var j = 0;
+			for (i = 0; i < 61; i++) {
+				var _QueDia = _Fecha.getDay();
+			switch (_QueDia) {
+				case 1 : _QueDia = "Lunes   "; break;
+				case 2 : _QueDia = "Martes  "; break;
+				case 3 : _QueDia = "Mierco. "; break; 
+				case 4 : _QueDia = "Jueves  "; break;
+				case 5 : _QueDia = "Viernes "; break;
+				case 6 : _QueDia = "Sábado  ";
+				}
+			  if (_Fecha.getDate() < 10) {_Dia = "0" + _Fecha.getDate()} else {_Dia = _Fecha.getDate()};
+			  if (_Fecha.getMonth() < 9) {_Mes = "0" + eval(_Fecha.getMonth()+1)} else {_Mes = eval(_Fecha.getMonth()+1)};
+			  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60)) 
+				{if (i == 0) {_Cant = "Hoy"} else {if (i == 1) {_Cant = i + " día"} else {_Cant = i + " días"}};
+				 window.document.control.dias_prestamo_A.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getYear());
+				 window.document.control.dias_prestamo_A.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getYear();
+				 j++};
+			  _Fecha.setHours(_Fecha.getHours() + 24);
 			}
-		  if (_Fecha.getDate() < 10) {_Dia = "0" + _Fecha.getDate()} else {_Dia = _Fecha.getDate()};
-		  if (_Fecha.getMonth() < 9) {_Mes = "0" + eval(_Fecha.getMonth()+1)} else {_Mes = eval(_Fecha.getMonth()+1)};
-		  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60)) 
-			{if (i == 0) {_Cant = "Hoy"} else {if (i == 1) {_Cant = i + " día"} else {_Cant = i + " días"}};
-			 window.document.control.dias_prestamo_A.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getYear());
-			 window.document.control.dias_prestamo_A.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getYear();
-			 j++};
-		  _Fecha.setHours(_Fecha.getHours() + 24);
-		}
-		
-		var _Fecha = new Date();
-		_Fecha.setFullYear([pft]left(date,4)[/pft]);
-		_Fecha.setMonth([pft]f(val(mid(date,5,2))-1,1,0)[/pft]);
-		_Fecha.setDate([pft]mid(date,7,2)[/pft]);
-		var j = 0;
-		for (i = 0; i < 61; i++) {
-	        var _QueDia = _Fecha.getDay();
-		switch (_QueDia) {
-			case 1 : _QueDia = "Lunes   "; break;
-	 	 	case 2 : _QueDia = "Martes  "; break;
-			case 3 : _QueDia = "Mierco. "; break; 
-			case 4 : _QueDia = "Jueves  "; break;
-			case 5 : _QueDia = "Viernes "; break;
-			case 6 : _QueDia = "Sábado  ";
+			
+			var _Fecha = new Date();
+			_Fecha.setFullYear([pft]left(date,4)[/pft]);
+			_Fecha.setMonth([pft]f(val(mid(date,5,2))-1,1,0)[/pft]);
+			_Fecha.setDate([pft]mid(date,7,2)[/pft]);
+			var j = 0;
+			for (i = 0; i < 61; i++) {
+				var _QueDia = _Fecha.getDay();
+			switch (_QueDia) {
+				case 1 : _QueDia = "Lunes   "; break;
+				case 2 : _QueDia = "Martes  "; break;
+				case 3 : _QueDia = "Mierco. "; break; 
+				case 4 : _QueDia = "Jueves  "; break;
+				case 5 : _QueDia = "Viernes "; break;
+				case 6 : _QueDia = "Sábado  ";
+				}
+			  if (_Fecha.getDate() < 10) {_Dia = "0" + _Fecha.getDate()} else {_Dia = _Fecha.getDate()};
+			  if (_Fecha.getMonth() < 9) {_Mes = "0" + eval(_Fecha.getMonth()+1)} else {_Mes = eval(_Fecha.getMonth()+1)};
+			  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60)) 
+				{if (i == 0) {_Cant = "Hoy"} else {if (i == 1) {_Cant = i + " día"} else {_Cant = i + " días"}};
+				 window.document.control.dias_prestamo_B.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getYear());
+				 window.document.control.dias_prestamo_B.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getYear();
+				 j++};
+			  _Fecha.setHours(_Fecha.getHours() + 24);
 			}
-		  if (_Fecha.getDate() < 10) {_Dia = "0" + _Fecha.getDate()} else {_Dia = _Fecha.getDate()};
-		  if (_Fecha.getMonth() < 9) {_Mes = "0" + eval(_Fecha.getMonth()+1)} else {_Mes = eval(_Fecha.getMonth()+1)};
-		  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60)) 
-			{if (i == 0) {_Cant = "Hoy"} else {if (i == 1) {_Cant = i + " día"} else {_Cant = i + " días"}};
-			 window.document.control.dias_prestamo_B.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getYear());
-			 window.document.control.dias_prestamo_B.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getYear();
-			 j++};
-		  _Fecha.setHours(_Fecha.getHours() + 24);
+			window.document.verifica.enviar.value = "0";
+			if (window.document.control.devolucion_1) {window.document.verifica._enviar.value = "0";}
+				else {window.document.verifica._enviar.value = "1";}
+			window.document.control.invs_prestamo_A.focus();
 		}
-	window.document.verifica.enviar.value = "0";
-	if (window.document.control.devolucion_1) {window.document.verifica._enviar.value = "0";}
-		else {window.document.verifica._enviar.value = "1";}
-	window.document.control.invs_prestamo_A.focus();
 	}
 	// End -->
 	</script>
@@ -447,13 +449,25 @@ if ref(['config']1,v9)='si' then
 				<input type="hidden" name="usuario_id" value="',v2,'">
 				<input type="hidden" name="operario_id" value="',v2002,'">
 	
-				<table border="0" width="90%" cellpadding="0" cellspacing="0">
-					<tr><th width="60%"><u>R</u>eservar material: </th>
-					<td width="15%">&nbsp;&nbsp;<input type="text" name="expresion" size="15" accesskey="r">&nbsp;&nbsp;</td>
-					<td align="right" width="10%"><input type="submit" value="Enviar">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td width="5%"><a href="/omp/circulacion/marc_fst.txt" target="new">?</a></td>
-					</tr>			
-				</table>
+					<h6><u>R</u>eservar material:</h6>
+                    <table width="100%" border="0">
+                    	<tr>
+                        	<td width="45%">
+                            	<input type="text" name="expresion" size="28" accesskey="r"><br />
+                            	<input type="checkbox" name="tipo" value="completa" />Palabras completa
+                            </td>
+                            <td width="20%">
+                                <input type="radio" name="campo" value="autor" checked /> Autor<br />
+                                <input type="radio" name="campo" value="titulo" /> Título<br />
+                            </td>
+                            <td width="20%" align="center">
+                                <input type="submit" value="Enviar"><br />
+								<a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
 				</form>
 			</td>
 		</tr>

@@ -1,5 +1,5 @@
 [pft]'
-<TABLE bgcolor="#F9C99A" BORDER=0 WIDTH=100% style="font-family: sans-serif; font-size: 11pt">
+<TABLE bgcolor="#BEE4FF" BORDER=0 WIDTH=100% style="font-family: sans-serif; font-size: 11pt">
 
 <TR><TD COLSPAN="3" WIDTH="*">',
 	if p(v100) or p(v700) or p(v110) or p(v710) then

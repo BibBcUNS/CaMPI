@@ -25,7 +25,7 @@ Uso local:
 	<head>
 		<title>Reserva de Material</title>
 	</head>
-	<body bgcolor="#E8E8D0">
+	<body>
 	<!-- BOTO CERRAR Ventana	
 	div style="float:right">
 		<input value="[x] Cerrar" type="Button" onClick="window.close()">
