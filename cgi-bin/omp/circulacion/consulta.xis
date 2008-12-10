@@ -228,7 +228,7 @@
 	<input type="hidden" name="usuario_id" value="',v120,'">
 	<input type="hidden" name="operario_id" value="',v130,'">
 	
-	<table width="450" border="0">
+	<TABLE width="450" border="0">
 		<tr>
 			<td width="50%">
 				<input type="text" name="expresion" size="28" accesskey="r" value="',v110,'"><br />
@@ -251,7 +251,7 @@
 			<td>
 			</td>
 		</tr>
-	</table>
+	</TABLE>
 	
 	<br><br>
 	</form>'
@@ -286,7 +286,7 @@
 			'AN=',replace(v110,' ',' AN=')
 		else
 		if v112='titulo' then
-			'~tit=',replace(v110,' ',' ~tit=')
+			'TT=',replace(v110,' ',' TT=')
 		fi,fi		
 	</pft></field>
 	
@@ -296,7 +296,7 @@
 	</pft></field>
 
 
-	<!-- display><pft>'</b>',v110,'</b>'</pft></display-->
+	<display><pft>'</b>',v110,'</b>'</pft></display>
     <do task=search>
 
     <parm name=db>opac_circulacion</parm>
