@@ -605,6 +605,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         
         
         <label>PRESTAMOS</label>
+		<trace>!BR</trace>
         <display><pft>if s(mpu,v10)<>'HABILITADO' and p(v1000^f) then 
           '<marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error ! </marquee>
            <p align="center" bgcolor="#FFFF9B" style="color: rgb(191,51,83)">
@@ -928,6 +929,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                             <field action=export previous=delete tag=1102>1102</field>
                           </update>
                         </do> <!-- Update Exist -->
+						<file action=close type=database>exist</file>
                         
                         <field action=replace tag=1001><pft>
                           if val(v1102)>0 then mpl,'^t',v1001^t,'^i',v1001^i,'^p',v1001^v,'^v',v1001^v,
@@ -957,13 +959,14 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                         <field action=export tag=5>3</field>
                 </loop>
                 </do> <!-- search opera -->
-            
+				<file action=close type=database>opera</file>
+				
                 <!-- A continuación se agrega la ip de la terminal cliente -->
                 <field action=add tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
                 <field action=add tag=7 split=occ><pft>(v4050/)</pft></field> 
                 <field action=delete tag=list>1000,1001,3000,4050,4051,4052</field>
             
-                <write>Lock</write>
+                <write>Unlock</write>
             
                 <field action=add tag=1100><pft>mfn</pft></field>
                 <field action=export tag=1100>1100</field>
