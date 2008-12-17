@@ -161,7 +161,7 @@ for ($i=0;$i<=(count($campos_nombre)-1);$i++)
 	echo "<tr><td class=fila_titulo>";
 	echo $campos_nombre[$i];
 	if ($campos_nombre[$i]=='Tipo de Usuario' or $campos_nombre[$i]=='Tipo de Objeto') {
-	   echo "</td><td><input type=text name=campo".$i." value=".$politicas_arreglo[$i]." disabled='disabled'></td></tr>";
+	   echo "</td><td><input type=text name=campo".$i." value=".$politicas_arreglo[$i]." readonly='readonly'></td></tr>";
 	}
 	else {
        echo "</td><td><input type=text name=campo".$i." value=".$politicas_arreglo[$i]."></td></tr>";	
@@ -199,7 +199,6 @@ for ($i=0;$i<=(count($campos_nombre)-1);$i++)
    }
 
 $url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_guardar.xis&".$parametros_guardar;
-
 $ptr_politicas = fopen($url,"r");
 $ptr_politicas;
 $politicas = fread($ptr_politicas,8192);
