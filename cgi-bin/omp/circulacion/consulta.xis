@@ -296,7 +296,7 @@
 	</pft></field>
 
 
-	<display><pft>'</b>',v110,'</b>'</pft></display>
+	<!--display><pft>'</b>',v110,'</b>'</pft></display-->
     <do task=search>
 
     <parm name=db>opac_circulacion</parm>
