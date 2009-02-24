@@ -1,0 +1,190 @@
+!ID 0
+!v5!20081202 092314
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081202 092333
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v0002!0
+!v0003!0
+!v0004!0
+!v1002!0
+!v2001!demo
+!v2002!TITLE
+!v2004!1
+!v2005!AND
+!v2016!author
+!v2101!BIB-KW-SEARCH
+!v2104!demo
+!v3001!DEMO/(9204) OR DEMO/(9404)
+!v3333!demo
+!v4001!DEMO/(9204)DEMO/(9404)
+!v4101!demo
+!v7000!demo
+
+!ID 0
+!v5!20081202 092337
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v0002!0
+!v0003!0
+!v0004!0
+!v1002!0
+!v2001!garcia
+!v2002!TITLE
+!v2004!1
+!v2005!AND
+!v2016!author
+!v2101!BIB-KW-SEARCH
+!v2104!demo
+!v3001!GARCIA/(9204) OR GARCIA/(9404)
+!v3333!garcia
+!v4001!GARCIA/(9204)GARCIA/(9404)
+!v4101!garcia
+!v7000!garcia
+
+!ID 0
+!v5!20081202 092344
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v1000!top
+!v1001!20
+!v1233!A
+!v2003!NAME
+!v2004!1
+!v2007!a
+!v2009!1
+!v2016!author
+!v2101!H-BROWSE
+!v2104!demo
+!v3007!A 
+!v3008!~A
+!v3009!1
+!v6018!^t201
+
+!ID 0
+!v5!20081202 092349
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v1000!aAgüero, Felipe.
+!v1002!1
+!v1003!0
+!v2001!^aAgüero, Felipe.
+!v2003!NAME
+!v2004!1
+!v2008!Modular
+!v2016!author
+!v2041!000064
+!v2099!TMP5.$$$
+!v2101!BIB-H-SEARCH
+!v2104!demo
+!v3001!~Agüero_Felipe
+!v3002!~Agüero_Felipe/(9100)
+!v3003!Agüero, Felipe.
+!v3004!Agüero, Felipe.
+!v9060!UNIQUE_KEYWORD_MATCH
+
+!ID 0
+!v5!20081202 092352
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v1000!aStark, Jeffrey.
+!v1001!2
+!v1002!2
+!v1003!0
+!v2001!^aStark, Jeffrey.
+!v2003!NAME
+!v2004!1
+!v2016!author
+!v2041!000018
+!v2099!TMP6.$$$
+!v2101!BIB-H-SEARCH
+!v2104!demo
+!v3001!~Stark_Jeffrey
+!v3002!~Stark_Jeffrey/(9100)
+!v3003!Stark, Jeffrey.
+!v3004!Stark, Jeffrey.
+
+!ID 0
+!v5!20081202 092806
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081202 092810
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v1000!top
+!v1001!20
+!v2003!NAME
+!v2004!1
+!v2009!1
+!v2016!author
+!v2101!H-BROWSE
+!v2104!demo
+!v6018!^t201
+
+!ID 0
+!v5!20081202 092812
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v1000!aAderinwale, Ayodele.
+!v1002!1
+!v1003!0
+!v2001!^aAderinwale, Ayodele.
+!v2003!NAME
+!v2004!1
+!v2008!Modular
+!v2016!author
+!v2041!000079
+!v2099!TMP3.$$$
+!v2101!BIB-H-SEARCH
+!v2104!demo
+!v3001!~Aderinwale_Ayodele
+!v3002!~Aderinwale_Ayodele/(9100)
+!v3003!Aderinwale, Ayodele.
+!v3004!Aderinwale, Ayodele.
+!v9060!UNIQUE_KEYWORD_MATCH
+
+!ID 0
+!v5!20081202 092817
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v2004!1
+!v2011!advanced
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081202 094609
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+!v2004!1
+!v2016!author
+!v2101!SHOW_ABOUT
+!v2104!demo
+

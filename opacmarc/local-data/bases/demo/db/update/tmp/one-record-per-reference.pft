@@ -1,0 +1,15 @@
+
+        (
+            '!ID 0'/
+            '!v001!',replace(s(v400, v410, v411)*2, '^', '~')/            /* referencia de véase */
+            '!v004!',replace(s(v100[1], v110[1], v111[1])*2, '^', '~')/   /* forma autorizada */
+        )
+        
+        if s(v500,v510,v511) > '' then
+            '!ID 0'/
+            '!v001!',replace(s(v100[1], v110[1], v111[1])*2, '^', '~')/   /* forma autorizada */
+            (
+                '!v005!',replace(s(v500, v510, v511)*2, '^', '~')/            /* referencias de véase además */
+            )
+        fi
+        

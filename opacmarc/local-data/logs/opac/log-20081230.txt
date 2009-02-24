@@ -1,0 +1,381 @@
+!ID 0
+!v5!20081230 152758
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 152830
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 152906
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153035
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153041
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153049
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v1000!top
+!v1001!20
+!v2003!NAME
+!v2004!1
+!v2009!1
+!v2016!author
+!v2101!H-BROWSE
+!v2104!demo
+!v6018!^t201
+
+!ID 0
+!v5!20081230 153055
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v1000!top
+!v1001!40
+!v2003!NAME
+!v2004!1
+!v2009!21
+!v2016!author
+!v2101!H-BROWSE
+!v2104!demo
+!v6018!^t201
+
+!ID 0
+!v5!20081230 153059
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153104
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153119
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153129
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v1000!aCaetano, Gerardo.
+!v1002!1
+!v1003!0
+!v2001!^aCaetano, Gerardo.
+!v2003!NAME
+!v2004!1
+!v2008!Modular
+!v2016!author
+!v2041!000058
+!v2099!TMP4.$$$
+!v2101!BIB-H-SEARCH
+!v2104!demo
+!v3001!~Caetano_Gerardo
+!v3002!~Caetano_Gerardo/(9100)
+!v3003!Caetano, Gerardo.
+!v3004!Caetano, Gerardo.
+!v9060!UNIQUE_KEYWORD_MATCH
+
+!ID 0
+!v5!20081230 153133
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v1000!top
+!v1001!20
+!v2003!TITLE
+!v2004!1
+!v2009!1
+!v2016!author
+!v2101!H-BROWSE
+!v2104!demo
+!v6018!^t156
+
+!ID 0
+!v5!20081230 153137
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v1000!aChanging nature of democracy
+!v1002!1
+!v2001!^aChanging nature of democracy
+!v2003!TITLE
+!v2004!1
+!v2008!Modular
+!v2016!author
+!v2041!000066
+!v2099!TMP5.$$$
+!v2101!BIB-H-SEARCH
+!v2104!demo
+!v3001!~Changing_nature_of_democracy
+!v3002!~Changing_nature_of_democracy/(9200) OR ~Changing_nature_of_democracy/(9400)
+!v3003!Changing nature of democracy
+!v3004!Changing nature of democracy
+!v9060!UNIQUE_KEYWORD_MATCH
+
+!ID 0
+!v5!20081230 153143
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v2004!1
+!v2016!author
+!v2101!SHOW_ABOUT
+!v2104!demo
+
+!ID 0
+!v5!20081230 153145
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153152
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v1000!top
+!v1001!20
+!v2003!NAME
+!v2004!1
+!v2009!1
+!v2016!author
+!v2101!H-BROWSE
+!v2104!demo
+!v6018!^t201
+
+!ID 0
+!v5!20081230 153157
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v1000!top
+!v1001!20
+!v2003!NAME
+!v2004!1
+!v2009!1
+!v2016!author
+!v2101!H-BROWSE
+!v2104!demo
+!v6018!^t201
+
+!ID 0
+!v5!20081230 153231
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v1000!top
+!v1001!20
+!v2003!NAME
+!v2004!1
+!v2009!1
+!v2016!author
+!v2101!H-BROWSE
+!v2104!demo
+!v6018!^t201
+
+!ID 0
+!v5!20081230 153234
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v1000!aBudlender, Debbie.
+!v1001!2
+!v1002!2
+!v1003!0
+!v2001!^aBudlender, Debbie.
+!v2003!NAME
+!v2004!1
+!v2016!author
+!v2041!000036
+!v2099!TMP6.$$$
+!v2101!BIB-H-SEARCH
+!v2104!demo
+!v3001!~Budlender_Debbie
+!v3002!~Budlender_Debbie/(9100)
+!v3003!Budlender, Debbie.
+!v3004!Budlender, Debbie.
+
+!ID 0
+!v5!20081230 153236
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v2004!1
+!v2008!Modular
+!v2016!author
+!v2017!2
+!v2027!2
+!v2041!000036
+!v2042!1
+!v2099!TMP6.$$$
+!v2101!BIB-RECORD
+!v2104!demo
+
+!ID 0
+!v5!20081230 153242
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v2004!1
+!v2011!advanced
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153305
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v1002!0
+!v2004!1
+!v2005!AND
+!v2016!author
+!v2023!exact
+!v2050!1
+!v2052!NAME
+!v2053!AND
+!v2055!TITLE
+!v2056!ufa
+!v2057!SUBJ
+!v2060!/(9604)
+!v2101!BIB-KW-SEARCH
+!v2104!demo
+!v3001!NOT (UFA/(9604))
+!v3056!UFA
+!v3333!ufa
+!v4001!NOT
+!v4001!(UFA/(9604))
+
+!ID 0
+!v5!20081230 153447
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153706
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153741
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v2004!1
+!v2011!simple
+!v2016!author
+!v2101!SHOW_FORM
+!v2104!demo
+
+!ID 0
+!v5!20081230 153906
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) )
+!v1000!top
+!v1001!20
+!v2003!TITLE
+!v2004!1
+!v2009!1
+!v2016!author
+!v2101!H-BROWSE
+!v2104!demo
+!v6018!^t156
+
+!ID 0
+!v5!20081230 153910
+!v10!127.0.0.1
+!v11!
+!v12!Mozilla/5.0 (Windows; U; Windows NT 5.1; es-AR; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5
+!v1000!top
+!v1001!20
+!v2003!TITLE
+!v2004!1
+!v2009!1
+!v2016!author
+!v2101!H-BROWSE
+!v2104!demo
+!v6018!^t156
+
