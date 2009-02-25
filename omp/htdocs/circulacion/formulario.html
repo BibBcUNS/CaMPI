@@ -50,7 +50,7 @@
 		}
 
 		if (window.document.control.invs_prestamo_A.value != "" || (window.document.control.invs_prestamo_B && window.document.control.invs_prestamo_B.value != "")) {
-			window.open("[pft]getenv('PATH_INFO')[/pft]/aguarde.html","VERIFICA","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,copyhistory=0,width=400,height=200");
+			window.open("[pft]getenv('PATH_INFO')[/pft]/aguarde.html","VERIFICA","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,copyhistory=0,width=400,height=400");
 			window.document.verifica.submit();
 		}
 
@@ -166,8 +166,8 @@ fi
   fi)
 fi,
 
-'<form name="control" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" style="margin-bottom: 0">
-  <input type="hidden" name="IsisScript" value="/omp/circulacion/prestamo.xis">
+'<form name="control" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/" style="margin-bottom: 0">
+  <input type="hidden" name="IsisScript" value="circulacion/prestamo.xis">
   <input type="hidden" name="opcion" value="WRITE">
   <input type="hidden" name="operacion" value="MODIFICA">
   <input type="hidden" name="Vto_AB">
@@ -223,7 +223,7 @@ if p(v8) then
       fi,
       if s(mdu,v8^i.1) : 'X' then mhl,' ? ' else mhl,' Inv: ' fi,
       v8^i,if p(v8^o) then '<br>'v8^o fi,'</td>',
-   '<td width="10%">','<div id=',"'"n0,'renovacion_',f(iocc,1,0),"'"n0,'><a onclick="javascript:window.document.control.devolucion_',f(iocc,1,0),'.click();window.document.control.invs_prestamo_A.value += ',"'"n0,replace(v8^i,' ',''),'\n',"'"n0,';renovar(',"'"n0,f(iocc,1,0),"'"n0,')"><img src="/omp/circulacion/images/renovar.gif"></a></div>','</td>',
+   '<td width="10%">','<div id=',"'"n0,'renovacion_',f(iocc,1,0),"'"n0,'><a onclick="javascript:window.document.control.devolucion_',f(iocc,1,0),'.click();window.document.control.invs_prestamo_A.value += ',"'"n0,replace(v8^i,' ',''),'\n',"'"n0,';renovar(',"'"n0,f(iocc,1,0),"'"n0,')"><img src="/circulacion/images/renovar.gif"></a></div>','</td>',
    '<td width="60%">',v8^b,'</td>',
    '<td align="center" width="15%"',
       if v2001:'1' then ' bgcolor="#BF3353">! ' else '>' fi,
@@ -386,8 +386,8 @@ if ref(['config']1,v9)='si' then
 					<td align="center" width="15%">',v2030^f,'<br>',v2030^h,'</td>					
 					<td align="center" width="12%">
 						<form name="eliminar_',f(iocc,1,0),'" method="POST"
-							action="/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
-							<input type="hidden" name="IsisScript"   value="omp/circulacion/reserva_eliminar.xis">
+							action="/omp/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
+							<input type="hidden" name="IsisScript"   value="circulacion/reserva_eliminar.xis">
 							<input type="hidden" name="usuario_id"  value="',v2[1],'">
 							<input type="hidden" name="operario_id" value="',v2002[1],'">
 							<input type="hidden" name="reserva_id"  value="^b',v2030^b,'^c',v2030^c,'^p',v2030^p,'">
@@ -425,8 +425,8 @@ if ref(['config']1,v9)='si' then
 					<td align="center" width="15%">',v2031^f,'<br>',v2031^h,'</td>
 					<td align="center" width="12%">
 						<form name="eliminar_',f(iocc,1,0),'" method="POST"
-							action="/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
-							<input type="hidden" name="IsisScript"   value="omp/circulacion/espera_eliminar.xis">
+							action="/omp/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
+							<input type="hidden" name="IsisScript"   value="circulacion/espera_eliminar.xis">
 							<input type="hidden" name="usuario_id"  value="',v2[1],'">
 							<input type="hidden" name="operario_id" value="',v2002[1],'">
 							<input type="hidden" name="reserva_id"  value="^b',v2031^b,'^c',v2031^c,'^p',v2031^p,'">
@@ -443,8 +443,8 @@ if ref(['config']1,v9)='si' then
 		
 		<tr>
 			<td>
-				<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/">
-				<input type="hidden" name="IsisScript" value="omp/circulacion/consulta.xis">
+				<form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/">
+				<input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
 				<input type="hidden" name="criterio" value="otro">
 				<input type="hidden" name="usuario_id" value="',v2,'">
 				<input type="hidden" name="operario_id" value="',v2002,'">
@@ -462,7 +462,7 @@ if ref(['config']1,v9)='si' then
                             </td>
                             <td width="20%" align="center">
                                 <input type="submit" value="Enviar"><br />
-								<a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
+								<a href="/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
                             </td>
                             <td>
                             </td>
@@ -476,8 +476,8 @@ if ref(['config']1,v9)='si' then
 
 fi,
 
-'<form name="verifica" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" target="VERIFICA">
-  <input type="hidden" name="IsisScript" value="/omp/circulacion/control.xis">
+'<form name="verifica" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/" target="VERIFICA">
+  <input type="hidden" name="IsisScript" value="circulacion/control.xis">
   <input type="hidden" name="invs_prestamo_A">
   <input type="hidden" name="invs_prestamo_B">
   <input type="hidden" name="enviar">
@@ -487,8 +487,8 @@ fi,
   <input type="hidden" name="documento" value="',v2,'">
 </form>
 
-<form name="form_observaciones" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" target="Observaciones">  
-	<input type="hidden" name="IsisScript" value="/omp/circulacion/observaciones_lector.xis">  
+<form name="form_observaciones" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/" target="Observaciones">  
+	<input type="hidden" name="IsisScript" value="circulacion/observaciones_lector.xis">  
 	<input type="hidden" name="opcion" value="PRESENTAR">  
 	<input type="hidden" name="operador" value="',v2002,'">  
 	<input type="hidden" name="mfn_lector" value="',v2003,'">

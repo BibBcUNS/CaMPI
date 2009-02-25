@@ -1,13 +1,13 @@
 <!-- Controles: se aplican sobre los préstamos a realizar -->
 
-<include>/omp/circulacion/controles/verificaEstadoUsuario_inc.xis</include>
-<include>/omp/circulacion/controles/validaInventarios_inc.xis</include>
-<include>/omp/circulacion/controles/verificaDispInv_inc.xis</include>
-<include>/omp/circulacion/controles/verificaPresDup_inc.xis</include>
-<include>/omp/circulacion/controles/verificaLimPresUsuario_inc.xis</include>
-<include>/omp/circulacion/controles/verificaEspRes_inc.xis</include>
+<include>circulacion/controles/verificaEstadoUsuario_inc.xis</include>
+<include>circulacion/controles/validaInventarios_inc.xis</include>
+<include>circulacion/controles/verificaDispInv_inc.xis</include>
+<include>circulacion/controles/verificaPresDup_inc.xis</include>
+<include>circulacion/controles/verificaLimPresUsuario_inc.xis</include>
+<include>circulacion/controles/verificaEspRes_inc.xis</include>
 
 <!-- No se utilizarán (consultar) -->
-<!-- include>/omp/circulacion/controles/validarVarios.xis</include -->
-<!-- include>/omp/circulacion/controles/validaOperador_inc.xis</include -->
-<!-- include>/omp/circulacion/controles/validarUsuario_inc.xis</include -->
+<!-- include>/circulacion/controles/validarVarios.xis</include -->
+<!-- include>/circulacion/controles/validaOperador_inc.xis</include -->
+<!-- include>/circulacion/controles/validarUsuario_inc.xis</include -->

@@ -43,9 +43,9 @@
 
 <IsisScript>
 
-<include>omp/circulacion/menor_inc.xis</include>
-<include>omp/circulacion/verif_reservas_inc.xis</include>
-<include>omp/fecha_funciones.xis</include>
+<include>circulacion/menor_inc.xis</include>
+<include>circulacion/verif_reservas_inc.xis</include>
+<include>fecha_funciones.xis</include>
 
 <function name=operador action=replace tag=1000>
         <!-- Esta función valida al operarrio. 
@@ -1259,11 +1259,11 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
             <a HREF="*" >Circulación</a>
           </li><li>&nbsp;</li>
           <li>
-            <a HREF="/omp/administracion/login_form.php"  target=_blank>		
+            <a HREF="/administracion/login_form.php"  target=_blank>		
 			Administración</a>
           </li><li>&nbsp;</li>
           <li>
-            <a HREF="/omp/estadisticas/index.htm" target=_blank>Estadísticas</a>
+            <a HREF="/estadisticas/index.htm" target=_blank>Estadísticas</a>
           </li><li>&nbsp;</li>
 		  <li>
              <a HREF="/catalis/catalogacion.htm" target=_blank>Catalogación</a>
@@ -1305,8 +1305,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 
 		<!-- comienza el formulario para prestamos y devoluciones -->
 		<display><pft>
-					'<form name="form_abm" METHOD="POST" ACTION="/cgi-bin/wxis.exe/omp/administracion/">',/
-			            '<input TYPE="hidden" name="IsisScript" VALUE="/omp/administracion/abmlector.xis">',/
+					'<form name="form_abm" METHOD="POST" ACTION="/cgi-bin/wxis.exe/administracion/">',/
+			            '<input TYPE="hidden" name="IsisScript" VALUE="/administracion/abmlector.xis">',/
 			            '<input TYPE="hidden" name="opcion" VALUE="Presentar">',/
 			            '<input TYPE="hidden" name="credencial">',/
 			            '<input TYPE="hidden" name="id_operador" VALUE="',v110^i,'">',/

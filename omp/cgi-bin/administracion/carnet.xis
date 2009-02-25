@@ -131,7 +131,7 @@
            <p ALIGN="CENTER"><font size="4">Institución XXXXX<br>
              </font><font size="2">Universidad u Organismo</font></p>
            <p ALIGN="CENTER"><b><u><font face="Arial" size="2">
-             <img border="0" src="/omp/circulacion/fotos/',v1001^b,'.jpg"
+             <img border="0" src="/circulacion/fotos/',v1001^b,'.jpg"
              width="95" height="76" align="left">Credencial de Lector</font>
              </u></b></p>
            <p ALIGN="CENTER"><b><font face="Arial" size="2">',v1001^a,'</font></b></p>

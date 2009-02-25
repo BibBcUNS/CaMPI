@@ -1,6 +1,5 @@
 <IsisScript>
 
-
 <!--
 ===========================================================================
 	catalis.xis
@@ -19,6 +18,7 @@
 	Véase el archivo LICENCIA.TXT incluido en la distribución de Catalis
 ===========================================================================
 -->
+
 
 <section>
 
@@ -47,7 +47,6 @@
 	'2002 userid'/         /* identificación del usuario */
 	'2104 db'/             /* base de datos */
 	'2019 trace'/
-	'2018 query'/             /* query para busqueda de autoridades */
 </pft></cgitable>
 
 <!-- Descartamos una espuria 2da ocurrencia de v2000 en Linux (TO-DO: volver a revisar este extraño fenómeno) -->
@@ -55,8 +54,8 @@
 
 <!-- trace es activado mediante un parámetro CGI -->
 <trace><pft>v2019</pft></trace>
- <!--<trace>BR</trace> -->
- <!-- Normalizamos el userid (mayúsculas) -->
+
+<!-- Normalizamos el userid (mayúsculas) -->
 <field action="replace" tag="2002"><pft>mpu,v2002</pft></field>
 
 <!-- Lectura del archivo de configuración. Los parámetros van al campo 6001 -->
@@ -126,6 +125,8 @@
 	fi
 </pft></field>
 
+
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <!--                       CIPAR                        -->
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -134,7 +135,6 @@
 	'BIBLIO.*=',          v6003^b,'/biblio/',v2104,'/biblio.*'/
 	'CONTROL-NUMBER.TXT=',v6003^b,'/biblio/',v2104,'/cn.txt'/
 	'DB-DESCR.TXT=',      v6003^b,'/biblio/',v2104,'/db-descr.txt'/
-	'AUTO.*=',            v6003^b,'/auto/',v2104,'/biblio.*'/
 	
 	/* ----- BASE DE DATOS (CLASIFICACION) ----- */
 	'MSC.*=',             v6003^b,'/opacmarc/msc2000/msc.*'/
@@ -154,7 +154,6 @@
 	'ERROR-IP-NUMBER.HTM=', v6003^c,'/html/error-ip-number.htm'/
 	'HEAD.HTM=',            v6003^c,'/html/head.htm'/
 	'HEAD-RECORD-LIST.HTM=',v6003^c,'/html/head-recordList.htm'/
-	'HEAD-BUSQUEDA-AUTO.HTM=',v6003^c,'/html/head-busqueda-auto.htm'/
 	'HIDDEN-ELEM.HTM=',     v6003^c,'/html/hidden-elem.htm'/
 	'LOGIN.HTM=',           v6003^c,'/html/login.htm'/
 	'SAVED-RECORD.HTM=',    v6003^c,'/html/saved-record.htm'/
@@ -168,12 +167,10 @@
 	'USERS.*=',             v6003^b,'/users/users.*'/
 	
 	/* ----- PFT (compartidos con el OPAC) ----- */
-	
 	'DOCUMENT-TYPE.PFT=', v6003^c,'/pft/doc-type.pft'/
 	'ETIQUETADO.PFT=',    v6003^c,'/pft/etiquetado.pft'/
 	'URLENCODE.PFT=',     v6003^c,'/pft/urlencode.pft'/
 	'WH.PFT=',            v6003^c,'/pft/wh.pft'/
-	'WH_AUTO.PFT=',       v6003^c,'/pft/wh_auto.pft'/
 
 	'BIB-LIST-HEAD.HTM=', v6003^c,'/opacmarc/html/bib-list-head.htm'/
 	
@@ -183,7 +180,6 @@
 	/* ----- Directorio para archivos temporales ----- */
 	'CI_TEMPDIR=',v6003^t,/
 </pft></parm>
-
 
 <!-- ATENCION -->
 <flow action="jump"><pft>if p(v2002) or a(v2001) then 'USERID_PRESENT' fi</pft></flow>
@@ -200,7 +196,7 @@
 
 <!-- Mensaje de "acceso denegado" [suspendido] -->
 <!--display><htmlpft><pft>,cat('HEAD.HTM'),</pft></htmlpft></display>
-display><htmlpft><pft>,cat('ACCESO_DENEGADO.HTM'),</pft></htmlpft></display>
+<display><htmlpft><pft>,cat('ACCESO_DENEGADO.HTM'),</pft></htmlpft></display>
 <flow action="jump">END</flow-->
 
 
@@ -213,7 +209,6 @@ display><htmlpft><pft>,cat('ACCESO_DENEGADO.HTM'),</pft></htmlpft></display>
 	'~INICIAR_SESION'      /* verifica los datos del login */
 	'~MAIN_PAGE'           /* presenta la página principal de la aplicación */
 	'~BUSCAR'              /* realiza una búsqueda y presenta los resultados */
-	'~BUSCAR_AUTO'         /* realiza una búsqueda en la base autoridades y presenta los resultados */
 	'~EDITAR_REG'          /* envía un registro al formulario de edición */
 	'~GRABAR_REG'          /* graba un registro en la base bibliográfica */
 	'~BORRAR_REG'          /* borra un registro de la base bibliográfica */
@@ -282,7 +277,6 @@ display><htmlpft><pft>,cat('ACCESO_DENEGADO.HTM'),</pft></htmlpft></display>
 	,cat('TOOLBAR.HTM'),       /* barra de herramientas/menúes */
 	,cat('SEARCH-PANEL.HTM'),  /* pantalla de búsquedas */
 	,cat('EDITION-FORM.HTM'),  /* pantalla de edición */
-
 </pft></htmlpft></display>
 
 <flow action="jump">END</flow>
@@ -302,11 +296,6 @@ display><htmlpft><pft>,cat('ACCESO_DENEGADO.HTM'),</pft></htmlpft></display>
 <include>biblio/xis/buscar.xis</include>
 <flow action="jump">END</flow>
 
-<!-- ----------------------------------------------------------------- -->
-<label>BUSCAR_AUTO</label>
-<!-- ----------------------------------------------------------------- -->
-<include>biblio/xis/buscar_auto.xis</include>
-<flow action="jump">END</flow>
 
 <!-- ----------------------------------------------------------------- -->
 <label>MFN_RANGE</label>
@@ -561,7 +550,6 @@ display><htmlpft><pft>,cat('ACCESO_DENEGADO.HTM'),</pft></htmlpft></display>
 <!-- ----------------------------------------------------------------- -->
 <include>biblio/xis/showkeys.xis</include>
 <flow action="jump">END</flow>
-
 
 
 <!-- ----------------------------------------------------------------- -->

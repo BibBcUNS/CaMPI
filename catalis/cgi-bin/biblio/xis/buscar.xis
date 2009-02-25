@@ -15,7 +15,6 @@
    ===========================================================================
 -->
 
-
 <display><htmlpft><pft>cat('HEAD-RECORD-LIST.HTM')</pft></htmlpft></display>
 
 <cgitable><pft>
@@ -205,7 +204,7 @@
 							replace(
 									s(,@WH.PFT,),
 									'cid=',
-									s('tarea=EDITAR_REG&mfn=',mfn(1),'&userid=',v2002,'&db=',v2104,'" onclick=top.viewRecordDetails(null,"',v001,'",top.g_RecordDisplayStyle);return(false) target="hiddenIFRAME')
+									s('tarea=EDITAR_REG&amp;mfn=',mfn(1),'&amp;userid=',v2002,'&amp;db=',v2104,'" onclick=top.viewRecordDetails(null,"',v001,'",top.g_RecordDisplayStyle);return(false) target="hiddenIFRAME')
 							),
 					</pft></display>
 					
@@ -243,7 +242,7 @@
 		<input type="hidden" name="from" value="[pft]f(val(v2006)-20,1,0)[/pft]">
 		<button class="resultsButton" onclick="this.form.submit()"
 		        [pft]if val(v2006) = 1 then ' disabled="disabled" ' fi[/pft]
-		        >< Anteriores/button>
+		        >&lt;&nbsp;Anteriores</button>
 	</form>
 
 	<!-- Botón "SIGUIENTES" -->
@@ -257,7 +256,7 @@
 		<input type="hidden" name="from" value="[pft]f(val(v2006)+20,1,0)[/pft]">
 		<button class="resultsButton" onclick="this.form.submit()"
 		        [pft]if val(v2006) >= val(v1002) - 20 then ' disabled="disabled" ' fi[/pft]
-		        >Siguientes ></button>
+		        >Siguientes&nbsp;&gt;</button>
 	</form>
 	
 	</div>

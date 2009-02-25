@@ -1,6 +1,6 @@
 <IsisScript>
 
-<include>omp/circulacion/menor_inc.xis</include>
+<include>circulacion/menor_inc.xis</include>
 
 <section>
 <display><pft>'Content-type: text/html'/#</pft></display>
@@ -139,9 +139,9 @@
 
 <display><pft>
     if (val(v1102)=0) then
-        '<img src="/omp/circulacion/images/ok.gif"> La espera se a eliminado correctamente.<br>',
+        '<img src="/circulacion/images/ok.gif"> La espera se a eliminado correctamente.<br>',
     else
-        '<img src="/omp/circulacion/images/error.gif"> Error!: No fue posible eliminar la espera. (',v1102,')'
+        '<img src="/circulacion/images/error.gif"> Error!: No fue posible eliminar la espera. (',v1102,')'
     fi,
     '</body>'
 </pft></display>

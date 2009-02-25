@@ -10,10 +10,6 @@
 
 
 
-
-
-
-
 <display><htmlpft><pft>cat('HEAD-RECORD-LIST.HTM')</pft></htmlpft></display>
 
 <field action="cgi" tag="2006">from</field>
@@ -31,7 +27,6 @@
 	<div align="center">
 	<table id="resultTable" width="100%" cellspacing="0" cellpadding="6" border="0">
 </htmlpft></display>
-
 
 <do task="mfnrange">
 	<parm name="db">BIBLIO</parm>
@@ -58,7 +53,7 @@
 			replace(
 					s(,@WH.PFT,),
 					'cid=',
-					s('tarea=SEND_RECORD&recordID=',v001,'&userid=',v2002,'&db=',v2104,'" onclick=top.viewRecordDetails(null,"',v001,'",top.g_RecordDisplayStyle);return(false) title="Ver detalles del registro" target="hiddenIFRAME')
+					s('tarea=SEND_RECORD&amp;recordID=',v001,'&amp;userid=',v2002,'&amp;db=',v2104,'" onclick=top.viewRecordDetails(null,"',v001,'",top.g_RecordDisplayStyle);return(false) title="Ver detalles del registro" target="hiddenIFRAME')
 			),
 		</pft></display>
 		

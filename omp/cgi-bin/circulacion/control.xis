@@ -9,7 +9,7 @@ v3004: documento
 
 <section>
   <display><pft>'Content-type: text/html'/#</pft></display>
-	<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'/cipar.par')</pft></parm>
+	<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 	<field action="cgi" tag="3004">documento</field>
 	<field action="cgi" tag="3000">invs_prestamo_A</field>
 	<field action="cgi" tag="3001">invs_prestamo_B</field>  
@@ -46,7 +46,7 @@ v3004: documento
 <field action="replace" tag="110"><pft>if v110:'m' then replace(v110,'m','') fi</pft></field>
 <field action="replace" tag="110"><pft>if v110:'M' then replace(v110,'M','') fi</pft></field>
 
-<include>/omp/circulacion/controles/controles_inc.xis</include>
+<include>circulacion/controles/controles_inc.xis</include>
 
   <display>
       <html>

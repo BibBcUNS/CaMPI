@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>Observaciones</title>
-    <link rel="stylesheet" type="text/css" href="/omp/circulacion/css/style.css" />			
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />			
 
 <body>
   <center>
@@ -20,7 +20,7 @@
   <tr>
     <td width="18%"><b>Nombre</b>:</td>
     <td width="52%">[pft]v1[/pft]</td>
-    <td width="30%" rowspan="4"><img src="[pft]'/omp/circulacion/fotos/',v2,'.jpg'[/pft]" width="128" height="96" align="middle" OnError="this.src='/omp/circulacion/fotos/falta_foto.gif';"></td>
+    <td width="30%" rowspan="4"><img src="[pft]'/omp/circulacion/fotos/',v2,'.jpg'[/pft]" width="128" height="96" align="middle" OnError="this.src='/circulacion/fotos/falta_foto.gif';"></td>
   </tr>
   <tr>
     <td width="18%"><b>Categoría</b>:</td>
@@ -34,7 +34,7 @@
     <td width="18%"><b>Registro</b>:</td>
     <td width="52%">[pft]mfn,'&nbsp;&nbsp;<b>DNI:</b>&nbsp;&nbsp;',v2[/pft]</td>
   </tr>
-	</table><form name="form_observa" action="/cgi-bin/wxis.exe[pft]getenv('PATH_INFO')[/pft]" method="post" onsubmit="return confirm([pft]"'"n0,'Confirma la observación',"'"n0[/pft])">
+	</table><form name="form_observa" action="omp/cgi-bin/wxis.exe[pft]getenv('PATH_INFO')[/pft]" method="post" onsubmit="return confirm([pft]"'"n0,'Confirma la observación',"'"n0[/pft])">
 	<input type="Hidden" name="IsisScript" value="[pft]getenv('PATH_INFO')[/pft]observaciones_lector.xis">
 	<input type="Hidden" name="opcion" value="AGREGAR">
 	<input type="Hidden" name="mfn_lector" value="[pft]v101[/pft]">

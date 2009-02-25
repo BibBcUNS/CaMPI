@@ -1,228 +1,64 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>CaMPI </title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <div id="head">
+		  <div id="title">Sistema de Gestión Bibliotecario   
+		  <div id="logo"><img src="images/espaciologo.gif"   width="156" height="71" ></div>
+		  </div>
+		 
+      <div id="menu">
+        <ul>
+          <li class="active">
+            <a href="#" >Principal</a>
+          </li>
+          <li>
+            <a href="circulacion/login_form.php" target="_blank">Circulación</a>
+          </li>
+          <li>
+            <a href="omp/administracion/login_form.php" target="_blank">			
+			Administración</a>
+          </li>
+          <li>
+            <a href="omp/estadisticas/index.htm" target="_blank">Estadísticas</a>
+          </li>
+		  <li>
+             <a href="catalis/catalogacion.htm" target="_self">
+			 Catalogación</a>
+          </li>
+		  <li>
+            <a href= "/cgi-bin/opacmarc/wxis.exe?IsisScript=opac/xis/opac.xis&db=demo&showForm=simple" 
+			target="_blank">OPAC</a>
+          </li>
+        </ul>
+      </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
+<center><img src="images/logocampi.png"   width="413" height="196"><br><br><b>Integración de sistemas de código abierto de gestión bibliotecaria. <br>
+Catalis: módulo de catalogación y autoridades en MARC21, OPACMARC  y <br> Open MarcoPolo:  sistema de Circulación, Administración y Estadísticas</b></center>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer"></div>
+	  <center>
+	  <IMG SRC="images/loslogos.gif" WIDTH="535" HEIGHT="65" BORDER="0" >
+	  </center>
+	  
+    </div>
+    <div id="end_body"></div>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Sistema de Gestión Bibliotecaria Open MarcoPolo</title>
-
-<style type="text/css">
-<!--
-.menu {font-family:Arial; font-weight:bold}
-
-.menu a{
-text-decoration:none;
-color:black;
-}
--->
-</style>
-
-<script language="javascript">
-<!--
-
-/*
-Cool Table Menu
-By Clarence Eldefors (http://www.freebox.com/cereweb) with modifications from javascriptkit.com
-Visit http://javascriptkit.com for this and over 400+ other scripts
-*/
-
-
-function movein(which,html){
-which.style.background='#FF8000'
-if (window.document.getElementById)
-window.document.getElementById("boxdescription").innerHTML=html
-else
-boxdescription.innerHTML=html
-}
-
-function moveout(which){
-which.style.background='bisque'
-if (window.document.getElementById)
-window.document.getElementById("boxdescription").innerHTML='&nbsp;'
-else
-boxdescription.innerHTML='&nbsp;'
-}
-
-//-->
-</script>	
-
-
-<SCRIPT language="JavaScript"> 
-<!--
-/*  You can get this script and many others 
-    by visiting JavaScript City at: http://www.javascriptcity.com . */
-
-var pic_width=200;
-var pic_height=150;
-
-/* define image urls */
-
-if (window.document.images)
- {
-     pic1= new Image(pic_width,pic_height);
-     pic1.src="parana1.jpg";  
-     pic2= new Image(pic_width,pic_height); 
-     pic2.src="parana2.jpg"; 
-     pic3= new Image(pic_width,pic_height);
-     pic3.src="parana3.jpg";  
-     pic4= new Image(pic_width,pic_height);
-     pic4.src="parana4.jpg";  
-     pic5= new Image(pic_width,pic_height);
-     pic5.src="parana5.jpg"; 
-     pic6= new Image(pic_width,pic_height);
-     pic6.src="parana6.jpg"; 
-     pic7= new Image(pic_width,pic_height);
-     pic7.src="parana7.jpg"; 
-     pic8= new Image(pic_width,pic_height);
-     pic8.src="parana8.jpg"; 
-     pic9= new Image(pic_width,pic_height);
-     pic9.src="parana9.jpg"; 
-     pic10= new Image(pic_width,pic_height);
-     pic10.src="parana10.jpg"; 
-     pic11= new Image(pic_width,pic_height);
-     pic11.src="parana11.jpg"; 
-     pic12= new Image(pic_width,pic_height);
-     pic12.src="parana12.jpg"; 
-     pic13= new Image(pic_width,pic_height);
-     pic13.src="parana13.jpg"; 
-     pic14= new Image(pic_width,pic_height);
-     pic14.src="parana14.jpg"; 
- }    
-
-var destext= new Array(5)
-    destext[0]="This is me on a normal day. Ouch.";
-    destext[1]="Then I get mad about something.";
-    destext[2]="Here I really get mad!";
-    destext[3]="Yikes, scary!";
-    destext[4]="I am so mad I see spots!.";
-    destext[5]="I am so mad I see spots!.";
-    destext[6]="I am so mad I see spots!.";
-    destext[7]="I am so mad I see spots!.";
-    destext[8]="I am so mad I see spots!.";
-    destext[9]="I am so mad I see spots!.";
-    destext[10]="I am so mad I see spots!.";
-    destext[11]="I am so mad I see spots!.";
-    destext[12]="I am so mad I see spots!.";
-    destext[13]="I am so mad I see spots!.";
-    destext[14]="I am so mad I see spots!.";
- 
-var pics= new Array(5) 
-   pics[0]=pic1.src;
-   pics[1]=pic2.src;
-   pics[2]=pic3.src;
-   pics[3]=pic4.src;
-   pics[4]=pic5.src; 
-   pics[5]=pic6.src; 
-   pics[6]=pic7.src; 
-   pics[7]=pic8.src; 
-   pics[8]=pic9.src; 
-   pics[9]=pic10.src; 
-   pics[10]=pic11.src; 
-   pics[11]=pic12.src; 
-   pics[12]=pic13.src; 
-   pics[13]=pic14.src; 
-
-var numpics=14;
-var thenum=0;
-imgName="img1";
-
-/* Retorna un número aleatorio en un rango de números [inferior , superior] */
-function aleatorio(inferior,superior){
-    numPosibilidades = superior - inferior
-    aleat = Math.random() * numPosibilidades
-    aleat = Math.floor(aleat)
-    return parseInt(inferior) + aleat
-} 
-
-
-function change_it()
- {
-   if (window.document.images)
-    {
-			window.document.write("<IMG SRC='"+pics[aleatorio(0,13)]+"' border='0' width='"+pic_width+"' height='"+pic_height+"' name='img1'>\n");
-      
-   }
-}
-
-function change_it2()
- {
-         var x=0;
-         thenum+=1;
-
-         if (thenum>numpics-1)
-         { 
-           document[imgName].src=pics[0];
-					 thenum=0;					 
-					 setTimeout('change_it2()',2000);
-           }
-         else
-         {
-           document[imgName].src=pics[thenum];
-           x+=1;
-           setTimeout('change_it2()',2000);
-          }
- }
-
-//-->
-</SCRIPT>
-
-<SCRIPT language="JavaScript">
-<!--
-function invocar_opac() {
-	window.open('opac/buscar.html','OPAC','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=790,height=545')
-	}
-
-function invocar_circulacion() {
-	window.open('circulacion/circulacion.html','CIRCULACION','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=1,copyhistory=0,width=790,height=545')
-	}	
-
-function invocar_stat() {
-	window.open('estadisticas/index.htm','ESTADISTICA','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=790,height=545')
-	}	
-	
-//-->
-</SCRIPT>
-
-</head>
-
-<body bgcolor="#E8E8D0">
-
-<center><font face="Tahoma" size="5">Sistema de Gestión Bibliotecaria</font><br>
-<img src="/omp/omp.gif">
-
-<table width="100%" align="center">
-  <tr>
-    <td align="middle" width="30%">
-			<SCRIPT language="JavaScript">
-			<!--
-			change_it(); 
-			//-->
-			</SCRIPT><br>
-			<font face="Tahoma" size="2"><i>¡Visite Entre Ríos - Argentina!</i></font>
-			</td>
-    <td width="40%">
-
-			<table align="center" bgcolor="black" border="1" bordercolor="ivory" cellpadding="2" cellspacing="0">
-				<tr>
-					<td class="menu" bordercolor="black" id="choice1" style="background-color:bisque; cursor:hand" onmouseover="movein(this,'Atención al público')" onmouseout="moveout(this)"">
-						<a href="javascript:invocar_circulacion()">Módulo de Circulación</a></td></tr>
-				<tr>
-					<td class="menu" bordercolor="black" id="choice2" style="background-color:bisque; cursor:hand" onmouseover="movein(this,'Catalogo OnLine')" onmouseout="moveout(this)">
-						<a href="JavaScript:invocar_opac()">OPAC</a></td>
-				<tr>
-					<td class="menu" bordercolor="black" id="choice3" style="background-color:bisque; cursor:hand" onmouseover="movein(this,'Procesos Técnicos')" onmouseout="moveout(this)">
-						<a href="administracion/menu.html" target="_blank">Administración</a></td>
-				<tr>
-					<td class="menu" bordercolor="black" id="choice4" style="background-color:bisque; cursor:hand" onmouseover="movein(this,'Estadísticas')" onmouseout="moveout(this)">
-						<a href="JavaScript:invocar_stat()">Estadística</a></td></tr>
-						
-				<tr>
-					<td bordercolor="black" bgcolor="ivory" height="18"><font id="boxdescription" face="Verdana" size="2">&nbsp;</font></td></tr>
-			</table></td>
-
-   <td width="30%" align="middle">
-	 		<img src="/omp/logo.gif" whith="125" height="125"><br>
-			<font face="Verdana" size="2"><strong></strong></font></td>
- </table>
-<center><font face="Tahoma" size="3">Versión 1.6<br>(Abril 2007)</font><br>
-</body>
-
+		<div id="footer">Versión 0.2<br>(noviembre 2008)</div>
+  </body>
 </html>

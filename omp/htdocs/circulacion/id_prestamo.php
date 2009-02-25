@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <base target="principal">
     <title>id_prestamo</title>
-<link rel="stylesheet" type="text/css" href="/omp/circulacion/css/style.css" />	
+<link rel="stylesheet" type="text/css" href="css/style.css" />	
 <style type="text/css">
 <!--
 #lt1 {
@@ -89,14 +89,14 @@ function focus_expresion() {
    <br><br>
    <div id="lt1">
    <h2>MENU</h2>
-<form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/" onclick="javascript:focus_expresion();"
+<form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/" onclick="javascript:focus_expresion();"
  onsubmit="
 		if (window.document.consultas.expresion.value =='$' || window.document.consultas.expresion.value =='') {
 				alert('Debe indicar una expresión válida')
 				return false;
 		}else{  return true;}
 	">
-  <input type="hidden" name="IsisScript" value="omp/circulacion/consulta_campi.xis">
+  <input type="hidden" name="IsisScript" value="circulacion/consulta_campi.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td width="100%"><strong>Consultar por</strong></td></tr>
@@ -124,7 +124,7 @@ function focus_expresion() {
   </table>
 </form>
 
-<form name="form_devolucion" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/"
+<form name="form_devolucion" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/"
 	onsubmit="
 		if (window.document.form_devolucion.inventario.value =='') {
 				alert('Debe indicar algun inventario')
@@ -133,7 +133,7 @@ function focus_expresion() {
 			window.document.form_devolucion.operador.value=window.document.form_id.operador.value;
 			return true;}
 	">
-  <input type="hidden" name="IsisScript" value="omp/circulacion/devolucion.xis">
+  <input type="hidden" name="IsisScript" value="circulacion/devolucion.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
 		<tr>
 			<td width="100%"><strong>Devolver x inventario</strong></td></tr>
@@ -149,13 +149,13 @@ function focus_expresion() {
 
 <?php 
 $usuario=$_SESSION["s_username"];
-$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
+$url="http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
 $ptr_grabar_datos = fopen($url,"r");
 $grabar_datos = fread($ptr_grabar_datos,500);
 //fclose($ptr_grabar_datos);
 ?>
 
-<form name="form_id" method="POST" action="/cgi-bin/wxis.exe/omp/circulacion/"
+<form name="form_id" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/"
  	onSubmit="
 		if (window.document.form_id.lector.value =='') {
 				window.document.form_id.lector.focus();
@@ -164,7 +164,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
 				return true;
 		">
 
-  <input type="hidden" name="IsisScript" value="omp/circulacion/prestamo.xis">
+  <input type="hidden" name="IsisScript" value="circulacion/prestamo.xis">
 	<input type="hidden" name="opcion" value="ID">
 	<table border="0" width="100%" cellpadding="0" cellpadding="">
     <tr>
@@ -184,7 +184,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
 <div id="lt1"><div id="lt1">
 		<?php
         $usuario=$_SESSION["s_username"];
-        $url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=omp/circulacion/identificacion_id.xis&id_operador=".$usuario;
+        $url="http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
         $ptr_datos = fopen($url,"r");
         $datos = fread($ptr_datos,500);
         fclose($ptr_datos);

@@ -42,8 +42,8 @@ body {
 
 <table border="0" width="100%">
   <tr>
-    <td width="85" rowspan="2"><img src="/omp/logo2.gif" width="80" height="80" align="middle"></td>
-    <td width="50%"><big>Institucion XXXXX</big><td align="right"><b><i>Módulo Administración</i></b>&nbsp;&nbsp;<img src="/omp/omp.gif" width="80" height="62" align="middle" border="0"><br>
+    <td width="85" rowspan="2"><img src="/logo2.gif" width="80" height="80" align="middle"></td>
+    <td width="50%"><big>Institucion XXXXX</big><td align="right"><b><i>Módulo Administración</i></b>&nbsp;&nbsp;<img src="/omp.gif" width="80" height="62" align="middle" border="0"><br>
     </td>
   </tr>
 </table>
@@ -55,8 +55,8 @@ body {
     	<p align="center"><b><big>Generación de Códigos de Barra</big></b></p>
     </td>
     <td rowspan="2" >
-	    <form method="POST" action="/cgi-bin/wxis.exe/omp/administracion/" name="form_inventarios" target="_parent">
-	    <input type="hidden" name="IsisScript" value="omp/administracion/listado_etiquetas.xis">
+	    <form method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" name="form_inventarios" target="_parent">
+	    <input type="hidden" name="IsisScript" value="administracion/listado_etiquetas.xis">
 	    <textarea rows="8" name="inventarios" cols="7" onkeydown="contar_inventarios()"></textarea>
 	    <input type="submit" value="Enviar">
 	    </form>
@@ -73,8 +73,8 @@ body {
 			  <!-- p align="center"><b>Selección de una obra completa a través del registro madre:<br>
         Indique Nro. de Inventario:</b>&nbsp;&nbsp;<input type="text" name="inventario" size="10">&nbsp;&nbsp;<input type="Button" value="Consultar" onclick="consulta_obra()" -->
       </form>
-	  <form name="consultas" method="POST" action="/cgi-bin/wxis.exe/omp/administracion/" target="inferior">
-      <input type="hidden" name="IsisScript" value="omp/administracion/consulta_inv.xis">
+	  <form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" target="inferior">
+      <input type="hidden" name="IsisScript" value="administracion/consulta_inv.xis">
       <a href="menu.html" target="_parent">Volver al Menú</a>&nbsp;&nbsp;&nbsp;&nbsp;
       <input type="radio" name="criterio" value="inv" checked>Inventario --> Buscar: 
       <input type="text" name="expresion" size="15">

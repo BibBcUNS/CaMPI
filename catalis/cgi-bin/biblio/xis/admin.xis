@@ -10,7 +10,6 @@
 
 
 
-
 <IsisScript>
 
 <section>
@@ -220,7 +219,7 @@
 
 <display><htmlpft>
 	<h5>Verificación de la base [pft]v2012[/pft]</h5>
-	<b>Atención: use también mxf0 para detectar la presencia de caracteres con código ASCII < 32.</b>
+	<b>Atención: use también mxf0 para detectar la presencia de caracteres con código ASCII &lt; 32.</b>
 </htmlpft></display>
 
 <!--field action="cgi" tag="2006">from</field>
@@ -333,7 +332,7 @@
 <display><htmlpft>
 	<hr>[pft]
 	replace(replace(s(cat(v6003^t,'/error.txt')),
-		'<','<'),
+		'<','&lt;'),
 		s(#),'')
 	[/pft]
 	</pre>
@@ -373,7 +372,7 @@
 <display><pft>
 	'<hr>'
 	replace(replace(s(cat(v6003^t,'/error.txt')),
-		'<','<'),
+		'<','&lt;'),
 		s(#),'')
 	'</pre>'
 </pft></display>
@@ -531,7 +530,7 @@
 							<th>OCCS</th>
 							<th>MINLEN</th>
 							<th>MAXLEN</th>
-							<th>DATA BYTES</th>
+							<th>DATA&nbsp;BYTES</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -559,7 +558,7 @@
 							(
 								'<tr>'
 									'<td style="text-align: center;">',v1030^x,'</td>'
-									'<td style="font-weight: bold; text-align: center;"> &#x',v1030^x,'; </td>'
+									'<td style="font-weight: bold; text-align: center;">&nbsp;&#x',v1030^x,';&nbsp;</td>'
 									'<td>',v1030^n,'</td>'
 								'</tr>'/
 							)
@@ -721,13 +720,13 @@
 		<display><htmlpft>
 			<tr class="[pft]v2001[/pft]">
 				<td width="72">[pft]v5*9.2,':',v5*11.2,':',v5*13.2[/pft]</td>
-				<td width="56">[pft]v2002," "n2002[/pft]</td>
+				<td width="56">[pft]v2002,"&nbsp;"n2002[/pft]</td>
 				<td width="110">[pft]v10[/pft]</td>
-				<td width="80">[pft]v2104," "n2104[/pft]</td>
-				<td width="136">[pft]v2001," "n2001[/pft]</td>
-				<td width="64">[pft]v4001," "n4001[/pft]</td>
-				<td width="6">[pft]v2006," "n2006[/pft]</td>
-				<td width="160">[pft]v3005,v2070," "n3005[/pft]</td>
+				<td width="80">[pft]v2104,"&nbsp;"n2104[/pft]</td>
+				<td width="136">[pft]v2001,"&nbsp;"n2001[/pft]</td>
+				<td width="64">[pft]v4001,"&nbsp;"n4001[/pft]</td>
+				<td width="6">[pft]v2006,"&nbsp;"n2006[/pft]</td>
+				<td width="160">[pft]v3005,v2070,"&nbsp;"n3005[/pft]</td>
 			</tr>
 		</htmlpft></display>
 	</loop>
@@ -784,7 +783,7 @@
 		<display><htmlpft>
 			<pre>[pft]
 				v1, ' [',v4,', ',v2,']'/
-				(' ·', v5^*, '[',v5^p,']'), / 
+				(' &#183;', v5^*, '[',v5^p,']'), / 
 			[/pft]</pre>
 		</htmlpft></display>
 	</loop>

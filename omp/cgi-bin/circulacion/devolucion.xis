@@ -45,8 +45,8 @@
 
 <IsisScript>
 
-<include>omp/circulacion/menor_inc.xis</include>
-<include>omp/circulacion/verif_reservas_inc.xis</include>
+<include>circulacion/menor_inc.xis</include>
+<include>circulacion/verif_reservas_inc.xis</include>
 
 <function name=operador action=replace tag=1000>
 

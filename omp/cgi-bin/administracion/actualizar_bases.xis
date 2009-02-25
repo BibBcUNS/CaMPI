@@ -38,7 +38,7 @@ y un campo repetible con todos los inventarios respectivos...
 		          '</small><big></big>',
 		        '</td>',
 		        '<td width="50%" align="right">',
-		          '<em>Sistema de Circulación <img src="/omp/omp.gif" width="59" height="45" align="middle"></em>',
+		          '<em>Sistema de Circulación <img src="/omp.gif" width="59" height="45" align="middle"></em>',
 		        '</td>',
 		      '</table><hr>',
 		</pft></display>
@@ -55,12 +55,12 @@ y un campo repetible con todos los inventarios respectivos...
 	</pft></field>						
 
 	<trace>!BR</trace>
-	<include>omp/administracion/archivos_actualiza/leer_base_config.xis</include>
-	<include>omp/administracion/archivos_actualiza/crear_biblo.xis</include>
-	<include>omp/administracion/archivos_actualiza/crear_partes.xis</include>
+	<include>administracion/archivos_actualiza/leer_base_config.xis</include>
+	<include>administracion/archivos_actualiza/crear_biblo.xis</include>
+	<include>administracion/archivos_actualiza/crear_partes.xis</include>
 	
 	<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>	
-	<include>omp/administracion/archivos_actualiza/actualizar_exist.xis</include>
+	<include>administracion/archivos_actualiza/actualizar_exist.xis</include>
 
 	
 	<!-- Listo, FIN-->

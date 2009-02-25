@@ -1,7 +1,7 @@
 <IsisScript>
 
-<include>omp/fecha_funciones.xis</include>
-<include>omp/circulacion/menor_inc.xis</include>
+<include>fecha_funciones.xis</include>
+<include>circulacion/menor_inc.xis</include>
 
 <section>
 <display><pft>'Content-type: text/html'/#</pft></display>

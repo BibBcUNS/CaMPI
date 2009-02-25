@@ -35,7 +35,7 @@ function mostrar_politicas() {
    global $campos_nombre;
    global $SERVER_NAME;
    
-	$ptr_politicas = fopen("http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_obtener.xis&cual=TODAS","r");
+	$ptr_politicas = fopen("http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=TODAS","r");
 	$politicas = fread($ptr_politicas,8192);
 	fclose($ptr_politicas);
 
@@ -138,7 +138,7 @@ function editar_politica() {
    global $campos_nombre;
    global $SERVER_NAME;
 
-   $url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_obtener.xis&cual=UNA&expresion=".$_POST['pol_nro'];
+   $url="http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=UNA&expresion=".$_POST['pol_nro'];
 
 	$ptr_politicas = fopen($url,"r");
 	$politicas = fread($ptr_politicas,8192);
@@ -198,7 +198,7 @@ for ($i=0;$i<=(count($campos_nombre)-1);$i++)
 	$parametros_guardar=$parametros_guardar."&campo".$i."=".$_POST[$campo_actual];
    }
 
-$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_guardar.xis&".$parametros_guardar;
+$url="http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_guardar.xis&".$parametros_guardar;
 $ptr_politicas = fopen($url,"r");
 $ptr_politicas;
 $politicas = fread($ptr_politicas,8192);
@@ -211,7 +211,7 @@ return $politicas;
 //***********************BORRA UNA POLITICA*************************//
 //*******************************************************************//
 function borrar_politica() {
- $url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/politicas_guardar.xis&record=BORRAR&expresion=".$_POST['pol_nro'];
+ $url="http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_guardar.xis&record=BORRAR&expresion=".$_POST['pol_nro'];
  $ptr_politicas = fopen($url,"r");
  $politicas = fread($ptr_politicas,8192);
  fclose($ptr_politicas);

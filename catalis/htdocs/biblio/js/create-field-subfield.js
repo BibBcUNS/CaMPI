@@ -6,6 +6,7 @@
 // =============================================================================
 
 
+
 // -----------------------------------------------------------------------------
 function createFieldList(tags)
 // Recibe una lista de tags y, luego de validarlos, llama repetidamente a
@@ -491,35 +492,6 @@ function createSubfield( code, sfText, label, fieldTag )
 		newLabel.appendChild(btnCheck);
 	}
 	
-	
-	if ( "100a" == fieldTag + code || "110a" == fieldTag + code || "111a" == fieldTag + code|| "130a" == fieldTag + code || "700a" == fieldTag + code || "710a" == fieldTag + code || "711a" == fieldTag + code || "730a" == fieldTag + code) {
-		var btnCheck = document.createElement("button");
-		
-		btnCheck.onclick = function() { 
-			var winProperties = "font-size:15px; dialogWidth:1830px; dialogHeight:500px;";
-			
-			var answer = showModalDialog(URL_SELECT_HEADING, window, winProperties);
-			
-			
-				
-				//var heading = window.open(URL_SELECT_HEADING + &query=respuesta, 'hola','');
-				
-				//if ( "undefined" == typeof(heading) || null == heading || heading.length == 0 ) {
-				//	return;  // abortamos
-				//}
-			
-						
-			box.focus();
-		}
-		btnCheck.innerHTML = "Autorizar";
-		btnCheck.title = "Asociar registro de Autoridades";
-		btnCheck.className = "checkButton";
-		btnCheck.tabIndex = -1;
-		newLabel.appendChild(btnCheck);
-		
-	}
-	
-
 	newCell.appendChild(newLabel);
 	newSubfield.appendChild(newCell);
 

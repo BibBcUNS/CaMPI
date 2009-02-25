@@ -152,14 +152,14 @@ function editar_año($_año) {
 	global $mesArray;
 	global $SERVER_NAME;
 	// Invoco al wxis con calendario_leer.xis(año) para leer los datos de un año determinado.
-	$ptr_datos_año = fopen("http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_leer.xis&anio=$_año","r");
+	$ptr_datos_año = fopen("http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_leer.xis&anio=$_año","r");
 	$datos_año = fread($ptr_datos_año,500);
 	fclose($ptr_datos_año);
 	// Se genera una lista de 0s y Puntos por cada mes, separada cada cadena por "~"
 
 	// En caso que el script no encuentre el año en la BD devuelve "error".
 	if (!(strpos($datos_año,"error")===false)) {
-		$ptr_ultimo_año = fopen("http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_ultimo_anio.xis","r");
+		$ptr_ultimo_año = fopen("http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_ultimo_anio.xis","r");
 		$ultimo_año = fread($ptr_ultimo_año,500);
 		fclose($ptr_ultimo_año);
 		echo "<font color=red>Error!: El año <b>$_año</b> no está definido.</font><br>";
@@ -203,7 +203,7 @@ function editar_año($_año) {
 
 function grabar_año($_año, $meses) {
 	global $SERVER_NAME;
-	$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_nuevo.xis".
+	$url="http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_nuevo.xis".
 			"&anio=$_año";
 	
 	for($i=0;$i<12;$i++){
@@ -256,7 +256,7 @@ function es_int($numero){
 
 function crear_hasta_el_año($año){
 	global $SERVER_NAME;
-	$ptr_ultimo_año = fopen("http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_ultimo_anio.xis","r");
+	$ptr_ultimo_año = fopen("http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_ultimo_anio.xis","r");
 	$ultimo_año = fread($ptr_ultimo_año,500);
 	fclose($ptr_ultimo_año);
 	

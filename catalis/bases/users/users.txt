@@ -1,19 +1,15 @@
-!ID 0
-!v001!XX
+!ID 2
+!v001!AUTO
 !v002!Institución
 !v003!test
-!v004!Nombre Apellido
-!v005!demo^p2
-!v005!celtic^p2
-!ID 1
-!v001!YY
-!v002!Institución
-!v003!test
-!v004!Nombre Apellido
+!v004!popo
 !v005!auto^p3
+!ID 1
+!v001!BIBLIO
+!v002!Institución
+!v003!test
+!v004!pepe
 !v005!demo^p3
-
-
 
 
 

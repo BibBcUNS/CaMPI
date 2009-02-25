@@ -10,11 +10,7 @@
  */
 
 
-
-
-
-
-
+ 
 // ATENCION: En saved-record.htm hay código que probablemente podría reubicarse aquí.
 
 // -----------------------------------------------------------------------------
@@ -123,11 +119,8 @@ function createRecord(newRecParams)
 		document.getElementById("ejemplaresBtn").style.backgroundColor = "";
 	}
 	
-	
 	// Original record state = el contenido de la plantilla
 	originalRecord = serializeRecord(true,true,true,true);
-	
-	
 	
 	// Buttons
 	document.getElementById("btnGrabar").disabled = false;
@@ -187,6 +180,7 @@ function showRecordInForm(receivedRecord)
 	form.f005_nice.value += receivedRecord.f005.substr(0,4) + ", ";
 	form.f005_nice.value += receivedRecord.f005.substr(8,2) + ":";
 	form.f005_nice.value += receivedRecord.f005.substr(10,2);
+	
 	form.f006.value = receivedRecord.f006;
 	form.f007.value = receivedRecord.f007;
 	

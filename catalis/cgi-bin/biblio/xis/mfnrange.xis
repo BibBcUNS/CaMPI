@@ -12,9 +12,6 @@
 	=======================================================================
 -->
 
-
-
-
 <display><htmlpft><pft>cat('HEAD-RECORD-LIST.HTM')</pft></htmlpft></display>
 
 <cgitable><pft>
@@ -78,9 +75,9 @@
 					s(,@WH.PFT,),
 					'cid=',
 					s('tarea=EDITAR_REG',
-					  '&mfn=',mfn(1),
-					  '&userid=',v2002,
-					  '&db=',v2104,
+					  '&amp;mfn=',mfn(1),
+					  '&amp;userid=',v2002,
+					  '&amp;db=',v2104,
 					  '" onclick=top.viewRecordDetails(null,"',v001,'",top.g_RecordDisplayStyle);return(false)',
 					  ' target="hiddenIFRAME')
 			),
@@ -107,7 +104,7 @@
 		<input type="hidden" name="from" value="[pft]f(rmax(f(val(v2006)-20,1,0),x1,'1'),1,0)[/pft]">
 		<button class="resultsButton" onclick="this.form.submit()"
 		        [pft]if val(v2006) = 1 then ' disabled="true" ' fi[/pft]
-		        >< Anteriores/button>
+		        >&lt;&nbsp;Anteriores</button>
 	</form>
 
 	<!-- Botón "SIGUIENTES" -->
@@ -119,7 +116,7 @@
 		<input type="hidden" name="from" value="[pft]f(val(v2006)+20,1,0)[/pft]">
 		<button class="resultsButton" onclick="this.form.submit()"
 		        [pft]if val(v2006) >= val(v2012) - 20 then ' disabled="true" ' fi[/pft]
-		        >Siguientes ></button>
+		        >Siguientes&nbsp;&gt;</button>
 	</form>
 	
 	</div>

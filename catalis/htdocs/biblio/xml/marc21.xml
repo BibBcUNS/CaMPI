@@ -676,7 +676,7 @@
 	<datafield tag="306" repet="NR" label-eng="Playing time" label-spa="Duración" aplic="MU" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" />
-		<subfield oblig="ALL" label-spa="Duración &lt;i&gt;(hhmmss)&lt;/i&gt;" repet="R" label-eng="Playing time" code="a" />
+		<subfield code="a" repet="R" label-eng="Playing time" label-spa="Duración &lt;i&gt;(hhmmss)&lt;/i&gt;" oblig="ALL" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="310" repet="NR" lite="lite" label-eng="Current publication frequency" label-spa="Frecuencia de publicación actual" aplic="CR" template="##a">

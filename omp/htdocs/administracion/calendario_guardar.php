@@ -35,7 +35,7 @@ function crear_cadena_mes($datos_mes, $_mes, $_anio) {
 	return $cadena;
 }
 
-$url="http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_grabar.xis".
+$url="http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_grabar.xis".
 		"&anio=$anio";
 
 

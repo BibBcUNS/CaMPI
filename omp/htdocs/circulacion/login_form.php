@@ -13,7 +13,7 @@ if (isset($_SESSION["s_username"]) && $_SESSION["s_permiso"]=='circulacion') {
   <body>
     <div id="head">
 		  <div id="title">Módulo de Circulación   
-		  <div id="logo"><img src="/images/logocampi2.gif"   width="156" height="71" ></div>
+		  <div id="logo"><img src="images/logocampi2.gif"   width="156" height="71" ></div>
 		  </div>
 		 
       <div id="menu">
@@ -25,17 +25,17 @@ if (isset($_SESSION["s_username"]) && $_SESSION["s_permiso"]=='circulacion') {
             <a href="*" >Circulación</a>
           </li>
           <li>
-            <a href="/omp/administracion/login_form.php"  target=_self>Administración</a>
+            <a href="/administracion/login_form.php"  target=_self>Administración</a>
           </li>
           <li>
-            <a href="/omp/estadisticas/index.htm"  target=_self>Estadísticas</a>
+            <a href="/estadisticas/index.htm"  target=_self>Estadísticas</a>
           </li>
 		  <li>
              <a href="/catalis/catalogacion.htm" target=_self>
 			 Catalogación</a>
           </li>
 		  <li>
-            <a href= "/cgi-bin/opacmarc/wxis.exe?IsisScript=opac/xis/opac.xis&db=demo&showForm=simple" 
+            <a href= "opacmarc/cgi-bin/opacmarc/wxis.exe?IsisScript=opac/xis/opac.xis&db=demo&showForm=simple" 
 			target=_self>OPAC</a>
           </li>
         </ul>

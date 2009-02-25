@@ -11,7 +11,7 @@ if (isset($_SESSION["s_username"])) {
 ?>
 
 <?php
-$ptr_anios_calendario = fopen("http://$SERVER_NAME/cgi-bin/wxis.exe/omp/administracion/?IsisScript=omp/administracion/calendario_anios.xis","r");
+$ptr_anios_calendario = fopen("http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_anios.xis","r");
 $anios_calendario = fread($ptr_anios_calendario,1000);
 fclose($ptr_anios_calendario);
 $anios = explode  ('~', $anios_calendario);
@@ -22,31 +22,7 @@ $anios = explode  ('~', $anios_calendario);
 		  <div id="logo"><img src="/images/logocampi2.gif"  width="156" height="71" ></div>
 		  </div>
 		 
-      <div id="menu">
-        <ul>
-          <li>
-            <a href="/index.html" target=_self>
-			Principal</a>
-          </li>
-          <li>
-             <a href="/omp/circulacion/login_form.php"  target=_self> Circulación</a>
-          </li>
-          <li  class="active">
-            <a href="*">Administración</a>
-          </li>
-          <li>
-            <a href="/omp/estadisticas/index.htm" target=_self>Estadísticas</a>
-          </li>
-		  <li>
-             <a href="catalis/catalogacion.htm" target=_self>
-			 Catalogación</a>
-          </li>
-		  <li>
-            <a href= "/cgi-bin/opacmarc/wxis.exe?IsisScript=opac/xis/opac.xis&db=demo&showForm=simple" 
-			target=_self>OPAC</a>
-          </li>
-        </ul>
-      </div>
+      
     </div> 
     <div id="body_wrapper">
       <div id="body">
@@ -118,8 +94,8 @@ $anios = explode  ('~', $anios_calendario);
   </tr>
     <th colspan="2">Altas y Modificaciones de Lectores</th>
   <tr>
-    <td width="70%"><form method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">
-      <input type="hidden" name="IsisScript" value="omp/administracion/abmlector.xis">
+    <td width="70%"><form method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/">
+      <input type="hidden" name="IsisScript" value="administracion/abmlector.xis">
       <input type="hidden" name="opcion" value="Presentar">
       <strong>Lector: <input type="text" name="credencial" size="10">
       <input type="radio" name="id_lector" value="documento" checked>
@@ -127,8 +103,8 @@ $anios = explode  ('~', $anios_calendario);
       MFN&nbsp;&nbsp; <input type="submit" value="Presentar">
     </form></td>
     <td width="30%">
-    <form method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">
-      <input type="hidden" name="IsisScript" value="omp/administracion/abmlector.xis">
+    <form method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/">
+      <input type="hidden" name="IsisScript" value="administracion/abmlector.xis">
       <input type="hidden" name="opcion" value="Registro Nuevo">
       <input type="hidden" name="invocado" value="menu.html">
       <input type="submit" value="Crear Nuevo Registro">
@@ -142,8 +118,8 @@ $anios = explode  ('~', $anios_calendario);
 
   <tr>
     <td>
-    	<form name="form_listados" method="POST" action="/cgi-bin/wxis.exe/omp/administracion/">
-    	 <input type="hidden" name="IsisScript" value="omp/administracion/listados.xis">
+    	<form name="form_listados" method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/">
+    	 <input type="hidden" name="IsisScript" value="administracion/listados.xis">
 	 <input type="Hidden" name="Orden" value="Prestamo">	
         <input type="radio" value="morosos" name="opcion"><strong>Listado de morosos<br>
         <input type="radio" value="prestamos" name="opcion">Prestamos del día (Estadística)<br>
@@ -169,26 +145,26 @@ $anios = explode  ('~', $anios_calendario);
 
   <tr>
 	<td colspan="2">
-		<form action="/cgi-bin/wxis.exe/omp/administracion/" method="post">
+		<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post">
 		<table border="0" style="valign:middle" cellpadding="8px"><tr><td>
 		<input type="submit" value="Actualizar inventarios (& y @)" width="100"></td><td>Si utiliza los símbolos <b><i>&</i></b> y <b><i>@</i></b> para indicar inventarios nuevos y los que se dan de baja
-		<input type="hidden" name="IsisScript" value="omp/administracion/make_InvNuevos.xis">
+		<input type="hidden" name="IsisScript" value="administracion/make_InvNuevos.xis">
 		</td>
 		</form>
 		</tr><tr>
 		<td>
-		<form action="/cgi-bin/wxis.exe/omp/administracion/" method="post">
+		<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post">
 		<input type="submit" value="         Actualizar inventarios         "></td><td>En caso que no utilize indicadores para inventarios nuevos y dados de baja<br> (el sistema lo detecta automáticamente)
-		<input type="hidden" name="IsisScript" value="omp/administracion/actualizar_bases.xis">
+		<input type="hidden" name="IsisScript" value="administracion/actualizar_bases.xis">
 		</form>
 		</td></tr></table>
 	</td>
 	</tr>
   	<tr>	
 	<td colspan="2">
-		<form action="/cgi-bin/wxis.exe/omp/administracion/" method="post">
+		<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post">
 		<input type="submit" value="Control de consistencia de inventarios">
-		<input type="hidden" name="IsisScript" value="omp/administracion/check_consistencia.xis">
+		<input type="hidden" name="IsisScript" value="administracion/check_consistencia.xis">
 		</form>
 	</td>
     <td>	
