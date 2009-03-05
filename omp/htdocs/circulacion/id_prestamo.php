@@ -149,7 +149,7 @@ function focus_expresion() {
 
 <?php 
 $usuario=$_SESSION["s_username"];
-$url="http://$_SERVER['SERVER_NAME'];/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
+$url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
 $ptr_grabar_datos = fopen($url,"r");
 $grabar_datos = fread($ptr_grabar_datos,500);
 //fclose($ptr_grabar_datos);
@@ -184,7 +184,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
 <div id="lt1"><div id="lt1">
 		<?php
         $usuario=$_SESSION["s_username"];
-        $url="http://$_SERVER['SERVER_NAME'];/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
+        $url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
         $ptr_datos = fopen($url,"r");
         $datos = fread($ptr_datos,500);
         fclose($ptr_datos);
