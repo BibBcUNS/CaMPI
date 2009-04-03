@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>Módulo de Administración </title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
 <!--script language=javascript type=text/javascript src=js/popup_calendar.js-->
 </head>
 <?php
@@ -19,7 +19,7 @@ $anios = explode  ('~', $anios_calendario);
   <body>
     <div id="head">
 		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
-		  <div id="logo"><img src="/images/logocampi2.gif"  width="156" height="71" ></div>
+		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
 		  </div>
 		 
       

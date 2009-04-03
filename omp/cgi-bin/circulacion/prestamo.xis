@@ -1305,8 +1305,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 
 		<!-- comienza el formulario para prestamos y devoluciones -->
 		<display><pft>
-					'<form name="form_abm" METHOD="POST" ACTION="/cgi-bin/wxis.exe/administracion/">',/
-			            '<input TYPE="hidden" name="IsisScript" VALUE="/administracion/abmlector.xis">',/
+					'<form name="form_abm" METHOD="POST" ACTION="/omp/cgi-bin/wxis.exe/omp/administracion/">',/
+			            '<input TYPE="hidden" name="IsisScript" VALUE="administracion/abmlector.xis">',/
 			            '<input TYPE="hidden" name="opcion" VALUE="Presentar">',/
 			            '<input TYPE="hidden" name="credencial">',/
 			            '<input TYPE="hidden" name="id_operador" VALUE="',v110^i,'">',/

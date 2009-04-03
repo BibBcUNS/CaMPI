@@ -14,7 +14,7 @@ echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=menu.php>";
 <body>
 <table  border="0" width="500" align="center" cellpadding="0" cellspacing="0">
 	<tr>
-		<td align="center"><img src="../../images/campi.png" border="0"></td>
+		<td align="center"><img src="../images/campi.png" border="0"></td>
 		<td align="center"><h3>Circulación - Módulo de Administración</h3></td>
 	</tr>
 </table>
@@ -51,11 +51,11 @@ Password: <input type='password' size='15' maxlength='25' name='password'>
 </form>
 <table  border="0" width="500" align="center" cellpadding="0" cellspacing="0">
 	<tr>
-		<td align="center"><img src="../../images/abr_78.jpg" border="0"></td>
-		<td align="center"><img src="../../images/ib-small-75_78.jpg" border="0"></td>
-		<td align="center"><img src="../../images/inmabb-80x80_78.jpg" border="0"></td>
-		<td align="center"><img src="../../images/uner_logo_78.jpg" border="0"></td>
-		<td align="center"><img src="../../images/uns_logo_78.gif" border="0"></td>
+		<td align="center"><img src="../images/abr_78.jpg" border="0"></td>
+		<td align="center"><img src="../images/ib-small-75_78.jpg" border="0"></td>
+		<td align="center"><img src="../images/inmabb-80x80_78.jpg" border="0"></td>
+		<td align="center"><img src="../images/uner_logo_78.jpg" border="0"></td>
+		<td align="center"><img src="../images/uns_logo_78.gif" border="0"></td>
 
 	</tr>
 </table>

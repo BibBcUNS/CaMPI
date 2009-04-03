@@ -138,10 +138,10 @@
 	muestran las partes, y para cada parte, los ejemplares prestados/reservados/en espera -->
 	
   <label>inv</label>
- <trace>!BR</trace>
-	<field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogación (v6) -->
-	
-  <do task=search>
+  <trace>!BR</trace>
+  <field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogación (v6) -->
+
+	<do task=search>
     <parm name=db>marc</parm>
     <parm name=expression><pft>if v100='nc' then 'NC=' fi,v110</pft></parm>
     <parm name=gizmo>gizmo</parm>

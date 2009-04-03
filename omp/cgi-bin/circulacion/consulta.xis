@@ -214,7 +214,7 @@
   ref(['lector']l(['lector']v120),
   	'<font style="color:#039"><big>',v1,'</big></font>',", ",v3,
    	if v2001:'1' then
-   		' <marquee bgcolor="#FFF0C4" border="0" style="color: rgb(191,51,83); font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',
+   		'<marquee bgcolor="#FFF0C4" border="0" style="color: rgb(191,51,83); font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',
    	fi,
    	'</center><hr>'
    )</pft></display>
@@ -296,7 +296,7 @@
 	</pft></field>
 
 
-	<display><pft>'</b>',v110,'</b>'</pft></display>
+	<!--display><pft>'</b>',v110,'</b>'</pft></display-->
     <do task=search>
 
     <parm name=db>opac_circulacion</parm>
@@ -374,8 +374,15 @@
 
   <label>SALIDA</label>
 
-  <display><p>&nbsp;</p>
-   <center><h2>No se ha indicado una expresión</h3></center></display></section>
+	
+    <display><br>
+		<center>
+			<h2>No se ha indicado una expresión</h3>
+			<input type="button" name="volver" value="<< Volver" onClick="javascript:history.back()">
+		</center>
+	</display>
+	
+</section>
 </IsisScript>
 
 

@@ -2,14 +2,13 @@
 	<!-- Begin
 
 	 function presenta_observaciones () {
-		 window.open("","Observaciones","width=500,height=300");
+		 window.open("","Observaciones","width=800,height=600");
 		 document.form_observaciones.submit();
 	 }
 
 	function renovar(Id) {
-	document.getElementById("renovacion_"+Id).innerHTML="<p><font color=#660033><strong><small>Renovado</small></strong></font></p>";
+	document.getElementById("renovacion_"+Id).innerHTML = "<center><p><font color=#660033><strong><small>Renovado</small></strong></font><br></p></center>";
 	}
-
 
 	function verificar() {
 		
@@ -223,7 +222,9 @@ if p(v8) then
       fi,
       if s(mdu,v8^i.1) : 'X' then mhl,' ? ' else mhl,' Inv: ' fi,
       v8^i,if p(v8^o) then '<br>'v8^o fi,'</td>',
-   '<td width="10%">','<div id=',"'"n0,'renovacion_',f(iocc,1,0),"'"n0,'><a onclick="javascript:window.document.control.devolucion_',f(iocc,1,0),'.click();window.document.control.invs_prestamo_A.value += ',"'"n0,replace(v8^i,' ',''),'\n',"'"n0,';renovar(',"'"n0,f(iocc,1,0),"'"n0,')"><img src="/circulacion/images/renovar.gif"></a></div>','</td>',
+   '<td width="10%">','<div id=',"'"n0,'renovacion_',f(iocc,1,0),"'"n0,'>
+		<input type="button" value="Renovar" style="width:60px; font-size:0.8em;text-decoration:none" onclick="javascript:window.document.control.devolucion_',f(iocc,1,0),'.checked=true;window.document.control.invs_prestamo_A.value += ',"'"n0,replace(v8^i,' ',''),'\n',"'"n0,';renovar(',"'"n0,f(iocc,1,0),"'"n0,')">
+	</div>','</td>',
    '<td width="60%">',v8^b,'</td>',
    '<td align="center" width="15%"',
       if v2001:'1' then ' bgcolor="#BF3353">! ' else '>' fi,
@@ -499,4 +500,3 @@ fi,
 </script>
 '
 [/pft] 
-

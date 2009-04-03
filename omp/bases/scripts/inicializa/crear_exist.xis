@@ -13,6 +13,7 @@
 <parm name=cipar><pft>v2000</pft></parm>
 
 <!-- verificamos si existen  invetarios duplicados (IsisPostings > 1) -->
+<field action=replace tag=2517><pft>'~'</pft></field>
 <do task=keyrange>
 <parm name=db>marc_invent</parm>
 <field action=define tag=1001>Isis_Current</field>
@@ -21,7 +22,7 @@
 <loop>
    <field action=import tag=2517>2517</field>
    <field action=replace tag=2517>
-      <pft>v2517,if val(v1)<>0 then if val(v2) > 1 then '~',v1 fi fi</pft>
+      <pft>v2517,if val(v1)<>0 then if val(v2) > 1 then v1,'~' fi fi</pft>
    </field>
    <field action=export tag=2517>2517</field>
 </loop>
@@ -90,7 +91,7 @@
 		<flow action=jump><pft>if (v2510='' or v2510='0') then 'FIN' fi</pft></flow>
 		
 		<!-- Si es un inventario duplicado registramos el log en un archivo . Luego salteamos el registro, jump 'FIN' -->		
-		<flow action=jump><pft>if (not v2517:v2510) then 'NO_DUPLICADO' fi</pft></flow>
+		<flow action=jump><pft>if (not v2517:s('~',v2510,'~')) then 'NO_DUPLICADO' fi</pft></flow>
 		
 				<!-- En caso que sea duplicado... -->
 				<field action=replace tag=2525><pft>DATE</pft></field>
@@ -103,7 +104,7 @@
 				  			c4,'mfn biblo: ',v3333,/,
 				  		</pft></display>
 				<file action="close" type="output">now</pft></file>
-				<display><pft>'<font color="red"><b>Advertencia!:</b> Inventario DUPLICADO: </font>',v2510,' (mfn: ',v3333,')<br></pft></display>
+				<display><pft>'<font color="red"><b>Advertencia!:</b> Inventario DUPLICADO: </font>',v2510,' (mfn: ',v3333,')<br>/</pft></display>
 				<flow action=jump>FIN</flow>
 		
 		<label>NO_DUPLICADO</label>

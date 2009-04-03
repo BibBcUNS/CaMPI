@@ -117,7 +117,7 @@ function focus_expresion() {
 	</tr>
     <tr>
       <td width="100%">
-	   <input type="text" name="expresion" size="10" value="" accesskey="b">
+	   <input type="text" name="expresion" size="10" value="" accesskey="b"><input type="submit" value=" > ">
 	   <!--input type="submit" value="Buscar"-->
 	  </td>
 	</tr>
@@ -136,10 +136,10 @@ function focus_expresion() {
   <input type="hidden" name="IsisScript" value="circulacion/devolucion.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
 		<tr>
-			<td width="100%"><strong>Devolver x inventario</strong></td></tr>
+			<td width="100%"><strong>Devolución (Inv.)</strong></td></tr>
     <tr>
       <td width="100%">
-            <input type="text" name="inventario" value="" size="10" accesskey="I">
+            <input type="text" name="inventario" value="" size="10" accesskey="I"><input type="submit" value=" > ">
             <!-- input type="submit" value="Devolver" -->
             <input type="Hidden" name="operador">
             <input type="Hidden" name="clave">			
@@ -173,7 +173,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
     <tr>
       <td width="100%">
       <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$grabar_datos; ?>">
-	  <input type="text" name="lector" size="8" accesskey="l"><input type="submit" value="Ver">
+	  <input type="text" name="lector" size="10" accesskey="l"><input type="submit" value=" > ">
 	  </td>
 	</tr>
   </table>

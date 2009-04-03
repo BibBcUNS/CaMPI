@@ -153,14 +153,15 @@ function editar_año($_año) {
 	global $SERVER_NAME;
 	// Invoco al wxis con calendario_leer.xis(año) para leer los datos de un año determinado.
 	$ptr_datos_año = fopen("http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_leer.xis&anio=$_año","r");
-	$datos_año = fread($ptr_datos_año,500);
+	$datos_año = fread($ptr_datos_año,1000);
 	fclose($ptr_datos_año);
+	
 	// Se genera una lista de 0s y Puntos por cada mes, separada cada cadena por "~"
 
 	// En caso que el script no encuentre el año en la BD devuelve "error".
 	if (!(strpos($datos_año,"error")===false)) {
 		$ptr_ultimo_año = fopen("http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_ultimo_anio.xis","r");
-		$ultimo_año = fread($ptr_ultimo_año,500);
+		$ultimo_año = fread($ptr_ultimo_año,1000);
 		fclose($ptr_ultimo_año);
 		echo "<font color=red>Error!: El año <b>$_año</b> no está definido.</font><br>";
 		echo "El último año definido es <b>$ultimo_año</b>";
@@ -214,7 +215,7 @@ function grabar_año($_año, $meses) {
 	}
 	//  Invoco al wxis con calendario_leer.xis(anio) para leer los datos de un año determinado.
 	$ptr_grabar_datos = fopen($url,"r");
-	$grabar_datos = fread($ptr_grabar_datos,500);
+	$grabar_datos = fread($ptr_grabar_datos,1000);
 	fclose($ptr_grabar_datos);
 	
 	
@@ -257,7 +258,7 @@ function es_int($numero){
 function crear_hasta_el_año($año){
 	global $SERVER_NAME;
 	$ptr_ultimo_año = fopen("http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_ultimo_anio.xis","r");
-	$ultimo_año = fread($ptr_ultimo_año,500);
+	$ultimo_año = fread($ptr_ultimo_año,1000);
 	fclose($ptr_ultimo_año);
 	
 	if ($año - $ultimo_año <= 10) {

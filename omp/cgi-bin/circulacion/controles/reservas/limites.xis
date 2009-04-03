@@ -68,7 +68,7 @@ Obs.: Este control depende de políticas definidas en la biblioteca.
 	<field action=define tag=1000>Isis_Item</field>
 	<loop>
 		<field action=replace tag=8000><pft>v1000</pft></field>
-		<include>omp/circulacion/controles/reservas/tipo_obj_no_cons.inc</include>
+		<include>circulacion/controles/reservas/tipo_obj_no_cons.inc</include>
 		<!-- v8080 es la salida del include, es el tiop de objeto del la parte_id Pasado en v8000 -->
 		<field action=export previous=add tag=3060>8080</field>
 	</loop>
