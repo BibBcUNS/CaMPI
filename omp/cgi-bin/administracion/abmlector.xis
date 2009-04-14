@@ -48,7 +48,6 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 
 <section>
   <display><pft>'Content-type: text/html'/#</pft></display>
-
   <trace>!On</trace>
   <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 

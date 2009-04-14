@@ -163,6 +163,8 @@
 	<!--CANTIDAD DE DIAS A SUMAR--> 	
 	<field action=replace tag=510><pft>v100[2]</pft></field>
 	
+	<!--display><pft>'<b>',v502,'/',v501,'/',v500,' + ',v510,'</b><br>'</pft></display-->
+	
 	
     <!--  de acá se borró otra forma de recuperar los días habiles del mes. -->
     

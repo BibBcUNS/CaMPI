@@ -17,13 +17,13 @@ respectivos...
 	
 	<include>./inicializa/leer_config.xis</include>
 	
-	<include>../../cgi-bin/administracion/archivos_actualiza/crear_biblo.xis</include>
+	<!--include>../../cgi-bin/administracion/archivos_actualiza/crear_biblo.xis</include-->
 	<!--include>./inicializa/crear_biblo.xis</include-->
 	
-	<include>../../cgi-bin/administracion/archivos_actualiza/crear_partes.xis</include>
+	<!--include>../../cgi-bin/administracion/archivos_actualiza/crear_partes.xis</include-->
 	<!--include>./inicializa/crear_partes.xis</include-->
 
-	<include>./inicializa/crear_exist.xis</include>
+	<!--include>./inicializa/crear_exist.xis</include-->
 	
 	<include>./inicializa/crear_config.xis</include>
 

@@ -1,32 +1,32 @@
 [pft]
 
 	'<table border="1" bgcolor="#FFFFFF" width="90%">',
-	'<tr><td colspan="2" align="center" bgcolor="#cd8e0c"><b>esperas<b></td></tr>',
-	'<tr><td colspan="2" align="center" bgcolor="#cd8e0c"><b>esperas<b></td></tr>',
-	(if p(v3) then
-	'<tr>',
-   	'<td width="30%"><p><b>ID.: </b>',v3^i,'</p></td>',
-   	'<td width="70%"><p><b>Fecha y hora: </b>',v3^f,' ',v3^h,'</p></td>',
-	'</tr>',
-	fi)
-	'<th colspan="2" align="center">Reservas</th>',
-	if a(v3) then
+	
+		'<tr><td colspan="2" align="center" bgcolor="#cd8e0c"><b>esperas<b></td></tr>',
+		(if p(v3) then
 		'<tr>',
-	   	'<td colspan="2" align="center">sin esperas</td>',
+		'<td width="30%"><p><b>ID.: </b>',v3^i,'</p></td>',
+		'<td width="70%"><p><b>Fecha y hora: </b>',v3^f,' ',v3^h,'</p></td>',
 		'</tr>',
-	fi
-	'<tr><td colspan="2" align="center" bgcolor="#e3b90d"><b>reservas<b></td></tr>',
-	(if p(v2) then
-	'<tr>',
-   	'<td width="30%"><p><b>ID.: </b>',v2^i,'</p></td>',
-   	'<td width="70%"><p><b>Fecha y hora: </b>',v2^f,' ',v2^h,'</p></td>',
-	'</tr>',
-	fi)
-	if a(v2) then
+		fi),
+		if a(v3) then
+			'<tr>',
+			'<td colspan="2" align="center">sin esperas</td>',
+			'</tr>',
+		fi
+		
+		'<tr><td colspan="2" align="center" bgcolor="#e3b90d"><b>reservas<b></td></tr>',
+		(if p(v2) then
 		'<tr>',
-	   	'<td colspan="2" align="center">sin reservas</td>',
+		'<td width="30%"><p><b>ID.: </b>',v2^i,'</p></td>',
+		'<td width="70%"><p><b>Fecha y hora: </b>',v2^f,' ',v2^h,'</p></td>',
 		'</tr>',
-	fi
+		fi)
+		if a(v2) then
+			'<tr>',
+			'<td colspan="2" align="center">sin reservas</td>',
+			'</tr>',
+		fi
 	
 	'</table>'/,
 
