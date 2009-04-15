@@ -113,7 +113,7 @@ Campos utilizados:
         
         <!-- Disponible: #prestados + #esperas < #ejemp_reservables -->
         <!-- Faltaría considerar el valor "Mínimo_Disponible" -->
-        <field action="add" tag="5000"><pft>
+        <field action="replace" tag="5000"><pft>
             if (val(v4012) + val (v4015) < val(v4011)) then
                 'Error: Hay <b>',f(val(v4011)-val(v4012)-val (v4015),1,0),'</b> ejemplar/es disponible/s. [',v4000,']<br>'
             fi

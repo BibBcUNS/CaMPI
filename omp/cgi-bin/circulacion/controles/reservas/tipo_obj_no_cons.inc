@@ -17,7 +17,7 @@
 
 	<!-- lista de tipo de objetos excluyendo CONS -->
 	<field action=replace tag=8015 split=occ><pft>
-		(if v8010<>'CONS ' then v8010 fi)
+		(if v8010<>'CONS ' then v8010/ fi)
 	</pft></field>
 
 	<field action=replace tag=8080><pft>
