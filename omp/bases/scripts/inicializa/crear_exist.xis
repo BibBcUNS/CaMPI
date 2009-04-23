@@ -104,7 +104,7 @@
 				  			c4,'mfn biblo: ',v3333,/,
 				  		</pft></display>
 				<file action="close" type="output">now</pft></file>
-				<display><pft>'<font color="red"><b>Advertencia!:</b> Inventario DUPLICADO: </font>',v2510,' (mfn: ',v3333,')<br>/</pft></display>
+				<display><pft>'<font color="red"><b>Advertencia!:</b> Inventario DUPLICADO: </font>',v2510,' (mfn: ',v3333,')<br>',/</pft></display>
 				<flow action=jump>FIN</flow>
 		
 		<label>NO_DUPLICADO</label>

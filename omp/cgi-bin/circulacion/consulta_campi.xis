@@ -45,7 +45,6 @@
 
 <section>
   <display><pft>'Content-type: text/html'/#</pft></display>
-  <trace>!BR</trace>
   <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
   
   <field action=cgi tag=100>criterio</field>

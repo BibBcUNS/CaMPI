@@ -1463,8 +1463,12 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		</field>
 
 		<!-- la función javascript "mostrar_reservas()" aletra si algún elemento devuelto presenta una reserva -->		
+		
+		<!-- Modifico la siguiente linea para sacar el print:
+			<body  onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then '; print()' fi,'">
+		-->
   		<display><pft>
-		        '<body  onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then '; print()' fi,'">',
+		        '<body  onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then ';' fi,'">',
 		        '<font face="Draft 10cpi">'
         </pft></display>
 

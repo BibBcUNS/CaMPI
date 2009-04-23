@@ -42,8 +42,6 @@
  */ -->
 
 <IsisScript>
-<trace>BR1</trace>
-
 <section>
   <display><pft>'Content-type: text/html'/#</pft></display>
   <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
@@ -58,6 +56,7 @@
   <display><htmlpft>
       <html>
 	<head>
+	<!--link REL="stylesheet" TYPE="text/css" HREF="/omp/circulacion/css/style.css" /-->
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
 
