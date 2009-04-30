@@ -70,6 +70,7 @@
 		'config.*=',v5006,'/config/config.*'/	
 		'calendario.*=',v5006,'/calendario/calendario.*'/		
 		'politicas.*=',v5006,'/politicas/politicas.*'/	
+		'tipo_lector.*=',v5006,'/politicas/tipo_lector.*'/	
 		'reservas.*=',v5006,'/reservas/reservas.*'/		
 		'partes.*=',v5006,'/partes/partes.*'/
 		'exist.*=',v5006,'/exist/exist.*'/
