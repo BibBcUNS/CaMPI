@@ -17,72 +17,72 @@
 		// window.document.control.dias_vto_A Retorna un valor booleano (true|false). Es para comprobar
 		// si se están utilizando fechas de vto manual o se calculan posteriormente de acuerdo a las políticas.
 
-		if (window.document.control.dias_vto_A && window.document.control.dias_vto_A.value != "----") {
-			window.document.control.dias_prestamo_A.options[window.document.control.dias_prestamo_A.selectedIndex].value = window.document.control.dias_vto_A.value;
+		if (window.parent.principal.document.control.dias_vto_A && window.parent.principal.document.control.dias_vto_A.value != "----") {
+			window.parent.principal.document.control.dias_prestamo_A.options[window.parent.principal.document.control.dias_prestamo_A.selectedIndex].value = window.parent.principal.document.control.dias_vto_A.value;
 		}
 			
-		if (window.document.control.dias_vto_B && window.document.control.dias_vto_B.value != "----") {
-			window.document.control.dias_prestamo_B.options[window.document.control.dias_prestamo_B.selectedIndex].value = window.document.control.dias_vto_B.value;}
+		if (window.parent.principal.document.control.dias_vto_B && window.parent.principal.document.control.dias_vto_B.value != "----") {
+			window.parent.principal.document.control.dias_prestamo_B.options[window.parent.principal.document.control.dias_prestamo_B.selectedIndex].value = window.parent.principal.document.control.dias_vto_B.value;}
 
-		window.document.verifica._enviar_invs.value = "";
-		window.document.verifica._devoluciones_invs.value = "";
+		window.parent.principal.document.verifica._enviar_invs.value = "";
+		window.parent.principal.document.verifica._devoluciones_invs.value = "";
 
 		for (j = 0; j < 100; j++) {
 			element = "dev_" + j;	
 			if (document.getElementById(element)) { 
 				if (document.getElementById(element).status) {
-					window.document.verifica._enviar.value = "1";
-		  	        window.document.verifica._devoluciones_invs.value += window.document.getElementById(element).value + "\n"
+					window.parent.principal.document.verifica._enviar.value = "1";
+		  	        window.parent.principal.document.verifica._devoluciones_invs.value += window.document.getElementById(element).value + "\n"
 		  	    }
 				else {
-					window.document.verifica._enviar_invs.value = document.getElementById(element).value + "\n"
+					window.parent.principal.document.verifica._enviar_invs.value = document.getElementById(element).value + "\n"
 				}
 			}
 		}
 
-		if (window.document.control.invs_prestamo_A.value != "") {
-			window.document.verifica.invs_prestamo_A.value = window.document.control.invs_prestamo_A.value
+		if (window.parent.principal.document.control.invs_prestamo_A.value != "") {
+			window.parent.principal.document.verifica.invs_prestamo_A.value = window.parent.principal.document.control.invs_prestamo_A.value
 		}
 
-		if (window.document.control.invs_prestamo_B && window.document.control.invs_prestamo_B.value != "") {
-			window.document.verifica.invs_prestamo_B.value = window.document.control.invs_prestamo_B.value
+		if (window.parent.principal.document.control.invs_prestamo_B && window.parent.principal.document.control.invs_prestamo_B.value != "") {
+			window.parent.principal.document.verifica.invs_prestamo_B.value = window.parent.principal.document.control.invs_prestamo_B.value
 		}
 
-		if (window.document.control.invs_prestamo_A.value != "" || (window.document.control.invs_prestamo_B && window.document.control.invs_prestamo_B.value != "")) {
+		if (window.parent.principal.document.control.invs_prestamo_A.value != "" || (window.parent.principal.document.control.invs_prestamo_B && window.document.control.invs_prestamo_B.value != "")) {
 			window.open("[pft]getenv('PATH_INFO')[/pft]/aguarde.html","VERIFICA","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,copyhistory=0,width=400,height=400");
-			window.document.verifica.submit();
+			window.parent.principal.document.verifica.submit();
 		}
 
-		if (window.document.control.invs_prestamo_A.value == "" && (!window.document.control.invs_prestamo_B || window.document.control.invs_prestamo_B.value == "") && window.document.verifica._enviar.value == "1" && window.document.control.devolucion_1) {
-			window.document.control.submit();
+		if (window.parent.principal.document.control.invs_prestamo_A.value == "" && (!window.parent.principal.document.control.invs_prestamo_B || window.parent.principal.document.control.invs_prestamo_B.value == "") && window.parent.principal.document.verifica._enviar.value == "1" && window.parent.principal.document.control.devolucion_1) {
+			window.parent.principal.document.control.submit();
 		}
 
-		if (window.document.control.devolucion_1) { 
-			if (window.document.control.invs_prestamo_A.value == "" && (!window.document.control.invs_prestamo_B || window.document.control.invs_prestamo_B.value == "") && window.document.verifica._enviar.value == "0") {
+		if (window.parent.principal.document.control.devolucion_1) { 
+			if (window.parent.principal.document.control.invs_prestamo_A.value == "" && (!window.parent.principal.document.control.invs_prestamo_B || window.parent.principal.document.control.invs_prestamo_B.value == "") && window.parent.principal.document.verifica._enviar.value == "0") {
 				alert ("No se puede enviar el formulario.\nPosibles errores:\n-- > No se ha marcado una devolución.\n-- > No se ha indicado un libro a prestar.");
 			}
 		}
 		else {
-			if (window.document.control.invs_prestamo_A.value == "" && (!window.document.control.invs_prestamo_B || window.document.control.invs_prestamo_B.value == "")) {
+			if (window.parent.principal.document.control.invs_prestamo_A.value == "" && (!window.parent.principal.document.control.invs_prestamo_B || window.parent.principal.document.control.invs_prestamo_B.value == "")) {
 				alert ("No se puede enviar el formulario.\nError:\n-- > No se ha indicado un libro a prestar.");
 			}
 		}
 	}
 
 	function borrar() {
-	window.document.verifica.invs_prestamo_A.value = "";
-	window.document.verifica.invs_prestamo_B.value = "";
+	window.parent.principal.document.verifica.invs_prestamo_A.value = "";
+	window.parent.principal.document.verifica.invs_prestamo_B.value = "";
 	}
 
 	function cancelar() {
-	window.document.control.operacion.value="CANCELA";
+	window.parent.principal.document.control.operacion.value="CANCELA";
 	if (confirm("Cancela la operación ?")) {
-          window.document.control.submit()
+          window.parent.principal.document.control.submit()
           }
 	}
 
 	function iniciar() {
-		if (window.document.control.dias_prestamo_A) {
+		if (window.parent.principal.document.control.dias_prestamo_A) {
 			var _Fecha = new Date();
 			_Fecha.setFullYear([pft]left(date,4)[/pft]);
 			_Fecha.setMonth([pft]f(val(mid(date,5,2))-1,1,0)[/pft]);
@@ -102,8 +102,8 @@
 			  if (_Fecha.getMonth() < 9) {_Mes = "0" + eval(_Fecha.getMonth()+1)} else {_Mes = eval(_Fecha.getMonth()+1)};
 			  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60)) 
 				{if (i == 0) {_Cant = "Hoy"} else {if (i == 1) {_Cant = i + " día"} else {_Cant = i + " días"}};
-				 window.document.control.dias_prestamo_A.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getYear());
-				 window.document.control.dias_prestamo_A.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getYear();
+				 window.parent.principal.document.control.dias_prestamo_A.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getYear());
+				 window.parent.principal.document.control.dias_prestamo_A.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getYear();
 				 j++};
 			  _Fecha.setHours(_Fecha.getHours() + 24);
 			}
@@ -127,15 +127,15 @@
 			  if (_Fecha.getMonth() < 9) {_Mes = "0" + eval(_Fecha.getMonth()+1)} else {_Mes = eval(_Fecha.getMonth()+1)};
 			  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60)) 
 				{if (i == 0) {_Cant = "Hoy"} else {if (i == 1) {_Cant = i + " día"} else {_Cant = i + " días"}};
-				 window.document.control.dias_prestamo_B.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getYear());
-				 window.document.control.dias_prestamo_B.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getYear();
+				 window.parent.principal.document.control.dias_prestamo_B.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getYear());
+				 window.parent.principal.document.control.dias_prestamo_B.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getYear();
 				 j++};
 			  _Fecha.setHours(_Fecha.getHours() + 24);
 			}
-			window.document.verifica.enviar.value = "0";
-			if (window.document.control.devolucion_1) {window.document.verifica._enviar.value = "0";}
-				else {window.document.verifica._enviar.value = "1";}
-			window.document.control.invs_prestamo_A.focus();
+			window.parent.principal.document.verifica.enviar.value = "0";
+			if (window.parent.principal.document.control.devolucion_1) {window.parent.principal.document.verifica._enviar.value = "0";}
+				else {window.parent.principal.document.verifica._enviar.value = "1";}
+			window.parent.principal.document.control.invs_prestamo_A.focus();
 		}
 	}
 	// End -->
@@ -155,7 +155,9 @@
 </table>',
 
 if val(s(v16)*6.4,s(v16)*3.2,s(v16)*0.2) < val(s(date).8) then 
-	'<h2><center><font color=red><a href="JavaScript:window.document.form_abm.credencial.value=parent.indice.form_id.lector.value; window.document.form_abm.submit()">Actualice los datos del usuario</a></font></center></h2>',
+	'<h2><center><font color=red>
+	<a href="JavaScript:window.parent.principal.document.form_abm.credencial.value=window.parent.indice.document.form_id.lector.value; window.document.form_abm.submit()">Actualice los datos del usuario
+    </a></font></center></h2>',
 fi
 
 

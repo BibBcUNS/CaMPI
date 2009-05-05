@@ -53,10 +53,12 @@ function fSetDate(iYear, iMonth, iDay){
   if (iDay < 10) {iDay = "0" + iDay};
   if (iMonth < 10) {iMonth = "0" + iMonth};
   gdCtrl.value = iDay+"/"+ iMonth+"/"+iYear; //Here, you could modify the locale as you need !!!!
+
   if (window.parent.document.control.Vto_AB.value == 'A') {
 	window.parent.document.control.dias_prestamo_A.options[window.parent.document.control.dias_prestamo_A.selectedIndex].text = "Nuevo Vto.: " + gdCtrl.value;}
   else {
 	window.parent.document.control.dias_prestamo_B.options[window.parent.document.control.dias_prestamo_B.selectedIndex].text = "Nuevo Vto.: " + gdCtrl.value;}
+
   VicPopCal.style.visibility = "hidden";
 }
 

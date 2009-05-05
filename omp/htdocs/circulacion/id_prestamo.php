@@ -173,7 +173,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
     <tr>
       <td width="100%">
       <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$grabar_datos; ?>">
-	  <input type="text" name="lector" size="10" accesskey="l"><input type="submit" value=" > ">
+	  <input type="text" id="lector" name="lector" size="10" accesskey="l"><input type="submit" value=" > ">
 	  </td>
 	</tr>
   </table>

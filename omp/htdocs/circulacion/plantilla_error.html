@@ -6,8 +6,9 @@
 	<script language="JavaScript">
 	
 	function presenta_registro(dni) {
+	
 		window.parent.indice.document.form_id.lector.value=dni;
-		window.parent.indice.document.form_id.submit();
+    	window.parent.indice.document.form_id.submit();
 	}
 	
 	</script>
@@ -15,7 +16,7 @@
 </head>
 
 
-<body onload="parent.indice.form_devolucion.inventario.value = '';">
+<body onload="window.parent.indice.document.form_devolucion.inventario.value = '';">
   <center>
     <div id="head"> 
 		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>

@@ -7,10 +7,10 @@
 	<!--
 
 	function asignar(documento) {
-		parent.indice.form_id.lector.value = [pft]"'"n0,"'"n0[/pft]
-		parent.indice.form_id.lector.value = documento
-		parent.indice.consultas.expresion.value = [pft]"'"n0,"'"n0[/pft]
-		parent.indice.consultas.expresion.value = documento
+		window.parent.indice.document.form_id.lector.value = [pft]"'"n0,"'"n0[/pft]
+		window.parent.indice.document.form_id.lector.value = documento
+		window.parent.indice.document.consultas.expresion.value = [pft]"'"n0,"'"n0[/pft]
+		window.parent.indice.document.consultas.expresion.value = documento
 
 	}
 	
@@ -28,7 +28,7 @@
 	//  End -->
 	</script>
   </head>
-  <body onload="mostrar_reservas();parent.indice.form_devolucion.inventario.value = '';" >
+  <body onload="mostrar_reservas();window.parent.indice.document.form_devolucion.inventario.value = '';" >
   <center>
     <div id="head"> 
 		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>

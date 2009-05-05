@@ -58,10 +58,18 @@
 	<!--
 
 	function asignar(documento) {
-		window.parent.superior.form_libre_deuda.numero_dni.value = "";
-		window.parent.superior.form_libre_deuda.numero_dni.value = documento;
-		window.parent.superior.form_consulta_lector.expresion.value = "";
-		window.parent.superior.form_consulta_lector.expresion.value = documento;
+	
+	/*Cambio realizado en la sintaxis de la función para compatibilidad FF y IE -PLL-04/05/09 */
+		//window.parent.superior.form_libre_deuda.numero_dni.value = "";
+		//window.parent.superior.form_libre_deuda.numero_dni.value = documento;
+		//window.parent.superior.form_consulta_lector.expresion.value = "";
+		//window.parent.superior.form_consulta_lector.expresion.value = documento;
+		
+		 window.parent.superior.document.form_libre_deuda.numero_dni.value = "";
+		 window.parent.superior.document.form_libre_deuda.numero_dni.value = documento;
+		 window.parent.superior.document.form_consulta_lector.expresion.value = "";
+		 window.parent.superior.document.form_consulta_lector.expresion.value = documento;
+		
 	}
 
 	//  End -->

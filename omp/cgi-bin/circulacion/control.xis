@@ -55,7 +55,7 @@ v3004: documento
 	<body bgcolor="#E8E8D0" onblur="window.close()">
 	<TABLE bgcolor="#F5A307" BORDER="1" WIDTH="100%" style="font-family: sans-serif; font-size: 11pt"><TR><TD Align="left">
 	<FONT FACE="MS SANS SERIF" SIZE="2" COLOR="black">
-	<B>Los siguientes n&uacute;meros de inventario son incorrectos:</B>
+	<B>Los siguientes n&uacute;meros de inventario son incorrectos: </B>
 	</FONT>
 	</TD>
 	</TABLE>
@@ -69,8 +69,8 @@ v3004: documento
 	<display><pft>if v5000:'Error' then '<tr><td>
 		<SCRIPT LANGUAGE="JavaScript">
 		
-		window.opener.verifica.enviar.value = "0";
-		if (window.opener.verifica.enviar.value == ',"'"n0,'0',"'"n0,' || window.opener.verifica._enviar.value == ',"'"n0,'0',"'"n0,') {alert (',"'"n0,'No se puede enviar el formulario.\nPosibles errores:\n-> No se ha marcado una devolución.\n-> No se ha indicado un libro a prestar\n-> Error en un número de inventario.',"'"n0,');}
+		window.opener.document.verifica.enviar.value = "0";
+		if (window.opener.document.verifica.enviar.value == ',"'"n0,'0',"'"n0,' || window.opener.document.verifica._enviar.value == ',"'"n0,'0',"'"n0,') {alert (',"'"n0,'No se puede enviar el formulario.\nPosibles errores:\n-> No se ha marcado una devolución.\n-> No se ha indicado un libro a prestar\n-> Error en un número de inventario.',"'"n0,');}
 		window.focus()
 		
 		</script>
@@ -79,9 +79,9 @@ v3004: documento
 		'<tr><td>
 		<SCRIPT LANGUAGE="JavaScript">
 		
-		window.opener.verifica.enviar.value = "1";
-		if (window.opener.verifica.enviar.value == ',"'"n0,'1',"'"n0,') {
-			window.opener.control.submit();
+		window.opener.document.verifica.enviar.value = "1";
+		if (window.opener.document.verifica.enviar.value == ',"'"n0,'1',"'"n0,') {
+			window.opener.document.control.submit();
 			window.close()}
 		
 		</script>

@@ -61,10 +61,17 @@
 	<!--
 
 	function asignar(documento) {
-		window.parent.indice.form_id.lector.value = "";
-		window.parent.indice.form_id.lector.value = documento;
-		window.parent.indice.consultas.expresion.value = "";
-		window.parent.indice.consultas.expresion.value = documento;
+	
+	/*Cambio realizado en la sintaxis de la función para compatibilidad FF y IE -PLL-04/05/09 */
+		//window.parent.indice.form_id.lector.value = "";
+		//window.parent.indice.form_id.lector.value = documento;
+		//window.parent.indice.consultas.expresion.value = "";
+		//window.parent.indice.consultas.expresion.value = documento;
+		
+        window.parent.indice.document.form_id.lector.value = "";
+        window.parent.indice.document.form_id.lector.value = documento;
+        window.parent.indice.document.consultas.expresion.value = "";
+        window.parent.indice.document.consultas.expresion.value = documento;		
 
 	}
 
