@@ -65,7 +65,7 @@ v3004: documento
 	<display><pft>(if v5000:'Error' then '<TR><TD><B><FONT FACE="MS SANS SERIF" SIZE="2" COLOR="red">',v5000,'</FONT></B></TD></TR>' fi)</pft></display>
 	<display></TABLE></display>
 	
-	<display><pft>'<br><center>',if v5000:'Error' then '<input type=button value="[X]  Cerrar" onclick="close()">' fi,'</center>'</pft></display>
+	<display><pft>'<br><center>',if v5000:'Error' then '<input type=button value="[X]  Cerrar" onclick="window.close()">' fi,'</center>'</pft></display>
 	
 	<display></BODY></HTML></display>
 
