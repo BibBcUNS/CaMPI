@@ -201,18 +201,19 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
   <flow action=exit>1</flow>
 
   <label>prestamos</label>
+  <!-- Muestra todos los préstamos del día -->
+  <!-- No hace referencia a un turno específico (VESPERTINO/MATUTINO) -->
+  
 
   <display><pft>
     '<p align="center"><big>Circulación de préstamos del día</big><br>',
      if val(mid(date,10,6)) > 130000  then '-Por la tarde-' else '-Por la mañana' fi,'</p>'</pft></display>
 
   <do task=search>
-    <parm name=db>movi</parm>
+    <parm name=db>movi</parm>1
 
     <parm name=expression>
-      <pft>'FECHA=',s(date).4,'/',s(date)*4.2,'/',s(date)*6.2,' * OPERACION=prestamo$ * ',
-           if val(mid(date,10,6)) > 130000  then 'TURNO=VESPERTINO' else 'TURNO=MATUTINO' fi
-      </pft></parm>
+      <pft>'FECHA=',s(date).4,'/',s(date)*4.2,'/',s(date)*6.2,' * OPERACION=prestamo$'</pft></parm>
     <parm name=gizmo>gizmo</parm>
     <loop>
       <list action=load>

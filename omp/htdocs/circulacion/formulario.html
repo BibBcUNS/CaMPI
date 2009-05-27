@@ -49,7 +49,9 @@
 		}
 
 		if (window.parent.principal.document.control.invs_prestamo_A.value != "" || (window.parent.principal.document.control.invs_prestamo_B && window.document.control.invs_prestamo_B.value != "")) {
-			window.open("[pft]getenv('PATH_INFO')[/pft]/aguarde.html","VERIFICA","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,copyhistory=0,width=400,height=400");
+			window.open("[pft]getenv('PATH_INFO')[/pft]/aguarde.html","VERIFICA","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,copyhistory=0,width=500,height=300");
+			//window_name = window.open("....");
+			//window_name.moveTo(250,180);
 			window.parent.principal.document.verifica.submit();
 		}
 

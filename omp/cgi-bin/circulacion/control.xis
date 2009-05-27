@@ -52,27 +52,27 @@ v3004: documento
       <html>
 	<head>
 	</head>	
-	<body bgcolor="#E8E8D0" onblur="window.close()">
-	<TABLE bgcolor="#F5A307" BORDER="1" WIDTH="100%" style="font-family: sans-serif; font-size: 11pt"><TR><TD Align="left">
-	<FONT FACE="MS SANS SERIF" SIZE="2" COLOR="black">
+	<body bgcolor="#f6f6f6" onblur="window.close()">
+	<TABLE bgcolor="red" BORDER="0" cellpadding=4 WIDTH="100%" style="font-family: sans-serif; font-size: 11pt"><TR><TD Align="center">
+	<FONT FACE="MS SANS SERIF" SIZE="2" COLOR="white">
 	<B>Los siguientes n&uacute;meros de inventario son incorrectos: </B>
 	</FONT>
 	</TD>
 	</TABLE>
-	<TABLE bgcolor="#F9C99A" BORDER="1" WIDTH="100%" style="font-family: sans-serif; font-size: 11pt">
+	<TABLE BORDER="0" cellpadding=8 WIDTH="100%" style="font-family: sans-serif; font-size: 11pt; ">
   </display>
-
-
-	<display><pft>(if v5000:'Error' then '<TR><TD><B><FONT FACE="MS SANS SERIF" SIZE="2" COLOR="#0000FF">',v5000,'</FONT></B></TD></TR>' fi)</pft></display>
-	<display></TABLE></BODY></HTML></display>
+  
+	<display><pft>(if v5000:'Error' then '<TR><TD><B><FONT FACE="MS SANS SERIF" SIZE="2" COLOR="red">',v5000,'</FONT></B></TD></TR>' fi)</pft></display>
+	<display></TABLE></display>
+	
+	<display><pft>'<br><center>',if v5000:'Error' then '<input type=button value="[X]  Cerrar" onclick="close()">' fi,'</center>'</pft></display>
+	
+	<display></BODY></HTML></display>
 
 	<display><pft>if v5000:'Error' then '<tr><td>
 		<SCRIPT LANGUAGE="JavaScript">
-		
-		window.opener.document.verifica.enviar.value = "0";
-		if (window.opener.document.verifica.enviar.value == ',"'"n0,'0',"'"n0,' || window.opener.document.verifica._enviar.value == ',"'"n0,'0',"'"n0,') {alert (',"'"n0,'No se puede enviar el formulario.\nPosibles errores:\n-> No se ha marcado una devolución.\n-> No se ha indicado un libro a prestar\n-> Error en un número de inventario.',"'"n0,');}
-		window.focus()
-		
+			window.opener.document.verifica.enviar.value = "0";
+			window.focus()
 		</script>
 		</td></tr>' 
 	else 

@@ -121,13 +121,13 @@ $anios = explode  ('~', $anios_calendario);
         <input type="radio" value="morosos" name="opcion"><strong>Listado de morosos<br>
         <input type="radio" value="prestamos" name="opcion">Prestamos del día (Estadística)<br>
         <input type="radio" value="id_recibos" name="opcion" checked>Devoluciones del día (Identificación de recibos)<br>
-        <span style="text-align:center; float:right;">
+        <center>
         Ordenamiento:
         <select onchange="window.document.form_listados.Orden.value=this.value;" style="font-size : xx-small">
         <option value="Prestamo" selected>Nro. Papeleta</option>
         <option value="Devolucion">Cronológico</option>							
         </select>
-        </span><br /><br />
+        </center>
         <input type="radio" value="circulante" name="opcion">Prestamos en circulaci&oacute;n<br>				
         <input type="submit" value="Enviar" name="B1"></strong>
         <input type="reset" value="Restablecer" name="B2"> 

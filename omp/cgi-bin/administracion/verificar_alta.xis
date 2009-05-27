@@ -93,7 +93,7 @@
 			'</table>'/
 			'<SCRIPT LANGUAGE="JavaScript">'/
 			'<!-- Begin'/
-			'		window.opener.document.form_abm.IsisScript.value="/omp/cgi-bin/administracion/abmlector.xis";'/
+			'		window.opener.document.form_abm.IsisScript.value="administracion/abmlector.xis";'/
 			'		window.opener.document.form_abm.documento_anterior.value=window.opener.document.form_abm.documento.value;'/
 			'		window.opener.focus();'/
  			'		window.close();'/

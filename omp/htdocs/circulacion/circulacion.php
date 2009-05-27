@@ -7,7 +7,7 @@
 <?php
 if (isset($_SESSION["s_username"])) {
 ?>
-<frameset cols="133,*" onload="moveTo(0,0)" border="0">
+<frameset cols="150,*" onload="moveTo(0,0)" border="0">
   <frame name="indice" src="id_prestamo.php" target="principal">
   <frame name="principal" src="logo_prestamo.html" scrolling="auto">
   <noframes>

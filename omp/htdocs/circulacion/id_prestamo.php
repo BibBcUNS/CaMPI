@@ -88,7 +88,7 @@ function focus_expresion() {
  <body>
    <br><br>
    <div id="lt1">
-   <h2>MENU</h2>
+   <!--h2>MENU</h2-->
 <form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/" onclick="javascript:focus_expresion();"
  onsubmit="
 		if (window.document.consultas.expresion.value =='$' || window.document.consultas.expresion.value =='') {
