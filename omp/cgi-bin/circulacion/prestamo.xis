@@ -605,7 +605,6 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         
         
         <label>PRESTAMOS</label>
-		<trace>!BR</trace>
         <display><pft>if s(mpu,v10)<>'HABILITADO' and p(v1000^f) then 
           '<marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error ! </marquee>
            <p align="center" bgcolor="#FFFF9B" style="color: rgb(191,51,83)">
@@ -692,7 +691,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 v3001 contiene las devoluciones, v1000^b se utiliza para bloquear la exist mas abajo  -->
         
                 <field action=import tag=list>1000,3001</field>
-                
+				
                 <do task=search>
                 <parm name=db>exist</parm>
                 <parm name=expression><pft>v1001^i</pft></parm>
@@ -1048,7 +1047,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <parm name=reverse>On</parm>
         <loop>
                 <display><pft>if val(v1002)=1 then
-                  '<table border="0" width="90%" bgcolor="transparent" cellspacing="0">
+                  '<table border="0" width="90%" cellspacing="0">
                    <tr>
                      <th width="45%">Devoluciones:</th>
                      <td width="10%">&nbsp;</td>
@@ -1097,7 +1096,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <loop>
                 <display><pft>if val(v1002)=1 then
                 '<br>
-                   <table border="0" width="90%" bgcolor="transparent" cellspacing="0">
+                   <table border="0" width="90%" cellspacing="0">
                    <tr>
                      <th width="45%" colspan="2">Préstamos:</th>
                      <td width="10%">&nbsp;</td>
@@ -1222,7 +1221,6 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 
 <section>
 		<display><pft>'Content-type: text/html'/#</pft></display>
-		<trace>!BR</trace>
 		<parm name="buffersize">120000</parm>
 		<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 		<field action=replace tag=2222><pft>ref(['config']1,v10)</pft></field>
@@ -1241,7 +1239,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
     <title>Circulación</title>
     <link REL="stylesheet" TYPE="text/css" HREF="/omp/circulacion/css/style.css" />
   </head>
-  <body onload="window.document.form_abm.credencial.value=parent.indice.form_id.lector.value">
+  <body onload="window.document.form_abm.credencial.value=window.parent.indice.document.form_id.lector.value">
   <center>
     <div id="head"> 
 		  <div id="title"><p ALIGN="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>

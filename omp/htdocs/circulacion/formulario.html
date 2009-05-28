@@ -27,10 +27,18 @@
 		window.parent.principal.document.verifica._enviar_invs.value = "";
 		window.parent.principal.document.verifica._devoluciones_invs.value = "";
 
+		/* más abajo cambié:
+			"document.getElementById(element).status"
+		por
+			"document.getElementById(element).checked"
+		porque no funcionaba con FIREFOX.
+		Dejo el comentario por las dudas que haya algún inconveniente con el "checked"
+		(Jero 2009-05-28) 
+		*/		
 		for (j = 0; j < 100; j++) {
 			element = "dev_" + j;	
-			if (document.getElementById(element)) { 
-				if (document.getElementById(element).status) {
+			if (document.getElementById(element)) {
+				if (document.getElementById(element).checked) {
 					window.parent.principal.document.verifica._enviar.value = "1";
 		  	        window.parent.principal.document.verifica._devoluciones_invs.value += window.document.getElementById(element).value + "\n"
 		  	    }
@@ -54,8 +62,12 @@
 			//window_name.moveTo(250,180);
 			window.parent.principal.document.verifica.submit();
 		}
-
-		if (window.parent.principal.document.control.invs_prestamo_A.value == "" && (!window.parent.principal.document.control.invs_prestamo_B || window.parent.principal.document.control.invs_prestamo_B.value == "") && window.parent.principal.document.verifica._enviar.value == "1" && window.parent.principal.document.control.devolucion_1) {
+		
+		if (window.parent.principal.document.control.invs_prestamo_A.value == "" && ( !window.parent.principal.document.control.invs_prestamo_B	|| window.parent.principal.document.control.invs_prestamo_B.value == "" )
+			 && window.parent.principal.document.verifica._enviar.value == "1"
+			 && window.parent.principal.document.control.devolucion_1
+		   )
+		{
 			window.parent.principal.document.control.submit();
 		}
 
