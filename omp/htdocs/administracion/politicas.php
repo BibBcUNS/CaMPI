@@ -1,13 +1,46 @@
-<?php session_start(); ?>
+<?php
+session_start();
+if (!isset($_SESSION["s_username"])) {
+	echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.html>";
+}
+?>
 <html>
 <head>
 <title>Open MarcoPolo - Edición de Políticas</title>
+<link rel="stylesheet" type="text/css" href="../css/style.css" />
+<style>
+body
+{
+  background: #f6f6f6;
+}
+</style>
 
+<script>
+var anterior="";
+function marcar(fila,elemento){
+  document.getElementById(elemento).checked = true;
+  if (anterior) anterior.style.backgroundColor='';
+  fila.style.backgroundColor='#9CF';
+  anterior = fila;
+}
+
+function resaltar(fila) {
+	if (anterior != fila) fila.style.backgroundColor='#FFF';
+}
+
+function normal(fila) {
+	if (anterior != fila) fila.style.backgroundColor='';
+}
+
+</script>
+<style>
+.linea{
+	cursor:pointer;
+}
+</style>
 </head>
-<?php
-if (isset($_SESSION["s_username"])) {
-?>
-<body bgcolor="#E8E8D0" topmargin="0">
+<body topmargin="0">
+
 
 <?php
 // recibo el parámetro opcion
@@ -59,7 +92,7 @@ function mostrar_politicas() {
 	
 	// Muestro el formulario
 	echo '<style>'.
-			'.dias_mes{padding:0px; width:80px; text-align=center; font-size:15px; font-weight:normal; height:30px}'.
+			'.dias_mes{padding:0px; width:120px; text-align=center; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
 	echo "<form name=form_politicas action=politicas.php method=post>";
 	echo '<input type=hidden name=formulario value="politicas">';
@@ -79,8 +112,12 @@ function mostrar_politicas() {
 	$atributos_cantidad = count($politicas_arreglo[0]);
 		
 	for($i=0;$i<$politicas_cantidad-1;$i++) {
-		echo '<tr><td width=100 height=22 align="center">
-		      <input type=radio name=pol_nro value="'
+		echo '<tr onclick="javascript:marcar(this,\'P_'.$politicas_arreglo[$i][0].'-'.$politicas_arreglo[$i][1].'\')"
+				  onMouseOut="normal(this)"
+				  onMouseOver="resaltar(this)"
+				  class="linea">
+	   		  <td width=50 height=22 align="center">
+		      <input id="P_'.$politicas_arreglo[$i][0].'-'.$politicas_arreglo[$i][1].'" type=radio name=pol_nro value="'
 			  .$politicas_arreglo[$i][0]
 			  .'-'
 			  .$politicas_arreglo[$i][1]
@@ -92,39 +129,29 @@ function mostrar_politicas() {
         }
 		echo '</tr>';
 	}
-	echo '<tr><td colspan=';
-	echo $atributos_cantidad+1;
-	echo ' align="center"><br>';
-	echo '<input type=submit name=opcion value="Crear">';
-	echo '  ';
-	echo '<input type=submit name=opcion value="Modificar">';
-	echo '  ';
+	echo "</table>";
+	echo '<input type=submit name=opcion value="Crear">  ';
+	echo '<input type=submit name=opcion value="Modificar">  ';
 	echo '<input type=submit name=opcion value="Borrar">';
 	echo "</form>";
-	echo "</td></tr>";
-	echo "</table>";
 
     //---------------------------------------------------------
 	//-------- Muestro los datos de la BD tipo_lector ---------
 	//---------------------------------------------------------
 
-	$ptr_tipos_lector = fopen("http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipos_lector_obtener.xis&cual=TODAS","r");
-	$tipos_lector = fread($ptr_tipos_lector,8192);
-	fclose($ptr_tipos_lector);
-	$tipos_lector_arreglo = explode('#',$tipos_lector);
-    for ($i=0;$i<=count($tipos_lector_arreglo)-1;$i++){	
-   	  $tipos_lector_arreglo[$i] = explode('~',$tipos_lector_arreglo[$i]);
+	$ptr_tipo_lector = fopen("http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_obtener.xis&cual=TODAS","r");
+	$tipo_lector = fread($ptr_tipo_lector,8192);
+	fclose($ptr_tipo_lector);
+	$tipo_lector_arreglo = explode('#',$tipo_lector);
+    for ($i=0;$i<=count($tipo_lector_arreglo)-1;$i++){	
+   	  $tipo_lector_arreglo[$i] = explode('~',$tipo_lector_arreglo[$i]);
 	}
-	
 	// Muestro el título
-	echo '<h2 style="text-align=left">Tipos de Lector</h2>';
+	echo '<br><h2 style="text-align=left">Tipos de Lector</h2>';
 	
 	// Muestro el formulario
-	echo '<style>'.
-			'.dias_mes{padding:0px; width:80px; text-align=center; font-size:15px; font-weight:normal; height:30px}'.
-			'</style>';
-	echo "<form name=form_tipos_lector action=politicas.php method=post>";
-	echo '<input type=hidden name=formulario value="tipos_lector">';
+	echo "<form name=form_tipo_lector action=politicas.php method=post>";
+	echo '<input type=hidden name=formulario value="tipo_lector">';
 	echo "<table border=1 cellspacing=0 cellpadding=0><tr><td></td>";
 
 	// Esto muestra los títulos de los atributos
@@ -138,32 +165,33 @@ function mostrar_politicas() {
 	
 	// Recorro las políticas y las muestro con un radiobutton.
 	
-	$tipos_lector_cantidad = count($tipos_lector_arreglo);
-	$tipos_lector_atributos_cantidad = count($tipos_lector_arreglo[0]);
+	$tipo_lector_cantidad = count($tipo_lector_arreglo);
+	$tipo_lector_atributos_cantidad = count($tipo_lector_arreglo[0]);
 		
-	for($i=0;$i<$tipos_lector_cantidad-1;$i++) {
-		echo '<tr><td width=100 height=22 align="center">
-		      <input type=radio name=tl_nro value="'
-			  .$tipos_lector_arreglo[$i][0]
+	for($i=0;$i<$tipo_lector_cantidad-1;$i++) {
+		echo '<tr onclick="javascript:marcar(this,\'TL_'.$tipo_lector_arreglo[$i][0].'\')"
+				  onMouseOut="normal(this)"
+				  onMouseOver="resaltar(this)"
+				  class="linea">
+		<td width=50 height=22 align="center">
+		      <input id="TL_'.$tipo_lector_arreglo[$i][0].'" type=radio name=tipo_lector_nro value="'
+			  .$tipo_lector_arreglo[$i][0]
 			  .'" checked></td>';
-        for ($j=0;$j<$tipos_lector_atributos_cantidad;$j++) { 
+        for ($j=0;$j<$tipo_lector_atributos_cantidad;$j++) { 
             echo '<td class=dias_mes align=center>';
-			echo $tipos_lector_arreglo[$i][$j];
+			echo $tipo_lector_arreglo[$i][$j];
 			echo "</td>";		
         }
 		echo '</tr>';
 	}
-	echo '<tr><td colspan=';
-	echo $atributos_cantidad+1;
-	echo ' align="center"><br>';
+	echo "</table>";
+
 	echo '<input type=submit name=opcion value="Crear">';
 	echo '  ';
 	echo '<input type=submit name=opcion value="Modificar">';
 	echo '  ';
 	echo '<input type=submit name=opcion value="Borrar">';
 	echo "</form>";
-	echo "</td></tr>";
-	echo "</table>";
 }
 //********************************************************************//
 //***********************CREA UNA POLITICA*************************//
@@ -175,7 +203,8 @@ function crear_politica() {
 echo '<style>'.
 			'.fila_titulo{padding:0px; width:200px; text-align=left; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
-echo "<form action=politicas.php method=post>";
+echo "<form name=form_politicas action=politicas.php method=post>";
+echo '<input type=hidden name=formulario value="politicas">';
 echo '<input type=hidden name=registro value="NUEVO">';
 echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 // Muestro el título
@@ -194,53 +223,57 @@ echo '  ';
 echo '<input type=reset name=opcion value="Limpiar">';
 echo "</form>";
 
-echo "<form action=politicas.php method=post>";
+echo "<form name=form_politicas action=politicas.php method=post>";
+echo '<input type=hidden name=formulario value="politicas">';
 echo '<input type=submit name=opcion value="Cancelar">';
 echo "</form>";
 
 echo "</td></tr>";
 echo "</table>";
-
 }
 
-
 function crear_tipo_lector() {
-   global $campos_nombre_TL;
-
-// Muestro el formulario
-echo '<style>'.
-			'.fila_titulo{padding:0px; width:200px; text-align=left; font-size:15px; font-weight:normal; height:30px}'.
-			'</style>';
-echo "<form action=politicas.php method=post>";
-echo '<input type=hidden name=registro value="NUEVO">';
-echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
-// Muestro el título
-echo '<tr><td colspan=2><h2 style="text-align=center">Crear una nueva política de circulación</h2></td></tr>';
+	global $campos_nombre_TL;
 	
-for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
-   {
-	echo "<tr><td class=fila_titulo>";
-	echo $campos_nombre_TL[$i];
-	echo "</td><td><input type=text name=campo".$i."></td></tr>";
-   }
+	// Muestro el formulario
+	echo '<style>'.
+				'.fila_titulo{padding:0px; width:200px; text-align=left; font-size:15px; font-weight:normal; height:30px}'.
+				'</style>';
+	echo "<form name=form_tipo_lector action=politicas.php method=post>";
+	echo '<input type=hidden name=formulario value="tipo_lector">';
+	echo '<input type=hidden name=registro value="NUEVO">';
+	echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 	
-echo '<tr><td colspan="2" align="center">';
-echo '<br><input type=submit name=opcion value="Guardar">';
-echo '  ';
-echo '<input type=reset name=opcion value="Limpiar">';
-echo "</form>";
-
-echo "<form action=politicas.php method=post>";
-echo '<input type=submit name=opcion value="Cancelar">';
-echo "</form>";
-
-echo "</td></tr>";
-echo "</table>";
+	// Muestro el título
+	echo '<tr><td colspan=2><h2 style="text-align=center">Crear una nueva política de circulación</h2></td></tr>';
+		
+	for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
+	   {
+		echo "<tr><td class=fila_titulo>";
+		echo $campos_nombre_TL[$i];
+		echo "</td><td><input type=text name=campo".$i."></td></tr>";
+	   }
+		
+	echo '<tr><td colspan="2" align="center">';
+	echo '<br><input type=submit name=opcion value="Guardar">';
+	echo '  ';
+	echo '<input type=reset name=opcion value="Limpiar">';
+	echo "</form>";
+	
+	echo "<form name=form_tipo_lector action=politicas.php method=post>";
+	echo '<input type=hidden name=formulario value="tipo_lector">';
+	echo '<input type=submit name=opcion value="Cancelar">';
+	echo "</form>";
+	
+	echo "</td></tr>";
+	echo "</table>";
 
 }		
 //********************************************************************//
 //***********************EDITA UNA POLITICA*************************//
 //*******************************************************************//
+
+/***** POLITICA *****/
 function editar_politica() {
    global $campos_nombre;
    global $SERVER_NAME;
@@ -257,7 +290,8 @@ function editar_politica() {
 echo '<style>'.
 			'.fila_titulo{padding:0px; width:200px; text-align=left; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
-echo "<form action=politicas.php method=post>";
+echo "<form name=form_politicas action=politicas.php method=post>";
+echo '<input type=hidden name=formulario value="politicas">';
 echo '<input type=hidden name=registro value="EXISTENTE">';
 echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 // Muestro el título
@@ -281,7 +315,8 @@ echo '  ';
 echo '<input type=reset name=opcion value="Limpiar">';
 echo "</form>";
 
-echo "<form action=politicas.php method=post>";
+echo "<form name=form_politicas action=politicas.php method=post>";
+echo '<input type=hidden name=formulario value="politicas">';
 echo '<input type=submit name=opcion value="Cancelar">';
 echo "</form>";
 
@@ -289,6 +324,58 @@ echo "</td></tr>";
 echo "</table>";
 
 }
+
+/***** TIPO LECTOR *****/
+function editar_tipo_lector() {
+   global $campos_nombre_TL;
+   global $SERVER_NAME;
+
+   	$url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_obtener.xis&cual=UNA&expresion=".$_POST['tipo_lector_nro'];
+	
+	$ptr_tipo_lector = fopen($url,"r");
+	$tipo_lector = fread($ptr_tipo_lector,8192);
+	fclose($ptr_tipo_lector);
+	
+	$tipo_lector_arreglo = explode('~',$tipo_lector);
+
+// Muestro el formulario
+echo '<style>'.
+			'.fila_titulo{padding:0px; width:200px; text-align=left; font-size:15px; font-weight:normal; height:30px}'.
+			'</style>';
+echo "<form name=form_tipo_lector action=politicas.php method=post>";
+echo '<input type=hidden name=formulario value="tipo_lector">';
+echo '<input type=hidden name=registro value="EXISTENTE">';
+echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
+// Muestro el título
+echo '<tr><td colspan=2><h2 style="text-align=center">Editar una política de circulación</h2></td></tr>';
+	
+for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
+   {
+	echo "<tr><td class=fila_titulo>";
+	echo $campos_nombre_TL[$i];
+	if ($campos_nombre_TL[$i]=='Tipo de Usuario' or $campos_nombre_TL[$i]=='Tipo de Objeto') {
+	   echo "</td><td><input type=text name=campo".$i." value=".$tipo_lector_arreglo[$i]." readonly='readonly'></td></tr>";
+	}
+	else {
+       echo "</td><td><input type=text name=campo".$i." value=".$tipo_lector_arreglo[$i]."></td></tr>";	
+	}
+   }
+	
+echo '<tr><td colspan="2" align="center">';
+echo '<br><input type=submit name=opcion value="Guardar">';
+echo '  ';
+echo '<input type=reset name=opcion value="Limpiar">';
+echo "</form>";
+
+echo "<form name=form_tipo_lector action=politicas.php method=post>";
+echo '<input type=hidden name=formulario value="tipo_lector">';
+echo '<input type=submit name=opcion value="Cancelar">';
+echo "</form>";
+
+echo "</td></tr>";
+echo "</table>";
+}
+
 //********************************************************************//
 //*********************GUARDAR UNA POLITICA***********************//
 //*******************************************************************//
@@ -296,42 +383,43 @@ echo "</table>";
 
 /***** POLITICA *****/
 function guardar_politica() {
-   global $campos_nombre;
-   global $SERVER_NAME;
+	global $campos_nombre;
+	global $SERVER_NAME;
 
-$parametros_guardar='record='.$_POST['registro'];
-
-for ($i=0;$i<=(count($campos_nombre)-1);$i++)
-   {
-    $campo_actual="campo".$i;
-	$parametros_guardar=$parametros_guardar."&campo".$i."=".$_POST[$campo_actual];
-   }
-
-$url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_guardar.xis&".$parametros_guardar;
-$ptr_politicas = fopen($url,"r");
-$ptr_politicas;
-$politicas = fread($ptr_politicas,8192);
-fclose($ptr_politicas);
-return $politicas;
-
+	$parametros_guardar='record='.$_POST['registro'];
+	
+	for ($i=0;$i<=(count($campos_nombre)-1);$i++)
+	   {
+		$campo_actual="campo".$i;
+		$parametros_guardar=$parametros_guardar."&campo".$i."=".$_POST[$campo_actual];
+	   }
+	
+	$url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_guardar.xis&".$parametros_guardar;
+	$ptr_politicas = fopen($url,"r");
+	$ptr_politicas;
+	$politicas = fread($ptr_politicas,8192);
+	fclose($ptr_politicas);
+	return $politicas;
+}
+	
 /***** TIPO LECTOR *****/
-function guardar_politica() {
-   global $campos_nombre_TL;
-   global $SERVER_NAME;
-
-$parametros_guardar='record='.$_POST['registro'];
-
-for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
-   {
-    $campo_actual="campo".$i;
-	$parametros_guardar=$parametros_guardar."&campo".$i."=".$_POST[$campo_actual];
-   }
-
-$url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipos_lector_guardar.xis&".$parametros_guardar;
-$ptr_tipos_lector = fopen($url,"r");
-$tipos_lector = fread($ptr_politicas,8192);
-fclose($ptr_politicas);
-return $politicas;
+function guardar_tipo_lector() {
+	global $campos_nombre_TL;
+	global $SERVER_NAME;
+	
+	$parametros_guardar='record='.$_POST['registro'];
+	
+	for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
+	{
+		$campo_actual="campo".$i;
+		$parametros_guardar=$parametros_guardar."&campo".$i."=".$_POST[$campo_actual];
+	}
+	
+	$url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&".$parametros_guardar;
+	$ptr_tipo_lector = fopen($url,"r");
+	$tipo_lector = fread($ptr_tipo_lector,8192);
+	fclose($ptr_tipo_lector);
+	return $tipo_lector;
 
 }	
 
@@ -344,59 +432,65 @@ function borrar_politica() {
  $politicas = fread($ptr_politicas,8192);
  fclose($ptr_politicas);
 }
-//*******************************************************************//
-
-if ($_POST["formulario"]=='politicas') {
-	
-	if (isset($_POST["opcion"])) {
-		if ($_POST["opcion"]=='Crear'):
-			 crear_politica();
-		elseif($_POST["opcion"]=='Modificar'):
-			 editar_politica();
-		elseif($_POST["opcion"]=='Guardar'):
-			 if (guardar_politica()=='CREAR_EXISTENTE') {
-				echo '<h2 style="text-align=center;color:red">La identificación de la política ya existe. Cree una política nueva!</h2>';
-				crear_politica();
-			 }
-			 else {
-			   mostrar_politicas();
-			 }
-		elseif($_POST["opcion"]=='Borrar'):
-			 borrar_politica();
-			 mostrar_politicas();
-		endif;
-	}
+function borrar_tipo_lector() {
+ $url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&record=BORRAR&expresion=".$_POST['tipo_lector_nro'];
+ $ptr_politicas = fopen($url,"r");
+ $politicas = fread($ptr_politicas,8192);
+ fclose($ptr_politicas);
 }
-if ($_POST["formulario"]=='tipos_lector') {
-	
-	if (isset($_POST["opcion"])) {
+//*******************************************************************//
+/*
+echo '<b>'.$_POST["formulario"].'<br>';
+echo $_POST["opcion"].'</b>';
+*/
+if (isset($_POST["formulario"])) {
+  if ($_POST["formulario"]=='politicas') {		
+	  if (isset($_POST["opcion"])) {
 		if ($_POST["opcion"]=='Crear'):
-			 crear_tipo_lector();
+		  crear_politica();
 		elseif($_POST["opcion"]=='Modificar'):
-			 editar_tipo_lecotr();
+		  editar_politica();
 		elseif($_POST["opcion"]=='Guardar'):
-			 if (guardar_tipo_lector()=='CREAR_EXISTENTE') {
-				echo '<h2 style="text-align=center;color:red">Tipo de lector ya existe. Cree una política nueva!</h2>';
-				crear_politica();
-			 }
-			 else {
-			   mostrar_politicas();
-			 }
+		  if (guardar_politica()=='CREAR_EXISTENTE') {
+			echo '<h2 style="text-align=center;color:red">La identificación de la política ya existe. Cree una política nueva!</h2>';
+			crear_politica();
+		  }
+		  else {
+			mostrar_politicas();
+		  }
 		elseif($_POST["opcion"]=='Borrar'):
-			 borrar_tipo_lector();
-			 mostrar_tipo_lector();
+		  borrar_politica();
+		  mostrar_politicas();
 		endif;
-	}
+	  }
+  }
+  if ($_POST["formulario"]=='tipo_lector') {
+	  if (isset($_POST["opcion"])) {
+		if ($_POST["opcion"]=='Crear'):
+		  crear_tipo_lector();
+		elseif($_POST["opcion"]=='Modificar'):
+		  editar_tipo_lectOr();
+		elseif($_POST["opcion"]=='Guardar'):
+		  if (guardar_tipo_lector()=='CREAR_EXISTENTE') {
+			echo '<h2 style="text-align=center;color:red">Tipo de lector ya existe. Cree una política nueva!</h2>';
+			crear_politica();
+		  }
+		  else {
+			mostrar_politicas();
+		  }
+		elseif($_POST["opcion"]=='Borrar'):
+		  borrar_tipo_lector();
+		  mostrar_politicas();
+		endif;
+	  }
+  }
+  if ($_POST["opcion"]=='Cancelar') {
+	mostrar_politicas();
+  }
 }
 else {
-	 mostrar_politicas();
+    mostrar_politicas();
 }
 ?>
-
 </body>
-<?php
-}else{
-echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.html>";
-}
-?>
 </html>
