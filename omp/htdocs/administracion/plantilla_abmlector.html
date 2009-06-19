@@ -1,9 +1,9 @@
 
-<table border="0" bgcolor="#FAEFC7" width="100%">
+<table border="0" width="90%" bgcolor="#FFFFFF">
   <tr>
-    <td width="40%"><big>Registro de Lector: </big>
-      [pft]if v120:'Nuevo' then v120 else 'MFN: ',f(val(mfn),1,0) fi[/pft]</td>
-    <td>
+    <th width="40%">Registro de Lector:
+      [pft]if v120:'Nuevo' then v120 else 'MFN: ',f(val(mfn),1,0) fi[/pft]</th>
+    <tr>
     <td><big>
 			[pft]
 				select v120 
@@ -11,56 +11,56 @@
 					case 'Presentar':       'Edición del registro',
 					case 'Grabar':	        'Grabado del registro',
 					case 'Borrar':	        'Borrado del registro'
-				endsel[/pft]</td></tr>
+				endsel[/pft]</big></td></tr>
 </table>
 
 
 <form name="form_abm" method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" onsubmit="return verificar_datos()" target="Verifica"> 
   <input type="hidden" name="IsisScript" value="administracion/verificar_alta.xis">
-  <table border="1" bgcolor="#FAEFC7" align="center">
+  <table border="1" bgcolor="#FFFFFF" align="center">
     <tr>
-      <td width="20%" bgcolor="#F9C99A"><b>Nombre</b></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Nombre</b></td>
       <td width="40%"><input type="text" name="nombre" size="40" value="[pft]v1[/pft]"></td>
-      <td width="20%" bgcolor="#F9C99A"><b>Documento</b></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Documento</b></td>
       <td><input type="text" name="documento" size="15" value="[pft]v2[/pft]">
 					<input type="hidden" name="documento_anterior" value="[pft]v2[/pft]"></td>
     </tr>
     <tr>
-      <td width="20%" bgcolor="#F9C99A"><b>Domicilio (local)</b></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Domicilio (local)</b></td>
       <td width="40%"><input type="text" name="domicilio" size="40" value="[pft]v6[/pft]"></td>
-      <td width="20%" bgcolor="#F9C99A"><b>Teléfono (local)</b></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Teléfono (local)</b></td>
       <td><input type="text" name="telefono" size="15" value="[pft]v7[/pft]"></td>
     </tr>
     <tr>
-      <td width="20%" bgcolor="#F9C99A"><b>Domicilio (origen)</b></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Domicilio (origen)</b></td>
       <td width="40%"><input type="text" name="domicilio_origen" size="40" value="[pft]v14[/pft]"></td>
-      <td width="20%" bgcolor="#F9C99A"><b>Teléfono (origen)</b></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Teléfono (origen)</b></td>
       <td><input type="text" name="telefono_origen" size="15" value="[pft]v15[/pft]"></td>
     </tr>
     <tr>
-      <td width="20%" bgcolor="#F9C99A"><b>Categoría</b></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Categoría</b></td>
       <td width="40%"><input type="text" name="categoria" size="40" value="[pft]v3[/pft]"></td>
-      <td width="20%" bgcolor="#F9C99A"><b>Legajo</b></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Legajo</b></td>
       <td><input type="text" name="legajo" size="15" value="[pft]v4[/pft]"></td>
     </tr>
     <tr>
-      <td width="20%" bgcolor="#F9C99A"><b>e@mail</td>
+      <td width="20%" bgcolor="#BEE4FF"><b>e@mail</td>
       <td width="40%"><input type="text" name="email" size="40" value="[pft]v12[/pft]"></td>
-      <td width="20%" bgcolor="#F9C99A"><b>Matrícula</b></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Matrícula</b></td>
       <td><input type="text" name="matricula" size="15" value="[pft]v5[/pft]"></td>
     </tr>
     <tr>
-      <td width="20%" bgcolor="#F9C99A"><b>Estado</td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Estado</td>
       <td width="40%">
       	<select name="estado">
       		<option value="Habilitado" [pft]if s(mhu,v10).3='HAB' then 'selected' fi,mpl[/pft]>Habilitado</option>
       		<option value="Sancionado" [pft]if s(mhu,v10).3='SAN' then 'selected' fi,mpl[/pft]>Sancionado</option>
       	</select>
       </td>
-      <td width="20%" bgcolor="#F9C99A"><b>Sanciones</b></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Sanciones</b></td>
       <td><input type="text" name="sanciones" size="25" value="[pft]v11+|%|[/pft]"></td>
     </tr>    <tr>
-      <td colspan="3" bgcolor="#F9C99A"><b>Vigencia de Datos</td>
+      <td colspan="3" bgcolor="#BEE4FF"><b>Vigencia de Datos</td>
       <td><input type="text" name="vigencia_datos" size="10" value="[pft]
 	if val(s(v16)*6.4,s(v16)*3.2,s(v16)*0.2) < val(s(date).8) then
 		'31/12/',s(date).4,

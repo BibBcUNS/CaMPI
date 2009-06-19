@@ -1,7 +1,9 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
-<title>Open MarcoPolo - Módulo Administración: Códigos de Barra</title>
+    <title>Módulo de Administración - Códigos de Barra</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
 
 	<SCRIPT language="JavaScript">
 	<!--
@@ -30,26 +32,22 @@
 	</SCRIPT>
 </head>
 
-<style type="text/css">
-<!--
-body {
-	margin-top: 20px;
-}
--->
-</style>
+  <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - Códigos de Barra  
+		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+		 
+      
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
 
-<body bgcolor="#E8E8D0">
-
-<table border="0" width="100%">
-  <tr>
-    <td width="85" rowspan="2"><img src="/logo2.gif" width="80" height="80" align="middle"></td>
-    <td width="50%"><big>Institucion XXXXX</big><td align="right"><b><i>Módulo Administración</i></b>&nbsp;&nbsp;<img src="/omp.gif" width="80" height="62" align="middle" border="0"><br>
-    </td>
-  </tr>
-</table>
-
-<hr>
-<table width="758"  cellpadding="0" cellspacing="0" border="0">
+<table width="650"  cellpadding="0" cellspacing="0" border="0">
   <tr>
     <td width="582">
     	<p align="center"><b><big>Generación de Códigos de Barra</big></b></p>
@@ -73,16 +71,31 @@ body {
 			  <!-- p align="center"><b>Selección de una obra completa a través del registro madre:<br>
         Indique Nro. de Inventario:</b>&nbsp;&nbsp;<input type="text" name="inventario" size="10">&nbsp;&nbsp;<input type="Button" value="Consultar" onclick="consulta_obra()" -->
       </form>
+	  <center>
 	  <form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" target="inferior">
       <input type="hidden" name="IsisScript" value="administracion/consulta_inv.xis">
-      <a href="menu.html" target="_parent">Volver al Menú</a>&nbsp;&nbsp;&nbsp;&nbsp;
       <input type="radio" name="criterio" value="inv" checked>Inventario --> Buscar: 
       <input type="text" name="expresion" size="15">
 	  <input type="submit" value="Enviar">
 	  <input type="reset" value="Limpiar">
  	  </form>
+	  <a href="menu.html" target="_parent">Volver al Menú</a></center>
    </td>
   </tr>
 </table>
-</body>
+
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+
+		<div id="footer">Versión Beta<br>(junio 2009)</div>
+  </body>
 </html>

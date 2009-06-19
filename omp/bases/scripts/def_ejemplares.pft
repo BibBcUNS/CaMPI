@@ -1,23 +1,5 @@
 (
-'^i',
-	v859^p
-'^s',
-	if v859^w<>''
-	then
-		'BAJA'
-	else
-		if (s(mhu,v859^b*0.2)='SU') or (s(mhu,v859^b*0.2)='SB') 
-			or (s(mhu,v859^b*0.2)='SA')	or	(s(mhu,v859^b*0.2)='C.')
-			or (s(mhu,v859^b)='S')
-		then
-			'PERM'
-		else
-			if s(mhu,v859^b.4)='CONS'
-				then 'CONS'
-			else
-				'BAJA'
-			fi,
-		fi,
-	fi,
-	mhl
+'^i',v859^p,
+'^s','PERM',
+mhl
 /)

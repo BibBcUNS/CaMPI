@@ -57,7 +57,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>Circulacion</title>
-    <link REL="stylesheet" TYPE="text/css" HREF="/omp/circulacion/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../htdocs/circulacion/css/style.css" >	
 		<SCRIPT LANGUAGE="JavaScript">
 	<!--
 

@@ -1,13 +1,27 @@
 <?php session_start(); ?>
-<html>
-<head>
-<title>Open MarcoPolo - Cancela Esperas Vencidas</title>
 
-</head>
 <?php
 if (isset($_SESSION["s_username"])) {
 ?>
-<body bgcolor="#E8E8D0" topmargin="0">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+</head>
+ <body>
+    <div id="head">
+		<div id="title">Módulo de Administración - Cancelar Esperas  
+		<div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		</div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->
 
 <?php
 
@@ -20,7 +34,19 @@ $url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?Isis
  fclose($ptr_esperas);
  
 ?>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
 
+			<div id="footer">Versión Beta<br>(junio 2009)</div>
 </body>
 <?php
 }else{

@@ -2,11 +2,28 @@
 <!-- La función que indica los días que son sábados y domingos....
 hasta la versión de php que tengo, funsiona solo hasta el 17 de Enero de 2038 -->
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>CaMPI - Edición de Calendario</title>
-
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
 </head>
+ <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - Calendario  
+		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+		 
+      
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
+
 <?php
 if (isset($_SESSION["s_username"])) {
 ?>
@@ -297,7 +314,19 @@ else {
 }
 
 ?>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
 
+			<div id="footer">Versión Beta<br>(junio 2009)</div>
 </body>
 <?php
 }else{

@@ -53,10 +53,13 @@
   <field action=cgi tag=130>operario_id</field>
 
 
-  <display><htmlpft>
-      <html>
-	<head>
-	<!--link REL="stylesheet" TYPE="text/css" HREF="/omp/circulacion/css/style.css" /-->
+  <display><htmlpft><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <title>Módulo de Circulación - MarcoPolo </title>
+    <link rel="stylesheet" type="text/css" href="../htdocs/circulacion/css/style.css" >	
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
 
@@ -90,19 +93,20 @@
 	</SCRIPT>
 	</head>
 
-	<!--body bgcolor="#E8E8D0"-->
-	<body style="background: #f6f6f6">
-	 <TABLE border="0" width="100%">
-	    <tr>
-		<td width="50%"><big>[pft]ref(['config']1,v7)[/pft]</big></td>
-		<td width="50%" align="right"><em>Open MarcoPolo - Módulo Circulación</em>
-		<br>Fecha: 
+  <center>
+    <div id="head"> 
+		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
+		<div id="logo"><img src="images/logocampicir.gif" width="120" height="54" ></div>
+		  </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div class="top"></div>
+								<div class="content">
+         
+<!----------------------------------------------------------------------------->		
   </htmlpft></display>
-  <display><pft>mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),' 'mid(date(datetime),10,9)
-        '</td>',
-      '</TABLE><hr>',
-   </pft></display>
-
   <flow action=jump><pft>if p(v110) or v100='prestamos' then v100 else 'SALIDA' fi</pft></flow>
 
   <label>mfn</label>
@@ -381,11 +385,21 @@
   <label>SALIDA</label>
 
 	
-    <display><br>
-		<center>
-			<h2>No se ha indicado una expresión</h3>
-			<input type="button" name="volver" value="<< Volver" onClick="javascript:history.back()">
-		</center>
+    <display>
+	<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+
+           <div id="footer">Versión Beta<br>(junio 2009)</div></center>
+
+</body>
+</html>
 	</display>
 	
 </section>

@@ -1,7 +1,9 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Open MarcoPolo - Módulo Estadísticas: Resultados</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Módulo de Administración - Reclamos </title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
 	
 <SCRIPT language="JavaScript">
 <!--
@@ -21,28 +23,20 @@
 -->
 </SCRIPT>
 </head>
-<body topmargin="0" bgcolor="#E8E8D0" onload="this.focus();graficar([pft]"'bars'"n0[/pft])">
-<link rel="stylesheet" href="[pft]getenv('PATH_INFO')[/pft]estilos.css" type="text/css">
-<table width="100%">
-	<tr>
-	  <td width="50%">Universidad Nacional del Sur</td>
-	  <td width="50%" align="right">
-	    <h5>Open MarcoPolo - Módulo Estadísticas<br>
-	    Fecha:
-	[pft]select s(date)*16.1
-		     case '0': ,'Domingo, ',
-		     case '1': ,'Lunes, ',
-		     case '2': ,'Martes, ',
-		     case '3': ,'Miércoles, ',
-		     case '4': ,'Jueves, ',
-		     case '5': ,'Viernes, ',
-		     case '6': ,'Sábado, ',
-		   endsel,
-		   mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)
-	[/pft]</h5>
-		</td>
-	</tr>
-</table><hr>
+  <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - Reclamos  
+		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+		 
+      
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
 [pft]|<p align="center">Otros datos: |v904|</p>|[/pft]
 <table border="1" align="center">
 	<tr>
@@ -109,5 +103,17 @@ fi
 )
 [/pft]
 </form>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+			<div id="footer">Versión Beta<br>(junio 2009)</div>
 </body>
 </html>

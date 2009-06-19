@@ -9,7 +9,7 @@
     <head>
         <title>Eliminación de Espera</title>
     </head>
-    <body bgcolor="#E8E8D0">
+    <body>
 </display>
 
 <display>
@@ -27,7 +27,7 @@
     ref(['lector']l(['lector']v2001),
         '<font style="color:#039"><big>',v1,'</big></font>',", ",v3,
         if v2001:'1' then
-            ' <marquee bgcolor="#FFF0C4" border="0" style="color: rgb(191,51,83); font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',
+            ' <marquee bgcolor="#FF0000" width=90% style="color: #FFFF9B; font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',
         fi,     
    ),
    '</center><hr>'
@@ -139,9 +139,9 @@
 
 <display><pft>
     if (val(v1102)=0) then
-        '<img src="/circulacion/images/ok.gif"> La espera se a eliminado correctamente.<br>',
+        '<img src="images/ok.gif"> La espera se a eliminado correctamente.<br>',
     else
-        '<img src="/circulacion/images/error.gif"> Error!: No fue posible eliminar la espera. (',v1102,')'
+        ' Error!: No fue posible eliminar la espera. (',v1102,')'
     fi,
     '</body>'
 </pft></display>

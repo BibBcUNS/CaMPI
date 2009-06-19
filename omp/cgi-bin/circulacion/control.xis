@@ -53,16 +53,16 @@ v3004: documento
 	<head>
 	</head>	
 	<body bgcolor="#f6f6f6" onblur="window.close()">
-	<TABLE bgcolor="red" BORDER="0" cellpadding=4 WIDTH="100%" style="font-family: sans-serif; font-size: 11pt"><TR><TD Align="center">
+	<TABLE bgcolor="#5277AE" BORDER="0" cellpadding=4 WIDTH="90%" style="font-family: sans-serif; font-size: 11pt"><TR><TD Align="center">
 	<FONT FACE="MS SANS SERIF" SIZE="2" COLOR="white">
 	<B>Los siguientes n&uacute;meros de inventario son incorrectos: </B>
 	</FONT>
 	</TD>
 	</TABLE>
-	<TABLE BORDER="0" cellpadding=8 WIDTH="100%" style="font-family: sans-serif; font-size: 11pt; ">
+	<TABLE BORDER="0" cellpadding=8 WIDTH="90%" style="font-family: sans-serif; font-size: 11pt; ">
   </display>
   
-	<display><pft>(if v5000:'Error' then '<TR><TD><B><FONT FACE="MS SANS SERIF" SIZE="2" COLOR="red">',v5000,'</FONT></B></TD></TR>' fi)</pft></display>
+	<display><pft>(if v5000:'Error' then '<TR><TD><B><FONT FACE="MS SANS SERIF" SIZE="2" COLOR="#5277AE">',v5000,'</FONT></B></TD></TR>' fi)</pft></display>
 	<display></TABLE></display>
 	
 	<display><pft>'<br><center>',if v5000:'Error' then '<input type=button value="[X]  Cerrar" onclick="window.close()">' fi,'</center>'</pft></display>

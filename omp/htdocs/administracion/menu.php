@@ -1,9 +1,10 @@
 <?php session_start(); ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
     <title>Módulo de Administración </title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
 	<style>
 	select,input {vertical-align:middle;}
 table td {border-width:0px; border-style:solid; border-color:#0099FF;}
@@ -187,7 +188,7 @@ $anios = explode  ('~', $anios_calendario);
     </div>
     <div id="end_body"></div>
 
-		<div id="footer">Versión 0.1<br>(Julio 2008)</div>
+           <div id="footer">Versión Beta<br>(junio 2009)</div>
   </body>
 <?php
 }else{

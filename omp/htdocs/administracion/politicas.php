@@ -4,16 +4,12 @@ if (!isset($_SESSION["s_username"])) {
 	echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.html>";
 }
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Open MarcoPolo - Edición de Políticas</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css" />
-<style>
-body
-{
-  background: #f6f6f6;
-}
-</style>
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
 
 <script>
 var anterior="";
@@ -33,13 +29,23 @@ function normal(fila) {
 }
 
 </script>
-<style>
-.linea{
-	cursor:pointer;
-}
-</style>
+
 </head>
-<body topmargin="0">
+  <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - Políticas  
+		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+		 
+      
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
+
 
 
 <?php
@@ -492,5 +498,19 @@ else {
     mostrar_politicas();
 }
 ?>
+
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+
+			<div id="footer">Versión Beta<br>(junio 2009)</div>
 </body>
 </html>

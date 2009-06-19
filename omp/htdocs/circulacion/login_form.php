@@ -1,45 +1,22 @@
 <?php session_start();?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
   <head>
     <title>CaMPI </title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" >
 <?php
 if (isset($_SESSION["s_username"]) && $_SESSION["s_permiso"]=='circulacion') {
  echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=circulacion.php>";
 }else{
 ?>	
   </head>
-  <body>
-    <div id="head">
-		  <div id="title">Módulo de Circulación   
-		  <div id="logo"><img src="images/logocampi2.gif"   width="156" height="71" ></div>
+  <body><center>
+    <div id="head"> 
+		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
+		<div id="logo"><img src="images/logocampicir.gif" width="120" height="54" ></div>
 		  </div>
-		 
-      <div id="menu">
-        <ul>
-          <li>
-            <a href="/index.html"  target=_self>Principal</a>
-          </li>
-          <li class="active">
-            <a href="*" >Circulación</a>
-          </li>
-          <li>
-            <a href="/administracion/login_form.php"  target=_self>Administración</a>
-          </li>
-          <li>
-            <a href="/estadisticas/index.htm"  target=_self>Estadísticas</a>
-          </li>
-		  <li>
-             <a href="/catalis/catalogacion.htm" target=_self>
-			 Catalogación</a>
-          </li>
-		  <li>
-            <a href= "opacmarc/cgi-bin/opacmarc/wxis.exe?IsisScript=opac/xis/opac.xis&db=demo&showForm=simple" 
-			target=_self>OPAC</a>
-          </li>
-        </ul>
-      </div>
+    </div> 
     </div> 
     <div id="body_wrapper">
       <div id="body">
@@ -82,15 +59,14 @@ Password: <input type='password' size='15' maxlength='25' name='password'>
 </div>
 								<div class="bottom"></div>
 						</div>
-        <div class="clearer">
-</div>
+        <div class="clearer"></div>
       </div>
-      <div class="clearer">
-	  </div>
+	  
+      <div class="clearer"></div>
     </div>
     <div id="end_body"></div>
 
-		<div id="footer">Versión 0.1<br>(Julio 2008)</div>
+		<div id="footer">Versión Beta<br>(junio 2009)</div></center>
   </body>
 
 <?php

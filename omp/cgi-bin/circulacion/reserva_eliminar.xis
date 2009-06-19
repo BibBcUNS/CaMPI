@@ -2,11 +2,14 @@
 <section>
 <display><pft>'Content-type: text/html'/#</pft></display>
 <display>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<title>Cancela Reserva de Material</title>
+  <head>
+    <title>Cancela Reserva de Material</title>
+    <link rel="stylesheet" type="text/css" href="/omp/htdocs/circulacion/css/style.css" >	
 	</head>
-	<body bgcolor="#E8E8D0">
+	<body>
 </display>
 
 <display>
@@ -101,11 +104,11 @@
 
 <display><pft>
 	if (val(v1102)=0) then
-		'<img src="/omp/circulacion/images/ok.gif"> La reserva se a eliminado correctamente.<br>',
+		'<img src="/omp/htdocs/circulacion/images/ok.gif"> La reserva se a eliminado correctamente.<br>',
 	else
-		'<img src="/omp/circulacion/images/error.gif"> Error!: No fue posible eliminar la reserva. (',v1102,')'
+		' Error!: No fue posible eliminar la reserva. (',v1102,')'
 	fi,
-	'</body>'
+	'</body></html>'
 </pft></display>
 </section>
 </IsisScript>

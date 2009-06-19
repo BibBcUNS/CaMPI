@@ -1,8 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Open MarcoPolo - Edición de Calendario</title>
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
 </head>
-<body bgcolor="#E8E8D0" topmargin="0">
+ <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - Calendario(Guardar) 
+		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+		 
+      
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
 
 <?php
 
@@ -55,5 +71,18 @@ fclose($ptr_grabar_datos);
 echo $grabar_datos;
 echo '<br><br><input type=button onclick="javascript:window.close()" value="Cerrar la ventana">';
 ?>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+
+			<div id="footer">Versión Beta<br>(junio 2009)</div>
 </body>
 </html>

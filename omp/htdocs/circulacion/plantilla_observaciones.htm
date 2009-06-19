@@ -1,40 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd"
+<html>
   <head>
     <title>Observaciones</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />			
+    <link rel="stylesheet" type="text/css" href="/omp/htdocs/circulacion/css/style.css" >			
 
 <body>
-  <center>
-    <div id="head"> 
-		<div id="title"><p align="left"><br>Módulo de Circulación - Observaciones</p></div>
-		  </div>
-    <div id="body_wrapper">
-      <div id="body">
-					 <div id="all">
-					 			<div class="top"></div>
-								<div class="content">
-         
-<!----------------------------------------------------------------------------->	
-<table style="font-family: sans-serif; font-size:10pt" width="100%">
+<br><br>
+<table style="font-family: sans-serif; font-size:10pt; padding-top:2px;" width="90%">
   <tr>
     <td width="18%"><b>Nombre</b>:</td>
     <td width="52%">[pft]v1[/pft]</td>
-    <td width="30%" rowspan="4"><img src="[pft]'/omp/circulacion/fotos/',v2,'.jpg'[/pft]" width="128" height="96" align="middle" OnError="this.src='/circulacion/fotos/falta_foto.gif';"></td>
+    <td width="30%" rowspan="4"><img src="[pft]'/omp/circulacion/fotos/',v2,'.jpg'[/pft]" width="128" height="96" align="middle" OnError="this.src='/omp/circulacion/fotos/falta_foto.gif';"></td>
   </tr>
   <tr>
-    <td width="18%"><b>Categoría</b>:</td>
-    <td width="52%">[pft]v3[/pft]</td>
-  </tr>
-  <tr>
-    <td width="18%"><b>Estado</b>:</td>
-    <td width="52%">[pft]v10[/pft]</td>
+    <td><b>Categoría</b>:</td>
+    <td>[pft]v3[/pft]&nbsp;&nbsp;<b>Estado</b>:&nbsp;&nbsp;[pft]v10[/pft]</td>
   </tr>
   <tr>
     <td width="18%"><b>Registro</b>:</td>
     <td width="52%">[pft]mfn,'&nbsp;&nbsp;<b>DNI:</b>&nbsp;&nbsp;',v2[/pft]</td>
   </tr>
-	</table><form name="form_observa" action="/omp/cgi-bin/wxis.exe[pft]getenv('PATH_INFO')[/pft]" method="post" onsubmit="return confirm([pft]"'"n0,'Confirma la observación',"'"n0[/pft])">
+	</table>
+	<form name="form_observa" action="/omp/cgi-bin/wxis.exe[pft]getenv('PATH_INFO')[/pft]" method="post" onsubmit="return confirm([pft]"'"n0,'Confirma la observación',"'"n0[/pft])">
 	<input type="Hidden" name="IsisScript" value="circulacion/observaciones_lector.xis">
 	<input type="Hidden" name="opcion" value="AGREGAR">
 	<input type="Hidden" name="mfn_lector" value="[pft]v101[/pft]">
@@ -67,12 +55,6 @@
 			<td colspan="3" align="right" class="celda_iluminada"><input type="Submit" value="Grabar"></td></tr>
 	</table>
 	</form>
-<!------------------------------------------------------------------------------------------------->  
-								</div>
-								<div class="bottom"></div>
-						</div>
-      </div>
-    </div>
-    <div id="end_body"></div></center>
+
 </body>		
 </html>		

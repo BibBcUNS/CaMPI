@@ -1233,46 +1233,19 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		
 		<!-- mostramos el encabezado de la pagina -->
 <display>
-		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
   <head>
     <title>Circulación</title>
-    <link REL="stylesheet" TYPE="text/css" HREF="/omp/circulacion/css/style.css" />
+    <link REL="stylesheet" TYPE="text/css" HREF="/omp/htdocs/circulacion/css/style.css" />
   </head>
   <body onload="window.document.form_abm.credencial.value=window.parent.indice.document.form_id.lector.value">
   <center>
     <div id="head"> 
-		  <div id="title"><p ALIGN="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
-		  <div id="logo"><img SRC="/omp/circulacion/images/logocampicir.gif"   width="120" HEIGHT="54" ></div>
+		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
+		<div id="logo"><img src="images/logocampicir.gif" width="120" height="54" ></div>
 		  </div>
-		 
-      <!--div id="menu">
-        <ul>
-          <li>
-            <a HREF="/index.html" target=_blank>
-			Principal</a>
-          </li>
-		  <li>&nbsp;</li>
-          <li  class="active">
-            <a HREF="*" >Circulación</a>
-          </li><li>&nbsp;</li>
-          <li>
-            <a HREF="/administracion/login_form.php"  target=_blank>		
-			Administración</a>
-          </li><li>&nbsp;</li>
-          <li>
-            <a HREF="/estadisticas/index.htm" target=_blank>Estadísticas</a>
-          </li><li>&nbsp;</li>
-		  <li>
-             <a HREF="/catalis/catalogacion.htm" target=_blank>Catalogación</a>
-          </li><li>&nbsp;</li>
-		  <li>
-            <a href= 
-			"http://cabbib2.cnea.gov.ar/cgi-bin/opacmarc/wxis?IsisScript=opac/xis/opac.xis&db=celtic" 
-			target=_blank>OPAC</a>
-          </li><li>&nbsp;</li>
-        </ul>
-      </div-->
     </div> 
     <div id="body_wrapper">
       <div id="body">
