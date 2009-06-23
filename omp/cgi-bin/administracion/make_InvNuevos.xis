@@ -51,30 +51,27 @@ detectar los números de inventario que fueron sacados de la base bibliográfica -
 	
 	<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 	
-    <display><pft>
-      '<html><body bgcolor="#E8E8D0">',
-      '<table border="0" width="100%">',
-      '<tr>',
-        '<td width="50%"><big>',ref(['config']1,v7),'</big><small><br>',
-          'Fecha: ',
-            select s(date)*16.1
-              case '0': ,'Domingo, ',
-              case '1': ,'Lunes, ',
-              case '2': ,'Martes, ',
-              case '3': ,'Miércoles, ',
-              case '4': ,'Jueves, ',
-              case '5': ,'Viernes, ',
-              case '6': ,'Sábado, ',
-            endsel,
-            mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)
-			'  --  ',mid(date(datetime),10,9),
-          '</small><big></big>',
-        '</td>',
-        '<td width="50%" align="right">',
-          '<em>Módulo Circulación <img src="/omp.gif" width="59" height="45" align="middle"></em>',
-        '</td>',
-      '</table><hr>',
-    </pft></display>
+<display>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+</head>	
+	  <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
+		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
+</display>
     <display><p align="center"><h2>Actualización de Inventarios</h2></display>   
 
     <!-- considerar que MARC es el diccionario por inventario dentro de la base bibliográfica, c:\OpenMP\Bases\MARCMP\exist\exist.*  -->
@@ -201,7 +198,23 @@ detectar los números de inventario que fueron sacados de la base bibliográfica -
 	</do>
 	
   <display><pft>'<p>Proceso finalizado !<br><a href="JavaScript:history.go(-1)">Volver</a></p>'</pft></display>
-    
+<display>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+
+           <div id="footer">Versión Beta<br>(junio 2009)</div>
+  </body>
+  </html>
+</display>    
 
 </section>
 </IsisScript>

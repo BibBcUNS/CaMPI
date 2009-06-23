@@ -60,10 +60,13 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 	<field action="replace" tag="300"><pft>if a(v300) then getenv('REMOTE_ADDR'),x1,s(date).8 fi</pft></field> 
 	
   <display><htmlpft>
-    <html>
-  
-    <head>
-    <title>Open MarcoPolo - Módulo Administración</title>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <title>Open MarcoPolo - Módulo Administración</title>
+<link rel="stylesheet" type="text/css" href="../css/style.css" >
+
     
 		<SCRIPT language="JavaScript">
 		<!--
@@ -94,17 +97,21 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 		-->		
 		</script>
 
-    </head>
-		
-    <body bgcolor="#E8E8D0">
-    <table border="0" width="100%">
-      <tr>
-        <td width="50%"><big>[pft]ref(['config']1,v7)[/pft]</big><small><br>
-        </small></td>
-        <td width="50%" align="right"><em>Open MarcoPolo - Módulo Administración</em><br>
-        </td>
-      </tr>
-    </table>
+</head>
+  <body><center>
+    <div id="head">
+		  <div id="title"><p align="left"><br>Lectores - OPEN MarcoPolo</p>
+		  <div id="logo"><img src="/omp/images/logocampi2.gif" width="143" height="65" ></div>
+		  </div>
+		 
+    </div> 
+  <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 <div class="top"></div>
+					 <div class="content">
+<!--------------------------------------------------------------------------------------------------------------------->
+
   </htmlpft></display>  
 
   <field action="add" tag="120"><pft>"Presentar"n120</pft></field>
@@ -125,6 +132,17 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
   <display><pft>
 		if a(v100) then 
 '			  <h2 align="center"><big>Datos incompletos</big></h2>'/
+        '<!---------------------------------------------------------------------------------------------->'/
+		'</div>'/
+		'<div class="bottom"></div>'/
+		'</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div id="end_body"></div>'/
+		'<div id="footer">Versión Beta<br>(junio 2009)</div>'/
+
 '			</body>'/
 '			</html>'/fi</pft></display>
   <flow action=exit><pft>"Now"n100</pft></flow> <!-- aborta la script si no se indica un DNI O MFN -->
@@ -143,6 +161,17 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 '			window.document.write("<a href=/omp/administracion/menu.php>Men&uacute; administraci&oacute;n</a>");'/
 '			//  End -->'/
 '			</script>'/
+        '<!---------------------------------------------------------------------------------------------->'/
+		'</div>'/
+		'<div class="bottom"></div>'/
+		'</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div id="end_body"></div>'/
+		'<div id="footer">Versión Beta<br>(junio 2009)</div>'/
+
 '			</body>'/
 '			</html>'/fi</pft></display>			
   <flow action=exit><pft>if val(v1000)=0 then 'Now' fi</pft></flow> <!-- Si no encuentra el lector aborta la script -->
@@ -277,6 +306,17 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 			'window.document.write("<a href=/omp/administracion/menu.php>Menú administración</a>");'/
 			'//  End -->'/
 			'</script>'/
+			'<!---------------------------------------------------------------------------------------------->'/
+			'</div>'/
+			'<div class="bottom"></div>'/
+			'</div>'/
+			'<div class="clearer"></div>'/
+			'</div>'/
+			'<div class="clearer"></div>'/
+			'</div>'/
+			'<div id="end_body"></div>'/
+			'<div id="footer">Versión Beta<br>(junio 2009)</div>'/
+
 			'</body>'/
 			'</html>'/
 		fi</pft></display>
@@ -316,7 +356,16 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 		'window.document.write("<a href=/omp/administracion/menu.php>Menú administración</a>");'/
 		'//  End -->'/
 		'</script>'/
-
+        '<!---------------------------------------------------------------------------------------------->'/
+		'</div>'/
+		'<div class="bottom"></div>'/
+		'</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div id="end_body"></div>'/
+		'<div id="footer">Versión Beta<br>(junio 2009)</div>'/
   	'</body>'/
   	'</html>'/</pft></display>
     
@@ -342,6 +391,17 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 		'window.document.write("<a href=/omp/administracion/menu.php>Menú administración</a>");'/
 		'//  End -->'/
 		'</script>'/
+		'<!---------------------------------------------------------------------------------------------->'/
+		'</div>'/
+		'<div class="bottom"></div>'/
+		'</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div id="end_body"></div>'/
+		'<div id="footer">Versión Beta<br>(junio 2009)</div>'/
+
 		'</body>'/
 		'</html>'/
 	</pft></display>

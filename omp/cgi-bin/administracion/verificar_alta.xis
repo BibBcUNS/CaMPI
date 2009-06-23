@@ -49,13 +49,27 @@
 
   <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 
-  <display>
-	 <html>
-		<head>
-		</head>	
-		<body bgcolor="#E8E8D0">
-  </display>
-
+<display>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+</head>	
+	  <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
+		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
+</display>
   <field action=cgi tag=130>mfn_lector</field>
   <field action=cgi tag=120>opcion</field> <!-- Presentar / Registro Nuevo -->
   <field action=cgi tag=2>documento</field> <!-- documento editado -->
@@ -104,10 +118,23 @@
 		fi
 	</pft></display>
 
-	<display>
-		</body>
-		</html>
-	</display>
+<display>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+
+           <div id="footer">Versión Beta<br>(junio 2009)</div>
+  </body>
+  </html>
+</display>
 
 </section>
 </IsisScript>

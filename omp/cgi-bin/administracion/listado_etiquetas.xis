@@ -48,8 +48,27 @@
 
 <trace>BR1</trace>
 
-	<display><pft>
-		'<html><body bgcolor="#E8E8D0">'</pft></display>	
+<display>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+</head>	
+	  <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
+		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
+</display>	
 
          <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 
@@ -123,7 +142,22 @@
 	<display></tr></table><br><br><u>Códigos de barra</u><br><i>
 Copyright © 1999-2006 IDAutomation.com, Inc. IDAutomation is a registered trademark of IDAutomation.com, Inc. All other trademarks mentioned are the property of their respective owners. Agreement Version 6.7.
 </i>
-</body></display>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+
+           <div id="footer">Versión Beta<br>(junio 2009)</div>
+  </body>
+  </html>
+</display>
 
 </section>
 </IsisScript>

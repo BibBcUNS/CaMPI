@@ -51,48 +51,27 @@
 	<field action=cgi tag=100>opcion</field>
 
 <!--  <field action=cgi tag=110>operador</field> -->
-
-  <display><pft>
-      '<html>'
-		'<head>'/
-						
-			'<SCRIPT language="JavaScript">'/
-				'<!--'/
-				'function enviarReclamo(Id) {'/
-				'	win=window.open("http://localhost/administracion/vacio.html","RECLAMO","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=1,copyhistory=0,width=400,height=300")'/
-				'	document.getElementById(Id).target=win.name;'/
-				'	document.getElementById(Id).submit()'/
-				' // document.getElementById("Mail"+Id).style.visibility="hidden"'/
-				' document.getElementById("Mail"+Id).innerHTML="<p><font color=#660033><strong>Reclamado</strong></font></p>"'/
-				'	}'/
-				'//-->'/
-			'</SCRIPT>'/
-			
-		'</head>'/
-
-      '<body bgcolor="#E8E8D0">'/,
-      '<table border="0" width="100%">'/,
-      '<tr>'/,
-        '<td width="50%"><big>',ref(['config']1,v7),'</big><small><br>'/,
-          'Fecha: '/,
-            select s(date)*16.1
-              case '0': ,'Domingo, ',
-              case '1': ,'Lunes, ',
-              case '2': ,'Martes, ',
-              case '3': ,'Miércoles, ',
-              case '4': ,'Jueves, ',
-              case '5': ,'Viernes, ',
-              case '6': ,'Sábado, ',
-            endsel,
-            mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)
-			'  --  ',mid(date(datetime),10,9),
-          '</small><big></big>'/,
-        '</td>'/,
-        '<td width="50%" align="right">'/,
-          '<em>Módulo Circulación <img src="/omp.gif" width="59" height="45" align="middle"></em>'/,
-        '</td>'/,
-      '</table><hr>'/,
-   </pft></display>
+<display>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+</head>	
+	  <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
+		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
+</display>
 
 <!-- Validación del operador. 
 Esta validación ya no se utiliza, la seguridad se la da el servidor web 
@@ -449,7 +428,22 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 	<display>
 		</table></display>	
   <display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.html">Volver al Menú</a></p>'</pft></display>
-
+<display>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+       <div id="footer">Versión Beta<br>(junio 2009)</div>
+  </body>
+  </html>
+</display>
 </section>
 </IsisScript>
 
