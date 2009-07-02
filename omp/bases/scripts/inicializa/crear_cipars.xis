@@ -89,6 +89,8 @@
 		'marc_invent.xrf=',v5006,'/',v5009,'/',v5009,'.xrf'/
 		'marc_invent.*=',v5006,'/',v5009,'/exist/exist.*'/
 		'lector.*=',v5006,'/lector/lector.*'/
+		'tipo_lector.*=',v5006,'/politicas/tipo_lector.*'/
+		'tipo_objeto.*=',v5006,'/politicas/tipo_objeto.*'/
 		'opera.*=',v5006,'/opera/opera.*'/
 		'movi.*=',v5006,'/movi/movi.*'/
 		'txt_htm.*=',v5006,'/gizmo/gizmo.*'/
