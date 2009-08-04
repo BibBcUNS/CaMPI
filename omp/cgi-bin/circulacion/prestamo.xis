@@ -1143,10 +1143,11 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
            if s(mpu,v10):'SANCIONADO' then 
              '<br>
                 <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold" width="90%">S A N C I O N A D O !</marquee>
-              <table border="0" width="90%" bgcolor="transparent" cellspacing="0">
-               <tr><td width="45%"><p>SANCIONADO hasta el',v11^v[last],'</p></td>
-                   <td width="10%">&nbsp;</td>
-                   <td width="45%"><p>SANCIONADO hasta el',v11^v[last],'</p></td>
+              <table border="0" width="90%" cellspacing="0">
+               <tr>
+			       <td width="45%"><p>SANCIONADO hasta el ',v11^v[last],'</p></td>
+                   <td width="10%"></td>
+                   <td width="45%"><p>SANCIONADO hasta el ',v11^v[last],'</p></td>
                </tr>
               </table>',
            fi/
@@ -1238,13 +1239,13 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 <html>
   <head>
     <title>Circulación</title>
-    <link REL="stylesheet" TYPE="text/css" HREF="/omp/htdocs/circulacion/css/style.css" />
+    <link REL="stylesheet" TYPE="text/css" HREF="/omp/circulacion/css/style.css" />
   </head>
   <body onload="window.document.form_abm.credencial.value=window.parent.indice.document.form_id.lector.value">
   <center>
     <div id="head"> 
 		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
-		<div id="logo"><img src="images/logocampicir.gif" width="120" height="54" ></div>
+		<div id="logo"><img src="/omp/circulacion/images/logocampicir.gif" width="120" height="54" ></div>
 		  </div>
     </div> 
     <div id="body_wrapper">

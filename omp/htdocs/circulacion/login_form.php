@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>CaMPI </title>
-    <link rel="stylesheet" type="text/css" href="css/style.css" >
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 <?php
 if (isset($_SESSION["s_username"]) && $_SESSION["s_permiso"]=='circulacion') {
  echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=circulacion.php>";
@@ -14,7 +14,7 @@ if (isset($_SESSION["s_username"]) && $_SESSION["s_permiso"]=='circulacion') {
   <body><center>
     <div id="head"> 
 		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
-		<div id="logo"><img src="images/logocampicir.gif" width="120" height="54" ></div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54" ></div>
 		  </div>
     </div> 
     </div> 

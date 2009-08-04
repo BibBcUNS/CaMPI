@@ -42,11 +42,10 @@
  */ -->
 
 <IsisScript>
-<trace>BR</trace>
+<trace>!BR</trace>
 
 <section>
   <display><pft>'Content-type: text/html'/#</pft></display>
-
   <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
   <field action=cgi tag=100>numero_dni</field>
   <field action=cgi tag=110>numero_nota</field>
@@ -58,12 +57,12 @@
 <html>
 <head>
     <title>Módulo de Administración </title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 </head>
  <body>
     <div id="head">
 		<div id="title">Módulo de Administración  - Libre Deuda 
-		<div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		<div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
 		</div>
     </div> 
     <div id="body_wrapper">

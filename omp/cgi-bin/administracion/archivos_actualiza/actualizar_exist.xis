@@ -280,7 +280,8 @@ El path del MX y de las bases se busca en la base CONFIG -->
 </pft></display>
 
 <display>
-	<br><br><a href="JavaScript:history.go(-1)"> << Volver </a></p>
+	<br><br>
+	<input type=button value=" << Volver " onclick="JavaScript:history.go(-1)">
 	</body>
 	</html>
 </display>

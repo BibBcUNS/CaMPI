@@ -13,7 +13,7 @@
 </display>
 
 <display>
-    <input type="button" name="usuario" value="  [usuario]  " onClick="javascript:top.frames['indice'].document.form_id.submit();"<br>
+    <input type="button" name="usuario" value="  [usuario]  " onClick="javascript:top.frames['indice'].document.form_id.submit();"><br>
 </display>
 
 <trace>!BR</trace>
@@ -139,7 +139,7 @@
 
 <display><pft>
     if (val(v1102)=0) then
-        '<img src="images/ok.gif"> La espera se a eliminado correctamente.<br>',
+        '<img src="/omp/circulacion/images/ok.gif"> La espera se a eliminado correctamente.<br>',
     else
         ' Error!: No fue posible eliminar la espera. (',v1102,')'
     fi,

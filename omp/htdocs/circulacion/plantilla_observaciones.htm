@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Observaciones</title>
-    <link rel="stylesheet" type="text/css" href="/omp/htdocs/circulacion/css/style.css" >			
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >			
 
 <body>
 <br><br>
@@ -22,7 +22,7 @@
     <td width="52%">[pft]mfn,'&nbsp;&nbsp;<b>DNI:</b>&nbsp;&nbsp;',v2[/pft]</td>
   </tr>
 	</table>
-	<form name="form_observa" action="/omp/cgi-bin/wxis.exe[pft]getenv('PATH_INFO')[/pft]" method="post" onsubmit="return confirm([pft]"'"n0,'Confirma la observación',"'"n0[/pft])">
+	<form name="form_observa" action="/omp/cgi-bin/wxis.exe[pft]getenv('PATH_INFO')[/pft]" method="post" onSubmit="return confirm([pft]"'"n0,'Confirma la observación',"'"n0[/pft])">
 	<input type="Hidden" name="IsisScript" value="circulacion/observaciones_lector.xis">
 	<input type="Hidden" name="opcion" value="AGREGAR">
 	<input type="Hidden" name="mfn_lector" value="[pft]v101[/pft]">

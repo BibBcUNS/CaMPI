@@ -55,12 +55,12 @@
 <html>
 <head>
     <title>Módulo de Administración </title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 </head>	
 	  <body>
     <div id="head">
 		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
-		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  <div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
 		  </div>
     </div> 
     <div id="body_wrapper">
@@ -90,7 +90,7 @@
 					</tr>
 					<tr>
 					    <td width="70%">Asignado a:<br>[pft],v1,'<b><br>Documento: ',v2,'</b>'[/pft]</td>
-							<td><img src="/circulacion/fotos/[pft],v2,[/pft].jpg" width="128" height="96" align="middle" OnError="this.src=[pft]"'"n0,'/circulacion/fotos/falta_foto.gif',"'"n0,[/pft]"></td>
+							<td><img src="/omp/circulacion/fotos/[pft],v2,[/pft].jpg" width="128" height="96" align="middle" OnError="this.src=[pft]"'"n0,'/circulacion/fotos/falta_foto.gif',"'"n0,[/pft]"></td>
 					</tr>
 					</table>
 					<td></td>
@@ -114,7 +114,7 @@
 			'		window.opener.document.form_abm.target="_self";'/
 			'		window.opener.document.form_abm.opcion[0].click(); // hace click en "Grabar" enviando así el formulario '/
 			'// End -->'/
-			'</script>'/
+			'</SCRIPT>'/
 		fi
 	</pft></display>
 

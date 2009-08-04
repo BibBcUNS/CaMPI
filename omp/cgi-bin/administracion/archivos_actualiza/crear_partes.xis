@@ -114,5 +114,3 @@ Actualizará la base Partes cuya estructura es:
 		</do> <!-- Fin recorrido lista -->					
 	</loop> 	
 </do> <!-- Fin recorrido base bibliogràfica -->
-
-<display><pft>'listo',/#</pft></display>

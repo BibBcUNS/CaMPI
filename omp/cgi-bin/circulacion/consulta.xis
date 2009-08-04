@@ -57,9 +57,9 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-  <head>
+<head>
     <title>Módulo de Circulación - MarcoPolo </title>
-    <link rel="stylesheet" type="text/css" href="../htdocs/circulacion/css/style.css" >	
+    <link rel="stylesheet" type="text/css" href="/omp/circulacion/css/style.css" />	
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
 
@@ -91,13 +91,13 @@
 	
 	//  End -->
 	</SCRIPT>
-	</head>
-
+</head>
+<body>
   <center>
     <div id="head"> 
 		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
-		<div id="logo"><img src="images/logocampicir.gif" width="120" height="54" ></div>
-		  </div>
+        	<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54" ></div>
+        </div>
     </div> 
     <div id="body_wrapper">
       <div id="body">
@@ -318,7 +318,7 @@
 		<field action="import" tag="list">120,5009</field>
 		
 		<display>
-		<TABLE bgcolor="#BEE4FF" BORDER=0 WIDTH=100% style="font-family: sans-serif; font-size: 11pt; border:2px solid #5277AE">
+		<TABLE bgcolor="#BEE4FF" BORDER=0 WIDTH=95% style="font-family: sans-serif; font-size: 11pt; border:2px solid #5277AE">
 		<tr><td>
 		</display>
 		
@@ -337,7 +337,7 @@
   </do>
   <display><pft>if val(v1102)=0 then 
    '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display>
-  <flow action=exit>1</flow>
+  <flow action=jump>SALIDA</flow>
   
   <label>dni</label>
 

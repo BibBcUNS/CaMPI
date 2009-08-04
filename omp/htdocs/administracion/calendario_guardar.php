@@ -40,7 +40,7 @@ function crear_cadena_mes($datos_mes, $_mes, $_anio) {
 	$cant_dias = cant_dias_mes($_mes+1,$_anio);
 	$cadena='';
 	for($i=0;$i<$cant_dias;$i++){
-		if ($dias[$i]=='0') {
+		if (isset($dias[$i]) && $dias[$i]=='0') {
 			$cadena .= '0';
 		}
 		else {

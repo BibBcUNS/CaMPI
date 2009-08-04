@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Módulo de Administración - Reclamos </title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 	
 <SCRIPT language="JavaScript">
 <!--
@@ -26,7 +26,7 @@
   <body>
     <div id="head">
 		  <div id="title">Módulo de Administración - Reclamos  
-		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  <div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
 		  </div>
 		 
       

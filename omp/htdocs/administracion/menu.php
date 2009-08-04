@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Módulo de Administración </title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 	<style>
 	select,input {vertical-align:middle;}
 table td {border-width:0px; border-style:solid; border-color:#0099FF;}
@@ -25,7 +25,7 @@ $anios = explode  ('~', $anios_calendario);
   <body>
     <div id="head">
 		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
-		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  <div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
 		  </div>
 		 
       
@@ -45,7 +45,7 @@ $anios = explode  ('~', $anios_calendario);
 </tr>
 <tr>
 	<td>
-	<form method="POST" name="calendario_edicion" action="calendario.php" target="calendario" onsubmit="window.open('', 'calendario', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,scrollbars=yes,status=no')" >
+	<form method="POST" name="calendario_edicion" action="calendario.php" target="calendario" onSubmit="window.open('', 'calendario', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,scrollbars=yes,status=no')" >
 
 	  	<script>
 			function alertselected(){
@@ -69,7 +69,7 @@ $anios = explode  ('~', $anios_calendario);
 						echo '<option value="'.$anios[$i].'">'.$anios[$i].'</option>';
 					}
 				?>
-				<option value=NUEVO onselect="alert(hola)">NUEVO</option>
+				<option value=NUEVO>NUEVO</option>
 		</select></strong>
  	  	<span id="nuevo" style="display:none">
  	  	<input id="anio_nuevo" type="text" name="anio_nuevo" size="4">
@@ -78,7 +78,7 @@ $anios = explode  ('~', $anios_calendario);
     </form>
     </td>
     <td>
-	    <form method="POST" action="cancela_esperas.php" target="esperas" onsubmit="window.open('', 'esperas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=420,width=750,scrollbars=yes,status=no')">
+	    <form method="POST" action="cancela_esperas.php" target="esperas" onSubmit="window.open('', 'esperas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=420,width=750,scrollbars=yes,status=no')">
 		<input type="submit" value="Cancela Esperas Vencidas">
 		</form>
     </td>
@@ -87,8 +87,8 @@ $anios = explode  ('~', $anios_calendario);
 <th>Lectores</th>
 <tr>
 	<td>
-    	<form method="POST" action="politicas.php" target="politicas" onsubmit="window.open('', 'politicas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=550,width=750,scrollbars=yes,status=no');">
-	    <input type="submit" value="ABM dee Políticas">
+    	<form method="POST" action="politicas.php" target="politicas" onSubmit="window.open('', 'politicas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=550,width=750,scrollbars=yes,status=no');">
+	    <input type="submit" value="Administración de Políticas">
         </form>
     </td>
 	<td>
@@ -124,7 +124,7 @@ $anios = explode  ('~', $anios_calendario);
         <input type="radio" value="id_recibos" name="opcion" checked>Devoluciones del día (Identificación de recibos)<br>
         <center>
         Ordenamiento:
-        <select onchange="window.document.form_listados.Orden.value=this.value;" style="font-size : xx-small">
+        <select onChange="window.document.form_listados.Orden.value=this.value;" style="font-size : xx-small">
         <option value="Prestamo" selected>Nro. Papeleta</option>
         <option value="Devolucion">Cronológico</option>							
         </select>

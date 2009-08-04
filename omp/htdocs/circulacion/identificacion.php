@@ -10,7 +10,7 @@
 <style type="text/css">
 <!--
 #body {
-   background : url(../images/body_ident.jpg) no-repeat ;
+   background : url(/omp/images/body_ident.jpg) no-repeat ;
 }
 #lt {
    float : left;

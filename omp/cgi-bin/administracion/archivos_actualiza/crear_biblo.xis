@@ -61,8 +61,6 @@
 <display><pft>v1111,'/',v1111/</pft></display>
 </do>
 
-<display><pft>'listo',/#</pft></display>
-
 <label>fin_crea_biblo</label>
 
 <field action=replace tag=2000><pft>		
@@ -89,4 +87,3 @@
 	<field action="define" tag="1102">Isis_Status</field>
 	<loop></loop>			
 </do>
-<display><pft>'listo',/#</pft></display>

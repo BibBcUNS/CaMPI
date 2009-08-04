@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Módulo de Administración - Códigos de Barra</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 
 	<SCRIPT language="JavaScript">
 	<!--
@@ -35,7 +35,7 @@
   <body>
     <div id="head">
 		  <div id="title">Módulo de Administración - Códigos de Barra  
-		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		  <div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
 		  </div>
 		 
       
@@ -55,7 +55,7 @@
     <td rowspan="2" >
 	    <form method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" name="form_inventarios" target="_parent">
 	    <input type="hidden" name="IsisScript" value="administracion/listado_etiquetas.xis">
-	    <textarea rows="8" name="inventarios" cols="7" onkeydown="contar_inventarios()"></textarea>
+	    <textarea rows="8" name="inventarios" cols="7" onKeyDown="contar_inventarios()"></textarea>
 	    <input type="submit" value="Enviar">
 	    </form>
     </td>

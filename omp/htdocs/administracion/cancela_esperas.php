@@ -8,12 +8,12 @@ if (isset($_SESSION["s_username"])) {
 <html>
 <head>
     <title>Módulo de Administración </title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 </head>
  <body>
     <div id="head">
 		<div id="title">Módulo de Administración - Cancelar Esperas  
-		<div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
+		<div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
 		</div>
     </div> 
     <div id="body_wrapper">

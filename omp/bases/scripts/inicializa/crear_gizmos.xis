@@ -24,13 +24,6 @@
 					)
 			fi
 		</pft></display>
-
-<display><pft>###,ref(['config']1,
-							'cd ',v5,'\gizmo&',
-							'"',v4,'" iso=gizmo_win.iso create=gizmo now -all&',
-							'"',v4,'" gizmo fst=@gizmo.fst fullinv=gizmo'),####
-</pft></display>
-
 <display><pft>'ANSIOEM...'/</pft></display>
 
 <display><pft>

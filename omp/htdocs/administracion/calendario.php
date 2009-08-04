@@ -7,22 +7,15 @@ hasta la versión de php que tengo, funsiona solo hasta el 17 de Enero de 2038 --
 <html>
 <head>
     <title>Módulo de Administración </title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" >
+    <!--link rel="stylesheet" type="text/css" href="../css/style.css"-->
+    <style>
+	body
+	{
+	  background: #f6f6f6
+	}
+    </style>
 </head>
  <body>
-    <div id="head">
-		  <div id="title">Módulo de Administración - Calendario  
-		  <div id="logo"><img src="../images/logocampi2.gif"  width="156" height="71" ></div>
-		  </div>
-		 
-      
-    </div> 
-    <div id="body_wrapper">
-      <div id="body">
-					 <div id="all">
-								<div class="top"></div>
-								<div class="content">
-<!------------------------------------------------------------------------------------------------->  
 
 <?php
 if (isset($_SESSION["s_username"])) {
@@ -315,18 +308,6 @@ else {
 
 ?>
 <!------------------------------------------------------------------------------------------------->  
-								</div>
-								<div class="bottom"></div>
-						</div>
-        <div class="clearer">
-</div>
-      </div>
-      <div class="clearer">
-	  </div>
-    </div>
-    <div id="end_body"></div>
-
-			<div id="footer">Versión Beta<br>(junio 2009)</div>
 </body>
 <?php
 }else{
