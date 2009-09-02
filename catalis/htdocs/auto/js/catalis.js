@@ -1124,6 +1124,18 @@ function refreshTitleBar()
 		var title = getSubfields(document.getElementById("field100")).replace(/ \.(?=($|\^))/,".").replace(/\^\w/g," ");
 		document.title = SOFT_NAME + " :: " + title;
 	}
+	if ( document.getElementById("field110") ) {
+			
+		var title = getSubfields(document.getElementById("field110")).replace(/ \.(?=($|\^))/,".").replace(/\^\w/g," ");
+		document.title = SOFT_NAME + " :: " + title;
+	}
+	
+	if ( document.getElementById("field111") ) {
+			
+		var title = getSubfields(document.getElementById("field111")).replace(/ \.(?=($|\^))/,".").replace(/\^\w/g," ");
+		document.title = SOFT_NAME + " :: " + title;
+	}
+	
 }
 
 

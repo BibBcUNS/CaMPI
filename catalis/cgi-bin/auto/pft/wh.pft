@@ -194,13 +194,132 @@ fi,
 	fi,fi,
 	*/
 	
-	proc(
-		'd1901a1901¦',
-			replace(replace(v100*3,
-				' /^d','^d'),
-				'^','¦a1901¦'),
-		'¦',
-	),
+	if p(v100) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v100*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	
+	if p(v110) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v110*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	
+	if p(v111) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v111*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	if p(v130) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v130*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	
+	if p(v148) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v148*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	
+	if p(v150) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v150*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	
+	if p(v151) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v151*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	
+	if p(v155) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v155*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	if p(v180) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v180*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	if p(v181) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v181*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	if p(v182) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v182*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
+	if p(v185) 
+	then 
+		proc(
+			'd1901a1901¦',
+				replace(replace(v185*3,
+					' /^d','^d'),
+					'^','¦a1901¦'),
+			'¦',
+		),
+	fi,	
 	
 	/* ATENCION: hay registros viejos que no usan '/' */
 	

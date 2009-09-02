@@ -37,7 +37,7 @@ function loadTemplates() {
 //------------------------------------------------------------------------------
 
 <!--  Plantilla para autores -->
-	templates["NOMBRE PERSONAL"] = {
+	templates["Nombre Personal"] = {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
@@ -50,7 +50,7 @@ function loadTemplates() {
 			
 	}
 	<!--  Plantilla para autores -->
-	templates["NOMBRE CORPORATIVO"] = {
+	templates["Nombre Corporativo"] = {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
@@ -64,7 +64,7 @@ function loadTemplates() {
 	}
 	
 	<!--  Plantilla para autores -->
-	templates["NOMBRE REUNION"] = {
+	templates["Nombre de Reunión"] = {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
@@ -80,7 +80,7 @@ function loadTemplates() {
 	
 		<!--  Plantilla de Autoridad para Título -->
 
-	templates["TITULO UNIFORME"] = {
+	templates["Título Uniforme"] = {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
@@ -93,7 +93,7 @@ function loadTemplates() {
 			
 	}
 	<!--  Plantilla de Autoridad para Temas-->
-	templates["TEMATICO"] = {
+	templates["Temático"] = {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
@@ -106,7 +106,7 @@ function loadTemplates() {
 			
 	}
 	<!--  Plantilla de Autoridad para Temas-->
-	templates["NOMBRE GEOGRAFICO"] = {
+	templates["Nombre Geográfico"] = {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",

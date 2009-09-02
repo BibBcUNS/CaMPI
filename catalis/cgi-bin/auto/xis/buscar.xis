@@ -243,7 +243,7 @@
 		<input type="hidden" name="from" value="[pft]f(val(v2006)-20,1,0)[/pft]">
 		<button class="resultsButton" onclick="this.form.submit()"
 		        [pft]if val(v2006) = 1 then ' disabled="disabled" ' fi[/pft]
-		        >< Anteriores/button>
+		        >< Anteriores></button>
 	</form>
 
 	<!-- Botón "SIGUIENTES" -->

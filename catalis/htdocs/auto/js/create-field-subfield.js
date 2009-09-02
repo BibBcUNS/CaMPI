@@ -213,6 +213,13 @@ function createField(tag, ind, subfields)
 	if ( "100" == tag ) {
 		newField.id = "field100"; // para poder usar refreshTitleBar()
 	}
+	if ( "110" == tag ) {
+		newField.id = "field110"; // para poder usar refreshTitleBar()
+	}
+	if ( "111" == tag ) {
+		newField.id = "field111"; // para poder usar refreshTitleBar()
+	}
+	
 	//max_fieldId++;
 	//newField.id = "fieldId" + max_fieldId;
 
