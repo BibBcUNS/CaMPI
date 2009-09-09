@@ -143,9 +143,11 @@ function mostrar_politicas() {
 	//-------- Muestro los datos de la BD politicas ---------
 	//-------------------------------------------------------
 	$ptr_politicas = fopen("http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=TODAS","r");
-	$politicas = fread($ptr_politicas,8192);
+	//$politicas = fread($ptr_politicas,10000);
+	while (!feof($ptr_politicas)) {$politicas .= fread($ptr_politicas, 500);}
 	fclose($ptr_politicas);
 
+	fclose($ptr_politicas);
 	$politicas_arreglo = explode('#',$politicas);
 
     for ($i=0;$i<=count($politicas_arreglo)-1;$i++){	
