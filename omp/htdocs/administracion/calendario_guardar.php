@@ -83,6 +83,6 @@ echo '<br><br><input type=button onclick="javascript:window.close()" value="Cerr
     </div>
     <div id="end_body"></div>
 
-			<div id="footer">Versión Beta<br>(junio 2009)</div>
+			<div id="footer"></div>
 </body>
 </html>

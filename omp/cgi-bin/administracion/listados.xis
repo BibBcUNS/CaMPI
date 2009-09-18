@@ -440,7 +440,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 	  </div>
     </div>
     <div id="end_body"></div>
-       <div id="footer">Versión Beta<br>(junio 2009)</div>
+       <div id="footer"></div>
   </body>
   </html>
 </display>

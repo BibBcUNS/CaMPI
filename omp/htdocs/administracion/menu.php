@@ -188,7 +188,7 @@ $anios = explode  ('~', $anios_calendario);
     </div>
     <div id="end_body"></div>
 
-           <div id="footer">Versión Beta<br>(junio 2009)</div>
+           <div id="footer"></div>
   </body>
 <?php
 }else{

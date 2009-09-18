@@ -46,7 +46,7 @@ $url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?Isis
     </div>
     <div id="end_body"></div>
 
-			<div id="footer">Versión Beta<br>(junio 2009)</div>
+			<div id="footer"></div>
 </body>
 <?php
 }else{

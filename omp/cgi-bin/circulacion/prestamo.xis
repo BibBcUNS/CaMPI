@@ -1505,7 +1505,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
       <div CLASS="clearer"></div>
     </div>
     <div id="end_body"></div>
-		<div id="footer">Versión 0.1<br>(Julio 2008)</div></center>
+		<div id="footer"></div></center>
   </body>
 </html>
 </display>

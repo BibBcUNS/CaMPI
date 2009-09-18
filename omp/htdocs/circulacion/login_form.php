@@ -66,7 +66,7 @@ Password: <input type='password' size='15' maxlength='25' name='password'>
     </div>
     <div id="end_body"></div>
 
-		<div id="footer">Versión Beta<br>(junio 2009)</div></center>
+		<div id="footer"></div></center>
   </body>
 
 <?php
