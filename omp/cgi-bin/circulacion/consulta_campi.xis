@@ -53,8 +53,9 @@
   <field action=cgi tag=130>operario_id</field>
  
   <display><htmlpft>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
   <head>
     <title>Circulacion</title>
     <link REL="stylesheet" TYPE="text/css" HREF="/omp/css/style.css" >	
@@ -90,48 +91,18 @@
 	</SCRIPT>
 
   </head>
-  <body>
-  <center>
+<body>
     <div id="head"> 
-		  <div id="title"><p ALIGN="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
-		  <div id="logo"><img SRC="/omp/circulacion/images/logocampi.gif"   width="120" HEIGHT="54" ></div>
-		  </div>
-		 
-      <!--div id="menu">
-        <ul>
-          <li>
-            <a HREF="/index.html" target=_blank>
-			Principal</a>
-          </li>
-		  <li>&nbsp;</li>
-          <li  class="active">
-            <a HREF="*" >Circulación</a>
-          </li><li>&nbsp;</li>
-          <li>
-            <a HREF="/administracion/login_form.php"  target=_blank>		
-			Administración</a>
-          </li><li>&nbsp;</li>
-          <li>
-            <a HREF="/estadisticas/index.htm" target=_blank>Estadísticas</a>
-          </li><li>&nbsp;</li>
-		  <li>
-             <a HREF="/catalis/catalogacion.htm" target=_blank>Catalogación</a>
-          </li><li>&nbsp;</li>
-		  <li>
-            <a href= 
-			"http://cabbib2.cnea.gov.ar/cgi-bin/opacmarc/wxis?IsisScript=opac/xis/opac.xis&db=celtic" 
-			target=_blank>OPAC</a>
-          </li><li>&nbsp;</li>
-        </ul>
-      </div-->
+		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
     </div> 
     <div id="body_wrapper">
       <div id="body">
 					 <div id="all">
 					 			<div CLASS="top"></div>
 								<div CLASS="content">
-           <br><br> 
-<!----------------------------------------------------------------------------->		    </htmlpft></display> 
+   
+<!--#########################################-->		    </htmlpft></display> 
 
 
  
@@ -205,7 +176,7 @@
   <display><pft>if val(v1102)=0 then 
    '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display>
 <display>
-<!----------------------------------------------------------------------------->	
+<!--##################################################-->	
 <br><br> 
 								</div>
 								<div CLASS="bottom"></div>
@@ -215,7 +186,7 @@
       <div CLASS="clearer"></div>
     </div>
     <div id="end_body"></div>
-		<div id="footer"></div></center>
+		<div id="footer"></div>
   </body>
 </html>
 </display>
@@ -268,7 +239,7 @@
 <!--  <display><pft>if val(v1102)=0 then 
    '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display> -->
 <display>
-<!----------------------------------------------------------------------------->	
+<!--################################################################-->	
 <br><br> 
 								</div>
 								<div CLASS="bottom"></div>
@@ -278,7 +249,7 @@
       <div CLASS="clearer"></div>
     </div>
     <div id="end_body"></div>
-		<div id="footer"></div></center>
+		<div id="footer"></div>
   </body>
 </html>
 </display>   
@@ -350,7 +321,7 @@
       <div CLASS="clearer"></div>
     </div>
     <div id="end_body"></div>
-		<div id="footer"></div></center>
+		<div id="footer"></div>
   </body>
 </html>
 </display>
@@ -381,7 +352,7 @@
       <div CLASS="clearer"></div>
     </div>
     <div id="end_body"></div>
-		<div id="footer"></div></center>
+		<div id="footer"></div>
   </body>
 </html>
 </display>
@@ -423,7 +394,7 @@
       <div CLASS="clearer"></div>
     </div>
     <div id="end_body"></div>
-		<div id="footer"></div></center>
+		<div id="footer"></div>
   </body>
 </html>
 </display>
@@ -444,7 +415,7 @@
       <div CLASS="clearer"></div>
     </div>
     <div id="end_body"></div>
-		<div id="footer"></div></center>
+		<div id="footer"></div>
   </body>
 </html>
 </display>   

@@ -183,19 +183,18 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
      <field action=define tag=1102>Isis_Status</field>
      <field action=define tag=1011>Isis_Lock</field>
      <update>
-			<field action=import tag=list>1000</field>
      		<flow action=jump><pft>if ref(['config']1,v10)='manual' then 'fin_recalcular' fi</pft></flow>
 					<!-------------------------------------------------------------			
 					 ---- calcula las nuevas fechas de vto de los prestamos -----
 					 -------------------------------------------------------------->
-					<flow action=jump><pft>if a(v8) then 'no_hay_prestamos' fi</pft></flow>
+					 <flow action=jump><pft>if a(v8) then 'no_hay_prestamos' fi</pft></flow>
 			     	<!-- calcula las nuevas fechas de vto de los prestamos -->
 			        <list action=delete>now</list>
 			        <list action=load type=list><pft>(v8/)</pft></list>
 			        <do task=list>
 			        <field action=define tag=1001>Isis_Item</field>
 					<loop>
-							<field action=import tag=list>3,1000</field>
+							<field action=import tag=list>3</field>
 							<!-- tipo objeto: -->
 							<field action=replace tag=2344><pft>ref(['exist']l(['exist']v1001^i),v987)</pft></field>
 							<!-- días prestamo v2 tiene la credencial del lector): -->
@@ -207,33 +206,14 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 
 							<field action=replace tag=3000><pft>v9000*6.2,'/',v9000*4.2,'/',v9000*0.4</pft></field>
 							<field action=export previous=add tag=3000>3000</field>
-							
-							<!-- Actualización de las fechas en base exist -->
-							<field action="replace" tag=4000><pft>f(l(['exist']v1001^i),1,0)</pft></field>
-							<do task=update>
-							<parm name=db>exist</parm>
-							<parm name=mfn><pft>v4000</pft></parm>
-							
-							<parm name=lockid><pft>v1000^b</pft></parm>
-							<field action=define tag=1102>Isis_Status</field>
-							<field action=define tag=1011>Isis_Lock</field>
-							<update>
-								<field action="import" tag=list>3000</field>
-								<field action="replace" tag=998><pft>replace(v998,s('^d',v998^d), s('^d',v3000))</pft></field>
-								<field action="delete" tag="list">3000</field>
-								<write>Unlock</write>
-							</update>
-							</do>
-							
 					</loop>
 			        </do>
-					
 			        <!-- formo las cadenas para el reemplazo de las fechas -->
 			        <field action=replace tag=2000 split=occ><pft>('^v',v8^v/)</pft></field> <!-- fechas de dev. registradas (a ser reemplazada) -->
 			        <field action=replace tag=3000 split=occ><pft>('^v',v3000/)</pft></field> <!-- nueva fecha de devolución -->
 			        
 			        <!-- por cada ocurrencia del v8 se creo una occ de v2000 (fecha orig) y v3000 (nva fecha) -->
-					<field action=replace tag=8 split=occ><pft>(replace(v8,v2000,v3000)/)</pft></field>					
+					<field action=replace tag=8 split=occ><pft>(replace(v8,v2000,v3000)/)</pft></field>
 					
 					<label>no_hay_prestamos</label>
 					 <!-------------------------------------------------------------
@@ -268,7 +248,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 	                'Habilitado'
 	            fi
 	        </pft></field>
-	        <field action=delete tag=list>1000,1001,2000,3000</field>
+	        <field action=delete tag=list>1001,2000,3000</field>
 	        <write>Unlock</write>
      </update>
 </do>
@@ -728,7 +708,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                                 <field action="add" tag="5001"><pft>@papeleta.pft</pft></field> <!-- Obtiene el resumen del material -->
                                 <field action="export" tag="list">5001</field>
                         </loop>
-                        </do> <!-- serarch marc -->
+                        </do> <!-- search marc -->
                                     
                         <field action=add tag=3000><pft>
                                         if s(mpu,v985):'PERM' then s(mpl,v1001,v5001,) 
@@ -1259,21 +1239,19 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 <html>
   <head>
     <title>Circulación</title>
-    <link REL="stylesheet" TYPE="text/css" HREF="/omp/circulacion/css/style.css" />
+    <link REL="stylesheet" TYPE="text/css" HREF="/omp/css/style.css" />
   </head>
   <body onload="window.document.form_abm.credencial.value=window.parent.indice.document.form_id.lector.value">
-  <center>
-    <div id="head"> 
-		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
-		<div id="logo"><img src="/omp/circulacion/images/logocampi.gif" width="120" height="54" ></div>
-		  </div>
-    </div> 
+     <div id="head"> 
+		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div>
     <div id="body_wrapper">
       <div id="body">
 					 <div id="all">
 					 			<div CLASS="top"></div>
 								<div CLASS="content">
-<!----------------------------------------------------------------------------->	
+<!--#########################################-->	
 </display>
 
 		<!-- recibimos los parametros del formulario form_id -->
@@ -1460,11 +1438,29 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 			<body  onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then '; print()' fi,'">
 		-->
   		<display><pft>
-		
-		<!-- Modifico la siguiente linea para compatibilidad FF - PLL - 04/05/09 
-		        '<body  onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then ';' fi,'">',
-		-->	
+		'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Circulacion</title>
+    <link REL="stylesheet" TYPE="text/css" HREF="/omp/css/style.css" >
+</head>'
+
+		'<!-- Modifico la siguiente linea para compatibilidad FF - PLL - 04/05/09 
+		        <body  onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then ';' fi,'">
+		-->'
 		 '<body  onload="mostrar_reservas();this.focus(); window.parent.indice.document.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then ';' fi,'">',
+		 '<div id="head"> 
+		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div CLASS="top"></div>
+								<div CLASS="content">
+   
+<!--#########################################-->	'
 		        '<font face="Draft 10cpi">'
         </pft></display>
 
@@ -1495,7 +1491,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 
 <label>EXIT</label>
 <display>
-<!----------------------------------------------------------------------------->	
+<!--##############################################-->	
  
 								</div>
 								<div CLASS="bottom"></div>
@@ -1505,7 +1501,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
       <div CLASS="clearer"></div>
     </div>
     <div id="end_body"></div>
-		<div id="footer"></div></center>
+		<div id="footer"></div>
   </body>
 </html>
 </display>

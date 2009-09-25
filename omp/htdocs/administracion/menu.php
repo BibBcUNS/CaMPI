@@ -2,16 +2,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-    <title>Módulo de Administración </title>
-    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
-	<style>
+  <head>
+    <title>Administración</title>
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css">
+		<style>
 	select,input {vertical-align:middle;}
 table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 	table th {border-color:white; border-style:solid; border-width:5px; -moz-border-radius:12px; padding: 5px 0px;}
 	</style>
 	<!--script language=javascript type=text/javascript src=js/popup_calendar.js-->
-</head>
+  </head>
+  <body>
+    <div id="head"> 
+		<div id="title">Módulo de Administración - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div> 
+	
+	<div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div class="top"></div>
+								<div class="content">
+   
+<!--###################################################-->	
+
 <?php
 if (isset($_SESSION["s_username"])) {
 ?>
@@ -22,20 +36,7 @@ $anios_calendario = fread($ptr_anios_calendario,1000);
 fclose($ptr_anios_calendario);
 $anios = explode  ('~', $anios_calendario);
 ?>
-  <body>
-    <div id="head">
-		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
-		  <div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
-		  </div>
-		 
-      
-    </div> 
-    <div id="body_wrapper">
-      <div id="body">
-					 <div id="all">
-								<div class="top"></div>
-								<div class="content">
-<!------------------------------------------------------------------------------------------------->  
+
 <center>
  
 <table border="0" width="100%">
@@ -176,20 +177,19 @@ $anios = explode  ('~', $anios_calendario);
 </tr>
 </table>
 </center>
-<!------------------------------------------------------------------------------------------------->  
+<!--###################################################-->		
+<br><br> 
 								</div>
 								<div class="bottom"></div>
 						</div>
-        <div class="clearer">
-</div>
+        <div class="clearer"></div>
       </div>
-      <div class="clearer">
-	  </div>
+      <div class="clearer"></div>
     </div>
     <div id="end_body"></div>
-
-           <div id="footer"></div>
+		<div id="footer"></div>
   </body>
+</html>
 <?php
 }else{
 echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php>";

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <base target="principal">
     <title>id_prestamo</title>
-<link rel="stylesheet" type="text/css" href="css/style.css" />	
+<link rel="stylesheet" type="text/css" href="/omp/css/style.css">	
 <style type="text/css">
 <!--
 #lt1 {

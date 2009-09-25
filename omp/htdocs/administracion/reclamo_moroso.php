@@ -24,19 +24,18 @@
 </SCRIPT>
 </head>
   <body>
-    <div id="head">
-		  <div id="title">Módulo de Administración - Reclamos  
-		  <div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
-		  </div>
-		 
-      
+    <div id="head"> 
+		<div id="title">Módulo de Administración - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
     </div> 
-    <div id="body_wrapper">
+	
+	<div id="body_wrapper">
       <div id="body">
 					 <div id="all">
-								<div class="top"></div>
+					 			<div class="top"></div>
 								<div class="content">
-<!------------------------------------------------------------------------------------------------->  
+   
+<!--###################################################-->	
 [pft]|<p align="center">Otros datos: |v904|</p>|[/pft]
 <table border="1" align="center">
 	<tr>

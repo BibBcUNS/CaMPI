@@ -1,10 +1,10 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-
-
 <title>Open MarcoPolo - Módulo Estadísticas</title>
-
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script language="JavaScript">
 
 function comienzo_semana(Mes, Anio, Dia_Comienzo_Semana) {
@@ -316,24 +316,21 @@ function CargarTerminal(Ip) {
 	window.document.form_stat.terminal.value=Ip;
 }
 </script>
-
 <link href="\mp.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-<!--
-body {
-	margin-top: 20px;
-}
--->
-</style></head>
+
+</head>
 
 <body onload="Inicializar()">
-<table border="0" width="100%">
-  <tr>
-    <td width="85" rowspan="2"><img src="/omp/logo2.gif" width="80" height="80" align="middle"></td>
-    <td width="50%"><big>Institucion XXXXX</big><td align="right"><b><i>Módulo Estadísticas</i></b>&nbsp;&nbsp;<img src="/omp/omp.gif" width="80" height="62" align="middle" border="0"><br>
-    </td>
-  </tr>
-</table>
+    <div id="head"> 
+		<div id="title">Módulo de Estadísticas - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!--##########################################################-->  
 <form action="/omp/cgi-bin/wxis.exe/omp/estadisticas/" method="post" name="form_stat" target="Resultados" onsubmit="return Procesar()">
 	<input type="Hidden" name="IsisScript" value="estadisticas/estadistica.xis">
 	<input type="hidden" name="operaciones">
@@ -350,33 +347,34 @@ body {
 
 	<table width="596" border="0" align="center" cellpadding="1" cellspacing="0" bgcolor="#D2E3AC" class="fichaencab">
  	<tr>
-    <td width="109" align="center" id="Celda1" style="cursor:hand" onclick="VerOcultar('Layer1','visible')">Operaciones</a>
-      </div></td>
-    <td width="87" align="center" id="Celda2" style="cursor:hand" onclick="VerOcultar('Layer2','visible')">Per&iacute;odo</a>
-      </div></td>	
-    <td width="90" align="center" id="Celda3" style="cursor:hand" onclick="VerOcultar('Layer3','visible')">Lector</a>
-      </div></td>
-    <td width="96" align="center" id="Celda4" style="cursor:hand" onclick="VerOcultar('Layer4','visible')">Material</a>
-      </div></td>
-    <td width="113" align="center" id="Celda5" style="cursor:hand" onclick="VerOcultar('Layer5','visible')">Bibliotecario</a>
-      </div></td>
-    <td width="96" align="center" id="Celda6" style="cursor:hand" onclick="VerOcultar('Layer6','visible')">Ayuda</a>
-      </div></td>
+    <th width="109" align="center" id="Celda1" style="cursor:hand" onclick="VerOcultar('Layer1','visible')">Operaciones</a>
+      </div></th>
+    <th width="87" align="center" id="Celda2" style="cursor:hand" onclick="VerOcultar('Layer2','visible')">Per&iacute;odo</a>
+      </div></th>	
+    <th width="90" align="center" id="Celda3" style="cursor:hand" onclick="VerOcultar('Layer3','visible')">Lector</a>
+      </div></th>
+    <th width="96" align="center" id="Celda4" style="cursor:hand" onclick="VerOcultar('Layer4','visible')">Material</a>
+      </div></th>
+    <th width="113" align="center" id="Celda5" style="cursor:hand" onclick="VerOcultar('Layer5','visible')">Bibliotecario</a>
+      </div></th>
+    <th width="96" align="center" id="Celda6" style="cursor:hand" onclick="VerOcultar('Layer6','visible')">Ayuda</a>
+      </div></th>
 	  </tr>
 	</table>
-	<table width="596" border="0" align="center" cellpadding="1" cellspacing="0" bordercolor="#FFFFCC" bgcolor="#D2E3AC" class="fichadatos">
+	<table width="596" border="0" align="center" cellpadding="1" cellspacing="0"  bgcolor="#BEE4FF" class="fichadatos">
   <tr>
     <td height="244" colspan="6" valign="top">
 		<div id="Layer1" style="position:absolute; width:592px; height:242px; z-index:1; visibility: visible; top: 145px;">
 			<table width="100%" align="center">
 	    <tr>
-	      <td colspan="3"><h3>Indique las operaciones para analizar</h3></td>
-			</tr>
-	    <tr>
 	      <td>&nbsp;</td>
 	      <td>&nbsp;</td>
 	      <td>&nbsp;</td>
 	      </tr>
+		  <tr>
+	      <td colspan="3"><h2 style="color:#5277AE;">Indique las operaciones para analizar</h2></td>
+			</tr>
+
 	    <tr>
 	      <td width="19%">&nbsp;</td>
 	      <td width="36%">
@@ -399,7 +397,6 @@ body {
 	        <input type="checkbox" name="operacion_6" value="Operacion=PRESTAMO_DOMICILIO"><a href="JavaScript:window.document.form_stat.operacion_6.click()">Préstamo a Domicilio</a></td>
 	    </tr>
 	  </table>
-	
     </div>
 		<div id="Layer2" style="position:absolute; width:593px; height:242px; z-index:1; visibility: hidden;">
 		<table width="100%" align="center">
@@ -622,6 +619,20 @@ body {
 	<input type="Hidden" name="Nombre">
 </form>
 
+	  
+<!--########################################################## -->
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
 
-</body>
+           <div id="footer"></div> 
+  </body>
+
 </html>

@@ -26,19 +26,15 @@ y un campo repetible con todos los inventarios respectivos...
     <title>Módulo de Administración </title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 	  <body>
-    <div id="head">
-		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
-		  <div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
-		  </div>
-		 
-      
-    </div> 
-    <div id="body_wrapper">
+    <div id="head"> 
+		<div id="title">Módulo de Administración - Códigos de Barra</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div>     <div id="body_wrapper">
       <div id="body">
 					 <div id="all">
 								<div class="top"></div>
 								<div class="content">
-<!------------------------------------------------------------------------------------------------->  
+<!--#####################################-->
 </display>
     
     <display><p align="center"><big>Actualización de Inventarios</big></p></display>
@@ -63,7 +59,7 @@ y un campo repetible con todos los inventarios respectivos...
 	
 	<!-- Listo, FIN-->
 <display>
-<!------------------------------------------------------------------------------------------------->  
+<!--################################################-->  
 								</div>
 								<div class="bottom"></div>
 						</div>

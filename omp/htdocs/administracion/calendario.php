@@ -7,21 +7,13 @@ hasta la versión de php que tengo, funsiona solo hasta el 17 de Enero de 2038 --
 <html>
 <head>
     <title>Módulo de Administración </title>
-    <!--link rel="stylesheet" type="text/css" href="../css/style.css"-->
-    <style>
-	body
-	{
-	  background: #f6f6f6
-	}
-    </style>
 </head>
- <body>
 
 <?php
 if (isset($_SESSION["s_username"])) {
 ?>
-<body bgcolor="#E8E8D0" topmargin="0">
-
+<body style="background: url(/omp/images/bg.jpg) repeat-x top left;">
+<br><br>
 <?php
 // recibo el parámetro $anio a ser creado/editado
 $año=$_POST['anio'];
@@ -191,11 +183,11 @@ function editar_año($_año) {
 	echo "<input type=hidden name=anio value=".$_año.">";
 	
 	// Muestro el título
-	echo '<h2 style="display:inline;margin-right:245px;">Edición de calendario - Año '.$_año.'</h2>';
+	echo '<h2 style="display:inline;margin-right:245px;color:white;">Edición de calendario - Año '.$_año.'</h2>';
 	
 	echo '<input type=submit value=" Guardar ">&nbsp;';
 	echo '<input type=button onclick="javascript:window.close()" value="Cerrar">';
-	echo '<br><br>';
+	echo '<br><br><br>';
 
 	
 	echo "<table border=0 cellspacing=0><tr>";

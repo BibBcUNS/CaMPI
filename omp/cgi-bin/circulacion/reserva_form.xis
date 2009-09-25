@@ -21,11 +21,26 @@ Uso local:
 <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 <!-- ENCABEZADO DE PÁGINA -->
 <display>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<title>Reserva de Material</title>
-	</head>
-	<body style="background: #f6f6f6">
+  <head>
+    <title>Reservas</title>
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css">
+  </head>
+  <body>
+    <div id="head"> 
+		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div> 
+	
+	<div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div class="top"></div>
+								<div class="content">
+   
+<!--###################################################-->	
 	<!-- BOTO CERRAR Ventana	
 	div style="float:right">
 		<input value="[x] Cerrar" type="Button" onClick="window.close()">
@@ -93,7 +108,7 @@ En caso de no ser submit se Muestra el Formulario
 	)
 </pft></field>
 
-<!-- Realizo los controles y verifico el resultoado. -->
+<!-- Realizo los controles y verifico el resultado. -->
 <include>circulacion/controles/reservas/controles_inc.xis</include>
 
 <!-- Si el resultado fue exitoso paso a realizar la reserva. En caso contrario muestro el error y luego el formulario -->
@@ -273,8 +288,18 @@ En caso de no ser submit se Muestra el Formulario
 <label>FIN</label>
 
 <display>
-</body>
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer"></div>
+  </body>
 </html>
+
 </display>
 
 

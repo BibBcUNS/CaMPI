@@ -91,11 +91,13 @@
 		<head>
 		<LINK REL="stylesheet" TYPE="text/css" HREF="/omp/css/style.css">
 		</head>
-		<body bgcolor="#E8E8D0">	
+		<body>	
+		<br><br><p style="font-family: Trebuchet MS, Verdana, sans-serif;
+	font-size: 24px;color: #FFF;">Observaciones</p><br><br><br>
 		<table width="100%">
 			<tr>
 				<td align="center">
-					[pft]if val(v1102)<=0 then 'Grabación Exitosa !' else 'Error: ',v1102 fi[/pft]
+					[pft]if val(v1102)<=0 then 'Grabación Exitosa !<br>' else 'Error: ',v1102 fi[/pft]
 					<input type=button value="Cerrar ventana" onclick="window.close()">
 				</td>
 			</tr>

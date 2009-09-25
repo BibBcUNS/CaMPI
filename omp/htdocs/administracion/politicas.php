@@ -32,19 +32,15 @@ function normal(fila) {
 
 </head>
   <body>
-    <div id="head">
-		  <div id="title">Módulo de Administración - Políticas  
-		  <div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
-		  </div>
-		 
-      
-    </div> 
-    <div id="body_wrapper">
+    <div id="head"> 
+		<div id="title">Módulo de Administración - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div>     <div id="body_wrapper">
       <div id="body">
 					 <div id="all">
 								<div class="top"></div>
 								<div class="content">
-<!------------------------------------------------------------------------------------------------->  
+<!--#####################################-->  
 
 
 
@@ -143,11 +139,9 @@ function mostrar_politicas() {
 	//-------- Muestro los datos de la BD politicas ---------
 	//-------------------------------------------------------
 	$ptr_politicas = fopen("http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=TODAS","r");
-	//$politicas = fread($ptr_politicas,10000);
-	while (!feof($ptr_politicas)) {$politicas .= fread($ptr_politicas, 500);}
+	$politicas = fread($ptr_politicas,8192);
 	fclose($ptr_politicas);
 
-	fclose($ptr_politicas);
 	$politicas_arreglo = explode('#',$politicas);
 
     for ($i=0;$i<=count($politicas_arreglo)-1;$i++){	
@@ -521,7 +515,7 @@ else {
 }
 ?>
 
-<!------------------------------------------------------------------------------------------------->  
+<!---###################################--->  
 								</div>
 								<div class="bottom"></div>
 						</div>

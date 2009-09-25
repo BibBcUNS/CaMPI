@@ -69,37 +69,17 @@ bibliográfica. Esta verificación debe ser relizada por el proceso check_consiste
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 </head>
  <body>
-    <div id="head">
-		<div id="title">Módulo de Administración - Actualizar Inventario  
-		<div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
-		</div>
-    </div> 
-    <div id="body_wrapper">
+    <div id="head"> 
+		<div id="title">Módulo de Administración - Actualizar Inventario</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div>     <div id="body_wrapper">
       <div id="body">
 					 <div id="all">
-</display>					 
-<display><pft>	
-<big>',ref(['config']1,v7),'</big><small><br>',
-          'Fecha: ',
-            select s(date)*16.1
-              case '0': ,'Domingo, ',
-              case '1': ,'Lunes, ',
-              case '2': ,'Martes, ',
-              case '3': ,'Miércoles, ',
-              case '4': ,'Jueves, ',
-              case '5': ,'Viernes, ',
-              case '6': ,'Sábado, ',
-            endsel,
-            mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)
-			'  --  ',mid(date(datetime),10,9),
-          '</small>',
-    </pft></display>	
-</display>	
 								<div class="top"></div>
 								<div class="content">
-<!------------------------------------------------------------------------------------------------->
-</display>
+<!--#####################################--> 
 
+</display>					 
     
     <display><p align="center"><big>Actualización de Inventarios</big></p></display>
 
@@ -445,7 +425,7 @@ bibliográfica. Esta verificación debe ser relizada por el proceso check_consiste
     </pft></display>
     
     <display>
-	<!---------------------------------------------------------------------------------------------------->
+<!--####################################################-->
 						</div>
 						<p><br><a href="JavaScript:history.go(-1)"> << Volver</a></p>
 								<div class="bottom"></div>

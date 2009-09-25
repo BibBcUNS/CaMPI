@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-    <title>CaMPI </title>
+    <title>CaMPI - Login </title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 <?php
 if (isset($_SESSION["s_username"]) && $_SESSION["s_permiso"]=='circulacion') {
@@ -13,17 +13,15 @@ if (isset($_SESSION["s_username"]) && $_SESSION["s_permiso"]=='circulacion') {
   </head>
   <body><center>
     <div id="head"> 
-		<div id="title"><p align="left"><br>Módulo de Circulación - OPEN MarcoPolo</p>
-		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54" ></div>
-		  </div>
-    </div> 
-    </div> 
+		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div>
     <div id="body_wrapper">
       <div id="body">
 					 <div id="all">
 								<div class="top"></div>
 								<div class="content">
-<!------------------------------------------------------------------------------------------------->  
+<!--############################################-->  
 
 <br>
 <form action='login_valida.php' method='POST'>
@@ -55,13 +53,12 @@ Password: <input type='password' size='15' maxlength='25' name='password'>
 </td>
 </tr>
 </table>
-<!------------------------------------------------------------------------------------------------->  
+<!--########################################-->  
 </div>
 								<div class="bottom"></div>
 						</div>
         <div class="clearer"></div>
       </div>
-	  
       <div class="clearer"></div>
     </div>
     <div id="end_body"></div>

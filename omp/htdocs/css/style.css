@@ -14,24 +14,28 @@ body
 	height: 117px;
 	padding: 0px;
 	margin: 0 auto;
+	display: block;
 	/*background: #0000ff;*/
 }
 
 
-#head #title
+#title
 {
-	float: left;
- 	font-size: 26px;
+	text-align:left;
+	width:65%;
+ 	font-size: 24px;
 	color: #FFF;
-	padding:0 0 0 30px;
-    margin: 30px 15px 0px 0px;
-	/*background: #0000ff;*/
+	padding:0 20px 0 30px;
+    margin: 30px 0px 0px 0px;
+	float:left;
 }
-#title #logo
+#logo
 {
-	float: right;
-	/*background: #ffff00;*/
-    margin-top: -35px;
+	float:right;
+	width:170px;
+	height:80px;
+	margin: 32px 30px 0px 0px;
+    display: block;
 }
 
 #body_wrapper
