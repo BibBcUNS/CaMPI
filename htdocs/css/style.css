@@ -29,11 +29,10 @@ body
 }
 #menu{
     width:92%;
-	height:55px;
 	background-color: transparent;
-	/*background-color:green;*/
+	/*background-color:green;;*/
 	margin: 0px 0px 0px 25px;
-	padding: 2px 0px 30px 0px;
+	padding: 0px 0px 0px 0px;
 }
 
 #menu span.boton{
