@@ -19,55 +19,25 @@ body
 
 #title
 {
-  font-size: 26px;
-  color: #FFF;
-  padding:0px 0px 0px 20px;
-  margin: 30px 15px 0px 15px;
-  /*background-color:red;*/
-  width:90%;
-  height:46px;
+	text-align:left;
+	width:450px;
+	height:60px;
+ 	font-size: 22px;
+	color: #FFF;
+	padding:0 20px 0 30px;
+    margin: 30px 0px 0px 0px;
+	float:left;
+	/*background:red;*/
 }
-#menu{
-    width:92%;
-	background-color: transparent;
-	/*background-color:green;;*/
-	margin: 0px 0px 0px 25px;
-	padding: 0px 0px 0px 0px;
-}
-
-#menu span.boton{
-  margin: 0px 8px 10px 18px;
-  font-size:15px;
-  /*background-color:yellow;*/
-}
-.boton a {
- text-decoration: none;
- color:#003366;
- background: url(../images/fon.jpg) no-repeat top left;
- border-right:1px groove #6C81B7;
- border-bottom:1px groove #6C81B7;
- border-left:1px groove transparent;
- border-top	:1px groove transparent;
-
- }
-.boton a:hover { 
- color: #003366; 
- border-left:1px groove #6C81B7;
- border-top	:1px groove #6C81B7;
- border-right:1px groove  transparent;
- border-bottom:1px groove transparent;
- background: url(../images/fon2.jpg) no-repeat top left;
- font-style:italic;
-}
-#end_body
+#logo
 {
-  background: url(../images/body_bottom.jpg) no-repeat top left;
-	margin: 0px auto;
-	width: 747px;
-	height: 28px;
-	display: block;
+	float:right;
+	width:170px;
+	height:60px;
+	margin: 30px 10px 0px 0px;
+    display: block;
+	/*background:blue;*/
 }
-
 .clearer
 {
   clear: both;
@@ -97,6 +67,14 @@ body
 .clear { /* generic container (i.e. div) for floating buttons */
     overflow: hidden;
     width: 100%;
+}
+#end_body
+{
+  background: url(../images/body_bottom.jpg) no-repeat top left;
+	margin: 0px auto;
+	width: 747px;
+	height: 28px;
+	display: block;
 }
 #all
 {
