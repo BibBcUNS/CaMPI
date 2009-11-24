@@ -26,7 +26,7 @@ if (isset($_SESSION["s_username"])) {
 
 // Muestro el título
 echo '<h2 style="text-align=center">Cancela Esperas Vencidas</h2>';
-$url="http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/cancela_esperas.xis";
+$url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/cancela_esperas.xis";
  $ptr_esperas = fopen($url,"r");
  $esperas = fread($ptr_esperas,8192);
  echo $esperas;

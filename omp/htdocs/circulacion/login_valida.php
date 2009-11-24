@@ -8,7 +8,7 @@ if ($password==NULL or $username==NULL) {
 echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php?error=si>";
 }else{
 
- $cadena_archivo = "http://127.0.0.1/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=userpwd.xis&user=".$username."&pwd=".$password."&modulo=circulacion";
+ $cadena_archivo = "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=userpwd.xis&user=".$username."&pwd=".$password."&modulo=circulacion";
 
  $ptr_userpwd = fopen($cadena_archivo, "r");
  $exito = fread($ptr_userpwd,8192);

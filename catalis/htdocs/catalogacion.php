@@ -14,7 +14,7 @@ function openWin(folder) {
 	str += ",innerWidth=" + aw;
 	
 	//var arguments = 'resizable=0,toolbar=0,location=0,directories=0,addressbar=0,scrollbars=0,status=0,menubar=0,top=0,left=0,screenX='+x+',screenY='+y+',width='+screen.availWidth+',height='+screen.availHeight;
-	var SCRIPT_URL = "http://<?php echo $_SERVER['SERVER_NAME'];?>/catalis/cgi-bin/wxis.exe";
+	var SCRIPT_URL = "http://<?php echo $_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT];?>/catalis/cgi-bin/wxis.exe";
 	
 	window.open(SCRIPT_URL + '?IsisScript='  +  folder + '/xis/catalis.xis','',str);
 }

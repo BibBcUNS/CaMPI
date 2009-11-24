@@ -31,7 +31,7 @@ if (isset($_SESSION["s_username"])) {
 ?>
 
 <?php
-$ptr_anios_calendario = fopen("http://$_SERVER[SERVER_NAME]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_anios.xis","r");
+$ptr_anios_calendario = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_anios.xis","r");
 $anios_calendario = fread($ptr_anios_calendario,1000);
 fclose($ptr_anios_calendario);
 $anios = explode  ('~', $anios_calendario);
