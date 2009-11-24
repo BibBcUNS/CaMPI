@@ -6,7 +6,7 @@ if ( navigator.appName != "Microsoft Internet Explorer" ) {
 	var msg = "Please consider that this version of Catalis does not work properly on browsers other than Internet Explorer 6. That will change, once we finish the next version which will also work on Mozilla. The development version can be tested online; please check the website.";
 	alert(msg);
 // Aviso para quien ingrese con IE < 5.5
-} else if ( navigator.appVersion.search(/MSIE (6\.\d?|5\.5)/) == -1 ) {
+} else if ( navigator.appVersion.search(/MSIE (8\.\d?|7\.\d?|6\.\d?|5\.5)/) == -1 ) {
 	var msg = "La versión de Internet Explorer que está utilizando (" + RegExp.$1 + ") no permite trabajar con Catalis. Recomendamos usar la versión 6.";
 	alert(msg);
 }
