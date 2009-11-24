@@ -49,10 +49,11 @@ Password: <input type='password' size='15' maxlength='25' name='password'>
 <tr>
 <td align='center'>
 <input type="submit" value="Login">
-</form>
 </td>
 </tr>
 </table>
+</form>
+
 <!--########################################-->  
 </div>
 								<div class="bottom"></div>

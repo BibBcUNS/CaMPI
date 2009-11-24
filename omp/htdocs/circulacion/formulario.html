@@ -505,22 +505,23 @@ if ref(['config']1,v9)='si' then
 				<input type="hidden" name="operario_id" value="',v2002,'">
 	
                     <table width="100%" border="0" bgcolor="#FFFFFF">
-                    	<tr><td colspan="3">
+                    	<tr><td colspan="2">
                         <h6><u>R</u>eservar material:</h6>
                         </td></tr>
                     	<tr>
-                        	<td width="45%">
-                            	<input type="text" name="expresion" size="28" accesskey="r"><br />
-                            	<input type="checkbox" name="tipo" value="completa" />Palabras completa
-                            </td>
-                            <td width="20%">
-                                <input type="radio" name="campo" value="NC" checked /> NC    <br />
-                                <input type="radio" name="campo" value="autor"      /> Autor <br />
+                        	<td width="80%">
+                            	<input type="text" name="expresion" size="35" accesskey="r">
+                                <input type="radio" name="campo" value="NC" checked /> NC
+                                <input type="radio" name="campo" value="autor"      /> Autor 
                                 <input type="radio" name="campo" value="titulo"     /> Título
+<br />                            	<input type="checkbox" name="tipo" value="completa" />Palabras completa
+                                
                             </td>
+                            
+                            
                             <td width="20%" align="center">
-                                <input type="submit" value="Enviar"><br />
-								<a href="/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
+                                <input type="submit" value="Buscar"><br />
+								<a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
                             </td>
                             <td>
                             </td>

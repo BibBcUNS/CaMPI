@@ -240,28 +240,30 @@
 	<input type="hidden" name="usuario_id" value="',v120,'">
 	<input type="hidden" name="operario_id" value="',v130,'">
 	
-	<TABLE width="450" border="0">
+	<TABLE width="85%" border="0">
 		<tr>
-			<td width="50%">
-				<input type="text" name="expresion" size="28" accesskey="r" value="',v110,'"><br />
+			<td width="85%">
+				<input type="text" name="expresion" size="28" accesskey="r" value="',v110,'">
+				<input type="radio" name="campo" value="NC" ',
+					if v112='NC' then 'checked' fi,
+					'/> NC 
+				<input type="radio" name="campo" value="autor" ',
+					if v112='autor' then 'checked' fi,
+					'/> Autor 
+				<input type="radio" name="campo" value="titulo" ',
+					if v112='titulo' then 'checked' fi,
+					'/> Título
+
+				<br />
 				<input type="checkbox" name="tipo" value="completa"',
 				if v111='completa' then 'checked' fi,
 				' />Palabras completa
 			</td>
-			<td width="20%">
-				<input type="radio" name="campo" value="NC" ',
-					if v112='NC' then 'checked' fi,
-					'/> NC<br />
-				<input type="radio" name="campo" value="autor" ',
-					if v112='autor' then 'checked' fi,
-					'/> Autor<br />
-				<input type="radio" name="campo" value="titulo" ',
-					if v112='titulo' then 'checked' fi,
-					'/> Título<br />
-			</td>
-			<td width="20%" align="center">
-				<input type="submit" value="Enviar"><br />
-				<a href="/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
+
+
+			<td width="150%" align="center">
+				<input type="submit" value="Buscar"><br />
+				<a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
 			</td>
 			<td>
 			</td>
