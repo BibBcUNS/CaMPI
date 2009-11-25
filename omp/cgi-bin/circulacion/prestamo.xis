@@ -609,7 +609,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
           '<marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error ! </marquee>
            <p align="center" bgcolor="#FFFF9B" style="color: rgb(191,51,83)">
              <big>El lector NO esta habilitado para realizar prestamos !<br>',
-             'Su estado es (v10): ',v10,'</big></p>' fi
+             'Su estado es (',v10,'): ',v10,'</big></p>' fi
         </pft></display>
 
         <!-- Si el lector está Inhabilitado o no tiene préstamos definidos salta a GRABAR -->
