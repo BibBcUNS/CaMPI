@@ -10,8 +10,14 @@ if (!isset($_SESSION["s_username"])) {
 <head>
     <title>Módulo de Administración </title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
+    <script type="text/javascript" src="/omp/administracion/tabber/tabber.js"></script>
+	<link rel="stylesheet" href="/omp/administracion/tabber/tabber.css" TYPE="text/css" MEDIA="screen">
+    
 
 <script>
+/*esto es para el tabber. No se que hace*/
+document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+
 var anterior="";
 function marcar(fila,elemento){
   document.getElementById(elemento).checked = true;
@@ -77,69 +83,14 @@ function mostrar_politicas() {
    global $campos_nombre, $campos_nombre_TL;
    global $SERVER_NAME;
 
-    //---------------------------------------------------------
-	//-------- Muestro los datos de la BD tipo_lector ---------
-	//---------------------------------------------------------
-
-	$ptr_tipo_lector = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_obtener.xis&cual=TODAS","r");
-	$tipo_lector = fread($ptr_tipo_lector,8192);
-	fclose($ptr_tipo_lector);
-	$tipo_lector_arreglo = explode('#',$tipo_lector);
-    for ($i=0;$i<=count($tipo_lector_arreglo)-1;$i++){	
-   	  $tipo_lector_arreglo[$i] = explode('~',$tipo_lector_arreglo[$i]);
-	}
-	// Muestro el título
-	echo '<h2 style="text-align=left">Tipos de Lector</h2>';
-	
-	// Muestro el formulario
-	echo "<form name=form_tipo_lector action=politicas.php method=post>";
-	echo '<input type=hidden name=formulario value="tipo_lector">';
-	echo "<table border=1 cellspacing=0 cellpadding=0><tr><td></td>";
-
-	// Esto muestra los títulos de los atributos
-	for ($i=0;$i<count($campos_nombre_TL);$i++){
-		echo "<td class=dias_mes align=center>";
-		echo $campos_nombre_TL[$i];
-		echo "</td>";
-	}
-	echo "</tr>";
-	
-	
-	// Recorro las políticas y las muestro con un radiobutton.
-	
-	$tipo_lector_cantidad = count($tipo_lector_arreglo);
-	$tipo_lector_atributos_cantidad = count($tipo_lector_arreglo[0]);
-		
-	for($i=0;$i<$tipo_lector_cantidad-1;$i++) {
-		echo '<tr onclick="javascript:marcar(this,\'TL_'.$tipo_lector_arreglo[$i][0].'\')"
-				  onMouseOut="normal(this)"
-				  onMouseOver="resaltar(this)"
-				  class="linea">
-		<td width=50 height=22 align="center">
-		      <input id="TL_'.$tipo_lector_arreglo[$i][0].'" type=radio name=tipo_lector_nro value="'
-			  .$tipo_lector_arreglo[$i][0]
-			  .'" checked></td>';
-        for ($j=0;$j<$tipo_lector_atributos_cantidad;$j++) { 
-            echo '<td class=dias_mes align=center>';
-			echo $tipo_lector_arreglo[$i][$j];
-			echo "</td>";		
-        }
-		echo '</tr>';
-	}
-	echo "</table>";
-
-	echo '<input type=submit name=opcion value="Crear">';
-	echo '  ';
-	echo '<input type=submit name=opcion value="Modificar">';
-	echo '  ';
-	echo '<input type=submit name=opcion value="Borrar">';
-	echo "</form><br>";
+  
 
     //-------------------------------------------------------
 	//-------- Muestro los datos de la BD politicas ---------
 	//-------------------------------------------------------
-	$ptr_politicas = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=TODAS","r");
-	$politicas = fread($ptr_politicas,8192);
+	$ptr_politicas = fopen(		"http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=TODAS","r");
+	$politicas = "";
+	while (!feof($ptr_politicas)) {$politicas .= fread($ptr_politicas, 500);}
 	fclose($ptr_politicas);
 
 	$politicas_arreglo = explode('#',$politicas);
@@ -148,7 +99,10 @@ function mostrar_politicas() {
    	  $politicas_arreglo[$i] = explode('~',$politicas_arreglo[$i]);
 	}
 
-	// Muestro el título
+	echo "<div class=tabber>";
+
+	echo "<div class=tabbertab>";
+	// Muestro el título	
 	echo '<h2 style="text-align=left">Políticas de Circulación</h2>';
 	
 	// Muestro el formulario
@@ -195,6 +149,73 @@ function mostrar_politicas() {
 	echo '<input type=submit name=opcion value="Modificar">  ';
 	echo '<input type=submit name=opcion value="Borrar">';
 	echo "</form>";
+	
+	echo "</div>"; // esto es del segundo tab
+	
+  //---------------------------------------------------------
+	//-------- Muestro los datos de la BD tipo_lector ---------
+	//---------------------------------------------------------
+
+	$ptr_tipo_lector = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_obtener.xis&cual=TODAS","r");
+	$tipo_lector = fread($ptr_tipo_lector,8192);
+	fclose($ptr_tipo_lector);
+	$tipo_lector_arreglo = explode('#',$tipo_lector);
+    for ($i=0;$i<=count($tipo_lector_arreglo)-1;$i++){	
+   	  $tipo_lector_arreglo[$i] = explode('~',$tipo_lector_arreglo[$i]);
+	}
+	// Muestro el título
+		
+	echo "<div class=tabbertab>";
+	echo '<h2 style="text-align=left">Tipos de Lector</h2>';
+	
+	// Muestro el formulario
+	echo "<form name=form_tipo_lector action=politicas.php method=post>";
+	echo '<input type=hidden name=formulario value="tipo_lector">';
+	echo "<table border=1 cellspacing=0 cellpadding=0><tr><td></td>";
+
+	// Esto muestra los títulos de los atributos
+	for ($i=0;$i<count($campos_nombre_TL);$i++){
+		echo "<td class=dias_mes align=center>";
+		echo $campos_nombre_TL[$i];
+		echo "</td>";
+	}
+	echo "</tr>";
+	
+	
+	// Recorro las políticas y las muestro con un radiobutton.
+	
+	$tipo_lector_cantidad = count($tipo_lector_arreglo);
+	$tipo_lector_atributos_cantidad = count($tipo_lector_arreglo[0]);
+		
+	for($i=0;$i<$tipo_lector_cantidad-1;$i++) {
+		echo '<tr onclick="javascript:marcar(this,\'TL_'.$tipo_lector_arreglo[$i][0].'\')"
+				  onMouseOut="normal(this)"
+				  onMouseOver="resaltar(this)"
+				  class="linea">
+		<td width=50 height=22 align="center">
+		      <input id="TL_'.$tipo_lector_arreglo[$i][0].'" type=radio name=tipo_lector_nro value="'
+			  .$tipo_lector_arreglo[$i][0]
+			  .'" checked></td>';
+        for ($j=0;$j<$tipo_lector_atributos_cantidad;$j++) { 
+            echo '<td class=dias_mes align=center>';
+			echo $tipo_lector_arreglo[$i][$j];
+			echo "</td>";		
+        }
+		echo '</tr>';
+	}
+	echo "</table>";
+
+	echo '<input type=submit name=opcion value="Crear">';
+	echo '  ';
+	echo '<input type=submit name=opcion value="Modificar">';
+	echo '  ';
+	echo '<input type=submit name=opcion value="Borrar">';
+	echo "</form><br>";
+	
+	echo "</div>"; // esto es del tabber	
+	
+	
+	echo "</div>"; // esto es del tabber
 	
 }
 //********************************************************************//

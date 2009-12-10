@@ -136,6 +136,7 @@
 				<!-- MUESTRO INFORMACIÓN DE LA PARTE -->
 				<!-- MUESTRO EL ENCABEZADO DE LA PARTE SI HAY MAS DE UNA-->
 				<display><htmlpft><pft>if val(v1102)>1 then cat(getenv('PATH_TRANSLATED'),'parte.html') fi</pft></htmlpft></display>
+
 				<do task=search>
 					<parm name=db>reservas</parm>
 				    <parm name=expression><pft>'MARC_',v1^c,'_',v1^p</pft></parm>

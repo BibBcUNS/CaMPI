@@ -306,7 +306,7 @@
 				'TT=',replace(v110,' ',' TT=')
 			else
 				if v112='NC' then
-					'LC=',replace(v110,' ',' NC=')
+					'NC=',replace(v110,' ',' NC=')
 				fi,
 			fi,
 		fi
