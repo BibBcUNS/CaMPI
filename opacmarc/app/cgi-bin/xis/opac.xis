@@ -200,8 +200,6 @@ Parámetros CGI
 <parm name="actab"><pft>cat('AC-ANSI.TAB')</pft></parm>
 <parm name="uctab"><pft>cat('UC-ANSI.TAB')</pft></parm>
 
-
-<display>sdfa</display>
 <!-- Lee parámetros de la aplicación -->
 <!-- Por las dudas, es recomendable que esto aparezca *después* de haber aumentado el valor de buffersize -->
 <include>xis/read-param.xis</include>
