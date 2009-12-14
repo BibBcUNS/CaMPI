@@ -1,1 +1,0 @@
-// JavaScript local, para la base demo
