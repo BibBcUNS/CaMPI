@@ -88,9 +88,9 @@ function sabado_domingo($_dia, $_mes, $_año) {
 // Recibe el año y mes en cuestión, y una cadena con 0s y Puntos correspondientes al mes.
 function mostrar_mes ($_mes, $_datos, $_año) {
 	global $mesArray;
-	echo '<span style="border:1px solid grey;width:180px;height:205; margin=0px 0px; padding-top=8px;text-align:center">'.$mesArray[$_mes+1];
+	echo '<div style="width:180px;height:205; margin=0px 0px; padding-top=8px;text-align:center;display:inline">'.$mesArray[$_mes+1];
 	$cant_dias = strlen($_datos);
-	echo "<table border=0><tr>";
+	echo '<table border=0><tr>';
 	$dia_sem = dia_semana(1, $_mes+1, $_año);
 	
 	switch($dia_sem){
@@ -190,7 +190,7 @@ function editar_año($_año) {
 	echo '<br><br><br>';
 
 	
-	echo "<table border=0 cellspacing=0><tr>";
+	echo "<table border=1 cellpadding=5><tr>";
 	for($i=0;$i<12;$i++) {
 		echo '<td style="vertical-align: top">';
 		mostrar_mes($i,$meses[$i],$_año);
