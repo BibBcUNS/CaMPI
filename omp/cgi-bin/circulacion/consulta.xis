@@ -306,7 +306,7 @@
 				'TT=',replace(v110,' ',' TT=')
 			else
 				if v112='NC' then
-					'NC=',replace(v110,' ',' NC=')
+					'LC=',replace(v110,' ',' NC=')
 				fi,
 			fi,
 		fi
@@ -318,9 +318,8 @@
 	</pft></field>
 
 
-	<!--display><pft>'</b>',v110,'</b>'</pft></display-->
+	<display><pft>'<b>expresion:',v110,'</b>'</pft></display>
     <do task=search>
-
     <parm name=db>opac_circulacion</parm>
     <parm name=expression><pft>v110</pft></parm>
     <parm name=gizmo>gizmo</parm>

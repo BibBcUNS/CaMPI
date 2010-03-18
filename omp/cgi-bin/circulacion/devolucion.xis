@@ -120,6 +120,8 @@ Se exporta el campo v2000 con OK o código error -->
   <call name=operador><pft>v2002</pft></call>
   
   <!-- mensaje en casos de error -->
+  <trace>!BR</trace>
+
   <display><htmlpft><pft>
         if v1000<>'ok' then 
             proc('a9001#Bibliotecario desconocido#'),
@@ -154,7 +156,7 @@ Se exporta el campo v2000 con OK o código error -->
                         proc('a9002#',
                             'El préstamo está vencido, la fecha última para su devolución es: ',v3001^d,
                             '<BR>Operación cancelada, proceda a identificar al '
-                            '<a href="Javascript:presenta_registro(',"'"n0,replace(replace(v3001^b,'DNI',''),'LC',''),"'"n0,')">usuario</a> y considere su sanción#')
+                            '<a href="Javascript:presenta_registro(',"'"n0,replace(replace(v3001^b,'',''),'LC',''),"'"n0,')">usuario</a> y considere su sanción#')
               cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') fi</pft></htmlpft></display>
             <flow action="exit"><pft>
                     if val(s(v3001^d)*6.4,s(v3001^d)*3.2,s(v3001^d)*0.2) < val(s(date).8) then 'Now' fi</pft></flow>
@@ -177,12 +179,12 @@ Se exporta el campo v2000 con OK o código error -->
             <flow action="exit"><pft>if v2000<>'OK' then 'Now' fi</pft></flow>
               
             
-            <!-- Linea origianal, considierando que el dni del lector está precedido por el tipo de documento
+            <!-- Linea origianal, considierando que el dni del lector está precedido por el tipo de documento -->
             <field action="add" tag="3002"><pft>f(l(['lector']v3001^b),1,0)</pft></field> 
-            -->
+           
             
             
-            <field action="add" tag="3002"><pft>f(l(['lector']replace(replace(v3001^b,'DNI',''),'LC','')),1,0)</pft></field> <!-- Busca el lector y regresa su MFN -->        
+            <!--field action="add" tag="3002"><pft>f(l(['lector']replace(replace(v3001^b,'DNI',''),'LC','')),1,0)</pft></field--> <!-- Busca el lector y regresa su MFN -->        
                 
             <call name="bloqueo"><pft>if val(v3002)=0 then '^bexist^u',v2002^i,'^r',mfn,'^fUnlock' fi</pft></call>
             <display><htmlpft><pft>

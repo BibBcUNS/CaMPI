@@ -11,12 +11,14 @@ v3002: lista de todos los inventarios (inv_prestamos#A + inv_prestamos#B)-->
 <!-- Se borran los campos que vamos a utilizar en este script, debido al include de otros scripts -->
 <field action=delete tag=4000>ALL</field>
 
+<list action=delete>now</list>
 <list action=load previous="delete"><pft>(v3002/)</pft></list>
 
 <do task=list>
    <field action="define" tag=1001>Isis_Current</field>
    <field action="define" tag=1002>Isis_Item</field>
    <loop>
+	  <display><pft>'<br>v1002: ',v1002,'<br>'</pft></display>
       <field action="import" tag="4000">4000</field>
       <!-- total de posting para el inventario (v4001)-->
       <field action="replace" tag="4001"><pft>f(npost(['exist']v1002),1,0)</pft></field>

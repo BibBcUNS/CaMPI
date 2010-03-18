@@ -9,7 +9,7 @@ echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php?error=si>";
 }else{
 
  $cadena_archivo = "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=userpwd.xis&user=".$username."&pwd=".$password."&modulo=circulacion";
-
+//echo $cadena_archivo;exit;
  $ptr_userpwd = fopen($cadena_archivo, "r");
  $exito = fread($ptr_userpwd,8192);
 

@@ -1,5 +1,4 @@
 <!-- Controles: se aplican sobre los préstamos a realizar -->
-
 <include>circulacion/controles/verificaEstadoUsuario_inc.xis</include>
 <include>circulacion/controles/validaInventarios_inc.xis</include>
 <include>circulacion/controles/verificaDispInv_inc.xis</include>

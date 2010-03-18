@@ -225,29 +225,32 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 			        <list action=load type=list><pft>(v11/)</pft></list>
 			        <field action=delete tag=11>ALL</field>			        
 				        <do task=list>
-				        <field action=define tag=1000>Isis_Item</field>
+					        <field action=define tag=1000>Isis_Item</field>
 							<loop>
-									<call name=SUMAH><pft>v1000^f*6.4,v1000^f*3.2,v1000^f*0.2,/,v1000^d</pft></call>
-									<field action=replace tag=11><pft>'^d',v1000^d,'^f',v1000^f,'^v',mid(v9000,7,2),'/',mid(v9000,5,2),'/',mid(v9000,1,4)</pft></field>
-									<field action=export previous=add tag=11>11</field>
+								<field action=import tag=10>10</field>
+							
+								<call name=SUMAH><pft>v1000^f*6.4,v1000^f*3.2,v1000^f*0.2,/,v1000^d</pft></call>
+								<field action=replace tag=11><pft>'^d',v1000^d,'^f',v1000^f,'^v',mid(v9000,7,2),'/',mid(v9000,5,2),'/',mid(v9000,1,4)</pft></field>
+								<!-- controlo la suspensión -->
+								<field action=replace tag=10><pft>
+									if v10:'Sancionado' then
+										'Sancionado'
+									else
+										if s(v1000^v*6,v1000^v*3.2,v1000^v.2) < s(date).8
+										then 'Habilitado'
+										else 'Sancionado'
+										fi,	
+									fi
+						        </pft></field>
+								
+						        <field action=export previous=add tag=11>11</field>
+								<field action=export previous=replace tag=10>10</field>
+								
 							</loop>
 						</do>
 					<label>no_hay_sanciones</label>
 			<label>fin_recalcular</label>
-	
-
-     		<!-- controlo la suspensión -->
-	        <field action=replace tag=10><pft>
-	            if v10:'Sancionado' and p(v11) 
-	            then 
-	                if s(v11[last]^v*6,v11[last]^v*3.2,v11[last]^v.2) < s(date).8
-	                    then 'Habilitado'
-	                    else 'Sancionado'
-	                fi,
-	            else
-	                'Habilitado'
-	            fi
-	        </pft></field>
+			
 	        <field action=delete tag=list>1001,2000,3000</field>
 	        <write>Unlock</write>
      </update>

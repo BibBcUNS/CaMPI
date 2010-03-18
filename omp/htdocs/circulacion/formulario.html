@@ -212,11 +212,16 @@ if val(s(v16)*6.4,s(v16)*3.2,s(v16)*0.2) < val(s(date).8) then
     </a></font></center></h2>',
 fi
 
-
-,if v10:'Sancionado' then 
- (if p(v11) then if iocc=nocc(v11) then
-   '<blink><big><font color="#FF0000">',if s(v11^v*6,v11^v*3.2,v11^v.2) < s(date).8 then ' Estuvo ' fi,'SANCIONADO hasta el ',v11^v,'</font></big></blink>', fi
-  fi)
+,if v10:'Sancionado' then
+	'Sanciones:<ul>',
+     (
+     	if (not s(v11^v*6,v11^v*3.2,v11^v.2) < s(date).8) then
+            '<li><font color="#FF0000">',
+                'hasta el <b>',v11^v, '</b> (',v11^d,' días a partir de ',v11^f,')',
+            '</font></li>',
+        fi
+      )
+	 ,'</ul>',
 fi,
 
 '<form name="control" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/" style="margin-bottom: 0">
