@@ -170,7 +170,7 @@
 		    </loop>
         </do>
         <display><pft>'<br><b>Inventarios: </b>'</pft></display>
-     	<display><pft>(v859^p,'[',ref(['exist']l(['exist']v859^p),v985),']',' - ')</pft></display>
+     	<display><pft>(v859^p,'[',ref(['exist']l(['exist']v859^p),v987),']',' - ')</pft></display>
 
     </loop>
   </do>

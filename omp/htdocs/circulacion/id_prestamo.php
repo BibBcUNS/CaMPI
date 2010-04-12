@@ -9,14 +9,14 @@
 <style type="text/css">
 <!--
 #lt1 {
-   float : left;
    width : 130px;
    margin : 0 0em 2em 0em;
    border : 1px solid #5277AE;
-   padding : 0;
+   padding : 0px 2px;
    background : #BEE4FF;
    font-family: "Trebuchet MS", Verdana, sans-serif;
    vertical-align:middle;
+   margin: auto;
 
 }
 
@@ -37,8 +37,8 @@
 
 #lt1 form{   
        border:1px solid #5277AE;
-	   border-bottom-width:0px;
-	   padding:10px 0px 10px 0px;
+	   border-width:1px 0px 0px 0px;
+	   padding:5px 0px 5px 0px;
 }
 
 #lt1 input[type=submit]{
@@ -174,6 +174,8 @@ $grabar_datos = fread($ptr_grabar_datos,500);
       <td width="100%">
       <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$grabar_datos; ?>">
 	  <input type="text" id="lector" name="lector" size="10" accesskey="l"><input type="submit" value=" > ">
+	  <input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()">
+	  <input type="button" value=limpiar onclick="window.document.form_id.lector.value='';window.document.form_id.lector.focus()">
 	  </td>
 	</tr>
   </table>
@@ -181,7 +183,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
 </font>
 </div>
 
-<div id="lt1"><div id="lt1">
+<div id="lt1">
 		<?php
         $usuario=$_SESSION["s_username"];
         $url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
@@ -190,7 +192,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
         fclose($ptr_datos);
         echo '<center><b>OPERADOR<br></center>'.$datos.'</b>';
         ?>
-</div></div>
+</div>
 
 </body>
 </html>

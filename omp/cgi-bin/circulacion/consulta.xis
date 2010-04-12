@@ -318,7 +318,7 @@
 	</pft></field>
 
 
-	<display><pft>'<b>expresion:',v110,'</b>'</pft></display>
+	<!--display><pft>'<b>expresion:',v110,'</b>'</pft></display-->
     <do task=search>
     <parm name=db>opac_circulacion</parm>
     <parm name=expression><pft>v110</pft></parm>
@@ -329,7 +329,7 @@
 		<field action="import" tag="list">120,5009</field>
 		
 		<display>
-		<TABLE bgcolor="#BEE4FF" BORDER=0 WIDTH=90% style="font-family: sans-serif; font-size: 11pt; border:2px solid #5277AE">
+		<TABLE bgcolor="#BEE4FF" BORDER=0 WIDTH=100% style="font-family: sans-serif; font-size: 11pt; border:2px solid #5277AE">
 		<tr><td>
 		</display>
 		
@@ -338,7 +338,7 @@
 		<!--display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'bibliografia_',v5009,'.html')</pft></htmlpft></display-->		
 		
 		<display><pft>'</td>
-			<td>
+			<td width="50px">
 				<input type="button" value="reservar" onclick="ventana_reserva(',mfn(0),');" style="float:right"></td>
 			</tr></TABLE><br>'
 		</pft></display>

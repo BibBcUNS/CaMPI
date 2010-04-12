@@ -321,8 +321,8 @@ function editar_politica() {
    global $campos_nombre;
    global $SERVER_NAME;
 
-   $url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=UNA&expresion=".$_POST['pol_nro'];
-
+   $url = "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=UNA&expresion=".$_POST['pol_nro'];
+   
 	$ptr_politicas = fopen($url,"r");
 	$politicas = fread($ptr_politicas,8192);
 	fclose($ptr_politicas);

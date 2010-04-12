@@ -17,7 +17,6 @@ Uso local:
 <display><pft>'Content-type: text/html'/</pft></display>
 <display><pft>'Set-Cookie: CUSTOMER=WILE_E_COYOTE;'/#</pft></display>
 
-
 <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 <!-- ENCABEZADO DE PÁGINA -->
 <display>

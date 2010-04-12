@@ -1,4 +1,4 @@
-/* hoja de estilo index */
+/* hoja deeeeeee estilo index */
 body
 {
   background: #f6f6f6 url(../images/bg.jpg) repeat-x top left;
@@ -14,6 +14,14 @@ body
   width: 747px;
   height: 115px;
   padding-top: 2px;
+  margin: 0 auto;
+}
+
+#head-prestamo
+{
+  background: url(../images/header.jpg) no-repeat top left;
+  width: 747px;
+  height: 20px;
   margin: 0 auto;
 }
 

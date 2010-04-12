@@ -2,13 +2,14 @@
 	
 <flow action="jump"><pft>if v5000:'Error' then 'FinSanciones' fi</pft></flow>
 
-<field action="replace" tag="4000"><pft>ref(['lector']l(['lector']v3002),v10)</pft></field> <!-- total de posting para el id_usuario -->
-<field action="replace" tag="4001"><pft>ref(['lector']l(['lector']v3002),v11[last]^v)</pft></field> <!-- total de posting para el id_usuario -->
+<field action="replace" tag="10"><pft>ref(['lector']l(['lector']v3002),v10)</pft></field> <!-- total de posting para el id_usuario -->
+
+<!-- Verifica que el usuario este HABILITADO ó SANCIONADO con sanción cumplida -->
 
 <field action="add" tag="5000">
 	<pft>  
-		if (s(mpu,v4000)<>'HABILITADO') then 
-			mhl,'Error: Usuario <b>SUSPENDIDO</b> hasta el <b>',v4001,'</b>.'
+		if (s(mpu,v10)<>'HABILITADO') then 
+			mhl,'Error: El Usuario está <b>SANCIONAOD</b>.'
 		fi
 	</pft>
 </field>

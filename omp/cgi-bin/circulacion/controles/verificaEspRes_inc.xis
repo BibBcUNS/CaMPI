@@ -7,26 +7,27 @@ v3004: DNI lector
 Si el ejemplar está reservado (sin importar quien lo reservó) no se puede prestar/renovar.
 -->
 <!-- Algoritmo que se implementa:
-Si hay Reservas
-   Error: Objeto Reservado
-sino
-   Si hay Esperas
-      Si el lector está en espera para ese libro
-         Ok
-      sino
-         Si es Renovación
-            Ok
-         sino
-            Si Total_Ejemplares - Prestados - Espera > Min_Cant_Disponible
-               OK
-            else
-               Error: Objeto en espera para otro usuario
-   sino
-      OK
+
+	Si el lector está en espera para ese libro
+		Ok
+    sino
+		Si hay Reservas
+			Error: Objeto Reservado
+		sino
+			Si es Renovación
+				OK
+			sino
+				Si Total_Ejemplares - Prestados - Espera > Min_Cant_Disponible
+					OK
+				sino
+					Error: Objeto en espera para otro usuario
+					
+	TRADUCCION. Condición de error:
 -->
 <trace>!BR</trace>
 <flow action="jump"><pft>if v5000:'Error' then 'verificaRes' fi</pft></flow>
-   
+
+<list action=delete>now</list>
 <list action=load previous="delete"><pft>(v3002/)</pft></list>
 <do task="list">
 <field action="define" tag="1001">Isis_Item</field>
@@ -65,35 +66,35 @@ sino
 	<!-- v1110: Contiene el DNI del usuario que posee el objeto si está prestado -->
 	<field action="replace" tag="1110"><pft>ref(['exist']l(['exist']v1001),if v985='PRES' then v998[LAST]^b fi)</pft></field>
 
+	<display><pft>v1104,':',s('~',v3004,'~')</pft></display>
 	<field action="replace" tag="4000"><pft>
-	    if val(v1109)>0 then
-		v1001
+	
+	    if v1104:s('~',v3004,'~') then
+			'ok' /* Libro en espera para el usuario */
 	    else
-		if val(v1105)>0 then
-		    if v1104:s('~',v3004,'~') then
-			
-		    else
-			if v3004=v1110 then
-			    
+			if val(v1109)>0 then
+    			v1001			/* El libro tiene reservas */
 			else
-			    if (val(v1106)-val(v1108)-val(v1105)>0) then
+				if v3004=v1110 then
+					'ok' 		/* No hay reservas y es renovación */
+				else
+					if (val(v1106)-val(v1108)-val(v1105)>0) then
+						'ok'	/* No hay reservas y Existen ejemplares disponibles (Ejs - Prestados - Esperas) */
+					else
+						v1001	/* No hay ejemplares disponibles (todos prestados y/o con esperas o reservas) */
+					fi
+				fi
+			fi
+		fi
+					
 				
-			    else
-	    			v1001
-	    		    fi
-	    		fi
-	    	    fi
-	    	else
-	    	    
-	    	fi
-	    fi	    
         </pft></field>
         <field action="export" tag="4000" previous="add">4000</field>
 </loop>
 </do>
 
 <field action="replace" tag="5000"><pft>
-   if v4000='' then
+   if v4000='ok' then
       mhl,'ok'
    else
       mhl,'Error: Objeto con espera o reserva: ',(v4000+|;|)

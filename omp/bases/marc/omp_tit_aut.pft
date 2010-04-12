@@ -1,5 +1,5 @@
 [pft]'
-<TABLE bgcolor="#BEE4FF" BORDER=0 WIDTH=90% style="font-family: sans-serif; font-size: 11pt">
+<TABLE bgcolor="#BEE4FF" BORDER=0 WIDTH=100% style="vertical-align: middle;font-family: sans-serif; font-size: 11pt" VALIGN=MIDDLE width=100%>
 
 <TR><TD COLSPAN="3" WIDTH="*">',
 	if p(v100) or p(v700) or p(v110) or p(v710) then
@@ -32,9 +32,11 @@
 		  (| |+v710^a,| |v710^b,| (|v710^9|)|,| |v710^n,| |v710^d,| |v710^c),
 	fi, 
 
+	/*
 	if p(v111)or p(v711) then
 		'<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Reunión : </FONT></B>'
 	fi,
+	*/
 	
 	(
 		| |+v111^a,
@@ -49,24 +51,36 @@
 		if s(v711^n,v711^d,v711^c)>'' then ') ' fi, v711^e
 	),
 	
+	/*
 	if s(v240,v130)>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Título Unif. : </FONT></B>',fi,
 			v130^a," "v130^p," "v130^k" ",
 		if v130>'' and p(v240) then '' fi,
 			v240^a," "v240^p," "v240^k" ",
- 
+	*/
 
 	if v245>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Título: </FONT></B>' fi,
 		v245^a," "v245^n,
 		" "v245^p," "v245^h," "v245^f,
 		if v245^b.1=';' or v245^b.1='=' then " "v245^b else " "v245^b  fi,
 		
+	/*
+	if p(v260^c) then
+		'<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Fecha de publ: </font></B>',v260^c,'<br>'
+	fi
+	*/
+	
 	if p(v250^a) then
-		'<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Ed.: </font></B>',v250^a,' ',
-		else '<br>'
+		'<TD width="20%"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Ed.: </font></B>',v250^a,'</TD>'
+	else
+		'<TD width="20%"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF></font></B>',
+			(if not v1000[1]:s(v859^h,'. ',v859^i) then proc('d1000a1000~',v1000[1],' ',s(v859^h,'. ',v859^i),'~') fi),(v1000),
+		'</TD>'
 	fi
 
-	if p(v260^c) then
-		'<B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Fecha de publ: </font></B>',v260^c,'<br>'
+	if v859^v<>'' then
+		'<TD width="20%"><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Tomos: </font></B>',
+			(if not v1000[1]:v859^v then proc('d1000a1000~',v1000[1],' ',v859^v,'~') fi),(v1000),
+		'</TD>'
 	fi
 	
 	'</TD>

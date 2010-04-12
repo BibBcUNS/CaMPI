@@ -17,6 +17,16 @@ body
 	/*background: #0000ff;*/
 }
 
+#head2
+{
+  background: url(../images/header.jpg) no-repeat top left;
+	width: 650px;
+	height: 117px;
+	padding: 0px;
+	margin: 0px 0px 0px 0px;
+	/*background: #0000ff;*/
+}
+
 #head #title
 {
 	float: left;

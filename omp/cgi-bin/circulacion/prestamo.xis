@@ -223,14 +223,20 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 					
 					<list action=delete>Now</list>
 			        <list action=load type=list><pft>(v11/)</pft></list>
-			        <field action=delete tag=11>ALL</field>			        
+			        <field action=delete tag=11>ALL</field>
+					<field action=replace tag=10><pft>'Habilitado'</pft></field>
 				        <do task=list>
 					        <field action=define tag=1000>Isis_Item</field>
 							<loop>
 								<field action=import tag=10>10</field>
 							
 								<call name=SUMAH><pft>v1000^f*6.4,v1000^f*3.2,v1000^f*0.2,/,v1000^d</pft></call>
-								<field action=replace tag=11><pft>'^d',v1000^d,'^f',v1000^f,'^v',mid(v9000,7,2),'/',mid(v9000,5,2),'/',mid(v9000,1,4)</pft></field>
+								<field action=replace tag=11><pft>
+									if v9000 >= s(date).8
+									then
+										'^d',v1000^d,'^f',v1000^f,'^v',mid(v9000,7,2),'/',mid(v9000,5,2),'/',mid(v9000,1,4)
+									fi
+								</pft></field>
 								<!-- controlo la suspensión -->
 								<field action=replace tag=10><pft>
 									if v10:'Sancionado' then
@@ -1245,9 +1251,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
     <link REL="stylesheet" TYPE="text/css" HREF="/omp/css/style.css" />
   </head>
   <body onload="window.document.form_abm.credencial.value=window.parent.indice.document.form_id.lector.value">
-     <div id="head"> 
-		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
-		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+     <div id="head-prestamo"> 
     </div>
     <div id="body_wrapper">
       <div id="body">

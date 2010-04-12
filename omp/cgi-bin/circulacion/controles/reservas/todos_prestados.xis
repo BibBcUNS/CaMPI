@@ -32,22 +32,22 @@ Método (no algoritmo):
         Entre los reserbables: Contamos cantidad de ejemplares prestados.
         Entre los reserbables: Contamos cantidad de esperas pendientes.
         Nota: Se supone que la cantidad de ejemplares reservanles hace referencia
-                al grupo de libros que le interesa al lector. En realidad es cant. ej. prestables en (no consulta)
-                Esto se debe a la ASUMPSION (*)
+           al grupo de libros que le interesa al lector. En realidad es cant. ej. prestables en (no consulta)
+           Esto se debe a la ASUMPSION (*)
         
 --------------------------------------------------------------------------------
 
 Campos utilizados:
     4000 Isis_item (id_parte)
-    4001    Categoría del usuario
-    4002    id_parte (formato para indexar)
-    4004    inventarios de la parte
-    4008    ejemplares de la parte (invent, estado, condic_pres)
+    4001 Categoría del usuario
+    4002 id_parte (formato para indexar)
+    4004 inventarios de la parte
+    4008 ejemplares de la parte (invent, estado, condic_pres)
     4010 ejemplares reserbables
     4011 cant. ej. reservables.
     4012 cant. ej. reservable PREStados.
     4015 cant. Esperas
-    5000    lista de errores
+    5000 lista de errores
 
 ------------------------------------------------------------------------------->
 
@@ -96,7 +96,7 @@ Campos utilizados:
         
         <!-- cant. ejemp. reserbables -->
         <field action="replace" tag="4011"><pft>f(nocc(v4010),1,0)</pft></field>
-        
+		
         <!-- cant. ejemp. reservable PREStados -->
         <field action="replace" tag="4012"><pft>f(size((if v4010^e='PRES' then '1' fi)),1,0)</pft></field>
         
