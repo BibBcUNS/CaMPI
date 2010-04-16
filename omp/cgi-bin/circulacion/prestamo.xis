@@ -1456,7 +1456,13 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		'<!-- Modifico la siguiente linea para compatibilidad FF - PLL - 04/05/09 
 		        <body  onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then ';' fi,'">
 		-->'
-		 '<body  onload="mostrar_reservas();this.focus(); window.parent.indice.document.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then ';' fi,'">',
+		 '<body
+			onload="
+				mostrar_reservas();
+				this.focus();
+				window.parent.indice.document.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then ';' fi,
+				if ref(['config']1,v11)='si' then 'print();' fi,
+				'">',
 		 '<div id="head"> 
 		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
 		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>

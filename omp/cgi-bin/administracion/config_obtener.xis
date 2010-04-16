@@ -1,0 +1,20 @@
+<IsisScript>
+<section>  
+<display><pft>'Content-type: text/html'/#</pft></display>
+<trace>!BR</trace>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+  <do task=mfnrange>
+    <parm name=db>config</parm>
+    <parm name=count>1</parm>
+    <loop>
+		<display>	    
+		<pft>
+	      v9,'~',v10,'~',v11
+		 </pft>
+	   </display>
+    </loop>
+  </do>
+  
+</section>
+</IsisScript>

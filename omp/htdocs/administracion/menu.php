@@ -10,8 +10,19 @@
 table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 	table th {border-color:white; border-style:solid; border-width:5px; -moz-border-radius:12px; padding: 5px 0px;}
 	</style>
+	
 	<!--script language=javascript type=text/javascript src=js/popup_calendar.js-->
   </head>
+  
+  	<script>
+		function enable_button(btn){
+			btn.disabled = '';
+		}
+		function disable_button(btn){
+			btn.disabled = 'disabled';
+		}
+	</script>
+
   <body>
     <div id="head"> 
 		<div id="title">Módulo de Administración - OPEN MarcoPolo</div>
@@ -35,6 +46,14 @@ $ptr_anios_calendario = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT
 $anios_calendario = fread($ptr_anios_calendario,1000);
 fclose($ptr_anios_calendario);
 $anios = explode  ('~', $anios_calendario);
+
+$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
+$config_obtener = fread($ptr_config,1000);
+fclose($ptr_config);
+$config_obtener = explode  ('~', $config_obtener);
+$config[reservas] = $config_obtener[0];
+$config[politicas] = $config_obtener[1];
+$config[imprimir_papeleta] = $config_obtener[2];
 ?>
 
 <center>
@@ -147,34 +166,63 @@ $anios = explode  ('~', $anios_calendario);
 
 <br /><br />
 <table border="0" width="100%">    
-
 <tr>
-   <th colspan="2">Base Bibliográfica. <i><font size="2">Dispare esta acción cada vez que incorpora o modifica un inventario</font></i></th>
+   <th width="50%">>Base Bibliográfica. </th>
+   <th>Configuración. </th>
 </tr>
 <tr style="vertical-align:top;">
 <td>
-    <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post">
-    <input type="submit" value="Actualizar inventarios (& y @)">
-    <input type="hidden" name="IsisScript" value="administracion/make_InvNuevos.xis"><br />
-    Si utiliza los símbolos <b><i>&</i></b> y <b><i>@</i></b> para indicar inventarios nuevos y los que se dan de baja
+	<i><font size="2">Dispare esta acción cada vez que incorpora o modifica un inventario</font></i>
+    <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=actualizar_bases_form onsubmit="disable_button(document.actualizar_bases_form.submit_btn)">
+    <input type="submit" value="         Actualizar inventarios         " name=submit_btn>
+    <input type="hidden" name="IsisScript" value="administracion/actualizar_bases.xis"><br />
+    </form><br>
+	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=control_consistencia_form onsubmit="disable_button(document.control_consistencia_form.submit_btn)">
+    <input type="submit" value="Control de consistencia de inventarios" name=submit_btn>
+    <input type="hidden" name="IsisScript" value="administracion/check_consistencia.xis" >
     </form>
 </td>
 <td>
-    <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post">
-    <input type="submit" value="         Actualizar inventarios         ">
-    <input type="hidden" name="IsisScript" value="administracion/actualizar_bases.xis"><br />
-    En caso que no utilize indicadores para inventarios nuevos y dados de baja<br> (el sistema lo detecta automáticamente)
+	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" target=resultado_grabar name=config_form onsubmit="disable_button(document.config_form.grabar)">
+	<table>
+		<tr><td>
+				Habilitar reservas:</td>
+			<td>
+				<select name=reservas onchange="enable_button(document.config_form.grabar)">
+					<option value="si" <?=$config[reservas]=='si'?'selected':''?>>si</option>
+					<option value="no" <?=$config[reservas]=='no'?'selected':''?>>no</option>
+					<br>
+				</select>
+			</td>
+		</tr><tr>
+			<td>
+				Políticas de préstamo:</td>
+			<td>
+				<select name=politicas onchange="enable_button(document.config_form.grabar)">
+					<option value="politicas" <?=$config[politicas]=='politicas'?'selected':''?>>Automático</option>
+					<option value="manual" <?=$config[politicas]=='manual'?'selected':''?>>Manual</option>
+					<br>
+				</select>
+			</td>
+		</tr><tr>
+			<td>
+				Imprimpir papeleta:</td>
+			<td>
+				<select name=impresion onchange="enable_button(document.config_form.grabar)">
+					<option value="si" <?=$config[imprimir_papeleta]=='si'?'selected':''?>>si</option>
+					<option value="no" <?=$config[imprimir_papeleta]=='no'?'selected':''?>>no</option>
+					<br>
+				</select>
+			</td>
+		</tr>
+	</table>
+	
+    <input type="submit" value="         Grabar         " name=grabar disabled="disabled">
+    <input type="hidden" name="IsisScript" value="administracion/config_guardar.xis"><br />
     </form>
+	<iframe name=resultado_grabar height=50 frameborder=0></iframe>
+	
 </td>
-<tr>
-<td colspan="2">
-    <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post">
-    <input type="submit" value="Control de consistencia de inventarios">
-    <input type="hidden" name="IsisScript" value="administracion/check_consistencia.xis">
-    </form>
-</td>    
-
-</tr>
 </table>
 </center>
 <!--###################################################-->		
