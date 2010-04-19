@@ -167,20 +167,29 @@ $config[imprimir_papeleta] = $config_obtener[2];
 <br /><br />
 <table border="0" width="100%">    
 <tr>
-   <th width="50%">>Base Bibliográfica. </th>
+   <th width="50%">Base Bibliográfica. </th>
    <th>Configuración. </th>
 </tr>
 <tr style="vertical-align:top;">
 <td>
 	<i><font size="2">Dispare esta acción cada vez que incorpora o modifica un inventario</font></i>
     <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=actualizar_bases_form onsubmit="disable_button(document.actualizar_bases_form.submit_btn)">
-    <input type="submit" value="         Actualizar inventarios         " name=submit_btn>
+    <input type="submit" value="Actualizar inventarios" name=submit_btn>
     <input type="hidden" name="IsisScript" value="administracion/actualizar_bases.xis"><br />
-    </form><br>
+    </form>
+	<br>
 	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=control_consistencia_form onsubmit="disable_button(document.control_consistencia_form.submit_btn)">
     <input type="submit" value="Control de consistencia de inventarios" name=submit_btn>
     <input type="hidden" name="IsisScript" value="administracion/check_consistencia.xis" >
     </form>
+	<br>
+    <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" name=actualizar_opac_form  target="resultado_actualizar_opac" method="post">
+    <input type="submit" value="Actualizar OPAC" name="actualizar_opac"  onclick="disable_button(document.actualizar_opac_form.actualizar_opac)">
+    <input type="hidden" name="IsisScript" value="administracion/actualizar_opac.xis">
+    </form>
+	
+    <iframe name="resultado_actualizar_opac" height=120 frameborder="0"></Iframe>
+
 </td>
 <td>
 	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" target=resultado_grabar name=config_form onsubmit="disable_button(document.config_form.grabar)">
