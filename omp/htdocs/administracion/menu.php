@@ -173,31 +173,30 @@ $config['imprimir_papeleta'] = $config_obtener[2];
 <tr style="vertical-align:top;">
 <td>
 	<i><font size="2">Dispare esta acción cada vez que incorpora o modifica un inventario</font></i>
-    <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=actualizar_bases_form onsubmit="disable_button(document.actualizar_bases_form.submit_btn)">
+    <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=actualizar_bases_form onSubmit="disable_button(document.actualizar_bases_form.submit_btn)">
     <input type="submit" value="Actualizar inventarios" name=submit_btn>
     <input type="hidden" name="IsisScript" value="administracion/actualizar_bases.xis"><br />
     </form>
 	<br>
-	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=control_consistencia_form onsubmit="disable_button(document.control_consistencia_form.submit_btn)">
+	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=control_consistencia_form onSubmit="disable_button(document.control_consistencia_form.submit_btn)">
     <input type="submit" value="Control de consistencia de inventarios" name=submit_btn>
     <input type="hidden" name="IsisScript" value="administracion/check_consistencia.xis" >
     </form>
 	<br>
-    <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" name=actualizar_opac_form  target="resultado_actualizar_opac" method="post">
+    <form action="opac_actualiza.php" name=actualizar_opac_form  target="resultado_actualizar_opac" method="post">
     <input type="submit" value="Actualizar OPAC" name="actualizar_opac"  onclick="disable_button(document.actualizar_opac_form.actualizar_opac)">
-    <input type="hidden" name="IsisScript" value="administracion/actualizar_opac.xis">
     </form>
 	
     <iframe name="resultado_actualizar_opac" height=120 frameborder="0"></Iframe>
 
 </td>
 <td>
-	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" target=resultado_grabar name=config_form onsubmit="disable_button(document.config_form.grabar)">
+	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" target=resultado_grabar name=config_form onSubmit="disable_button(document.config_form.grabar)">
 	<table>
 		<tr><td>
 				Habilitar reservas:</td>
 			<td>
-				<select name=reservas onchange="enable_button(document.config_form.grabar)">
+				<select name=reservas onChange="enable_button(document.config_form.grabar)">
 					<option value="si" <?php if ($config['reservas']=='si'){echo 'selected';}?>>si</option>
 					<option value="no" <?php if ($config['reservas']=='no'){echo 'selected';}?>>no</option>
 					<br>
@@ -207,7 +206,7 @@ $config['imprimir_papeleta'] = $config_obtener[2];
 			<td>
 				Políticas de préstamo:</td>
 			<td>
-				<select name=politicas onchange="enable_button(document.config_form.grabar)">
+				<select name=politicas onChange="enable_button(document.config_form.grabar)">
 					<option value="politicas" <?php if ($config['politicas']=='politicas'){echo 'selected';}?>>Automático</option>
 					<option value="manual" <?php if ($config['politicas']=='manual'){echo 'selected';}?>>Manual</option>
 					<br>
@@ -217,7 +216,7 @@ $config['imprimir_papeleta'] = $config_obtener[2];
 			<td>
 				Imprimpir papeleta:</td>
 			<td>
-				<select name=impresion onchange="enable_button(document.config_form.grabar)">
+				<select name=impresion onChange="enable_button(document.config_form.grabar)">
 					<option value="si" <?php if ($config['imprimir_papeleta']=='si'){echo 'selected';}?>>si</option>
 					<option value="no" <?php if ($config['imprimir_papeleta']=='no'){echo 'selected';}?>>no</option>
 					<br>
