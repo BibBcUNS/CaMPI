@@ -51,9 +51,9 @@ $ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-
 $config_obtener = fread($ptr_config,1000);
 fclose($ptr_config);
 $config_obtener = explode  ('~', $config_obtener);
-$config[reservas] = $config_obtener[0];
-$config[politicas] = $config_obtener[1];
-$config[imprimir_papeleta] = $config_obtener[2];
+$config['reservas'] = $config_obtener[0];
+$config['politicas'] = $config_obtener[1];
+$config['imprimir_papeleta'] = $config_obtener[2];
 ?>
 
 <center>
@@ -198,8 +198,8 @@ $config[imprimir_papeleta] = $config_obtener[2];
 				Habilitar reservas:</td>
 			<td>
 				<select name=reservas onchange="enable_button(document.config_form.grabar)">
-					<option value="si" <?=$config[reservas]=='si'?'selected':''?>>si</option>
-					<option value="no" <?=$config[reservas]=='no'?'selected':''?>>no</option>
+					<option value="si" <?php if ($config['reservas']=='si'){echo 'selected';}?>>si</option>
+					<option value="no" <?php if ($config['reservas']=='no'){echo 'selected';}?>>no</option>
 					<br>
 				</select>
 			</td>
@@ -208,8 +208,8 @@ $config[imprimir_papeleta] = $config_obtener[2];
 				Políticas de préstamo:</td>
 			<td>
 				<select name=politicas onchange="enable_button(document.config_form.grabar)">
-					<option value="politicas" <?=$config[politicas]=='politicas'?'selected':''?>>Automático</option>
-					<option value="manual" <?=$config[politicas]=='manual'?'selected':''?>>Manual</option>
+					<option value="politicas" <?php if ($config['politicas']=='politicas'){echo 'selected';}?>>Automático</option>
+					<option value="manual" <?php if ($config['politicas']=='manual'){echo 'selected';}?>>Manual</option>
 					<br>
 				</select>
 			</td>
@@ -218,8 +218,8 @@ $config[imprimir_papeleta] = $config_obtener[2];
 				Imprimpir papeleta:</td>
 			<td>
 				<select name=impresion onchange="enable_button(document.config_form.grabar)">
-					<option value="si" <?=$config[imprimir_papeleta]=='si'?'selected':''?>>si</option>
-					<option value="no" <?=$config[imprimir_papeleta]=='no'?'selected':''?>>no</option>
+					<option value="si" <?php if ($config['imprimir_papeleta']=='si'){echo 'selected';}?>>si</option>
+					<option value="no" <?php if ($config['imprimir_papeleta']=='no'){echo 'selected';}?>>no</option>
 					<br>
 				</select>
 			</td>
