@@ -147,7 +147,7 @@ Los campos rankeables son: Temática, Inventario, Lector, Operario, Día, Hora, Te
 								 case 'terminal': , 	v6/,
 	 							 case 'hora': , 	v3^h.2/,
 								 case 'dia': , 		v3^f.2/,
-								 case 'tematica': , 	left(v4^c,instr(v4^c,' ')-1)/,
+								 case 'tematica': , 	v4^c/,
 								 case 'inventario': , v4^i/,
 								 case 'material': , 	v4^l/,
 								 case 'operacion': , 	v4^t/,
@@ -193,7 +193,7 @@ Los campos rankeables son: Temática, Inventario, Lector, Operario, Día, Hora, Te
 								' * INVENTARIO=',v4^i fi 														/* inventario */
 		
 							if s(mhu,v3000[1]):'TEMATICA=' then
-								' * TEMATICA=',left(v4^c,size(v600[1])-9) fi 				/* clasificación, toma del subcampo solo la parte indicada en la expresión (v600, tematica) */
+								' * TEMATICA=',v4^c fi 				/* clasificación, toma del subcampo solo la parte indicada en la expresión (v600, tematica) */
 		
 							if s(mhu,v3000[1]):'MATERIAL=' then 
 								' * MATERIAL=',v4^l fi 								/* tipo material */
@@ -220,7 +220,7 @@ lector y para el caso de que un usuario haya tenido 3 operaciones (pres-pres-dev
 							 case 'localidad': , 	(if v53=v3001[1] then v3003[1]/ fi),
 							 case 'hora': , 	(if v53=v3001[1] then v3^h[1].2/ fi),
 							 case 'dia': , 		(if v53=v3001[1] then v3^f[1].2/ fi),							 							 
-							 case 'tematica': , 	(if v53=v3001[1] then left(v4^c,instr(v4^c,' ')-1)/ fi), 	
+							 case 'tematica': , 	(if v53=v3001[1] then v4^c/ fi), 	
 							 case 'inventario': , 	(if v53=v3001[1] then v4^i/ fi),							
 							 case 'material': , 	(if v53=v3001[1] then v4^l/ fi),							
 							 case 'operacion': , 	(if v53=v3001[1] then v4^t/ fi),

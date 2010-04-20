@@ -58,7 +58,7 @@
 			<do task="search">
 				<parm name="db">movi</parm>
 				<parm name="expression"><pft>v1001</pft></parm>
-				<parm name="gizmo"><pft>if val(v1002)=1 then 'oemansi' fi</pft></parm> <!-- aplica gizmo solo al primero para evitar recurrencia -->
+				<!-- parm name="gizmo"><pft>if val(v1002)=1 then 'oemansi' fi</pft></parm --> <!-- aplica gizmo solo al primero para evitar recurrencia -->
 				<parm name="count">1</parm>
 				<loop>
 					<field action="export" tag="list">5</field> <!-- Apellido y Nombre -->
