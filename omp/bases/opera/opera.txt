@@ -4,3 +4,4 @@
 !v003!^aBIBLIOTECARIO^bInvitado
 !v005!circulacion
 !v005!administracion
+!v005!estadisticas

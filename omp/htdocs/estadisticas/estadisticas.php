@@ -1,10 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<?php session_start(); ?>
+<?php
+if (!isset($_SESSION["s_username"])) {
+   echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php>";}
+else {
+?>
+
 <html>
 <head>
 <title>Open MarcoPolo - Módulo Estadísticas</title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
 <script language="JavaScript">
 
 function comienzo_semana(Mes, Anio, Dia_Comienzo_Semana) {
@@ -634,5 +640,6 @@ function CargarTerminal(Ip) {
 
            <div id="footer"></div> 
   </body>
-
+  
+<? } ?>
 </html>
