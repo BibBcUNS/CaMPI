@@ -692,30 +692,32 @@
 		
 		[pft]if p(v859) or p(v092) then[/pft]
 			<div id="ubicacion">
-			
-				[pft] if v859[1]^a='AR-BaUNS' then /* para Biblioteca Central UNS, feb/mar 2007 */[/pft]
 					<script type="text/javascript">
 						function verDisponibilidad() {
-							var ventana = window.open("","","width=600,height=450,top=10,left=15,resizable=yes,scrollbars=yes");
-							ventana.location.href = "[pft]v6003^h[/pft]/php/disponibilidad.php?ncontrol=[pft]v001[/pft]";
+							var ventana = window.open("","","width=710,height=450,top=10,left=15,resizable=yes,scrollbars=yes");
+							ventana.location.href = "/omp/circulacion/ver_disponibilidad.php?nc=[pft]v001[/pft]";
 						}
 					</script>
 					<style type="text/css">
 						input.disponibilidad {
-							color: black;
 							font-weight: normal;
 							font-family: arial, sans-serif;
+							background-color: #EEFDEC;
+							border:2px groove #CCC;
+							float:right;
+							cursor:pointer;
+							height:20px;
 						}
 					</style>
 					<h3 class="label">
 						Ubicación
+                        
 						<input type="button" name="disponibilidad"
-						value="Ver disponibilidad" class="disponibilidad" onclick="verDisponibilidad();return false">
-					</h3>
-				[pft] else [/pft]
-					<h3 class="label">Ubicación</h3>
-				[pft] fi [/pft]
-
+						value=" Ver disponibilidad " class="disponibilidad" onclick="verDisponibilidad();return false">
+						
+                    </h3>
+				
+				
 				<ul>
 					[pft]if p(v092) then[/pft]
 					
@@ -803,7 +805,7 @@
 						
 					[pft]fi[/pft]
 				</ul>
-			</div>
+			            </div>
 		[pft]fi[/pft]
 
 		

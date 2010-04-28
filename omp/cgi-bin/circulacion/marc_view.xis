@@ -1,0 +1,16 @@
+<IsisScript>
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  <field action=cgi tag=110>nc</field>
+  
+  <do task=search>
+    <parm name=db>opac_circulacion</parm>
+    <parm name=expression><pft>'LC=',v110</pft></parm>
+    <loop>
+		<display><htmlpft><pft>,cat('disponibilidad.pft'),</pft></htmlpft></display>
+    </loop>
+  </do>
+
+</section>
+</IsisScript>

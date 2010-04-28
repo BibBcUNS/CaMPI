@@ -329,13 +329,11 @@
 		<field action="import" tag="list">120,5009</field>
 		
 		<display>
-		<TABLE bgcolor="#BEE4FF" BORDER=0 WIDTH=100% style="font-family: sans-serif; font-size: 11pt; border:2px solid #5277AE">
+		<TABLE BORDER=0 WIDTH=95% style="font-family: sans-serif; font-size: 11pt; border:1px solid #5277AE">
 		<tr><td>
 		</display>
 		
-		<!--display><htmlpft><pft>cat('consulta.pft')</pft></htmlpft></display-->		
 		<display><htmlpft><pft>cat('omp_tit_aut.pft')</pft></htmlpft></display>
-		<!--display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'bibliografia_',v5009,'.html')</pft></htmlpft></display-->		
 		
 		<display><pft>'</td>
 			<td width="50px">

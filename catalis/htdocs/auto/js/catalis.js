@@ -159,8 +159,8 @@ function setDimensions()
 		
 	
 		default :
-			var message = screen.width + "x" + screen.height + ": resolución de pantalla no prevista.\n\nPor favor, comuníquese con:\n\nfgomez@criba.edu.ar";
-			alert(message);
+			//var message = screen.width + "x" + screen.height + ": resolución de pantalla no prevista.\n\nPor favor, comuníquese con:\n\nfgomez@criba.edu.ar";
+			//alert(message);
 	}
 }
 

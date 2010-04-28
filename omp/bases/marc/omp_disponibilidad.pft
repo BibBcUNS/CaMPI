@@ -1,9 +1,6 @@
-[pft]'
-<TABLE BORDER=0 WIDTH=100% style="vertical-align: middle;font-family: sans-serif; font-size: 11pt" VALIGN=MIDDLE width=100%>
-
-<TR><TD COLSPAN="3" WIDTH="*">',
+[pft]
 	if p(v100) or p(v700) or p(v110) or p(v710) then
-		'<B><FONT FACE="MS SANS SERIF" SIZE=2 >Autor/es: </FONT></B>'
+		'<B><FONT FACE="MS SANS SERIF"  >Autor/es: </FONT></B>'
 	fi,
 	
 	if v100^9='' then
@@ -34,7 +31,7 @@
 
 	/*
 	if p(v111)or p(v711) then
-		'<br><B><FONT FACE="MS SANS SERIF" SIZE=2 >Reunión : </FONT></B>'
+		'<br><B><FONT FACE="MS SANS SERIF" >Reunión : </FONT></B>'
 	fi,
 	*/
 	
@@ -52,33 +49,32 @@
 	),
 	
 	/*
-	if s(v240,v130)>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 >Título Unif. : </FONT></B>',fi,
+	if s(v240,v130)>'' then '<br><B><FONT FACE="MS SANS SERIF"  >Título Unif. : </FONT></B>',fi,
 			v130^a," "v130^p," "v130^k" ",
 		if v130>'' and p(v240) then '' fi,
 			v240^a," "v240^p," "v240^k" ",
 	*/
 
-	if v245>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 >Título: </FONT></B>' fi,
+	if v245>'' then '<br><B><FONT FACE="MS SANS SERIF"  >Título: </FONT></B>' fi,
 		v245^a," "v245^n,
 		" "v245^p," "v245^h," "v245^f,
 		if v245^b.1=';' or v245^b.1='=' then " "v245^b else " "v245^b  fi,
 		
 	/*
 	if p(v260^c) then
-		'<br><B><FONT FACE="MS SANS SERIF" SIZE=2 >Fecha de publ: </font></B>',v260^c,'<br>'
+		'<br><B><FONT FACE="MS SANS SERIF"  >Fecha de publ: </font></B>',v260^c,'<br>'
 	fi
 	*/
 	
 	if p(v250^a) then
-		'<TD width="20%"><B><FONT FACE="MS SANS SERIF" SIZE=2 >Ed.: </font></B>',v250^a,'</TD>'
+		'<br><B><FONT FACE="MS SANS SERIF"  >Ed.: </font></B>',v250^a,
 	else
-		'<TD width="20%"><B><FONT FACE="MS SANS SERIF" SIZE=2 ></font></B>',
+		'<br><B><FONT FACE="MS SANS SERIF"  >Sig. Topográfica: </font></B>',
 			(if not v1000[1]:s(v859^h,'. ',v859^i) then proc('d1000a1000~',v1000[1],' ',s(v859^h,'. ',v859^i),'~') fi),(v1000),
-		'</TD>'
 	fi
 
-	if v859^3<>'' then
-		'<TD width="20%"><B><FONT FACE="MS SANS SERIF" SIZE=2 >Tomos: </font></B>',
+/*	if v859^3<>'' then
+		'<br><B><FONT FACE="MS SANS SERIF"  >Tomos: </font></B>',
 			(
 				if not v2000[1]:v859^3 or v859^3='' then
 					proc('d2000a2000~',
@@ -87,11 +83,6 @@
 							'~'
 			)
 	fi),(v2000),
-		'</TD>'
 	fi
-	
-	'</TD>
-</TR>
-
-</TABLE>
-'[/pft]
+*/
+[/pft]
