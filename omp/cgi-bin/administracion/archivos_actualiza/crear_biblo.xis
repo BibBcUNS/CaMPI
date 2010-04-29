@@ -16,6 +16,7 @@
 	'biblo.*='v5006,'/',v5009,'/',v5009,'.*'/
 	'ac.tab='v5006,'/isisac.tab'/
 	'uc.tab='v5006,'/isisuc.tab'/
+
 	'CI_TEMPDIR='v5006,'/bases/temp'/
 </pft></field>				
 <field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>				
@@ -32,16 +33,15 @@
 	
 
 <do task="mfnrange">
-<parm name=db>biblo_original</parm>
-<field action=define tag=1111>Isis_Total</field>
+   <parm name=db>biblo_original</parm>
+		
+   <field action=define tag=1111>Isis_Total</field>
 	<loop></loop> <!-- Para saber el total de registros -->
 
 	<loop>
 		<do task=update> <!-- crea el registro bibliográfico (propio del OpenMP)-->
 		<parm name=db>biblo</parm>
 		<parm name="fst"><pft>cat('biblo.fst')</pft></parm>
-		<!--parm name=actab><pft>cat('ac.tab')</pft></parm>
-		<parm name=uctab><pft>cat('uc.tab')</pft></parm-->
 		<parm name=mfn>New</parm>     
 	    <field action=define tag=1102>Isis_Status</field>
 	    <field action=import tag=1111>1111</field>

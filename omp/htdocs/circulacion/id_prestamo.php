@@ -105,11 +105,11 @@ function focus_expresion() {
 		<input type="radio" name="criterio" value="inv" checked>Inventario
 		</td>
 	</tr>
-    <tr>
+    <!--tr>
 		<td width="100%">
 		<input type="radio" name="criterio" value="nc">Nº Control
 		</td>
-	</tr>
+	</tr-->
     <tr>
 		<td width="100%">
 		<input type="radio" name="criterio" value="lector">Usuario
@@ -174,7 +174,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
       <td width="100%">
       <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$grabar_datos; ?>">
 	  <input type="text" id="lector" name="lector" size="10" accesskey="l"><input type="submit" value=" > ">
-	  <input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()">
+	  <!--input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()"-->
 	  <input type="button" value=limpiar onclick="window.document.form_id.lector.value='';window.document.form_id.lector.focus()">
 	  </td>
 	</tr>

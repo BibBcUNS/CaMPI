@@ -285,7 +285,7 @@
   	<!--field action="import" tag="list">110</field-->
     <parm name=db>opac_circulacion</parm>
     <parm name=expression><pft>v110</pft></parm>
-    <parm name=gizmo>gizmo</parm>
+
     <field action=define tag=1102>Isis_Total</field>
     <loop>
 		<field action="add" tag="7777" split="occ"><htmlpft><pft>'[pft](',ref(['config']1,v1),'/)[/pft]'</pft></htmlpft></field> <!-- el v7777 tendrá los nro. de inventarios de la etiqueta declarada en el config.txt -->

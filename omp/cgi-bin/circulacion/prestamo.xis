@@ -285,7 +285,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 <parm name=db>lector</parm>
 <parm name=from><pft>v2001</pft></parm>
 <parm name=count>1</parm>
-<parm name=gizmo>txt_htm</parm>
+<!--parm name=gizmo>txt_htm</parm-->
 <loop>
 
         <!-- v2001 tendrá tantas ocurrencias como v8 (prestamos)
@@ -1017,7 +1017,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
           <parm name=db>movi</parm>
           <parm name=from><pft>v1100</pft></parm>
           <parm name=count>1</parm>
-          <parm name=gizmo>txt_htm</parm>
+          <!--parm name=gizmo>txt_htm</parm-->
           <field action=define tag=1102>Isis_Status</field>
           <loop>
             <display><pft>          
@@ -1041,7 +1041,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <parm name=db>movi</parm>
         <parm name=from><pft>v1100</pft></parm>
         <parm name=count>1</parm>
-        <parm name=gizmo>txt_htm</parm>
+        <!--parm name=gizmo>txt_htm</parm-->
         <field action=define tag=1102>Isis_Status</field>
         <loop>
                 <list action=load type=list>
@@ -1091,7 +1091,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <parm name=db>movi</parm>
         <parm name=from><pft>v1100</pft></parm>
         <parm name=count>1</parm>
-        <parm name=gizmo>txt_htm</parm>
+        <!--parm name=gizmo>txt_htm</parm-->
         <field action=define tag=1102>Isis_Status</field>
         <loop>
                 <list action=load type=list>
@@ -1168,7 +1168,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <parm name=db>movi</parm>
         <parm name=from><pft>v1100</pft></parm>
         <parm name=count>1</parm>
-        <parm name=gizmo>txt_htm</parm>
+        <!--parm name=gizmo>txt_htm</parm-->
         <field action=define tag=1102>Isis_Status</field>
         <loop>
                 <display><pft>'<p>&nbsp</p>',
@@ -1192,7 +1192,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <parm name=db>movi</parm>
         <parm name=from><pft>v1100</pft></parm>
         <parm name=count>1</parm>
-        <parm name=gizmo>txt_htm</parm>
+        <!--parm name=gizmo>txt_htm</parm-->
         <field action=define tag=1102>Isis_Status</field>
         <loop>
         	<!-- generlo la lista de inventarios que generaron esperas -->

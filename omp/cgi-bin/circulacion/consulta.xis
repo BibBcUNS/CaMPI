@@ -244,9 +244,9 @@
 		<tr>
 			<td width="85%">
 				<input type="text" name="expresion" size="28" accesskey="r" value="',v110,'">
-				<input type="radio" name="campo" value="NC" ',
+				<!--input type="radio" name="campo" value="NC" ',
 					if v112='NC' then 'checked' fi,
-					'/> NC 
+					'/> NC -->
 				<input type="radio" name="campo" value="autor" ',
 					if v112='autor' then 'checked' fi,
 					'/> Autor 
@@ -322,7 +322,7 @@
     <do task=search>
     <parm name=db>opac_circulacion</parm>
     <parm name=expression><pft>v110</pft></parm>
-    <parm name=gizmo>gizmo</parm>
+
     <field action=define tag=1102>Isis_Total</field>
     <loop>
 		<field action="add" tag="7777" split="occ"><htmlpft><pft>'[pft](',ref(['config']1,v1),'/)[/pft]'</pft></htmlpft></field> <!-- el v7777 tendrá los nro. de inventarios de la etiqueta declarada en el config.txt -->
