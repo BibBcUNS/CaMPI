@@ -15,11 +15,20 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
   </head>
   
   	<script>
-		function enable_button(btn){
+		function enable_button(btn, texto){
 			btn.disabled = '';
+			if (texto!=null) {
+				btn.value = texto;
+			}
 		}
-		function disable_button(btn){
+		function disable_button(btn,texto){
 			btn.disabled = 'disabled';
+			if (texto!=null) {
+				btn.value = texto;
+			}
+		}
+		function aaa() {
+				alert('hola');
 		}
 	</script>
 
@@ -173,8 +182,8 @@ $config['imprimir_papeleta'] = $config_obtener[2];
 <tr style="vertical-align:top;">
 <td>
 	<i><font size="2">Dispare esta acción cada vez que incorpora o modifica un inventario</font></i>
-    <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=actualizar_bases_form onSubmit="disable_button(document.actualizar_bases_form.submit_btn)">
-    <input type="submit" value="Actualizar Circulación" title="Actualiza la base de datos utilizada en el sistema de circulación en función de la base bibliográfica del sistema de catalogación" name=submit_btn>
+    <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=actualizar_bases_form onSubmit="disable_button(document.actualizar_bases_form.submit_btn,' Realizando operación ...')">
+    <input type="submit" value="Actualizar Circulación" title="Actualiza la base de datos utilizada en el sistema de circulación en función de la base bibliográfica del sistema de catalogación" name="submit_btn">
     <input type="hidden" name="IsisScript" value="administracion/actualizar_bases.xis"><br />
     </form>
 	<br>
@@ -183,14 +192,13 @@ $config['imprimir_papeleta'] = $config_obtener[2];
     <input type="submit" value="Control de consistencia de inventarios" name=submit_btn>
     <input type="hidden" name="IsisScript" value="administracion/check_consistencia.xis" >
     </form>
-	<br>
+	<br 
     -->
-    <!-- target="resultado_actualizar_opac" -->
-    <form action="opac_actualiza.php" name="actualizar_opac_form"   method="post">
-    <input type="submit" value="Actualizar OPAC" title="Actualiza la base de datos de libros que se muestran en el OPAC a partir de la base de datos del sistema de Catalogación" name="actualizar_opac"  onclick="disable_button(document.actualizar_opac_form.actualizar_opac)">
+ 
+    <form action="opac_actualiza.php" name="actualizar_opac_form" target="resultado_actualizar_opac" method="post" onsubmit="disable_button(document.actualizar_opac_form.actualizar_opac, ' Realizando operación ...')">
+    <input type="submit" value="Actualizar OPAC" title="Actualiza la base de datos de libros que se muestran en el OPAC a partir de la base de datos del sistema de Catalogación" name="actualizar_opac">
     </form>
-	
-    <iframe name="resultado_actualizar_opac" height=120 frameborder="0"></Iframe>
+    <iframe name=resultado_actualizar_opac height=50 frameborder=0></iframe>
 
 </td>
 <td>
@@ -232,6 +240,7 @@ $config['imprimir_papeleta'] = $config_obtener[2];
     <input type="hidden" name="IsisScript" value="administracion/config_guardar.xis"><br />
     </form>
 	<iframe name=resultado_grabar height=50 frameborder=0></iframe>
+    
 	
 </td>
 </table>

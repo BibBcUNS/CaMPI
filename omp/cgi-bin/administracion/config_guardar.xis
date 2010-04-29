@@ -24,7 +24,7 @@
      </update>
      </do>
      
-<display>La configuración se guardó correctamente</display>
+<display><span style="color:green">La configuración se guardó correctamente</span></display>
 <flow action=jump><pft>'Fin'</pft></flow>
 
 <label>Error</label>
