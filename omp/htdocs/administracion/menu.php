@@ -1,6 +1,19 @@
-<?php session_start(); ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<?php session_start(); 
+if (isset($_SESSION["s_username"]) && $_SESSION["s_permiso"]=='administracion') {
+
+$ptr_anios_calendario = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_anios.xis","r");
+$anios_calendario = fread($ptr_anios_calendario,1000);
+fclose($ptr_anios_calendario);
+$anios = explode  ('~', $anios_calendario);
+
+$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
+$config_obtener = fread($ptr_config,1000);
+fclose($ptr_config);
+$config_obtener = explode  ('~', $config_obtener);
+$config['reservas'] = $config_obtener[0];
+$config['politicas'] = $config_obtener[1];
+$config['imprimir_papeleta'] = $config_obtener[2];
+?>
 <html>
   <head>
     <title>Administración</title>
@@ -46,24 +59,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
    
 <!--###################################################-->	
 
-<?php
-if (isset($_SESSION["s_username"])) {
-?>
 
-<?php
-$ptr_anios_calendario = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_anios.xis","r");
-$anios_calendario = fread($ptr_anios_calendario,1000);
-fclose($ptr_anios_calendario);
-$anios = explode  ('~', $anios_calendario);
-
-$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
-$config_obtener = fread($ptr_config,1000);
-fclose($ptr_config);
-$config_obtener = explode  ('~', $config_obtener);
-$config['reservas'] = $config_obtener[0];
-$config['politicas'] = $config_obtener[1];
-$config['imprimir_papeleta'] = $config_obtener[2];
-?>
 
 <center>
  

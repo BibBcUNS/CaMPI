@@ -1,8 +1,5 @@
-<?php session_start(); ?>
-<?php
-if (!isset($_SESSION["s_username"])) {
-   echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php>";}
-else {
+<?php session_start(); 
+if (isset($_SESSION["s_username"]) && ($_SESSION["s_permiso"]=='estadisticas' or $_SESSION["s_permiso"]=='administracion')) {
 ?>
 
 <html>
@@ -641,5 +638,7 @@ function CargarTerminal(Ip) {
            <div id="footer"></div> 
   </body>
   
-<? } ?>
+<? 
+}else{
+echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php>";} ?>
 </html>

@@ -13,7 +13,7 @@
 	.no_disponible {background-color:#FFC4C4}
 </style>
 
-<h4 class="texto" align="center">Datos Bibliogr&aacuteficos:</h4>
+<h4 class="texto" align="center">Datos Bibliogr&aacute;ficos:</h4>
 <?php
 $nc = $_GET['nc'];
 
@@ -23,7 +23,7 @@ $datos_bibliograficos = fread($datos, 1000000);
 echo "<div class='texto'>$datos_bibliograficos</div>";
 //echo '<iframe src="/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/marc_view.xis&nc='.$nc.'" style="border:0px solid red; width:100%; height:120px"></iframe>';
 
-include "c:\CaMPI\php\PEAR\go-pear-bundle\JSON.php";
+include "json/JSON.php";
 
 ?>
 <h4 class="texto" align="center">Estado de los ejemplares:</h4>
@@ -36,6 +36,7 @@ include "c:\CaMPI\php\PEAR\go-pear-bundle\JSON.php";
 	}
 	
 	$partes_string = get_url("IsisScript=circulacion/estado_ejemplares.xis&nc=$nc");
+	//echo $partes_string;
 	if ($partes_string){
 		$json = new Services_JSON();
 		$partes = $json->decode($partes_string);
@@ -68,7 +69,7 @@ include "c:\CaMPI\php\PEAR\go-pear-bundle\JSON.php";
 				{$estado="<font color=#1F8B2F ><b>Disponible</b></font><br>";}
 			
 			
-			echo '<b>Tomo/Volumen: '.($parte->parte==''?'No especificada':$parte->parte).'</b><br>';
+			echo '<b>Tomo/Volumen: '.($parte->parte==''?'No especificado':$parte->parte).'</b><br>';
 			print "$estado<br>";
 			echo "Prestados: $prestados<br>";
 			echo "Disponibles: $disponibles<br>";

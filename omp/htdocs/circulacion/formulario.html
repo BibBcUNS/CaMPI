@@ -430,8 +430,12 @@ if ref(['config']1,v9)='si' then
 			if p(v2030) then
 			'<table border="1" width="100%" bgcolor="FFFFFF" cellpadding="4" cellspacing="0">
 				<tr valign="middle" style="font-weight:normal;font-size:0.7em">
-					<th align="left">Reservas registradas</th><th>Fecha/hora</th><th>Eliminar</th></tr>
-					',('<tr valign="middle"><td>',
+					<th align="left">Reservas registradas</th><th>Fecha/hora</th>',
+					if ref(['opera']l(['opera']v1000^b),(v5|~|)):'administracion' then
+						'<th>Eliminar</th>',
+					fi,
+					'</tr>',
+					,('<tr valign="middle"><td>',
 					ref(['opac_circulacion']l(['opac_circulacion']'LC='v2030^c),
 						'<font color="blue"><b>',
 							if v100^9='' then
@@ -446,18 +450,20 @@ if ref(['config']1,v9)='si' then
 					if v2030^p<>'' then 'Parte: ',v2030^p,'</font><br>' fi,
 					'<font color="gray">',v2030^c, if v2030^p<>'' then '[',v2030^p,']' fi,'<br>'
 					'</td>
-					<td align="center" width="15%">',v2030^f,'<br>',v2030^h,'</td>					
-					<td align="center" width="12%">
-						<form name="eliminar_',f(iocc,1,0),'" method="POST"
-							action="/omp/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
-							<input type="hidden" name="IsisScript"   value="circulacion/reserva_eliminar.xis">
-							<input type="hidden" name="usuario_id"  value="',v2[1],'">
-							<input type="hidden" name="operario_id" value="',v2002[1],'">
-							<input type="hidden" name="reserva_id"  value="^b',v2030^b,'^c',v2030^c,'^p',v2030^p,'">
-							<input type="submit" value="Eliminar">
-						</form>
-					</td>
-				</tr>'),			
+					<td align="center" width="15%">',v2030^f,'<br>',v2030^h,'</td>',
+					if ref(['opera']l(['opera']v1000^b),(v5|~|)):'administracion' then
+						'<td align="center" width="12%">
+							<form name="eliminar_',f(iocc,1,0),'" method="POST"
+								action="/omp/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
+								<input type="hidden" name="IsisScript"   value="circulacion/reserva_eliminar.xis">
+								<input type="hidden" name="usuario_id"  value="',v2[1],'">
+								<input type="hidden" name="operario_id" value="',v2002[1],'">
+								<input type="hidden" name="reserva_id"  value="^b',v2030^b,'^c',v2030^c,'^p',v2030^p,'">
+								<input type="submit" value="Eliminar">
+							</form>
+						</td>',
+					fi,
+				'</tr>'),			
 			'</table>',
 			else
 				'<h6>El usuario no registra Reservas</h6>'
