@@ -514,7 +514,7 @@ if ref(['config']1,v9)='si' then
 			<td>
 				<form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/">
 				<input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
-				<input type="hidden" name="criterio" value="otro">
+				<input type="hidden" name="criterio" value="reserva">
 				<input type="hidden" name="usuario_id" value="',v2,'">
 				<input type="hidden" name="operario_id" value="',v2002,'">
 	
@@ -529,7 +529,7 @@ if ref(['config']1,v9)='si' then
                                 <input type="radio" name="campo" value="titulo"     /> Título
                                 ',
 									if ref(['config']1,v12)='si' then
-										'<input type="radio" name="campo" value="NC" checked /> NC ',
+										'<input type="radio" name="campo" value="NC"/> NC ',
 									fi,
 								'<br /><input type="checkbox" name="tipo" value="completa" />Palabras completa
                                 

@@ -333,7 +333,7 @@
   <flow action=exit>1</flow>
 
 <!----------------------------------------------------------------------------->	
-<label>otro</label>
+<label>reserva</label>
   
   <display><pft>
   '<center>',
@@ -349,8 +349,8 @@
   <display><pft>
 	'<input type="button" name="volver" value="<< Volver" onClick="javascript:history.back()">
   	<form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/">
-  	<input type="hidden" name="IsisScript" value="circulacion/consulta_campi.xis">
-	<input type="hidden" name="criterio" value="otro">
+  	<input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
+	<input type="hidden" name="criterio" value="reserva">
 	<input type="hidden" name="usuario_id" value="',v120,'">
 	<input type="hidden" name="operario_id" value="',v130,'">
 	
@@ -358,17 +358,19 @@
 		<tr>
 			<td width="85%">
 				<input type="text" name="expresion" size="28" accesskey="r" value="',v110,'">
-				<!--input type="radio" name="campo" value="NC" ',
-					if v112='NC' then 'checked' fi,
-					'/> NC -->
 				<input type="radio" name="campo" value="autor" ',
 					if v112='autor' then 'checked' fi,
 					'/> Autor 
 				<input type="radio" name="campo" value="titulo" ',
 					if v112='titulo' then 'checked' fi,
-					'/> Título
-
-				<br />
+					'/> Título',
+				
+				if ref(['config']1,v12)='si' then
+					'<input type="radio" name="campo" value="NC" ',
+						if v112='NC' then 'checked' fi,
+					'/> NC',
+				fi,
+				'<br>
 				<input type="checkbox" name="tipo" value="completa"',
 				if v111='completa' then 'checked' fi,
 				' />Palabras completa

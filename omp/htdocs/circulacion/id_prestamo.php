@@ -96,7 +96,7 @@ function focus_expresion() {
 				return false;
 		}else{  return true;}
 	">
-  <input type="hidden" name="IsisScript" value="circulacion/consulta_campi.xis">
+  <input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td width="100%"><strong>Consultar por</strong></td></tr>
