@@ -172,7 +172,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 			</pft></display>
 		</loop>
    </do> 
-	<display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.html">Volver al Menú</a></p>'</pft></display>
+	<display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.php">Volver al Menú</a></p>'</pft></display>
 
 
   <flow action=exit>1</flow>
@@ -187,7 +187,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
      if val(mid(date,10,6)) > 130000  then '-Por la tarde-' else '-Por la mañana' fi,'</p>'</pft></display>
 
   <do task=search>
-    <parm name=db>movi</parm>1
+    <parm name=db>movi</parm>
 
     <parm name=expression>
       <pft>'FECHA=',s(date).4,'/',s(date)*4.2,'/',s(date)*6.2,' * OPERACION=prestamo$'</pft></parm>
@@ -233,7 +233,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
     </loop>
   </do> 
   <display></table></display>
-  <display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.html">Volver al Menú</a></p>'</pft></display>
+  <display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.php">Volver al Menú</a></p>'</pft></display>
   <flow action=exit>1</flow>
 
   <label>id_recibos</label>
@@ -321,7 +321,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 	      </do>
 	</loop>
   </do>
-  <display><pft>'</table><p><a href="',getenv('PATH_INFO'),'menu.html">Volver al Menú</a></p>'</pft></display>
+  <display><pft>'</table><p><a href="',getenv('PATH_INFO'),'menu.php">Volver al Menú</a></p>'</pft></display>
   <flow action=exit>1</flow>	
 
   <label>circulante</label>
@@ -425,7 +425,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 
 	<display>
 		</table></display>	
-  <display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.html">Volver al Menú</a></p>'</pft></display>
+  <display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.php">Volver al Menú</a></p>'</pft></display>
 <display>
 <!--###############################################-->  
 								</div>

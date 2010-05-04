@@ -31,7 +31,7 @@
 
 	/*
 	if p(v111)or p(v711) then
-		'<br><B><FONT FACE="MS SANS SERIF" >Reunión : </FONT></B>'
+		'<br><B><FONT FACE="MS SANS SERIF" >Reuni&oacute;n : </FONT></B>'
 	fi,
 	*/
 	
@@ -49,13 +49,13 @@
 	),
 	
 	/*
-	if s(v240,v130)>'' then '<br><B><FONT FACE="MS SANS SERIF"  >Título Unif. : </FONT></B>',fi,
+	if s(v240,v130)>'' then '<br><B><FONT FACE="MS SANS SERIF"  >T&iacute;tulo Unif. : </FONT></B>',fi,
 			v130^a," "v130^p," "v130^k" ",
 		if v130>'' and p(v240) then '' fi,
 			v240^a," "v240^p," "v240^k" ",
 	*/
 
-	if v245>'' then '<br><B><FONT FACE="MS SANS SERIF"  >Título: </FONT></B>' fi,
+	if v245>'' then '<br><B><FONT FACE="MS SANS SERIF"  >T&iacute;tulo: </FONT></B>' fi,
 		v245^a," "v245^n,
 		" "v245^p," "v245^h," "v245^f,
 		if v245^b.1=';' or v245^b.1='=' then " "v245^b else " "v245^b  fi,
@@ -69,7 +69,7 @@
 	if p(v250^a) then
 		'<br><B><FONT FACE="MS SANS SERIF"  >Ed.: </font></B>',v250^a,
 	else
-		'<br><B><FONT FACE="MS SANS SERIF"  >Sig. Topográfica: </font></B>',
+		'<br><B><FONT FACE="MS SANS SERIF"  >Sig. Topogr&aacute;fica: </font></B>',
 			(if not v1000[1]:s(v859^h,'. ',v859^i) then proc('d1000a1000~',v1000[1],' ',s(v859^h,'. ',v859^i),'~') fi),(v1000),
 	fi
 

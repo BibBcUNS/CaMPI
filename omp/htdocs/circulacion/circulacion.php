@@ -1,5 +1,7 @@
 <?php session_start(); 
-if (isset($_SESSION["s_username"]) && ($_SESSION["s_permiso"]=='circulacion' or $_SESSION["s_permiso"]=='administracion' or $_SESSION["s_permiso"]=='estadisticas')) {
+if (isset($_SESSION["s_username"])
+	&& isset($_SESSION["s_permisos"])
+	&& in_array('circulacion' , $_SESSION["s_permisos"])) {
 ?>
 <html>
 <head>
@@ -20,7 +22,7 @@ if (isset($_SESSION["s_username"]) && ($_SESSION["s_permiso"]=='circulacion' or 
 }
 else
 {
-echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php>";
+echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=/omp/login_form.php>";
 }
 ?>
 </html>

@@ -6,20 +6,28 @@
 	<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 	<field action=cgi tag=100>user</field>
 	<field action=cgi tag=101>pwd</field>
-	<field action=cgi tag=102>modulo</field>
 
 	<do task=search>
 	<parm name=db>opera</parm>
 	<parm name=expression><pft>v100</pft></parm>
 	<loop>
 		<field action=replace tag=200><pft>v2</pft></field>
-		<field action=replace tag=500><pft>(v5/)</pft></field>
+		<field action=replace tag=500 split=occ><pft>(v5/)</pft></field>
 		<field action=export tag=200>200</field>
-		<field action=export tag=500>500</field>
+		<field action=export tag=500 split=occ>500</field>
 	</loop>
     </do>
 
-	<display><pft>if p(v200) then if v200=v101 then if v500:v102 then 'OK' else 'NOK' fi else 'NOK' fi else 'NOK' fi</pft></display>
+	
+	<field action=replace tag=500><pft>
+		if p(v200) then
+			if v200=v101 then
+					(v500+|,|),
+			fi
+		fi
+	</pft></field>
+	<field action=replace tag=500><pft>'["',replace(v500,',','","'),'"]'</pft></field>
+	<display><pft>v500</pft></display>
 	
 </section>
 </IsisScript>

@@ -1,6 +1,7 @@
 <?php session_start(); 
-if (isset($_SESSION["s_username"]) && ($_SESSION["s_permiso"]=='estadisticas' or $_SESSION["s_permiso"]=='administracion')) {
-?>
+if (isset($_SESSION["s_username"])
+	&& isset($_SESSION["s_permisos"])
+	&& in_array('estadisticas' , $_SESSION["s_permisos"])) {?>
 
 <html>
 <head>
@@ -157,13 +158,13 @@ function VerificarFecha(Fecha) {
 }
 
 function VerOcultar(Elemento,Visibilidad) {
-	window.document.getElementById("Layer1").style.visibility='hidden';
-	window.document.getElementById("Layer2").style.visibility='hidden';
-	window.document.getElementById("Layer3").style.visibility='hidden';
-	window.document.getElementById("Layer4").style.visibility='hidden';
-	window.document.getElementById("Layer5").style.visibility='hidden';
-	window.document.getElementById("Layer6").style.visibility='hidden';
-	window.document.getElementById(Elemento).style.visibility=Visibilidad;
+	window.document.getElementById("Layer1").style.display='none';
+	window.document.getElementById("Layer2").style.display='none';
+	window.document.getElementById("Layer3").style.display='none';
+	window.document.getElementById("Layer4").style.display='none';
+	window.document.getElementById("Layer5").style.display='none';
+	window.document.getElementById("Layer6").style.display='none';
+	window.document.getElementById(Elemento).style.display='';
 }
 
 function Procesar() {
@@ -337,8 +338,8 @@ function CargarTerminal(Ip) {
 <form action="/omp/cgi-bin/wxis.exe/omp/estadisticas/" method="post" name="form_stat" target="Resultados" onsubmit="return Procesar()">
 	<input type="Hidden" name="IsisScript" value="estadisticas/estadistica.xis">
 	<input type="hidden" name="operaciones">
-  <input type="hidden" name="turno">	
-  <input type="hidden" name="fecha">
+	<input type="hidden" name="turno">	
+	<input type="hidden" name="fecha">
 	<input type="hidden" name="doc">
 	<input type="hidden" name="localidad_lector">
 	<input type="hidden" name="inventario">
@@ -350,65 +351,53 @@ function CargarTerminal(Ip) {
 
 	<table width="596" border="0" align="center" cellpadding="1" cellspacing="0" bgcolor="#D2E3AC" class="fichaencab">
  	<tr>
-    <th width="109" align="center" id="Celda1" style="cursor:hand" onclick="VerOcultar('Layer1','visible')">Operaciones</a>
-      </div></th>
-    <th width="87" align="center" id="Celda2" style="cursor:hand" onclick="VerOcultar('Layer2','visible')">Per&iacute;odo</a>
-      </div></th>	
-    <th width="90" align="center" id="Celda3" style="cursor:hand" onclick="VerOcultar('Layer3','visible')">Lector</a>
-      </div></th>
-    <th width="96" align="center" id="Celda4" style="cursor:hand" onclick="VerOcultar('Layer4','visible')">Material</a>
-      </div></th>
-    <th width="113" align="center" id="Celda5" style="cursor:hand" onclick="VerOcultar('Layer5','visible')">Bibliotecario</a>
-      </div></th>
-    <th width="96" align="center" id="Celda6" style="cursor:hand" onclick="VerOcultar('Layer6','visible')">Ayuda</a>
-      </div></th>
-	  </tr>
+		<th width="109" align="center" id="Celda1" style="cursor:hand" onclick="VerOcultar('Layer1','visible')">Operaciones</th>
+		<th width="87" align="center" id="Celda2" style="cursor:hand" onclick="VerOcultar('Layer2','visible')">Per&iacute;odo</th>	
+		<th width="90" align="center" id="Celda3" style="cursor:hand" onclick="VerOcultar('Layer3','visible')">Lector</th>
+		<th width="96" align="center" id="Celda4" style="cursor:hand" onclick="VerOcultar('Layer4','visible')">Material</th>
+		<th width="113" align="center" id="Celda5" style="cursor:hand" onclick="VerOcultar('Layer5','visible')">Bibliotecario</th>
+		<th width="96" align="center" id="Celda6" style="cursor:hand" onclick="VerOcultar('Layer6','visible')">Ayuda</th>
+	</tr>
 	</table>
 	<table width="596" border="0" align="center" cellpadding="1" cellspacing="0"  bgcolor="#BEE4FF" class="fichadatos">
-  <tr>
+	<tr>
     <td height="244" colspan="6" valign="top">
-		<div id="Layer1" style="position:absolute; width:592px; height:242px; z-index:1; visibility: visible; top: 145px;">
+		<div id="Layer1">
 			<table width="100%" align="center">
-	    <tr>
-	      <td>&nbsp;</td>
-	      <td>&nbsp;</td>
-	      <td>&nbsp;</td>
-	      </tr>
-		  <tr>
-	      <td colspan="3"><br><h2 style="color:#5277AE;">Indique las operaciones para analizar</h2></td>
+			<tr>
+				<td colspan="3"><h3>Indique las operaciones para analizar</h3></td>
 			</tr>
-
-	    <tr>
-	      <td width="19%">&nbsp;</td>
-	      <td width="36%">
-	        <input type="checkbox" name="operacion_1" value="Operacion=PRESTAMO$"><a href="JavaScript:window.document.form_stat.operacion_1.click()">Préstamos</a></td>
-	      <td width="45%">
-		<input type="checkbox" name="operacion_2" value="Operacion=DEVOLUCION_MOROSA"><a href="JavaScript:window.document.form_stat.operacion_2.click()">Devoluciones Morosas</a></td>
-	    </tr>
-	    <tr>
-	      <td>&nbsp;</td>
-	      <td>
-	        <input type="checkbox" name="operacion_3" value="Operacion=DEVOLUCION$"><a href="JavaScript:window.document.form_stat.operacion_3.click()">Devoluciones</a></td>
-	      <td>
-	        <input type="checkbox" name="operacion_4" value="Operacion=PRESTAMO_SALA"><a href="JavaScript:window.document.form_stat.operacion_4.click()">Préstamo en Sala</a></td>
-	    </tr>
-	    <tr>
-	      <td>&nbsp;</td>
-	      <td>
-	        <input type="checkbox" name="operacion_5" value="Operacion=SANCION"><a href="JavaScript:window.document.form_stat.operacion_5.click()">Sanciones</a></td>
-	      <td>
-	        <input type="checkbox" name="operacion_6" value="Operacion=PRESTAMO_DOMICILIO"><a href="JavaScript:window.document.form_stat.operacion_6.click()">Préstamo a Domicilio</a></td>
-	    </tr>
-	  </table>
-    </div>
-		<div id="Layer2" style="position:absolute; width:593px; height:242px; z-index:1; visibility: hidden;">
+			<tr>
+				<td width="19%">&nbsp;</td>
+				<td width="36%">
+				<input type="checkbox" name="operacion_1" value="Operacion=PRESTAMO$"><a href="JavaScript:window.document.form_stat.operacion_1.click()">Préstamos</a></td>
+				<td width="45%">
+				<input type="checkbox" name="operacion_2" value="Operacion=DEVOLUCION_MOROSA"><a href="JavaScript:window.document.form_stat.operacion_2.click()">Devoluciones Morosas</a></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+				<input type="checkbox" name="operacion_3" value="Operacion=DEVOLUCION$"><a href="JavaScript:window.document.form_stat.operacion_3.click()">Devoluciones</a></td>
+				<td>
+				<input type="checkbox" name="operacion_4" value="Operacion=PRESTAMO_SALA"><a href="JavaScript:window.document.form_stat.operacion_4.click()">Préstamo en Sala</a></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+				<input type="checkbox" name="operacion_5" value="Operacion=SANCION"><a href="JavaScript:window.document.form_stat.operacion_5.click()">Sanciones</a></td>
+				<td>
+				<input type="checkbox" name="operacion_6" value="Operacion=PRESTAMO_DOMICILIO"><a href="JavaScript:window.document.form_stat.operacion_6.click()">Préstamo a Domicilio</a></td>
+			</tr>
+			</table>
+			</div>
+		<div id="Layer2" style="display:'none'">
 		<table width="100%" align="center">
     <tr>
       <td colspan="5"><h3>Indique el período del análisis</h3></TD>
     </TR>
     <tr>
-      <td width="9%">&nbsp;</TD>
-      <td width="23%" rowspan="4"><input type="checkbox"  name="turno_1" value="Turno=MATUTINO">        
+      <td width="2%">&nbsp;</TD>
+      <td width="30%" rowspan="4"><input type="checkbox"  name="turno_1" value="Turno=MATUTINO">        
         <a href="JavaScript:window.document.form_stat.turno_1.click()">Turno Matutino<br>
         </a>
         <input type="checkbox" name="turno_2" value="Turno=VESPERTINO">
@@ -475,7 +464,7 @@ function CargarTerminal(Ip) {
     </TABLE>
 
 	  </div>
-		<div id="Layer3" style="position:absolute; width:593px; height:227px; z-index:1; visibility: hidden;">
+		<div id="Layer3" style="display:'none'">
 
 		<table width="100%" height="236" align="center">
     <tr>
@@ -506,7 +495,7 @@ function CargarTerminal(Ip) {
 		</TABLE>
 		</div>
 		
-		<div id="Layer4" style="position:absolute; width:592px; height:242px; z-index:1; visibility: hidden;">
+		<div id="Layer4" style="display:'none'">
 		<table width="100%" align="center">
     <tr>
       <td colspan="4"><h3>Indique el material a considerar en el an&aacute;lisis</h3></td>
@@ -549,7 +538,7 @@ function CargarTerminal(Ip) {
   </table>  
 		</div>
 		
-		<div id="Layer5" style="position:absolute; width:591px; height:242px; z-index:1; visibility: hidden;">
+		<div id="Layer5" style="display:'none'">
 		  <table width="100%" align="center">
 			<tr>
 			  <td colspan="4"><h3>Indique el bibliotecario o terminal</h3></td>
@@ -585,7 +574,7 @@ function CargarTerminal(Ip) {
 			</table>
 		</div>
 		
-		<div id="Layer6" style="position:absolute; width:591px; height:242px; z-index:1; visibility: hidden;">
+		<div id="Layer6" style="display:'none'">
 		<table width="100%" align="center">
 		<tr>
 		  <td><h3>Indicaciones para la operación del módulo</h3></td>
@@ -598,6 +587,7 @@ function CargarTerminal(Ip) {
 		</tr>
 		</table>
 	  </div>
+	 </td>
   </tr>
   <tr>
     <td colspan="6" valign="top"><input type="submit" name="Submit" value="Enviar">      </tr>
@@ -638,7 +628,7 @@ function CargarTerminal(Ip) {
            <div id="footer"></div> 
   </body>
   
-<? 
+<?php
 }else{
-echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php>";} ?>
+echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=/omp/login_form.php>";} ?>
 </html>

@@ -28,6 +28,7 @@ Si el ejemplar está reservado (sin importar quien lo reservó) no se puede pres
 <flow action="jump"><pft>if v5000:'Error' then 'verificaRes' fi</pft></flow>
 
 <list action=delete>now</list>
+<field action=replace tag=4000></field>
 <list action=load previous="delete"><pft>(v3002/)</pft></list>
 <do task="list">
 <field action="define" tag="1001">Isis_Item</field>
@@ -66,21 +67,15 @@ Si el ejemplar está reservado (sin importar quien lo reservó) no se puede pres
 	<!-- v1110: Contiene el DNI del usuario que posee el objeto si está prestado -->
 	<field action="replace" tag="1110"><pft>ref(['exist']l(['exist']v1001),if v985='PRES' then v998[LAST]^b fi)</pft></field>
 
-	<display><pft>v1104,':',s('~',v3004,'~')</pft></display>
+	<!--display><pft>v1104,':',s('~',v3004,'~')</pft></display-->
 	<field action="replace" tag="4000"><pft>
 	
-	    if v1104:s('~',v3004,'~') then
-			'ok' /* Libro en espera para el usuario */
-	    else
+	    if (not v1104:s('~',v3004,'~')) then
 			if val(v1109)>0 then
     			v1001			/* El libro tiene reservas */
 			else
-				if v3004=v1110 then
-					'ok' 		/* No hay reservas y es renovación */
-				else
-					if (val(v1106)-val(v1108)-val(v1105)>0) then
-						'ok'	/* No hay reservas y Existen ejemplares disponibles (Ejs - Prestados - Esperas) */
-					else
+				if (not v3004=v1110) then
+					if (not val(v1106)-val(v1108)-val(v1105)>0) then
 						v1001	/* No hay ejemplares disponibles (todos prestados y/o con esperas o reservas) */
 					fi
 				fi
@@ -94,7 +89,7 @@ Si el ejemplar está reservado (sin importar quien lo reservó) no se puede pres
 </do>
 
 <field action="replace" tag="5000"><pft>
-   if v4000='ok' then
+   if v4000='' then
       mhl,'ok'
    else
       mhl,'Error: Objeto con espera o reserva: ',(v4000+|;|)

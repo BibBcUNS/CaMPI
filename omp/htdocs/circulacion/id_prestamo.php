@@ -105,11 +105,21 @@ function focus_expresion() {
 		<input type="radio" name="criterio" value="inv" checked>Inventario
 		</td>
 	</tr>
-    <!--tr>
-		<td width="100%">
-		<input type="radio" name="criterio" value="nc">Nº Control
-		</td>
-	</tr-->
+	<?php
+		include "json/JSON.php";
+		$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
+		$config_obtener = fread($ptr_config,1000);
+		fclose($ptr_config);
+		$json = new Services_JSON();
+		$config = $json->decode($config_obtener);
+		if ($config->busqueda_x_nc == 'si') {
+		?>
+			<tr>
+				<td width="100%">
+				<input type="radio" name="criterio" value="nc">Nº Control
+				</td>
+			</tr>
+		<?php } // fi end ?>
     <tr>
 		<td width="100%">
 		<input type="radio" name="criterio" value="lector">Usuario
@@ -149,10 +159,7 @@ function focus_expresion() {
 
 <?php 
 $usuario=$_SESSION["s_username"];
-$url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
-$ptr_grabar_datos = fopen($url,"r");
-$grabar_datos = fread($ptr_grabar_datos,500);
-//fclose($ptr_grabar_datos);
+$password=$_SESSION["s_password"];
 ?>
 
 <form name="form_id" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/"
@@ -172,7 +179,7 @@ $grabar_datos = fread($ptr_grabar_datos,500);
     </tr>
     <tr>
       <td width="100%">
-      <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$grabar_datos; ?>">
+      <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$password; ?>">
 	  <input type="text" id="lector" name="lector" size="10" accesskey="l"><input type="submit" value=" > ">
 	  <!--input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()"-->
 	  <input type="button" value=limpiar onclick="window.document.form_id.lector.value='';window.document.form_id.lector.focus()">

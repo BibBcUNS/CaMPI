@@ -9,8 +9,16 @@
     <parm name=count>1</parm>
     <loop>
 		<display>	    
-		<pft>
+		<!--pft>
 	      v9,'~',v10,'~',v11
+		 </pft-->
+		<pft>
+			'{',
+			  '"reservas":"',v9,'",',
+			  '"politicas":"',v10,'",',
+			  '"imprimir_papeleta":"',v11,'",',
+			  '"busqueda_x_nc":"',v12,'"',
+			'}'
 		 </pft>
 	   </display>
     </loop>

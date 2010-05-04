@@ -5,9 +5,18 @@
 <field action=cgi tag=1>reservas</field>
 <field action=cgi tag=2>politicas</field>
 <field action=cgi tag=3>impresion</field>
+<field action=cgi tag=4>busqueda_x_nc</field>
 <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 
-<flow action=jump><pft>if not '.si.no.':v1 or not '.si.no.':v3 or not '.politicas.manual.':v2   then 'Error' fi</pft></flow>
+<flow action=jump><pft>
+	if (not '.si.no.':v1) 
+		or (not '.si.no.':v3)
+		or (not '.politicas.manual.':v2)
+		or (not '.si.no.':v4)
+	then
+		'Error'
+	fi
+</pft></flow>
 <do task=update>
 	<parm name=db>config</parm>
 	<parm name=count>1</parm>
@@ -20,6 +29,7 @@
 		<field action=import tag=9>1</field>
 		<field action=import tag=10>2</field>
 		<field action=import tag=11>3</field>
+		<field action=import tag=12>4</field>
         <write>Unlock</write>
      </update>
      </do>

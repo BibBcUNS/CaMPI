@@ -1,18 +1,8 @@
-<?php session_start(); 
-if (isset($_SESSION["s_username"]) && $_SESSION["s_permiso"]=='administracion') {
-
-$ptr_anios_calendario = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_anios.xis","r");
-$anios_calendario = fread($ptr_anios_calendario,1000);
-fclose($ptr_anios_calendario);
-$anios = explode  ('~', $anios_calendario);
-
-$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
-$config_obtener = fread($ptr_config,1000);
-fclose($ptr_config);
-$config_obtener = explode  ('~', $config_obtener);
-$config['reservas'] = $config_obtener[0];
-$config['politicas'] = $config_obtener[1];
-$config['imprimir_papeleta'] = $config_obtener[2];
+<?php
+session_start(); 
+if (isset($_SESSION["s_username"])
+	&& isset($_SESSION["s_permisos"])
+	&& in_array('administracion' , $_SESSION["s_permisos"])) {
 ?>
 <html>
   <head>
@@ -63,14 +53,14 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 
 <center>
  
-<table border="0" width="100%">
+<table border="0" width="95%">
 <tr>
-<th width="50%">Calendario</th>
-<th>Esperas Vencidas</th>
+<th  width="50%">Calendario</th>
+<th  width="50%">Esperas Vencidas</th>
 </tr>
 <tr>
 	<td>
-	<form method="POST" name="calendario_edicion" action="calendario.php" target="calendario" onSubmit="window.open('', 'calendario', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,scrollbars=yes,status=no')" >
+	<form method="POST" name="calendario_edicion" action="calendario.php" target="calendario" onSubmit="window.open('', 'calendario', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,scrollbars=yes,status=no')">
 
 	  	<script>
 			function alertselected(){
@@ -86,16 +76,21 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 				}
 			}
 		</script>
-		  
-	    <strong align="middle">Año: <select name=anio onChange="alertselected()" style="">    
 				<?php
-					$cant = count($anios);
-					for($i=$cant-1;$i>=0;$i--) {
-						echo '<option value="'.$anios[$i].'">'.$anios[$i].'</option>';
-					}
+				$ptr_anios_calendario = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_anios.xis","r");
+				$anios_calendario = fread($ptr_anios_calendario,1000);
+				fclose($ptr_anios_calendario);
+				$anios = explode  ('~', $anios_calendario);  
 				?>
-				<option value=NUEVO>NUEVO</option>
-		</select></strong>
+			<strong align="middle">Año: </strong><select name=anio onChange="alertselected()" style="">    
+				<?php
+				$cant = count($anios);
+				for($i=$cant-1;$i>=0;$i--) {
+					echo '<option value="'.$anios[$i].'">'.$anios[$i].'</option>';
+				}
+				?>
+			<option value=NUEVO>NUEVO</option>
+		</select>
  	  	<span id="nuevo" style="display:none">
  	  	<input id="anio_nuevo" type="text" name="anio_nuevo" size="4">
  	  	</span>
@@ -103,18 +98,22 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
     </form>
     </td>
     <td>
-	    <form method="POST" action="cancela_esperas.php" target="esperas" onSubmit="window.open('', 'esperas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=420,width=750,scrollbars=yes,status=no')">
-		<input type="submit" value="Cancela Esperas Vencidas">
-		</form>
+	    <center>
+			<form method="POST" action="cancela_esperas.php" target="esperas" onSubmit="window.open('', 'esperas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=420,width=750,scrollbars=yes,status=no')">
+			<input type="submit" value="Cancela Esperas Vencidas">
+			</form>
+		 </center>
     </td>
 </tr>
-<th width="50%">Políticas</th>
+<th>Políticas</th>
 <th>Lectores</th>
 <tr>
 	<td>
-    	<form method="POST" action="politicas.php" target="politicas" onSubmit="window.open('', 'politicas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=550,width=750,scrollbars=yes,status=no');">
-	    <input type="submit" value="Administración de Políticas">
-        </form>
+	    <center>
+			<form method="POST" action="politicas.php" target="politicas" onSubmit="window.open('', 'politicas', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,height=550,width=750,scrollbars=yes,status=no');">
+			<input type="submit" value="Administración de Políticas">
+			</form>
+	    </center>
     </td>
 	<td>
 	    <form method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" style="display:inline;">
@@ -136,7 +135,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
     </td>
 </tr>
 <tr>
-    <th width="50%">Circulación Bibliográfica</th>
+    <th>Circulación Bibliográfica</th>
     <th>Otros procedimientos</th>
 </tr>
 <tr>
@@ -144,45 +143,43 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
         <form name="form_listados" method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/">
         <input type="hidden" name="IsisScript" value="administracion/listados.xis">
         <input type="Hidden" name="Orden" value="Prestamo">	
-        <input type="radio" value="morosos" name="opcion"><strong>Listado de morosos<br>
+        <input type="radio" value="morosos" name="opcion">Listado de morosos<br>
         <input type="radio" value="prestamos" name="opcion">Prestamos del día (Estadística)<br>
-        <input type="radio" value="id_recibos" name="opcion" checked>Devoluciones del día (Identificación de recibos)<br>
-        <center>
-        Ordenamiento:
-        <select onChange="window.document.form_listados.Orden.value=this.value;" style="font-size : xx-small">
-        <option value="Prestamo" selected>Nro. Papeleta</option>
-        <option value="Devolucion">Cronológico</option>							
-        </select>
+        <input type="radio" value="id_recibos" name="opcion" checked>Devoluciones del día<br>
+        <center  style="font-size : x-small;">
+			Ordenamiento:
+			<select onChange="window.document.form_listados.Orden.value=this.value;" style="font-size : xx-small;">
+			<option value="Prestamo" selected>Nro. Papeleta</option>
+			<option value="Devolucion">Cronológico</option>							
+			</select>
         </center>
-        <input type="radio" value="circulante" name="opcion">Prestamos en circulaci&oacute;n<br>				
-        <input type="submit" value="Enviar" name="B1"></strong>
+        <input type="radio" value="circulante" name="opcion">Prestamos en circulaci&oacute;n
+		<br><br>
+        <input type="submit" value="Enviar" name="B1">
         <input type="reset" value="Restablecer" name="B2"> 
         </form>
     </td>
     <td>
-	    <b>
         <a href="etiquetas.html">Códigos de Barra libros</a><br>
 		<a href="credenciales.html">Generación de credenciales</a><br>
 		<a href="libre_deuda.html">Emisión de Libre Deuda</a>
-        </b>
     </td>
 </tr>
 </table>
 
 <br /><br />
-<table border="0" width="100%">    
+<table border="0" width="95%">    
 <tr>
-   <th width="50%">Base Bibliográfica. </th>
+   <th>Base Bibliográfica. </th>
    <th>Configuración. </th>
 </tr>
-<tr style="vertical-align:top;">
+<tr style="vertical-align:top; text-align:center">
 <td>
-	<i><font size="2">Dispare esta acción cada vez que incorpora o modifica un inventario</font></i>
+	<i><font size="2">Dispare esta acción cada vez que incorpora o modifica un inventario</font></i><br><br>
     <form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=actualizar_bases_form onSubmit="disable_button(document.actualizar_bases_form.submit_btn,' Realizando operación ...')">
     <input type="submit" value="Actualizar Circulación" title="Actualiza la base de datos utilizada en el sistema de circulación en función de la base bibliográfica del sistema de catalogación" name="submit_btn">
-    <input type="hidden" name="IsisScript" value="administracion/actualizar_bases.xis"><br />
-    </form>
-	<br>
+    <input type="hidden" name="IsisScript" value="administracion/actualizar_bases.xis">
+	<br><br>
     <!--
 	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=control_consistencia_form onSubmit="disable_button(document.control_consistencia_form.submit_btn)">
     <input type="submit" value="Control de consistencia de inventarios" name=submit_btn>
@@ -197,6 +194,15 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
     <iframe name=resultado_actualizar_opac height=50 frameborder=0></iframe>
 
 </td>
+<?php
+	include "../circulacion/json/JSON.php";
+	$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
+	$config_obtener = fread($ptr_config,1000);
+	fclose($ptr_config);
+	$json = new Services_JSON();
+	$config = $json->decode($config_obtener);
+?>
+
 <td>
 	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" target=resultado_grabar name=config_form onSubmit="disable_button(document.config_form.grabar)">
 	<table>
@@ -204,8 +210,8 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 				Habilitar reservas:</td>
 			<td>
 				<select name=reservas onChange="enable_button(document.config_form.grabar)">
-					<option value="si" <?php if ($config['reservas']=='si'){echo 'selected';}?>>si</option>
-					<option value="no" <?php if ($config['reservas']=='no'){echo 'selected';}?>>no</option>
+					<option value="si" <?php if ($config->reservas =='si'){echo 'selected';}?>>si</option>
+					<option value="no" <?php if ($config->reservas =='no'){echo 'selected';}?>>no</option>
 					<br>
 				</select>
 			</td>
@@ -214,8 +220,8 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 				Políticas de préstamo:</td>
 			<td>
 				<select name=politicas onChange="enable_button(document.config_form.grabar)">
-					<option value="politicas" <?php if ($config['politicas']=='politicas'){echo 'selected';}?>>Automático</option>
-					<option value="manual" <?php if ($config['politicas']=='manual'){echo 'selected';}?>>Manual</option>
+					<option value="politicas" <?php if ($config->politicas=='politicas'){echo 'selected';}?>>Automático</option>
+					<option value="manual" <?php if ($config->politicas=='manual'){echo 'selected';}?>>Manual</option>
 					<br>
 				</select>
 			</td>
@@ -224,8 +230,19 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 				Imprimpir papeleta:</td>
 			<td>
 				<select name=impresion onChange="enable_button(document.config_form.grabar)">
-					<option value="si" <?php if ($config['imprimir_papeleta']=='si'){echo 'selected';}?>>si</option>
-					<option value="no" <?php if ($config['imprimir_papeleta']=='no'){echo 'selected';}?>>no</option>
+					<option value="si" <?php if ($config->imprimir_papeleta=='si'){echo 'selected';}?>>si</option>
+					<option value="no" <?php if ($config->imprimir_papeleta=='no'){echo 'selected';}?>>no</option>
+					<br>
+				</select>
+			</td>
+		</tr>
+		</tr><tr>
+			<td>
+				Buscar por Nro de Control (NC):</td>
+			<td>
+				<select name=busqueda_x_nc onChange="enable_button(document.config_form.grabar)">
+					<option value="si" <?php if ($config->busqueda_x_nc=='si'){echo 'selected';}?>>si</option>
+					<option value="no" <?php if ($config->busqueda_x_nc=='no'){echo 'selected';}?>>no</option>
 					<br>
 				</select>
 			</td>
@@ -256,7 +273,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 </html>
 <?php
 }else{
-echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php>";
+echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=/omp/login_form.php>";
 }
 ?>
 
