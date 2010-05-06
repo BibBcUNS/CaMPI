@@ -225,7 +225,13 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 					'//  End -->'/
 					'</SCRIPT>'/
 				fi</pft></display>
-       <flow action="skip"><pft>if val(v1102)>0 then 'Next' fi</pft></flow>      
+       <flow action="skip"><pft>if val(v1102)>0 then 'Next' fi</pft></flow>     
+		<do task=mfnrange>
+			<parm name=db>tipo_lector</parm>
+			<loop>
+				<field action=export previous=add tag=2000>1</field>
+			</loop>
+		</do>
       <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_abmlector.html')</pft></htmlpft></display>
     </loop>
   </do>

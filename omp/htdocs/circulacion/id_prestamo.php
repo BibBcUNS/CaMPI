@@ -107,7 +107,7 @@ function focus_expresion() {
 	</tr>
 	<?php
 		include "json/JSON.php";
-		$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
+		$ptr_config = fopen("http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
 		$config_obtener = fread($ptr_config,1000);
 		fclose($ptr_config);
 		$json = new Services_JSON();
@@ -193,7 +193,7 @@ $password=$_SESSION["s_password"];
 <div id="lt1">
 		<?php
         $usuario=$_SESSION["s_username"];
-        $url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
+        $url="http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
         $ptr_datos = fopen($url,"r");
         $datos = fread($ptr_datos,500);
         fclose($ptr_datos);

@@ -30,7 +30,7 @@ v3002: lista de todos los inventarios (inv_prestamos#A + inv_prestamos#B)-->
    if v4000='' then
       mhl,'ok'
    else
-      mhl,'Error: Número/s de inventario inexistente/s: ',(v4000+|;|)
+      mhl,'Error: Número/s de inventario inexistente/s: <ul>',('<li>'v4000'</li>'),'</ul>'
    fi
 </pft></field>
 

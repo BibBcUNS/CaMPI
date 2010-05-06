@@ -49,29 +49,58 @@ v3004: documento
 <include>circulacion/controles/controles_inc.xis</include>
 
   <display>
-      <html>
+    <html>
 	<head>
+	<style>
+		body{
+			cursor:hand;
+			padding:5px;
+			margin:5px;
+			background-color:#f6f6f6;
+		}
+		#error_title {
+			width:90%;
+			font-family: sans-serif;
+			font-size: 10pt;
+			color:white;
+			background-color:LightCoral ;
+			text-align:center;
+			padding: 5px 10px;
+			font-weight:bold;
+			margin:0px;
+		}
+		#error_message {
+			width:90%;
+			font-family: sans-serif;
+			font-size: 10pt;
+			text-align:left;
+			color: #5277AE;
+			margin-top: 20px;
+			font-weight:bold;
+		}
+	</style>
 	</head>	
-	<body bgcolor="#f6f6f6" onblur="window.close()">
-	<TABLE bgcolor="#5277AE" BORDER="0" cellpadding=4 WIDTH="90%" style="font-family: sans-serif; font-size: 11pt"><TR><TD Align="center">
-	<FONT FACE="MS SANS SERIF" SIZE="2" COLOR="white">
-	<B>Los siguientes n&uacute;meros de inventario son incorrectos: </B>
-	</FONT>
-	</TD>
-	</TABLE>
-	<TABLE BORDER="0" cellpadding=8 WIDTH="90%" style="font-family: sans-serif; font-size: 11pt; ">
+	<body onclick="window.parent.ocultar_control()">
+	<div id="error_title">
+	Ocurrió un error al intentar realizar la operación
+	</div>
+	<div id="error_message">
   </display>
   
-	<display><pft>(if v5000:'Error' then '<TR><TD><B><FONT FACE="MS SANS SERIF" SIZE="2" COLOR="#5277AE">',v5000,'</FONT></B></TD></TR>' fi)</pft></display>
-	<display></TABLE></display>
+	<display><pft>
+		(if v5000:'Error' then 
+				replace(v5000,'Error:','')
+		fi)
+	</pft></display>
 	
-	<display><pft>'<br><center>',if v5000:'Error' then '<input type=button value="[X]  Cerrar" onclick="window.close()">' fi,'</center>'</pft></display>
-	
-	<display></BODY></HTML></display>
+	<display>
+		</BODY>
+		</HTML>
+	</display>
 
 	<display><pft>if v5000:'Error' then '<tr><td>
 		<SCRIPT LANGUAGE="JavaScript">
-			window.opener.document.verifica.enviar.value = "0";
+			window.parent.document.verifica.enviar.value = "0";
 			window.focus()
 		</script>
 		</td></tr>' 
@@ -79,10 +108,10 @@ v3004: documento
 		'<tr><td>
 		<SCRIPT LANGUAGE="JavaScript">
 		
-		window.opener.document.verifica.enviar.value = "1";
-		if (window.opener.document.verifica.enviar.value == ',"'"n0,'1',"'"n0,') {
-			window.opener.document.control.submit();
-			window.close()}
+		window.parent.document.verifica.enviar.value = "1";
+		if (window.parent.document.verifica.enviar.value == ',"'"n0,'1',"'"n0,') {
+			window.parent.document.control.submit();
+			//window.close()}
 		
 		</script>
 		</td></tr>' 

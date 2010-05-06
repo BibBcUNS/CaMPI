@@ -1242,9 +1242,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		<label>ID</label>
 		
 		<!-- mostramos el encabezado de la pagina -->
+<display><pft>'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">'</pft></display>
 <display>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
     <title>Circulación</title>
@@ -1445,8 +1444,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 			<body  onload="mostrar_reservas();this.focus(); window.parent.indice.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then '; print()' fi,'">
 		-->
   		<display><pft>
-		'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+		'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
     <title>Circulacion</title>

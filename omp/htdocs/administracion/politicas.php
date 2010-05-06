@@ -88,7 +88,7 @@ function mostrar_politicas() {
     //-------------------------------------------------------
 	//-------- Muestro los datos de la BD politicas ---------
 	//-------------------------------------------------------
-	$ptr_politicas = fopen(		"http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=TODAS","r");
+	$ptr_politicas = fopen(		"http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=TODAS","r");
 	$politicas = "";
 	while (!feof($ptr_politicas)) {$politicas .= fread($ptr_politicas, 500);}
 	fclose($ptr_politicas);
@@ -156,7 +156,7 @@ function mostrar_politicas() {
 	//-------- Muestro los datos de la BD tipo_lector ---------
 	//---------------------------------------------------------
 
-	$ptr_tipo_lector = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_obtener.xis&cual=TODAS","r");
+	$ptr_tipo_lector = fopen("http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_obtener.xis&cual=TODAS","r");
 	$tipo_lector = fread($ptr_tipo_lector,8192);
 	fclose($ptr_tipo_lector);
 	$tipo_lector_arreglo = explode('#',$tipo_lector);
@@ -224,7 +224,7 @@ function mostrar_politicas() {
 function crear_politica() {
    global $campos_nombre;
 
-$ptr_lista_tipos_lector = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/lista_tipos_lector.xis","r");
+$ptr_lista_tipos_lector = fopen("http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/lista_tipos_lector.xis","r");
 $lista_tipos_lector = fread($ptr_lista_tipos_lector,1000);
 fclose($ptr_lista_tipos_lector);
 $lista_tipos_lector = explode  ('~', $lista_tipos_lector);
@@ -321,7 +321,7 @@ function editar_politica() {
    global $campos_nombre;
    global $SERVER_NAME;
 
-   $url = "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=UNA&expresion=".$_POST['pol_nro'];
+   $url = "http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_obtener.xis&cual=UNA&expresion=".$_POST['pol_nro'];
    
 	$ptr_politicas = fopen($url,"r");
 	$politicas = fread($ptr_politicas,8192);
@@ -373,7 +373,7 @@ function editar_tipo_lector() {
    global $campos_nombre_TL;
    global $SERVER_NAME;
 
-   	$url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_obtener.xis&cual=UNA&expresion=".$_POST['tipo_lector_nro'];
+   	$url="http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_obtener.xis&cual=UNA&expresion=".$_POST['tipo_lector_nro'];
 	
 	$ptr_tipo_lector = fopen($url,"r");
 	$tipo_lector = fread($ptr_tipo_lector,8192);
@@ -437,7 +437,7 @@ function guardar_politica() {
 		$parametros_guardar=$parametros_guardar."&campo".$i."=".$_POST[$campo_actual];
 	   }
 	
-	$url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_guardar.xis&".$parametros_guardar;
+	$url="http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_guardar.xis&".$parametros_guardar;
 	$ptr_politicas = fopen($url,"r");
 	$ptr_politicas;
 	$politicas = fread($ptr_politicas,8192);
@@ -458,7 +458,7 @@ function guardar_tipo_lector() {
 		$parametros_guardar=$parametros_guardar."&campo".$i."=".$_POST[$campo_actual];
 	}
 	
-	$url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&".$parametros_guardar;
+	$url="http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&".$parametros_guardar;
 	$ptr_tipo_lector = fopen($url,"r");
 	$tipo_lector = fread($ptr_tipo_lector,8192);
 	fclose($ptr_tipo_lector);
@@ -470,13 +470,13 @@ function guardar_tipo_lector() {
 //***********************BORRA UNA POLITICA*************************//
 //*******************************************************************//
 function borrar_politica() {
- $url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_guardar.xis&record=BORRAR&expresion=".$_POST['pol_nro'];
+ $url="http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/politicas_guardar.xis&record=BORRAR&expresion=".$_POST['pol_nro'];
  $ptr_politicas = fopen($url,"r");
  $politicas = fread($ptr_politicas,8192);
  fclose($ptr_politicas);
 }
 function borrar_tipo_lector() {
- $url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&record=BORRAR&expresion=".$_POST['tipo_lector_nro'];
+ $url="http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&record=BORRAR&expresion=".$_POST['tipo_lector_nro'];
  $ptr_politicas = fopen($url,"r");
  $politicas = fread($ptr_politicas,8192);
  fclose($ptr_politicas);

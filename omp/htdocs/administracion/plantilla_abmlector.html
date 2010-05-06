@@ -39,12 +39,21 @@
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Categoría</b></td>
-      <td width="40%"><input type="text" name="categoria" size="40" value="[pft]v3[/pft]"></td>
+      <td width="40%">
+		<select name="categoria">
+			[pft](
+				'
+				<option value="',v2000,'" ',if (v2000=v3[1]) then ' SELECTED ' fi,'>',v2000,'</option>
+				'
+			)[/pft]
+		</select>
+
+	  </td>
       <td width="20%" bgcolor="#BEE4FF"><b>Legajo</b></td>
       <td><input type="text" name="legajo" size="15" value="[pft]v4[/pft]"></td>
     </tr>
     <tr>
-      <td width="20%" bgcolor="#BEE4FF"><b>e@mail</td>
+      <td width="20%" bgcolor="#BEE4FF"><b>email</td>
       <td width="40%"><input type="text" name="email" size="40" value="[pft]v12[/pft]"></td>
       <td width="20%" bgcolor="#BEE4FF"><b>Matrícula</b></td>
       <td><input type="text" name="matricula" size="15" value="[pft]v5[/pft]"></td>

@@ -77,7 +77,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 			}
 		</script>
 				<?php
-				$ptr_anios_calendario = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_anios.xis","r");
+				$ptr_anios_calendario = fopen("http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/calendario_anios.xis","r");
 				$anios_calendario = fread($ptr_anios_calendario,1000);
 				fclose($ptr_anios_calendario);
 				$anios = explode  ('~', $anios_calendario);  
@@ -196,7 +196,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 </td>
 <?php
 	include "../circulacion/json/JSON.php";
-	$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
+	$ptr_config = fopen("http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
 	$config_obtener = fread($ptr_config,1000);
 	fclose($ptr_config);
 	$json = new Services_JSON();

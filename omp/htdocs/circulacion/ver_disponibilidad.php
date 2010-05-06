@@ -17,7 +17,7 @@
 <?php
 $nc = $_GET['nc'];
 
-$datos=fopen("http://".$_SERVER["HTTP_HOST"]."/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/marc_view.xis&nc=$nc", "r");
+$datos=fopen("http://localhost/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/marc_view.xis&nc=$nc", "r");
 $datos_bibliograficos = fread($datos, 1000000); 
 //echo "http://".$_SERVER["HTTP_HOST"]."/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/marc_view.xis&nc=$nc";
 echo "<div class='texto'>$datos_bibliograficos</div>";
@@ -30,7 +30,7 @@ include "json/JSON.php";
 <?php	
 	function get_url($p_url) {
 		$cadena = '';
-		$ptr = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/circulacion/?".$p_url, "r");
+		$ptr = fopen("http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/circulacion/?".$p_url, "r");
 		while (!feof($ptr)) {$cadena .= fread($ptr, 500);}
 		return $cadena;
 	}

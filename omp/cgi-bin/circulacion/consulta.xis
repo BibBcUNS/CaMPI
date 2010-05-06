@@ -79,7 +79,7 @@
 	}
 
 	function ventana_reserva(mfn) {					
-					location.href = "omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/reserva_form.xis&mfn="+mfn+"&usuario_id="+usuario_id+"&operario_id="+operario_id;
+					location.href = "/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/reserva_form.xis&mfn="+mfn+"&usuario_id="+usuario_id+"&operario_id="+operario_id;
 					/* Así se hace en una ventana nueva:
 						var ventana = window.open("","","width=600,height=450,top=10,left=15,resizable=yes,scrollbars=yes;location=yes");
 						ventana.location.href = "/cgi-bin/wxis.exe/circulacion/?IsisScript=circulacion/reserva_form.xis&mfn="+mfn;
@@ -370,6 +370,7 @@
 						if v112='NC' then 'checked' fi,
 					'/> NC',
 				fi,
+				
 				'<br>
 				<input type="checkbox" name="tipo" value="completa"',
 				if v111='completa' then 'checked' fi,
