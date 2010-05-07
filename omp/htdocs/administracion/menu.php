@@ -86,7 +86,11 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 				<?php
 				$cant = count($anios);
 				for($i=$cant-1;$i>=0;$i--) {
-					echo '<option value="'.$anios[$i].'">'.$anios[$i].'</option>';
+					echo '<option '.
+						 'value="'.$anios[$i].'" '.
+						 (date("Y")==$anios[$i]?'"SELECTED"':'').
+						 '>'.$anios[$i].
+						 '</option>';
 				}
 				?>
 			<option value=NUEVO>NUEVO</option>

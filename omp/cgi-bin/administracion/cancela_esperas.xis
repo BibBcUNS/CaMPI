@@ -126,8 +126,8 @@
 			 </update>
 		  </do>
 		  <label>NO_GRABAR_EN_MOVI</label>
-		  <display><pft>'Ha/n caído ',f(nocc(v5555)/3,1,0),' espera/s.'</pft></display>
 	</loop>
+			<display><pft>'Ha/n caído ',f(nocc(v5555)/3,1,0),' espera/s.'</pft></display>
 </do>
 
 
