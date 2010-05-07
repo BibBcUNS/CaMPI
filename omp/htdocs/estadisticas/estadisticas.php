@@ -379,18 +379,18 @@ function CargarTerminal(Ip) {
 				<td>
 				<input type="checkbox" name="operacion_3" value="Operacion=DEVOLUCION$"><a href="JavaScript:window.document.form_stat.operacion_3.click()">Devoluciones</a></td>
 				<td>
-				<input type="checkbox" name="operacion_4" value="Operacion=PRESTAMO_SALA"><a href="JavaScript:window.document.form_stat.operacion_4.click()">Préstamo en Sala</a></td>
+				<input type="checkbox" name="operacion_6" value="Operacion=PRESTAMO_DOMICILIO"><a href="JavaScript:window.document.form_stat.operacion_6.click()">Préstamo a Domicilio</a></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
 				<td>
 				<input type="checkbox" name="operacion_5" value="Operacion=SANCION"><a href="JavaScript:window.document.form_stat.operacion_5.click()">Sanciones</a></td>
-				<td>
-				<input type="checkbox" name="operacion_6" value="Operacion=PRESTAMO_DOMICILIO"><a href="JavaScript:window.document.form_stat.operacion_6.click()">Préstamo a Domicilio</a></td>
+				<td style="display:none">
+				<input type="checkbox" name="operacion_4" value="Operacion=PRESTAMO_SALA"><a href="JavaScript:window.document.form_stat.operacion_4.click()">Préstamo en Sala</a></td>
 			</tr>
 			</table>
 			</div>
-		<div id="Layer2" style="display:'none'">
+		<div id="Layer2" style="display:none">
 		<table width="100%" align="center">
     <tr>
       <td colspan="5"><h3>Indique el período del análisis</h3></TD>
@@ -464,7 +464,7 @@ function CargarTerminal(Ip) {
     </TABLE>
 
 	  </div>
-		<div id="Layer3" style="display:'none'">
+		<div id="Layer3" style="display:none">
 
 		<table width="100%" height="236" align="center">
     <tr>
@@ -495,7 +495,7 @@ function CargarTerminal(Ip) {
 		</TABLE>
 		</div>
 		
-		<div id="Layer4" style="display:'none'">
+		<div id="Layer4" style="display:none">
 		<table width="100%" align="center">
     <tr>
       <td colspan="4"><h3>Indique el material a considerar en el an&aacute;lisis</h3></td>
@@ -538,7 +538,7 @@ function CargarTerminal(Ip) {
   </table>  
 		</div>
 		
-		<div id="Layer5" style="display:'none'">
+		<div id="Layer5" style="display:none">
 		  <table width="100%" align="center">
 			<tr>
 			  <td colspan="4"><h3>Indique el bibliotecario o terminal</h3></td>
@@ -574,7 +574,7 @@ function CargarTerminal(Ip) {
 			</table>
 		</div>
 		
-		<div id="Layer6" style="display:'none'">
+		<div id="Layer6" style="display:none">
 		<table width="100%" align="center">
 		<tr>
 		  <td><h3>Indicaciones para la operación del módulo</h3></td>
