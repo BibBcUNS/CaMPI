@@ -3,19 +3,19 @@
 
 <html>
   <head>
-    <title>CaMPI </title>
+    <title>CaMPI</title>
     <link rel="stylesheet" type="text/css" href="/css/index.css">
   </head>
   <body>
     <div id="head">
-		<div id="title">Sistema de Gestión Bibliotecaria  </div><!--title -->
+		<div id="title">Sistema de gestión bibliotecaria  </div><!--title -->
 		<div id="menu">
 			<p>
-				<span class="boton"><a href="omp/login_form.php?modulo=circulacion" target="_blank">&nbsp;CIRCULACION&nbsp;</a></span>
-				<span class="boton"><a href="omp/login_form.php?modulo=administracion" target="_blank">&nbsp;ADMINISTRACION&nbsp;</a></span>
-				<span class="boton"><a href="omp/login_form.php?modulo=estadisticas" target="_blank">&nbsp;ESTADISTICAS&nbsp;</a></span>
-				<span class="boton"><a href="catalis/catalogacion.php" target="_blank">&nbsp;CATALOGACION&nbsp;</a></span>
-				<span class="boton"><a href="opacmarc/cgi-bin/wxis.exe?IsisScript=/xis/opac.xis&db=campi&showForm=simple" target="_blank">&nbsp;OPACMARC&nbsp;</a></span>
+				<span class="boton"><a href="omp/login_form.php?modulo=circulacion" target="_blank">&nbsp;Circulación&nbsp;</a></span>
+				<span class="boton"><a href="omp/login_form.php?modulo=administracion" target="_blank">&nbsp;Administración&nbsp;</a></span>
+				<span class="boton"><a href="omp/login_form.php?modulo=estadisticas" target="_blank">&nbsp;Estadísticas&nbsp;</a></span>
+				<span class="boton"><a href="catalis/catalogacion.php" target="_blank">&nbsp;Catalogación&nbsp;</a></span>
+				<span class="boton"><a href="opacmarc/cgi-bin/wxis.exe?IsisScript=/xis/opac.xis&db=campi&showForm=simple" target="_blank">&nbsp;Opacmarc&nbsp;</a></span>
 			<p>
 			</div> <!--menu-->
 		</div> <!-- head-->
@@ -29,13 +29,61 @@
 
 <!-- ##################################################### -->  
 <center>
-<img src="images/logocampi.png" width="413" height="196" alt="CaMPI">
-<br><p>Integración de sistemas de gestión bibliotecaria de código abierto. </p></center>
-<p CLASS="indent"><b>Catalis</b>: Sistema de catalogación y autoridades en MARC21
-<br><b>OPACMARC</b>: Catálogo de acceso público
-<br><b>Open MarcoPolo</b>:  Sistema de circulación, administración y estadísticas</p>
+<img src="images/logocampi.png" width="280" height="130" alt="CaMPI">
+<!-- <br><p>Integración de sistemas de gestión bibliotecaria de código abierto. </p> -->
+
+</center> 
+
 
 <!-- ##################################################### -->  				
+<br><br>
+<div class="content">
+
+		<center>
+		<h2>Bienvenido a CaMPI</h2>
+
+		</center> 
+
+		<p><h4>Ud. ha instalado en su computadora un demo del producto. Le sugerimos que visite <a href="http://campi.uns.edu.ar/">nuestro sitio Web</a> para obtener mayor información. Y también que lea la <a href="https://sourceforge.net/apps/trac/campi/wiki/demo_doc">guía de usuario</a> para comenzar a trabajar.</h4>
+	
+		<p>El sistema incluye varios módulos que le permitirán llevar a cabo tareas de gestión bibliotecaria. Hemos incluido en el demo algunas bases de datos de prueba mediante las cuales podrá conocer el funcionamiento del producto.</p>
+
+			 
+			<ul>
+				<li>
+					
+			<p>El <em>módulo de circulación</em> permite realizar:</p>
+				<ul>
+					<li>Consultas por apellido o nro. de documento del usuario, nro. de inventario del material a prestar.</li>
+					<li>Devolución rápida por nro. de inventario.</li>
+					<li>Préstamo, reserva y renovación de libros.</li>
+					<li>Acceso a los datos del usuario y suspensión a morosos.</li>
+				</ul>
+				</li>
+					<p>
+				<li>Mediante el <em>módulo de administración</em> es posible:</p>
+				<ul>
+
+					<li>Definir el calendario.</li>
+					<li>Gestionar políticas de circulación.</li>
+					<li>Administrar datos de usuarios (lectores).</li>
+					<li>Generar listados (morosos, préstamos del día, devoluciones, estados de circulación).</li>
+					<li>Generar credenciales y códigos de barras para los materiales.</li>
+					<li>Actualizar inventarios cuando se creen nuevos registros en la base bibliográfica.</li>
+
+				</ul>
+				</li>
+					<p>
+				<li>En el <em>módulo de catalogación</em> se podrá acceder a Catalis bibliográfico para crear registros MARC21/AACR2, y a Catalis autoridades, como así también a otros sitios de interés relacionados específicamente con el módulo de catalogación.</p>
+				</li>
+					<p>
+				<li>El <em>módulo de estadísticas</em> permite generar historiales por rango de fecha y turno de los préstamos, devoluciones, morosos, sanciones.</p></li>
+					<p>
+				<li>En el <em>módulo OPAC</em> se puede consultar el catálogo en línea.</p></li>
+			</ul>
+
+</div> <!--content-->
+
 				  <div class="bottom"></div>	
 				  
                    </div> <!--all-->
@@ -47,7 +95,7 @@
 
     <div id="end_body"></div>
 
-		<div id="footer"></div>
+		<div id="footer">Versión Beta<br>(mayo 2010)</div>
   </body>
 </html>
 				   			

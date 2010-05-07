@@ -5,7 +5,7 @@ if (isset($_SESSION["s_username"])
 
 <html>
 <head>
-<title>Open MarcoPolo - Módulo Estadísticas</title>
+<title>CaMPI - Estadísticas</title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
@@ -326,7 +326,7 @@ function CargarTerminal(Ip) {
 
 <body onload="Inicializar()">
     <div id="head"> 
-		<div id="title">Módulo de Estadísticas - OPEN MarcoPolo</div>
+		<div id="title">CaMPI > Estadísticas (OpenMarcoPolo)</div>
 		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
     </div> 
     <div id="body_wrapper">

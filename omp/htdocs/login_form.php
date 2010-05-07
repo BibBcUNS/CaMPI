@@ -1,7 +1,7 @@
 <?php session_start();?>
 <html>
   <head>
-    <title>CaMPI - Login </title>
+    <title>CaMPI - Login</title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 <?php
 $modulo = $_GET['modulo'];
@@ -25,7 +25,13 @@ else {
   </head>
   <body><center>
     <div id="head"> 
-		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="title">CaMPI > 
+<?php switch ($modulo){
+	case 'circulacion': echo 'Circulación';break;
+	case 'estadisticas': echo 'Estadísticas';break;
+	case 'administracion': echo 'Administración';break;
+	default:;
+}?>	(OpenMarcoPolo) </div>
 		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
     </div>
     <div id="body_wrapper">

@@ -6,7 +6,7 @@ if (isset($_SESSION["s_username"])
 ?>
 <html>
   <head>
-    <title>Administración</title>
+    <title>CaMPI - Administración</title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css">
 		<style>
 	select,input {vertical-align:middle;}
@@ -37,7 +37,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 
   <body>
     <div id="head"> 
-		<div id="title">Módulo de Administración - OPEN MarcoPolo</div>
+		<div id="title">CaMPI > Administración (OpenMarcoPolo)</div>
 		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
     </div> 
 	
@@ -55,12 +55,12 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
  
 <table border="0" width="95%">
 <tr>
-<th  width="50%">Calendario</th>
-<th  width="50%">Esperas Vencidas</th>
+<th width="50%">Calendario</th>
+<th width="50%">Esperas Vencidas</th>
 </tr>
 <tr>
 	<td>
-	<form method="POST" name="calendario_edicion" action="calendario.php" target="calendario" onSubmit="window.open('', 'calendario', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,scrollbars=yes,status=no')">
+	<form method="POST" name="calendario_edicion" action="calendario.php" target="calendario" onSubmit="window.open('', 'calendario', 'menubar=no,locationbar=no,resizable=yes,top=0,left=0,scrollbars=yes,status=no')" >
 
 	  	<script>
 			function alertselected(){
@@ -144,7 +144,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
         <input type="hidden" name="IsisScript" value="administracion/listados.xis">
         <input type="Hidden" name="Orden" value="Prestamo">	
         <input type="radio" value="morosos" name="opcion">Listado de morosos<br>
-        <input type="radio" value="prestamos" name="opcion">Prestamos del día (Estadística)<br>
+        <input type="radio" value="prestamos" name="opcion">Préstamos del día (Estadística)<br>
         <input type="radio" value="id_recibos" name="opcion" checked>Devoluciones del día<br>
         <center  style="font-size : x-small;">
 			Ordenamiento:
@@ -153,7 +153,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 			<option value="Devolucion">Cronológico</option>							
 			</select>
         </center>
-        <input type="radio" value="circulante" name="opcion">Prestamos en circulaci&oacute;n
+        <input type="radio" value="circulante" name="opcion">Préstamos en circulaci&oacute;n
 		<br><br>
         <input type="submit" value="Enviar" name="B1">
         <input type="reset" value="Restablecer" name="B2"> 
