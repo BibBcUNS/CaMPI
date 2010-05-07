@@ -10,14 +10,12 @@
 <!--
 #lt1 {
    width : 130px;
-   margin : 0 0em 2em 0em;
    border : 1px solid #5277AE;
    padding : 0px 2px;
-   background : #BEE4FF;
+   //background : #BEE4FF;
    font-family: "Trebuchet MS", Verdana, sans-serif;
    vertical-align:middle;
-   margin: auto;
-
+   margin:auto;
 }
 
 
@@ -44,7 +42,6 @@
 #lt1 input[type=submit]{
 	height:24px;
 }
-
 
 -->
 </style>
@@ -85,18 +82,27 @@ function focus_expresion() {
 </head>
 
 <body>
- <body>
-   <br><br>
-   <div id="lt1">
+   <div id="lt1" style="margin-top:60px;">
+		<?php
+        $usuario=$_SESSION["s_username"];
+        $url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
+        $ptr_datos = fopen($url,"r");
+        $datos = fread($ptr_datos,500);
+        fclose($ptr_datos);
+        echo '<center><b>OPERADOR<br></center>'.$datos.'</b>';
+        ?>
+	</div>
+   <div id="lt1" style="margin-top:30px;">
    <!--h2>MENU</h2-->
 <form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/" onclick="javascript:focus_expresion();"
+	style="border-top:0px;"
  onsubmit="
 		if (window.document.consultas.expresion.value =='$' || window.document.consultas.expresion.value =='') {
 				alert('Debe indicar una expresión válida')
 				return false;
 		}else{  return true;}
 	">
-  <input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
+  <input type="hidden" name="IsisScript" value="circulacion/consulta_campi.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td width="100%"><strong>Consultar por</strong></td></tr>
@@ -105,21 +111,11 @@ function focus_expresion() {
 		<input type="radio" name="criterio" value="inv" checked>Inventario
 		</td>
 	</tr>
-	<?php
-		include "json/JSON.php";
-		$ptr_config = fopen("http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
-		$config_obtener = fread($ptr_config,1000);
-		fclose($ptr_config);
-		$json = new Services_JSON();
-		$config = $json->decode($config_obtener);
-		if ($config->busqueda_x_nc == 'si') {
-		?>
-			<tr>
-				<td width="100%">
-				<input type="radio" name="criterio" value="nc">Nº Control
-				</td>
-			</tr>
-		<?php } // fi end ?>
+    <!--tr>
+		<td width="100%">
+		<input type="radio" name="criterio" value="nc">Nº Control
+		</td>
+	</tr-->
     <tr>
 		<td width="100%">
 		<input type="radio" name="criterio" value="lector">Usuario
@@ -159,7 +155,10 @@ function focus_expresion() {
 
 <?php 
 $usuario=$_SESSION["s_username"];
-$password=$_SESSION["s_password"];
+$url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/obtener_pwd_opera.xis&id_operador=".$usuario;
+$ptr_grabar_datos = fopen($url,"r");
+$grabar_datos = fread($ptr_grabar_datos,500);
+//fclose($ptr_grabar_datos);
 ?>
 
 <form name="form_id" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/"
@@ -179,26 +178,15 @@ $password=$_SESSION["s_password"];
     </tr>
     <tr>
       <td width="100%">
-      <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$password; ?>">
+      <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$grabar_datos; ?>">
 	  <input type="text" id="lector" name="lector" size="10" accesskey="l"><input type="submit" value=" > ">
 	  <!--input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()"-->
-	  <input type="button" value=limpiar onclick="window.document.form_id.lector.value='';window.document.form_id.lector.focus()">
+	  <input type="button" value="limpiar" onclick="window.document.form_id.lector.value='';window.document.form_id.lector.focus()">
 	  </td>
 	</tr>
   </table>
 </form>
 </font>
-</div>
-
-<div id="lt1">
-		<?php
-        $usuario=$_SESSION["s_username"];
-        $url="http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
-        $ptr_datos = fopen($url,"r");
-        $datos = fread($ptr_datos,500);
-        fclose($ptr_datos);
-        echo '<center><b>OPERADOR<br></center>'.$datos.'</b>';
-        ?>
 </div>
 
 </body>
