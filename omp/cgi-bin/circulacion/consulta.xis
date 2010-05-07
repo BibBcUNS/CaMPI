@@ -122,7 +122,7 @@
 	<do task=search>
     <parm name=db>marc</parm>
     <parm name=expression><pft>if v100='nc' then 'NC=' fi,v110</pft></parm>
-    <parm name=gizmo>gizmo</parm>
+    <!--parm name=gizmo>gizmo</parm-->
     <field action=define tag=1102>Isis_Total</field>
     <loop>
 		<!-- MUESTRO INFORMACIÓN DEL LIBRO -->
@@ -132,7 +132,7 @@
 		<do task=search>
 			<parm name=db>partes</parm>
 		    <parm name=expression><pft>'MARC_',v1,'$'</pft></parm>
-		    <parm name=gizmo>gizmo</parm>
+		    <!--parm name=gizmo>gizmo</parm-->
 		    <field action=define tag=1102>Isis_Total</field>
 		    <loop>
 				<!-- MUESTRO INFORMACIÓN DE LA PARTE -->
@@ -142,7 +142,7 @@
 				<do task=search>
 					<parm name=db>reservas</parm>
 				    <parm name=expression><pft>'MARC_',v1^c,'_',v1^p</pft></parm>
-				    <parm name=gizmo>gizmo</parm>
+				    <!--parm name=gizmo>gizmo</parm-->
 				    <field action=define tag=1102>Isis_Total</field>
 				    <loop>
 						<!-- MUESTRO INFORMACIÓN DE ESPERAS/RESERVAS -->
@@ -219,7 +219,7 @@
       <do task=search>
         <parm name=db>lector</parm>
         <parm name=expression><pft>v1103</pft></parm>
-        <parm name=gizmo>gizmo</parm>
+        <!--parm name=gizmo>gizmo</parm-->
         <loop>
 					<list action="load" type="freq"><pft>'^a',replace(v1,' ',''),'^b',v2,'^c',v1</pft></list> <!-- en ^a se borran los espacios para un mejor ordenamiento -->
         </loop>
@@ -266,7 +266,7 @@
     <parm name=db>lector</parm>
     <parm name=expression><pft>v110</pft></parm>
     <parm name=count>1</parm>
-    <parm name=gizmo>gizmo</parm>
+    <!--parm name=gizmo>gizmo</parm-->
     <field action=define tag=1102>Isis_Total</field>
     <loop>
       <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'lector.html')</pft></htmlpft></display>
@@ -296,7 +296,7 @@
   <display><p aling="center">Préstamos morosos</p></display>
   <do task=mfnrange>
     <parm name=db>lector</parm>
-    <parm name=gizmo>gizmo</parm>
+    <!--parm name=gizmo>gizmo</parm-->
     <loop>
       <list action=load><pft>if p(v8) then 
        (if val(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < val(s(date).8) then '^a',v1,mpl,v8/,fi),fi
