@@ -10,7 +10,7 @@ if (isset($_SESSION["s_username"])
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
 
-<frameset cols="150,*" onload="moveTo(0,0)" border="0">
+<frameset cols="150,*" border="0">
   <frame name="indice" src="id_prestamo.php" target="principal">
   <frame name="principal" src="logo_prestamo.html" scrolling="auto">
   <noframes>
