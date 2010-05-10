@@ -44,6 +44,27 @@
 	height:24px;
 }
 
+input {
+	border:1px solid lightgray;
+	height:20px;
+	vertical-align:middle;
+	margin-bottom:1px;
+}
+
+input:hover{
+	border:1px solid Gray !important;
+}
+
+input:focus{
+	border:1px solid Gray !important;
+	background-color:Beige;
+}
+
+input[type="submit"] {
+	border-left-width:0px;
+}
+
+
 -->
 </style>
 
@@ -134,7 +155,7 @@ function focus_expresion() {
 	</tr>
     <tr>
       <td width="100%">
-	   <input type="text" name="expresion" size="10" value="" accesskey="b"><input type="submit" value=" > ">
+	   <input type="text" name="expresion" size="10" value="" accesskey="b"><input type="submit" value=">">
 	   <!--input type="submit" value="Buscar"-->
 	  </td>
 	</tr>
@@ -153,7 +174,7 @@ function focus_expresion() {
   <input type="hidden" name="IsisScript" value="circulacion/devolucion.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
 		<tr>
-			<td width="100%"><strong>Devolución (Inv.)</strong></td></tr>
+			<td width="100%"><strong>Inventario (devol)</strong></td></tr>
     <tr>
       <td width="100%">
             <input type="text" name="inventario" value="" size="10" accesskey="I"><input type="submit" value=" > ">
@@ -182,7 +203,7 @@ $password=$_SESSION["s_password"];
 	<input type="hidden" name="opcion" value="ID">
 	<table border="0" width="100%" cellpadding="0" cellpadding="">
     <tr>
-      <td width="100%"><strong>Ingrese ID. Usuario</strong></td>
+      <td width="100%"><strong>ID del usuario</strong></td>
     </tr>
     <tr>
       <td width="100%">

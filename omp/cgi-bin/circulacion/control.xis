@@ -81,16 +81,18 @@ v3004: documento
 	</style>
 	</head>	
 	<body onclick="window.parent.ocultar_control()">
-	<div id="error_title">
-	Ocurrió un error al intentar realizar la operación
-	</div>
-	<div id="error_message">
+	
   </display>
   
 	<display><pft>
-		(if v5000:'Error' then 
-				replace(v5000,'Error:','')
-		fi)
+		if v5000:'Error' then 
+			'<div id="error_title">
+				Ocurrió un error al intentar realizar la operación
+			</div>
+			<div id="error_message">',
+				replace(v5000,'Error:',''),
+			'</div>'
+		fi
 	</pft></display>
 	
 	<display>
@@ -111,7 +113,8 @@ v3004: documento
 		window.parent.document.verifica.enviar.value = "1";
 		if (window.parent.document.verifica.enviar.value == ',"'"n0,'1',"'"n0,') {
 			window.parent.document.control.submit();
-			//window.close()}
+			//window.close()
+		}
 		
 		</script>
 		</td></tr>' 
