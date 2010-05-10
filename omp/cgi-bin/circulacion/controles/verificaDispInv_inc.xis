@@ -45,10 +45,11 @@ v4040: lista de inventarios no disponibles para préstamos
       if v4000='' then
          mhl,'ok'
       else
-         mhl,'Error: Inventario/s no disponible/s: ',(v4000|;|),
-         if p(v4030) then '<br>No marcó la devolución: ',(v4030|;|) fi,
-         if p(v4040) then '<br>No disponible/s para préstamos a domicilio: ',(v4040|;|) fi,
-         if p(v4050) then '<br>Ejemplar/es prestado/s: <br>',(v4050+|;|,'<br>') fi
+         mhl,'Error: Inventario/s no disponible/s: ',(v4000+|,|),'.<ul>',
+         if p(v4030) then '<li>No marcó la devolución: ',(v4030+|,|),'</li>' fi,
+         if p(v4040) then '<li>No disponible/s para préstamos a domicilio: ',(v4040+|,|),'</li>' fi,
+         if p(v4050) then '<li>Ejemplar/es prestado/s: <br>',(v4050+|,|,'<br>'),'</li>' fi,
+		 '</ul>'
       fi
 </pft></field>
 

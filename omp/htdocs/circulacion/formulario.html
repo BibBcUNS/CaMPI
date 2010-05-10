@@ -164,10 +164,10 @@
 	<style>
 		#control_div {
 		  position: fixed;
-		  left: 180px;
+		  left: 150px;
 		  right: 50px;
 		  top:100px;
-		  width: 300px;
+		  width: 350px;
 		  height:200px;
 		  display:none;
 		}
@@ -181,7 +181,7 @@
 			top:-42px;
 			float:right;
 			z-index:1;
-			cursor:hand;
+			cursor:pointer;
 			margin:0px;
 			padding:0px;
 		}
@@ -567,7 +567,7 @@ if ref(['config']1,v9)='si' then
 			<td>
 				<form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/">
 				<input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
-				<input type="hidden" name="criterio" value="otro">
+				<input type="hidden" name="criterio" value="reserva">
 				<input type="hidden" name="usuario_id" value="',v2,'">
 				<input type="hidden" name="operario_id" value="',v2002,'">
 	
@@ -578,9 +578,11 @@ if ref(['config']1,v9)='si' then
                     	<tr>
                         	<td width="80%">
                             	<input type="text" name="expresion" size="35" accesskey="r">
-                                <!--input type="radio" name="campo" value="NC" checked /> NC-->
                                 <input type="radio" name="campo" value="autor" checked /> Autor 
                                 <input type="radio" name="campo" value="titulo"     /> Título
+								',if ref(['config']1,v12)='si' then
+									'<input type="radio" name="campo" value="NC" checked /> NC',
+								fi,'
 <br />                            	<input type="checkbox" name="tipo" value="completa" />Palabras completa
                                 
                             </td>

@@ -53,13 +53,13 @@ v3004: documento
 	<head>
 	<style>
 		body{
-			cursor:hand;
+			cursor:pointer;
 			padding:5px;
 			margin:5px;
 			background-color:#f6f6f6;
 		}
 		#error_title {
-			width:90%;
+			width:95%;
 			font-family: sans-serif;
 			font-size: 10pt;
 			color:white;
@@ -70,11 +70,12 @@ v3004: documento
 			margin:0px;
 		}
 		#error_message {
-			width:90%;
+			width:95%;
 			font-family: sans-serif;
 			font-size: 10pt;
 			text-align:left;
 			color: #5277AE;
+			color: red;
 			margin-top: 20px;
 			font-weight:bold;
 		}
