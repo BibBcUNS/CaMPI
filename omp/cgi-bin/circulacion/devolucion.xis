@@ -141,7 +141,7 @@ Se exporta el campo v2000 con OK o código error -->
             <display><htmlpft><pft>
             if s(mhu,v985)<>'PRES' then mhl,
                         proc('a9001#Material en Biblioteca#'),
-                        proc('a9002#Según el estado del registro bibliográfico (v985), el material no figura prestado#')
+                        proc('a9002#Según el estado del registro bibliográfico (',v977,'), el material no figura prestado#')
                       cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') fi</pft></htmlpft></display>
             <flow action="exit"><pft>if s(mhu,v985)<>'PRES' then 'Now' fi</pft></flow>
             

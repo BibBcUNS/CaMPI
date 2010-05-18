@@ -10,13 +10,10 @@
 <!--
 #lt1 {
    width : 130px;
-   margin : 0 0em 2em 0em;
    border : 1px solid #5277AE;
    padding : 0px 2px;
-   //background : #BEE4FF;
    font-family: "Trebuchet MS", Verdana, sans-serif;
    vertical-align:middle;
-   margin:auto;
 }
 
 
@@ -38,6 +35,7 @@
        border:1px solid #5277AE;
 	   border-width:1px 0px 0px 0px;
 	   padding:5px 0px 5px 0px;
+	   margin:5px;
 }
 
 #lt1 input[type=submit]{
@@ -59,11 +57,6 @@ input:focus{
 	border:1px solid Gray !important;
 	background-color:Beige;
 }
-
-input[type="submit"] {
-	border-left-width:0px;
-}
-
 
 -->
 </style>
@@ -124,13 +117,13 @@ function focus_expresion() {
 				return false;
 		}else{  return true;}
 	">
-  <input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
+	<input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td width="100%"><strong>Consultar por</strong></td></tr>
     <tr>
 		<td width="100%">
-		<input type="radio" name="criterio" value="inv" checked>Inventario
+		<label><input type="radio" name="criterio" value="inv" checked>Inventario</label>
 		</td>
 	</tr>
 	<?php
@@ -144,18 +137,18 @@ function focus_expresion() {
 		?>
 			<tr>
 				<td width="100%">
-				<input type="radio" name="criterio" value="nc">Nº Control
+				<label><input type="radio" name="criterio" value="nc">Nº Control</label>
 				</td>
 			</tr>
 		<?php } // fi end ?>
     <tr>
 		<td width="100%">
-		<input type="radio" name="criterio" value="lector">Usuario
+		<label><input type="radio" name="criterio" value="lector">Usuario</label>
 		</td>
 	</tr>
     <tr>
       <td width="100%">
-	   <input type="text" name="expresion" size="10" value="" accesskey="b"><input type="submit" value=">">
+	   <input type="text" name="expresion" size="10" value="" accesskey="b"><input type="submit" value=" > ">
 	   <!--input type="submit" value="Buscar"-->
 	  </td>
 	</tr>
@@ -171,7 +164,7 @@ function focus_expresion() {
 			window.document.form_devolucion.operador.value=window.document.form_id.operador.value;
 			return true;}
 	">
-  <input type="hidden" name="IsisScript" value="circulacion/devolucion.xis">
+	<input type="hidden" name="IsisScript" value="circulacion/devolucion.xis">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
 		<tr>
 			<td width="100%"><strong>Inventario (devol)</strong></td></tr>

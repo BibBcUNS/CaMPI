@@ -446,7 +446,7 @@
 		<field action="import" tag="list">120,5009</field>
 		
 		<display>
-		<TABLE BORDER=0 WIDTH=95% style="font-family: sans-serif; font-size: 11pt; border:1px solid #5277AE">
+		<TABLE WIDTH=85% style="font-family: sans-serif; font-size: 11pt; border:1px solid #5277AE">
 		<tr><td>
 		</display>
 		

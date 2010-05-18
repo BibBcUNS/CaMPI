@@ -268,7 +268,7 @@ En caso de no ser submit se Muestra el Formulario
 					'<input type="checkbox" name="partes_id" ',
 					if (v1002='1' or v2061:v1005) then 'checked' fi,
 					' value="','^bMARC^c',v1,'^p',if v1000='#' then '' else v1000 fi,'">',
-					if v1000='#' then 'Parte única' else v1000 fi,'<br>',
+					if v1000='#' then 'Primera' else v1000 fi,'<br>',
 			</pft></display>			
 		</loop
 			><display><br></display>

@@ -74,11 +74,19 @@ v3004: documento
 			font-family: sans-serif;
 			font-size: 10pt;
 			text-align:left;
-			color: #5277AE;
-			color: red;
+			/*color: #5277AE;*/
+			color: #C00000;
 			margin-top: 20px;
-			font-weight:bold;
 		}
+		
+		#close {
+			position: fixed;
+			bottom: 0;
+			right: 0;
+			height:20px;
+			width:45px;
+		}
+		
 	</style>
 	</head>	
 	<body onclick="window.parent.ocultar_control()">
@@ -88,15 +96,17 @@ v3004: documento
 	<display><pft>
 		if v5000:'Error' then 
 			'<div id="error_title">
-				Ocurrió un error al intentar realizar la operación
+				No es posible realizar la operación
 			</div>
 			<div id="error_message">',
 				replace(v5000,'Error:',''),
-			'</div>'
+			'</div>
+			<img id="close" src="/omp/circulacion/images/close.gif">'
 		fi
 	</pft></display>
 	
 	<display>
+		
 		</BODY>
 		</HTML>
 	</display>
