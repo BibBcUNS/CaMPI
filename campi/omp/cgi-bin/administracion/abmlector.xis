@@ -1,0 +1,470 @@
+<!-- ==================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<!--
+Esta script realiza alta, baja y modif. a la base LECTOR -->
+
+<IsisScript>
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <trace>!On</trace>
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+  <field action=cgi tag=100>credencial</field> <!-- valores posibles: documento/mfn -->
+  <field action=cgi tag=120>opcion</field> <!-- valores posibles: Pesentar/Registro Nuevo -->
+  <field action=cgi tag=130>id_lector</field>
+  <field action=cgi tag=300>id_operador</field>
+	
+	<!-- Si se invoca la script desde el menú, el operador o bibliotecario no estara identificado, por lo tanto se define la fecha y la ip como parámetro que se usará como lockid -->
+	<field action="replace" tag="300"><pft>if a(v300) then getenv('REMOTE_ADDR'),x1,s(date).8 fi</pft></field> 
+	
+  <display><htmlpft>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <title>Open MarcoPolo - Módulo Administración</title>
+<link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
+
+    
+		<SCRIPT language="JavaScript">
+		<!--
+			function verificar_datos() {
+				if (window.document.form_abm.documento.value=="" || window.document.form_abm.nombre.value=="") {
+					alert ("Ingrese Nombre y Documento");
+					return false;
+				}else{
+					if ("[pft]v120[/pft]"!="Registro Nuevo") {
+						if (window.document.form_abm.documento.value!=window.document.form_abm.documento_anterior.value) { <!-- cambio los documentos y no es un registro nuevo -->
+							if (confirm("Está seguro de cambiar el Documento ?")) {
+								window.open("[pft]getenv('PATH_INFO')[/pft]aguarde.html","Verifica","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,copyhistory=0,width=400,height=200");
+								return true
+							}else{
+								return false
+							}
+						}else{ <!-- No es un registro nuevo y no hay nada que verificar (no cambia el documento), modifica la script del formualrio para invocar directamente a abmlector.xis-->
+							window.document.form_abm.IsisScript.value="administracion/abmlector.xis"; 
+							window.document.form_abm.target="_self";
+							return true
+						}
+					}else{ <!-- Es un registro nuevo -->
+						window.open("[pft]getenv('PATH_INFO')[/pft]aguarde.html","Verifica","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,copyhistory=0,width=400,height=200");
+						return true
+					}
+				}
+			}
+		-->		
+		</SCRIPT>
+
+</head>
+  <body><center>
+    <div id="head">
+		  <div id="title"><p align="left"><br>Lectores - OPEN MarcoPolo</p>
+		  <!--div id="logo"><img src="/omp/images/logocampi2.gif" width="143" height="65" ></div-->
+		  </div>
+		 
+    </div> 
+  <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 <div class="top"></div>
+					 <div class="content">
+<!--------------------------------------------------------------------------------------------------------------------->
+
+  </htmlpft></display>  
+
+  <field action="add" tag="120"><pft>"Presentar"n120</pft></field>
+  <flow action=jump><pft>v120</pft></flow>
+	
+	<display><pft>ALL</pft></display>
+	
+  <flow action=exit>1</flow>
+
+  <label>Registro Nuevo</label>
+
+	<field action="add" tag="10">Habilitado</field>
+  <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_abmlector.html')</pft></htmlpft></display>
+  <flow action=exit>1</flow>
+
+  <label>Presentar</label>
+
+  <display><pft>
+		if a(v100) then 
+'			  <h2 align="center"><big>Datos incompletos</big></h2>'/
+        '<!---------------------------------------------------------------------------------------------->'/
+		'</div>'/
+		'<div class="bottom"></div>'/
+		'</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div id="end_body"></div>'/
+		'<div id="footer"></div>'/
+
+'			</body>'/
+'			</html>'/fi</pft></display>
+  <flow action=exit><pft>"Now"n100</pft></flow> <!-- aborta la script si no se indica un DNI O MFN -->
+
+<!-- Si en vez de especificar el dni del lector se indica el nro. de registro salta a BLOQUEO -->
+  <flow action=jump><pft>if v130='mfn' then 'BLOQUEO' fi</pft></flow>  
+
+  <field action="add" tag="1000"><pft>f(l(['lector']v100),1,0)</pft></field> <!-- MFN del Registro Lector, búsca por DNI -->
+
+  <display><pft>
+    if val(v1000)=0 then 
+'       <p>&nbsp;</p>'/
+'       <h2 align="center">Lector inexistente!</h2>'/
+'			<SCRIPT LANGUAGE="JavaScript">'/
+'			<!--'/
+'			window.document.write("<a href=/omp/administracion/menu.php>Men&uacute; administraci&oacute;n</a>");'/
+'			//  End -->'/
+'			</SCRIPT>'/
+        '<!---------------------------------------------------------------------------------------------->'/
+		'</div>'/
+		'<div class="bottom"></div>'/
+		'</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div id="end_body"></div>'/
+		'<div id="footer"></div>'/
+
+'			</body>'/
+'			</html>'/fi</pft></display>			
+  <flow action=exit><pft>if val(v1000)=0 then 'Now' fi</pft></flow> <!-- Si no encuentra el lector aborta la script -->
+
+  <label>BLOQUEO</label>
+
+  <do task=update>
+    <parm name=db>lector</parm>
+    <parm name=mfn><pft>if v130='mfn' then v100 else v1000 fi</pft></parm>
+    <parm name=lockid><pft>v300</pft></parm>
+    <parm name=expire>60</parm>
+    <field action=define tag=1102>Isis_Status</field>
+    <field action=define tag=1011>Isis_Lock</field>
+    <update>
+      <write>Lock</write>
+      <field action="export" tag="list">1102</field>
+    </update>
+  </do>
+  <display><pft>
+		if val(v1102)>0 then
+       '<h2 align="center">No se pudo tomar el registro lector. Error: ',v1102,'<br>'/
+			select val(v1102)
+				case 2: 'Registro editado por otro usuario</h2>',
+			endsel,
+			'<SCRIPT LANGUAGE="JavaScript">'/
+			'<!--'/
+			'window.document.write("<a href=/omp/administracion/menu.php>Menú administración</a>");'/
+			'//  End -->'/
+			'</SCRIPT>'/
+		fi</pft></display>
+
+  <flow action=exit><pft>if val(v1102)>0 then 'Now' fi</pft></flow>
+
+  <do task=mfnrange>
+    <parm name=db>lector</parm>
+    <parm name=from><pft>if v130='mfn' then v100 else v1000 fi</pft></parm>
+    <parm name=count>1</parm>
+    <parm name=gizmo>oemansi</parm>
+    <field action=define tag=1102>Isis_Status</field>
+    <loop>
+      <field action=import tag=list>110,120,300</field>
+      <display><pft>
+				if val(v1102)>0 then
+	        '<h2 align="center">No se pudo tomar el registro lector. Error: ',v1102,'<br>'/
+					select val(v1102)
+						case 1: 'Registro borrado lógicamente</h2>',
+					endsel,
+					'<SCRIPT LANGUAGE="JavaScript">'/
+					'<!--'/
+					'window.document.write("<a href=/omp/administracion/menu.php>Menú administración</a>");'/
+					'//  End -->'/
+					'</SCRIPT>'/
+				fi</pft></display>
+       <flow action="skip"><pft>if val(v1102)>0 then 'Next' fi</pft></flow>     
+		<do task=mfnrange>
+			<parm name=db>tipo_lector</parm>
+			<loop>
+				<field action=export previous=add tag=2000>1</field>
+			</loop>
+		</do>
+      <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_abmlector.html')</pft></htmlpft></display>
+    </loop>
+  </do>
+  <flow action=exit>1</flow> 
+
+  <label>Grabar</label>
+  
+  <field action=cgi tag=130>mfn_lector</field>
+
+	<parm name="uctab"><pft>cat('uc.tab')</pft></parm> <!-- Se convierten del ansi al ascii los códigos especiales que van al diccionario -->
+	<parm name="actab"><pft>cat('ac.tab')</pft></parm> <!-- Se convierten del ansi al ascii los códigos especiales que van al diccionario -->
+
+ <!-- 
+  Importante: Se presenta una incompatibilidad entre las tablas de conversión ansi/ascii que impide actualizar correctamente la línea del 
+  "Apellido y Nombre" (v2) en el diccionario. Si la linea contiene caracters especiales (mayores al ascii 128) y por más que difiera la 
+	nueva entrada del nombre anterior, esta última sigue existiendo y apuntando al registro 
+  
+  ejemplo:
+  suponiendo que v2: "MORALES, Martín" 
+	
+	  ifkeys lector "from=morales" "to=morales"
+     1|MORALES, MARTIN GABRIEL
+		 
+	y se lo reemplaza por "MORALES, Martín Gabriel" el diccionario queda con las dos entradas:
+  
+  ifkeys lector "from=morales" "to=morales"
+     1|MORALES, MARTIN
+     1|MORALES, MARTIN GABRIEL
+  
+  -->
+  
+	  <do task=update>
+    <parm name=db>lector</parm>
+    <parm name=mfn><pft>v130</pft></parm>
+    <parm name=lockid><pft>v300</pft></parm>
+    <parm name=expire>30</parm>
+		<parm name="fst"><pft>cat('lector.fst')</pft></parm>
+
+    <field action=define tag=1102>Isis_Status</field>
+    <field action=define tag=1011>Isis_Lock</field>
+    <update>
+      <field action="delete" tag="list">1/20</field>
+      <field action=cgi tag=1>nombre</field>
+      <field action=cgi tag=2>documento</field>
+      <field action=cgi tag=3>categoria</field>
+      <field action=cgi tag=4>legajo</field>
+      <field action=cgi tag=5>matricula</field>
+      <field action=cgi tag=6>domicilio</field>
+      <field action=cgi tag=7>telefono</field>
+      <field action=cgi tag=8>prestamos</field>
+      <field action="replace" tag="8" split="occ"><pft>(v8/)</pft></field>
+      <field action=cgi tag=9>reservas</field>
+      <field action="replace" tag="9" split="occ"><pft>(v9/)</pft></field>
+      <field action=cgi tag=10>estado</field>
+      <field action=cgi tag=11>sanciones</field>
+      <field action="replace" tag="11" split="occ"><pft>replace(v11,'%',s(/#))</pft></field>
+      <field action=cgi tag=12>email</field>
+      <field action=cgi tag=14>domicilio_origen</field>
+      <field action=cgi tag=15>telefono_origen</field>
+      <field action=cgi tag=16>vigencia_datos</field>	
+	  <field action=cgi tag=17>observaciones_lector</field>
+      <field action="replace" tag="17" split="occ"><pft>(v17/)</pft></field>
+
+      <write>Unlock</write>
+			<field action="add" tag="130"><pft>mfn</pft></field> <!-- exporta el mfn por si es un registro nuevo -->
+			<field action="export" tag="130" previous="delete">130</field>
+      <field action="export" tag="list">1102</field>
+    </update>
+	</do>
+  <display><pft>
+		if val(v1102)>0 then
+       '<h2 align="center">No se pudo grabar el registro lector. Error: ',v1102,'<br>'/
+			select val(v1102)
+				case 2: 'Registro editado por otro usuario</h2>',
+			endsel,
+			'<SCRIPT LANGUAGE="JavaScript">'/
+			'<!--'/
+			'window.document.write("<a href=/omp/administracion/menu.php>Menú administración</a>");'/
+			'//  End -->'/
+			'</SCRIPT>'/
+			'<!---------------------------------------------------------------------------------------------->'/
+			'</div>'/
+			'<div class="bottom"></div>'/
+			'</div>'/
+			'<div class="clearer"></div>'/
+			'</div>'/
+			'<div class="clearer"></div>'/
+			'</div>'/
+			'<div id="end_body"></div>'/
+			'<div id="footer"></div>'/
+
+			'</body>'/
+			'</html>'/
+		fi</pft></display>
+  
+	<flow action="exit"><pft>if val(v1102)<>0 then 'Now' fi</pft></flow>
+
+	
+	<do task="mfnrange"> <!-- Lee el registro aplicando el gizmo para luego grabarlo con estos cambios -->
+    <parm name="db">lector</parm>
+    <parm name="from"><pft>v130</pft></parm>
+		<parm name="count">1</parm>
+    <parm name="gizmo">ansioem</parm>		
+		<loop>
+		  <do task="update">
+		    <parm name="db">lector</parm>
+		    <parm name="mfn"><pft>mfn</pft></parm>
+		    <parm name="lockid"><pft>getenv('REMOTE_ADDR'),x1,s(date).8</pft></parm>
+  	    <field action="define" tag="1102">Isis_Status</field>
+		    <field action="define" tag="1011">Isis_Lock</field>
+		    <update>
+					 <field action="import" tag="list" previous="delete">1/50</field>
+		       <write>Unlock</write>
+           <field action="export" tag="list">1102</field>
+		    </update>
+		  </do>			
+		</loop>
+	</do>
+	
+  <display><pft>
+  	if val(v1102)<>0 then 
+  		'<h2 align="center">No se pudo grabar el registro. Error: ',v1102,'</h2>'/
+  	else
+  		'<h2 align="center">Operación Exitosa !</h2>'/
+  	fi,
+		'<SCRIPT LANGUAGE="JavaScript">'/
+		'<!--'/
+		'window.document.write("<a href=/omp/administracion/menu.php>Menú administración</a>");'/
+		'//  End -->'/
+		'</SCRIPT>'/
+        '<!---------------------------------------------------------------------------------------------->'/
+		'</div>'/
+		'<div class="bottom"></div>'/
+		'</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div id="end_body"></div>'/
+		'<div id="footer"></div>'/
+  	'</body>'/
+  	'</html>'/</pft></display>
+    
+  <flow action=exit>1</flow>
+
+	<label>Cancelar</label>
+
+  <field action=cgi tag=130>mfn_lector</field>
+  <do task=update>
+    <parm name=db>lector</parm>
+    <parm name=mfn><pft>v130</pft></parm>
+    <parm name=lockid><pft>getenv('REMOTE_ADDR'),x1,s(date).8</pft></parm>
+    <field action=define tag=1102>Isis_Status</field>
+    <field action=define tag=1011>Isis_Lock</field>
+    <update>
+       <write>Unlock</write>
+    </update>
+  </do>
+	<display><pft>
+		'<h2 align="center">Operación cancelada</h2>'/
+		'<SCRIPT LANGUAGE="JavaScript">'/
+		'<!--'/
+		'window.document.write("<a href=/omp/administracion/menu.php>Menú administración</a>");'/
+		'//  End -->'/
+		'</SCRIPT>'/
+		'<!---------------------------------------------------------------------------------------------->'/
+		'</div>'/
+		'<div class="bottom"></div>'/
+		'</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div class="clearer"></div>'/
+        '</div>'/
+        '<div id="end_body"></div>'/
+		'<div id="footer"></div>'/
+
+		'</body>'/
+		'</html>'/
+	</pft></display>
+	<flow action="exit">Now</flow>
+
+  <label>Borrar</label>
+
+  <field action=cgi tag=130>mfn_lector</field>
+  <do task=mfnrange>
+    <parm name=db>lector</parm>
+    <parm name=from><pft>v130</pft></parm>
+    <parm name=count>1</parm>
+		<parm name="gizmo">oemansi</parm>
+    <field action=define tag=1102>Isis_Status</field>
+    <loop>
+      <field action=import tag=list>110,120</field>
+      <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_abmlector.html')</pft></htmlpft></display>
+    </loop>
+  </do>
+  <flow action=exit>1</flow>
+
+  <label>Confirma el BORRADO ?</label>
+
+	<parm name="uctab"><pft>cat('uc.tab')</pft></parm> <!-- Se convierten del ansi al ascii los códigos especiales que van al diccionario -->
+	<parm name="actab"><pft>cat('ac.tab')</pft></parm> <!-- Se convierten del ansi al ascii los códigos especiales que van al diccionario -->
+
+  <field action=cgi tag=130>mfn_lector</field>
+  <do task=update>
+    <parm name=db>lector</parm>
+    <parm name=mfn><pft>v130</pft></parm>
+		<parm name="fst"><pft>cat('lector.fst')</pft></parm>
+    <parm name=lockid><pft>getenv('REMOTE_ADDR'),x1,s(date).8</pft></parm>
+    <field action=define tag=1102>Isis_Status</field>
+    <field action=define tag=1011>Isis_Lock</field>
+    <update>
+      <write>Delete</write>
+      <field action="export" tag="list">1102</field>
+    </update>
+  </do>
+  <display><pft>
+    if val(v1102)>=0 then 
+			'<h2 align="center">Registro Borrardo exitosamente</h2>' 
+    else 
+			'<h2 align="center">No se logró grabar el registro, error: ',v1102,'</br>'/
+      select val(v1102)
+        case 5: '. Registro tomado por otro operador !</big></p>',
+      endsel,
+    fi,
+	'<SCRIPT LANGUAGE="JavaScript">'/
+	'<!--'/
+	'window.document.write("<a href=/omp/administracion/menu.php>Menú administración</a>");'/
+	'//  End -->'/
+	'</SCRIPT>'/
+  </pft></display>
+  <flow action=exit>1</flow>
+
+</section>
+</IsisScript>
+
+

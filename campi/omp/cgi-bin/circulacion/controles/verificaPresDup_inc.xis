@@ -1,0 +1,70 @@
+<!-- Verifica que el lector no tenga un ejemplar de la misma parte en su poder, siempre que no sea un ejemplar que se devuelve (renovación).
+Y que no se presten dos ejemplares de la misma obra.
+
+Entrada: Lista de inventarios a prestar, lista de invs. a devolver y documento
+Salida: ok o la lista de error.
+Nota: Falta verificar si hay dos ejemplares iguales en la lista de inventarios como potenciales prestamos. -->
+
+<!-- 
+v3002=lista de inventarios a prestar
+v3003=lista de inventarios a devolver
+v3004=documento -->
+<flow action="jump"><pft>if v5000:'Error' then 'FinVerificaPresDup' fi</pft></flow>
+
+<!-- v3050: lista de los mfns a los que apunta en PARTES cada inventario que el lector posee.
+Esta lista comienza, termina y se separa MFNs con el simbolo '~' -->
+<field action="replace" tag="3050"><pft>
+   '~'
+   ref(['lector']l(['lector']v3004),
+   (f(l(['partes']v8^i),1,0),'~')
+   )
+</pft></field>
+
+<!-- v3060: cadena con los mfns de las partes a las que corresponden los inventarios de las devoluciones -->
+<field action="replace" tag="3060"><pft>'~',(f(l(['partes']v3003^y),1,0),'~')</pft></field>
+
+<!-- Carga de la lista con los inventarios a prestar -->
+<list action=load previous="delete"><pft>(v3002/)</pft></list>
+
+<!-- v3001: contendrá los inventarios que correspondan a "préstamos duplicados" -->
+<field action="delete" tag="3001">borrar</field>
+
+<!-- v3005: acumulará los mfns de partes correspondientes a los invs. a prestar -->
+<field action="delete" tag="3005">borrar</field>
+
+<!-- Recorrido de la lista de inventarios a prestar.
+Por cada inventario buscamos el mfn al que apunta en PARTES y corroboramos si este mfn
+esta en la lista de los prestados al lector en cuestion. -->
+<do task=list>
+   <field action="define" tag="1000">Isis_Item</field>
+   <loop>
+      <field action="import" tag="3050">3050</field>
+      <field action="import" tag="3060">3060</field>
+      <field action="import" tag="3001">3001</field>
+	  <field action="import" tag="3005">3005</field>
+
+      <!-- v4000: mfn de la parte a la que pertenece el inventario actual a prestar (Isis_Item) con '~' como prefijo y sufijo -->
+      <field action="replace" tag="4000"><pft>'~',f(l(['partes']v1000),1,0),'~'</pft></field>
+
+      <!-- Se agrega el inv actual (v1000) a la lista de "préstamos duplicados" si:
+	  el lector ya posee el objeto(v3050:v4000) y no es renovación (not v3060:v4000)
+	  ó
+	  el lector intenta llevar más de 1 ejemplar de la parte (v3005:v4000) -->
+      <field action="add" tag="3001">
+         <pft>if l(['partes']v1000)>0 and (v3005:v4000 or (v3050:v4000 and (not v3060:v4000))) then v1000 fi</pft>
+      </field>
+	  <field action="add" tag="3005">4000</field>
+	  <field action="export" tag="3005">3005</field>
+      <field action="export" tag="3001">3001</field>
+   </loop>
+</do>
+
+<field action="replace" tag="5000"><pft>
+   if v3001='' then
+      'ok'
+   else
+      'Error: Préstamo duplicado. Inventario/s: ',(v3001+|;|)
+   fi
+</pft></field>
+
+<label>FinVerificaPresDup</label>

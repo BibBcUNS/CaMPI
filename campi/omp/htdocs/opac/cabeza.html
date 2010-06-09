@@ -1,0 +1,216 @@
+<html>
+
+<head>
+<title>Busqueda</title>
+<SCRIPT language="JavaScript1.1">
+<!--
+function enviar() {
+	if (window.document.formulario1.expresion.value =='') {
+		alert ('   No se permite enviar la\nsolicitud con el campo vacío');
+		return false;}
+	else {
+		window.document.busqueda_ant.valor_search_20.value = window.document.busqueda_ant.valor_search_19.value;
+		window.document.busqueda_ant.valor_search_19.value = window.document.busqueda_ant.valor_search_18.value;
+		window.document.busqueda_ant.valor_search_18.value = window.document.busqueda_ant.valor_search_17.value;
+		window.document.busqueda_ant.valor_search_17.value = window.document.busqueda_ant.valor_search_16.value;
+		window.document.busqueda_ant.valor_search_16.value = window.document.busqueda_ant.valor_search_15.value;
+		window.document.busqueda_ant.valor_search_15.value = window.document.busqueda_ant.valor_search_14.value;
+		window.document.busqueda_ant.valor_search_14.value = window.document.busqueda_ant.valor_search_13.value;
+		window.document.busqueda_ant.valor_search_13.value = window.document.busqueda_ant.valor_search_12.value;
+		window.document.busqueda_ant.valor_search_12.value = window.document.busqueda_ant.valor_search_11.value;
+		window.document.busqueda_ant.valor_search_11.value = window.document.busqueda_ant.valor_search_10.value;
+		window.document.busqueda_ant.valor_search_10.value = window.document.busqueda_ant.valor_search_09.value;
+		window.document.busqueda_ant.valor_search_09.value = window.document.busqueda_ant.valor_search_08.value;
+		window.document.busqueda_ant.valor_search_08.value = window.document.busqueda_ant.valor_search_07.value;
+		window.document.busqueda_ant.valor_search_07.value = window.document.busqueda_ant.valor_search_06.value;
+		window.document.busqueda_ant.valor_search_06.value = window.document.busqueda_ant.valor_search_05.value;
+		window.document.busqueda_ant.valor_search_05.value = window.document.busqueda_ant.valor_search_04.value;
+		window.document.busqueda_ant.valor_search_04.value = window.document.busqueda_ant.valor_search_03.value;
+		window.document.busqueda_ant.valor_search_03.value = window.document.busqueda_ant.valor_search_02.value;
+		window.document.busqueda_ant.valor_search_02.value = window.document.formulario1.expresion.value;
+		window.document.busqueda_ant.submit();
+	   	window.document.formulario1.submit();} 
+}
+
+function elimina() {
+	anterior='';
+	window.document.formulario1.expresion.value ='';
+	parent.principal.location = '/omp/opac/presentar.html';
+}
+
+function asignar_otro(seleccionado) {
+	anterior = parent.frames["cabeza"].formulario1.expresion.value ;
+	parent.frames["cabeza"].formulario1.expresion.value += seleccionado
+}
+
+function asignar_op(seleccionado) {
+	anterior = parent.frames["cabeza"].formulario1.expresion.value ;
+	var texto = parent.frames["cabeza"].formulario1.expresion;
+	var valor = texto.value;
+	var compara = valor.substring(valor.length - 3,valor.length);
+	var compara2 = valor.substring(valor.length - 1,valor.length);
+	if (anterior != "") {
+			if (compara == " * " || compara == " + " || compara == " ^ " 
+			|| compara2 == "(") {return;}
+			else {
+			parent.frames["cabeza"].formulario1.expresion.value += seleccionado	}
+			 }
+}
+
+function asignar_pa(seleccionado) {
+	anterior = parent.frames["cabeza"].formulario1.expresion.value ;
+	var texto = parent.frames["cabeza"].formulario1.expresion;
+	var valor = texto.value;
+	var compara = valor.substring(valor.length - 2,valor.length);
+	if (anterior == "") {
+		if (seleccionado == ') ') {return;}
+		else {
+		parent.frames["cabeza"].formulario1.expresion.value = '('}
+		}
+	else {
+		if (compara == ") " || compara == " (") {return;}
+		else {
+		parent.frames["cabeza"].formulario1.expresion.value += seleccionado}	
+	}
+
+}
+
+function asignar_pac(seleccionado) {
+	anterior = parent.frames["cabeza"].formulario1.expresion.value ;
+	if (anterior != "") {
+		parent.frames["cabeza"].formulario1.expresion.value = "(" + parent.frames["cabeza"].formulario1.expresion.value + ")"
+	}
+}
+
+function atras() {
+	parent.frames["cabeza"].formulario1.expresion.value = anterior
+}		
+
+function tiempo() {
+	if (window.document.form_dicc.from.value != "") {
+		if (window.document.form_dicc.from.value != ultimo) {
+			ultimo = window.document.form_dicc.from.value;}
+			window.document.form_dicc.submit();
+		}
+	}
+
+//-->
+</SCRIPT>
+
+</head>
+<body bgcolor="#E8E8D0" onload='anterior = ""'>
+<form action="/cgi-bin/wxis.exe/omp/opac/" target="principal" name="formulario1" method="post"
+	onSubmit=
+	"if (window.document.formulario1.expresion.value =='') {
+		alert ('   No se permite enviar la\nsolicitud con el campo vacío');
+		return false;}
+	else {
+	   	return true;}">
+	<input type="hidden" name="IsisScript" value="omp/opac/buscar.xis">
+	<table>
+	<tr>
+		<td width="65%">&nbsp;<img src="images/tecladoconcable.gif" align="absbottom" width="267" height="23"></td>
+		<td rowspan="2">
+			<img src="images/b_buscar.jpg" 
+				onclick="enviar();" alt="Presione aquí para realizar la búsqueda"
+				onmouseover="this.src='images/bf_buscar.jpg'"
+				onmouseout="this.src='images/b_buscar.jpg'"
+			  onmousedown="this.src='images/bc_buscar.jpg'"
+				onmouseup="this.src='images/bf_buscar.jpg'" width="87" height="34">
+			<a href="ayuda/ayuda.htm" target="principal">
+				<img src="images/b_ayuda.jpg" border="0" alt="Se ofrece ayuda para manejar el OPAC"
+					onmouseover="this.src='images/bf_ayuda.jpg'"
+					onmouseout="this.src='images/b_ayuda.jpg'"
+				 	onmousedown="this.src='images/bc_ayuda.jpg'"
+					onmouseup="this.src='images/bf_ayuda.jpg'" width="72" height="25"></a>				
+		</td>
+		<td rowspan="2">
+			<img src="images/b_borrar.jpg" alt="Borra la expresión de búsqueda ingresada"
+				onmouseover="this.src='images/bf_borrar.jpg'"
+				onmouseout="this.src='images/b_borrar.jpg'"
+			  onmousedown="this.src='images/bc_borrar.jpg'"
+				onmouseup="this.src='images/bf_borrar.jpg'"
+			 	onclick='elimina();' width="72" height="25">
+			<img src="images/b_deshacer.jpg"  alt="Permite borrar el último término u operador ingresado a la expresión."
+				onmouseover="this.src='images/bf_deshacer.jpg'"
+				onmouseout="this.src='images/b_deshacer.jpg'"
+			  onmousedown="this.src='images/bc_deshacer.jpg'"
+				onmouseup="this.src='images/bf_deshacer.jpg'"
+				onclick="atras()" width="94" height="34">			
+		</td></tr>
+	<tr>
+		<td><input style="background-color: 99,66,00" type="text" name="expresion" size="50"></td></tr>
+		<td>
+			<img src="images/operadores.gif" alt="Los operadores booleanos son los que se utilizan en las operaciones de conjuntos: adición, intersección y negación." width="75" height="25">&nbsp;&nbsp;&nbsp;
+			<img src="images/b_y.jpg" onclick="asignar_op(' * ')" alt="Operador «Y» exige que los registros recuperados contengan ambos términos."
+				onmouseover="this.src='images/bf_y.jpg'"
+				onmouseout="this.src='images/b_y.jpg'"
+			  onmousedown="this.src='images/bc_y.jpg'"
+				onmouseup="this.src='images/bf_y.jpg'" width="40" height="24">
+			<img src="images/b_o.jpg" onclick="asignar_op(' + ')" alt="Operador «O» implica que en los registros recuperados al menos se halle alguno de los términos."
+				onmouseover="this.src='images/bf_o.jpg'"
+				onmouseout="this.src='images/b_o.jpg'"
+			  onmousedown="this.src='images/bc_o.jpg'"
+				onmouseup="this.src='images/bf_o.jpg'" width="40" height="24">
+			<img src="images/b_no.jpg" onclick="asignar_op(' ^ ')" alt="Operador «No» exige que en los registros recuperados se encuentre el primer término pero no el segundo."
+				onmouseover="this.src='images/bf_no.jpg'"
+				onmouseout="this.src='images/b_no.jpg'"
+			  onmousedown="this.src='images/bc_no.jpg'"
+				onmouseup="this.src='images/bf_no.jpg'" width="40" height="24">
+			<img src="images/b_parentesisa.jpg" onclick="asignar_pa(' (')"  alt="Permite abrir un paréntesis para encerrar una expresión de búsqueda."
+				onmouseover="this.src='images/bf_parentesisa.jpg'"
+				onmouseout="this.src='images/b_parentesisa.jpg'"
+			  onmousedown="this.src='images/bc_parentesisa.jpg'"
+				onmouseup="this.src='images/bf_parentesisa.jpg'" width="40" height="24">
+			<img src="images/b_parentesisc.jpg" onclick="asignar_pa(') ')" alt="Permite cerrar la expresión con un paréntesis."
+				onmouseover="this.src='images/bf_parentesisc.jpg'"
+				onmouseout="this.src='images/b_parentesisc.jpg'"
+			  onmousedown="this.src='images/bc_parentesisc.jpg'"
+				onmouseup="this.src='images/bf_parentesisc.jpg'" width="40" height="24">
+			<img src="images/b_parentesisac.jpg" onclick="asignar_pac()" alt="Encierra la expresión de búsqueda entre paréntesis."
+				onmouseover="this.src='images/bf_parentesisac.jpg'"
+				onmouseout="this.src='images/b_parentesisac.jpg'"
+			  onmousedown="this.src='images/bc_parentesisac.jpg'"
+				onmouseup="this.src='images/bf_parentesisac.jpg'" width="40" height="24"></td>
+		<td colspan="2" align="right" valign="top">
+			<img src="images/tipomaterial.gif" width="92" height="24">
+			<select name="tipo_material">
+				<option selected>Todos</option>
+				<option value="TEXTO">Textos</option>
+				<option value="[COMPUTER FILE]">Arch.Comp.</option>
+				<option value="[GRAPHIC]">Gráficos</option>
+				<option value="[MICROFORM]">Microforma</option>
+				<option value="[SOUND RECORDING]">Reg.Sonoro</option>
+				<option value="[VIDEORECORDING]">Videos</option>
+				<option value="[REALIA]">Realia</option>
+			</select></td></tr>
+	</table>
+  <input type="hidden" name="from" value="1">
+</form>
+
+<form action="/cgi-bin/wxis.exe/omp/opac/" method="post" name="busqueda_ant" target="bus_ant">
+<input type="hidden" name="IsisScript" value="omp/opac/busqant.xis">
+  <input type="hidden" name="valor_search_01" value=" <--- Presione aquí para ver las búsquedas anteriores --->">
+  <input type="hidden" name="valor_search_02">
+  <input type="hidden" name="valor_search_03">
+  <input type="hidden" name="valor_search_04">
+  <input type="hidden" name="valor_search_05">
+  <input type="hidden" name="valor_search_06">
+  <input type="hidden" name="valor_search_07">
+  <input type="hidden" name="valor_search_08">
+  <input type="hidden" name="valor_search_09">
+  <input type="hidden" name="valor_search_10">
+  <input type="hidden" name="valor_search_11">
+  <input type="hidden" name="valor_search_12">
+  <input type="hidden" name="valor_search_13">
+  <input type="hidden" name="valor_search_14">
+  <input type="hidden" name="valor_search_15">
+  <input type="hidden" name="valor_search_16">
+  <input type="hidden" name="valor_search_17">
+  <input type="hidden" name="valor_search_18">
+  <input type="hidden" name="valor_search_19">
+  <input type="hidden" name="valor_search_20">
+</form>
+
+</body>
+</html>

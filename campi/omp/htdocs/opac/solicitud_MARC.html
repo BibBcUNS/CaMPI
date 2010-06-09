@@ -1,0 +1,60 @@
+[pft]'^d',if v100^9='' then,
+  v100^a, " "v100^b,", "v100^c,", "v100^d
+else,
+  v100^9,
+fi,
+
+v110^a, ". "V110^b, if s(v110^n,v110^d,v110^c)>'' then,
+  '(',v110^n,
+            if v110^n>'' and v110^d>'' then ' : ' fi,
+      v110^d,
+            if (v110^d>'' and v110^c>'')or (v110^n>'' and v110^c>'') then ' : ' fi,
+      v110^c,
+   ')',
+fi,
+
+
+v111^a,
+if s(v111^n,v111^d,v111^c)>'' then,
+  ' (',v111^n,
+            if v111^n>'' and v111^d>'' then ' : ' fi,
+      v111^d,
+            if (v111^d>'' and v111^c>'')or (v111^n>'' and v111^c>'') then ' : ' fi,
+      v111^c,
+   ')',
+fi,
+'. ',
+'  ',"["V240^a"]",if p(v240) then '. ' fi,
+
+
+
+'  ',v245^a, ". "v245^n,
+
+if v245^n>'' and v245^p>'' then ', ' fi,
+if v245^n='' and v245^p>'' then '. ' fi,
+                                    
+v245^p, " "v245^h,
+
+
+  if v245^b.1:';' or v245^b.1:'=' then,
+   " "v245^b,
+    else " : "v245^b,
+  fi,
+
+
+
+   " / "v245^c,
+if v773>'' then '. ' fi,
+"   En: "v773^t ,|. |v773^d ,|. |v773^g ,
+
+". -- "v362^a,". -- "v250^a,
+if s(v255^a,v255^b)>'' then '. -- ', fi, v255^a,
+if s(v255^a)>'' then '. ', fi,v255^b,
+". -- "v260^a," : "v260^b,
+if s(v260^a,v260^b)='' and v260^c>'' then '. -- ', else ', ' fi,
+,v260^c,
+if s(v260^e,v260^f,v260^g)>'' then
+  '; (',
+   v260^e, " : "v260^f,", "v260^g,
+  ')',
+fi,|^s|v82^a,[/pft]

@@ -1,0 +1,1 @@
+"wxis" "IsisScript=./inicializa/inicializa.xis"

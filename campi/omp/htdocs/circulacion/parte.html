@@ -1,0 +1,12 @@
+[pft]
+
+	'<table border="1"  width="90%">',
+
+      '<tr><td><strong>
+	      PARTE: ',v1^p,' | Ejemplares totales: ',f(nocc(v2),1,0),
+	      ' | Ejemplares disponibles: ',f(rsum((if ref(['exist']l(['exist']v2),v985)='PERM' then '1,' fi/)),1,0),'</strong>'
+      '</td></tr>',
+
+	'</table>'/,
+
+[/pft]

@@ -1,0 +1,159 @@
+<field action=replace tag=2000><pft>
+	'marc.*='v5006,'/',v5009,'/',v5009,'.*'/
+	'marc_invent.mst='v5006,'/',v5009,'/',v5009,'.mst'/
+	'marc_invent.xrf='v5006,'/',v5009,'/',v5009,'.xrf'/
+	'marc_invent.*='v5006,'/',v5009,'/exist/exist.*'/
+	'exist.*='v5006,'/exist/exist.*'/
+	'ac.tab='v5006,'/isisac.tab'/
+	'uc.tab='v5006,'/isisuc.tab'/
+	'CI_TEMPDIR='v5006,'/bases/temp'/
+</pft></field>				
+<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>				
+<!-- Definimos el cipar.par para los do que se encuentran a continuación -->
+<parm name=cipar><pft>v2000</pft></parm>
+
+<!-- verificamos si existen  invetarios duplicados (IsisPostings > 1) -->
+<field action=replace tag=2517><pft>'~'</pft></field>
+<do task=keyrange>
+<parm name=db>marc_invent</parm>
+<field action=define tag=1001>Isis_Current</field>
+<field action=define tag=1>Isis_Key</field>
+<field action=define tag=2>Isis_Postings</field>
+<loop>
+   <field action=import tag=2517>2517</field>
+   <field action=replace tag=2517>
+      <pft>v2517,if val(v1)<>0 then if val(v2) > 1 then v1,'~' fi fi</pft>
+   </field>
+   <field action=export tag=2517>2517</field>
+</loop>
+</do>
+
+<!-- crea la base de existencia (exist) a partir de la nueva base bibliográfica (biblo) -->
+<display><pft>'Creando la base existencia ...'/</pft></display>
+
+<!-- Creamos la base de datos -->
+<file action="create" type="database">exist</file>
+
+<!-- Limpiamos el archivo de logs de inventarios que se encuentran duplicados -->
+<file action="create" type="output">log_inventarios_duplicados.txt</file>
+<file action="close" type="output">now</pft></file>
+
+<!-- Recorro los registros de la base BIBLO -->
+<do task=mfnrange>
+<parm name="db">marc</parm>
+<!--parm name="count">10</parm-->
+
+ <!-- inicializamos los contadores de ejemplares incorporados -->
+<field action=replace tag=2600>0</field>
+
+
+<loop>
+	<field action=import tag="list">2600,2517,5001</field>
+	<!-- 2600 Importamos contador
+		+ 2517 lista de inventarios duplicados
+		+ 5001 indica el campo en que se encuentra el inventario
+	 -->
+
+			
+	<!-- v2001 contiendrá todos los inventarios y el valor de cond. de préstamo (tipo de material) del registro bibliográ¡fico.
+	Cada ocurrencia del campo tendrá el siguiente formato:  "^i<Invantario>^s<Sección>" -->
+	
+	<!-- Si está definido el tag para sección/colección entonces utilizamos el mismo para definir dicho valor. -->
+	<!-- En caso contrario el campo sección/colección para el inventario lo definimos como vacio '' -->
+	<!-- ¿Cómo controlo que la pft esté bien definida? -->
+	
+	<field action="add" tag="2001" split="occ"><pft>@def_ejemplares.pft</pft></field>
+	
+	<!-- carga la lista con todos los nro. de inventarios y sección/colección -->
+	<list action="delete">Now</list>
+	<list action="load"><pft>(v2001/)</pft></list>
+
+	<field action=replace tag=3333><pft>mfn(0)</pft></field>
+	<!-- Recorremos todos los ejemplares del registro BIBLO actual -->	
+	<do task=list>
+	<field action=define tag=1001>Isis_Item</field>
+	<field action=define tag=1002>Isis_Current</field>
+	<loop>
+		<!-- Importamos los tags contadores -->
+		<field action=import tag=list>2600,2601,2602,2603,2517,3333</field>
+		<!-- 2600 - 2603 Contadores
+			+ 2517 invs duplicados
+			+ 3333 mfn del reg bib (para visualización de errores)
+		-->
+		
+		<!-- Separamos el inventario de la sección/colección -->
+		<!-- 2510: inventario -->
+		<field action="replace" tag="2510"><pft>v1001^i</pft></field>
+		<!-- 2511: seccion/coleccion. En mayúscula (mhu) -->
+		<field action="replace" tag="2511"><pft>mhu,v1001^s</pft></field>		
+		
+		<!-- Salteamos el registro si no tiene definido el inventario -->		
+		<flow action=jump><pft>if (v2510='' or v2510='0') then 'FIN' fi</pft></flow>
+		
+		<!-- Si es un inventario duplicado registramos el log en un archivo . Luego salteamos el registro, jump 'FIN' -->		
+		<flow action=jump><pft>if (not v2517:s('~',v2510,'~')) then 'NO_DUPLICADO' fi</pft></flow>
+		
+				<!-- En caso que sea duplicado... -->
+				<field action=replace tag=2525><pft>DATE</pft></field>
+				<file action="append" type="output">log_inventarios_duplicados.txt</file>
+						<display><pft>
+				  			'>',/,
+				  			c4,'Inventario duplicado en la base bibliográfica',
+				  				' (',mid(v2525,7,2),'/',mid(v2525,5,2),'/',mid(v2525,1,4),' ',mid(v2525,10,2),':',mid(v2525,12,2),')',/,
+				  			c4,'inventario: ',v2510,/,
+				  			c4,'mfn biblo: ',v3333,/,
+				  		</pft></display>
+				<file action="close" type="output">now</pft></file>
+				<display><pft>'<font color="red"><b>Advertencia!:</b> Inventario DUPLICADO: </font>',v2510,' (mfn: ',v3333,')<br>',/</pft></display>
+				<flow action=jump>FIN</flow>
+		
+		<label>NO_DUPLICADO</label>
+
+		<!-- Condición para la no incorporación de ejemplares a la base exist. -->
+		<!--flow action=jump><pft>
+			if v2511='BAJA'
+			then	'FIN'
+			else	'INCORPORAR_EN_EXIST'
+			fi
+		</pft></flow-->
+		
+		<label>INCORPORAR_EN_EXIST</label>						
+				<!-- incrementamos el contador correspondiente a efecto informativo -->
+			    <field action=replace tag=2601><pft>f(val(v2601)+1,1,0)</pft></field>
+			
+				<do task=update>
+				<parm name=db>exist</parm>
+				<parm name="fst"><pft>cat('exist.fst')</pft></parm>
+				<parm name=mfn>New</parm>
+				<field action=define tag=1102>Isis_Status</field>
+	            <update>
+	              <field action="import" tag="977">2510</field> <!-- Inventario -->
+	              <field action="replace" tag="985">PERM</field> <!-- Estado -->
+	              <field action="import" tag="987">2511</field> <!-- Estado -->
+	              <write>Unlock</write>
+	              <!-- En caso de producirse un error, Mostramos en pantalla el mensaje correspondiente. Luego finalizamos el proceso -->
+	              <display><pft>
+	                if val(v1102)>0 then 
+	                  'ERROR: !, no se logró grabar el reg. hijo ',v977/
+									fi</pft></display>
+								<field action="export" tag="list">1102</field>
+	            </update>
+		        </do>
+
+		        <!-- controlamos el resultado del borrado. En caso de error terminamos la ejecución -->
+            	<flow action="exit"><pft>if val(v1102)>0 then 'Now' fi</pft></flow>
+	        	<flow action=jump>FIN</flow>
+	
+		<label>FIN</label>
+		<!-- Exportamos los contadores -->
+		<field action=export tag=list>2600,2601,2602,2603</field>
+
+	</loop>		
+	</do>
+	
+	<!-- Exportamos los contadores -->
+	<field action=export tag=list>2600,2601,2602,2603</field>
+
+</loop>    	
+</do>
+<display><pft>'listo',/#</pft></display>

@@ -1,0 +1,32 @@
+<!-- A partir de acá utilizamos v2000 como campo temporal. Para definir los cipar.par
+y cambiar las "/" por "\" en caso de trabajar en SO windows -->
+<field action=replace tag=2000><pft>		
+	'config.*=',v5006,'/config/config.*'/
+	'CI_TEMPDIR=',v5006,'/temp'/
+</pft></field>
+
+<!-- La siguiente línea realiza el reemplazo correspondiente de las "/" en caso de ser Windows -->
+<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
+
+<!-- Defino el cipar.par en fucnion de los datos anteriores -->		
+<parm name="cipar"><pft>v2000</pft></parm>
+
+<file action="create" type="database">config</file>
+<do task="update">
+	<parm name="db">config</parm>
+<parm name=mfn>New</parm>
+<field action=define tag=1102>Isis_Status</field>
+	<update>
+		<field action="import" tag="1">5001</field>
+		<field action="import" tag="2">5003</field>
+		<field action="import" tag="3">5002</field>
+		<field action="import" tag="4">5005</field>
+		<field action="import" tag="5">5006</field>
+		<field action="import" tag="6">5009</field>
+		<field action="import" tag="7">5010</field>	
+		<field action="import" tag="8">5004</field>	
+		<field action="import" tag="9">5007</field>	
+	    <field action="import" tag="10">5011</field>	
+		<write>Unlock</write>
+	</update>
+</do>

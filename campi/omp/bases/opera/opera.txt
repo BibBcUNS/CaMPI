@@ -1,0 +1,12 @@
+!ID 2
+!v001!admin
+!v002!admin
+!v003!^aBIBLIOTECARIO^bInvitado
+!v005!circulacion
+!v005!administracion
+!v005!estadisticas
+!ID 1
+!v001!operador
+!v002!operador
+!v003!^aBIBLIOTECARIO^bInvitado
+!v005!circulacion

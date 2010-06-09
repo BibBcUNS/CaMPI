@@ -1,0 +1,106 @@
+<!-- ==================================================================
+ * CaMPI
+ * Copyright (c) ¿?
+ *
+ * Desarrolladores:
+ *
+ * Fuhr, Claudio 
+ * e-mail: claudiofuhr@gmail.com
+ * Asociación Bernardino Rivadavia
+ * Av. Colón 31
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ *
+ * Ferracutti, Victor
+ * e-mail: vmferra@uns.edu.ar
+ * Biblioteca Central, UNS
+ * Av. Alem 1253
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ */ -->
+
+<!--
+ * ABM Políticas
+-->
+
+<IsisScript>
+<section>  
+<display><pft>'Content-type: text/html'/#</pft></display>
+<trace>!BR</trace>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+<field action=cgi tag=100>record</field>
+<field action=cgi tag=111>expresion</field>
+<field action=cgi tag=1>campo0</field>
+<field action=cgi tag=10>campo1</field>
+<field action=cgi tag=12>campo2</field>
+
+<field action=replace tag=110><pft>f(l(['tipo_lector']v1),1,0)</pft></field>
+<field action=replace tag=112><pft>f(l(['tipo_lector']v111),1,0)</pft></field>
+
+<flow action=jump><pft>v100</pft></flow>
+<flow action=exit>1</flow>
+
+<label>NUEVO</label>
+
+<display><pft>if val(v110)<>0 then 'CREAR_EXISTENTE' fi</pft></display>
+<flow action=exit><pft>if val(v110)<>0 then '1' fi</pft></flow>
+
+<do task=update>
+	<parm name=db>tipo_lector</parm>
+	<parm name=mfn>New</parm>
+	<parm name=fst><pft>cat('tipo_lector.fst')</pft></parm>
+	<field action=define tag=1102>Isis_Status</field>
+	<field action=define tag=1103>Isis_Lock</field>
+	<parm name=lockid>ID</parm>
+	<update>
+		<field action=import tag=list>1,10,12</field>
+        <write>Unlock</write>
+     </update>
+</do>
+
+<flow action=exit>1</flow>
+
+<label>EXISTENTE</label>
+
+<display><pft>if val(v110)=0 then 'MODIFICAR_INEXISTENTE' fi</pft></display>
+<flow action=exit><pft>if val(v110)=0 then '1' fi</pft></flow>
+
+<do task=update>
+	<parm name=db>tipo_lector</parm>
+	<parm name=mfn><pft>v110</pft></parm>
+	<parm name=fst><pft>cat('tipo_lector.fst')</pft></parm>
+	<parm name=lockid><pft>v110</pft></parm>
+	<field action=define tag=1102>Isis_Status</field>
+	<field action=define tag=1103>Isis_Lock</field>
+	<update>
+		<field action=import tag=list>1,10,12</field>
+        <write>Unlock</write>
+     </update>
+</do>
+
+<flow action=exit>1</flow>
+
+<label>BORRAR</label>
+
+<display><pft>if val(v112)=0 then 'La política para el tipo de usuario y tipo de objeto NO EXISTE' fi</pft></display>
+<flow action=exit><pft>if val(v112)=0 then '1' fi</pft></flow>
+<display><pft>'-',v112,'-'</pft></display>
+<do task=update>
+	<parm name=db>tipo_lector</parm>
+	<parm name=mfn><pft>v112</pft></parm>
+	<parm name=fst><pft>cat('tipo_lector.fst')</pft></parm>
+	<parm name=lockid><pft>v111</pft></parm>
+	<field action=define tag=1102>Isis_Status</field>
+	<field action=define tag=1103>Isis_Lock</field>
+	<update>
+	   <field action=delete tag=list>ALL</field>
+       <write>Delete</write>
+     </update>
+</do>	 
+
+</section>
+</IsisScript>

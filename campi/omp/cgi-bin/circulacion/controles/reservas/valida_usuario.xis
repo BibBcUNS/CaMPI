@@ -1,0 +1,16 @@
+<!-- verifica que la identificación del usuario sea correcto.
+Ejemplo: v3004=DNI -->
+	
+<flow action="jump"><pft>if v5000:'Error' then 'FinValidaUsuario' fi</pft></flow>
+
+<field action="replace" tag="4000"><pft>f(npost(['lector']v3002),1,0)</pft></field> <!-- total de posting para el id_usuario -->
+
+<field action="add" tag="5000">
+	<pft>  
+		if val(v4000)=0 then 
+		  mhl,'Error: Usuario <b>',v3004,'</b> inexistente.'
+		fi
+	</pft>
+</field>
+		  
+<label>FinValidaUsuario</label>

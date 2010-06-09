@@ -1,0 +1,211 @@
+<IsisScript>
+
+<include>fecha_funciones.xis</include>
+<include>circulacion/menor_inc.xis</include>
+
+<section>
+<display><pft>'Content-type: text/html'/#</pft></display>
+<trace>!BR</trace>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+<field action=replace tag=2000><pft>left(date,8)</pft></field>
+
+<do task=mfnrange>
+	<parm name=db>reservas</parm>
+	<parm name=from>1</parm>
+    <loop>
+		<field action=replace tag=1901><pft>v1</pft></field>
+		<field action=replace tag=1900><pft>mfn(1)</pft></field>
+		<field action=import tag=2000>2000</field>
+		<list action=load><pft>(v3/)</pft></list>
+		<do task=list>
+			<field action=define tag=1001>Isis_Current</field>
+			<field action=define tag=1002>Isis_Items</field>
+			<field action=define tag=1>Isis_Item</field>
+			<loop>
+				<field action=import tag=555>5555</field>
+				<field action=import tag=3001>1</field>
+				<field action=import tag=3002>2</field>
+				<field action=import tag=3003>3</field>
+			    <!-- IMPORTO EL MFN DE REGISTRO DE RESERVAS QUE ESTOY TRATANDO -->
+				<field action=import tag=1900>1900</field>
+			    <!-- OBTENGO EL TIPO DE USUARIO EN v1500 -->
+				<field action=replace tag=1500><pft>ref(['lector']l(['lector']v1^i),v3)</pft></field>
+				<!--Los objetos de una parte pueden ser de tipo CONS u otro. Esto es, una parte podrá
+				tener objetos de a lo sumo 2 tipos uno de los cuales será CONS -->
+			    <!-- OBTENGO EL TIPO DE OBJETO EN v1504 -->
+				<field action=import tag=1501>1</field>
+				<field action=replace tag=1501><pft>v1501^b,'_',v1501^c,'_',v1501^p</pft></field>
+				
+				<!-- Inventarios de la parte -->
+				<field action="replace" tag="1502" split="occ"><pft>ref(['partes']l(['partes']v1501),(v2/))</pft></field>
+
+				<!-- ejemplares con su estado (pres/perm) y cond de pres (v987)-->
+				<field action="replace" tag="1503" split="occ"><pft>
+					(
+					ref(['exist']l(['exist']v1502),'^i',v977,'^e',v985,'^c',v987/)
+					)
+				</pft></field>
+				
+				<!-- buscar el tipo distinto a CONS entre los objetos-->
+		        <field action="replace" tag="1504"><pft>
+					(if v1503^c<>'CONS' then v1503^c,break fi/) 
+				</pft></field>
+				
+				<!-- OBTENGO CANTIDAD DE DIAS DE ESPERA EN v1510-->
+				<field action=replace tag=1510><pft>ref(['politicas']l(['politicas']'UO=',v1500,'-',v1504),v13^d)</pft></field>
+				
+			    <!-- OBTENGO EL ENESIMO DIA HABIL SIGUIENTE A LA FECHA DE LA ESPERA, 
+				DONDE N LO DEFINE LA POLITICA CORRESPONDIENTE. OJO SIN TERMINAR. -->
+				
+				<call name=SUMAH><pft>v1^f*6,v1^f*3.2,v1^f*0.2,' ',replace(v1^h,':','')/v1510</pft></call>
+
+				<!-- FECHA Y HORA EN DONDE LA ESPERA ACTUAL DEBE VENCER (aaaammdd hhmmss)-->
+				<field action=replace tag=8000><pft>v9000,' ',replace(v1^h,':','')</pft></field>
+				<!-- FECHA Y HORA ACTUAL (aaaammdd hhmmss)-->
+				<field action=replace tag=8001><pft>left(date,15)</pft></field>
+			    <!-- ¿CORRESPONDE DAR DE BAJA LA ESPERA?-->
+				
+				<flow action=jump><pft>if v8000>v8001 then 'FIN_BAJAR_ESPERA' fi</pft></flow>
+
+				<do task=update>
+				     <parm name=db>reservas</parm>
+				     <parm name=mfn><pft>v1900</pft></parm>
+					 <parm name=fst><pft>cat('reservas.fst')</pft></parm>
+				     <field action=define tag=1102>Isis_Status</field>
+					 <field action=define tag=1103>Isis_Lock</field>
+					 <parm name=lockid>ID</parm>
+				     <update>
+						<field action=import tag=1>3001</field>
+						<field action=import tag=2>3002</field>
+						<field action=import tag=3>3003</field>
+						<field action=import tag=200>1</field>
+						
+						<proc><pft>'d3',(if v3=v200[1] then else 'a3~',v3,'~' fi/)</pft></proc>
+				
+						<!-- Busco el timestamp más chico usando la funcion menor. -->			
+						<call name=menor><pft>(v2^f*6,v2^f*3.2,v2^f*0.2,' ',replace(v2^h,':','')/)</pft></call>
+						<!-- Salida en v30 (^o^t, órden y timestamp respectivamente) -->						
+						<field action=replace tag=553><pft>date</pft></field>
+						<field action=replace tag=554><pft>getenv('REMOTE_ADDR')</pft></field>
+						<!-- Construyo lo que grabaré en MOVI -->						
+						<field action=add tag=555><pft>'EC=',v200</pft></field>
+						<proc><pft>(if iocc=val(v30[1]^o) then 'a444~',v2,'~' fi/)</pft></proc>
+						<field action=add tag=555><pft>'RC=',v444</pft></field>
+						<field action=add tag=555><pft>'EN=','^i',v444^i,'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',,'^p',v554</pft></field>
+						<field action=export tag=5555>555</field>
+						<!-- FALTA OBTENER EL OPERADOR -->
+						<proc><pft>(if iocc=val(v30[1]^o) then 'a3~^i',v2^i,'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',,'^p',v554,'~' fi/)</pft></proc>
+						<field action=delete tag=2><pft>v30^o</pft></field>
+						<proc><pft>'d30d200d444d553d554d555'</pft></proc>
+				        <write>Unlock</write>
+				     </update>
+				  </do>
+				 <field action=export tag=5555>5555</field>
+				<label>FIN_BAJAR_ESPERA</label>
+			</loop>
+		</do>
+		<flow action=jump><pft>if a(v5555) then 'NO_GRABAR_EN_MOVI' fi</pft></flow>
+		<do task=update>
+			 <parm name=db>movi</parm>
+			 <parm name=mfn>New</parm>
+			 <parm name=fst><pft>cat('movi.fst')</pft></parm>
+			 <field action=define tag=1102>Isis_Status</field>
+			 <field action=define tag=1103>Isis_Lock</field>
+			 <parm name=lockid>ID</parm>
+			 <update>
+			    <field action=import tag=1>1901</field>
+				<field action=import tag=7>5555</field>
+				<field action=replace tag=553><pft>date</pft></field>				
+				<field action=add tag=3><pft>'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2</pft></field>
+				<field action=add tag=4>cancela_esperas_vencidas</field>
+				<field action=add tag=5>VACIO</field>
+				<field action=add tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
+				<proc><pft>'d553'</pft></proc>				
+				<write>Unlock</write>
+			 </update>
+		  </do>
+		  <label>NO_GRABAR_EN_MOVI</label>
+	</loop>
+			<display><pft>'Ha/n caído ',f(nocc(v5555)/3,1,0),' espera/s.'</pft></display>
+</do>
+
+
+<!--
+
+RESERVAS:
+Campo 1: Identificador de la parte a ser reservada
+
+    * ^b base
+    * ^c Nro de Control (nro de registro bibliográfico)
+    * ^p Parte (puede ser <vacío> -cuando no tiene parte-)
+
+
+Campo 2: (Repetible) Cola de reservas
+
+    * ^i ID usuario (lector)
+    * ^f Fecha en que se realizó la reserva (dd/mm/aaaa)
+    * ^h Hora en que se realizó la reserva (hh:mm:ss)
+    * ^u Operador que realizó la operación de reserva
+    * ^p IP donde se realizó la reserva
+
+
+Campo 3: (Repetible) Conjunto de esperas
+
+    * ^i ID usuario (lector)
+    * ^f fecha inicio espera
+    * ^h hora inicio espera
+    * ^u Operador que produjo la espera
+    * ^p IP que produjo la espera
+
+
+MOVI:
+Campo 1: Apellido y nombre del Lector
+Campo 2: ID usuario (lector)
+Campo 3:
+
+    * ^f Fecha (dd/mm/aaaa)
+    * ^h Hora (hhmmss)
+
+Campo 4: Operación realizada
+
+    * ^t Transacción (préstamo, devolución, reserva)
+
+Campo 5: Operador que realizó la transacción
+Campo 6: IP de la PC en que se ralizó la transacción.
+
+Subcampos dependientes de la transacción (^t)
+
+Préstamo:
+
+    * ^i Inventario del material prestado
+    * ^p Fecha en que se realizó el préstamo (dd/mm/aaaa)
+    * ^v Vencimiento del préstamo (dd/m/aaaa)
+    * ^b Mención de Responsabilidad y Título del material.
+    * ^c Código Dewey
+    * ^r Número de control (nro. de registro bibliográfico)
+    * ^l Tipo de material
+
+
+Devolución:
+
+    * ^i Inventario
+    * ^p Fecha en que se realizó el prestamo (dd/mm/aaaa)
+    * ^v Vencimiento del préstamo (dd/m/aaaa)
+    * ^b Mensión de Responsabilidad y Título del material.
+    * ^c Código Dewey
+    * ^r Número de control (nro. de registro bibliográfico)
+    * ^l Tipo de material
+    * ^m <Este no se que es lo que tiene>
+    * ^d ID del usuario que pasa a espera por esta devolución(puede ser ausente).
+
+
+Reserva:
+
+    * ^b base
+    * ^c Nro de Control (nro. de registro bibliográfico)
+    * ^p Parte
+    * ^o Orden de prioridad en que fue asignado a la cola de reserva
+-->
+</section>
+</IsisScript>

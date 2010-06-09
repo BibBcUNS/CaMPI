@@ -1,0 +1,119 @@
+<display><pft>'creando cipar.par (circulacion)'/</pft></display>	
+	<field action=replace tag=2000><pft>
+		'config.*=',v5006,'/config/config.*'/		
+		'marc.mst=',v5006,'/',v5009,'/',v5009,'.mst'/
+		'marc.xrf=',v5006,'/',v5009,'/',v5009,'.xrf'/
+		'marc.ifp=',v5006,'/',v5009,'/exist/exist.ifp'/
+		'marc.cnt=',v5006,'/',v5009,'/exist/exist.cnt'/
+		'marc.n01=',v5006,'/',v5009,'/exist/exist.n01'/
+		'marc.n02=',v5006,'/',v5009,'/exist/exist.n02'/
+		'marc.l01=',v5006,'/',v5009,'/exist/exist.l01'/
+		'marc.l02=',v5006,'/',v5009,'/exist/exist.l02'/
+		'marc.ifp=',v5006,'/',v5009,'/exist/exist.ifp'/
+		'marc.any=',v5006,'/',v5009,'/exist/exist.any'/
+		'marc.fst=',v5006,'/',v5009,'/exist/exist.fst'/		
+		'lector.*=',v5006,'/lector/lector.*'/
+		'reservas.*=',v5006,'/reservas/reservas.*'/
+		'partes.*=',v5006,'/partes/partes.*'/
+		'opera.*=',v5006,'/opera/opera.*'/
+		'movi.*=',v5006,'/movi/movi.*'/
+		'politicas.*=',v5006,'/politicas/politicas.*'/
+		'tipo_lector.*=',v5006,'/politicas/tipo_lector.*'/
+		'tipo_objeto.*=',v5006,'/politicas/tipo_objeto.*'/
+		'calendario.*=',v5006,'/calendario/calendario.*'/		
+		'txt_htm.*=',v5006,'/gizmo/gizmo.*'/
+		'oemansi.*=',v5006,'/oemansi/oemansi.*'/
+		'ansioem.*=',v5006,'/ansioem/ansioem.*'/
+		'gizmo.*=',v5006,'/gizmo/gizmo.*'/
+		'papeleta.pft=',v5006,'/',v5009,'/omp_papeleta.pft'/
+		'exist.*=',v5006,'/exist/exist.*'/
+		'opac_circulacion.*=',v5006,'/',v5009,'/',v5009,'.*'/
+		'consulta.pft=',v5006,'/',v5009,'/omp_consultaopac.pft'/		
+		'omp_tit_aut.pft=',v5006,'/',v5009,'/omp_tit_aut.pft'/
+		'CI_TEMPDIR=',v5006,'/temp'/		
+	</pft></field>		
+	<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
+
+	<!-- v2020 será utilizado para indicar el path y nombre de archivos (por si hay que reemplazar "/") -->
+	<field action=replace tag=2020><pft>v5004,'/circulacion/cipar.par'</pft></field>
+	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
+	
+	<file action="create" type="output"><pft>v2020</pft></file>
+	<display><pft>v2000</pft></display>
+	<file action="close" type="output">now</file>
+
+	<display><pft>'creando cipar.par (opac)'/</pft></display>
+	
+	<field action=replace tag=2000><pft>
+		'config.*=',v5006,'/config/config.*'/	
+		'marc.*=',v5006,'/',v5009,'/',v5009,'.*'/
+		'gizmo.*=',v5006,'/gizmo/gizmo.*'/
+		'lector.*=',v5006,'/lector/lector.*'/
+		'exist.*=',v5006,'/exist/exist.*'/
+		'partes.*=',v5006,'/partes/partes.*'/
+		'isbd.pft=',v5006,'/',v5009,'/omp_isbdopac.pft'/
+		'consulta.pft=',v5006,'/',v5009,'/omp_consultaopac.pft'/		
+		'CI_TEMPDIR=',v5006,'/temp'/
+	</pft></field>		
+	<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
+
+    
+	<field action=replace tag=2020><pft>v5004,'/opac/cipar.par'</pft></field>
+	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
+	
+	<file action="create" type="output"><pft>v2020</pft></file>
+	<display><pft>v2000</pft></display>
+	<file action="close" type="output">now</file>
+	
+	<display><pft>'creando cipar.par (administracion)'/</pft></display>	
+	<field action=replace tag=2000><pft>		
+		'config.*=',v5006,'/config/config.*'/	
+		'calendario.*=',v5006,'/calendario/calendario.*'/		
+		'politicas.*=',v5006,'/politicas/politicas.*'/	
+		'tipo_lector.*=',v5006,'/politicas/tipo_lector.*'/	
+		'reservas.*=',v5006,'/reservas/reservas.*'/		
+		'partes.*=',v5006,'/partes/partes.*'/
+		'exist.*=',v5006,'/exist/exist.*'/
+		'marc.mst=',v5006,'/',v5009,'/',v5009,'.mst'/
+		'marc.xrf=',v5006,'/',v5009,'/',v5009,'.xrf'/
+		'marc.ifp=',v5006,'/',v5009,'/exist/exist.ifp'/
+		'marc.cnt=',v5006,'/',v5009,'/exist/exist.cnt'/
+		'marc.n01=',v5006,'/',v5009,'/exist/exist.n01'/
+		'marc.n02=',v5006,'/',v5009,'/exist/exist.n02'/
+		'marc.l01=',v5006,'/',v5009,'/exist/exist.l01'/
+		'marc.l02=',v5006,'/',v5009,'/exist/exist.l02'/
+		'marc.ifp=',v5006,'/',v5009,'/exist/exist.ifp'/
+		'marc.any=',v5006,'/',v5009,'/exist/exist.any'/
+		'marc.fst=',v5006,'/',v5009,'/exist/exist.fst'/	
+		'marc_invent.mst=',v5006,'/',v5009,'/',v5009,'.mst'/
+		'marc_invent.xrf=',v5006,'/',v5009,'/',v5009,'.xrf'/
+		'marc_invent.*=',v5006,'/',v5009,'/exist/exist.*'/
+		'lector.*=',v5006,'/lector/lector.*'/
+		'tipo_lector.*=',v5006,'/politicas/tipo_lector.*'/
+		'tipo_objeto.*=',v5006,'/politicas/tipo_objeto.*'/
+		'opera.*=',v5006,'/opera/opera.*'/
+		'movi.*=',v5006,'/movi/movi.*'/
+		'txt_htm.*=',v5006,'/gizmo/gizmo.*'/
+		'oemansi.*=',v5006,'/oemansi/oemansi.*'/
+		'ansioem.*=',v5006,'/ansioem/ansioem.*'/
+		'gizmo.*=',v5006,'/gizmo/gizmo.*'/
+		'ac.tab=',v5006,'/ac_ansioem.tab'/
+		'uc.tab=',v5006,'/uc_ansioem.tab'/
+		'papeleta.pft=',v5006,'/',v5009,'/omp_papeleta.pft'/		
+		'dicc_invent.*=',v5006,'/exist/dicc_invent/dicc_invent.*'/
+		'dicc_invent.mst=',v5006,'/exist/exist.mst'/
+		'dicc_invent.xrf=',v5006,'/exist/exist.xrf'/
+		'log_baja_prestados.txt=',v5004,'/log_baja_prestados.txt'/
+		'log_inventarios_duplicados.txt=',v5004,'/log_inventarios_duplicados.txt'/
+		'def_ejemplares.pft=',v5006,'/scripts/def_ejemplares.pft'/
+		'CI_TEMPDIR=',v5006,'/temp'/
+	</pft></field>		
+	<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
+	<display><pft>' '/#</pft></display>
+	
+	<field action=replace tag=2020><pft>v5004,'/administracion/cipar.par'</pft></field>
+	<field action=replace tag=2020><pft>if v2010='WIN' then replace(v2020,'/','\') else v2020 fi	</pft></field>
+	
+	<file action="create" type="output"><pft>v2020</pft></file>
+	<display><pft>v2000</pft></display>
+	<file action="close" type="output">now</file>

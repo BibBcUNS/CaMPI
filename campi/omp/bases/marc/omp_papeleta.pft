@@ -1,0 +1,41 @@
+
+
+/* <bibliografía> Datos utilizados en la papeleta  */
+
+		,'^b', 
+		if s(v100,v110,v111)>'' then 
+			v100^a,v110^a,v111^a
+		else
+			if p(v700) then 
+				v700[1]^a
+			else 
+				v710[1]^a,|, |v710[1]^b,
+			fi,
+		fi,' : ',
+		v245^a," "v245^n," "v245^p," "v245^h," "v245^f,
+		if v245^b.1=';' or v245^b.1='=' then 
+			" "v245^b 
+		else
+			" "v245^b
+		fi,
+			
+/* </bibliografía> */
+
+
+/* <clasificación temática> Este dato es utilizado en la estadística */
+
+		,'^c',v82^a
+		
+/* </clasificación temática> */
+
+/* <mfn> */
+
+		,'^r',mfn,
+		
+/* </mfn>*/
+
+/* <tipo material> valores evaluados luego en estadística, valores posibles: Libro, Apunte, Revista, Tesis, Especial */
+
+		,'^l',if a(v245^h) then 'TEXTO' else s(mid(v245^h,instr(v245^h,'['),instr(v245^h,']'))) fi,
+		
+/* </tipo material>*/

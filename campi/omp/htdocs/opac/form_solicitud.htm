@@ -1,0 +1,29 @@
+[pft],if v2001='1' then '<br><br>' fi,
+'<table width="100%">
+  <tr>
+    <td width="76%" bgcolor="#FFFFFF" colspan="2" align="center"><big><font face="Arial">',v1,'</big>',", ",v3,'</font></td></tr>
+  <tr>
+    <td colspan="2">',
+   if v2001='1' then '<hr><marquee bgcolor="#FFF0C4" border="0" style="color: rgb(191,51,83); font-weight: bold" height="19">PASAR URGENTE por Biblioteca!!!</marquee><hr>',fi,
+   '</td>
+  </tr>
+</table>',
+
+if p(v9) and v2001<>'1' then 
+'<table border="1" width="100%" bgcolor="#F9C99A">',
+ '<tr>',
+   '<td width="80%" bgcolor="#F5A307"><font face="Arial"><small><strong>Ha pedido...</strong></small></font></td>
+    <td width="20%" bgcolor="#F5A307"><font face="Arial"><small><strong>Ubicación</strong></small></font></td>
+</tr>',
+(
+ '<tr>',
+   '<td width="80%"><font face="Arial"><small><small>',v9^d,'</small></small></font></td>
+    <td width="20%"><font face="Arial"><small><small>',v9^s,'</small></small></font></td>
+</tr>',
+)
+'</table>',
+fi,
+
+[/pft]
+ 
+

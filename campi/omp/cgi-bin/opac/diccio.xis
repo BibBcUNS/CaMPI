@@ -1,0 +1,179 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+
+<display><html><head>
+<SCRIPT language="JavaScript1.1">
+<!--
+
+function asignar(seleccionado) {
+	anterior = window.parent.frames["cabeza"].formulario1.expresion.value ;
+	var texto = window.parent.frames["cabeza"].formulario1.expresion;
+	var valor = texto.value;
+	var compara = valor.substring(valor.length - 3,valor.length);
+	var compara2 = valor.substring(valor.length - 1,valor.length);
+
+	if (anterior == "") {window.parent.frames["cabeza"].formulario1.expresion.value += '"' + seleccionado + '"'}
+		else {
+			if (compara == " * " || compara == " + " || compara == " ^ " 
+			 || compara2 == "(") {
+				window.parent.frames["cabeza"].formulario1.expresion.value += '"' + seleccionado + '"'}
+			else {
+				alert ('Debe colocar un operador\nen la expresión de búsqueda');}
+			 }
+}
+
+function enfocar() {
+	window.parent.frames["control"].form_dicc.from.focus();
+        return;
+}
+
+//-->
+</SCRIPT>
+</head><body bgcolor="#E8E8D0" onload="enfocar()"></display>
+
+  <field action="cgi" tag="100">from</field>
+  <field action="cgi" tag="101">tipo</field>	
+  <field action="cgi" tag="102">direccion</field>
+
+  <field action="add" tag="9998"><pft>v100</pft></field>
+
+  <field action=replace tag=100><pft>
+	if v100.1<>'~' then
+		select s(v101)
+			case 'titulo': ,s('~TIT=',v100),
+			case 'autor': ,s('~AUT=',v100)
+			case 'palcla': ,s('~CLA=',v100)
+		endsel
+	fi
+	</pft></field>
+	
+	<field action="add" tag="9997">25</field>
+	
+  <parm name=cipar><pft>
+		cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+	<do task="keyrange">
+		<parm name="db">marc</parm>
+		<parm name="from"><pft>v100</pft></parm>
+		<parm name="count"><pft>v9997</pft></parm>
+		<parm name="to"><pft>
+			if v100.1='~' then v100.5
+				if v102='atras' then '000' else 'ZZZ' fi
+			fi		
+		</pft></parm>
+		<parm name="reverse"><pft>
+			if v102='atras' then 'On' else 'OFF' fi</pft></parm>		
+		<field action="define" tag="1001">Isis_Key</field>
+		<field action="define" tag="1002">Isis_Postings</field>
+		<loop>
+
+			<list action="load" type="sort"><pft>'^a',v1001</pft></list>
+			<field action="export" tag="9999" previous="delete">1001</field>
+
+		</loop>	
+	</do>
+		
+	<display><pft>
+	 '<form name="formulario2">
+		<table border="0" width="100%">
+			<tr>
+			<td align="center" valign="top"><div align="left">
+				<select name="claves" size="',v9997,'"',
+	</pft></display>
+  <display>
+		 Onclick='asignar(this.form.claves.value)' style="background-color:
+	</display>
+	<display><pft>
+		select v101
+			case 'titulo': '#FFCC99',
+			case 'autor': '#BCD8C4',
+			case 'palcla': '#FFCCCC',
+			elsecase '#FFFFFF',
+		endsel,
+		'; font-size : xx-small; font-family : monospace">',</pft></display>
+
+
+	<do task="list">
+		<field action="define" tag="1001">Isis_Item</field>
+		<!--parm name="sort"><pft>v1001</pft></parm-->
+		<loop>
+ 			<display><pft>
+				'<option value="',v1001^a,'">',
+					left(s(if v1001^a.1='~' then v1001^a*5 else v1001^a fi,'...............................'),25),'</option>',
+			</pft></display>
+		</loop>
+  </do>
+
+	<display><pft>'</select>
+		</td>
+		<td>
+			<img align="absbottom" src="',getenv('PATH_INFO'),'images/arriba.jpg" onclick="window.document.form_dicc0.submit()">
+			<img align="absbottom" src="',getenv('PATH_INFO'),'images/barra.jpg" onclick="window.document.form_dicc1.submit()">
+			<img src="',getenv('PATH_INFO'),'images/abajo.jpg" onclick="window.document.form_dicc1.submit()"></td>
+    </tr>
+	  </table>
+   </form>',
+
+	'<form action="/cgi-bin/wxis.exe',getenv('PATH_INFO'),'" method="post" name="form_dicc0" target="_self">
+		<input type="hidden" name="IsisScript" value="',getenv('PATH_INFO'),'diccio.xis">
+		<input type="hidden" name="direccion"  value="atras">
+		<input type="hidden" name="tipo" value="',v101,'">		
+		<input type="hidden" name="from" value="',
+		if v102='atras' then v9999 else v9998 fi,'"></form>',
+
+	'<form action="/cgi-bin/wxis.exe',getenv('PATH_INFO'),'" method="post" name="form_dicc1" target="_self">
+		<input type="hidden" name="IsisScript" value="',getenv('PATH_INFO'),'diccio.xis">
+		<input type="hidden" name="direccion"  value="siguiente">
+		<input type="hidden" name="tipo" value="',v101,'">
+		<input type="hidden" name="from" value="',
+		if v102='atras' then v9998 else v9999 fi,'"></form>
+  </body>
+  </html>'</pft></display>
+
+ </section>
+</IsisScript>

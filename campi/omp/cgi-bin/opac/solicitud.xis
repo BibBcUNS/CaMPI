@@ -1,0 +1,391 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de GestiÛn Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librerÌa es software libre; usted puede redistribuirlo y\o
+ * modificarlo seg˙n los tÈrminos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versiÛn 2 de la
+ * Licencia, (o en su opiniÛn) cualquier versiÛn posterior.
+ *
+ * Esta librerÌa es distribuida con la esperanza que esto ser· de
+ * uso completo, pero SIN GARANTÕA ALGUNA; sin la garantÌa
+ * implÌcita de valor comercial o salud para un objetivo particular.
+ *
+ * Para m·s detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, HipÛlito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la EducaciÛn
+ * Rivadavia 106
+ * (3100) - Paran·
+ * Entre RÌos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias EconÛmicas - UNER
+ * Urquiza 552
+ * (3100) - Paran·
+ * Entre RÌos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+
+<section>
+	<display><pft>'Content-type: text/html'/#</pft></display>
+
+	<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+	<display><html>
+		
+		<head>
+		<title>Open MarcoPolo - MÛdulo OPAC</title>
+		<SCRIPT language="JavaScript1.1">
+		<!--
+		function tiempo() {
+			window.close();
+		}
+	
+		function enviar() {
+			<!-- if (window.document.validacion_lector.documento.value == '' || window.document.validacion_lector.legajo.value == '' ) { -->
+			if (window.document.validacion_lector.documento.value == '') {
+				alert ('   No se permite enviar la\nsolicitud sin nro de documento');
+				return false;}
+			else {
+			window.document.validacion_lector.submit();}
+			}
+
+		function grabe_cancele(Opcion) {
+			window.document.grabar_cancelar.opcion.value = Opcion;
+			window.document.grabar_cancelar.submit();
+			}
+
+		function limpiar() {
+			window.document.validacion_lector.reset();
+			}
+
+		function volver(Descripcion) {
+			window.document.solicitud.Item_Seleccionado.value = Descripcion;
+			window.open('/omp/opac/solicitud.html','Solicitud','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,alwaysRaised=1,width=500,height=400');
+			window.document.solicitud.submit();
+			}
+		//-->
+		</SCRIPT>
+		</head>	
+
+		<body bgcolor="#FCF0DA" onLoad='window.focus(); setTimeout("tiempo()",150000)'>
+	</display>
+
+	<field action=cgi tag=4000>Item_Seleccionado</field>
+	<field action=cgi tag=1000>opcion</field>
+	<field action=cgi tag=4010>documento</field>
+	<field action=cgi tag=4011>legajo</field>
+	<field action=cgi tag=4012>mfn_lector</field>
+
+	<display><pft>'
+		<form action="/cgi-bin/wxis.exe',getenv('PATH_INFO'),'" name="bloqueo_out">
+			<input type="hidden" name="IsisScript" value="',getenv('PATH_INFO'),'solicitud.xis">
+			<input type="hidden" name="opcion" value="FIN_BLOQUEO">
+			<!-- input type="hidden" name="legajo" value="',v4011,'"-->
+			<input type="hidden" name="mfn_lector" value="',v4012,'">
+		</form>'
+	</pft>
+	</display>
+
+
+	<flow action=jump><pft>v1000</pft></flow>
+	
+	<label>IDENTIFICACION</label>
+	<display>
+	<p><strong><small><font face="Arial">Sr. Usuario/a:</font></small></strong></p>
+	<p><strong><small><font face="Arial">La operaciÛn que est· por efectuar, registrar· su
+	pedido en la Biblioteca. </font></small></strong></p>
+	<p><strong><small><font face="Arial">Esta <font color="#FF0000">RESERVA</font>,
+	 <font color="#FF0000">NO GARANTIZA</font> la disponibilidad del material. </font></small></strong></p>
+	<p><strong><small><font face="Arial">Est· sujeta a la
+	existencia y disponibilidad al momento en que Ud. se dirija a la Biblioteca.</font></small></strong></p>
+	<hr>
+	<p><strong><small><font face="Arial">A continuaciÛn se le requerir· su <em>N˙mero de
+	Documento</em> a los efectos de validar su condiciÛn de
+	Usuario.</font></small></strong></p>
+	</display>
+	<display><pft>'
+		<form action="/cgi-bin/wxis.exe',getenv('PATH_INFO'),'" name="validacion_lector">
+			<input type="hidden" name="IsisScript" value="',getenv('PATH_INFO'),'solicitud.xis">
+			<input type="hidden" name="opcion" value="VALIDACION">
+			<input type="hidden" name="Item_Seleccionado" value="',v4000,'">
+
+			<table border="0" width="100%">
+			    <tr>
+			      <td width="33%"><strong>N˙mero de Documento: </strong></td>
+			      <td width="50%"><input type="text" name="documento" size="8"></td>
+ 			    </tr>
+			    <!--tr>
+			      <td width="33%"><strong>N˙mero de Legajo: </strong></td>
+			      <td width="50%"><input type="password" name="legajo" size="8"></td>
+ 			    </tr-->
+			    <tr>
+			      <td width="80%" align="right" colspan="2"><img src="/omp/opac/images/bot_enviar.jpg" onclick="enviar()">
+						<img src="/omp/opac/images/bot_limpiar.jpg" onclick="limpiar()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<img src="/omp/opac/images/bot_cancelar.jpg" onclick="window.close()">
+			      </td>
+			    </tr>
+			  </table>
+		</form>'
+	</pft>
+	</display>
+		<flow action=exit>1</flow>
+
+
+	<label>VALIDACION</label>
+
+
+	<do task=search>
+	    <parm name=db>lector</parm>
+	    <parm name=expression><pft>v4010</pft></parm>
+	    <parm name=count>1</parm>
+
+	    <field action=add tag=4015>ERROR</field>
+	    <field action=define tag=1102>Isis_Total</field>
+
+	    <loop>
+		<field action=import tag=4010>4010</field>
+		<!-- field action=import tag=4011>4011</field -->
+		<field action=replace tag=4012><pft>mfn</pft></field>
+
+		<field action=import tag=4015>4015</field>
+		<!-- field action=replace tag=4015><pft>
+			if v2=v4010 and val(v4)=val(v4011) then 'OK' fi
+		</pft></field -->
+
+		<field action=replace tag=4015><pft>
+			if v2=v4010 then 'OK' fi
+		</pft></field>
+
+		<field action=export tag=4015>4015</field>
+		<field action=export tag=4012>4012</field>
+	    </loop>
+	</do>
+
+
+	<flow action=jump><pft>v4015</pft></flow>
+
+
+	<label>OK</label>
+
+	<!-- BLOQUEO DEL LECTOR -->
+	<do task=update>
+	  <parm name=db>lector</parm>
+	  <parm name=mfn><pft>v4012</pft></parm>
+	  <!-- parm name=lockid><pft>v4011</pft></parm -->
+          <parm name=lockid><pft>getenv('REMOTE_ADDR'),x1,s(date).8</pft></parm>
+	  <parm name=expire>30</parm>
+	  <field action=define tag=1102>Isis_Status</field>
+	  <field action=define tag=1011>Isis_Lock</field>
+
+	  <update>
+	    <write>Lock</write>
+	    <field action=add tag=2000><pft>if val(v1102)=0 then 'ok' else v1102 fi</pft></field>
+	    <field action=export tag=2000>2000</field>
+	  </update>
+	</do>
+
+	<flow action=jump><pft>if v2000<>'ok' then 'FIN_BLOQUEO' fi</pft></flow>
+
+	<!-- Muestra los pedidos efectuados con anterioridad -->
+
+	<do task=mfnrange>
+	  <parm name=db>lector</parm>
+	  <parm name=from><pft>v4012</pft></parm>
+	  <parm name=count>1</parm>
+	  <parm name=gizmo>gizmo</parm>
+	  <loop>
+	    <field action=add tag=2001>
+	      <pft>if p(v8) then (if val(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < val(s(date).8) then '1' else '0' fi) else '0' fi </pft>
+ 	    </field>    <!-- v2001 tendr· 1's si el lector est· moroso -->
+	    <field action=replace tag=2001><pft>if v2001:'1' then '1' else '0' fi</pft></field> 
+	    <field action=import tag=4000>4000</field>
+	    <!-- field action=replace tag=2002><pft>v4011</pft></field --> <!-- v2002 contiene el legajo -->
+	    <field action=add tag=2003><pft>mfn</pft></field>      <!-- v2003 tiene el mfn del lector -->
+	    <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'form_solicitud.htm')</pft></htmlpft></display>
+	   <field action=export tag=2001>2001</field>
+	   <field action=export tag=10>10</field>
+	  </loop>
+
+	</do>
+
+	<display><pft>
+		if s(mhu,v10)<>'HABILITADO' then mhl,'<br><br><blockquote><center><big><strong><font face="Arial">
+			Ud. no se encuentra habilitado para registrar un nuevo Pedido de Material
+			</font></strong></big></center></blockquote>' 
+		fi,mhl,
+	</pft></display>
+
+	<flow action=jump><pft>if v2001='1' or s(mhu,v10)<>'HABILITADO' then 'FIN_BLOQUEO' fi</pft></flow>
+
+	<!-- Muestra el pedido actual dando la opciÛn de grabarlo  -->
+
+	<display><font face="Arial"><strong><br>øDesea registrar el siguiente material?</strong></font><br><br><i><font face="Arial Bold"></display>
+
+	<field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogaciÛn (v6) -->
+
+	<do task=mfnrange>
+	    <parm name=db>marc</parm>
+	    <parm name=from><pft>v4000</pft></parm>
+	    <parm name=count>1</parm>
+	    <loop>
+		<field action="import" tag="list">5009</field>
+		<field action="add" tag="4050">
+		  <htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'solicitud_',v5009[1],'.html')</pft></htmlpft>
+		</field>
+		<display><pft>v4050^d,|<b>&nbsp;UbicaciÛn: |v4050^s</pft></display>
+	    </loop>
+	</do>
+
+	<display></font></i><br><br><font face="Arial"><strong>Presione el botÛn <i>´Grabarª</i> para grabar su pedido Û <i>´Cancelarª</i> para abandonar este proceso<br><br>
+
+	<img src="/omp/opac/images/bot_grabar.jpg"   onclick="grabe_cancele('GRABAR')">
+	<img src="/omp/opac/images/bot_cancelar.jpg" onclick="grabe_cancele('FIN_BLOQUEO')"><br>
+	</display>
+		
+
+	<display><pft>'<form action="/cgi-bin/wxis.exe',getenv('PATH_INFO'),'" name="grabar_cancelar">
+		<input type="hidden" name="IsisScript" value="',getenv('PATH_INFO'),'solicitud.xis">
+		<input type="hidden" name="opcion" value="">
+		<input type="hidden" name="Item_Seleccionado" value="',v4000,'">
+		<!-- input type="hidden" name="legajo" value="',v4011,'"-->
+		<input type="hidden" name="mfn_lector" value="',v4012,'">
+		</form>'
+	</pft></display>
+	<flow action=exit>1</flow>
+
+
+
+	<label>GRABAR</label>
+
+	<do task=update>
+		<parm name=db>lector</parm>
+		<parm name=mfn><pft>v4012</pft></parm>
+		<!-- parm name=lockid><pft>v4011</pft></parm-->
+		<parm name=lockid><pft>getenv('REMOTE_ADDR'),x1,s(date).8</pft></parm>
+		<parm name=expire>63</parm>
+		
+		<field action=define tag=1102>Isis_Status</field>
+		<field action=define tag=1011>Isis_Lock</field>
+			
+		<update>
+
+			<field action=import tag=4000>4000</field>
+			<field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogaciÛn (v6) -->
+
+			  <do task=mfnrange>
+		   	  	<parm name=db>marc</parm>
+			  	<parm name=from><pft>v4000</pft></parm>
+				<parm name=count>1</parm>
+				<loop>
+
+					<field action="import" tag="list">5009</field>
+					<field action="add" tag="4050">
+					  <htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'solicitud_',v5009[1],'.html')</pft></htmlpft>
+					</field>
+					<field action="export" tag="4050">4050</field>
+
+				</loop>
+
+			</do>
+
+			<flow action=jump><pft>if nocc(v9) < 5 then 'AGREGA' fi</pft></flow>
+			<field action=delete tag=9>1</field>
+
+			<label>AGREGA</label>
+			<field action=add tag=9><pft>v4050</pft></field>
+
+
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'·','†')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'È','Ç')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'Ì','°')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'Û','¢')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'˙','£')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'Ò','§')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'—','•')/)</pft></field>
+        		<field action=replace tag=9 split=occ><pft>(replace(v9,'¡','µ')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'…','ê')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'Õ','÷')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'”','‡')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'⁄','È')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'¸','Å')/)</pft></field>
+		        <field action=replace tag=9 split=occ><pft>(replace(v9,'‹','ö')/)</pft></field>
+  
+			<field action=delete tag=list>4050,4000,5009</field>
+
+			<write>Unlock</write>
+			<display><pft>'<font face="Arial"><i><strong>',if v1102='0' then v1,', su pedido ha sido 
+			registrado satisfactoriamente.<br>°Gracias por su consulta!' else '°ERROR! Su pedido no ha sido registrado' fi,'</strong></i></font><br><br>'</pft></display>
+			<display><center><img src="/omp/opac/images/bot_cerrar.jpg" onclick="window.close()"></center></display>
+		</update>
+
+	</do>
+
+
+		<flow action=exit>1</flow>
+
+
+
+	<label>FIN_BLOQUEO</label>
+
+		<do task=update>
+	
+		<parm name=db>lector</parm>
+		<parm name=mfn><pft>v4012</pft></parm>
+		<!-- parm name=lockid><pft>v4011</pft></parm-->
+		<parm name=lockid><pft>getenv('REMOTE_ADDR'),x1,s(date).8</pft></parm>
+		<parm name=expire>63</parm>
+
+		<field action=define tag=1102>Isis_Status</field>
+		<field action=define tag=1011>Isis_Lock</field>
+			
+			<update>
+			<write>Unlock</write>
+			</update>
+		</do>
+		
+		<display><p align="center"><font face="Arial" color="#FF0000"><strong><small>
+			&lt;&lt;&lt;&lt;&lt;&lt;&nbsp;&nbsp; OPERACI”N CANCELADA&nbsp;&nbsp; &gt;&gt;&gt;&gt;&gt;
+			</small></strong></font></p>
+		<center><img src="/omp/opac/images/bot_cerrar.jpg" onclick="window.close()"></center>
+		</display>
+		<flow action=exit>1</flow>
+
+
+	<label>ERROR</label>
+
+	<display>
+		<form action="/cgi-bin/wxis.exe" method="post" name="solicitud" target="Solicitud"></display>
+	<display><pft>'<input type="hidden" name="IsisScript" value="',getenv('PATH_INFO'),'solicitud.xis">'</pft></display>
+	<display><input type="hidden" name="Item_Seleccionado" value="">
+		  <input type="hidden" name="opcion" value="IDENTIFICACION">
+		</form>
+
+	<center><H3><font face="Arial" color="#FF0000">USUARIO NO RECONOCIDO EN EL SISTEMA</FONT></H1>
+	<img src="/omp/opac/images/bot_cerrar.jpg" onclick="window.close()">
+	<img src="/omp/opac/images/bot_volver.jpg" onclick="volver('</display><display><pft>v4000</pft></display><display>')">
+	</center></display>
+	
+	<flow action=exit>1</flow>
+
+	
+
+</section>
+</IsisScript>

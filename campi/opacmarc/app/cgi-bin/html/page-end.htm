@@ -1,0 +1,39 @@
+<!-- Page footer -->
+
+<hr>
+
+<div id="page-footer">
+	<!-- Total de registros, fecha de actualización -->
+	<!-- TO-DO: este texto podría estar totalmente almacenado en un archivo externo, que se actualice junto con el OPAC -->
+	<div id="opac_numbers">
+			Este catálogo cuenta con
+			[pft]
+			proc('d5001a5001|',
+				replace(s(cat('BASES.PAR')),s(#),'|a5001|'),
+			'|'),
+			(,
+				if v5001 : 'BIBLIOGRAPHIC_TOTAL=' then
+					mid(v5001,instr(v5001,'=') + 1,10),' registros,',
+				/*else if v5001 : 'ITEMS_TOTAL=' then
+					' (',mid(v5001,instr(v5001,'=') + 1,10),' ejemplares)'
+				fi,*/
+				fi,
+			),
+			[/pft]
+			y fue actualizado el [pft]s(cat('UPDATED.TXT'))[/pft]
+	</div>
+	
+	<div id="systemInfo">
+    	<!-- FIXME  - Usar svnversion para generar el número de revisión global. Ver http://subversion.tigris.org/faq.html#version-value-in-source -->
+        <!-- O bien usar cat('VERSION'), donde VERSION es un archivo generado con install.py -->
+		<a href="http://code.google.com/p/opacmarc/" title="OpacMarc, un proyecto de software libre alojado en Google Code">OPACMARC</a>
+        2008.12.01
+        · Desarrollado en la Biblioteca <i>Dr. Antonio Monteiro</i>, Instituto de Matemática de Bahía Blanca
+        (CONICET / Universidad Nacional del Sur), Argentina.
+	</div>
+</div>
+
+</div> <!-- contentWrapper (se abre en el header) -->
+
+</body>
+</html>

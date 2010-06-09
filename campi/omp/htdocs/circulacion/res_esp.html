@@ -1,0 +1,33 @@
+[pft]
+
+	'<br /><table border="0" bgcolor="#FFFFFF" width="85%" align="center">',
+	
+		'<tr><th colspan="2" align="center" >esperas</th></tr>',
+		(if p(v3) then
+		'<tr>',
+		'<td width="30%"><p><b>ID.: </b>',v3^i,'</p></td>',
+		'<td width="70%"><p><b>Fecha y hora: </b>',v3^f,' ',v3^h,'</p></td>',
+		'</tr>',
+		fi),
+		if a(v3) then
+			'<tr>',
+			'<td colspan="2" align="center">sin esperas</td>',
+			'</tr>',
+		fi
+		
+		'<tr><th colspan="2" align="center">reservas</th></tr>',
+		(if p(v2) then
+		'<tr>',
+		'<td width="30%"><p><b>ID.: </b>',v2^i,'</p></td>',
+		'<td width="70%"><p><b>Fecha y hora: </b>',v2^f,' ',v2^h,'</p></td>',
+		'</tr>',
+		fi)
+		if a(v2) then
+			'<tr>',
+			'<td colspan="2" align="center">sin reservas</td>',
+			'</tr>',
+		fi
+	
+	'</table>'/,
+
+[/pft]

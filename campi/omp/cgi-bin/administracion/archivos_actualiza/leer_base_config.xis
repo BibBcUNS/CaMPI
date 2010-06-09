@@ -1,0 +1,37 @@
+<!-- tags utilizados: 
+5000	Contiene todas las lineas del archivo config.txt
+5001 tag y el subcampo correspondiente al inventario de la base bibliográfica [supuestamente no se debería usar más]
+5002 Ubicación y archivos que componen la base bibliográfica(Path base bibliografica)
+5003 tag y subcampo que define la sección/colección (Campo Estado)
+4004 path de la carpeta pública vía HTTP (Path htdocs)
+5005 path del mx (path mx)
+5006 path de las bases para OMP (Path bases)
+5007 Indica si se habilita o no la opción de reserva ()
+5009 formato de catalogación (Formato Cataloga)
+5010 Nombre de la institución (Nombre Institucion)
+
+<!-- v5001 contiene el tag y el subcampo correspondiente al inventario de la base bibliográfica -->
+<field action="add" tag="5001"><pft>ref(['config']1,v1)</pft></field>
+
+<!-- v5002 define la ubicación y los archivos que componen la base bibliográfica -->
+<field action="add" tag="5002"><pft>ref(['config']1,v3)</pft></field>
+
+<!-- v5004 define el path de la carpeta pública vía HTTP -->
+<field action="add" tag="5004"><pft>ref(['config']1,v8)</pft></field>
+
+<!-- v5005 define el path del mx -->
+<field action="add" tag="5005"><pft>ref(['config']1,v4)</pft></field>
+
+<!-- v5006 define el path de las bases para OMP -->
+<field action="add" tag="5006"><pft>ref(['config']1,v5)</pft></field>
+
+<!-- v5007 si se habilita la opción de reservas -->
+<field action="add" tag="5007"><pft>ref(['config']1,v9)</pft></field>
+
+<!-- v5009 define el formato de catalogación -->
+<field action="add" tag="5009"><pft>ref(['config']1,v6)</pft></field>
+
+<!-- v5010 define el Nombre de la Institucion -->
+<field action="add" tag="5010"><pft>ref(['config']1,v7)</pft></field>
+
+<field action="add" tag="5011"><pft>ref(['config']1,v10)</pft></field>
