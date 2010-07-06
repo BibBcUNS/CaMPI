@@ -123,7 +123,13 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 
   <label>Registro Nuevo</label>
 
-	<field action="add" tag="10">Habilitado</field>
+  <field action="add" tag="10">Habilitado</field>
+  <do task=mfnrange>
+			<parm name=db>tipo_lector</parm>
+			<loop>
+				<field action=export previous=add tag=2000>1</field>
+			</loop>
+		</do>
   <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_abmlector.html')</pft></htmlpft></display>
   <flow action=exit>1</flow>
 
@@ -296,7 +302,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
       <field action="replace" tag="17" split="occ"><pft>(v17/)</pft></field>
 
       <write>Unlock</write>
-			<field action="add" tag="130"><pft>mfn</pft></field> <!-- exporta el mfn por si es un registro nuevo -->
+			<field action="add" tag="130"><pft>mfn</pft></field> <!-- exporta el mfn por si es un uevo -->
 			<field action="export" tag="130" previous="delete">130</field>
       <field action="export" tag="list">1102</field>
     </update>

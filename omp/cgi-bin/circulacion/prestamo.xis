@@ -184,8 +184,8 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
      <field action=define tag=1011>Isis_Lock</field>
      <update>
      		<flow action=jump><pft>if ref(['config']1,v10)='manual' then 'fin_recalcular' fi</pft></flow>
-					<!-------------------------------------------------------------			
-					 ---- calcula las nuevas fechas de vto de los prestamos -----
+					<!--------------------------------------------------------------			
+					 ---- calcula las nuevas fechas de vto de los prestamos --------
 					 -------------------------------------------------------------->
 					 <flow action=jump><pft>if a(v8) then 'no_hay_prestamos' fi</pft></flow>
 			     	<!-- calcula las nuevas fechas de vto de los prestamos -->
@@ -217,7 +217,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 					
 					<label>no_hay_prestamos</label>
 					 <!-------------------------------------------------------------
-					 --- calcula las nuevas fechas de vto de las suspenciones ---
+					 --- calcula las nuevas fechas de vto de las suspenciones ------
 					 -------------------------------------------------------------->
 					<flow action=jump><pft>if a(v11) then 'no_hay_sanciones' fi</pft></flow>
 					
@@ -242,7 +242,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 									if v10:'Sancionado' then
 										'Sancionado'
 									else
-										if s(v1000^v*6,v1000^v*3.2,v1000^v.2) < s(date).8
+										if s(v11^v*6,v11^v*3.2,v11^v.2) < s(date).8
 										then 'Habilitado'
 										else 'Sancionado'
 										fi,	
@@ -253,6 +253,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 								<field action=export previous=replace tag=10>10</field>
 								
 							</loop>
+
 						</do>
 					<label>no_hay_sanciones</label>
 			<label>fin_recalcular</label>
@@ -261,7 +262,6 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 	        <write>Unlock</write>
      </update>
 </do>
-
 <!-- Bloqueo del registro lector, el mfn fue exportado en v2001 del loop anterior -->
 <do task=update>
 <parm name=db>lector</parm>
@@ -315,18 +315,17 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
         <loop>
                 <field action="import" tag="150">2</field>
                 <field action="import" tag="list">2030,2031</field>
-                <field action="add" tag="2030"><pft>(if v2^i=v150[1] then v1[1],v2 fi)</pft></field> <!-- reservas -->
-                <field action="add" tag="2031"><pft>(if v3^i=v150[1] then v1[1],v3 fi)</pft></field> <!-- esperas -->
-                <field action="export" tag="list">2030,2031</field>      
+                <field action="add" tag="2030"><pft>(if v2^i=v150[1] then v1[1],v2, fi)</pft></field> <!-- reservas -->
+                <field action="add" tag="2031"><pft>(if v3^i=v150[1] then v1[1],v3, fi)</pft></field> <!-- esperas -->
+                <field action="export" tag="list">2030,2031</field>
         </loop>
         </do>
-
+		<file action=close type=database>reservas</file>
         <label>fin lista reservas</label>
 
         <field action=import tag=1000>1000,2030</field>
         <field action=replace tag=2002><pft>v1000^b</pft></field> 	<!-- v2002 contiene id operario -->
         <field action=add tag=2003><pft>mfn</pft></field>      			<!-- v2003 tiene el mfn del lector -->
-        
         <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'formulario.html')</pft></htmlpft></display>
 </loop>
 </do>
@@ -1235,6 +1234,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 		<field action=replace tag=2222><pft>ref(['config']1,v10)</pft></field>
 		<field action=cgi tag=1000>opcion</field>
+		<trace>br</trace>
 		<flow action=jump><pft>v1000</pft></flow>
   
 		<!-- Esta parte valida al operario y presenta al lector -->
@@ -1461,7 +1461,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 				window.parent.indice.document.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then ';' fi,
 				if ref(['config']1,v11)='si' then 'print();' fi,
 				'">',
-		 '<div id="head"> 
+				
+						 '<div id="head"> 
 		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
 		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
     </div> 
@@ -1472,6 +1473,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 								<div CLASS="content">
    
 <!--#########################################-->	'
+
+				
 		        '<font face="Draft 10cpi">'
         </pft></display>
 

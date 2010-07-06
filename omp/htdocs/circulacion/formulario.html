@@ -186,10 +186,6 @@
 			padding:0px;
 		}
 		
-		#control_frame {
-		  border:1px solid LightCoral;
-		}
-
 	</style>
 	
 [pft]mhl,
@@ -234,7 +230,7 @@
 
 <table width="100%" border="0">
   <tr>
-     <td height="24%" align="center"><img src="/omp/circulacion/fotos/',v2,'.jpg" style="height:112px;width:150px;margin-left:10px" align="middle" OnError="this.src=',"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,'"></td>',
+     <td height="24%" align="center"><img src="/omp/circulacion/fotos/',v2,'.jpg" style="height:150px;width:130px;margin-left:10px" align="middle" OnError="this.src=',"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,'"></td>',
    '<td width="76%"><big>',v1,'</big>',", ",v3,
 	if v2001:'1' then
 		'<br><marquee bgcolor="#FF0000" width=90% style="color: #FFFF9B; font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',fi,
@@ -523,16 +519,16 @@ if ref(['config']1,v9)='si' then
 					fi,
 					,'</tr>',
 					,('<tr valign="middle"><td>',
-					ref(['opac_circulacion']l(['opac_circulacion']'LC='v2031^c),
-						'<font color="blue"><b>',
-							if v100^9='' then
-							v100^a," "v100^b," "v100^c," "v100^d," "v100^e,
-								else
-							v100^9, " "v100^d,
-							fi,'</b> : ',
-							v245^a," "v245^b,
-						'</font><br>
-						'),
+						ref(['opac_circulacion']l(['opac_circulacion']s('LC=',v2031^c)),
+							'<font color="blue"><b>',
+								if v100^9='' then
+								v100^a," "v100^b," "v100^c," "v100^d," "v100^e,
+									else
+								v100^9, " "v100^d,
+								fi,'</b> : ',
+								v245^a," "v245^b,
+							'</font><br>'
+						),
 		
 					if v2031^p<>'' then 'Parte: ',v2031^p,'</font><br>' fi,
 					'<font color="gray">',v2031^c,if v2031^p<>'' then '[',v2031^p,']' fi, '<br>'

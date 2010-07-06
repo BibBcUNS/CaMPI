@@ -241,9 +241,9 @@ En caso de no ser submit se Muestra el Formulario
 		<list action="load" type="freq">			
 			<pft>(if p(v859^p)
 					then
-						if (v859^3='')
+						if (v859^v='')
 							then '#'
-							else v859^3
+							else v859^v
 						fi
 					fi/)</pft> 
 		</list>

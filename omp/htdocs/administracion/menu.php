@@ -231,7 +231,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 			</td>
 		</tr><tr>
 			<td>
-				Imprimir papeleta:</td>
+				Imprimpir papeleta:</td>
 			<td>
 				<select name=impresion onChange="enable_button(document.config_form.grabar)">
 					<option value="si" <?php if ($config->imprimir_papeleta=='si'){echo 'selected';}?>>si</option>

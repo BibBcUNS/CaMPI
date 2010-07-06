@@ -74,19 +74,10 @@ v3004: documento
 			font-family: sans-serif;
 			font-size: 10pt;
 			text-align:left;
-			/*color: #5277AE;*/
+			//color: #5277AE;
 			color: #C00000;
 			margin-top: 20px;
 		}
-		
-		#close {
-			position: fixed;
-			bottom: 0;
-			right: 0;
-			height:20px;
-			width:45px;
-		}
-		
 	</style>
 	</head>	
 	<body onclick="window.parent.ocultar_control()">
@@ -100,13 +91,11 @@ v3004: documento
 			</div>
 			<div id="error_message">',
 				replace(v5000,'Error:',''),
-			'</div>
-			<img id="close" src="/omp/circulacion/images/close.gif">'
+			'</div>'
 		fi
 	</pft></display>
 	
 	<display>
-		
 		</BODY>
 		</HTML>
 	</display>

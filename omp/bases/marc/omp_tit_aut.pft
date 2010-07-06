@@ -71,7 +71,7 @@
 	
 	if v859^v<>'' then
 		'<TD width="20%" style="border-left:1px solid #5277AE; text-align:center">
-		 <B><FONT FACE="MS SANS SERIF" SIZE=2 >Tomos: </font></B><br>',
+		 <FONT FACE="MS SANS SERIF" SIZE=2 >Tomos: </font><br><B>',
 			(
 				if not v2000[1]:v859^v or (v859^v='' and not v2000[1]:'Primera') then
 					proc('d2000a2000~',
@@ -81,19 +81,19 @@
 			)
 	fi),
 		left(v2000,size(v2000)-2), /* Para eliminar la última coma*/
-		'</TD>'
+		'</B></TD>'
 	fi,
 	
 	'<TD width="25%" style="border-left:1px solid #5277AE; text-align:center">',
-	if p(v859^h) then
-		'<FONT FACE="MS SANS SERIF ITALIC" SIZE=2 ><B>',
-			(if not v1000[1]:s(v859^h,'. ',v859^i) then proc('d1000a1000~',v1000[1],' ',s(v859^h,'. ',v859^i),'~') fi),(v1000),
-		'</font><BR></B>',
-	fi,
 	if p(v250^a) then
 		'
-		 <B><FONT FACE="MS SANS SERIF" SIZE=2 >Ed.: </font></B>',v250^a,
-	fi
+		 <B><FONT FACE="MS SANS SERIF" SIZE=2 >',v250^a,'</font></B><br>',
+	fi,
+	if p(v859^h) then
+		'<FONT FACE="MS SANS SERIF ITALIC" SIZE=2 >',
+			(if not v1000[1]:s(v859^h,'. ',v859^i) then proc('d1000a1000~',v1000[1],' ',s(v859^h,'. ',v859^i),'~') fi),(v1000),
+		'</font>',
+	fi,
 	'</TD>'
 	
 	

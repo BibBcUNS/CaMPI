@@ -580,7 +580,7 @@ function CargarTerminal(Ip) {
 		  <td><h3>Indicaciones para la operación del módulo</h3></td>
 		</tr>
 		<tr>
-		  <td> Seleccione las diferentes alternativas que el módulo de estadística ofrece para analizar la circulación de los materiales.<br>
+		  <td> Seleccione las diferentes alternativas que el módulo de estadístca ofrece para analizar la circulación de los materiales.<br>
   La opción <b>Operaciones</b> permite indicar los movimientos a evaluar, en <b>Fecha</b> <u>debe</u> señalar el plazo y el turno de la consulta.<br>
   Puede además indicar filtros opcionales para ajustar los resultados a un <b>Material</b>, <b>Operador</b> o <b>Lector</b> determinado.<br>
   Debe en todos los casos dejar indicado al menos una operación, la fecha y el turno de la consulta.</td>

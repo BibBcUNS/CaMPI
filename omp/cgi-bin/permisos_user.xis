@@ -19,14 +19,14 @@
     </do>
 
 	
-	<field action=replace tag=500><pft>
-		if p(v200) then
-			if v200=v101 then
-					(v500+|,|),
-			fi
+	<field action=replace tag=501><pft>
+		if p(v200) and v200=v101 then
+			(v500+|,|),
+		else
+			''
 		fi
 	</pft></field>
-	<field action=replace tag=500><pft>'["',replace(v500,',','","'),'"]'</pft></field>
+	<field action=replace tag=500><pft>'["',replace(v501,',','","'),'"]'</pft></field>
 	<display><pft>v500</pft></display>
 	
 </section>
