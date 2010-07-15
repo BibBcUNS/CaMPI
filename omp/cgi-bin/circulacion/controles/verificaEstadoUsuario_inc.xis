@@ -46,8 +46,14 @@ Se asume que el DNI ya esta validado -->
 </pft></field-->
 
 <field action="add" tag="4001" split="occ"><pft>
-   (ref(['lector']l(['lector']v4002),
-       if s(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < s(s(date).8) then v977 fi)/)
+   ref(['lector']l(['lector']v3004),
+       (
+		if s(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < s(s(date).8)
+			then
+				v8^i
+			fi
+	    )/
+	)
 </pft></field>
 
 
