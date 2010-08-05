@@ -184,11 +184,11 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
     <input type="submit" value="Actualizar Circulación" title="Actualiza la base de datos utilizada en el sistema de circulación en función de la base bibliográfica del sistema de catalogación" name="submit_btn">
     <input type="hidden" name="IsisScript" value="administracion/actualizar_bases.xis">
 	<br><br>
+    </form>
     <!--
 	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=control_consistencia_form onSubmit="disable_button(document.control_consistencia_form.submit_btn)">
     <input type="submit" value="Control de consistencia de inventarios" name=submit_btn>
     <input type="hidden" name="IsisScript" value="administracion/check_consistencia.xis" >
-    </form>
 	<br 
     -->
  
