@@ -35,7 +35,7 @@
   <do task=search>
     <parm name=db>movi</parm>
     <parm name=expression><pft>v100</pft></parm>
-		<parm name="gizmo">oemansi</parm>
+		<!--parm name="gizmo">oemansi</parm-->
     <field action=define tag=1001>Isis_Current</field>
     <field action=define tag=1002>Isis_Total</field>
     <loop>

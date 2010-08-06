@@ -55,9 +55,8 @@ v3004: documento
 		body{
 			cursor:pointer;
 			padding:5px;
-			margin:2px;
+			margin:5px;
 			background-color:#f6f6f6;
-			border:1px solid LightCoral;
 		}
 		#error_title {
 			width:95%;
@@ -79,6 +78,13 @@ v3004: documento
 			color: #C00000;
 			margin-top: 20px;
 		}
+		#close {
+			position: fixed;
+			bottom: 0;
+			right: 0;
+			height:20px;
+			width:45px;
+		}
 	</style>
 	</head>	
 	<body onclick="window.parent.ocultar_control()">
@@ -92,7 +98,8 @@ v3004: documento
 			</div>
 			<div id="error_message">',
 				replace(v5000,'Error:',''),
-			'</div>'
+			'</div>
+			<img id="close" src="/omp/circulacion/images/close.gif">'
 		fi
 	</pft></display>
 	

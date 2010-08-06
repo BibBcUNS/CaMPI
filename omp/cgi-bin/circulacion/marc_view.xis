@@ -8,9 +8,42 @@
     <parm name=db>opac_circulacion</parm>
     <parm name=expression><pft>'LC=',v110</pft></parm>
     <loop>
-		<display><htmlpft><pft>,cat('disponibilidad.pft'),</pft></htmlpft></display>
-    </loop>
+		<!-- Muestra datos bibliográficos -->
+		<display><htmlpft><pft>,cat('disponibilidad.pft'),'<br>'</pft></htmlpft></display>
+    	
+		<!-- Para mostrar los sectores -->
+		
+		<!--<list action=load type=list><pft>(if v859:'L.F.' then v859^b,'L.F.-' else v859^b,'-', fi)</pft></list>  -->
+		
+		<list action=delete>now</list>
+		<list action=load type=freq><pft>(if v859:'L.F.' then v859^b,'L.F.-' else v859^b,'-', fi/)</pft></list>
+		<do task=list>
+			<field action=define tag=1>Isis_Item</field>
+			<display><pft>'<font color=red>Sector: '</pft></display>
+			<loop>
+				
+				<field action=export tag=3010>1</field>
+				
+				<display><pft>'<font color=red>'
+				if v1='pasilloDCM' then 'Pasillo DCM-' ,fi
+				if v1:'referencias' then 'Sala de Referencias-' ,fi
+				if v1:'subsueloA' then 'Subsuelo A-' ,fi
+				if v1:'subsueloB' then 'Subsuelo B-' ,fi
+				if v1:'subsueloC' then 'Subsuelo C-' ,fi
+				if v1:'SA' then 'Subsuelo A-' ,fi
+				if v1:'SB' then 'Subsuelo B-' ,fi
+				if v1:'SC' then 'Subsuelo C-' ,fi
+				'</font>'
+				</pft></display>
+			</loop>
+		</do>  
+	
+	<!--	<display><pft>'<div>',v3010,'</div>'</pft></display> -->
+	</loop>
   </do>
+  
+		
+
 
 </section>
 </IsisScript>

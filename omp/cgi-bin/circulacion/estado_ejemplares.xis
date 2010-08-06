@@ -4,7 +4,7 @@
   <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
   <field action=cgi tag=110>nc</field>
 
-  
+
   <field action=replace tag=1000>[</field>  
   
   <do task=search>
@@ -15,23 +15,30 @@
 		<field action=replace tag=1000>
 			<pft>
 				v1000,
-				'{',
-					'"parte":"',v1^p,'", ',
-					'"reservas":"',ref(['reservas']l(['reservas']'-NC=',v1^c),f(nocc(v2),1,0)),'",',
-					'"esperas":"',ref(['reservas']l(['reservas']'-NC=',v1^c),f(nocc(v3),1,0)),'",',
-					'"ejemplares":[',
-						(
-							'{"inventario":"',v2,'"',
-							',',
-							'"estado":"',ref(['exist']l(['exist']v2),v985),'"}'
-						),
-					']',
+					
+						'{',
+							'"parte":"',v1^p,'", ',
+							'"reservas":"',ref(['reservas']l(['reservas']'-NC=',v1^c),f(nocc(v2),1,0)),'",',
+							'"esperas":"',ref(['reservas']l(['reservas']'-NC=',v1^c),f(nocc(v3),1,0)),'",',
+							
+							'"ejemplares":[',
+								(
+									if s(ref(['exist']l(['exist']v2),v987))='OTRO' 
+									then
+										'{"inventario":"',v2,'"',
+										',',
+										'"estado":"',ref(['exist']l(['exist']v2),v985),'"}'
+									fi
+								),
+							']',
+		
+						'}'
 
-				'}'
 			</pft>
 		</field>
 		<field action=export tag=1000>1000</field>
-    </loop>
+    	
+	</loop>
   </do>
 
   <field action=replace tag=1000><pft>v1000,']'</pft></field>

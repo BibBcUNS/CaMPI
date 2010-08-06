@@ -50,8 +50,8 @@
 
 	<do task="keyrange">
 	<parm name="db">movi</parm>
-	<parm name="from">OPERADOR</parm>
-	<parm name="to">OPERADOR=ZZZ</parm>
+	<parm name="from">OPERARIO</parm>
+	<parm name="to">OPERARIO=ZZZ</parm>
 	<field action="define" tag="1001">Isis_Key</field>
 	<field action="define" tag="1002">Isis_Current</field>
 		<loop>
@@ -64,7 +64,7 @@
 					<field action="export" tag="list">5</field> <!-- Apellido y Nombre -->
 				</loop>
 			</do>
-			<field action="replace" tag="1003"><pft>'^a',v5^a,", "v5^b,'^b',replace(v1001,'OPERADOR=','')</pft></field> <!-- ^aApellido, Nombre (formato ansi) ^bAPELLIDO, NOMBRE (key puro) -->
+			<field action="replace" tag="1003"><pft>'^a',v5^a,", "v5^b,'^b',replace(v1001,'OPERARIO=','')</pft></field> <!-- ^aApellido, Nombre (formato ansi) ^bAPELLIDO, NOMBRE (key puro) -->
 			<field action="export" tag="4001" previous="add">1003</field> <!-- exporta y agrega una entrada a un campo repetible de bibliotecario -->
 		</loop>
 	</do>

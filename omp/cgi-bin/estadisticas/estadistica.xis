@@ -190,7 +190,7 @@ Considerar que v9996 es la contador de operaciones matcheadas
 	<field action="add" tag="900" split="occ"><pft>(v100/)</pft></field> <!-- Operaciones -->
 	<field action="add" tag="901" split="occ"><pft>(v300/)</pft></field> <!-- Fecha -->
 	<field action="add" tag="903" split="occ"><pft>(v200/)</pft></field> <!-- Turno -->
-	<field action="add" tag="904"><pft>| * DNI=|v400,| * INVENTARIO=|v500|$|,| * TEMATICA=|v600|$|,| * MATERIAL=|v700|$|,| * OPERADOR=|v800|$|,| * TERMINAL=|v899|$|</pft></field>
+	<field action="add" tag="904"><pft>| * DNI=|v400,| * INVENTARIO=|v500|$|,| * TEMATICA=|v600|$|,| * MATERIAL=|v700|$|,| * OPERARIO=|v800|$|,| * TERMINAL=|v899|$|</pft></field>
 	<!-- v904= doc, inventario, temática, material, operador, terminal -->
 
 	<do>

@@ -38,7 +38,7 @@
 <flow action=jump><pft>'Fin'</pft></flow>
 
 <label>Error</label>
-<display>Los parametros son incorrectos.<br>
+<display>Los parámetros son incorrectos.<br>
 La configuración no fue modificada</display>
 
 <label>Fin</label>

@@ -9,7 +9,6 @@
 <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 
 <field action=replace tag=2000><pft>left(date,8)</pft></field>
-
 <do task=mfnrange>
 	<parm name=db>reservas</parm>
 	<parm name=from>1</parm>
@@ -17,6 +16,8 @@
 		<field action=replace tag=1901><pft>v1</pft></field>
 		<field action=replace tag=1900><pft>mfn(1)</pft></field>
 		<field action=import tag=2000>2000</field>
+		<field action=import tag=5555>5555</field>
+		<list action=delete>now</list>
 		<list action=load><pft>(v3/)</pft></list>
 		<do task=list>
 			<field action=define tag=1001>Isis_Current</field>
@@ -24,9 +25,6 @@
 			<field action=define tag=1>Isis_Item</field>
 			<loop>
 				<field action=import tag=555>5555</field>
-				<field action=import tag=3001>1</field>
-				<field action=import tag=3002>2</field>
-				<field action=import tag=3003>3</field>
 			    <!-- IMPORTO EL MFN DE REGISTRO DE RESERVAS QUE ESTOY TRATANDO -->
 				<field action=import tag=1900>1900</field>
 			    <!-- OBTENGO EL TIPO DE USUARIO EN v1500 -->
@@ -76,9 +74,6 @@
 					 <field action=define tag=1103>Isis_Lock</field>
 					 <parm name=lockid>ID</parm>
 				     <update>
-						<field action=import tag=1>3001</field>
-						<field action=import tag=2>3002</field>
-						<field action=import tag=3>3003</field>
 						<field action=import tag=200>1</field>
 						
 						<proc><pft>'d3',(if v3=v200[1] then else 'a3~',v3,'~' fi/)</pft></proc>
@@ -90,18 +85,20 @@
 						<field action=replace tag=554><pft>getenv('REMOTE_ADDR')</pft></field>
 						<!-- Construyo lo que grabaré en MOVI -->						
 						<field action=add tag=555><pft>'EC=',v200</pft></field>
+						<field action=export tag=6000 previous=add>555</field><!-- para contar las esperas caidas-->
 						<proc><pft>(if iocc=val(v30[1]^o) then 'a444~',v2,'~' fi/)</pft></proc>
 						<field action=add tag=555><pft>'RC=',v444</pft></field>
-						<field action=add tag=555><pft>'EN=','^i',v444^i,'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',,'^p',v554</pft></field>
+						<field action=add tag=555><pft>'EN=',if p(v444) then '^i',v444^i,'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',,'^p',v554 fi</pft></field>
 						<field action=export tag=5555>555</field>
 						<!-- FALTA OBTENER EL OPERADOR -->
-						<proc><pft>(if iocc=val(v30[1]^o) then 'a3~^i',v2^i,'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',,'^p',v554,'~' fi/)</pft></proc>
+						<proc><pft>if p(v2) then (if iocc=val(v30[1]^o) then 'a3~^i',v2^i,'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',,'^p',v554,'~' fi/) fi</pft></proc>
 						<field action=delete tag=2><pft>v30^o</pft></field>
 						<proc><pft>'d30d200d444d553d554d555'</pft></proc>
 				        <write>Unlock</write>
 				     </update>
 				  </do>
-				 <field action=export tag=5555>5555</field>
+				 <field action=export tag=5555 previous=add>5555</field>
+				<field action=export tag=6000 previous=add>6000</field><!-- para contar las esperas caidas-->
 				<label>FIN_BAJAR_ESPERA</label>
 			</loop>
 		</do>
@@ -126,11 +123,10 @@
 			 </update>
 		  </do>
 		  <label>NO_GRABAR_EN_MOVI</label>
+		  <field action=export tag=6000 previous=add>6000</field><!-- para contar las esperas caidas-->
 	</loop>
-			<display><pft>'Ha/n caído ',f(nocc(v5555)/3,1,0),' espera/s.'</pft></display>
 </do>
-
-
+<display><pft>'Ha/n caído ',f(nocc(v6000)/3,1,0),' espera/s.'</pft></display>
 <!--
 
 RESERVAS:

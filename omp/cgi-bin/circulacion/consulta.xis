@@ -85,6 +85,9 @@
 						ventana.location.href = "/cgi-bin/wxis.exe/circulacion/?IsisScript=circulacion/reserva_form.xis&mfn="+mfn;
 					*/
 	}
+	function ventana_estado(nc) {
+		location.href = "/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/consulta.xis&expresion="+nc+"&criterio=nc";
+	}
 	
 	usuario_id="[pft]v120[/pft]";
 	operario_id="[pft]v130[/pft]";
@@ -137,7 +140,7 @@
 		    <loop>
 				<!-- MUESTRO INFORMACIÓN DE LA PARTE -->
 				<!-- MUESTRO EL ENCABEZADO DE LA PARTE SI HAY MAS DE UNA-->
-				<display><htmlpft><pft>if val(v1102)>1 then cat(getenv('PATH_TRANSLATED'),'parte.html') fi</pft></htmlpft></display>
+				<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'parte.html')</pft></htmlpft></display>
 
 				<do task=search>
 					<parm name=db>reservas</parm>
@@ -149,7 +152,10 @@
 						<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'res_esp.html')</pft></htmlpft></display>
 					</loop>
 				</do>	
-				
+				<display>
+					<table border="0" bgcolor="#FFFFFF" width="80%" align="center" cellspacing=0 cellpadding=0>
+					<tr><th colspan="4" align="center"><b>préstamos<b></th></tr>
+				</display>
 				<list action=delete>now</list>
 				<list action=load type=freq><pft>(v2/)</pft></list>
 				<do task=list>
@@ -168,11 +174,11 @@
 						</do>			 
 					 </loop>
 				</do>			
-			
+				<display></table></display>
 		    </loop>
         </do>
-        <display><pft>'<br><b>Inventarios: </b>'</pft></display>
-     	<display><pft>(v859^p,'[',ref(['exist']l(['exist']v859^p),v987),']',' - ')</pft></display>
+        <!--display><pft>'<br><b>Inventarios: </b>'</pft></display>
+     	<display><pft>(v859^p,'[',ref(['exist']l(['exist']v859^p),v987),']',' - ')</pft></display-->
 
     </loop>
   </do>
@@ -478,6 +484,110 @@
    </pft></display>
    <flow action=exit>1</flow>  
   
+<!----------------------------------------------------------------------------->	
+<label>autor</label>
+
+  
+  <field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogación (v6) -->
+  <display><pft>
+	'<input type="button" name="volver" value="<< Volver" onClick="javascript:history.back()">
+  	<form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/">
+  	<input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
+	
+	<TABLE width="85%" border="0">
+		<tr>
+			<td width="85%">
+				<input type="text" name="expresion" size="28" accesskey="r" value="',v110,'"><br>
+			</td>
+
+
+			<td width="150%" align="center">
+				<input type="submit" value="Buscar"><br />
+				<a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
+			</td>
+			<td>
+			</td>
+		</tr>
+	</TABLE>
+	
+	<br><br>
+	</form>'
+	</pft></display>
+
+  	<!-- Formateo de la cadena de busqueda -->
+	<!-- esto es por si queremos quitar puntuaciones -->
+	<!--field action="replace" tag="110"><pft>replace(v110,':',' ')</pft></field>
+	<field action="replace" tag="110"><pft>replace(v110,'.',' ')</pft></field>
+	<field action="replace" tag="110"><pft>replace(v110,';',' ')</pft></field-->
+	<!-- elimino los espacios en blanco -->
+	<loop>
+		<field action=import tag="110">110</field>
+		<field action="replace" tag="110"><pft>replace(v110,'  ',' ')</pft></field>
+		<field action=export previous="replace" tag="110">110</field>
+		<flow action="skip"><pft>if instr(v110,'  ')=0 then 'Quit' else 'Next' fi</pft></flow>
+	</loop>
+	
+	<!-- resguardamos la cadena -->
+	<field action="replace" tag="115"><pft>v110</pft></field>
+	
+	<!-- vefificamos si se busca or palabra completa o prefijo -->
+	<field action="replace" tag="110"><pft>
+			replace(v110,' ','$ '),'$'
+	</pft></field>
+	
+	<!-- vefificamos si se busca titulo o autor -->
+	<field action="replace" tag="110"><pft>
+			'AN=',replace(v110,' ',' AN=')
+	</pft></field>
+	
+	<!-- Agrego "and" en los espacios -->
+	<field action="replace" tag="110"><pft>
+			replace(v110,' ',' AND ')
+	</pft></field>
+
+
+	<!--display><pft>'<b>expresion:',v110,'</b>'</pft></display-->
+    <do task=search>
+    <parm name=db>opac_circulacion</parm>
+    <parm name=expression><pft>v110</pft></parm>
+
+    <field action=define tag=1102>Isis_Total</field>
+    <loop>
+		<field action="add" tag="7777" split="occ"><htmlpft><pft>'[pft](',ref(['config']1,v1),'/)[/pft]'</pft></htmlpft></field> <!-- el v7777 tendrá los nro. de inventarios de la etiqueta declarada en el config.txt -->
+		<field action="import" tag="list">120,5009</field>
+		
+		<display>
+		<TABLE WIDTH=85% style="font-family: sans-serif; font-size: 11pt; border:1px solid #5277AE">
+		<tr><td>
+		</display>
+		
+		<display><htmlpft><pft>cat('omp_tit_aut.pft')</pft></htmlpft></display>
+		
+		<display><pft>'</td>
+			<td width="50px">
+				<input type="button" value="ver" onclick=ventana_estado("',v1,'"); style="float:right"></td>
+			</tr></TABLE><br>'
+		</pft></display>
+
+					
+     </loop>
+  </do>
+  <display><pft>if val(v1102)=0 then 
+   '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi
+   '<!--#####################################################-->	
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer"></div>
+  </body>
+</html>'
+   </pft></display>
+   <flow action=exit>1</flow>  
 <!----------------------------------------------------------------------------->	
   
   <label>SALIDA</label>
