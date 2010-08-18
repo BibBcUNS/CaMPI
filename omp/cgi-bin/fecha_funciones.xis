@@ -152,7 +152,7 @@
 <function name=SUMAH action=replace tag=100 split=occ>
     <!--AÑO--> 
     <field action=replace tag=500><pft>v100[1]*0.4</pft></field>
-	<!--MES--> 
+	<!--MES-->   
 	<field action=replace tag=501><pft>v100[1]*4.2</pft></field>
 	<!--DIA DEL MES--> 
 	<field action=replace tag=502><pft>v100[1]*6.2</pft></field>
@@ -172,8 +172,8 @@
 	<call name=CALENDARIO_ANIO_MES><pft>'^a',v500,'^m',v501</pft></call>
 	<field action=replace tag=300><pft>v600</pft></field>
 	
-	<!-- Me quedo con los días posteriores al día correspondiente. -->
-	<field action=replace tag=301><pft>mid(v300,val(v502)+1,31)</pft></field>
+	<!-- Me quedo con los días a partir de la fecha de comienzo -->
+	<field action=replace tag=301><pft>mid(v300,val(v502),31)</pft></field>
 	<!-- calculo los dias habiles -->
 	<field action=replace tag=504><pft>f(size(replace(v301,'0','')),1,0)</pft></field>
 
@@ -253,7 +253,8 @@
 		
 	<field action=replace tag=552><pft>v502</pft></field>
 	
-	<label>ENCUENTRO_DIA</label>
+	<label>LOOP_ENCUENTRO_DIA</label>
+			<flow action=jump><pft>if val(v510)=0 then 'END_LOOP_ENCUENTRO_DIA' fi</pft></flow>
 			<field action=replace tag=551><pft>f(instr(v550,'.'),1,0)</pft></field>
 
 			<!--DIA DEL MES-->
@@ -262,11 +263,12 @@
 			<!-- field action=replace tag=550><pft>right(v550,size(v550)-val(v551)+1)</pft></field -->
 
 			<field action=replace tag=550><pft>right(v550,size(v550)-val(v551))</pft></field>
+			<flow action=jump><pft>'LOOP_ENCUENTRO_DIA'</pft></flow>
 
-	<flow action=jump><pft>if val(v510)>0 then 'ENCUENTRO_DIA' fi</pft></flow>
     
-	<field action=replace tag=600><pft>v500,if val(v501)<10 then '0',f(val(v501),1,0) else v501 fi,if val(v552)<10 then '0',f(val(v552),1,0) else v552 fi</pft></field>
+	<label>END_LOOP_ENCUENTRO_DIA</label>
 	
+	<field action=replace tag=600><pft>v500,if val(v501)<10 then '0',f(val(v501),1,0) else v501 fi,if val(v552)<10 then '0',f(val(v552),1,0) else v552 fi</pft></field>
     <return action=export tag=9000>600</return>
 
 </function>
