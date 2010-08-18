@@ -152,7 +152,7 @@
 <function name=SUMAH action=replace tag=100 split=occ>
     <!--AÑO--> 
     <field action=replace tag=500><pft>v100[1]*0.4</pft></field>
-	<!--MES-->   
+	<!--MES--> 
 	<field action=replace tag=501><pft>v100[1]*4.2</pft></field>
 	<!--DIA DEL MES--> 
 	<field action=replace tag=502><pft>v100[1]*6.2</pft></field>
@@ -162,6 +162,10 @@
 	-->
 	<!--CANTIDAD DE DIAS A SUMAR--> 	
 	<field action=replace tag=510><pft>v100[2]</pft></field>
+	<flow action=jump><pft>if val(v510)<>0 then 'CANTIDAD_DE_DIAS_NO_ES_CERO' fi</pft></flow>
+		<field action=replace tag=552><pft>v502</pft></field>
+		<flow action=jump>RETURN</flow>
+	<label>CANTIDAD_DE_DIAS_NO_ES_CERO</label>
 	
 	<!--display><pft>'<b>',v502,'/',v501,'/',v500,' + ',v510,'</b><br>'</pft></display-->
 	
@@ -172,8 +176,8 @@
 	<call name=CALENDARIO_ANIO_MES><pft>'^a',v500,'^m',v501</pft></call>
 	<field action=replace tag=300><pft>v600</pft></field>
 	
-	<!-- Me quedo con los días a partir de la fecha de comienzo -->
-	<field action=replace tag=301><pft>mid(v300,val(v502),31)</pft></field>
+	<!-- Me quedo con los días posteriores al día correspondiente. -->
+	<field action=replace tag=301><pft>mid(v300,val(v502)+1,31)</pft></field>
 	<!-- calculo los dias habiles -->
 	<field action=replace tag=504><pft>f(size(replace(v301,'0','')),1,0)</pft></field>
 
@@ -223,28 +227,7 @@
 
 	
     <!--RECUPERO LA STRING DE 0 y . DEL MES FINAL-->
-	
-    <!-- mas abajo hago esto de otra forma (llamando a calendario_anio_mes) -->
-    <!--field action=replace tag=550><pft>
-		select val(v501) 
-			case 1: ,ref(['calendario']l(['calendario']v500),v1), 
-			case 2: ,ref(['calendario']l(['calendario']v500),v2), 
-			case 3: ,ref(['calendario']l(['calendario']v500),v3),
-			case 4: ,ref(['calendario']l(['calendario']v500),v4),
-			case 5: ,ref(['calendario']l(['calendario']v500),v5),
-			case 6: ,ref(['calendario']l(['calendario']v500),v6),
-			case 7: ,ref(['calendario']l(['calendario']v500),v7),
-			case 8: ,ref(['calendario']l(['calendario']v500),v8),
-			case 9: ,ref(['calendario']l(['calendario']v500),v9),
-			case 10: ,ref(['calendario']l(['calendario']v500),v10),
-			case 11: ,ref(['calendario']l(['calendario']v500),v11),
-			case 12: ,ref(['calendario']l(['calendario']v500),v12),
-		endsel,
-	</pft></field>
-	
-	<field action=replace tag=555>v550*</field>
-	<field action=replace tag=555><pft>v555,f(val(v502),1,0)</pft></field>
-	<field action=replace tag=550><htmlpft><pft>'[pft]',v555,'[/pft]'</pft></htmlpft></field-->
+
 	
 	<!-- esto lo agregue sin probarlo (jero) -->
 	<call name=CALENDARIO_ANIO_MES><pft>'^a',v500,'^m',v501</pft></call>
@@ -253,8 +236,7 @@
 		
 	<field action=replace tag=552><pft>v502</pft></field>
 	
-	<label>LOOP_ENCUENTRO_DIA</label>
-			<flow action=jump><pft>if val(v510)=0 then 'END_LOOP_ENCUENTRO_DIA' fi</pft></flow>
+	<label>ENCUENTRO_DIA</label>
 			<field action=replace tag=551><pft>f(instr(v550,'.'),1,0)</pft></field>
 
 			<!--DIA DEL MES-->
@@ -263,12 +245,12 @@
 			<!-- field action=replace tag=550><pft>right(v550,size(v550)-val(v551)+1)</pft></field -->
 
 			<field action=replace tag=550><pft>right(v550,size(v550)-val(v551))</pft></field>
-			<flow action=jump><pft>'LOOP_ENCUENTRO_DIA'</pft></flow>
 
+	<flow action=jump><pft>if val(v510)>0 then 'ENCUENTRO_DIA' fi</pft></flow>
+	<label>RETURN</label>
     
-	<label>END_LOOP_ENCUENTRO_DIA</label>
-	
 	<field action=replace tag=600><pft>v500,if val(v501)<10 then '0',f(val(v501),1,0) else v501 fi,if val(v552)<10 then '0',f(val(v552),1,0) else v552 fi</pft></field>
+	
     <return action=export tag=9000>600</return>
 
 </function>
