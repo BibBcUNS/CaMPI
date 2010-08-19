@@ -53,9 +53,12 @@ esta en la lista de los prestados al lector en cuestion. -->
       <field action="add" tag="3001">
          <pft>if l(['partes']v1000)>0 and (v3005:v4000 or (v3050:v4000 and (not v3060:v4000))) then v1000 fi</pft>
       </field>
+	  
+      <field action="replace" tag="3050"><pft>v3050,v4000</pft></field> <!-- Agrego a la lista de comparación los prestamos a ser agregados -->
 	  <field action="add" tag="3005">4000</field>
 	  <field action="export" tag="3005">3005</field>
       <field action="export" tag="3001">3001</field>
+      <field action="export" tag="3050">3050</field>
    </loop>
 </do>
 
