@@ -1,8 +1,11 @@
 <?php
+//tabbertabdefault
 session_start();
 if (!isset($_SESSION["s_username"])) {
 	echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.html>";
 }
+$class_tipo_lector = '';
+$class_politicas = '';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -71,9 +74,10 @@ $campos_nombre = array(
 
 // Defino un arreglo de nombre de de los criterios de la base Tipo_lector
 $campos_nombre_TL = array(
-   0 => "Tipo de Usuario",
-   1 => "Límite total de Préstamos",
-   2 => "Límite total de Reservas",
+	   0 => "Categoria ID",
+	   1 => "Descripción",
+	   2 => "Límite total de Préstamos",
+	   3 => "Límite total de Reservas",
    );
    
 //********************************************************************//
@@ -81,6 +85,8 @@ $campos_nombre_TL = array(
 //*******************************************************************//
 function mostrar_politicas() {
    global $campos_nombre, $campos_nombre_TL;
+   global $class_tipo_lector, $class_politicas;
+
    global $SERVER_NAME;
 
   
@@ -101,13 +107,13 @@ function mostrar_politicas() {
 
 	echo "<div class=tabber>";
 
-	echo "<div class=tabbertab>";
+	echo "<div class='tabbertab $class_politicas'>";
 	// Muestro el título	
-	echo '<h2 style="text-align=left">Políticas de Circulación</h2>';
+	echo '<h2 style="text-align:left">Políticas de Circulación</h2>';
 	
 	// Muestro el formulario
 	echo '<style>'.
-			'.dias_mes{padding:0px; width:120px; text-align=center; font-size:15px; font-weight:normal; height:30px}'.
+			'.dias_mes{padding:0px; width:120px; text-align:center; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
 	echo "<form name=form_politicas action=politicas.php method=post>";
 	echo '<input type=hidden name=formulario value="politicas">';
@@ -157,7 +163,9 @@ function mostrar_politicas() {
 	//---------------------------------------------------------
 
 	$ptr_tipo_lector = fopen("http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_obtener.xis&cual=TODAS","r");
-	$tipo_lector = fread($ptr_tipo_lector,8192);
+	
+	$tipo_lector = "";
+	while (!feof($ptr_tipo_lector)) {$tipo_lector .= fread($ptr_tipo_lector, 500);}
 	fclose($ptr_tipo_lector);
 	$tipo_lector_arreglo = explode('#',$tipo_lector);
     for ($i=0;$i<=count($tipo_lector_arreglo)-1;$i++){	
@@ -165,8 +173,8 @@ function mostrar_politicas() {
 	}
 	// Muestro el título
 		
-	echo "<div class=tabbertab>";
-	echo '<h2 style="text-align=left">Tipos de Lector</h2>';
+	echo "<div class='tabbertab $class_tipo_lector'>";
+	echo '<h2 style="text-align:left">Tipos de Lector</h2>';
 	
 	// Muestro el formulario
 	echo "<form name=form_tipo_lector action=politicas.php method=post>";
@@ -231,14 +239,14 @@ $lista_tipos_lector = explode  ('~', $lista_tipos_lector);
 
 // Muestro el formulario
 echo '<style>'.
-			'.fila_titulo{padding:0px; width:200px; text-align=left; font-size:15px; font-weight:normal; height:30px}'.
+			'.fila_titulo{padding:0px; width:200px; text-align:left; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
 echo "<form name=form_politicas action=politicas.php method=post>";
 echo '<input type=hidden name=formulario value="politicas">';
 echo '<input type=hidden name=registro value="NUEVO">';
 echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 // Muestro el título
-echo '<tr><td colspan=2><h2 style="text-align=center">Crear una nueva política de circulación</h2></td></tr>';
+echo '<tr><td colspan=2><h2 style="text-align:center">Crear una nueva política de circulación</h2></td></tr>';
 	
 for ($i=0;$i<=(count($campos_nombre)-1);$i++)
    {
@@ -280,7 +288,7 @@ function crear_tipo_lector() {
 	
 	// Muestro el formulario
 	echo '<style>'.
-				'.fila_titulo{padding:0px; width:200px; text-align=left; font-size:15px; font-weight:normal; height:30px}'.
+				'.fila_titulo{padding:0px; width:200px; text-align:left; font-size:15px; font-weight:normal; height:30px}'.
 				'</style>';
 	echo "<form name=form_tipo_lector action=politicas.php method=post>";
 	echo '<input type=hidden name=formulario value="tipo_lector">';
@@ -331,7 +339,7 @@ function editar_politica() {
 
 // Muestro el formulario
 echo '<style>'.
-			'.fila_titulo{padding:0px; width:200px; text-align=left; font-size:15px; font-weight:normal; height:30px}'.
+			'.fila_titulo{padding:0px; width:200px; text-align:left; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
 echo "<form name=form_politicas action=politicas.php method=post>";
 echo '<input type=hidden name=formulario value="politicas">';
@@ -383,7 +391,7 @@ function editar_tipo_lector() {
 
 // Muestro el formulario
 echo '<style>'.
-			'.fila_titulo{padding:0px; width:200px; text-align=left; font-size:15px; font-weight:normal; height:30px}'.
+			'.fila_titulo{padding:0px; width:200px; text-align:left; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
 echo "<form name=form_tipo_lector action=politicas.php method=post>";
 echo '<input type=hidden name=formulario value="tipo_lector">';
@@ -396,11 +404,11 @@ for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
    {
 	echo "<tr><td class=fila_titulo>";
 	echo $campos_nombre_TL[$i];
-	if ($campos_nombre_TL[$i]=='Tipo de Usuario' or $campos_nombre_TL[$i]=='Tipo de Objeto') {
-	   echo "</td><td><input type=text name=campo".$i." value=".$tipo_lector_arreglo[$i]." readonly='readonly'></td></tr>";
+	if ($i==0) {
+	   echo "</td><td><input type=text name=campo".$i." value='".$tipo_lector_arreglo[$i]."' readonly='readonly'></td></tr>";
 	}
 	else {
-       echo "</td><td><input type=text name=campo".$i." value=".$tipo_lector_arreglo[$i]."></td></tr>";	
+       echo "</td><td><input type=text name=campo".$i." value='".$tipo_lector_arreglo[$i]."'></td></tr>";	
 	}
    }
 	
@@ -428,6 +436,7 @@ echo "</table>";
 function guardar_politica() {
 	global $campos_nombre;
 	global $SERVER_NAME;
+	global $class_politicas;
 
 	$parametros_guardar='record='.$_POST['registro'];
 	
@@ -442,6 +451,8 @@ function guardar_politica() {
 	$ptr_politicas;
 	$politicas = fread($ptr_politicas,8192);
 	fclose($ptr_politicas);
+	$class_politicas = 'tabbertabdefault';
+
 	return $politicas;
 }
 	
@@ -449,19 +460,20 @@ function guardar_politica() {
 function guardar_tipo_lector() {
 	global $campos_nombre_TL;
 	global $SERVER_NAME;
+	global $class_tipo_lector;
 	
 	$parametros_guardar='record='.$_POST['registro'];
-	
 	for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
 	{
 		$campo_actual="campo".$i;
-		$parametros_guardar=$parametros_guardar."&campo".$i."=".$_POST[$campo_actual];
+		$parametros_guardar=$parametros_guardar."&campo".$i."=".urlEncode($_POST[$campo_actual]);
 	}
 	
 	$url="http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&".$parametros_guardar;
 	$ptr_tipo_lector = fopen($url,"r");
 	$tipo_lector = fread($ptr_tipo_lector,8192);
 	fclose($ptr_tipo_lector);
+	$class_tipo_lector = 'tabbertabdefault';
 	return $tipo_lector;
 
 }	

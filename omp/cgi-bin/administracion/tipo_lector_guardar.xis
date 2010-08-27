@@ -35,8 +35,9 @@
 <field action=cgi tag=100>record</field>
 <field action=cgi tag=111>expresion</field>
 <field action=cgi tag=1>campo0</field>
-<field action=cgi tag=10>campo1</field>
-<field action=cgi tag=12>campo2</field>
+<field action=cgi tag=2>campo1</field>
+<field action=cgi tag=10>campo2</field>
+<field action=cgi tag=12>campo3</field>
 
 <field action=replace tag=110><pft>f(l(['tipo_lector']v1),1,0)</pft></field>
 <field action=replace tag=112><pft>f(l(['tipo_lector']v111),1,0)</pft></field>
@@ -57,7 +58,7 @@
 	<field action=define tag=1103>Isis_Lock</field>
 	<parm name=lockid>ID</parm>
 	<update>
-		<field action=import tag=list>1,10,12</field>
+		<field action=import tag=list>1,2,10,12</field>
         <write>Unlock</write>
      </update>
 </do>
@@ -77,7 +78,7 @@
 	<field action=define tag=1102>Isis_Status</field>
 	<field action=define tag=1103>Isis_Lock</field>
 	<update>
-		<field action=import tag=list>1,10,12</field>
+		<field action=import tag=list>1,2,10,12</field>
         <write>Unlock</write>
      </update>
 </do>

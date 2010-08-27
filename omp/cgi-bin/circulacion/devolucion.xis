@@ -227,8 +227,11 @@ Se exporta el campo v2000 con OK o código error -->
         			<field action=import tag=list>v2002</field>
         			
         			<!-- verifico reservas -->
-        			<call name=verificarReservas><pft>'^i',v1000,'^o',v2002^i</pft></call> <!-- ^i es el ID del operador -->
-        			<field action=export tag=list>4050</field> <!-- Reserva Caida y Espera Nueva -->
+					<!-- si es un ejemplar de consulta ignoro este control -->
+					<flow action=jump><pft>if ref(['exist']l(['exist']v1000),v987)='CONS' then 'FIN_VERIFICO_RESERVAS' fi</pft></flow>
+						<call name=verificarReservas><pft>'^i',v1000,'^o',v2002^i</pft></call> <!-- ^i es el ID del operador -->
+						<field action=export tag=list>4050</field> <!-- Reserva Caida y Espera Nueva -->
+					<label>FIN_VERIFICO_RESERVAS</label>
         			
         			
         			<field action="occ" tag="3004" from="8"><pft>(if s(mhu,v8^i)=s(mhu,v1000[1]) then f(iocc,1,0) fi)</pft></field> <!-- Crea v3004 con el detalle del préstamo -->

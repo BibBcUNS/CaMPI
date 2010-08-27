@@ -83,6 +83,8 @@
                 <write>Unlock</write>
             </update>
             </do>
+			<file action=close type=database>reservas</file>
+			<file action=close type=database>partes</file>
     
             <!-- exporto el resultado de la función -->
             <field action=export tag=list>4050</field>

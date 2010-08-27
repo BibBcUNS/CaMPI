@@ -131,7 +131,8 @@
 		<!-- MUESTRO INFORMACIÓN DEL LIBRO -->
 		<field action="add" tag="7777" split="occ"><htmlpft><pft>'[pft](',ref(['config']1,v1),'/)[/pft]'</pft></htmlpft></field>
 		<field action="import" tag="list">5009</field>
-		<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'bibliografia_',v5009,'.html')</pft></htmlpft></display>
+		<display><htmlpft><pft>cat('omp_tit_aut.pft')</pft></htmlpft></display>
+		<!--display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'bibliografia_',v5009,'.html')</pft></htmlpft></display-->
 		<do task=search>
 			<parm name=db>partes</parm>
 		    <parm name=expression><pft>'MARC_',v1,'$'</pft></parm>

@@ -63,6 +63,7 @@
 			case 12: ,ref(['calendario']l(['calendario']v100^a),v12), 
 		endsel,
 	</pft></field>
+	<file action=close type=database>calendario</file>
 	<return action=export tag=600>600</return>
 </function>
 
@@ -145,6 +146,7 @@
 	<flow action=jump><pft>v800</pft></flow>
 	
 	<label>TERMINO</label>
+	<file action=close type=database>calendario</file>
 	<field action=replace tag=600><pft>v500,if val(v501)<10 then '0',f(val(v501),1,0) else v501 fi,if val(v530)<10 then '0',f(val(v530),1,0) else v530 fi</pft></field>
     <return action=export tag=9000>600</return>
 </function>
@@ -248,9 +250,8 @@
 
 	<flow action=jump><pft>if val(v510)>0 then 'ENCUENTRO_DIA' fi</pft></flow>
 	<label>RETURN</label>
-    
+    <file action=close type=database>calendario</file>
 	<field action=replace tag=600><pft>v500,if val(v501)<10 then '0',f(val(v501),1,0) else v501 fi,if val(v552)<10 then '0',f(val(v552),1,0) else v552 fi</pft></field>
-	
     <return action=export tag=9000>600</return>
 
 </function>

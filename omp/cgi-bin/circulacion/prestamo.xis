@@ -68,6 +68,7 @@
           <field action=export previous=delete tag=2000>2000</field>
         </loop>
         </do>
+		<file action=close type=database>opera</file>
         <return action=export tag=1000>2000</return>
 </function>
 
@@ -171,7 +172,7 @@ El campo v2001 contiene el mfn del registro del lector (en caso de que se encuen
 				<field action=export previous=delete tag=2001>2001</field>
 		</loop>
 </do>
-
+<file action=close type=database>lector</file>
 <flow action=jump><pft>if v2000<>'ok' then 'FIN_BLOQUEO' fi</pft></flow>
 
 <!-- Controlamos si cayó la suspensión, actualizamos lector (agregado por jero)
@@ -262,6 +263,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 	        <write>Unlock</write>
      </update>
 </do>
+<file action=close type=database>lector</file>
 <!-- Bloqueo del registro lector, el mfn fue exportado en v2001 del loop anterior -->
 <do task=update>
 <parm name=db>lector</parm>
@@ -276,7 +278,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
     <field action=export tag=2000>2000</field>
 </update>
 </do>
-
+<file action=close type=database>lector</file>
 <!-- finalizamos la operación si no es posible bloquear -->
 <flow action=jump><pft>if v2000<>'ok' then 'FIN_BLOQUEO' fi</pft></flow>
 
@@ -321,6 +323,12 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
         </loop>
         </do>
 		<file action=close type=database>reservas</file>
+		<file action=close type=database>marc</file>
+		<file action=close type=database>partes</file>
+ 		<file action=close type=database>reservas</file>
+		<file action=close type=database>marc</file>
+		<file action=close type=database>partes</file>
+		<file action=close type=database>exist</file>
         <label>fin lista reservas</label>
 
         <field action=import tag=1000>1000,2030</field>
@@ -441,9 +449,11 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 <field action=import tag=1000>1000,2001</field>
         
                 <!-- verifico reservas, por cada inventarios -->
-                <call name=verificarReservas><pft>'^i',v3000^i,'^o',v1000[1]^b</pft></call>
-                <field action=export tag=list previous=add>4050</field>
-                <!-- en 4050 se obtienen las las Reservas Caidas (RC) y Esperas Nuevas (EN) -->
+                <flow action=jump><pft>if ref(['exist']l(['exist']v3000^i),v987)='CONS' then 'FIN_VERIFICO_RESERVAS' fi</pft></flow>
+					<call name=verificarReservas><pft>'^i',v3000^i,'^o',v1000[1]^b</pft></call>
+					<field action=export tag=list previous=add>4050</field>
+					<!-- en 4050 se obtienen las las Reservas Caidas (RC) y Esperas Nuevas (EN) -->
+				<label>FIN_VERIFICO_RESERVAS</label>
                                                 
                 <flow action=jump><pft>if s(mpu,v3000^i.1):'X' then 'FIN_BLOQUEO' fi</pft></flow>
         
@@ -1234,7 +1244,6 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 		<field action=replace tag=2222><pft>ref(['config']1,v10)</pft></field>
 		<field action=cgi tag=1000>opcion</field>
-		<trace>br</trace>
 		<flow action=jump><pft>v1000</pft></flow>
   
 		<!-- Esta parte valida al operario y presenta al lector -->
@@ -1293,7 +1302,9 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		
 		<!-- a lector se le entregan los siguientes valores: 'bloqueo',id operador, lector.
 		v2222 Indica la forma de aplicar políticas: manual/politicas -->
+		<display><pft>'ENTRA'</pft></display>
   		<call name=lector><pft>'^aBLOQUEO^b',v110^i,'^c',v100,'^p',v2222</pft></call>
+		<display><pft>'SALE'</pft></display>
   		
 		<display><pft>
 				if v1000<>'ok' then 

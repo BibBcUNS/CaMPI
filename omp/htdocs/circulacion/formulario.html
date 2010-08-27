@@ -231,11 +231,12 @@
 <table width="100%" border="0">
   <tr>
      <td height="24%" align="center"><img src="/omp/circulacion/fotos/',v2,'.jpg" style="height:150px;width:130px;margin-left:10px" align="middle" OnError="this.src=',"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,'"></td>',
-   '<td width="76%"><big>',v1,'</big>',", ",v3,
+   '<td width="76%"><b>',v1,'</b>
+   <br>Categoría: ',ref(['tipo_lector']l(['tipo_lector']v3),v2),
 	if v2001:'1' then
 		'<br><marquee bgcolor="#FF0000" width=90% style="color: #FFFF9B; font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',fi,
 
-	'<br><a href="JavaScript:presenta_observaciones()"><font face="Arial" size="3">Observaciones al Lector</font></a><br>',
+	'<br><a href="JavaScript:presenta_observaciones()"><font face="Arial" size="3">Observaciones al Lector</font></a> ',
    
 	if p(v17) then '(Consúltelas!)<br>' fi,
     /* se quita actualización de datos de usuario desde circulación - tarea administrativa */
@@ -319,7 +320,10 @@ if p(v8) then
    '<td width="10%">','<div id=',"'"n0,'renovacion_',f(iocc,1,0),"'"n0,'>
 		<input type="button" value="Renovar" style="width:60px; font-size:0.8em;text-decoration:none" onclick="javascript:window.document.control.devolucion_',f(iocc,1,0),'.checked=true;window.document.control.invs_prestamo_A.value += ',"'"n0,replace(v8^i,' ',''),'\n',"'"n0,';renovar(',"'"n0,f(iocc,1,0),"'"n0,')">
 	</div>','</td>',
-   '<td width="60%">',v8^b,'</td>',
+   '<td width="60%">',v8^b,'<br>',
+		ref(['marc']l(['marc'],v8^i),s(v859[1]^h,'. ',v859[1]^i)),
+		ref(['partes']l(['partes'],v8^i),v1^p),
+   '</td>',
    '<td align="center" width="15%"',
       if v2001:'1' then ' bgcolor="#BF3353">! ' else '>' fi,
       v8^p.6,v8^p*8'<br><b>Vto ',v8^v.6,,v8^v*8'</b></td></tr>'

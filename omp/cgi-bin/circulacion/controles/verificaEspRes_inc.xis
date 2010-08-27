@@ -33,6 +33,9 @@ Si el ejemplar está reservado (sin importar quien lo reservó) no se puede pres
 <do task="list">
 <field action="define" tag="1001">Isis_Item</field>
 <loop>
+	<!--este control es ignorado para los objetos de tipo CONS -->
+	<flow action=skip><pft>if ref(['exist']l(['exist']v1001),v987)='CONS' then 'Next' fi</pft></flow>
+
 	<field action=import tag=3004>3004</field>
 	
 	<!-- v1100: Identificador de la parte a la que pertenece el nro. de inv indicado  -->
@@ -95,5 +98,4 @@ Si el ejemplar está reservado (sin importar quien lo reservó) no se puede pres
       mhl,'Error: Objeto con espera o reserva: ',(v4000+|;|)
    fi
 </pft></field>
-
 <label>verificaRes</label>

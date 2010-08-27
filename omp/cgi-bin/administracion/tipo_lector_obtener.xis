@@ -46,7 +46,7 @@
     <loop>
        <list action=load>
 	     <pft>
-	       v1,'~',v10,'~',v12
+	       v1,'~',v2,'~',v10,'~',v12
 		 </pft>
 	   </list>
     </loop>
@@ -75,7 +75,7 @@
     <loop>
        <display>
 	     <pft>
-	       v1,'~',v10,'~',v12
+	       v1,'~',v2,'~',v10,'~',v12
 		 </pft>
 	   </display>
     </loop>
