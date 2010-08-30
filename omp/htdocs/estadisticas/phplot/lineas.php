@@ -4089,18 +4089,21 @@ function array_pad_array(&$arr, $size, $arr2=NULL)
         $arr = array_merge($arr, $arr2);        // append until done
 }
 
-
 //Define the object
 $graph = new PHPlot(500,300); 
 
 // ejemplo de las variables cgi, la Serie[0] define las fechas analizadas
-//$Series[0]='29/7,29/7,30/7,31/7,1/8';
-//$Series[1]='52,44,32,41,52';
-//$Series[2]='76,32,33,24,38';
-//$Series[3]='89,87,80,86,94';
-//$Series[4]='11,86,101,78,56';
 
+/*$Series[0]='29/7,29/7,30/7,31/7,1/8'; 
+$Series[1]='52,44,32,41,52';
+$Series[2]='76,32,33,24,38';
+$Series[3]='89,87,80,86,94';
+$Series[4]='11,86,101,78,56';
+*/
 
+for ($i=0;$i<sizeof($_POST['Series']); $i++){
+	$Series[$i] = $_POST['Series'][$i];
+}
 // Arma dos vectores, uno con los valores máximos y otro con los mínimos de cada serie de datos
 // Luego establece la escala del eje y.
 
@@ -4144,12 +4147,11 @@ for ($i=0; $i<substr_count($Series[0],',')+1; $i++) { // gira segun la cantidad 
 //		print('-');
 	}
 //	print('<br>');
-};
-
-
-
+}
 
 // Leyendas y opciones gráficas
+
+$Tipo_Grafico=$_POST['Tipo_Grafico'];
 
 $graph->SetDataType('text-data');
 $graph->SetLineWidth(1);
@@ -4166,8 +4168,10 @@ $graph->SetTitle("Movimientos de circulación");
 
 //print_r($Datos);
 
+$Leyendas=$_POST['Leyendas'];
 if ($Tipo_Grafico=='pie') {
 	$graph->SetShading(5);
+
 
 	if (sizeof($Series)==2) { // si hay una sola operación muestra las leyendas del gráfico (referencia de los colores)
 		$graph->SetLegendPixels(430,30);

@@ -40,13 +40,13 @@ function comienzo_semana(Mes, Anio, Dia_Comienzo_Semana) {
   var _MesUltimoDia = _UltimoDia.getMonth()+1
   var _DiaUltimoDia = _UltimoDia.getDate()
   var _Fin = null
-  if (_MesUltimoDia < 10) {_Fin = _UltimoDia.getYear() + '0' + _MesUltimoDia} else {_Fin = _UltimoDia.getYear() + '' + _MesUltimoDia}
+  if (_MesUltimoDia < 10) {_Fin = _UltimoDia.getFullYear() + '0' + _MesUltimoDia} else {_Fin = _UltimoDia.getFullYear() + '' + _MesUltimoDia}
   if (_DiaUltimoDia < 10) {_Fin += '0' + _DiaUltimoDia} else {_Fin += '' + _DiaUltimoDia}
   
   var _MesPrimerDia = _Fecha.getMonth()+1
   var _DiaPrimerDia = _Fecha.getDate()
   var _Inicio = null
-  if (_MesPrimerDia < 10) {_Inicio = _Fecha.getYear() + '0' + _MesPrimerDia} else {_Inicio = _Fecha.getYear() + '' + _MesPrimerDia}
+  if (_MesPrimerDia < 10) {_Inicio = _Fecha.getFullYear() + '0' + _MesPrimerDia} else {_Inicio = _Fecha.getFullYear() + '' + _MesPrimerDia}
   if (_DiaPrimerDia < 10) {_Inicio += '0' + _DiaPrimerDia} else {_Inicio += '' + _DiaPrimerDia}
  
  
@@ -66,8 +66,8 @@ function comienzo_semana(Mes, Anio, Dia_Comienzo_Semana) {
 	
 		<!-- arma _Actual con formato AAAA/MM/DD -->
 		
-		if (_MesActual < 10) {_Actual += '^s' + _ContSemana + '^fFecha=' +  _Fecha.getYear() + '/0' + _MesActual} else 
-			{_Actual += '^s' + _ContSemana + '^fFecha=' + _Fecha.getYear() + '/' + _MesActual}    
+		if (_MesActual < 10) {_Actual += '^s' + _ContSemana + '^fFecha=' +  _Fecha.getFullYear() + '/0' + _MesActual} else 
+			{_Actual += '^s' + _ContSemana + '^fFecha=' + _Fecha.getFullYear() + '/' + _MesActual}    
 		if (_DiaActual < 10) {_Actual += '/0' + _DiaActual} else {_Actual +=  '/' + _DiaActual}
 		
 		<!-- Visualización de las semanas -->
@@ -97,7 +97,7 @@ function comienzo_semana(Mes, Anio, Dia_Comienzo_Semana) {
 		_MesActual = _Fecha.getMonth()+1;
 		_DiaActual = _Fecha.getDate();
 		_Actual = '';
-		if (_MesActual < 10) {_Inicio = _Fecha.getYear() + '0' + _MesActual} else {_Inicio = _Fecha.getYear() + '' + _MesActual}
+		if (_MesActual < 10) {_Inicio = _Fecha.getFullYear() + '0' + _MesActual} else {_Inicio = _Fecha.getFullYear() + '' + _MesActual}
 		if (_DiaActual < 10) {_Inicio += '0' + _DiaActual} else {_Inicio += '' + _DiaActual}
 		
 	}
@@ -142,11 +142,11 @@ function VerificarFecha(Fecha) {
 	if (aaaa!=parseInt(aaaa) || aaaa=="") {
 		estado=false;
 	}else{
-		if (mm!=parseInt(mm) || mm=="" || mm.valueOf()<1 || mm.valueOf()>12) {
+		if ( mm=="" || mm.valueOf()<1 || mm.valueOf()>12) {
 			estado=false;
 		}else{
 			dd_maximo=DiasDelMes(mm,aaaa); // DiasDelMes trae el nro. de días del mes mm
-			if (dd!=parseInt(dd) || dd=="" || dd.valueOf()<1 || dd.valueOf()>dd_maximo) {
+			if (dd=="" || dd.valueOf()<1 || dd.valueOf()>dd_maximo) {
 				estado=false;
 			}
 		}
