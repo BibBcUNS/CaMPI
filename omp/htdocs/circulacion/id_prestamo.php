@@ -58,6 +58,10 @@ input:focus{
 	background-color:Beige;
 }
 
+input[type="submit"] {
+	border-left-width:0px;
+}
+
 -->
 </style>
 
@@ -97,14 +101,15 @@ function focus_expresion() {
 </head>
 
 <body>
-   <div id="lt1" style="margin-top:60px;">
+   <div id="lt1" style="margin-top:50px;">
 		<?php
         $usuario=$_SESSION["s_username"];
         $url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
         $ptr_datos = fopen($url,"r");
         $datos = fread($ptr_datos,500);
         fclose($ptr_datos);
-        echo '<center><b>OPERADOR<br></center>'.$datos.'</b>';
+        echo '<center><b>OPERADOR<br>'.$datos.'</b>';
+		echo '<a href="/omp/logout.php" target="_top" style="text-decoration:none"><b>&gt;&gt;&gt; Salir &lt;&lt;&lt;</b></a></center>';
         ?>
 	</div>
    <div id="lt1" style="margin-top:30px;">
@@ -123,7 +128,7 @@ function focus_expresion() {
       <td width="100%"><strong>Consultar por</strong></td></tr>
     <tr>
 		<td width="100%">
-		<label><input type="radio" name="criterio" value="inv" checked>Inventario</label>
+		<input type="radio" name="criterio" value="inv" checked>Inventario
 		</td>
 	</tr>
 	<?php
@@ -137,13 +142,18 @@ function focus_expresion() {
 		?>
 			<tr>
 				<td width="100%">
-				<label><input type="radio" name="criterio" value="nc">Nº Control</label>
+				<input type="radio" name="criterio" value="nc">Nº Control
 				</td>
 			</tr>
 		<?php } // fi end ?>
     <tr>
 		<td width="100%">
-		<label><input type="radio" name="criterio" value="lector">Usuario</label>
+		<input type="radio" name="criterio" value="autor">Autor
+		</td>
+	</tr>
+	<tr>
+		<td width="100%">
+		<input type="radio" name="criterio" value="lector">Usuario
 		</td>
 	</tr>
     <tr>
@@ -202,7 +212,7 @@ $password=$_SESSION["s_password"];
       <td width="100%">
       <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$password; ?>">
 	  <input type="text" id="lector" name="lector" size="10" accesskey="l"><input type="submit" value=" > ">
-	  <!--input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()"-->
+	  <input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()">
 	  <input type="button" value="limpiar" onclick="window.document.form_id.lector.value='';window.document.form_id.lector.focus()">
 	  </td>
 	</tr>

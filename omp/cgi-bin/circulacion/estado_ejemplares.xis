@@ -12,15 +12,15 @@
     <parm name=expression><pft>'-NC=',v110</pft></parm>
     <loop>
 		<field action=import tag=1000>1000</field>
+		<field action=replace tag=2000><pft>v1^b,'_',v1^c,'_',v1^p</pft></field>
 		<field action=replace tag=1000>
 			<pft>
 				v1000,
 					
 						'{',
 							'"parte":"',v1^p,'", ',
-							'"reservas":"',ref(['reservas']l(['reservas']'-NC=',v1^c),f(nocc(v2),1,0)),'",',
-							'"esperas":"',ref(['reservas']l(['reservas']'-NC=',v1^c),f(nocc(v3),1,0)),'",',
-							
+							'"reservas":"',ref(['reservas']l(['reservas']v2000),f(nocc(v2),1,0)),'",',
+							'"esperas":"',ref(['reservas']l(['reservas']v2000),f(nocc(v3),1,0)),'",',
 							'"ejemplares":[',
 								(
 									if s(ref(['exist']l(['exist']v2),v987))='OTRO' 

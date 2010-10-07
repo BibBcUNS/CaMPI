@@ -125,7 +125,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
         <input type="hidden" name="opcion" value="Presentar">
         <strong>Lector: <input type="text" name="credencial" size="10">
         <input type="radio" name="id_lector" value="documento" checked>
-        DNI <input type="radio" name="id_lector" value="mfn">
+        Doc. <input type="radio" name="id_lector" value="mfn">
         MFN<br />
         <input type="submit" value="Presentar">
         </form>
@@ -184,11 +184,11 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
     <input type="submit" value="Actualizar Circulación" title="Actualiza la base de datos utilizada en el sistema de circulación en función de la base bibliográfica del sistema de catalogación" name="submit_btn">
     <input type="hidden" name="IsisScript" value="administracion/actualizar_bases.xis">
 	<br><br>
-    </form>
     <!--
 	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" name=control_consistencia_form onSubmit="disable_button(document.control_consistencia_form.submit_btn)">
     <input type="submit" value="Control de consistencia de inventarios" name=submit_btn>
     <input type="hidden" name="IsisScript" value="administracion/check_consistencia.xis" >
+    </form>
 	<br 
     -->
  

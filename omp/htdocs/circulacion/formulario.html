@@ -471,7 +471,7 @@ if ref(['config']1,v9)='si' then
 		<td colspan="2" bgcolor="#FFFFFF">',
 			if p(v2030) then
 			'<table border="1" width="100%" bgcolor="FFFFFF" cellpadding="4" cellspacing="0">
-				<tr valign="middle" style="font-weight:normal;font-size:0.7em">
+				<tr valign="middle" style="font-weight:normal">
 					<th align="left">Reservas registradas</th><th>Fecha/hora</th>',
 					if ref(['opera']l(['opera']v1000^b),(v5|~|)):'administracion' then
 						'<th>Eliminar</th>',
@@ -486,14 +486,19 @@ if ref(['config']1,v9)='si' then
 							v100^9, " "v100^d,
 							fi,'</b> : ',
 							v245^a," "v245^b,
+							if p(v859^h) then
+								'<FONT FACE="MS SANS SERIF ITALIC" SIZE=2 >',
+								(if not v1000[1]:s(v859^h,'. ',v859^i) then proc('d1000a1000~',v1000[1],' ',s(v859^h,'. ',v859^i),'~') fi),(v1000),
+								'</font>',
+							fi,
 						'</font><br>
 						'),
 		
 					if v2030^p<>'' then 'Parte: ',v2030^p,'</font><br>' fi,
-					'<font color="gray">',v2030^c, if v2030^p<>'' then '[',v2030^p,']' fi,'<br>'
+					/*'<font color="gray">',v2030^c, if v2030^p<>'' then '[',v2030^p,']' fi,'<br>'*/
 					'</td>
 					<td align="center" width="15%">',v2030^f,'<br>',v2030^h,'</td>',
-					if ref(['opera']l(['opera']v1000^b),(v5|~|)):'administracion' then
+					if ref(['opera']l(['opera']v1000[1]^b),(v5|~|)):'administracion' then
 						'<td align="center" width="12%">
 							<form name="eliminar_',f(iocc,1,0),'" method="POST"
 								action="/omp/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
@@ -516,7 +521,7 @@ if ref(['config']1,v9)='si' then
 		<td colspan="2" bgcolor="#FFFFFF">',
 			if p(v2031) then
 			'<table border="0.5" width="100%" bgcolor="FFFFFF" cellpadding="4" cellspacing="0">
-				<tr valign="middle" style="font-weight:normal;font-size:0.7em">
+				<tr valign="middle" style="font-weight:normal">
 					<th align="left">Esperas registradas</th><th>Fecha/hora</th>',
 					if ref(['opera']l(['opera']v1000^b),(v5|~|)):'administracion' then
 						'<th>Eliminar</th>',
@@ -531,11 +536,16 @@ if ref(['config']1,v9)='si' then
 								v100^9, " "v100^d,
 								fi,'</b> : ',
 								v245^a," "v245^b,
+								if p(v859^h) then
+									'<FONT FACE="MS SANS SERIF ITALIC" SIZE=2 >',
+									(if not v1000[1]:s(v859^h,'. ',v859^i) then proc('d1000a1000~',v1000[1],' ',s(v859^h,'. ',v859^i),'~') fi),(v1000),
+									'</font>',
+								fi,
 							'</font><br>'
 						),
 		
 					if v2031^p<>'' then 'Parte: ',v2031^p,'</font><br>' fi,
-					'<font color="gray">',v2031^c,if v2031^p<>'' then '[',v2031^p,']' fi, '<br>'
+					/*'<font color="gray">',v2031^c,if v2031^p<>'' then '[',v2031^p,']' fi, '<br>'*/
 					'</td>
 					<td align="center" width="15%">',v2031^f,'<br>',v2031^h,'</td>',
 					if ref(['opera']l(['opera']v1000^b),(v5|~|)):'administracion' then

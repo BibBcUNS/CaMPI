@@ -1302,9 +1302,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		
 		<!-- a lector se le entregan los siguientes valores: 'bloqueo',id operador, lector.
 		v2222 Indica la forma de aplicar políticas: manual/politicas -->
-		<display><pft>'ENTRA'</pft></display>
   		<call name=lector><pft>'^aBLOQUEO^b',v110^i,'^c',v100,'^p',v2222</pft></call>
-		<display><pft>'SALE'</pft></display>
   		
 		<display><pft>
 				if v1000<>'ok' then 
