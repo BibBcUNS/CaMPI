@@ -9,7 +9,7 @@ $modulo=$_POST['modulo'];
 if ($password==NULL or $username==NULL) {
    echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php?error=si&modulo=$modulo>";}
 else{
-   $cadena_archivo = "http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=permisos_user.xis&user=".$username."&pwd=".$password;
+   $cadena_archivo = "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=permisos_user.xis&user=".$username."&pwd=".$password;
    $ptr_userpwd = fopen($cadena_archivo, "r");
    $permisos = fread($ptr_userpwd,8192);
    fclose($ptr_userpwd);

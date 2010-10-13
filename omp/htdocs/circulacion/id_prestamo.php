@@ -133,7 +133,7 @@ function focus_expresion() {
 	</tr>
 	<?php
 		include "json/JSON.php";
-		$ptr_config = fopen("http://localhost:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
+		$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
 		$config_obtener = fread($ptr_config,1000);
 		fclose($ptr_config);
 		$json = new Services_JSON();
