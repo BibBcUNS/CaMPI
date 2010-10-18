@@ -41,7 +41,7 @@
    <div id="lt"><br>
 		<?php
         $usuario=$_SESSION["s_username"];
-        $url="http://127.0.0.1/omp/cgi-bin/wxis.exe/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
+        $url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/circulacion/?IsisScript=circulacion/identificacion_id.xis&id_operador=".$usuario;
         $ptr_grabar_datos = fopen($url,"r");
         $grabar_datos = fread($ptr_grabar_datos,500);
         fclose($ptr_grabar_datos);
