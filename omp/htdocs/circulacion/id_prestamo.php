@@ -212,7 +212,7 @@ $password=$_SESSION["s_password"];
       <td width="100%">
       <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$password; ?>">
 	  <input type="text" id="lector" name="lector" size="10" accesskey="l"><input type="submit" value=" > ">
-	  <input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()">
+	  <!--input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()"-->
 	  <input type="button" value="limpiar" onclick="window.document.form_id.lector.value='';window.document.form_id.lector.focus()">
 	  </td>
 	</tr>
