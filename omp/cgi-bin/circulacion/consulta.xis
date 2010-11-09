@@ -387,7 +387,7 @@
 
 			<td width="150%" align="center">
 				<input type="submit" value="Buscar"><br />
-				<a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
+				<!--a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a--><br />
 			</td>
 			<td>
 			</td>
@@ -504,7 +504,7 @@
 
 			<td width="150%" align="center">
 				<input type="submit" value="Buscar"><br />
-				<a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
+				<!--a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a--><br />
 			</td>
 			<td>
 			</td>
