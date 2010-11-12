@@ -548,7 +548,7 @@ if ref(['config']1,v9)='si' then
 					/*'<font color="gray">',v2031^c,if v2031^p<>'' then '[',v2031^p,']' fi, '<br>'*/
 					'</td>
 					<td align="center" width="15%">',v2031^f,'<br>',v2031^h,'</td>',
-					if ref(['opera']l(['opera']v1000^b),(v5|~|)):'administracion' then
+					if ref(['opera']l(['opera']v1000[1]^b),(v5|~|)):'administracion' then
 					'<td align="center" width="12%">
 						<form name="eliminar_',f(iocc,1,0),'" method="POST"
 							action="/omp/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
