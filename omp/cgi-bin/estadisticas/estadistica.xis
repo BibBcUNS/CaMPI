@@ -291,12 +291,33 @@ Considerar que v9996 es la contador de operaciones matcheadas
 			endsel,
 		</pft></field> <!-- Reformula v300 dejando unicamente los datos limpios de fecha -->
 
+<field action="replace" tag="4999" split="occ"><pft>
+	select v9999 
+			case 'mensual':
+				select s(v300[1]*11.2)
+			    case '01': ,'Enero',
+			    case '02': ,'Feb',
+			    case '03': ,'Mar',
+			    case '04': ,'Abr',
+			    case '05': ,'May',
+			    case '06': ,'Jun',
+			    case '07': ,'Jul',
+			    case '08': ,'Ago',
+			    case '09': ,'Sep',
+			    case '10': ,'Oct',
+			    case '11': ,'Nov',
+			    case '12': ,'Dic',
+			  endsel,
+	endsel,
+</pft></field> <!-- Reformula v300 dejando unicamente los datos limpios de fecha -->
+
 <field action="add" tag="4006" split="occ"><pft>(v4002/)</pft></field> <!-- Leyendas para el eje X (fechas) -->
 
 <field action="replace" tag="4002" split="occ"><pft>
 		select v9999 
 			case 'mensual':
-				('<td class="celda_encabezado" align="center">',v4002.2,'<font size="-3"><br>',v4002*3,'</font>'/),
+				
+				('<td class="celda_encabezado" align="center">',v4002.2,/),
 			elsecase
 				(|<td class="celda_encabezado">|v4002|</td>|/),
 			endsel,

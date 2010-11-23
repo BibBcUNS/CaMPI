@@ -112,7 +112,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
   <display><p align="center"><big>Préstamos morosos a la fecha</big></p></display>
   <do task=mfnrange>
     <parm name=db>lector</parm>
-    <parm name=gizmo>oemansi</parm>
+  
     <loop>
 				
   <list action=load><pft>
@@ -142,18 +142,21 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 				<field action="import" tag="list">2100</field>
        	<display><pft>
 				if v1100^a<>v2100 then 
-        	 '<font face="Draft 10cpi"><table border="0" width="100%" bgcolor="#FAEFDD" cellpadding="0" cellspacing="0">'/
+        	 '<table class=tabla_admin    cellpadding="2" cellspacing="0">'/
 	         '<tr>'/
 			 		 if p(v1100^z) then 
-         	  '<td width="50%" colspan="2" bgcolor="#F9C99A">Lector: <b>',mhl,v1100^a,'</b></td>'/
-				 		'<td bgcolor="#F9C99A" align="center"><div id=',"'"n0,'MailFormId#',v1100^x,"'"n0,'><a href="JavaScript:enviarReclamo(',"'FormId#"v1100^x"'",')">Reclamar por email</a></div>'/
+         	  '<td width="50%" colspan="2" bgcolor="#84b5d1">Lector: <b>',mhl,v1100^a,'</b></td>'/
+				
+				'<td bgcolor="#84b5d1" align="center"><div id=',"'"n0,'MailFormId#',v1100^x,"'"n0,'><a href=mailto:'v1100^z,'>Reclamar por email</a></div>'/
+
+				
 				 		'<form id="FormId#',v1100^x,'" method="post" action="/administracion/reclamo_moroso/reclamo.php">'/
 				 		'  <input type="hidden" name="nombre" value="',v1100^a,'">'/, 
 					  '  <input type="hidden" name="email" value="',v1100^z,'">'/,
 					  '  <input type="hidden" name="material[]" value="',mid(v1100^b,instr(v1100^b,')')+1,size(v1100^b)),' (prestado: ',v1100^p,'; vencimiento: ',v1100^v,')">'/,
 					  '</form>'/
 					 else
-            '<td width="100%" colspan="3" bgcolor="#F9C99A">Lector: <b>',mhl,v1100^a,'</b></td>'/
+            '<td width="100%" colspan="3" >Lector: <b>',mhl,v1100^a,'</b></td>'/
 					 fi
  			    '</tr>'/
 		 		fi
@@ -167,7 +170,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 			<field action="export" tag="list">2100</field>
 			<display><pft>
 			 if val(v1101)=val(v1102) then 
-			 	 '</table></font>'/
+			 	 '</table>'/
 			 fi							 
 			</pft></display>
 		</loop>
@@ -207,7 +210,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
     </loop>
   </do>
   <display><pft>'<font face="Draft 10cpi"><p><b>Total de préstamos: ',v1102,'</b></p>'
-    if val(v1102)>0 then '<table border="0" width="100%" bgcolor="#FAEFDD">' fi</pft></display>
+    if val(v1102)>0 then '<table table class=tabla_admin  cellpadding="2" cellspacing="0">' fi</pft></display>
 
   <do task=list>
     <field action=define tag=1001>Isis_Item</field>
@@ -287,7 +290,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 
   <display><pft>'<font face="Draft 10cpi"><p><b>Total de devoluciones: ',f(val(v1102)/2,1,0),'</b></p>'
      if val(v1102)>0 then 
-      '<table border="0" width="100%" bgcolor="#FAEFDD"> 
+      '<table border="0" width="90%" bgcolor="#FAEFDD"> 
        <tr>
          <td width="20%" align="center" bgcolor="#F9C99A"><b>Operación del préstamo</b></td>
          <td width="10%" align="center" bgcolor="#F9C99A"><b>Inventario</b></td>
@@ -344,7 +347,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 						<do task="mfnrange">
 							<parm name="db">marc</parm>
 							<parm name="from"><pft>v5000</pft></parm>
-							<parm name="gizmo">oemansi</parm>
+							
 							<parm name=count>1</parm>
 							<loop>
 								<field action="add" tag="5001"><pft>@papeleta.pft</pft></field> <!-- Obtiene los datos utilizados en la papeleta -->
@@ -398,7 +401,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 	</do>
 
 	<display>
-      <table border="0" width="100%" bgcolor="#FAEFDD"> 
+      <table border="0" width="90%" bgcolor="#FAEFDD"> 
        <tr>
          <td width="50%" align="center" bgcolor="#F9C99A"><b>Material</b></td>
          <td width="40%" align="center" bgcolor="#F9C99A"><b>Lector</b></td>

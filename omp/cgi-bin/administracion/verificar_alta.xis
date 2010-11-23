@@ -73,10 +73,11 @@
   <field action=cgi tag=130>mfn_lector</field>
   <field action=cgi tag=120>opcion</field> <!-- Presentar / Registro Nuevo -->
   <field action=cgi tag=2>documento</field> <!-- documento editado -->
+  <field action=cgi tag=29>tipoid</field>
 
 	<do task="search">
 	<parm name="db">lector</parm>
-	<parm name="expression"><pft>v2</pft></parm> <!-- si es un reg. nuevo o uno editado verifica que no exista otro documento repetirlo -->
+	<parm name="expression"><pft>v29,v2</pft></parm> <!-- si es un reg. nuevo o uno editado verifica que no exista otro documento repetirlo -->
 	<parm name="gizmo">oemansi</parm>
 	<parm name="count">1</parm>
 	<field action="define" tag="1002">Isis_Total</field>
