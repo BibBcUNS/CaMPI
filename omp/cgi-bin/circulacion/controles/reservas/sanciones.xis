@@ -9,7 +9,7 @@
 <field action="add" tag="5000">
 	<pft>  
 		if (s(mpu,v10)<>'HABILITADO') then 
-			mhl,'Error: El Usuario está <b>SANCIONAOD</b>.'
+			mhl,'Error: El Usuario está <b>SANCIONADO</b>.'
 		fi
 	</pft>
 </field>

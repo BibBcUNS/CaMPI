@@ -32,7 +32,7 @@ ref(['lector']l(['lector']v3002),
 <field action=replace tag=5000><pft>
 if val(v4000)>0
 then
-	'Error: El usuario tiene una devolución atrazada.'
+	'Error: El usuario tiene una devolución atrasada.'
 fi
 </pft></field>
 
