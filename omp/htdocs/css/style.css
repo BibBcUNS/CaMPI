@@ -258,18 +258,6 @@ hr
   margin: 10px 0px;
 }
 
-
-.texto_tabla{
-	
-}
-
-.tabla_admin
-{ background-color:#b5d2e2;
-	width:90%;
-	font-size:12px;
-	border-color:#333;
-	border-bottom-width: medium;
-	
-	
-}
-
+.boton {
+		background-color: #a6d1fe;
+	}

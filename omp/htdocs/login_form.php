@@ -44,9 +44,9 @@ else {
 <br>
 <form action='login_valida.php' method='POST'>
 <input type=hidden name=modulo value="<?php echo $_GET['modulo'];?>">
-<table align='center' style='border:1px solid #000000;'>
+<table align='center' width="500" style='border:1px solid #000000;'>
 <tr>
-	<td align='center'>
+	<td align='center' colspan="2">
 		<?php
 		if (isset($_GET["error"]) && $_GET["error"]=='si'){
 		echo "<br><font color='red'>Ingrese usuario y contrase&ntilde;a v&aacute;lidos</font><br><br>";
@@ -57,17 +57,23 @@ else {
 </tr>
 <tr>
 	<td align='right'>
-	Nombre de usuario: <input type='text' size='15' maxlength='25' name='username'>
+		Nombre de usuario: 
+    </td>
+    <td>
+    	<input type='text' size='15' maxlength='25' name='username'> (Usuario=admin)
 	</td>
 </tr>
 <tr>
 	<td align='right'>
-	Password: <input type='password' size='15' maxlength='25' name='password'>
+		Password: 
+    </td>
+    <td>    
+    	<input type='password' size='15' maxlength='25' name='password'> (password=admin)
 	</td>
 </tr>
 <tr>
-	<td align='center'>
-	<input type="submit" value="Login">
+	<td align='center' colspan="2">
+	<input type="submit" value="Ingreso a Circulación" class="boton">
 	</td>
 </tr>
 </table>
