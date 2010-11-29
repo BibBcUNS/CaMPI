@@ -490,7 +490,7 @@
 
   
   <field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogación (v6) -->
-  <display><pft>
+  <!--display><pft>
 	'<input type="button" name="volver" value="<< Volver" onClick="javascript:history.back()">
   	<form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/">
   	<input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
@@ -504,7 +504,7 @@
 
 			<td width="150%" align="center">
 				<input type="submit" value="Buscar"><br />
-				<!--a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a--><br />
+				<a href="/omp/circulacion/marc_fst.txt" target="new">Ayuda</a><br />
 			</td>
 			<td>
 			</td>
@@ -513,7 +513,7 @@
 	
 	<br><br>
 	</form>'
-	</pft></display>
+	</pft></display-->
 
   	<!-- Formateo de la cadena de busqueda -->
 	<!-- esto es por si queremos quitar puntuaciones -->
