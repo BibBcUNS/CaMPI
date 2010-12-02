@@ -53,7 +53,7 @@
   <field action=cgi tag=112>campo</field>
   <field action=cgi tag=120>usuario_id</field>
   <field action=cgi tag=130>operario_id</field>
- 
+
   <display><htmlpft>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -86,7 +86,7 @@
 					*/
 	}
 	function ventana_estado(nc) {
-		location.href = "/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/consulta.xis&expresion="+nc+"&criterio=nc";
+		location.href = "/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/consulta.xis&expresion="+nc+"&criterio=nc"+"&operario_id="+operario_id;
 	}
 	
 	usuario_id="[pft]v120[/pft]";
@@ -109,8 +109,6 @@
    
 <!--#########################################-->		    </htmlpft></display> 
 
-
- 
   <flow action=jump><pft>if p(v110) or v100='prestamos' then v100 else 'SALIDA' fi</pft></flow>
 <!----------------------------------------------------------------------------->
   <label>nc</label>
@@ -121,7 +119,6 @@
   <label>inv</label>
   <trace>!BR</trace>
   <field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogación (v6) -->
-
 	<do task=search>
     <parm name=db>marc</parm>
     <parm name=expression><pft>if v100='nc' then 'NC=' fi,v110</pft></parm>
@@ -178,8 +175,11 @@
 				<display></table></display>
 		    </loop>
         </do>
-        <!--display><pft>'<br><b>Inventarios: </b>'</pft></display>
-     	<display><pft>(v859^p,'[',ref(['exist']l(['exist']v859^p),v987),']',' - ')</pft></display-->
+		<!-- Se muestran los inventarios si el operador tiene privilegios de administración -->
+		<field action=import tag=130>130</field>
+        <display><pft>if ref(['opera']l(['opera']v130),(v5|~|)):'administracion' then,
+		'<br><b>Inventarios: </b>',
+     	(v859^p,'[',ref(['exist']l(['exist']v859^p),v987),']',' - ') fi</pft></display>
 
     </loop>
   </do>

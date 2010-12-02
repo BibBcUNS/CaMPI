@@ -123,6 +123,7 @@ function focus_expresion() {
 		}else{  return true;}
 	">
 	<input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
+	<input type="hidden" name="operario_id" value="<? echo $usuario; ?>">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td width="100%"><strong>Consultar por</strong></td></tr>
