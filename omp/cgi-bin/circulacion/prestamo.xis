@@ -1123,7 +1123,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                </pft></display>
         
                <display><pft>
-                 '<tr><td width="10%" align="center" style="color: #FF0000; font-weight: bold">Vto.',v1001^v.5,
+                 '<tr><td width="10%" align="center" style="color: #FF0000; font-weight: bold">Vto.',v1001^v.10,
                        if p(v1001^o) then '<br>', 
                           select s(v1001^o).1
                             case 'm': '10:00 hs.',
@@ -1136,7 +1136,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                  <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error !</marquee>'
                         fi,v1001^b.60,
                       '</td><td width="10%">&nbsp;</td>',
-                      '<td width="10%" align="center" style="color: #FF0000; font-weight: bold">Vto.',v1001^v.5,
+                      '<td width="10%" align="center" style="color: #FF0000; font-weight: bold">Vto.',v1001^v.10,
                        if p(v1001^o) then '<br>', 
                           select s(v1001^o).1
                             case 'm': '10:00 hs.',
