@@ -1,0 +1,39 @@
+<field action=replace tag=2000><pft>
+	'lector.*=',v5006,'/lector/lector.*'/
+</pft></field>		
+<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
+
+<parm name="cipar"><pft>v2000</pft></parm>
+
+<!-- Eliminamos los prestamos registrados en la base Lector. -->
+<display><pft>'Borrando prestamos existentes en LECTOR...'/</pft></display>
+<do task="mfnrange">
+	<parm name="db">lector</parm>
+	<loop>
+	  <do task=update>
+	    <parm name=db>lector</parm>
+	    <parm name=mfn><pft>mfn</pft></parm>
+	    <parm name="lockid">id</parm>
+			<field action="define" tag="1102">Isis_Status</field>
+	    <field action="define" tag="1011">Isis_Lock</field>
+			<update>
+				<field action="delete" tag="8">ALL</field> <!-- borra los préstamos -->
+				<field action="delete" tag="9">ALL</field> <!-- borra los anticipos de préstamos -->
+				<write>Unlock</write>
+				<display><pft>if val(v1102)>0 then 'Error en mfn: ',mfn/ fi</pft></display>
+			</update>
+		</do>
+	</loop>
+</do>
+<display><pft>'listo'/#</pft></display>
+
+
+<!-- Indexamos la base LECTOR -->
+<display><pft>'Indexando la base LECTOR...'/</pft></display>
+<do task="fullinvertion">
+	<parm name="db">lector</parm>
+	<parm name="fst"><pft>cat('lector.fst')</pft></parm>
+	<field action="define" tag="1102">Isis_Status</field>
+		<loop></loop>
+</do>	
+<display><pft>'listo'/#</pft></display>

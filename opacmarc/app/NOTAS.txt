@@ -1,0 +1,398 @@
+Ver también lo que empezamos a hacer para Catalis: http://dpaste.com/hold/67286/
+
+
+Reorganización de opacmarc-admin:
+
+    - contiene:
+        common  => aux ?   *tab, *.fst, *.stw, *.pft, country.*, dictgiz.*, lang.*  
+        
+        
+admin
+    conf (podria juntarse con cgi-bin/opac/config/)
+        conf.sh
+        opac.conf
+    bin
+        update-opac.*
+    data
+        lang.txt
+        oem2ansi (gizmo)
+        shared (common): *.tab, *.fst, *.stw, *.pft, country.*, dictgiz.*, lang.*
+        opac.cip.dist (plantilla), opac.cip (se genera automáticamente en base a la plantilla)
+    code
+        *.pft
+        *.fst
+        *.proc
+    work
+        one subdir per database, with subdirectories: original (source), tmp, pre
+
+bases
+    common <= lo mismo que admin/common (unificar)
+    opac
+        un subdir por base de datos
+
+cgi-bin
+    common
+    opac
+
+htdocs
+    common
+    opac
+
+logs
+
+bin
+    agrep.exe (en Windows)
+    newdb.py
+    
+config
+    Aquí podemos juntar lo que está en cgi-bin/opac/config/*.conf y en admin/*.conf
+    Pero antes tenemos que verificar que desde wxis podemos leer este dir, e.g.:
+        cat(getenv('PATH_WXIS'),'../config/opacmarc.conf')
+        
+---------------------------------------------------------------
+
+2008-10-08
+
+Cómo organizar archivos usados para tareas de administración.
+
+Tenemos por el momento tres tareas definidas, y cada una de ellas requiere
+de un conjunto de archivos auxiliares, además del respectivo archivo .py:
+
+    - install / init / setup
+        archivos .id para generar bases isis auxiliares
+        templates para config
+        
+        base demo: .id e imágenes
+    
+    - add_db
+        templates para la nueva base: html, css, conf
+    
+    - update_db
+        pft, fst (lo de admin/opac/)
+        más otros archivos comunes (lo de bases/common/)
+    
+
+La propuesta es que por cada tarea tengamos un directorio dentro de bin/
+y guardemos en él los archivos específicos requeridos por esa tarea (posiblemente
+clasificados dentro de subcarpetas más específicas), sin importar qué tipo de
+archivos sean, a excepción de archivos de configuración que necesariamente
+irán a parar a local-data/config/. Ejemplo:
+
+    bin/
+        add_db/
+            templates/
+                *.htm, *.css, *.conf
+        
+        update_db/
+            *.pft, *.fst
+        
+        install/
+            data/
+                *.id + demo img
+            templates/
+                *.conf
+         
+¿Dónde ponemos los scripts respectivos? install.py, add_db.py, update_db.py, ...
+
+¿Dónde ponemos archivos comunes a más de una tarea?
+
+¿Dónde ponemos archivos compartidos por alguna tarea y por cgi-bin?
+
+Si alguna de estas tareas requiere parámetros de configuración (archivos .conf o .cipar),
+éstos se guardarán en local-data/config/, y sus respectivos templates (sólo usados por
+install.py) en...? O bien podríamos consolidar en un único archivo de configuración local
+los parámetros de todas las tareas, agrupados por bloques. O bien para no sobrecargar
+al opac.xis, podemos usar un .conf para cgi-bin (el opac propiamente dicho), y un .conf
+para bin (las tareas de admin).
+
+
+Los archivos .id en install/data corresponden a bases isis que irán en su mayoría a util/
+y por lo tanto podríamos tener esos .id en util/ desde el comienzo. Los otros van a
+bin/update_db/.
+
+2008-10-15.
+Luego de unos días trabajando con esta disposición de archivos, creo que:
+
+- En los casos de add_db y update_db, parece bien que los archivos asociados queden
+  dentro de bin (no parece haber otro lugar más apropiado); sin embargo en el caso de install
+  (que contiene data y templates), creo que será mejor dejar los .id en el lugar donde irán
+  las bases isis asociadas, y los templates de config en la carpeta config.
+  
+- En cuanto a los archivos compartidos por bin/update_db y cgi-bin:
+      - country
+      - dictgiz
+      - actab
+      - uctab
+      - biblio.fst
+      - biblio.stw
+      - headsort.pft
+  creo que sería bueno ubicarlos en bin/update_db, y que desde el cgi-bin se haga referencia a
+  ellos, como para dejar en claro que en estos aspectos el funcionamiento del OPAC está
+  atado a la manera en que se generaron las bases durante la actualización. (Sí, es una
+  justificación extraña, pero por ahora me sirve.)
+  
+  De esta manera, podríamos deshacernos de la carpeta util.
+  
+  Dentro de bin/update_db podemos organizar mejor así?
+      - pft
+      - auxdb
+      - tab, fst, stw
+  
+  Sin embargo, me sigue pareciendo que archivos de uso claramente general, como las tablas
+  (actab, uctab), biblio.fst, tal vez deberían ubicarse en un nivel bien general dentro de
+  la estructura de carpetas, por si más adelante las queremos usar desde otro script.
+
+
+
+---------------------------------------------------------------
+Archivos temporales en OpacMarc
+
+
+Cuándo crea wxis archivos temporales:
+
+    - al hacer una búsqueda (seguro siempre?)
+    - cada vez que usamos <file action="create" type="tempfile">
+    
+El parámetro CI_TEMPDIR se especifica en el cipar, y le indica a wxis en qué directorio
+crear los temporales.
+
+Sin embargo, parece que en Linux ignora ese parámetro, y siempre los crea en /tmp.
+
+Por lo tanto, la solución más simple es que en Linux usemos un prefijo PATH_TEMP vacío, o bien
+con valor "/tmp".
+
+Para ver en qué partes de la aplicación aparecen archivos temporales, buscamos estas cadenas:
+
+    - tempfile
+    - PATH_TEMP
+    - v6003^t
+    - CI_TEMPDIR
+    - 2099
+    
+---------------------------------------------------------------
+2008-10-15
+
+En local-data tenemos una carpeta bases, con una subcarpeta por cada base
+alojada en el OPAC. Hay una pequeña incomodidad en el hecho de que el nombre
+'bases' puede hacer pensar que allí sólo encontraremos bases de datos, cuando
+en realidad hay archivos diversos (conf, css, html, además de las bases en
+sí). Las bases propiamente dichas viven dentro de la subcarpeta db.
+
+Tal vez sería más claro si en lugar de 'bases' usáramos el nombre 'catalogs'.
+De hecho, en una instalación de OpacMarc, cada base bibliográfica da lugar a
+un catálogo aparte, y por el momento no hay conexión entre ellos (salvo por
+un link como en el caso de los dos catálogos de ABR). Excepción: en el IAR
+se usa una base separada para analíticas, y desde ésta se generan links hacia
+la otra base; es decir, ambos "catálogos" están acoplados.  
+
+Así que podríamos tener esto:
+
+    local-data/
+        bin/
+        catalogs/
+            demo/
+                cgi-bin/
+                    htmlpft/
+                    pft/
+                config/
+                    db-settings o catalog-settings?
+                db/ o bases/
+                htdocs/
+            bibima/
+                cgi-bin/
+                    htmlpft/
+                    pft/
+                config/
+                db/ o bases/
+                htdocs/
+        config/
+        htdocs/
+        logs/
+        temp/
+
+Nótese que hemos agregado también, por consistencia, una carpeta cgi-bin para
+cada catálogo.
+
+Aun habría que pensar en posibles mecanismos para usar elementos locales de
+cgi-bin: un xis, un pft, o un htmlpft (además de los htmlpft ya previstos),
+ya sea de nivel local general, o específico para un catálogo.
+
+----------------------------------------------
+2008-10-15
+
+Si se usa un virtual host de Apache, podemos enviar los logs de Apache
+(asociados a este virtual host) a la carpeta local-data/logs.
+Ver http://httpd.apache.org/docs/2.2/logs.html
+    http://httpd.apache.org/docs/2.2/mod/mod_log_config.html
+Tener en cuenta cómo manejan los logs las diferentes versiones de Apache.
+Directivas: ErrorLog, TransferLog, CustomLog, LogFormat
+
+---------------------
+
+¿Deberíamos renombrar los "cgi-bin/html" como "cgi-bin/htmlpft"?
+
+---------------------
+
+Ideas generales sobre el uso de archivos locales.
+
+Tenemos dos problemas diferentes, aunque relacionados:
+
+    1) agregar/extend: crear archivos locales para añadir funcionalidad a la aplicación.
+    
+    2) sobrescribir/override: sustituir localmente archivos de la aplicación, para 
+      modificar la funcionalidad predeterminada.
+
+1) Por una parte, queremos que se puedan usar archivos puramente locales, es decir,
+archivos que la aplicación no requiere para funcionar correctamente, pero que en
+forma opcional los usuarios de la aplicación pueden definir y usar. Ejemplos:
+
+   -------------------------------------------------------------------------------------------------------
+    Tipo     Nombre a nivel local  Nombre a nivel base   Mecanismo de uso
+   -------------------------------------------------------------------------------------------------------
+   
+    --- CONFIG ---
+    conf     local-settings.conf   db-settings.conf      leídos desde read-param.xis
+    cipar    local-cipar.par       db-cipar.par          leídos desde read-param.xis
+    
+    --- HTDOCS ---
+    css      local-styles.css      db-styles.css         llamados desde opac-head.htm; pueden incluir otros .css con @import
+    js       local-scripts.js      db-scripts.js         llamados desde opac-head.htm
+    img      cualquiera            cualquiera            link desde archivos locales (htmpft, pft, xis, css)
+    docs     cualquiera            cualquiera            link desde archivos locales (htmpft, pft, xis)
+    
+    --- CGI-BIN ---
+    pft      cualquiera            cualquiera            llamados desde xis, pft o htmlpft, vía cipar local      
+    htmlpft  cualquiera            cualquiera            llamados desde xis, vía cipar local
+    xis      cualquiera            cualquiera            llamados desde opac.xis, vía local.xis         
+    
+    --- BIN ---
+    bin      cualquiera            cualquiera            ejecución desde línea de comandos   
+   -------------------------------------------------------------------------------------------------------
+
+
+2) Por otra parte, queremos que (muchos de) los archivos *necesarios* para la aplicación
+puedan ser "pisados" (overriden) localmente, siempre respetando el principio de no alterar
+código de la aplicación, para simplificar las actualizaciones. En este caso, nos interesan
+principalmente los archivos de cgi-bin: pft, htmlpft, xis. Y quizás también las imágenes
+predeterminadas.
+
+   -------------------------------------------------------------------------------------------------------
+    Tipo     Nombre a nivel local  Nombre a nivel base   Mecanismo de uso
+   -------------------------------------------------------------------------------------------------------
+    
+    --- HTDOCS ---
+    img      cualquiera            cualquiera            link desde archivos locales (htmpft, pft, xis, css)
+    
+    --- CGI-BIN ---
+    pft      cualquiera            cualquiera            llamados desde xis, pft o htmlpft, vía cipar local      
+    htmlpft  cualquiera            cualquiera            llamados desde xis, vía cipar local
+    xis      cualquiera            cualquiera            ??         
+   -------------------------------------------------------------------------------------------------------
+
+¿Y qué hay de CSS y JS? ¿Vale la pena permitir que se use p.ej. local-aacr.css en lugar de aacr.css,
+siendo que ya se ofrece el mecanismo para aplicar CSS local? Y lo mismo para JS...
+
+Falta considerar:
+    FST, STW
+    Tablas actab, uctab
+
+
+Para dejar todo esto bien en claro, tenemos que armar una buena tabla donde queden respondidas
+estas preguntas para cada tipo de archivo T, y para cada nivel local (general, base):
+
+    - ¿cómo hago para agregar un archivo de tipo T?
+    - ¿cómo hago para alterar/reemplazar un archivo de tipo T que viene predeterminado en la aplicación?
+    
+El "cómo hago" involucra: qué archivo creo o modifico, donde lo almaceno, y dónde/cómo registro
+el cambio para que entre en efecto.
+
+------------------------------------------------------------
+
+Los links a imágenes:
+
+./bin/add_db/templates/db-header.htm:    <img src="[pft]v6003^h[/pft]local-base/[pft]v2104[/pft]/img/db-logo.png" alt="Logo">
+./cgi-bin/html/novedad.htm:			     <img src="[pft]v6003^h[/pft]local-base/[pft]v2104[/pft]/img/[pft]v001,'.',v985^a[/pft]" alt="Imagen de la tapa">
+./cgi-bin/html/complete.htm:		     <img src="[pft]v6003^h[/pft]local-base/[pft]v2104[/pft]/img/[pft]v001,'.',v985^a[/pft]" alt="Imagen de la tapa">
+./cgi-bin/html/complete.htm:		     <img src="[pft]v6003^h[/pft]local-base/[pft]v2104[/pft]/img/[pft]v001,'.',v985[/pft]"></p>
+./cgi-bin/html/complete.htm:		     <img src="[pft]v6003^h[/pft]local-base/[pft]v2104[/pft]/img/[pft]v001,'.',v985[/pft]">
+
+./cgi-bin/html/mail.htm:		         <img src="[pft]v6003^h[/pft]img/envelope-icon.gif" alt="" align="middle">
+./cgi-bin/html/mail.htm:	             <img src="[pft]v6003^h[/pft]img/envelope-icon.gif" alt="" align="middle">
+./cgi-bin/xis/zero-hits.xis:			 <img src="[pft]v6003^h[/pft]img/google-Logo_25wht.gif" alt="Google" align="top" border="0">
+./cgi-bin/html/complete.htm:			 <img src="[pft]v6003^h[1][/pft]img/pdf_icon.gif" border="0">
+./cgi-bin/pft/wh.pft:					'<img src="',v6003^h,'img/sym_s_tree_plus.gif" style="border: none; /*vertical-align: top;*/"></a>'/ 
+
+Sería conveniente definir 3 parámetros, uno por cada nivel, para facilitar la creación de links a imágenes u otros tipos de
+archivos estáticos:
+
+     v6005^h := default_htdocs = /
+     <img src="[pft]v6005^h[/pft]img/something.png">
+     
+     v6005^l := local_htdocs = /local/
+     <img src="[pft]v6005^l[/pft]img/otherthing.png">
+     
+     v6005^d := db_htdocs = /local-db/__DB__/
+     <img src="[pft]v6005^d[/pft]img/db-logo.png">
+
+pero aun no sé en qué lugar/momento definirlos.
+
+------------------------------------------------------------
+
+FAVICON
+
+Podemos poner un favicon genérico de OpacMarc en app/htdocs/img
+Opcionalmente, se podrán usar un favicon local ubicado en
+    - local-data/htdocs/img
+    - local-data/bases/<base>/htdocs/img
+
+Para saber qué URL usar en la cabecera de las páginas, habrá que usar algún parámetro de configuración.
+
+------------------------------------------------------------
+
+Los scripts de administración (add_db.py, update_db.py, y otros que podamos necesitar), podrían
+implementarse como subcomandos de un comando general, al estilo de manage.py en Django, o el comando
+svn. Para esto podría ser útil:
+
+    cmd -- Support for line-oriented command interpreters <http://www.python.org/doc/2.5.2/lib/module-cmd.html>
+    
+    cmdln.py -- an improved cmd.py <http://trentm.com/projects/cmdln/>, <http://code.google.com/p/cmdln/>
+    Incluye como ejemplo el uso de "sub-commands" al estilo svn. 
+
+-----------------------------------------------------------
+
+Sobre BUILD, PACKAGE, INSTALL
+
+El libro "Producing Open Source Software: How to Run a Successful Free Software Project", de Karl Fogel
+contiene material de utilidad sobre esta cuestión. Ver p.ej.
+
+    Chapter 7. Packaging, Releasing, and Daily Development
+    http://producingoss.com/en/packaging.html
+
+"Be willing to put in a lot of extra effort in order to make your project conform to the relevant
+build or installation standards. Building and installing is an entry point: it's okay for things
+to get harder after that, if they absolutely must, but it would be a shame for the user's or
+developer's very first interaction with the software to require unexpected steps."
+
+------
+
+Acá hay un ejemplo de script para build hecho en Python:
+
+    http://code.google.com/p/cmdln/source/browse/trunk/build.py
+
+--------------------
+
+Podemos incluir ejemplos de cronjobs para el OPAC? E.g. update_db.py.
+
+-----------------------
+
+Deberíamos incluir en la config del virtual host de apache un Redirect de este tipo:
+
+    Redirect /           http://127.0.0.1:8081/cgi-bin/wxis?IsisScript=xis/opac.xis&db=demo&showForm=simple
+    Redirect /index.html http://127.0.0.1:8081/cgi-bin/wxis?IsisScript=xis/opac.xis&db=demo&showForm=simple
+    
+¿Se podrá hacer así?    
+    
+    Redirect /           /cgi-bin/wxis?IsisScript=xis/opac.xis&db=demo&showForm=simple
+    Redirect /index.html /cgi-bin/wxis?IsisScript=xis/opac.xis&db=demo&showForm=simple
+
+-----------------------

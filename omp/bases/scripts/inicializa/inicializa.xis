@@ -1,0 +1,54 @@
+<IsisScript><section>
+<trace>!On</trace>
+
+ 
+<!-- Esta script inicializa la base de existencias y la base de partes a partir de los registros
+de la base bibliogràfica (biblo).
+
+Para la base de existencias se toman el nombre de la base de datos y los datos de existencia del 
+campo expresado en el parámetro "Campo Inventario" del archivo config.txt y como nombre de base 
+de datos se toma ...
+ 
+Para la base de partes se toman el nombre de base de datos, el nùmero de control del registro 
+bibliográfico y la identificación de parte; y un campo repetible con todos los inventarios 
+respectivos...
+-->
+	<include>./inicializa/definir_SO.xis</include>
+	
+	<include>./inicializa/leer_config.xis</include>
+	
+	<include>../../cgi-bin/administracion/archivos_actualiza/crear_biblo.xis</include>
+	<!--include>./inicializa/crear_biblo.xis</include-->
+	
+	<include>../../cgi-bin/administracion/archivos_actualiza/crear_partes.xis</include>
+	<!--include>./inicializa/crear_partes.xis</include-->
+
+	<include>./inicializa/crear_exist.xis</include>
+	
+	<include>./inicializa/crear_config.xis</include>
+
+	<include>./inicializa/crear_gizmos.xis</include>
+
+	<include>./inicializa/crear_opera.xis</include>
+	
+	<include>./inicializa/crear_cipars.xis</include>
+	
+	<include>./inicializa/reescr_htmls.xis</include>
+
+	<!-- BASES DEMO -->	
+		<!--include>./inicializa/limpiar_lector.xis</include-->
+		<include>./inicializa/crear_lector_demo.xis</include>
+		<!--include>  ¿¿?? ./inicializa/limpiar_politicas.xis</include-->
+		<include>./inicializa/crear_politicas_demo.xis</include>
+		<include>./inicializa/crear_tipo_lector_demo.xis</include>
+		<include>./inicializa/crear_calendario_demo.xis</include>
+
+	<include>./inicializa/crear_movi.xis</include>
+
+	<include>./inicializa/crear_reservas.xis</include>
+
+	
+<!-- Listo, FIN-->
+
+</section>
+</IsisScript>

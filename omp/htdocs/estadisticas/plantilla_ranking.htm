@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Open MarcoPolo - Módulo Estadísticas</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	
+</head>
+
+<body topmargin="10" style="font-family: Verdana, Arial, Helvetica, sans-serif;	font-size : 12px">
+
+[pft]
+	if nocc(v2003)>10 then
+		'<a href="JavaScript:window.document.form_Ranking.submit();">',
+		'<img src="',getenv('PATH_INFO'),'graficos/ranking10.gif" border="0" alt="10 primeros" align="right">'
+		'</a>'
+	fi
+[/pft]
+
+<a href="JavaScript:print()"><img src="[pft]getenv('PATH_INFO')[/pft]graficos/imprimir.gif" alt="Imprimir" border="0" align="right"></a>
+<table border="1" align="center" width="60%">
+	<tr>
+		<td style="font-size: 12px; color: white; background-color: #5277AE" align="center">Máximos por [pft]v3001[/pft]</td>
+		<td style="font-size: 12px; color: white; background-color: #5277AE"" align="center">Valor</td></tr>
+[pft]	
+(
+'	<tr>'/
+'		<td bgcolor="#FEFFF6" align="center" style="font-size: 12px">',v2003^i,'</td>'/
+'		<td bgcolor="#FEFFF6" align="center" style="font-size: 12px">',v2003^v,'</td>'/
+'	</tr>'/
+)
+[/pft]
+		
+</table>
+<br>
+
+<form action="/omp/cgi-bin/wxis.exe/omp/[pft]getenv('PATH_INFO')[/pft]" method="post" name="form_Ranking">
+	<input type="hidden" name="IsisScript" value="estadisticas/ranking.xis">
+[pft]
+(
+if p(v3000) then
+'  <input type="Hidden" name="tag3000" value="',v3000,'">'/
+fi
+)
+[/pft]
+	<input type="Hidden" name="campo" value="[pft]v3001[/pft]">
+	<input type="Hidden" name="total_items" value="10">
+</form>
+
+</body>
+</html>

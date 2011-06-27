@@ -1,0 +1,70 @@
+<!-- Verifica que el lector no esté sancionado ni con devolución atrasada, siempre que quiera retirar un ejemplar.
+v120: lista de ejemplares prestados al lector, no devueltos
+v3002: lista de ejemplares a prestar
+v3003: lista de ejemplares prestados al lector, a devolver
+v3004: documento
+Se asume que el DNI ya esta validado -->
+<flow action="jump"><pft>if v5000:'Error' or a(v3002) then 'FinVerificarEstado' fi</pft></flow>
+
+<!-- Se borran los campos que vamos a utilizar en este script, debido al include de otros scripts -->
+<field action="delete" tag="4000">ALL</field>
+<field action="delete" tag="4001">ALL</field>
+
+<!-- Material prestado al lector (v4002) -->
+<field action="replace" tag="4002" split="occ"><pft>(v120^y/)(v3003^y/)</pft></field>
+
+<!-- Verifica que el usuario este HABILITADO ó SANCIONADO con sanción cumplida -->
+
+<!--field action="replace" tag=4000><pft>
+   ref(['lector']l(['lector']v3004),
+       if s(mpu,v10):'SANCIONADO' and s(s(v11^v[last])*6.4,s(v11^v[last])*3.2,s(v11^v[last])*0.2) >= s(s(date).8) then
+          mpl,'Error: Usuario sancionado.'
+       fi)
+</pft></field-->
+
+<list action=delete>now</list>
+<list action=load type=list><pft>ref(['lector']l(['lector']v3004),(v11/))</pft></list>
+<do task=list>
+	<field action=define tag=1000>Isis_Item</field>
+	<loop>
+		<field action="replace" tag=4000><pft>
+			if s(v1000^v*6.4,v1000^v*3.2,v1000^v*0.2) >= s(s(date).8) then
+          		mpl,'Error: Usuario sancionado.'
+		    fi
+		</pft></field>
+		<field action=export previous=replace tag=4000>4000</field>
+		<flow action=skip><pft>if v4000:'Error' then 'Quit' fi</pft></flow>
+	</loop>
+</do>
+
+
+<!-- Verifica que el lector no tenga una devolución atrasada -->
+<!-- modifique la siguiente expresión por la que le sigue -->
+<!--field action="add" tag="4001" split="occ"><pft>
+   (ref(['exist']l(['exist']v4002),
+       if s(s(v998[last]^d)*6.4,s(v998[last]^d)*3.2,s(v998[last]^d)*0.2) < s(s(date).8) then v977 fi)/)
+</pft></field-->
+
+<field action="add" tag="4001" split="occ"><pft>
+   ref(['lector']l(['lector']v3004),
+       (
+		if s(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < s(s(date).8)
+			then
+				v8^i
+			fi
+	    )/
+	)
+</pft></field>
+
+
+<field action="replace" tag="5000"><pft>
+   if p(v4000) then
+      v4000
+   fi
+   if p(v4001) then
+      if p(v4000) then '<br>' fi,
+      'Error: Devolución atrasada:',(v4001+|;|)
+   fi
+</pft></field>
+
+<label>FinVerificarEstado</label>

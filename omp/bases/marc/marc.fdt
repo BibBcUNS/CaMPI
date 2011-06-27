@@ -1,0 +1,96 @@
+W:MARCM LDR   
+F:MARCMPTEST  EDITA 
+S:MARCMP
+***
+Numero de control                                 1 1000 0 0
+C¢digo de ls instituci¢n                          3 1000 0 0
+Fecha £ltima modificaci¢n                         5 1000 0 0
+Elementos largo fijo                              8 1000 0 0
+LC - n£mero de control        a                   10 1000 0 0
+N£mero Bibliograf¡a Nacional  a                   15 1000 0 0
+Nro registro (c)              ab                  17 1000 0 1
+ISBN                          acz                 20 1000 0 1
+ISSN                          ayz                 22 1000 0 1
+Otro identificador est ndar   acdz2               24 1000 0 1
+N£mero editor (m£sica)        ab                  28 1000 0 1
+Numero de control sist/alt    az                  35 1000 0 1
+Fuente de adquisici¢n         abcfgn              37 1000 0 1
+Fuente de la catalogaci•n     abcde               40 1000 0 0
+Idiomas del documento         ah                  41 1000 0 1
+C¢digo de  rea geogr fica     ab                  43 1000 0 0
+Clasificaci¢n de la LoC       ab                  50 1000 0 1
+NLM - Clasificaci¢n           ab                  60 1000 0 1
+Conjunto de caracteres usado  abc                 66 1000 0 0
+C¢digo de categor¡a tematica  ax2                 72 1000 0 1
+N£mero clasificaci¢n CDU      abx2                80 1000 0 1
+N£mero clasificaci¢n Dewey    ab2                 82 1000 0 1
+Otros sistemas clasificaci¢n  ab2                 84 1000 0 1
+Sign/topog doc gobierno       az2                 86 1000 0 1
+Nombre personal               abcdequ4            100 1000 0 0
+Nombre de Instituci¢n         abeu4               110 1000 0 0
+Conferencia                   acdenu4             111 1000 0 0
+T¡tulo abreviado              ab2                 210 1000 0 1
+T¡tulo clave                  ab                  222 1000 0 1
+Titulo Uniforme               adfghklmnoprs       240 1000 0 0
+T¡tulo traducido agen/catal   abchnpy             242 1000 0 1
+Menci¢n de t¡tulo             abchnp              245 1000 0 0
+Otras formas del t¡tulo       abfghinp            246 1000 0 1
+Menci¢n de edici¢n            ab                  250 1000 0 1
+Pie de imprenta               abc                 260 1000 0 0
+Descripci¢n f¡sica            abce                300 1000 0 1
+Frecuencia actual publicacion ab                  310 1000 0 0
+Fecha publ/designacion volum  az                  362 1000 0 1
+Menci¢n de serie - adicional  anpvx               440 1000 0 1
+Notas generales               a                   500 1000 0 1
+Nota de bibliograf¡a          ab                  504 1000 0 1
+Nota de contenido formateada  a                   505 1000 0 1
+Resumen                       a                   520 1000 0 1
+Tipo de audiencia             a                   521 1000 0 1
+Nota de reproducci¢n          abcdefmn            533 1000 0 1
+Nota de versi•n original      abcept              534 1000 0 1
+Nota de sistema               a                   538 1000 0 1
+Nota de idioma                ab                  546 1000 0 1
+Notas sobre premios           a                   586 1000 0 1
+Persona como tema             abcdeqtuvxyz24      600 1000 0 1
+Instituci¢n como tema         abetuvxyz24         610 1000 0 1
+Conferencia como tema         acdentuvxyz24       611 1000 0 1
+T¡tulo uniforme como tema     anpvxyz2            630 1000 0 1
+Encabezamiento de materia     aevxyz2             650 1000 0 1
+Encabezamiento geogr fico     avxyz2              651 1000 0 1
+T‚rmino indizaci¢n no controlaa                   653 1000 0 1
+Indice de g‚nero-forma        avxyz2              655 1000 0 1
+Persona-entrada adicional     abcdequ4            700 1000 0 1
+Instituci¢n-entrada adicional abetu4              710 1000 0 1
+Reuni¢n-entrada adicional     acdentu4            711 1000 0 1
+Nombre no controlado-adicion  ae4                 720 1000 0 1
+T¡tulo uniforme-entrada adicioanp                 730 1000 0 1
+T¡t relacionado-no controlad  a                   740 1000 0 1
+Nobre lugar jer rquico-adicionabcd                752 1000 0 1
+Entrada principal de Seriada  abdghinotwx         760 1000 0 1
+Entrada principal de Subserie abdghinotwx         762 1000 0 1
+Entrada por idioma original   abdghinotwxz        765 1000 0 1
+Entrada de traducci¢n         abdghinotwxz        767 1000 0 1
+Entrada de Supl/Num especial  abdghinotwxz        770 1000 0 1
+Entrada de Reg Principal/Supl abdghinotwxz        772 1000 0 1
+Entrada de Item anfitri¢n     abdghinotwxz        773 1000 0 1
+Entrada de relaci¢n vertical  abdghinotwxz        774 1000 0 1
+Entrada otra edici¢n          abdefghinotwxyz     775 1000 0 1
+Entrada de firna f¡sica adicioabdghinotwxz        776 1000 0 1
+Entrada de publicado con      abdghinotwx         777 1000 0 1
+Entrada de T¡tulos anteriores abdghinotwxz        780 1000 0 1
+Entrada de T¡tulo posterior   abdghinotwxz        785 1000 0 1
+Entrada de relaci¢n no especifabdghinotwxz        787 1000 0 1
+Existencias de la instituci¢n a                   850 1000 0 1
+Ubicaci¢n en la Instituci¢n   abchijtxz2          852 1000 0 1
+Direcci¢n electr¢nica         uxz                 856 1000 0 1
+Descrip exist - unidad b sica axz                 866 1000 0 1
+Descrip exist - suplementaria axz                 867 1000 0 1
+Descrip exist - indices       axz                 868 1000 0 1
+Leader/05 - estado registro                       3005 1000 0 0
+Leader/06 - tipo de registro                      3006 1000 0 0
+Leader/07 - nivel bibliogr…fic                    3007 1000 0 0
+Leader/08 - tipo de control                       3008 1000 0 0
+Leader/09 - c¢digo caracteres                     3009 1000 0 0
+Leader/17 - nivel codificaci¢n                    3017 1000 0 0
+Leader/18 - forma catalogaci¢n                    3018 1000 0 0
+Leader/19 - requerimiento link                    3019 1000 0 0

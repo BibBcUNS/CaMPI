@@ -1,0 +1,131 @@
+/* ----------------------------------------------------------------
+ *  Clave de ordenación para los encabezamientos (nombres, temas).
+ *
+ *  (c) 2003-2004 Fernando J. Gómez - CONICET - INMABB
+ * ----------------------------------------------------------------
+ *
+ *  Testear con:
+ *       mx seq=testsort.seq create=testsort now -all
+ *       mx testsort "proc='a9|',@headsort.pft,'|'" copy=testsort now -all
+ *       msrt testsort 100 v9
+ *       mx testsort "pft=v1/" now
+ *
+ *  ATENCION: Este PFT también es usado para ordenar la base de títulos,
+ *  y para generar el archivo invertido de dicha base. Quizás convendría
+ *  usar un PFT específico para estos casos (una razón: la necesidad de
+ *  usar los indicadores de ordenación).
+ *
+ *  TO-DO: ¿cómo ordenar la Ñ?
+ *
+ *  TO-DO: mejorar el ordenamiento de subject headings. Por ejemplo,
+ *  esta lista, que queda ordenada de manera puramente alfabética:
+ *
+ *  	Celts—Australia—History. 
+ *  	Celts—Bibliography. 
+ *  	Celts—Bibliography—Catalogs. 
+ *  	Celts—Church history. 
+ *  	Celts—Congresses. 
+ *  	Celts—Domestic animals. 
+ *  	Celts—Encyclopedias. 
+ *  	Celts—Europe. 
+ *
+ *  debería reordenarse de manera más lógica tal vez así:
+ *
+ *  	Celts—Bibliography.            FORM
+ *  	Celts—Bibliography—Catalogs. 
+ *  	Celts—Congresses.
+ *  	Celts—Encyclopedias. 
+ *
+ *  	Celts—Church history.          TOPIC
+ *  	Celts—Domestic animals. 
+ *
+ *  	Celts—Australia—History.       PLACE
+ *  	Celts—Europe. 
+ *
+ *  Consultar filing rules.
+ * ----------------------------------------------------------------
+ */
+
+
+/* ------------------------------------------------
+ *  Caracteres auxiliares
+ *  v111: flag seteado en browse-headings.xis
+ * ------------------------------------------------
+ */
+
+if p(v111) then
+	proc('a29¦ ¦a30¦ ¦a31¦ ¦'),      /* llamado desde browse-headings.xis */
+else
+	proc('a29¦¦a30¦¦a31¦¦'),    /* llamado al generar el OPAC */
+fi,
+
+
+proc('d1001a1001¦',v1,'¦'),
+
+
+/* ------------------------------------------------
+ *  Quitamos la puntuación final (es necesario?)
+ * ------------------------------------------------
+ */
+ 
+if '.?!)' : right(v1001,1) then
+	proc(
+		'd1001a1001¦',
+			mid(v1001, 1, size(v1001)-1),
+		'¦',
+	),
+fi,
+
+
+/* -------------------------------------------------------
+ *  Usamos los indicadores de ordenación para los títulos
+ * -------------------------------------------------------
+ */
+ 
+/* ATENCION: usamos ":" y no "=" antes de 'TITLE' */
+if s(mpu,mstname,mpl) : 'TITLE' and v13 <> '0' then
+	proc(
+		'd1001a1001¦',
+			v1001.2,
+			mid(v1001*2, val(v13) + 1, size(v1001)),
+		'¦',
+	)
+fi,
+
+
+/* --------------------------------------------------
+ *  Construimos la clave, procesando cada "subcampo"
+ * --------------------------------------------------
+ */
+ 
+proc(
+	'a1000¦',
+		replace(v1001*1, '~', '¦a1000¦'),
+	'¦',
+),
+
+/* Loop sobre las ocurrencias de v1000 */
+(,
+	if 'xyzv' : v1000.1 then
+		v30[1],
+	else if iocc > 1 /* v1000.1 <> 'a' ? */ then
+		v31[1],
+	fi,fi,
+
+	replace(replace(replace(replace(
+	replace(replace(replace(replace(s(mpu,v1000*1),
+		')', ''),
+		'(', ''),
+		':', ''),
+		',', ''),
+		'-', ' '),
+		'"', ''),
+		'´', ''),
+		s("'"n9999), ''),  /* quitamos apóstrofes */
+),
+
+v29,  /* terminador */
+
+
+/* Eliminamos campos auxiliares */
+proc('d29','d30','d31','d1000','d1001'),

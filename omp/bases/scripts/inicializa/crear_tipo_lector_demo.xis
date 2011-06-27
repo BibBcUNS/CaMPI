@@ -1,0 +1,21 @@
+<display><pft>'Creacion una base TIPO_LECTOR de prueba...'/</pft></display>
+
+<display><pft>
+			if v2010='WIN' then
+				system(ref(['config']1,
+							'cd ',v5,'\politicas&',
+							'"',v4,'" iso=tipo_lector_win.iso create=tipo_lector now -all&',
+							'"',v4,'" tipo_lector fst=@tipo_lector.fst fullinv=tipo_lector'
+						)
+					)
+			else
+					system(ref(['config']1,
+							'cd "',v5,'/politicas";'
+							'"',v4,'" iso=tipo_lector_lin.iso create=tipo_lector now -all;',
+							'"',v4,'" tipo_lector fst=@tipo_lector.fst fullinv=tipo_lector'
+						)
+					)
+			fi
+</pft></display>
+
+<display><pft>'listo'/#</pft></display>

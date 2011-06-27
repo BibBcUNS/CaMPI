@@ -1,0 +1,99 @@
+<!--
+Verifica que el usuario no supere el límite de reservas
+Límite 1: Límite total de reservas para el tipo de usuario.
+Límite 2: Límite de reservas respecto al típo de usuario y tipo de objeto. (pendiente) .
+
+Se asume que el usuario es válido, los inventarios existen (validaInventarios_inc.xis)  y son prestables (verificaDispInv_inc.xis).
+Obs.: Este control depende de políticas definidas en la biblioteca.
+-->
+<trace>!BR</trace>
+<!--
+   si reservados + a reservar > límite reservas total entonces
+        Error: Límite total de reservas excedido
+   sino
+	Creo un conjunto vacio para "tipos de objetos" y cantidad de reservas para ese tipo. (list freq)
+	Incorporo los tipos de objetos en el conjunto.
+	Por cada tipo de objeto a reservar en el conjunto:
+		Si el tipo de usuario no tiene políticas el tipos de objetos a reservar entonces:
+			Error: El usuario no tiene permisos para el tipo de objeto.
+			
+			????????
+			
+		Si cantidad del tipo de objeto para el objeto considerado + 1 <= límite para el tipo de objeto entonces
+		   cantidad del tipo de objeto para el objeto considerado <- cantidad del tipo de objeto para el objeto considerado + 1
+	   sino
+		   Error: Límite de préstamos para el tipo de objeto excedido.
+-->
+
+<flow action="jump"><pft>if v5000:'Error' then 'FinLimites' fi</pft></flow>
+
+<!-- Obtengo la categoría del usuario -->
+<field action="replace" tag="3000"><pft>ref(['lector']l(['lector']v3002),v3)</pft></field>
+
+<!-- Obtengo el límite de reservas para el usuario -->
+<field action="replace" tag="3010"><pft>ref(['tipo_lector']l(['tipo_lector']v3000),v12)</pft></field>
+
+<!-- Obtengo la cantidad de reservas de dicho usuario -->
+<field action="replace" tag="3020"><pft>f(npost(['reservas']'RES='v3002),1,0)</pft></field>
+
+<!-- Obtengo la cantidad de reservas a realizar (vienen en v2020)  -->
+<field action="replace" tag="3030"><pft>f(nocc(v2060),1,0)</pft></field>
+
+<!-- Verificamos el límite total de reservas -->
+<field action="replace" tag="5000"><pft>
+   if val(v3020) + val(v3030) > val(v3010) then
+      'Error: El usuario llegó a su límite de reservas.'
+   fi
+</pft></field>
+<flow action="jump"><pft>if v5000:'Error' then 'FinLimites' fi</pft></flow>
+
+<!-- Creo una lista de partes reservados del lector -->
+<do task=search>
+	<parm name=db>reservas</parm>
+	<parm name=expression><pft>'RES=',v3002</pft></parm>
+	<loop>
+		<field action=export tag=3040 previous=add>1</field>
+	</loop>
+	<field action=export tag=3040 previous=replace>3040</field>
+</do>
+
+<!-- Creo una lista con los ID de partes reservadas y a reservar (ara contar el total por tipo de objetos) -->
+
+<field action=add tag=3050><pft>(v2060/)</pft></field>
+<field action=add tag=3050><pft>(v3040/)</pft></field>
+
+<list action="delete">now</list>
+<list action="load"><pft>(v2060/),(v3040/)</pft></list>
+<do task=list>
+	<field action=define tag=1000>Isis_Item</field>
+	<loop>
+		<field action=replace tag=8000><pft>v1000</pft></field>
+		<include>circulacion/controles/reservas/tipo_obj_no_cons.inc</include>
+		<!-- v8080 es la salida del include, es el tiop de objeto del la parte_id Pasado en v8000 -->
+		<field action=export previous=add tag=3060>8080</field>
+	</loop>
+</do>
+
+<list action="delete">now</list>
+<list action="load" type="freq"><pft>(v3060/)</pft></list>
+<do task="list">
+     <field action="define" tag="1">Isis_Item</field>
+	 <field action="define" tag="2">Isis_Value</field>
+     <loop>
+		<field action="import" tag="3000">3000</field>
+        <field action="replace" tag="4100"><pft>
+			if val(v2) > val(ref(['politicas']l(['politicas']'UO=',v3000,'-',v1),v12)) then v1 fi
+		</pft></field>
+		<field action="export" previous="add" tag="4100">4100</field>
+     </loop>
+  </do>
+
+<field action="replace" tag="5000"><pft>
+   if v4100='' then
+      'ok'
+   else
+      'Error: Límite de reservas excedido para tipo de objeto: ',(v4100+|;|)
+   fi
+</pft></field>
+
+<label>FinLimites</label>

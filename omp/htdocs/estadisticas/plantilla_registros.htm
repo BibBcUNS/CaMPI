@@ -1,0 +1,54 @@
+<table width="95%" border="1" cellspacing="0" cellpadding="0">
+  <tr style="font-size: 14px; color: white; background-color: #5277AE"> 
+    <td colspan="2" class="celda_encabezado">Operaci&oacute;n: [pft]mfn[/pft]</td>
+  </tr>
+  <tr> 
+    <td width="17%" style="font-size: 14px; color: blue; background-color: #BEE4FF" class="celda_titulo">Usuario</td>
+    <td width="83%" class="datos">[pft]v1,|, |v2[/pft]</td>
+  </tr>
+  <tr> 
+    <td width="17%" style="font-size: 14px; color: blue; background-color: #BEE4FF" class="celda_titulo">Fecha y Hora</td>
+    <td width="83%" class="datos">[pft]v3^f,' - ',s(v3^h.2,':',v3^h*2.2,':',v3^h*4.2)[/pft]</td>
+  </tr>
+  <tr> 
+    <td width="17%" style="font-size: 14px; color: blue; background-color: #BEE4FF" class="celda_titulo">Bibliotecario</td>
+    <td width="83%" class="datos">[pft]mhl,v5[/pft]</td>
+  </tr>
+  <tr> 
+    <td width="17%" style="font-size: 14px; color: blue; background-color: #BEE4FF" class="celda_titulo">IP de Terminal</td>
+    <td width="83%" class="datos">[pft]v6[/pft]</td>
+  </tr>
+  <tr> 
+    <td width="17%" style="font-size: 14px; color: blue; background-color: #BEE4FF" class="celda_titulo">Movimientos:</td>
+    <td width="83%"> 
+     [pft](
+      	'<table width="100%" border="1" cellspacing="0" cellpadding="1" class="datos">'/
+				'<tr align="center">',
+					select s(v4^t)
+						case 'prestamo': 
+							s(mhl,
+								'<td width="10%">Prestamo<br>Inv.',v4^i,'</td>'/
+								'<td width="10%">Vencimiento<br>',v4^v,'</td>'/
+								'<td align="left">Material:',v4^b,| (Temática:|v4^c|)|,'</td>')/
+						case 'devolucion': 
+							s(mhl,
+								'<td width="10%">Devolución<br>Inv.',v4^i,'</td>'/
+								'<td width="10%"',if s(mhu,v4^m)='S' then ' bgcolor="#FF9191"' fi,mhl,'>Vencimiento<br>',v4^v,'</td>'/
+								'<td align="left">Material:',v4^b,| (Temática:|v4^c|)|,'</td>')/
+						case 'sancion': 
+							s(mhl,
+								'<td width="10%">Sanción</td>'/
+								'<td align="left">',v4^d,' días, del ',v4^f,' al ',v4^v,'. Recurrencia Nro. ',v4^o,'</td>'),
+				endsel,
+				'</tr>'/
+				)[/pft] 
+      </table>
+    </td>
+  </tr>
+</table>
+<table border="0" width="95%">
+<tr>
+	<td align="right">
+		<a href="#top"><img src="[pft]getenv('PATH_INFO')[/pft]graficos/arriba.gif" border="0" alt="Tope del listado"></a>&nbsp;<a href="JavaScript:window.close(); window.opener.focus();"><img src="[pft]getenv('PATH_INFO')[/pft]graficos/cerrar.gif" border="0" alt="Volver a Resultados"></a></td>
+</tr>
+</table>

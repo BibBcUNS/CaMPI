@@ -1,0 +1,17 @@
+campos cgi normalizados
+
+
+id_usuario, dni del usuario
+nombre_usuario, nombre del usuario
+path_cipar, path al cipar.par
+inv_devoluciones, inventarios separados por salto de linea
+inv_prestamos#A, separador por salto de linea
+vencimiento#A, formato dd/mm/aaaa
+inv_prestamos#B, separador por salto de linea
+vencimiento#B, formato dd/mm/aaaa
+vto_sancion, formato dd/mm/aaaa
+
+id_operador, formato id-key
+
+considerar:
+tomar

@@ -1,0 +1,126 @@
+<!------------------------------------------------------------------------------
+Verifica que todos los ejemplares estén prestados. Todos los ejemplares de la parte
+cuya condición de préstamo (tipo de objeto) indique que es reservable para el
+usuario en cuestión (tipo de usuario).
+Reservable: Indicado por el campo 12 en políticas: Cantidad de reservas permitidas.
+
+(*) ASUMIMOS que todos los ejemplares de una misma parte pertenecen a un mismo
+tipo de objeto (salvo consulta) O sea que se prestan y reservan bajo las
+mismas reglas y condiciones.
+
+--------------------------------------------------------------------------------
+
+Ej. válidos:
+
+    Parte 1:                                        Parte 2:
+        - 2 ejs. 'CONS'                             - 1 ej. 'CONS'
+        - 10 ejs. 'permA'                          - 5 ejs. 'permB'
+    
+Ej. NO válido:
+
+    Parte 3:
+        - 2 ejs. 'CONS'
+        - 8 ejs. 'permA'
+        - 7 ejs. 'permB'
+        
+--------------------------------------------------------------------------------
+
+Método (no algoritmo):
+        Recuperamos la lista de ejemplares (inventarios) de la parte y su condición de prestamo:
+        Recuperamos la condición de préstamos (v987 en exist) de cada ejemplar.
+        Por cada ejemplar accedemos a la base política con (tipo_usu, tipo_obj) y contamos la cantidad de ejemplares "reserbables"
+        Entre los reserbables: Contamos cantidad de ejemplares prestados.
+        Entre los reserbables: Contamos cantidad de esperas pendientes.
+        Nota: Se supone que la cantidad de ejemplares reservanles hace referencia
+           al grupo de libros que le interesa al lector. En realidad es cant. ej. prestables en (no consulta)
+           Esto se debe a la ASUMPSION (*)
+        
+--------------------------------------------------------------------------------
+
+Campos utilizados:
+    4000 Isis_item (id_parte)
+    4001 Categoría del usuario
+    4002 id_parte (formato para indexar)
+    4004 inventarios de la parte
+    4008 ejemplares de la parte (invent, estado, condic_pres)
+    4010 ejemplares reserbables
+    4011 cant. ej. reservables.
+    4012 cant. ej. reservable PREStados.
+    4015 cant. Esperas
+    5000 lista de errores
+
+------------------------------------------------------------------------------->
+
+<flow action="jump"><pft>if v5000:'Error' then 'fin_todos_prestados' fi</pft></flow>
+
+<!-- Cargo la lista de id_partes -->
+<list action="delete">now</list>
+<list action="load" type="list"><pft>(v2060/)</pft></list> 
+
+<!-- 4001 Categoría del usuario -->
+<field action="replace" tag=4001><pft>ref(['lector']l(['lector']v3002),v3)</pft></field>
+
+<do task=list>
+    <field action="define" tag=4000>Isis_Item</field> <!-- id_parte -->
+    <loop>
+        <field action="import" tag="list">5000,4001</field>
+        <!--    5000 lista de errores
+                4001    Categ del usuario
+
+        <!--    Id parte para buscar en "partes" y recuperar los inventarios -->
+        <field action="replace" tag="4002"><pft>v4000^b,'_',v4000^c,'_',v4000^p</pft></field>
+        
+        <!-- Inventarios de la parte -->
+        <field action="replace" tag="4004" split="occ"><pft>ref(['partes']l(['partes']v4002),(v2/))</pft></field>
+        
+        <!-- ejemplares con su estado (pres/perm) y cond de pres (v987)-->
+        <field action="replace" tag="4008" split="occ">
+        <pft>
+            (
+            ref(['exist']l(['exist']v4004), '^i',v977,'^e',v985,'^c',v987/ )
+            )
+        </pft>
+        </field>
+        
+        <!-- ejemplares "reservables" -->
+        <field action="replace" tag="4010" split="occ">
+        <pft>
+            (
+            if val(ref(['politicas']l(['politicas']'UO=',v4001[1],'-',v4008^c),v12))>0
+            then
+                v4008/
+            fi
+            )
+        </pft>
+        </field>
+        
+        <!-- cant. ejemp. reserbables -->
+        <field action="replace" tag="4011"><pft>f(nocc(v4010),1,0)</pft></field>
+		
+        <!-- cant. ejemp. reservable PREStados -->
+        <field action="replace" tag="4012"><pft>f(size((if v4010^e='PRES' then '1' fi)),1,0)</pft></field>
+        
+        <!-- Esperas registradas para la parte -->
+        <field action="replace" tag="4015"><pft>ref(['reservas']l(['reservas']v4002),f(nocc(v3),1,0))</pft></field>
+        
+        <!--display><pft>
+        'Ejs. de la parte: <br>',(v4008,'<br>'),'<br><br>',
+        'Ejs. reservables: <br>',(v4010,'<br>'),'<br>',
+        'reserbables: ',v4011,'<br><br>',
+        'Cant reservables NO prestados: ',v4012,'<br><br>',
+        'Esperas: ',v4015,
+        '',</pft></display-->
+        
+        <!-- Disponible: #prestados + #esperas < #ejemp_reservables -->
+        <!-- Faltaría considerar el valor "Mínimo_Disponible" -->
+        <field action="replace" tag="5000"><pft>
+            if (val(v4012) + val (v4015) < val(v4011)) then
+                'Error: Hay <b>',f(val(v4011)-val(v4012)-val (v4015),1,0),'</b> ejemplar/es disponible/s. [',v4000,']<br>'
+            fi
+        </pft></field>
+        <field action="export" tag="list">5000</field>
+
+    </loop>
+</do>
+
+<label>fin_todos_prestados</label>

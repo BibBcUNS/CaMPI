@@ -1,0 +1,164 @@
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!--                       CIPAR                        -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!--
+    TO-DO: podemos comparar con la manera en que se maneja esto en iah.xis (en ABCD).
+-->
+
+<!--
+    Read the cipar template file, and substitute the following variables:
+    __DB__             : the name of the current database
+    __DATE__           : the current date
+    
+    This version assumes that __APP_DIR__ and __LOCAL_DATA_DIR__ have already been set by
+    an installation script.
+-->
+
+<!-- IMPORTANTE! Los archivos cipar se leen en este orden: base > local > default -->
+<parm name="cipar"><pft>
+    /* cipar local para una base particular */
+    s(cat(getenv('PATH_WXIS'),'../../local-data/bases/',v2104,'/config/db-cipar.par')),
+    
+    /#,
+    /* cipar local común a todas las bases */
+    s(cat(getenv('PATH_WXIS'),'../../local-data/config/local-cipar.par')),
+    
+    /#,
+    /* cipar default */
+    replace(replace(
+        s(cat(getenv('PATH_WXIS'),'../config/default-cipar.par')),
+        '__DB__', v2104),
+        '__DATE__', s(date).8)
+</pft></parm>
+
+<!--
+    Read the cipar template file, and substitute the following variables:
+    __DB__             : the name of the current database
+    __DATE__           : the current date
+    __APP_DIR__        : the path to OpacMarc's main directory
+    __LOCAL_DATA_DIR__ : the path to OpacMarc's local data directory
+
+    This version assumes a "virgin template", i.e., no installation script has provided any local
+    path information, so wxis must find out the paths by itself.
+    It requires that cipar templates be kept in __APP_DIR__/config
+    Advantage: we don't need to re-run an install script every time the app is upgraded.
+    Disadvantage: wxis must do the same trivial replacements *every* time it is called.
+-->
+<!--field action="replace" tag="6010"><pft>getenv('PATH_WXIS'), '..'</pft></field>
+<field action="replace" tag="6011"><pft>v6010, '/local-data'</pft></field>
+<parm name="cipar"><pft>
+    replace(replace(replace(replace(
+        s(cat(v6010, '/config/opac.cip.tpl')),
+        '__DB__', v2104),
+        '__DATE__', s(date).8),
+        '__APP_DIR__', v6010),
+        '__LOCAL_DATA_DIR__', v6011)
+</pft></parm-->
+
+
+<!--
+   IMPORTANTE! Los archivos de configuración se leen en este orden (específico -> general)
+   debido a que si v6000 = '^avalor_1^avalor_2' entonces v6000^a = 'valor_1', es decir,
+   la primera ocurrencia de un subcampo les gana a todas las posteriores.
+   IMPORTANTE! para el primero action=replace, y para los restantes action=add
+-->
+
+<!-- Leemos el archivo de configuración asociado a la base actual -->
+<field action="replace" tag="6000" split="occ"><pft>
+	cat(getenv('PATH_WXIS'),'../../local-data/bases/',v2104,'/config/db-settings.conf')
+</pft></field>
+
+<!-- Leemos el archivo de configuración local -->
+<field action="add" tag="6000" split="occ"><pft>
+	cat(getenv('PATH_WXIS'),'../../local-data/config/local-settings.conf')
+</pft></field>
+
+<!-- Leemos la configuración predeterminada -->
+<field action="add" tag="6000" split="occ"><pft>
+	cat(getenv('PATH_WXIS'),'../config/default-settings.conf')
+</pft></field>
+
+
+<!-- Almacenamos los valores de los parámetros en varios campos 600x -->
+
+<!-- v6001: opciones varias -->
+<field action="replace" tag="6001"><pft>
+	(,
+		,if v6000.1 = '#' then /* ignoramos líneas de comentarios */
+		,else if v6000 : 'FORM_STYLE='            then '^a',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'AGREP_MAX_SUG='         then '^b',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'COMPACT_RESULT_LIST='   then '^c',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'MAX_HITS_BIB='          then '^d',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'DEFAULT_RECORD_STYLE='  then '^e',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'RECORD_STYLE_CONTROL='  then '^f',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'SHOW_245h='             then '^g',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'HEADINGS_PER_PAGE='     then '^h',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'SHOW_INV='              then '^i',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'TEXT_INDENT='           then '^j',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'USE_MSC='               then '^k',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'SHOW_EXTERNAL_LINKS='   then '^l',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'SHOW_245c='             then '^m',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'EMAIL_RECORDS='         then '^n',mid(v6000,instr(v6000,'=')+1,size(v6000))
+        ,else if v6000 : 'GOOGLE_BOOK_PREVIEW='   then '^p',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'BIB_RECORDS_PER_PAGE='  then '^r',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'DISPLAY_LOCATION='      then '^s',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'DISPLAY_DOC_TYPE='      then '^t',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'SCRIPT_URL='            then '^u',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'SHOW_RECORD_ID='        then '^v',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'CALL_NUMBER_BROWSE='    then '^w',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'AGREP_AUTO_SEARCH='     then '^x',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'SHOW_SUGGESTIONS='      then '^y',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'SHOW_SECTION='          then '^z',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'DEBUG='                 then '^0',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'MAIN_ENTRY_TOP='        then '^1',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'ETIQ_773_MODE='         then '^7',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,fi,
+	),
+</pft></field>
+
+<!-- v6002: Texto de mensajes, botones, etc. -->
+<field action="replace" tag="6002"><pft>
+	(,
+		,if v6000.1 = '#' then ,, /* ignoramos líneas de comentarios */
+		,else if v6000 : 'AVAILABLE_IN='   then '^a',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'INDEX_BROWSE='   then '^i',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'NEW_SEARCH='     then '^s',mid(v6000,instr(v6000,'=')+1,size(v6000))
+        ,else if v6000 : 'PAGE_TITLE_NAME=' then '^t',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,else if v6000 : 'KEYWORD_SEARCH=' then '^w',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,fi,fi,fi,fi,fi,fi,
+	),
+</pft></field>
+
+
+<!-- v6003: Paths -->
+<field action="replace" tag="6003"><pft>
+	(,
+		,if v6000.1 = '#' then /* ignoramos líneas de comentarios */
+		,else if v6000 : 'PATH_AGREP='     then '^a',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		/*,else if v6000 : 'PATH_DB='        then '^b',mid(v6000,instr(v6000,'=')+1,size(v6000))*/
+		/*,else if v6000 : 'PATH_CGI-BIN='   then '^c',mid(v6000,instr(v6000,'=')+1,size(v6000))*/
+		,else if v6000 : 'PATH_HTDOCS='    then '^h',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		/*,else if v6000 : 'PATH_LOGS='      then '^l',mid(v6000,instr(v6000,'=')+1,size(v6000))*/
+		,else if v6000 : 'PATH_TEMP='      then '^t',mid(v6000,instr(v6000,'=')+1,size(v6000))
+		,fi,fi,fi,fi,
+        /*fi,fi,fi,*/
+	),
+</pft></field>
+
+<!-- Ciertos parámetros pueden sobrescribirse con valores recibidos vía CGI -->
+<field action="replace" tag="6001"><pft>
+	if p(v2090) then replace(v6001,s('^c'v6001^c),s('^c'v2090)) fi,
+</pft></field>
+
+<field action="replace" tag="6001"><pft>
+	if p(v2091) then replace(v6001,s('^s'v6001^s),s('^s'v2091)) fi,
+</pft></field>
+
+<field action="replace" tag="6001"><pft>
+	if p(v2092) then replace(v6001,s('^s'v6001^s),s('^s'v2092)) fi,
+</pft></field>
+
+
+<!-- Borramos el campo auxiliar -->
+<proc>d6000</proc>
