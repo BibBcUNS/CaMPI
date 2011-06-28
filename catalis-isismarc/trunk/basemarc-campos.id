@@ -1,0 +1,794 @@
+!ID 000001
+!v005!20050705114148.0
+!v035!##^9(DLC)   39010336
+!v035!##^a(OCoLC)28246336
+!v040!##^aDLC^cDNA^dDNA^dDLC
+!v042!##^apremarc
+!v050!00^aZ696.D8^bO7
+!v100!2#^aOrtiz de Montellano, Bernardo,^d1899-
+!v245!10^aGuía para la clasificación y catalogación de los archivos /^c/ por Bernardo Ortiz de Montellano.
+!v260!##^aMéxico :^bEditorial "Cvltvra",^c1927.
+!v300!##^a132 p. :^bill. ;^c19 cm.
+!v500!##^aAt head of title: Departamento de Salubridad Pública.
+!v500!##^a"Catalogación, por Juan B. Iguíniz":p. [65]-76.
+!v650!#0^aClassification, Decimal.
+!v650!#0^aCataloging of archival material.
+!v700!12^aIguíniz, Juan B.^tCatalogación.
+!v710!1#^aMexico.^bDepartamento de Salubridad Pública.
+!v985!##^eOCLC REPLACEMENT cdsdistr
+!v991!##^bc-GenColl^hZ696.D8^iO7^tCopy 1^wOCLCREP
+!v909!
+!v001!8779290
+!v008!930610s1927####mx#a##########000#0#spa##
+!v010!##^a###39010336#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!1
+!v918!a
+!v919!#
+!ID 000002
+!v925!0#^aacquire^b1 shelf copy^xpolicy default
+!v955!##^ax to xxCD
+!v005!20070629190150.0
+!v035!##^a(SP-BaPL)pu070000716
+!v040!##^aDLC^cDLC
+!v100!1#^aPereira Molares, Ana María.
+!v245!10^aArquitectura y arquitectos en la diócesis de Tui :^bsiglos XVII y XVIII /^cAna María Pereira Molares.
+!v260!##^aA Coruäna :^bFundación Pedro Barrié de la Maza,^cc2006.
+!v300!##^a694 p. :^bill. ;^cil.
+!v440!#0^aCatalogación Arqueológica y Artística de Galicia
+!v500!##^aIncluye referencias bibliográficas.
+!v504!##^aBibliografía: p. 691-694.
+!v653!##^aArquitectura^aTui (Pontevedra)^aHistoria^aS. XVII.
+!v653!##^aArquitectura^aTui (Pontevedra)^aHistoria^aS. XVIII.
+!v923!##^d20070606^n141377^sSP-BaPL
+!v985!##^eVENDOR LOAD
+!v909!
+!v001!14911936
+!v008!070213s2006####sp############000#0#spa##
+!v905!n
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!4
+!v918!a
+!v919!#
+!ID 000003
+!v005!20030430111502.0
+!v035!##^9(DLC)   97130004
+!v955!##^aud07 to hlcd 03-20-97; lc22 (desc./subj.) 5-28-97/lc13 05-30-97; lc03 to ddc 06-05-97;^clc22 2002-04-17 add. v. 2^elc15 2002-04-18 to BCCD (v.2)
+!v020!##^a8489748047 (obra completa)
+!v020!##^a8489748055 (v. 1)
+!v020!##^a8489748934 (v. 2)
+!v035!##^a(SpBaP)pu970002576
+!v035!##^a(CStRLIN)XPUV972576-B
+!v040!##^aDLC^cDLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aDP402.L8^bL83 1996
+!v082!00^a936.6^221
+!v245!00^aLucus Augusti /^cAntonio Rodríguez Colmenero, coordinador.
+!v250!##^a1. ed.
+!v260!##^aA Coruäna :^bFundación Pedro Barrié de la Maza,^c1996-<2001   >
+!v300!##^av. <1-2   > :^bill. (some col.) ;^c29 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^aIncludes bibliographical references.
+!v505!1#^a1. El amanecer de una ciudad -- 2. Cerámica común romana de cocina y mesa hallada en las excavaciones de la ciudad / Enrique J. Alcorta Irastorza --
+!v651!#0^aLugo (Spain)^xAntiquities, Roman.
+!v650!#0^aExcavations (Archaeology)^zSpain^zLugo.
+!v650!#0^aRomans^zSpain^zLugo.
+!v700!2#^aRodríguez Colmenero, Antonio.
+!v922!##^aap
+!v952!##^aComplete in 10 v.--P. 6, v. 1
+!v991!##^bc-GenColl^hDP402.L8^iL83 1996^tCopy 1^wBOOKS
+!v909!
+!v001!1659304
+!v008!970320m19969999sp#a#####b####000#0#spa##
+!v010!##^a###97130004#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000004
+!v005!20051012135415.0
+!v925!0#^aacquire^b1 shelf copy^xpolicy default
+!v955!##^aoc01 08-19-05 to ASCD;^cjh26 2005-09-27^djh34 2005-10-12 to SL^ejh34 2005-10-12 to BCCD
+!v020!##^a8495892294
+!v035!##^a(SP-BaPL)pu050077187
+!v040!##^aDLC^cDLC
+!v042!##^apcc
+!v050!00^aND813.A55^bA4 2004
+!v100!1#^aAlvarez Sotomayor, Fernando.
+!v245!10^aFernando A. de Sotomayor /^cproyecto y coordinación, José Carlos Valle Pérez ; [textos,Luis María Caruncho ... et al.].
+!v260!##^aA Coruäna :^bFundación Pedro Barrié de la Maza,^cc2004.
+!v300!##^a477 p. :^bill. (chiefly col.) ;^c28 cm.
+!v490!1#^aCatalogación Arqueológica y Artística de Galicia
+!v504!##^aIncludes bibliographical references (p. 465-477).
+!v600!10^aAlvarez de Sotomayor, Fernando, 1875-1960^vCatalogs.
+!v700!1#^aValle Pérez, José Carlos.
+!v700!1#^aCaruncho, Luis.
+!v830!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra.
+!v923!##^d20050713^n119925^sSP-BaPL
+!v985!##^eVENDOR LOAD
+!v909!
+!v001!14040712
+!v008!050217s2004####sp#a#####bc###000#0dspa##
+!v010!##^a##2005451495
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!4
+!v918!a
+!v919!#
+!ID 000005
+!v005!19941021155717.4
+!v035!##^9(DLC)   89145710
+!v955!##^anf04 06-04-93; nc33/sl 07-15-93
+!v020!##^a8485728556
+!v040!##^aCU^cDLC^dDLC
+!v042!##^alccopycat
+!v043!##^ae-sp---
+!v050!04^aQB215^b.B38 1986
+!v100!2#^aBasanta Campos, José Luis.
+!v245!10^aRelojes de piedra en Galicia :^bcatalogación arqueológica y artística de Galicia del Museo de Pontevedra /^cJosé Luis Basanta Campos.
+!v250!##^a1. ed.
+!v260!##^aLa Coruäna, Espaäna :^bFundación Pedro Barrié de la Maza,^c1986.
+!v300!##^a194 p. :^bill. (some col.), map ;^c29 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^aIncludes bibliographical references (p. 189-191).
+!v650!#0^aSundials^zSpain^zGalicia (Region)
+!v991!##^bc-GenColl^hQB215^i.B38 1986^p00036289284^tCopy 1^wBOOKS
+!v909!
+!v001!3877946
+!v008!930608s1986####sp#ab####bc###000#0#spa#d
+!v010!##^a###89145710#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000006
+!v005!19850228000000.0
+!v035!##^9(DLC)   84216499
+!v020!##^a8485728378
+!v040!##^aDLC^cDLC^dDLC
+!v050!00^aND813.M497^bC37 1984
+!v082!00^a759.6^219
+!v100!2#^aCarballo-Calero Ramos, María Victoria.
+!v245!10^aJulia Minguillón /^cpor Ma. Victoria Carballo-Calero Ramos.
+!v250!##^a1a ed.
+!v260!##^aLa Coruäna, Espaäna :^bFundación "Pedro Barrié de la Maza" :^bEditorial Atlántico,^c1984.
+!v300!##^a219 p. :^bill. (some col.) ;^c29 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^aIncludes bibliographical references and index.
+!v600!10^aMinguillón, Julia,^d1906-1965.
+!v700!1#^aMinguillón, Julia,^d1906-1965.
+!v991!##^bc-GenColl^hND813.M497^iC37 1984^tCopy 1^wBOOKS
+!v909!
+!v001!1908220
+!v008!840919s1984####sp#a#####b####001#0#spa##
+!v010!##^a###84216499#
+!v905!n
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000007
+!v005!19931019090151.6
+!v035!##^9(DLC)   93206981
+!v955!##^aub11 09-16-93 to ASCD; jh22 10-05-93; jh21 10-06-93; jk34 to DDC 10-07-93
+!v020!##^a8487819265
+!v040!##^aDLC^cDLC
+!v043!##^ae-sp---
+!v050!00^aND1329.M67^bA4 1992
+!v100!1#^aCaruncho, Luis.
+!v245!10^aLuis Mosquera (1899-1987) /^cLuis María Caruncho ; prólogo, Camilo José Cela ; epílogo, José Filgueira Valverde.
+!v250!##^a1. ed.
+!v260!##^aLa Coruäna, Espaäna :^bFundación Pedro Barrié de la Maza,^c1992.
+!v300!##^a447 p. :^bill. (some col.) ;^c29 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^aIncludes bibliographical references (p. 441-442).
+!v600!10^aMosquera Gómez, Luis,^d1899-1987^xCatalogs.
+!v651!#0^aSpain^xBiography^xPortraits^xCatalogs.
+!v700!2#^aMosquera Gómez, Luis,^d1899-1987.
+!v922!##^aap
+!v991!##^bc-GenColl^hND1329.M67^iA4 1992^tCopy 1^wBOOKS
+!v909!
+!v001!2534119
+!v008!930916s1992####sp#a#####bc###000#0#spa##
+!v010!##^a###93206981#
+!v905!n
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000008
+!v005!19920707091100.3
+!v035!##^9(DLC)   89118690
+!v020!##^a8485728629
+!v040!##^aDLC^cDLC^dDLC^dOCoLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aNA1309.G3^bC37 1987
+!v100!1#^aCastillo, Angel del,^d1886-1961.
+!v245!10^aInventario de la riqueza monumental y artística de Galicia /^cAngel del Castillo ; introducción y bibliografía complementaria de José Filgueira Valverde.
+!v260!##^aLa Coruäna :^bFundación Pedro Barrie de la Maza,^c1987.
+!v300!##^axlvi, 715 p., [202] p. of plates :^bill. (some col.), col. port. ;^c29 cm.
+!v490!1#^aSerie catalogación arqueológica y artística del Museo de Pontevedra
+!v500!##^aReprint. Originally published: Santiago de Compostela : Editorial de los Bibliófilos Gallegos, 1972.
+!v504!##^aIncludes bibliographies and indexes.
+!v650!#0^aArchitecture^zSpain^zGalicia (Region)^xGuidebooks.
+!v650!#0^aArt^zSpain^zGalicia (Region)^xGuidebooks.
+!v700!2#^aFilgueira Valverde, José,^d1905-
+!v830!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra.
+!v991!##^bc-GenColl^hNA1309.G3^iC37 1987^tCopy 1^wBOOKS
+!v909!
+!v001!3876157
+!v008!890527r19871972sp#acf###b####001#0#spa##
+!v010!##^a###89118690#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000009
+!v005!19850524000000.0
+!v035!##^9(DLC)   84129601
+!v020!##^a8485728122 (La Fundación)
+!v040!##^aDLC^cDLC^dDLC
+!v050!00^aND813.P8^bC29 1982
+!v082!00^a759.6^219
+!v100!1#^aCaturla, Maria Luisa.
+!v245!10^aAntonio de Puga :^bpintor gallego /^cpor Ma. Luisa Caturla.
+!v250!##^a1a ed.
+!v260!##^aLa Coruäna, Espaäna :^bFundación "Pedro Barrié de la Maza, Conde de Fenosa" :^bEditorial Atlantico,^c1982.
+!v300!##^a91 p. :^bill. (some col.) ;^c34 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^a"Libros que poseia el pintor Puga, por F.J. Sánchez Cantón": p. 61-65.
+!v600!10^aPuga, Antonio de,^d1602-1648.
+!v700!1#^aPuga, Antonio de,^d1602-1648.
+!v991!##^bc-GenColl^hND813.P8^iC29 1982^tCopy 1^wBOOKS
+!v909!
+!v001!2373590
+!v008!850515s1982####sp#a#####b####000#0#spa##
+!v010!##^a###84129601#
+!v905!n
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000010
+!v005!19880713000000.0
+!v035!##^9(DLC)   86214397
+!v020!##^z8485728204
+!v040!##^aDLC^cDLC^dDLC
+!v050!00^aNA2707.L62^bA4 1985
+!v100!2#^aCervera Vera, Luis.
+!v245!13^aEl arquitecto gallego Domingo Antonio Lois Monteagudo (1723-1786) y su "Libro de barios adornos" /^cLuis Cervera Vera.
+!v250!##^a1a ed.
+!v260!##^aLa Coruäna, Espaäna :^bFundación Pedro Barrié de la Maza :^bEditorial Atlántico,^c1985.
+!v300!##^a311 p. :^bchiefly ill. (some col.), facsims. ;^c34 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v500!##^a"Facsímiles": p. [81]-289.
+!v504!##^aBibliography: p. 291-305.
+!v500!##^aIncludes indexes.
+!v600!20^aLois Monteagudo, Domingo Antonio,^d1723-1786^xNotebooks, sketchbooks, etc.
+!v650!#0^aDecoration and ornament, Architectural^xThemes, motives.
+!v650!#0^aArchitectural drawing.
+!v700!22^aLois Monteagudo, Domingo Antonio,^d1723-1786.^tLibro de barios adornos.^f1985.
+!v991!##^bc-GenColl^hNA2707.L62^iA4 1985^tCopy 1^wBOOKS
+!v909!
+!v001!2889281
+!v008!880628s1985####sp#ah####b####001#0#spa##
+!v010!##^a###86214397#
+!v905!n
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000011
+!v005!19890707073057.9
+!v035!##^9(DLC)   84220320
+!v020!##^a8485728351
+!v040!##^aDLC^cDLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aNA5809.O74^bF47 1983
+!v100!2#^aFernández Otero, José Carlos.
+!v245!00^aApuntes para el inventario del mobiliario litúrgico de la Diócesis de Orense /^cmateriales para el catálogo del mobiliario litúrgico allegados por José Carlos Fernández Otero con Miguel Angel González García y José González Paz.
+!v260!##^a[La Coruäna] :^bFundación "Pedro Barrié de la Maza, Conde de Fenosa",^c1983.
+!v300!##^a381 p. :^bill. (some col.), maps ;^c34 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^aBibliography: p. 269-279.
+!v650!#0^aChurch furniture^zSpain^zOrense (Province)^xCatalogs.
+!v610!20^aCatholic Church.^bDiocese of Orense (Spain)^xCatalogs.
+!v700!2#^aGonzález García, Miguel Angel.
+!v700!2#^aGonzález Paz, José.
+!v710!2#^aCatholic Church.^bDiocese of Orense (Spain)
+!v991!##^bc-GenColl^hNA5809.O74^iF47 1983^tCopy 1^wBOOKS
+!v909!
+!v001!3799075
+!v008!890707s1983####sp#ab####bc###000#0#spa##
+!v010!##^a###84220320#
+!v905!n
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000012
+!v005!19900124064640.5
+!v035!##^9(DLC)   89194140
+!v020!##^a8424198999
+!v040!##^aDLC^cDLC^dDLC
+!v050!00^aNA1313.R59^bF64 1989
+!v100!2#^aFolgar de la Calle, Ma. Carmen^q(María Carmen)
+!v245!10^aSimón Rodríguez /^cMa. del Carmen Folgar de la Calle.
+!v250!##^a1a ed.
+!v260!##^aLa Coruäna (Espaäna) :^bFundación Pedro Barrié de la Maza,^c1989.
+!v300!##^a217 p. :^bill. (some col.) ;^c28 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v500!##^aBased, in part, on the author's thesis (doctoral--Universidad de Santiago de Compostela, 1981) presented under the title: Simón Rodríguez y su escuela.
+!v504!##^aIncludes bibliographical references (p. 213-217)
+!v600!10^aRodríguez, Simón,^d1679-1752^xCriticism and interpretation.
+!v991!##^bc-GenColl^hNA1313.R59^iF64 1989^tCopy 1^wBOOKS
+!v909!
+!v001!3881142
+!v008!900124s1989####sp#a#####b####000#0#spa##
+!v010!##^a###89194140#
+!v905!n
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000013
+!v005!19980903144515.0
+!v035!##^9(DLC)   93115702
+!v955!##^aub11 to Cat. 02-16-93; jh00 02-26-93; jh22 03-11-93; jh99 03-15-93 to DDC
+!v020!##^a8487819087
+!v040!##^aDLC^cDLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aNC287.G34^bA4 1991
+!v100!2#^aGaite Sancho, Nolasco,^d1879-1949.
+!v245!10^aMonumentos de Galicia :^bcuadernos de dibujos : Biblioteca del Monasterio de Poio /^cNolasco Gaite Sancho.
+!v260!##^aLa Coruäna :^bFundación Pedro Barrie de la Maza, Conde de Fenosa,^c[1991]
+!v300!##^a183, 351, 208, 48 p. :^bill. ;^c28 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v500!##^aIncludes indexes.
+!v600!20^aGaite Sancho, Nolasco,^d1879-1949^xCatalogs.
+!v650!#0^aMonuments^zSpain^zGalicia (Region)^xCatalogs.
+!v650!#0^aDrawing^zSpain^zPontevedra^xCatalogs.
+!v610!20^aMonasterio de Poyo (Pontevedra, Spain).^bBiblioteca^xCatalogs.
+!v710!2#^aMonasterio de Poyo (Pontevedra, Spain).^bBiblioteca.
+!v922!##^aap
+!v991!##^bc-GenColl^hNC287.G34^iA4 1991^tCopy 1^wBOOKS
+!v909!
+!v001!4892796
+!v008!930216s1991####sp#a#####c####001#0#spa##
+!v010!##^a###93115702#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000014
+!v005!20020206160732.0
+!v035!##^9(DLC)   84216698
+!v020!##^a8485728386
+!v040!##^aDLC^cDLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aND813.P52^bG37 1984
+!v082!00^a759.6^219
+!v100!2#^aGarcía Iglesias, José Manuel,^d1950-
+!v245!13^aEl Pintor de Banga /^cpor José Manuel García Iglesias.
+!v250!##^a1a ed.
+!v260!##^aLa Coruäna, Espaäna :^bFundación Pedro Barrié de la Maza,^c1983 [i.e. 1984]
+!v300!##^a132 p. :^bill. (some col.) ;^c29 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^aBibliography: p. 127-130.
+!v600!00^aPintor de Banga,^d16th cent.^xCriticism and interpretation.
+!v650!#0^aMural painting and decoration, Spanish^zSpain^zGalicia (Region)^y16th century.
+!v650!#0^aMannerism (Art)^zSpain^zGalicia (Region)
+!v700!0#^aPintor de Banga,^d16th cent.
+!v991!##^bc-GenColl^hND813.P52^iG37 1984^tCopy 1^wBOOKS
+!v909!
+!v001!491390
+!v008!871015s1984####sp#a#####b####000#0#spa##
+!v010!##^a###84216698#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000015
+!v005!20000515130021.0
+!v035!##^9(DLC)   94228944
+!v955!##^aud02 to cat 11-10-94; jh26 11-18-94; jh21 11-18-94; jh20 11-30-94
+!v020!##^a8487819354
+!v035!##^a(OCoLC)30627604
+!v040!##^aFrPAA^cFrPAA^dDLC
+!v042!##^alccopycat
+!v043!##^ae-sp---
+!v050!00^aNA5809.G3^bM36 1993
+!v082!00^a726/.5/094610902^220
+!v100!2#^aManso Porto, Carmen.
+!v245!10^aArte gótico en Galicia :^blos Dominicos /^cCarmen Manso Porto ; prólogo, Serafín Moralejo ; epílogo, José Filgueira Valverde.
+!v250!##^a1a ed.
+!v260!##^aLa Coruäna :^bFundación Pedro Barrié de la Maza, Conde de Fenosa,^c1993.
+!v300!##^a2 v. :^bill. (some col.) ;^c29 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^aIncludes bibliographical references and indexes.
+!v650!#0^aDominican architecture^zSpain^zGalicia (Region)
+!v650!#0^aArchitecture, Gothic^zSpain^zGalicia (Region)
+!v650!#0^aArchitecture^zSpain^zGalicia (Region)
+!v650!#0^aDecoration and ornament, Architectural^zSpain^zGalicia (Region)
+!v700!1#^aMoralejo Alvarez, Serafín.
+!v700!2#^aFilgueira Valverde, José,^d1905-
+!v922!##^aap
+!v991!##^bc-GenColl^hNA5809.G3^iM36 1993^tCopy 1^wBOOKS
+!v909!
+!v001!1609772
+!v008!940620s1993####sp#a#####b####001#0#spa#d
+!v010!##^a###94228944#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000016
+!v005!19931022171729.1
+!v035!##^9(DLC)   82180158
+!v040!##^aDLC^cDLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aNA8240^b.M37 1979
+!v082!00^a728/.92^219
+!v100!2#^aMartínez Rodríguez, Ignacio.
+!v245!13^aEl hórreo gallego :^bestudio geográfico /^cIgnacio Martínez Rodríguez.
+!v260!##^aMontevideo (Uruguay) :^bFundación Pedro Barrié de la Maza,^c1975, [i.e. 1979]
+!v300!##^a387 p. :^b154 ill., maps ;^c22 cm.
+!v490!1#^aSerie Catalogación arqueológica y artística de Galicia
+!v504!##^aIncludes bibliographies.
+!v650!#0^aGranaries^zSpain^zGalicia (Region)
+!v650!#0^aVernacular architecture^zSpain^zGalicia (Region)
+!v830!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra.
+!v991!##^bc-GenColl^hNA8240^i.M37 1979^p0001347798A^tCopy 1^wBOOKS
+!v909!
+!v001!452330
+!v008!860825s1979####uy#ab####b####000#0#spa##
+!v010!##^a###82180158#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000017
+!v005!19970205124438.0
+!v035!##^9(DLC)   90158148
+!v955!##^aep41 05-21-90; arr 3323; nc43 09-01-93; sf13 01-29-97; sf03 02-03-97; sf04 02-05-97
+!v020!##^a8485728807
+!v040!##^aDLC^cDLC
+!v041!0#^agagspa
+!v043!##^ae-sp---
+!v050!00^aGT4062.A3^bG355 1989
+!v100!1#^aMartinez, Tino.
+!v245!10^aOfrecidos :^bo Nazareno do Caramiänal /^cTino Martinez.
+!v260!##^a[ La Coruäna, Spain] :^bFundación Pedro Barrie de la Maza,^c[1989]
+!v300!##^a31 p., [102] leaves of plates :^bill. ;^c23 x 28 cm.
+!v440!#0^aCatalogación Arqueológica y Artística de Galicia del Museo de Pontevedra
+!v650!#0^aProcessions^zSpain^zGalicia (Region)^xPictorial works.
+!v922!##^aap
+!v991!##^bc-GenColl^hGT4062.A3^iG355 1989^tCopy 1^wBOOKS
+!v909!
+!v001!587810
+!v008!900521s1989####sp#af#########000#0#gag##
+!v010!##^a###90158148#
+!v905!n
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!7
+!v918!a
+!v919!#
+!ID 000018
+!v005!20011210152806.0
+!v035!##^9(DLC)   84123580
+!v020!##^a8485858069
+!v020!##^a8485728092
+!v040!##^aDLC^cDLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aND809.G34^bP3 1981
+!v082!00^a759.6/1^aB^219
+!v100!1#^aPablos, Francisco.
+!v245!10^aPintores gallegos del novecientos :^bSerafín Avendaäno, Modesto Brocos, Roman Navarro ... /^cpor Francisco Pablos.
+!v250!##^a1a ed.
+!v260!##^aLa Coruäna, Espaäna :^bFundación Pedro Barrié de la Maza :^bEditorial Atlántico,^c1981.
+!v300!##^a200 p. :^bcol. ill. ;^c34 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^aIncludes bibliographies.
+!v650!#0^aPainters^zSpain^zGalicia (Region)^xBiography.
+!v650!#0^aPainting, Spanish^zSpain^zGalicia (Region)^y19th century.
+!v650!#0^aPainting, Spanish^zSpain^zGalicia (Region)^y20th century.
+!v651!#0^aGalicia (Spain : Region)^xBiography.
+!v740!0#^aPintores gallegos del 900.
+!v991!##^bc-GenColl^hND809.G34^iP3 1981^tCopy 1^wBOOKS
+!v909!
+!v001!3791342
+!v008!841206s1981####sp#a#####b####000#0cspa##
+!v010!##^a###84123580#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000019
+!v005!20070216094345.0
+!v035!##^a(DLC)78754
+!v955!##^amarcadia import^hsd11 2007-02-16
+!v040!##^aMH^cMH^dCStRLIN^dDLC
+!v042!##^alccopycat
+!v043!##^ae-sp---
+!v050!00^aMLCS 2007/41183 (B)
+!v100!1#^aPadín, Angel.
+!v245!13^aLa reedificación del templo de San Andrés y el Gremio de Mareantes de La Coruäna /^cpor Angel Padín.
+!v260!##^aPontevedra :^bFundación "Pedro Barrié de la Maza, Conde de Fenosa,"^c1992.
+!v300!##^a219 p. :^bill. (some col.) ;^c21 cm.
+!v490!1#^aCatalogación arqueológica y artística del Museo de Pontevedra
+!v504!##^aIncludes bibliographical references (p. 201-206) and index.
+!v653!##^aTemplo de San Andrés (La Coruäna, Spain)
+!v830!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra.
+!v955!##^aud07 to cat 01-31-95; jh00 02-21-95; jk28 to HLCD 03-15-96; sh00 04-11-96; sh00 06-02-00 to Adam's arrearage
+!v985!##^arlin^crlin^emarcadia
+!v985!##^eGAP
+!v909!
+!v001!78754
+!v008!950131s1992####sp#a#####b####001#0#spa##
+!v010!##^a###95110944#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!7
+!v918!a
+!v919!#
+!ID 000020
+!v005!19971222124440.9
+!v035!##^9(DLC)   97218925
+!v955!##^auc07 to Cat. 11-25-97; jh26 12-12-97; jh21 12-15-97; jh20 12-22-97
+!v020!##^a8489748101
+!v040!##^aDLC^cDLC
+!v043!##^ae-sp---
+!v050!00^aNA6840.S7^bS26 1997
+!v100!2#^aSánchez García, Jesús Angel.
+!v245!13^aLa arquitectura teatral en Galicia /^cJesús Angel Sánchez García ; [prólogo: Alfredo Vigo Trasancos].
+!v250!##^a1. ed.
+!v260!##^aLa Coruäna :^bFundación Pedro Barrié de la Maza,^c1997.
+!v300!##^a550 p. :^bill. (some col). ;^c27 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^aInclude bibliographical references (p. 527-543) and index.
+!v650!#0^aTheater architecture^zSpain^zGalicia (Region)
+!v710!2#^aMuseo de Pontevedra.
+!v991!##^bc-GenColl^hNA6840.S7^iS26 1997^tCopy 1^wBOOKS
+!v909!
+!v001!1193501
+!v008!971125s1997####sp#a#####b####000#0#spa##
+!v010!##^a###97218925#
+!v905!n
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000021
+!v005!19890420000000.0
+!v035!##^9(DLC)   86101406
+!v020!##^a8485728475
+!v040!##^aDLC^cDLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aUG430.G35^bS67 1985
+!v082!00^a355.7/0946/1^219
+!v100!2#^aSoraluce Blond, José-R.
+!v245!10^aCastillos y fortificaciones de Galicia :^bla arquitectura militar de los siglos XVI-XVIII /^cJosé Ramón Soraluce Blond.
+!v260!##^a[La Coruäna] :^bFundación Pedro Barrié de la Maza, Conde de Fenosa,^c[1985?]
+!v300!##^a194 p., [8] leaves of plates :^bill. (some col.), plans ;^c34 cm.
+!v490!1#^aCatalogación arqueológica y artística de Galicia
+!v500!##^aOriginally presented as the author's thesis (doctoral--Escuela de Arquitectura de la Coruäna, 1981)
+!v504!##^aIncludes bibliographical references and indexes.
+!v650!#0^aFortification^zSpain^zGalicia (Region)
+!v651!#0^aGalicia (Spain : Region)^xHistory, Military.
+!v830!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra.
+!v952!##^aDate from dep. legal.
+!v991!##^bc-GenColl^hUG430.G35^iS67 1985^tCopy 1^wBOOKS
+!v909!
+!v001!3354211
+!v008!860107s1985####sp#aef###b####001#0#spa##
+!v010!##^a###86101406#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000022
+!v005!20000928101440.0
+!v035!##^9(DLC)   95127202
+!v955!##^aud07 to cat 03-15-95; jh00 03-23-95; jk28 03-19-96; jh21 03-27-96; jh99 04-05-96
+!v020!##^a8487819737
+!v035!##^a(OCoLC)31795999
+!v035!##^zMLC 199503
+!v040!##^aFrPAA^cFrPAA^dNN^dDLC
+!v042!##^alccopycat
+!v050!00^aND813.J83^bT7 1994
+!v100!1#^aTravieso, Javier,^d1957-
+!v245!13^aEl pintor Juan Luis /^cJavier Travieso, Josefina Cerviäno Lago ; introducción, José Filgueira Valverde.
+!v250!##^a1. ed.
+!v260!##^aLa Coruäna (Espaäna) :^bFundación Pedro Barrié de la Maza,^c1994.
+!v300!##^a181 p. :^bill. (some col.) ;^c30 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v504!##^aIncludes bibliographical references (p. 177-178).
+!v600!00^aJuan Luis,^d1894-1984^xCriticism and interpretation.
+!v700!2#^aLópez García, Juan Luis,^d1894-1984.
+!v700!2#^aCerviäno Lago, Josefina.
+!v922!##^aap
+!v991!##^bc-GenColl^hND813.J83^iT7 1994^tCopy 1^wBOOKS
+!v909!
+!v001!4930926
+!v008!950315s1994####sp#a#####b####000#0#spa#d
+!v010!##^a###95127202#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000023
+!v005!20040303181955.0
+!v035!##^9(DLC)   84114770
+!v020!##^a848572819X (set)
+!v020!##^a8485728203 (v. 1)
+!v020!##^a8485728211 (v. 2)
+!v040!##^aDLC^cDLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aNA5809.G3^bV3 1982
+!v082!00^a726/.7/09461^219
+!v100!2#^aValle Pérez, José Carlos.
+!v245!13^aLa arquitectura cisterciense en Galicia /^cpor José Carlos Valle Pérez.
+!v250!##^a1a ed.
+!v260!##^aLa Coruäna :^bFundación "Pedro Barrié de la Maza, Conde de Fenosa",^c1982.
+!v300!##^a2 v. :^bill. ;^c34 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v500!##^aOriginally presented as the author's thesis (doctoral--Universidad de Santiago de Compostela, 1981) under the title: Las fundaciones de Clairvaux en la Galicia medieval. Filiación directa: el siglo XII.
+!v504!##^aBibliography: v. 1, p. 301-314.
+!v650!#0^aCistercian architecture^zSpain^zGalicia (Region)
+!v650!#0^aArchitecture, Medieval^zSpain^zGalicia (Region)
+!v650!#0^aChurch architecture^zSpain^zGalicia (Region)
+!v991!##^bc-GenColl^hNA5809.G3^iV3 1982^tCopy 1^wBOOKS
+!v909!
+!v001!3790656
+!v008!840516s1982####sp#a#####b####000#0#spa##
+!v010!##^a###84114770#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000024
+!v005!20011107115832.0
+!v035!##^9(DLC)   84155104
+!v020!##^a8485728297 (v. 1)
+!v040!##^aDLC^cDLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aNA5809.L84^bY97 1983
+!v082!00^a720/.946/13^219
+!v100!2#^aYzquierdo Perrín, Ramón.
+!v245!13^aLa arquitectura románica en Lugo /^cRamón Yzquierdo Perrín.
+!v250!##^a1a ed.
+!v260!##^aLa Coruäna, Espaäna :^bFundación "Pedro Barrié de la Maza",^c1983-
+!v300!##^av. <1   > :^bill. (some col.) ;^c34 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museo de Pontevedra
+!v500!##^aAbstract of thesis (doctoral)--Universidad de Santiago, 1976.
+!v504!##^aBibliography: p. 223-233.
+!v500!##^aIncludes indexes.
+!v650!#0^aChurch architecture^zSpain^zLugo.
+!v650!#0^aArchitecture, Romanesque^zSpain^zLugo.
+!v650!#0^aChristian art and symbolism^zSpain^zLugo^yMedieval, 500-1500.
+!v991!##^bc-GenColl^hNA5809.L84^iY97 1983^tCopy 1^wBOOKS
+!v909!
+!v001!1431307
+!v008!840426m19839999sp#a#####b####001#0#spa##
+!v010!##^a###84155104#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
+!ID 000025
+!v005!20011114151516.0
+!v035!##^9(DLC)   89103185
+!v955!##^aep64 01-12-89
+!v020!##^a8485728548
+!v040!##^aDLC^cDLC^dDLC^dOCoLC^dDLC
+!v043!##^ae-sp---
+!v050!00^aND809.G34^bG37 1986
+!v082!00^a759.6/1/074461^220
+!v100!2#^aGarcía Iglesias, José Manuel,^d1950-
+!v245!13^aLa pintura manierista en Galicia /^cJosé Manuel García Iglesias.
+!v250!##^a1a ed.
+!v260!##^aLa Coruäna, Espaäna :^bFundación Pedro Barrié de la Maz :^bEditorial Atlántico,^c1986.
+!v300!##^a237 p. :^bill. (some col.) ;^c29 cm.
+!v440!#0^aCatalogación arqueológica y artística de Galicia del Museode Pontevedra
+!v504!##^aBibliography: p. 231-234.
+!v650!#0^aPainting, Spanish^zSpain^zGalicia (Region)^y16th century^vCatalogs.
+!v650!#0^aMannerism (Art)^zSpain^zGalicia (Region)^vCatalogs.
+!v922!##^aap
+!v991!##^bc-GenColl^hND809.G34^iG37 1986^tCopy 1^wBOOKS
+!v909!
+!v001!1039765
+!v008!890112s1986####sp#a#####bc###000#0#spa##
+!v010!##^a###89103185#
+!v905!c
+!v906!a
+!v907!m
+!v908!#
+!v909!
+!v917!#
+!v918!a
+!v919!#
