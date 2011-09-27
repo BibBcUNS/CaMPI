@@ -296,7 +296,7 @@ function crear_tipo_lector() {
 	echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 	
 	// Muestro el título
-	echo '<tr><td colspan=2><h2 style="text-align=center">Crear una nueva política de circulación</h2></td></tr>';
+	echo '<tr><td colspan=2><h2 style="text-align=center">Crear un nuevo tipo de lector</h2></td></tr>';
 		
 	for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
 	   {
@@ -398,7 +398,7 @@ echo '<input type=hidden name=formulario value="tipo_lector">';
 echo '<input type=hidden name=registro value="EXISTENTE">';
 echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 // Muestro el título
-echo '<tr><td colspan=2><h2 style="text-align=center">Editar una política de circulación</h2></td></tr>';
+echo '<tr><td colspan=2><h2 style="text-align=center">Editar un tipo de lector</h2></td></tr>';
 	
 for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
    {
