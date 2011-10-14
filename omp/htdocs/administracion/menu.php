@@ -135,7 +135,6 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
         <input type="hidden" name="invocado" value="menu.html">
         <input type="submit" value="Nuevo">
         </form></strong>
-        </form> 
     </td>
 </tr>
 <tr>
