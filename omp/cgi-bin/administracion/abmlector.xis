@@ -124,7 +124,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
   <label>Registro Nuevo</label>
 
   <field action="add" tag="10">Habilitado</field>
-        <do task=mfnrange>
+  <do task=mfnrange>
 			<parm name=db>tipo_lector</parm>
 			<loop>
 				<field action=export previous=add tag=2000>1</field>
@@ -280,15 +280,8 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
     <field action=define tag=1011>Isis_Lock</field>
     <update>
       <field action="delete" tag="list">1/20</field>
-
-      <field action=import tag=130>130</field>
-      <field action=cgi tag=25>tipoid</field>
-	  <field action=cgi tag=26>documento</field>
-	  <field action=replace tag=2><pft>
-	  	if v130='New' then v25,v26 else v26 fi /* Si es un registro nuevo concatenamos el tipo */
-	  </pft></field>
-
       <field action=cgi tag=1>nombre</field>
+      <field action=cgi tag=2>documento</field>
       <field action=cgi tag=3>categoria</field>
       <field action=cgi tag=4>legajo</field>
       <field action=cgi tag=5>matricula</field>
@@ -307,7 +300,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
       <field action=cgi tag=16>vigencia_datos</field>	
 	  <field action=cgi tag=17>observaciones_lector</field>
       <field action="replace" tag="17" split="occ"><pft>(v17/)</pft></field>
-	  <field action="delete" tag="list">130,25,26</field>
+
       <write>Unlock</write>
 			<field action="add" tag="130"><pft>mfn</pft></field> <!-- exporta el mfn por si es un uevo -->
 			<field action="export" tag="130" previous="delete">130</field>
@@ -433,7 +426,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
     <parm name=db>lector</parm>
     <parm name=from><pft>v130</pft></parm>
     <parm name=count>1</parm>
-	<parm name="gizmo">oemansi</parm>
+		<parm name="gizmo">oemansi</parm>
     <field action=define tag=1102>Isis_Status</field>
     <loop>
       <field action=import tag=list>110,120</field>
