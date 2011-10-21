@@ -1427,7 +1427,9 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		<field action=cgi tag=799>devolucion_100</field>
 		<field action=cgi tag=220>dias_sancion</field>
 		<field action=cgi tag=231>invs_prestamo_A</field>
+		<field action=replace tag=231><pft>replace(v231,' ','')</pft></field>
 		<field action=cgi tag=232>invs_prestamo_B</field>
+		<field action=replace tag=232><pft>replace(v232,' ','')</pft></field>
 		<field action=cgi tag=241>dias_prestamo_A</field>
 		<field action=cgi tag=242>dias_prestamo_B</field>
         
