@@ -463,19 +463,23 @@ function guardar_tipo_lector() {
 	global $class_tipo_lector;
 	
 	$parametros_guardar='record='.$_POST['registro'];
+	
 	for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
 	{
 		$campo_actual="campo".$i;
 		$parametros_guardar=$parametros_guardar."&campo".$i."=".urlEncode($_POST[$campo_actual]);
-	}
 	
-	$url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&".$parametros_guardar;
-	$ptr_tipo_lector = fopen($url,"r");
-	$tipo_lector = fread($ptr_tipo_lector,8192);
-	fclose($ptr_tipo_lector);
-	$class_tipo_lector = 'tabbertabdefault';
-	return $tipo_lector;
+	}
 
+
+			$url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&".$parametros_guardar;
+			$ptr_tipo_lector = fopen($url,"r");
+			$tipo_lector = fread($ptr_tipo_lector,8192);
+			
+			fclose($ptr_tipo_lector);
+			$class_tipo_lector = 'tabbertabdefault';
+			return $tipo_lector;
+	
 }	
 
 //********************************************************************//
@@ -527,12 +531,28 @@ if (isset($_POST["formulario"])) {
 		  editar_tipo_lectOr();
 		elseif($_POST["opcion"]=='Guardar'):
 		  if (guardar_tipo_lector()=='CREAR_EXISTENTE') {
-			echo '<h2 style="text-align=center;color:red">Tipo de lector ya existe. Cree una política nueva!</h2>';
+			echo '<h2 style="text-align=center;color:red">Tipo de lector ya existe. Cree una lector nuevo!</h2>';
 			crear_tipo_lector();
 		  }
-		  else {
-			mostrar_politicas();
-		  }
+		  else
+			{
+			if (guardar_tipo_lector()=='ID_VACIO') {
+			echo '<h2 style="text-align=center;color:red">Tipo de lector VACIO. Cree una lector nuevo!</h2>';
+			crear_tipo_lector();
+		  	}
+				else
+					{
+					if (guardar_tipo_lector()=='DESCRIPCION') {
+						echo '<h2 style="text-align=center;color:red">Falta Descripción - Tipo de Lector. </h2>';
+						crear_tipo_lector();
+						}
+		  			else {
+						mostrar_politicas();
+		  				}
+					}
+			
+			}
+
 		elseif($_POST["opcion"]=='Borrar'):
 		  borrar_tipo_lector();
 		  mostrar_politicas();
