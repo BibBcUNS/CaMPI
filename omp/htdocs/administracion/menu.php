@@ -191,7 +191,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 	<br 
     -->
  
-    <form action="opac_actualiza.php" name="actualizar_opac_form" target="resultado_actualizar_opac" method="post" onsubmit="disable_button(document.actualizar_opac_form.actualizar_opac, ' Realizando operación ...')">
+    <form action="opac_actualiza.php" name="actualizar_opac_form" target="resultado_actualizar_opac" method="post" onSubmit="disable_button(document.actualizar_opac_form.actualizar_opac, ' Realizando operación ...')">
     <input type="submit" value="Actualizar OPAC" title="Actualiza la base de datos de libros que se muestran en el OPAC a partir de la base de datos del sistema de Catalogación" name="actualizar_opac">
     </form>
     <iframe name=resultado_actualizar_opac height=50 frameborder=0></iframe>
@@ -233,8 +233,8 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 				Imprimir papeleta:</td>
 			<td>
 				<select name=impresion onChange="enable_button(document.config_form.grabar)">
-					<option value="si" <?php if ($config->imprimir_papeleta=='si'){echo 'selected';}?>>si</option>
 					<option value="no" <?php if ($config->imprimir_papeleta=='no'){echo 'selected';}?>>no</option>
+                    <option value="si" <?php if ($config->imprimir_papeleta=='si'){echo 'selected';}?>>si</option>
 					<br>
 				</select>
 			</td>
