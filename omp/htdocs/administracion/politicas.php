@@ -14,7 +14,7 @@ $class_politicas = '';
     <title>Módulo de Administración </title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
     <script type="text/javascript" src="/omp/administracion/tabber/tabber.js"></script>
-	<link rel="stylesheet" href="/omp/administracion/tabber/tabber.css" TYPE="text/css" MEDIA="screen">
+	<link rel="stylesheet" href="/omp/administracion/tabber/tabber.css" type="text/css" media="screen">
     
 
 <script>
@@ -296,7 +296,8 @@ function crear_tipo_lector() {
 	echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 	
 	// Muestro el título
-	echo '<tr><td colspan=2><h2 style="text-align=center">Crear un nuevo tipo de lector</h2></td></tr>';
+	echo '<tr><td colspan=2><h2 style="text-align:center
+">Crear un nuevo tipo de lector</h2></td></tr>';
 		
 	for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
 	   {
@@ -346,7 +347,8 @@ echo '<input type=hidden name=formulario value="politicas">';
 echo '<input type=hidden name=registro value="EXISTENTE">';
 echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 // Muestro el título
-echo '<tr><td colspan=2><h2 style="text-align=center">Editar una política de circulación</h2></td></tr>';
+echo '<tr><td colspan=2><h2 style="text-align:center
+">Editar una política de circulación</h2></td></tr>';
 	
 for ($i=0;$i<=(count($campos_nombre)-1);$i++)
    {
@@ -398,7 +400,8 @@ echo '<input type=hidden name=formulario value="tipo_lector">';
 echo '<input type=hidden name=registro value="EXISTENTE">';
 echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 // Muestro el título
-echo '<tr><td colspan=2><h2 style="text-align=center">Editar un tipo de lector</h2></td></tr>';
+echo '<tr><td colspan=2><h2 style="text-align:center
+">Editar un tipo de lector</h2></td></tr>';
 	
 for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
    {
@@ -511,7 +514,8 @@ if (isset($_POST["formulario"])) {
 		  editar_politica();
 		elseif($_POST["opcion"]=='Guardar'):
 		  if (guardar_politica()=='CREAR_EXISTENTE') {
-			echo '<h2 style="text-align=center;color:red">La identificación de la política ya existe. Cree una política nueva!</h2>';
+			echo '<h2 style="text-align:center
+;color:red">La identificación de la política ya existe. Cree una política nueva!</h2>';
 			crear_politica();
 		  }
 		  else {
@@ -531,19 +535,22 @@ if (isset($_POST["formulario"])) {
 		  editar_tipo_lectOr();
 		elseif($_POST["opcion"]=='Guardar'):
 		  if (guardar_tipo_lector()=='CREAR_EXISTENTE') {
-			echo '<h2 style="text-align=center;color:red">Error: Categoría ID ya existe.</h2>';
+			echo '<h2 style="text-align:center
+;color:red">Error: Categoría ID ya existe.</h2>';
 			crear_tipo_lector();
 		  }
 		  else
 			{
 			if (guardar_tipo_lector()=='ID_VACIO') {
-			echo '<h2 style="text-align=center;color:red">Error: Falta Categoría ID.</h2>';
+			echo '<h2 style="text-align:center
+;color:red">Error: Falta Categoría ID.</h2>';
 			crear_tipo_lector();
 		  	}
 				else
 					{
 					if (guardar_tipo_lector()=='DESCRIPCION') {
-						echo '<h2 style="text-align=center;color:red">Error: Falta Descripción.</h2>';
+						echo '<h2 style="text-align:center
+;color:red">Error: Falta Descripción.</h2>';
 						crear_tipo_lector();
 						}
 		  			else {

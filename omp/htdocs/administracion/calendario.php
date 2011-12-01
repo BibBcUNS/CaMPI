@@ -177,7 +177,8 @@ function editar_año($_año) {
 	
 	// Muestro el formulario
 	echo '<style>'.
-			'.dias_mes{padding:0px; width:20px; text-align=center; font-size:15px; font-weight:normal; height:30px}'.
+			'.dias_mes{padding:0px; width:20px; text-align:center
+; font-size:15px; font-weight:normal; height:30px}'.
 			'</style>';
 	echo "<form action=calendario_guardar.php method=post>";
 	echo "<input type=hidden name=anio value=".$_año.">";
