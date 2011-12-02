@@ -40,10 +40,10 @@
 <field action=cgi tag=12>campo3</field>
 
 <display><pft>if v1='' then 'ID_VACIO' fi</pft></display>
-<flow action=exit><pft>if v1='' then '1' fi</pft></flow>
+<flow action=exit><pft>if (v1='') and (v100<>'BORRAR') then '1' fi</pft></flow>
 
 <display><pft>if v2='' then 'DESCRIPCION' fi</pft></display>
-<flow action=exit><pft>if v2='' then '1' fi</pft></flow>
+<flow action=exit><pft>if (v2='') and (v100<>'BORRAR') then '1' fi</pft></flow>
 
 <field action=replace tag=110><pft>f(l(['tipo_lector']v1),1,0)</pft></field>
 <field action=replace tag=112><pft>f(l(['tipo_lector']v111),1,0)</pft></field>
