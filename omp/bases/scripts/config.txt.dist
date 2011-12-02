@@ -1,0 +1,66 @@
+# Archivo de configuración utilizado para la generación de la base de existencias de OpenMP
+# _________________________________________________________________________________________
+#
+# Leer con atención todos los parámetros y poner el valor correspondiente.
+# IMPORTANTE: Todos los parámetros deben terminar con ;
+# El caracter "#" como prefijo de línea indica que la misma es un comentario.
+
+# Indique el nombre de la institución.
+# Ejemplo:
+# Nombre Institucion=Universidad Nacional XYZ;
+
+Nombre Institucion=Institucion XXX;
+
+# Indique la ubicación de los archivos correspondientes a la base bibliográfica.
+# Debe ser el directorio donde se encuentran, y el nombre de los archivos .mst y .xrf correspondientes.
+# Ejemplo:
+# Path base bibliografica=C:\isis\bibun\bibun.*;
+
+Path base bibliografica=C:\base\biblio.*;
+    
+# Indique el formato de catalogación.
+# Valores posibles: cepal, bibun, marc, lilacs, oit (siempre en minúsculas).
+# Ejemplo: Formato Cataloga=marc;
+
+Formato Cataloga=marc;
+
+# Indique el campo y subcampo que contiene el nro. de inventario.
+# Ejemplo:
+# Campo Inventario=v852^j;
+
+Campo Inventario=v859^p;
+
+# Indique el directorio que contendrá las bases del sistema de circulación.
+# No incluir la barra al final del path.
+# Ejemplo:
+# Path bases=c:\bases;
+
+Path bases=C:\CaMPI\bases\omp;
+
+# Indique el directorio donde residen los documentos "públicos" accesibles vía HTTP.
+# No incluir la barra al final del path.
+
+Path htdocs=C:\CaMPI\htdocs\omp;
+
+# Indique el directorio en el que se encuentra el utilitario MX y demás utilitarios.
+# Ejemplo:
+# Path mx=c:\cisis\mx;
+# O se puede poner simplemente "mx" si ya está en el path.
+# Path mx=mx;
+
+Path mx=c:\cisis\mx;
+
+# A continuación indicamos si habilitar o no la opción de reserva.
+# Ejemplos:
+# Habilitar reserva=si;
+# Habilitar reserva=no;
+
+Habilitar reserva=si;
+
+# A continuación indicamos si las fechas de devolución serán puestas
+# de acuerdo a politicas o en forma manual.
+# Ejemplos:
+# Fecha de devolucion=manual;
+# Fecha de devolucion=politicas;
+
+Fecha de devolucion=politicas;

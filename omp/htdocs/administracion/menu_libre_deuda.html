@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Módulo de Administración - Libre Deuda</title>
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
+		<SCRIPT language="JavaScript">
+	<!--
+			
+	function consulta_obra() {
+		consulta=window.open('consulta_obra.html','Consulta_Autores','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,width=500,height=400');
+	}
+			
+	function contar_inventarios() {
+		textarea = window.document.form_inventarios.inventarios.value;
+		contador = 0;
+		for ( x = 0; x <= textarea.length; x++ ) {
+			if ( escape(textarea.substring(x,x+1)) == '%0D') {
+				++contador;
+			}
+			if (textarea.length > 0 && contador == 0) {contador = 1 };
+			window.document.form_consulta.contador_inventarios.value = contador;
+			if (contador >= 80 && window.document.form_consulta.avisado.value == '0') {
+				window.document.form_consulta.avisado.value = '1';
+				alert ('Se ha completado la hoja')}
+			
+		}
+	}
+
+	//-->
+	</SCRIPT>
+</head>
+
+  <body>
+     <div id="head"> 
+		<div id="title">Módulo de Administración - Libre Deuda</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div>     <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!--#####################################-->
+
+
+<table width="758"  cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td colspan="2" width="500">
+    	<p align="center"><b><big>Constancia de Libre Deuda</big></b></p>
+    </td>
+    </tr>
+    <tr>
+    <td colspan="2" >
+	    <form method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" name="form_libre_deuda" target="_parent">
+	    <input type="hidden" name="IsisScript" value="administracion/libre_deuda.xis">
+	    Nota D.B. Nº&nbsp;<input type="text" name="numero_nota" value="  /08" size="6"><br>
+	    DNI Número&nbsp;<input type="text" name="numero_dni" size="10">(Ingrese el número sin puntos)
+	    <input type="radio" name="sexo" value="masculino" checked>Masculino&nbsp;&nbsp;&nbsp;
+	    <input type="radio" name="sexo" value="femenino">Femenino<br>
+	    <input type="submit" value="Enviar">
+	    </form>
+    </td>
+  </tr>
+  <tr>
+    <td>
+		<form method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" name="form_consulta_lector" target="busqueda">
+		Consulta de Lectores:&nbsp; 
+		      <input type="hidden" name="IsisScript" value="/administracion/consulta_lector.xis">
+		      <input type="radio" name="criterio" value="lector" checked>Lector&nbsp;(DNI o Nombre)<br>
+		      <input type="text" name="expresion" size="15"><input type="submit" value="Enviar"><input type="reset" value="Limpiar"> </td>
+		</form>
+   </td>
+   <td>
+	<a href="menu.php" target="_parent">Volver al Menú</a>
+  </td>
+  </tr>
+</table>
+
+<!--#####################################-->
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+
+			<div id="footer"></div>
+</body>
+</html>

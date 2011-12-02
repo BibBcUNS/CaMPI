@@ -1,0 +1,59 @@
+<html>
+
+<head>
+<title>Open MarcoPolo - Módulo Estadísticas</title>
+
+<style type="text/css">
+<!--
+.menu {font-family:Arial; font-size: 12px;}
+
+.menu a{
+text-decoration:none;
+color:black;
+}
+-->
+</style>
+
+<script language="javascript">
+<!--
+
+/*
+Cool Table Menu
+By Clarence Eldefors (http://www.freebox.com/cereweb) with modifications from javascriptkit.com
+Visit http://javascriptkit.com for this and over 400+ other scripts
+*/
+
+
+function movein(which,html){
+which.style.background='#FF8000'
+}
+
+function moveout(which){
+which.style.background='#5277AE'
+}
+
+function invocar_ranking(campo){
+	window.top.document.form_Ranking.campo.value=campo;
+//	alert(window.top.document.form_Ranking.campo.value);
+	window.top.document.form_Ranking.submit();
+}
+//-->
+</script>	
+
+</head>
+
+<body topmargin="5">
+<table align="center" bgcolor="black" border="1" bordercolor="ivory" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="12%" align="center" class="menu" bordercolor="black" id="choice1" style="color: white; background-color:#5277AE; cursor:hand" onmouseover="movein(this,'Temática')" onmouseout="moveout(this)" onclick="javascript:invocar_ranking('tematica')">Temática</td>
+			<td width="12%" align="center" class="menu" bordercolor="black" id="choice2" style="color: white; background-color:#5277AE; cursor:hand" onmouseover="movein(this,'Inventario')" onmouseout="moveout(this)" onclick="invocar_ranking('inventario')">Inventario</td>
+			<td width="12%" align="center" class="menu" bordercolor="black" id="choice3" style="color: white; background-color:#5277AE; cursor:hand" onmouseover="movein(this,'Usuario')" onmouseout="moveout(this)" onclick="invocar_ranking('lector')">Usuario</td>
+			<td width="12%" align="center" class="menu" bordercolor="black" id="choice5" style="color: white; background-color:#5277AE; cursor:hand" onmouseover="movein(this,'Bibliotecario')" onmouseout="moveout(this)" onclick="invocar_ranking('operador')">Bibliotecario</td>
+			<td width="12%" align="center" class="menu" bordercolor="black" id="choice6" style="color: white; background-color:#5277AE; cursor:hand" onmouseover="movein(this,'Termianal de Atención')" onmouseout="moveout(this)" onclick="invocar_ranking('terminal')">Terminal</td>
+			<td width="12%" align="center" class="menu" bordercolor="black" id="choice7" style="color: white; background-color:#5277AE; cursor:hand" onmouseover="movein(this,'Día')" onmouseout="moveout(this)" onclick="invocar_ranking('dia')">Día</td>
+			<td width="12%" align="center" class="menu" bordercolor="black" id="choice8" style="color: white; background-color:#5277AE; cursor:hand" onmouseover="movein(this,'Hora')" onmouseout="moveout(this)" onclick="invocar_ranking('hora')">Hora</td>
+	</table>
+
+</body>
+
+</html>

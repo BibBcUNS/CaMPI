@@ -1,0 +1,117 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+<trace>BR1</trace>
+<function name=operador action=replace tag=1000>
+
+<!-- Esta función valida al operarrio. 
+El campo 1000 contiene los datos del operador en el formato:
+^inombre de usuario
+^pclave de acceso
+El campo v2000 que es exportado como v1000 valdrá ok si el usuario está correctamente validado -->
+
+  <field action=add tag=2000>ERROR</field>
+  <do task=search>
+    <parm name=db>opera</parm>
+    <parm name=gizmo>gizmo</parm>
+    <parm name=expression><pft>v1000^i</pft></parm>
+    <parm name=count>1</parm>
+    <loop>
+      <field action=import tag=1000>1000</field>
+      <field action=replace tag=2000><pft>
+        if s(mpu,v1)=s(mpu,v1000^i) and s(mpu,v2)=s(mpu,v1000^p) 
+         then mhl,v3 else 'error' fi
+      </pft></field>
+      <field action=export previous=delete tag=2000>2000</field>
+    </loop>
+  </do>
+  <return action=export tag=1000>2000</return>
+</function>
+
+
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <display><html><body background="/circulacion/images/fondo_operario.jpg" topmargin="12"></display>
+
+
+  <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+
+<!-- Esta parte valida al operador y presenta al lector -->
+
+  <field action=cgi tag=110>id_operador</field>
+
+
+  <flow action=jump><pft>if a(v110) then 'EXIT' fi</pft></flow>
+
+  <field action=replace tag=110><pft>'^i',replace(v110,'-','^p')</pft></field>
+
+<!-- a operador se le entregan los siguientes valores: id operador(^i), clave del mismo(^p) -->
+
+  <call name=operador><pft>v110</pft></call>
+
+  <display>
+     <pft>if v1000<>'error' then 
+       '<center><b>',left(v1000,instr(v1000,',')-1),'</b></center>' fi
+     </pft>
+  </display>
+
+  <flow action=jump><pft>if v1000='ERROR' then 'MAL' fi</pft></flow>
+  <flow action=exit>1</flow>
+
+
+<label>MAL</label>
+  <display><pft>'<b><center>¡INCORRECTO!</b></center>'</pft></display>
+  <flow action=exit>1</flow>
+
+
+<label>EXIT</label>
+
+<display><pft>'<b><center>SIN INDICAR</b></center>'</pft></display>
+
+
+
+</section>
+</IsisScript>

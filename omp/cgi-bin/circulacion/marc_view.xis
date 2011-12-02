@@ -1,0 +1,72 @@
+<IsisScript>
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  <field action=cgi tag=110>nc</field>
+  
+  <do task=search>
+    <parm name=db>opac_circulacion</parm>
+    <parm name=expression><pft>'LC=',v110</pft></parm>
+    <loop>
+		<!-- Muestra datos bibliográficos -->
+		<display><htmlpft><pft>,cat('disponibilidad.pft'),'<br>'</pft></htmlpft></display>
+    	
+		<!-- Para mostrar los sectores -->
+		
+		<!--<list action=load type=list><pft>(if v859:'L.F.' then v859^b,'L.F.-' else v859^b, fi)</pft></list>  -->
+		
+		<list action=delete>now</list>
+		<list action=load type=freq><pft>(if v859:'L.F.' then v859^b,'L.F.-' else v859^b, fi/)</pft></list>
+		<do task=list>
+			<field action=define tag=1>Isis_Item</field>
+			<field action=define tag=2>Isis_Value</field>
+			<display><pft>'<br>Sector/es: '</pft></display>
+			<display><pft>'<ul>'</pft></display>
+			<loop>
+				
+				<field action=export tag=3010>1</field>
+				
+				<display><pft>'<li><font color=red>',
+				select s(mhu,v1)
+					case 'SCS': mhl,'BC-Sector A-CS' ,
+					case 'HM': mhl,'DCS- Cons. HM' ,
+					case 'REFERENCIAS': mhl,'Sala de Referencias',
+					case 'SA': mhl,'BC-Sector A' ,
+					case 'SB': mhl,'BC-Sector B' ,
+					case 'SC': mhl,'BC-Sector C' ,
+					case 'C-MS': mhl,'BC-Sector A-Cons' ,
+					case 'CDB': mhl,'BC-CDB' ,
+					case 'SL': mhl,'Sala de Lectura' ,
+					case 'PLAPIQUI': mhl,'CTC PLAPIQUI' ,
+					case 'BAGRONOMIA': mhl,'Bibl. Agronomía' ,
+					case 'BDERECHO': mhl,'Bibl. Derecho' ,
+					case 'BECONOMIA': mhl,'Bibl. Economía' ,
+					case 'BGEOGRAFIA': mhl,'Bibl. Geografía' ,
+					case 'BHUMANIDADES': mhl,'Bibl. Humanidades' ,
+					case 'DG': mhl,'Depto Geología-Area Geofísica' ,
+					case 'DI': mhl,'Depto Ingeniería-Area 12' ,
+					case 'DIEYC': mhl,'Depto Ing Eléctrica y de Comput.' ,
+					case 'DQ': mhl,'Depto Química' ,
+					case 'INIBIBB': mhl,'CTC INIBIBB' ,
+					case 'INIEC': mhl,'CTC INIEC' ,
+					case 'PEUZO': mhl,'PEUZO' ,
+					case 'UTN': mhl,'UTN' ,
+					case 'DSH': mhl,'Seguridad e Higiene' ,
+				endsel,'</font>',
+				<!-- Muestra la cantidad de ejemplares por sector -->
+				<!-- '(',v2,')</li>',-->
+				
+				</pft></display>
+			</loop>
+			<display><pft>'</ul>'</pft></display>
+		</do>  
+
+	<!--	<display><pft>'<div>',v3010,'</div>'</pft></display> -->
+	</loop>
+  </do>
+  
+		
+
+
+</section>
+</IsisScript>

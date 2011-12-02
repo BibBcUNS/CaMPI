@@ -1,0 +1,91 @@
+<table border="1" width="90%" bgcolor="#FFFFFF">
+    <th align="center" width="100%" colspan="3">Ficha del lector</th>
+  <tr>
+    <td bgcolor="#BEE4FF" width="25%"><b>Registro (MFN)</b></td>
+    <td width="54%">[pft]f(val(mfn),1,0)[/pft]</td>
+    <td width="26%" rowspan="5"><p align="center"><img src="/omp/circulacion/fotos/[pft],v2,[/pft].jpg" width="128" height="96" align="middle" OnError="this.src=[pft]"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,[/pft]"></p></td>
+  </tr>
+  <tr>
+    <td bgcolor="BEE4FF" width="25%"><b>Nombre</b></td>
+    <td width="54%">[pft]v1[/pft]</td>
+  </tr>
+  <tr>
+    <td bgcolor="BEE4FF" width="25%"><b>Documento</b></td>
+    <td width="54%">[pft]v2[/pft]</td>
+  </tr>
+  <tr>
+    <td bgcolor="BEE4FF" width="25%"><b>Domicilio</b></td>
+    <td width="54%">[pft]v6[/pft]</td>
+  </tr>
+  <tr>
+    <td bgcolor="BEE4FF" width="25%"><b>Teléfono</b></td>
+    <td width="54%">[pft]if p(v7) then v7 else 'No se indica' fi[/pft]</td>
+  </tr>
+  <tr>
+    <td bgcolor="BEE4FF" width="25%"><b>Dom. de origen</b></td>
+    <td width="54%" colspan="2">[pft]if p(v14) then v14 else 'No se indica' fi[/pft]</td>
+  </tr>
+  <tr>
+    <td bgcolor="BEE4FF" width="25%"><b>Tel. de origen</b></td>
+    <td width="54%" colspan="2">[pft]if p(v15) then v15 else 'No se indica' fi[/pft]</td>
+  </tr>
+  <tr>
+    <td bgcolor="BEE4FF" width="25%"><b>E@mail</b></td>
+    <td width="54%" colspan="2">[pft]if p(v12) then '<a href="mailto:',v12,'">',v12,'</a>' else 'No se indica' fi[/pft]</td>
+  </tr>
+  <tr>
+    <td bgcolor="BEE4FF" width="25%"><b>Estado</b></td>
+    <td width="54%" colspan="2"><strong><big>[pft]v10[/pft]</big></strong></td>
+  </tr>
+[pft]	
+  if p(v11) then
+ '<tr>
+    <td bgcolor="BEE4FF" width="25%"><b>Fin Sanción</b></td>
+    <td width="54%" colspan="2">'if p(v11) then (v11^*,' Días - Fecha: ',v11^f,' Vencimiento: ',v11^v,'<br>') else 'No se indica' fi'</td>
+  </tr>'
+  fi,
+  if p(v130) then
+ '<tr>
+    <td bgcolor="BEE4FF" width="25%"><b>Observaciones</b></td>
+    <td width="54%" colspan="2"><strong><big><big><font color="red">',v130,'</font></big></big></strong></td>
+  </tr>'
+  fi,
+
+[/pft]
+</table><br>
+
+[pft]
+  if p(v8) then
+ '<table border="1" bgcolor="#FFFFFF">
+  <th colspan="8">Préstamos Vigentes</th>
+  </tr>
+  <tr bgcolor="BEE4FF">
+     <td align="center" width="10%" align="center"><b>Inventario</b></td>
+     <td align="center" width="65%"><b>Descripción</b></td>
+     <td align="center" width="15%"><b>Prestamo</b></td>
+     <td align="center" width="15%"><b>Vencimiento</b></td>
+  </b></tr>',
+ ('<tr>
+     <td width="10%" align="center">',v8^i,'</td>
+     <td width="65%">',v8^b,'</td>
+     <td width="15%">',v8^p,'</td>
+     <td width="15%">',v8^v,'</td>
+  </tr>'),
+'</table>',fi,
+  
+if p(v9) then
+ '<br>
+ 	<table bgcolor="#FFFFFF" border="1">
+    <th colspan="3">Solicitudes por Internet</th>
+  <tr bgcolor="#BEE4FF"><b>
+     <td width="10%" align="center"><b>Ubicación</b></td>
+     <td align="center" width="90%"><b>Descripción</b></td>
+  </b></tr>',
+ ('<tr>
+    <td width="10%" align="center">',v9^s,'</td>
+    <td width="90%">',v9^d,'</td>
+  </tr>'),
+'</table>',
+  fi,
+  if a(v8) and a(v9) then '<p><h3><center>No registra movimientos !</center></h3></p>' fi,
+[/pft]

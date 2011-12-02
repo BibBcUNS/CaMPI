@@ -1,0 +1,48 @@
+<IsisScript>
+<section>  
+<display><pft>'Content-type: text/html'/#</pft></display>
+
+<field action=cgi tag=1>reservas</field>
+<field action=cgi tag=2>politicas</field>
+<field action=cgi tag=3>impresion</field>
+<field action=cgi tag=4>busqueda_x_nc</field>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+<flow action=jump><pft>
+	if (not '.si.no.':v1) 
+		or (not '.si.no.':v3)
+		or (not '.politicas.manual.':v2)
+		or (not '.si.no.':v4)
+	then
+		'Error'
+	fi
+</pft></flow>
+<do task=update>
+	<parm name=db>config</parm>
+	<parm name=count>1</parm>
+	<parm name=mfn>1</parm>
+	<field action=define tag=1102>Isis_Status</field>
+	<field action=define tag=1103>Isis_Lock</field>
+	<parm name=lockid>ID</parm>
+	<update>
+        <field action=delete tag=list>9,10,11</field>
+		<field action=import tag=9>1</field>
+		<field action=import tag=10>2</field>
+		<field action=import tag=11>3</field>
+		<field action=import tag=12>4</field>
+        <write>Unlock</write>
+     </update>
+     </do>
+     
+<display><span style="color:green">La configuración se guardó correctamente</span></display>
+<flow action=jump><pft>'Fin'</pft></flow>
+
+<label>Error</label>
+<display>Los parámetros son incorrectos.<br>
+La configuración no fue modificada</display>
+
+<label>Fin</label>
+
+</section>
+</IsisScript>
+

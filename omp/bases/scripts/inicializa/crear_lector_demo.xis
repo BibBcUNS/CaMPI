@@ -1,0 +1,21 @@
+<display><pft>'Creacion una base LECTOR de prueba...'/</pft></display>
+
+<display><pft>
+			if v2010='WIN' then
+				system(ref(['config']1,
+							'cd ',v5,'\lector&',
+							'"',v4,'" iso=lector_win.iso create=lector now -all&',
+							'"',v4,'" lector fst=@lector.fst fullinv=lector'
+						)
+					)
+			else
+					system(ref(['config']1,
+							'cd "',v5,'/lector";'
+							'"',v4,'" iso=lector_lin.iso create=lector now -all;',
+							'"',v4,'" lector fst=@lector.fst fullinv=lector'
+						)
+					)
+			fi
+</pft></display>
+
+<display><pft>'listo'/#</pft></display>

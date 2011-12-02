@@ -1,0 +1,295 @@
+[pft]'<br>
+<TABLE bgcolor="#F5A307" BORDER=1 WIDTH=100% style="font-family: sans-serif; font-size: 11pt">
+
+<TR>	<TD Align="left">
+	<FONT FACE="MS SANS SERIF" SIZE=2 COLOR="white">
+	<B>',
+        if a(v245^h) then 'Texto' else v245^h fi,
+	'</B>
+	</FONT><br>
+	<FONT FACE="MS SANS SERIF" SIZE=2 COLOR="white">
+	<B>',|Ubicación: |v82^a,'</B>
+	</FONT></TD>
+	<TD Align="center">
+	<FONT FACE="MS SANS SERIF" SIZE=2 COLOR="white">
+	<B>Resultado ',v1001,' de ',v1003,'</B>
+	</FONT></TD>
+	</TD>
+	<TD ALIGN="right">
+	<FONT FACE="MS SANS SERIF" SIZE=2 COLOR="white">
+	<B>',ref(['exist']l(['exist']v7777[1]),
+	      select s(v985)
+		case 'PRES': ,'<FONT COLOR=#FF0000>',
+		case 'BAJA': ,'<FONT COLOR=#0000FF>',
+		case 'EXTRAVIADO': ,'<FONT COLOR=#FF00FF>',
+	      endsel,
+	    v977),
+	'</FONT></FONT>',
+	
+/*solo las terminales con las direcciones ip que se mencionan pueden visualizar los datos del préstamo o el estado del material*/
+
+	   ref(['exist']l(['exist']v7777[1]),
+	   if v985:'PRES' then '<br><img src="/omp/opac/images/prestado1.gif" alt="',
+				if s(getenv('REMOTE_ADDR'))='127.0.0.1' then mhl,v998[LAST] fi,'">' 
+		 fi,
+  	 if v985:'EXTRAVIADO' then '<br><img src="/biblioteca/opac/images/inve.gif" alt="',
+		 		if s(getenv('REMOTE_ADDR'))='127.0.0.1' then mhl,'EXTRAVIADO' fi,'">' fi,
+  	 if v985:'BAJA' then '<img src="/biblioteca/opac/images/baja.gif">' fi
+	   ),
+	'</TD> 
+	</TR>
+</TABLE>
+
+
+<TABLE bgcolor="#F9C99A" BORDER=1 WIDTH=100% style="font-family: sans-serif; font-size: 11pt">
+
+<TR>	<TD COLSPAN="3" WIDTH="*">',
+	  if p(v100) or p(v700) or p(v110) or p(v710) then '<B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Autor/es : </FONT></B>' fi,
+		if v100^9='' then ,
+		  v100^a," "v100^b," "v100^c," "v100^d," "v100^e,
+		else
+		  v100^9, " "v100^d,
+		,fi,
+
+	  if p(v100) and p(v700) then ' ' fi,
+		(if v700^9='' then ,
+		  | |+v700^a,| |v700^b,| |v700^c,| |v700^d,| |v700^e,
+		else
+		  | |+v700^9,| |v700^d,| (|v700^e|)|,
+		,fi),
+
+		if s(v100,v700)>'' and s(v110,v710)>'' then ' ' fi,
+
+		if v100^9>'' and v100^a='' then ,
+		  v110^9," "v110^b," "v110^n, " "v110^d," "v110^c,
+		  if p(v110) and p(v710) then ' ' fi,
+		  (| |+v710^a,| |v710^b,| (|v710^9|)|,| |v710^n,| |v710^d,| |v710^c,),
+		else
+		  v110^a," "v110^b," ("v110^9")"," "v110^n, " "v110^d," "v110^c,
+		  if p(v110) and p(v710) then ' ' fi,
+		  (| |+v710^a,| |v710^b,| (|v710^9|)|,| |v710^n,| |v710^d,| |v710^c),
+		fi, 
+
+	if p(v111)or p(v711) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Reunión : </FONT></B>' fi,
+		(| |+v111^a,
+		  if s(v111^n,v111^c,v111^d)>'' then ' (' fi ,
+		  v111^n, if p(v111^n)and p(v111^d) then ' ' fi, v111^d, | |v111^c,
+		  if s(v111^n,v111^c,v111^d)>'' then ') ' fi, V111^e ),
+		if p(v111)and p(v711) then fi
+		(| |+v711^a,
+		  if s(v711^n,v711^c,v711^d)>'' then ' (' fi ,
+		  v711^n, if p(v711^n) and p(v711^d) then ' ' fi, v711^d, | |v711^c,
+		  if s(v711^n,v711^d,v711^c)>'' then ') ' fi, v711^e ),
+	
+	if s(v240,v130)>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Título Unif. : </FONT></B>',fi,
+			v130^a," "v130^p," "v130^k" ",
+		if v130>'' and p(v240) then '' fi,
+			v240^a," "v240^p," "v240^k" ",
+ 
+
+	if v245>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Título : </FONT></B>' fi,
+		v245^a," "v245^n,
+		" "v245^p," "v245^h," "v245^f,
+		if v245^b.1=';' or v245^b.1='=' then " "v245^b else " "v245^b  fi,
+	'</TD>
+</TR>
+
+<tr>
+	<td align="right"><B><FONT FACE="Verdana" SIZE=1 COLOR=#FF0000>
+	<A id="mostrar_',mfn(1),'" style="display:block;" 
+		href="javascript:void(document.all.detalle_',mfn(1),'.style.display=',"'"n0,'block',"'"n0,');
+				 void(document.all.mostrar_',mfn(1),'.style.display=',"'"n0,'none',"'"n0,');
+				 void(document.all.ocultar_',mfn(1),'.style.display=',"'"n0,'block',"'"n0,')">Mostrar Detalles</A>
+	<A id="ocultar_',mfn(1),'" style="display:none;" 
+		href="javascript:void(document.all.detalle_',mfn(1),'.style.display=',"'"n0,'none',"'"n0,');
+				 void(document.all.ocultar_',mfn(1),'.style.display=',"'"n0,'none',"'"n0,');
+				 void(document.all.mostrar_',mfn(1),'.style.display=',"'"n0,'block',"'"n0,')">Ocultar Detalles</A></td>
+	</FONT>
+</tr>
+</TABLE>
+
+
+
+<TABLE bgcolor="#F9C99A" BORDER=0 WIDTH=100% id="detalle_',mfn(1),'" style="display:none; font-family: sans-serif; font-size: 11pt">
+
+<TR>	<TD COLSPAN="3" WIDTH="*">',
+	if v246>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Variantes : </FONT></B>',
+		(v246^a,| |v246^b), 
+	fi,
+
+	if v740>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Título Relac. : </FONT></B>',
+		(v740^a+|-- |),
+	fi, 
+
+
+	if v780>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Título Ant. : </FONT></B>',
+		(v780^t+|  |),
+	fi,
+
+	if p(v249^t) then '<B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Norma : </FONT></B>',v249^t fi,
+	if p(v249^o) then '&nbsp;&nbsp;<B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Número: </FONT></B>',v249^o fi,
+	if p(v249^d) then '&nbsp;&nbsp;<B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Fecha: </FONT></B>',v249^d fi,
+
+
+	if p(v250) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Edición : </FONT></B>',
+		v250^a,"  "v250^b,
+	fi,
+
+	if p(v255) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Escala : </FONT></B>',
+		v255^a," "v255^b,
+	fi,
+
+	if p(v362) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Inicio-cese : </FONT></B>',
+		v362^a,
+	fi,
+
+	if p(v260) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Publicación : </FONT></B>',
+		v260^a," "v260^b,
+		     if v260<>s('##^c',v260^c) and v260>'' then ' ',v260^c fi,
+		     If s(v260^e,v260^f,v260^g)>'' then ' (',v260^e," "v260^f," "v260^g fi,
+		     If s(v260^e,v260^f,v260^g)>'' then ' (' fi,
+	,fi,
+
+	if p(v300) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Descripción : </FONT></B>',
+		(| |+v300^a,| |v300^b,| |v300^c,| + |v300^e,),
+	fi,
+
+	if p(v309) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Soporte : </FONT></B>',
+		v309^a," "v309^b," + "v309^e,
+	fi,
+
+
+	if p(v773) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>EN: </FONT></B>',
+		,v773^t ,| |v773^d ,| |v773^g ,
+	fi,
+
+	if v440>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Colección: </FONT></B>',
+		(| |+v440^a,| |v440^p,| ; |v440^v),
+	fi,
+
+	if v800>'' or v810>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Director: </FONT></B>',
+		if v800^a:', ' then ,
+		  mid(v800^a,instr(v800^a,', ')+2,size(v800^a)), ' ',mid(v800^a,1,instr(v800^a,', ')-1)
+		fi,
+		(| |+v810^a,| |v810^b,| [|v810^9|]|),
+	fi,
+
+	if p(v500)or p(v504) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Notas: </FONT></B>',
+		mdl,(| - |+v500^a,| - |v504^a),mhl,
+	fi,
+
+
+	if p(v310) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Frecuencia: </FONT></B>',
+		v310^a,
+	fi,
+
+	if p(v505) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Contenido: </FONT></B>',fi
+		(| -- |+v505^t,
+		if v505^r>'' then ' / ' fi,
+		if v505^r:', ' then ,
+		  mid(v505^r,instr(v505^r,', ')+2,size(v505^r)), ' ',mid(v505^r,1,instr(v505^r,', ')-1),'. '
+		else
+		,v505^r,
+		fi,
+		| |v505^g
+		,),
+
+	if p(v520) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Resumen: </FONT></B>',
+		v520^a+| |,
+	fi,
+
+	if p(v521) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Nivel: </FONT></B>',
+		v521^a+| |,
+	fi,
+
+	if p(v522^a) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Jurisdicción: </FONT></B>',
+		v522^a,
+	fi,
+
+	if p(v529^a) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Estado Norma: </FONT></B>',
+		v529^a,
+	fi,
+
+	if p(v530) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>También en: </FONT></B>',
+		v530^a+| |,
+	fi,
+
+	if p(v856) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>URL: </FONT></B>',
+		v856^n,|. ( |v856^u| )|,
+	fi,
+	
+	if p(v536) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Auspicio: </FONT></B>',
+		v536^a+|.-- |,
+	fi,
+
+	if p(v585) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Exposición: </FONT></B>',
+		v585^a+| |,
+	fi,
+
+	if p(v590) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Notas de Inv.: </FONT></B>',
+		v590^a+| |,
+	fi,
+
+	if p(v591) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Notas de CON: </FONT></B>',
+		v591^R+| |,v591^t+| |,
+	fi,
+
+	(if p(v787) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Vinculadas: </FONT></B>',
+	v787^t,| |v787^o, |  fecha:|v787^d/ fi),
+
+	if p(v869) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Existencias: </FONT></B>',
+		v869,
+	fi,
+
+	if p(v20) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>ISBN: </FONT></B>', 
+	      (v020^a+| |),
+	fi,
+
+	if p(v22) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>ISSN: </FONT></B>',
+		(v022^a+| |),
+	fi,
+
+	if p(v82) then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>CDU: </FONT></B>',
+		v82^a,
+	fi,
+
+	if v650^a>'' or v651^a>'' or v653^a>'' or s(v600,v610,v611)>'' or v659>'' then 
+		'<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Materia: </FONT></B>',
+		(v650^a+|; |) fi,
+
+	if v650>'' then (v651^a+|; |) fi,
+	if v651>'' then (v653^a+|; |) fi,
+	if v653>'' then (|; |+v600^a,| |v600^b,|, |v600^c,|, |v600^d,|, |v600^e) fi,
+	if p(v600) and p(v610) then '; ' (|; |+v610^a,|, |v610^b,|, |v610^n,|, |v610^d,|, |v610^c) fi,
+	(|; |+v611^a,
+		if s(v611^n,v611^c,v611^d)>'' then ' (' fi ,
+		  v611^n, if p(v611^n)and p(v611^d) then ' : ' fi v611^d, | |v611^c,
+		  if s(v611^n,v611^d,v611^c)>'' then ') ' fi, v611^e ),
+		if v600>'' or v611>'' then ' ',fi,
+
+	if v659>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>Tema: </FONT></B>',
+		(|; |+V659^a,| - |V659^b,| - |V659^c,),
+	fi,
+
+,if p(v7777) then '
+<TR>	<TD  width="*" COLSPAN=2>
+	<FONT FACE="MS SANS SERIF" SIZE=2 COLOR=#0000FF>
+	<ul><B><u>Ejemplar/es</u></B></FONT>',
+	('<li>ej.',f(iocc,1,0),' - ',mhl,ref(['exist']l(['exist']v7777),
+	select s(v985) 
+		case 'PRES': ,
+			'<img src="/biblioteca/opac/images/prestado2.gif" alt="',
+			if s(getenv('REMOTE_ADDR'))='127.0.0.1' then mhl,v998[LAST] fi,'">',
+		case 'EXTRAVIADO': ,
+			'<img src="/biblioteca/opac/images/inve.gif" alt="',
+			if s(getenv('REMOTE_ADDR'))='127.0.0.1' then mhl,'EXTRAVIADO' fi,'">',
+		case 'BAJA': ,
+			'<img src="/biblioteca/opac/images/baja.gif">',
+	endsel,)
+	if p(v7777) then 'Inv.: ',v7777 fi'</font><br>'),'
+	</ul></TD>
+</TR>
+' fi '
+
+</TABLE>
+'[/pft]

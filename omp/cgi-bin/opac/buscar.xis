@@ -1,0 +1,210 @@
+<!--  ===================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+<section>
+<trace>On!</trace>
+	<display><pft>'Content-type: text/html'/#</pft></display>
+	<display><htmlpft><html>
+		<head>
+		<SCRIPT language="JavaScript1.1">
+		<!--
+		
+			function ir_atras_adelante(sentido) {
+			window.document.atras_adelante.from.value = sentido;
+			window.document.atras_adelante.submit();
+			}
+
+			function borrar_expresion() {
+			parent.frames["cabeza"].formulario1.expresion.value = "";
+			parent.frames["cabeza"].formulario1.tipo_material[0].click();
+			}
+			
+			function solicita(Item) {
+			window.document.solicitud.Item_Seleccionado.value = Item;
+			window.open([pft]"'','Solicitud','"n0[/pft]toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0,alwaysRaised=1,width=500,height=400[pft]"'"n0[/pft]);
+			window.document.solicitud.submit();
+			}
+
+			function presentar_formato(formato,mfn) {
+				if (formato!="Normal") {
+					window.document.form_formatos.Formato.value = formato;
+					window.document.form_formatos.MFN.value = mfn;				
+					window.open([pft]"'"n0,getenv('PATH_INFO'),'formatos.html',"','Opac_Formato','"n0[/pft]toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,copyhistory=0,width=550,height=300[pft]"'"n0[/pft]);
+					}
+			}
+		//-->
+		</SCRIPT>
+		</head>	
+
+		<body bgcolor="#EBF1CC" onload="borrar_expresion();">
+	</htmlpft></display>
+
+	<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+	<field action=cgi tag=5151>expresion</field>
+	<field action=cgi tag=5001>from</field>
+	<field action="cgi" tag="5100">tipo_material</field>
+	<field action="replace" tag="5151"><pft>if p(v5100) and v5100<>'Todos' then '(',v5151,') * "~MAT=',v5100|"| fi</pft></field>
+
+
+
+	<display><pft>'
+		<form action="/cgi-bin/wxis.exe',getenv('PATH_INFO'),'" method="post" name="atras_adelante">
+			<input type="hidden" name="IsisScript" value="',getenv('PATH_INFO'),'buscar.xis">
+			<input type="hidden" name="expresion" value=',"'"n0,v5151,"'"n0,'>
+			<input type="hidden" name="from">
+			</form>
+		<form action="/cgi-bin/wxis.exe',getenv('PATH_INFO'),'" method="post" name="solicitud" target="Solicitud">
+		  <input type="hidden" name="IsisScript" value="',getenv('PATH_INFO'),'solicitud.xis">
+		  <input type="hidden" name="Item_Seleccionado" value="">
+		  <input type="hidden" name="opcion" value="IDENTIFICACION">
+			</form>
+		<form action="/cgi-bin/wxis.exe',getenv('PATH_INFO'),'" method="post" name="form_formatos">
+			<input type="hidden" name="IsisScript" value="',getenv('PATH_INFO'),'formatos.xis">
+			<input type="Hidden" name="Formato">
+			<input type="Hidden" name="MFN"
+			</form>'
+	</pft></display>
+
+	<do task=search>
+		<parm name=db>marc</parm>
+		<parm name=gizmo>gizmo</parm>
+		<parm name=count>10</parm>
+		<parm name=expression><pft>v5151</pft></parm>
+		<parm name=from><pft>v5001</pft></parm>
+
+		<field action=define tag=1003>Isis_Total</field>
+		<field action=define tag=1004>Isis_From</field>
+		<field action=define tag=1005>Isis_Keys</field>
+		<field action=define tag=1001>Isis_Current</field>
+		<field action=define tag=1009>Isis_ErrorInfo</field>
+	
+		<loop>
+		  <field action="import" tag="list">5151</field>
+			<display><pft>
+			  if v1001=v1004 then 
+				'<table>
+  			<tr>
+					<td width="10%"><b>Expresi&oacute;n:&nbsp;</b></td>
+					<td width="55%">',v5151,'</td>
+					<td align="right"><b>&nbsp;&nbsp;Registros (',v1004,'..', 
+						if val(v1004)+9 > val(v1003) then v1003,')', 
+							else f(val(v1004)+9,1,0),') de ',v1003 fi,'</td>
+				</tr>
+				</table>',fi
+			</pft></display>
+			
+				<field action="add" tag="7777" split="occ"><htmlpft><pft>'[pft](',ref(['config']1,v1),'/)[/pft]'</pft></htmlpft></field>  <!-- el v7777 tendrá los nro. de inventarios de la etiqueta declarada en el config.txt -->
+				<field action="import" tag="list">5009</field>
+					
+			
+			<display><htmlpft><pft>,cat('consulta.pft'),</pft></htmlpft></display>
+			<display><pft>
+				'<table width="100%">
+				<tr><td>',
+					'<td>
+						<img src="',getenv('PATH_INFO'),'images/formatosvisualizacion.gif">&nbsp;
+						<select name="sel_formatos" size="1"
+							onblur="this.value=',"'"n0,'Normal',"'"n0,'"; 
+							onchange="presentar_formato(this.options[this.selectedIndex].value, ',"'"n0,mfn,"'"n0,')">
+							<option value="Normal">Normal</option>
+							<option value="Ficha Completa">Ficha Completa</option>
+							<option value="All">All</option>
+						</select></td>'
+			</pft></display>
+
+			<display><pft>
+				'<td>',
+					'<img align="right" src="',getenv('PATH_INFO'),
+					'images/solicitudmaterial.gif" onclick="solicita(',mfn(1)')">
+				</td></td></table><br>'</pft></display>
+		</loop>
+
+<!-- Fin del loop. Desde aquí se muestra el mensaje si no hay registros para visualizar -->
+
+		<display><htmlpft><pft>if v1003 = '0' then 
+			cat(getenv('PATH_TRANSLATED'),'matching0.html') fi,
+		</pft></htmlpft></display>
+	
+<!-- Desde aquí se presentan los botones de navegación -->
+		<display><br></display>
+		<flow action=jump><pft>if val(v1001)>10 and val(v1001)<>val(v1003) then
+				'ATRAS_ADELANTE' else
+					if val(v1001)>10 then 'ATRAS' else
+						if val(v1001)<>val(v1003) then 'ADELANTE'
+							else 'SALIR' fi fi fi
+				</pft></flow>
+
+		<label>ATRAS</label>
+		<display><pft>'<center><img src="',getenv('PATH_INFO'),'images/volver.gif"'</pft></display>		
+		<display>onclick="ir_atras_adelante('</display>
+		<display><pft>f(val(v5001)-10,1,0)</pft></display>
+		<display>')" alt="Presione aquí para ver los resultados anteriores"></display>
+		<flow action=exit>1</flow>
+
+		<label>ADELANTE</label>
+		<display><pft>'<center><img src="',getenv('PATH_INFO'),'images/seguir.gif"'</pft></display>
+		<display>onclick="ir_atras_adelante('</display>
+		<display><pft>f(val(v5001)+10,1,0)</pft></display>
+		<display>')" alt="Presione aquí para ver los proximos resultados"></display>
+		<flow action=exit>1</flow>
+
+		<label>ATRAS_ADELANTE</label>
+		<display><pft>'<center><img src="',getenv('PATH_INFO'),'images/volver.gif"'</pft></display>
+		<display>onclick="ir_atras_adelante('</display>
+		<display><pft>f(val(v5001)-10,1,0)</pft></display>
+		<display>')" alt="Presione aquí para ver los resultados anteriores"></display>
+		<display><pft>'<img src="',getenv('PATH_INFO'),'images/seguir.gif"'</pft></display>
+		<display>onclick="ir_atras_adelante('</display>
+		<display><pft>f(val(v5001)+10,1,0)</pft></display>
+		<display>')" alt="Presione aquí para ver los proximos resultados"></display>
+		<flow action=exit>1</flow>
+
+		<label>SALIR</label>		
+		
+		<display></body></html></display>
+		
+   </do>	
+</section>
+</IsisScript>

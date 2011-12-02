@@ -1,0 +1,89 @@
+<!-- La base bibliográfica original (externa) debería indicarse siempre.
+	Pero en caso que no fuera así, se saltea la creación de biblo -->
+<flow action="jump"><pft>if a(v5002) then 'fin_crea_biblo' fi</pft></flow>
+
+<!-- Comprobamos el estado de la base bibliográfica. Es decir, verificamos que exista -->
+<field action="statusdb" tag="6002"><pft>s(replace(v5002,'.*',''))</pft></field>    
+<display><pft>
+  if not v6002^s:'m' then 
+    	'No se encontro una base de datos Isis en ',v5002/
+		'Revise el parametro "Path base bibliografica=" del archivo config.txt'/
+  fi
+</pft></display>
+
+<field action=replace tag=2000><pft>
+	'biblo_original.*=',v5002/
+	'biblo.*='v5006,'/',v5009,'/',v5009,'.*'/
+	'ac.tab='v5006,'/isisac.tab'/
+	'uc.tab='v5006,'/isisuc.tab'/
+
+	'CI_TEMPDIR='v5006,'/bases/temp'/
+</pft></field>				
+<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>				
+
+<!-- Definimos el cipar.par para los do que se encuentran a continuación -->
+<parm name=cipar><pft>v2000</pft></parm>  		
+
+<!-- Terminamos la ejecución si existe algún problema con la base (no existe) -->
+<flow action="exit"><pft>"Now"n5002,if not v6002^s:'m' then 'Now' fi</pft></flow>
+
+<file action="create" type="database">biblo</file>
+	
+<display><pft>'Creando la base bibliografica...'/</pft></display>
+	
+
+<do task="mfnrange">
+   <parm name=db>biblo_original</parm>
+		
+   <field action=define tag=1111>Isis_Total</field>
+	<loop></loop> <!-- Para saber el total de registros -->
+
+	<loop>
+		<do task=update> <!-- crea el registro bibliográfico (propio del OpenMP)-->
+		<parm name=db>biblo</parm>
+		<parm name="fst"><pft>cat('biblo.fst')</pft></parm>
+		<parm name=mfn>New</parm>     
+	    <field action=define tag=1102>Isis_Status</field>
+	    <field action=import tag=1111>1111</field>
+        <update>
+            
+              <field action="import" tag="list">1/9999</field>
+              <write>Unlock</write>
+              <display><pft>
+                if val(v1102)>0 then 
+					'ERROR: !, no se logró crear el registro bibliográfico'/
+					'SCRIPT ABORTADA'/# fi</pft></display>
+              		<flow action="exit"><pft>if val(v1102)>0 then 'Now' fi</pft></flow>
+					<display><pft>if right(s(mfn),2)='00' then mfn(3),'/',v1111,/ fi</pft></display> <!-- imprime el mfn cada 100 registros procesados -->
+		</update>
+        </do>
+</loop>
+<display><pft>v1111,'/',v1111/</pft></display>
+</do>
+
+<label>fin_crea_biblo</label>
+
+<field action=replace tag=2000><pft>		
+	'biblo.*=',v5006,'/',v5009,'/exist/exist.*'/
+	'biblo.mst=',v5006,'/',v5009,'/',v5009,'.mst'/
+	'biblo.xrf=',v5006,'/',v5009,'/',v5009,'.xrf'/
+	'CI_TEMPDIR=',v5006,'/temp'/
+</pft></field>
+<field action=replace tag=2000><pft>if v2010='WIN' then replace(v2000,'/','\') else v2000 fi	</pft></field>
+
+<!-- Defino el cipar.par en función de los datos anteriores -->		
+<parm name="cipar"><pft>v2000</pft></parm>
+<!-- Se crea el archivo biblo.fst para luego realizar un invertido por nro de inventario -->
+<file action="create" type="output">biblo.fst</file>
+<display><pft>'1 0 (',v5001,'/)'#</pft></display>
+<display><pft>'1 0 (|NC=|v1/)'</pft></display>
+<file action="close" type="output">now</pft></file>
+
+<!-- realizo el invertido  por inventarios función de biblo.fst -->
+<display><pft>'Invirtiendo el diccionario de inventarios...',/</pft></display>
+<do task="fullinvertion">
+	<parm name="db">biblo</parm>
+	<parm name="fst"><pft>cat('biblo.fst')</pft></parm>
+	<field action="define" tag="1102">Isis_Status</field>
+	<loop></loop>			
+</do>

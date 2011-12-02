@@ -1,0 +1,21 @@
+<display><pft>'Creacion una base POLITICAS de prueba...'/</pft></display>
+
+<display><pft>
+			if v2010='WIN' then
+				system(ref(['config']1,
+							'cd ',v5,'\politicas&',
+							'"',v4,'" iso=politicas_win.iso create=politicas now -all&',
+							'"',v4,'" politicas fst=@politicas.fst fullinv=politicas'
+						)
+					)
+			else
+					system(ref(['config']1,
+							'cd "',v5,'/politicas";'
+							'"',v4,'" iso=politicas_lin.iso create=politicas now -all;',
+							'"',v4,'" politicas fst=@politicas.fst fullinv=politicas'
+						)
+					)
+			fi
+</pft></display>
+
+<display><pft>'listo'/#</pft></display>

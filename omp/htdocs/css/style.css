@@ -1,0 +1,263 @@
+/* hoja deeeeeee estilo index */
+body
+{
+  background: #f6f6f6 url(../images/bg.jpg) repeat-x top left;
+  margin: 0px; 
+  padding: 0px;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 12px;
+  }
+
+#head
+{
+ background: url(../images/header.jpg) no-repeat top left;
+  width: 747px;
+  height: 115px;
+  padding-top: 2px;
+  margin: 0 auto;
+}
+
+#head-prestamo
+{
+  background: url(../images/header.jpg) no-repeat top left;
+  width: 747px;
+  height: 20px;
+  margin: 0 auto;
+}
+
+#title
+{
+	text-align:left;
+	width:450px;
+	height:60px;
+ 	font-size: 22px;
+	color: #FFF;
+	padding:0 20px 0 30px;
+    margin: 30px 0px 0px 0px;
+	float:left;
+	/*background:red;*/
+}
+#logo
+{
+	float:right;
+	width:170px;
+	height:60px;
+	margin: 30px 10px 0px 0px;
+    display: block;
+	/*background:blue;*/
+}
+.clearer
+{
+  clear: both;
+	height: 1px;
+	padding: 0px;
+	margin: 0px;
+}
+
+#body_wrapper
+{
+  background: url(../images/body_repeat.jpg) repeat-y top left;
+	margin: 0px auto;
+	width: 747px;
+	display: block;
+}
+
+
+#body
+{
+  background: url(../images/body_top.jpg) no-repeat top left;
+	float: left;
+	padding: 0px 20px 0px 20px;
+	min-height: 450px;
+	display: block;
+}
+
+.clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+#end_body
+{
+  background: url(../images/body_bottom.jpg) no-repeat top left;
+	margin: 0px auto;
+	width: 747px;
+	height: 28px;
+	display: block;
+}
+#all
+{
+  width: 707px;
+	float: left;
+	padding: 0px;
+	background: url(../images/all_repeat.jpg) repeat-y top left;
+
+}
+
+#all .top
+{
+  background: url(../images/all_top.jpg) no-repeat top left;
+	width: 707px;
+	height: 18px;
+	padding: 0px;
+	margin: 0px;
+}
+
+#all .bottom
+{
+  background: url(../images/all_bottom.jpg) no-repeat bottom left;
+	width: 707px;
+	height: 21px;
+	padding: 0px;
+	margin: 0px;
+}
+
+#all th{
+	color: #fff;
+	text-align: center;
+	font-size : 100%;
+	background: #5277AE;
+}
+
+.indented {
+padding-left: 25pt;
+}
+.indent{
+padding-left: 120pt;
+}
+
+.content 
+{
+  padding: 0px 15px;
+}
+
+#left .content, #all .content
+{
+  padding-left: 22px;
+}
+
+#footer
+{
+  margin: 0 auto; 
+	width: 747px;
+	text-align: center;
+	color: #B05128;
+	font-weight: bold;
+}
+
+#footer a
+{
+ color: #B05128;
+}
+
+
+
+
+
+
+/*  Headers  */
+h1 
+{
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 10px;
+	color: #D96B11;
+	background-color: transparent;
+	font-size: 1.6em;
+	font-weight: bold;
+	display: block;
+	border-bottom: 1px solid;
+}
+
+h2 
+{
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 5px;
+	color: #333;
+	background-color: transparent;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+h3 
+{
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 5px;
+	color: #76b7d7;
+	background-color: transparent;
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+h4 
+{
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 5px;
+	color: #333;
+	background-color: transparent;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+h5 
+{
+	color: #9ad5f3;
+	background-color: transparent;
+	padding: 0px;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 5px;
+}
+
+h6 
+{
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+	color: #D96B11;
+	font-size: 1.1em;
+	font-weight: normal;
+	line-height: 150%;
+}
+/* HTML Tags */
+
+.code, code
+{
+  display: block;
+	margin: 5px 10px;
+	padding: 5px;
+	color: #ad4c21;
+	border: 1px dashed;
+	background: #f0ebe7;
+	font-family: Courier, 'Courier New', 'Andale Mono', Monaco, monospace;
+	width: auto;
+}
+
+pre
+{
+ white-space: normal;
+}
+
+
+hr
+{
+  border: 0px;
+  border-bottom: 2px #999999 solid;
+  height: 3px;
+  margin:0px auto;
+}
+
+#left hr, #all hr
+{
+  margin: 10px 0px;
+}
+
+.boton {
+		background-color: #a6d1fe;
+	}

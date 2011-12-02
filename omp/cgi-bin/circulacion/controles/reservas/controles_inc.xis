@@ -1,0 +1,31 @@
+<!--
+Tags utilizados:
+	
+validar_usuario.xis
+	4000:  total de posting para el id_usuario
+	
+validar_id_partes:
+	4000:	IsisItem
+	4002:	Identificador de parte (para buscarlo en partes)
+	3001:	Lista de id_partes no encontrada en la base "partes"
+
+verificar_res_dup:
+	3002: 	ID del usuario.
+	4000:	IsisItem
+	4002:	Identificadores de partes con reservas duplicadas (es decir, que ya tiene una reserva y pretende hacer una más)
+	
+verificar_limites:
+	3002: 	ID del usuario.
+	3005: 	Categoría del usuario.
+	
+-->
+
+<!-- Decidimos no validar el operador dado que se realiza dicho control para poder acceder a las operaciones -->
+<include>circulacion/controles/reservas/valida_usuario.xis</include>
+<include>circulacion/controles/reservas/sanciones.xis</include>
+<include>circulacion/controles/reservas/dev_atrazadas.xis</include>
+<include>circulacion/controles/reservas/id_partes_validos.xis</include>
+<include>circulacion/controles/reservas/reservas_duplicadas.xis</include>
+<include>circulacion/controles/reservas/limites.xis</include>
+<include>circulacion/controles/reservas/tiene_prestado.xis</include>
+<include>circulacion/controles/reservas/todos_prestados.xis</include>

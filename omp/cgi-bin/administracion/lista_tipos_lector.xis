@@ -1,0 +1,16 @@
+<IsisScript name="totalTitulos">
+<section>
+
+<display><pft>'Content-type: text/html'/#</pft></display>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+<do task=mfnrange>
+	<parm name=db>tipo_lector</parm>	
+	<loop>
+		<field action=export  previous=add tag=1>1</field>
+	</loop>
+</do>
+<display><pft>(v1+|~|)</pft></display>
+
+</section>
+</IsisScript>

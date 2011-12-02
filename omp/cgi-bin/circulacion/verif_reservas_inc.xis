@@ -1,0 +1,93 @@
+<function name=verificarReservas tag=1 action=replace>
+        <!-- Verifica si existe alguna reserva para el inventario devuelto.
+        En caso de existir, la primera reserva (menor timestamp) pasa a espera (v3)
+        Recibe como parametro ^i el invatrario y ^o el operador (para lockid)
+        -->
+
+            <!-- Recupero el ID de la parte -->
+            <field action=replace tag=2><pft>ref(['partes']l(['partes']v1^i),v1)</pft></field>
+            <!-- Busco el registro en reservas (mfn) -->
+            <field action=replace tag=3><pft>f(l(['reservas']v2^b,'_',v2^c,'_',v2^p),1,0)</pft></field>
+        
+            <!-- Si no hay reservas finalizo la función -->
+            <flow action=jump><pft>if val(v3)=0 then 'fin_reserva'  fi</pft></flow>
+            
+            <!-- Esto es el caso en que HAY reservas -->
+            <!-- Busco la reserva más "vieja" en el registro.
+            O sea, el nro de occ de v2 con el timestamp más chico -->
+            
+            <!-- en v4 pongo todas las ocurrencias de v2 (las reservas propiamente) -->
+            <field action=replace tag=4 split=occ><pft>ref(['reservas']val(v3),(v2/))</pft></field>
+
+            <!-- Si no hay reservas finalizo la función -->
+            <flow action=jump><pft>if nocc(v4)=0 then 'fin_reserva' fi</pft></flow>
+            
+            <!-- en v5 pongo todos los timestamps  "aammddhhmmss", cada uno como una ocurrencia diferente -->
+            <field action=replace tag=5 split=occ><pft>
+                (v4^f*8.4,v4^f*3.2,v4^f.2,v4^h.2,v4^h*3.2,v4^h*6.2/)
+            </pft></field>
+            <!--display><pft>('v5: ',v5,'.-<br>')</pft></display-->
+
+            <!-- Busco el timestamp más chico usando la funcion menor. -->          
+            <call name=menor><pft>(v5/)</pft></call>
+            <!-- Salida en v30 (^o^t, órden y timestamp respectivamente) -->
+            
+            <!-- Obtengo la hora y fecha -->
+            <field action=replace tag=3010><pft>date</pft></field>
+            <field action=replace tag=3010><pft>
+                '^f',mid(v3010,7,2),'/',mid(v3010,5,2),'/',mid(v3010,1,4),
+                '^h',mid(v3010,10,2),':',mid(v3010,12,2),':',mid(v3010,14,2)
+            </pft></field>
+
+            <!-- Tengo que pasar el registro de reserva a espera de v2 a v3-->                      
+            <do task=update>
+            <parm name=db>reservas</parm>
+            <parm name=mfn><pft>v3</pft></parm>
+            <parm name=lockid><pft>v1^o</pft></parm>
+            <field action=define tag=1102>Isis_Status</field>
+            <field action=define tag=1011>Isis_Lock</field>         
+            <update>
+                <field action=import tag=list>30,3010</field>
+                <field action=import tag=35>1</field> <!-- Para tener el ID del operador -->
+                
+                <!-- Creo la espera temporal v10 con el valor de v2 en la ocurrencia indicada por v30^o -->
+                <field action=occ tag=10 from=2><pft>v30^o</pft></field>
+                
+                <!-- Elimino la ocurrencia correspondiente de v2 -->
+                <field action=delete tag=2><pft>v30^o</pft></field>
+                
+                <!-- Creo la espera con el valor temporal de v10 -->
+                <field action=add tag=3><pft>
+                    '^i',v10^i,
+                    '^f',v3010^f,
+                    '^h',v3010^h,
+                    '^u',v35^o,
+                    '^p',getenv('REMOTE_ADDR')
+                </pft></field>
+				
+                <!-- exporto los datos de reserva caida -->
+                <field action=add tag=4050><pft>'RC=',v1,'^i',v10^i,'^f',v10^f,'^h',v10^h</pft></field>
+                
+                <!-- exporto los datos de la nva espera -->
+                <field action=add tag=4050><pft>
+                	'EN=',
+                	v1,
+                    '^i',v10^i,
+                    '^f',v3010^f,
+                    '^h',v3010^h,
+                    '^e',v35^i
+                </pft></field>
+ 				<field action=export tag=list>4050</field>
+                
+                <field action=delete tag=list>10,30,35,3010,4050</field>
+                <write>Unlock</write>
+            </update>
+            </do>
+			<file action=close type=database>reservas</file>
+			<file action=close type=database>partes</file>
+    
+            <!-- exporto el resultado de la función -->
+            <field action=export tag=list>4050</field>
+
+<label>fin_reserva</label>
+</function> <!-- end verificarReservas -->

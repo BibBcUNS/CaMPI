@@ -1,0 +1,307 @@
+<IsisScript>
+<section>
+<!-- LISTA DE TAGS:
+
+Parametros:
+2000		mfn que referencia a un registro en la base bibliográfica (por ahora marc). Se usa para mostrar el formulario.
+2060		lista de los identificadores de partes a ser reservadas.
+3002		Identificador del usuario.
+3004		Identificador del operador.
+3500		Indica si se invocó al script para realizar una reserva (o si es sólo para mostrar el formulario).
+
+Uso local:
+4000		Items en la eliminación de repetidos (lista de ident de partes)
+
+-->
+
+<display><pft>'Content-type: text/html'/</pft></display>
+<display><pft>'Set-Cookie: CUSTOMER=WILE_E_COYOTE;'/#</pft></display>
+
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+<!-- ENCABEZADO DE PÁGINA -->
+<display>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Reservas</title>
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css">
+  </head>
+  <body>
+    <div id="head"> 
+		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div> 
+	
+	<div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div class="top"></div>
+								<div class="content">
+   
+<!--###################################################-->	
+	<!-- BOTO CERRAR Ventana	
+	div style="float:right">
+		<input value="[x] Cerrar" type="Button" onClick="window.close()">
+	</div-->
+	<h2>Reservar Material</h2>
+	<input type="button" name="volver" value="[ << ]" onClick="javascript:history.back()">
+	<input type="button" name="usuario" value="  [usuario]  " onClick="javascript:top.frames['indice'].document.form_id.submit()";>	
+</display>
+
+<!--
+Verificamos si se está recibiendo el formulario de reserva
+En caso de no ser submit se Muestra el Formulario
+-->
+<field action="cgi" tag="2000">mfn</field>
+<field action="cgi" tag="2060" split="occ">partes_id</field>
+<field action="cgi" tag="3002">usuario_id</field>
+<field action="cgi" tag="3004">operario_id</field>
+<field action="cgi" tag="3500">submit</field>
+
+<!-- Muestro los datos del usuario -->
+  <display><pft>
+  	'<center>',
+  	ref(['lector']l(['lector']v3002),
+  	'<big>',v1,'</big>',", ",v3,
+   	if v2001:'1' then
+   		' <marquee bgcolor="#FF0000" width=90% style="color: #FFFF9B; font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',
+   	fi,
+   	'</center><hr>'
+   )</pft></display>
+
+
+<!-- Muestro los datos bibliográficos -->   
+<do task="mfnrange">
+<parm name="db">marc</parm>
+<parm name="from"><pft>v2000</pft></parm>
+<parm name="count">1</parm>
+<loop>
+		<field action="import" tag="list">3002</field>
+		<display><htmlpft><pft>,cat('omp_tit_aut.pft'),</pft></htmlpft></display>
+</loop>
+</do>
+   
+<!-- Si el formulario fue enviado realizamos los controles correspondientes. En caso contrario mostramos el formulario -->
+<flow action="jump"><pft>if a(v3500) then 'Mostrar Formulario' fi</pft></flow>
+
+
+<!-- Elimino elementos repetidos de la lista de id_partes -->
+<list action="delete"></list>
+<list action="load" type="freq"><pft>(v2060/)</pft></list>	<!-- cargo la lista (sin repetidos) -->
+<field action="delete" tag="2060">All</field>						<!-- limpio v2060 -->
+<do task="list">															<!-- recorro la lista -->
+<field action="define" tag="4000">Isis_Item</field>
+<loop>
+	<field action="import" tag=list>2060</field>
+	<field action="add" tag="2060"><pft>v4000</pft></field> <!-- agrego los items a v2060 -->
+	<field action="export" tag="list">2060</field>
+</loop>
+</do>
+
+<field action="add" tag="2020" split="occ"><pft>
+	(
+		f(l(['reservas']
+			v2060^b,'_',v2060^c,'_',v2060^p
+		),1,0)/
+	)
+</pft></field>
+
+<!-- Realizo los controles y verifico el resultado. -->
+<include>circulacion/controles/reservas/controles_inc.xis</include>
+
+<!-- Si el resultado fue exitoso paso a realizar la reserva. En caso contrario muestro el error y luego el formulario -->
+<flow action=jump><pft>if(not v5000:'Error') then 'CONTROL_OK' fi</pft></flow>
+<display><pft>
+	'<br><font color="red" weight="bold">',
+	(v5000//#),'</font><br>',
+</pft></display>
+<flow action=jump>Mostrar Formulario</flow>
+
+<label>CONTROL_OK</label>
+<!-- Obtengo la fecha y hora -->
+<field action=add tag=3010><pft>
+	'^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^h',mid(date,10,2),':',mid(date,12,2),':',mid(date,14,2)</pft></field>
+
+<!-- cargo la lista con todo los identificadores de partes. -->
+<list action=delete>now</list>
+<list action="load" type="list"><pft>(replace(v2060,'~','^')/)</pft></list>
+
+<do task="list">
+<field action="define" tag=4001>Isis_Item</field>
+<loop>
+	<field action="replace" tag="4002"><pft>v4001^b,'_',v4001^c,'_',v4001^p</pft></field>
+	<field action="import" tag=list>3002,3004,3010</field>
+	<!--flow action=jump><pft>if (l(['reservas']v4002)=0) then 'el_registro_NO_existe' fi</pft></flow-->
+
+	<!--label>el_registro_existe</label-->
+
+	<!-- 2030: recupero todos los id_usuario que reservaron el material en cuestión -->
+	<field action=replace split=occ tag=2030><pft>ref(['reservas']l(['reservas']v4002),(v2/))</pft></field>
+	
+	<!-- Esto pone timestam en lugar de horden "AAAAMMDD HHMMSS" -->
+	<display><pft>'<font style="color:gray"><b>',v4001,'</font><br>'</pft></display>
+	
+	<field action=replace tag=5000><pft>f(l(['reservas']v4002),1,0)</pft></field>
+	
+	<do task="update">
+	    <parm name="db">reservas</parm>
+	    <parm name="fst"><pft>cat('reservas.fst')</pft></parm>
+	    <parm name=mfn><pft>if v5000='0' then 'New' else v5000 fi</pft></parm>
+		<parm name=expire>90</parm>
+		<parm name=lockid><pft>v3004</pft></parm>
+		<field action=define tag=1102>Isis_Status</field>
+		<field action=define tag=1011>Isis_Lock</field>
+		<update>
+			<field action="import" tag=list>3002,3010,3004</field>
+			
+			<!-- esto lo hago para unificar reservas con nuevo registro o registro existente -->
+			<flow action=jump><pft>"registro_existente"d1</pft></flow>
+			<field action=import tag=1>4001</field>
+			<label>registro_existente</label>
+			
+			<field action=add tag=2><pft>
+				'^i',v3002,
+				'^f',v3010^f,
+				'^h',v3010^h,
+				'^u',v3004,
+				'^p',getenv('REMOTE_ADDR')
+				</pft></field>
+			<field action=replace tag=4050><pft>'^i',v3002,'^f',v3010^f,'^h',v3010</pft></field> <!-- ID-fecha-hora -->
+			<field action=replace tag=4040><pft>v1</pft></field>
+			<field action=export tag=list>4040,4050</field>
+			<field action=delete tag=list>3002,3004,3010,4040,4050</field>
+			<write>Unlock</write>
+		</update>
+	</do>
+
+	<label>listo</label>
+	<field action=export tag=list>4040,4050</field>
+	</loop>
+</do>
+
+<!-- Estas líneas que me interesaría agregar tiran error si las activo y habilito la fst-->
+
+<!-- field action=replace tag=7894><pft>f(l(['opera']v3004),1,0)</pft></field>
+	   error: <write>Unlock WXIS|fatal error|unavoidable|cntwrit/cnopn/w|
+--> 
+
+<!-- field action=replace tag=5><pft>ref(['opera']l(['opera']v3004),v3)</pft></field>
+	   WXIS|fatal error|unavoidable|dbxopen: C:\wamp\www\omp\bases\movi\movi.l01 (4)|
+	   el ref solo (sin el l() ) funciona bien
+--> 
+
+<do task=update>
+<parm name=db>movi</parm>
+<parm name=mfn>New</parm>
+<parm name=fst><pft>cat('movi.fst')</pft></parm>
+<field action=define tag=1102>Isis_Status</field>
+<field action=define tag=1011>Isis_Lock</field>
+<update>
+	<field action=import tag=list>3002,4040,4050</field> <!-- En 3002 el ID del Lector. En 4050 datos de la res -->
+	<field action=add tag=1><pft>ref(['lector']l(['lector']v3002),v1)</pft></field>
+	<field action=add tag=2><pft>v3002</pft></field>
+	<field action=import tag=3>3010</field>
+	<field action=replace tag=4><pft>'^treserva',v4040</pft></field>
+	<field action=import tag=5>3004</field>
+	<field action=add tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
+	<field action=add tag=7><pft>'RN=',v4050,'^u',v5,'^p',v6</pft></field>
+	<field action="delete" tag="list">2002,3002,3004,4040,4050</field>
+	<write>Unlock</write>
+	</update>
+</do>
+
+<display>
+	<img src="/omp/circulacion/images/ok.gif">
+	<font color="green">La reserva se ha realizado correctamente</font><br><br>
+</display>
+
+<flow action="jump">FIN</flow>
+
+<label>Mostrar Formulario</label>
+
+<do task="mfnrange">
+<parm name="db">marc</parm>
+<parm name="from"><pft>v2000</pft></parm>
+<parm name="count">1</parm>
+<loop>
+		<field action="import" tag="list">2060,3002,3004</field>
+		<display>
+			<form action="">
+			<input type="hidden" name="IsisScript" value="/circulacion/reserva_form.xis">
+		</display>
+		<display><pft>'
+			<input type="hidden" name="mfn" value="',mfn(0),'">
+			<input type="hidden" name="usuario_id" value="',v3002,'">
+			<input type="hidden" name="operario_id" value="',v3004,'">
+		'</pft></display>
+
+		<list action=delete>now</list>
+
+		<list action="load" type="freq">			
+			<pft>(if p(v859^p)
+					then
+						if (v859^v='')
+							then '#'
+							else v859^v
+						fi
+					fi/)</pft> 
+		</list>
+		
+		<field action="replace" tag="2061"><pft>'~',(v2060,'~')</pft></field>
+		
+		<do task="list">
+		<field action="define" tag="1000">Isis_Item</field>
+		<field action="define" tag="1001">Isis_Current</field>
+		<field action="define" tag="1002">Isis_Items</field>
+		<loop>
+			<field action="import" tag=list>1,2061</field>
+			<!-- Hay que parametrizar la el nombre/path/prefijo de la BD. Fijamos 'MARC' -->
+			<display><pft>
+				if (v1000='#' and val(v1002)<2) then
+					'<input type="hidden" name="partes_id" value="','^bMARC^c',v1,'^p">'
+				fi
+			</pft></display>			
+			<flow action="skip"><pft>if (v1000='#' and val(v1002)<2) then 'Quit' fi</pft></flow>
+			<field action="replace" tag="1005"><pft>'~^bMARC^c',v1,'^p',v1000,'~'</pft></field>
+			<display><pft>
+					'<input type="checkbox" name="partes_id" ',
+					if (v1002='1' or v2061:v1005) then 'checked' fi,
+					' value="','^bMARC^c',v1,'^p',if v1000='#' then '' else v1000 fi,'">',
+					if v1000='#' then 'Primera' else v1000 fi,'<br>',
+			</pft></display>			
+		</loop
+			><display><br></display>
+		</do>
+</loop
+></do>
+
+<display>
+		<input type="submit" name="submit" value="Confirmar reserva">
+	</form>
+</display>
+
+<flow action=jump>FIN</flow>
+
+
+<label>FIN</label>
+
+<display>
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer"></div>
+  </body>
+</html>
+
+</display>
+
+
+
+</section>
+</IsisScript>

@@ -1,0 +1,45 @@
+<!-- 
+Verificar la existencia de los identificadores de partes
+Es decir si dichos identificadores existen en la tabla "partes"
+Entrada: Lista de identificadores de partes (^b^c^p) y id_usuario
+Salida en 5000: Vacios si no hay error. Contenido del error en caso contrario.
+-->
+
+<field action="replace" tag="5000">
+	<pft>
+	if a(v2060) then 
+		'Error: Debe indicar la parte a reservar'
+	fi
+	</pft>
+</field>
+
+<flow action="jump"><pft>if v5000:'Error' then 'FinValidaIdPartes' fi</pft></flow>
+
+<list action="delete">now</list>
+
+<list action="load" type="list"><pft>(v2060/)</pft></list> 
+<do task=list>
+	<field action="define" tag=4000>Isis_Item</field>
+	<loop>		
+		<field action="import" tag="3001">3001</field>
+		<field action="replace" tag="4002"><pft>v4000^b,'_',v4000^c,'_',v4000^p</pft></field>
+		<!-- verifico si existe el identificador en el diccionario de partes -->
+		<field action="add" tag="3001"><pft>
+			if (l(['partes']v4002)=0)
+			then
+				v4000
+			fi
+		</pft></field>		
+		<field action="export" tag="3001">3001</field>
+	</loop>
+</do>
+
+<field action="replace" tag="5000">
+	<pft>
+	if (not v3001='') then 
+		'Error: No existe material con identificador/es de partes siguiente: <ul>',('<li>',v3001,'</li>'),'</ul>'
+	fi
+	</pft>
+</field>
+
+<label>FinValidaIdPartes</label>

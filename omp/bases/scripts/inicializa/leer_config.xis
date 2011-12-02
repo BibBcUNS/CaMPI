@@ -1,0 +1,77 @@
+<!-- tags utilizados: 
+5000	Contiene todas las lineas del archivo config.txt
+5001 tag y el subcampo correspondiente al inventario de la base bibliográfica [supuestamente no se debería usar más]
+5002 Ubicación y archivos que componen la base bibliográfica(Path base bibliografica)
+5003 tag y subcampo que define la sección/colección (Campo Estado)
+4004 path de la carpeta pública vía HTTP (Path htdocs)
+5005 path del mx (path mx)
+5006 path de las bases para OMP (Path bases)
+5007 Indica si se habilita o no la opción de reserva ()
+5009 formato de catalogación (Formato Cataloga)
+5010 Nombre de la institución (Nombre Institucion)
+
+<!-- El archivo config.txt debería estar en el mismo directorio que el inicializa.xis o indicar el mismo en la sig. línea -->
+<field action="add" tag="5000" split="occ"><pft>cat('config.txt')</pft></field> <!-- Coloca en v5000 todos los parámetros de configuración -->
+
+<!-- v5001 contiene el tag y el subcampo correspondiente al inventario de la base bibliográfica -->
+<field action="add" tag="5001"><pft>
+	(if v5000.1<>'#' and v5000:'Campo Inventario=' then 
+		mid(v5000,size('Campo Inventario=')+1,
+		instr(v5000,';')-size('Campo Inventario=')-1) fi)</pft></field>
+
+<!-- v5002 define la ubicación y los archivos que componen la base bibliográfica -->
+<field action="add" tag="5002"><pft>
+	(if v5000.1<>'#' and v5000:'Path base bibliografica=' then 
+		mid(v5000,size('Path base bibliografica=')+1,
+		instr(v5000,';')-size('Path base bibliografica=')-1) fi)</pft></field>
+
+<!-- v5003 define el tag y subcampo que define la sección/colección de los inventarios -->	
+<field action="add" tag="5003"><pft>
+	(if v5000.1<>'#' and v5000:'Campo Estado=' then 
+		mid(v5000,size('Campo Estado=')+1,
+		instr(v5000,';')-size('Campo Estado=')-1) fi)</pft></field>
+
+<!-- v5004 define el path de la carpeta pública vía HTTP -->
+<field action="add" tag="5004"><pft>
+	(if v5000.1<>'#' and v5000:'Path htdocs=' then 
+		mid(v5000,size('Path htdocs=')+1,
+		instr(v5000,';')-size('Path htdocs=')-1) fi)</pft></field>
+					
+<!-- v5005 define el path del mx -->
+<field action="add" tag="5005"><pft>
+	(if v5000.1<>'#' and v5000:'Path mx=' then 
+		mid(v5000,size('Path mx=')+1,
+		instr(v5000,';')-size('Path mx=')-1) fi)</pft></field>
+
+
+<!-- v5006 define el path de las bases para OMP -->
+<field action="add" tag="5006"><pft>
+	(if v5000.1<>'#' and v5000:'Path bases=' then 
+		mid(v5000,size('Path bases=')+1,
+		instr(v5000,';')-size('Path bases=')-1) fi)</pft></field>
+
+<!-- v5007 si se habilita la opción de reservas -->
+<field action="add" tag="5007"><pft>
+	(if v5000.1<>'#' and v5000:'Habilitar reserva=' then 
+		mid(v5000,size('Habilitar reserva=')+1,
+		instr(v5000,';')-size('Habilitar reserva=')-1) fi)</pft></field>
+
+<!-- v5009 define el formato de catalogación -->
+<field action="add" tag="5009"><pft>
+	(if v5000.1<>'#' and v5000:'Formato Cataloga=' then 
+		mid(v5000,size('Formato Cataloga=')+1,
+		instr(v5000,';')-size('Formato Cataloga=')-1) fi)</pft></field>
+
+
+<!-- v5010 define el Nombre de la Institucion -->
+<field action="add" tag="5010"><pft>
+	(if v5000.1<>'#' and v5000:'Nombre Institucion=' then 
+		mid(v5000,size('Nombre Institucion=')+1,
+		instr(v5000,';')-size('Nombre Institucion=')-1) fi)</pft></field>						
+
+<!-- v5011 define el Nombre de la Institucion -->
+<field action="add" tag="5011"><pft>
+	(if v5000.1<>'#' and v5000:'Fecha de devolucion=' then 
+		mid(v5000,size('Fecha de devolucion=')+1,
+		instr(v5000,';')-size('Fecha de devolucion=')-1) fi)</pft></field>						
+

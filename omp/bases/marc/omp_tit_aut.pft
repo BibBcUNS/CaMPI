@@ -1,0 +1,104 @@
+[pft]'
+<TABLE BORDER=0 WIDTH=100% style="vertical-align: middle;font-family: sans-serif; font-size: 11pt" VALIGN=MIDDLE>
+
+<TR><TD COLSPAN="3" WIDTH="*">',
+	if p(v100) or p(v700) or p(v110) or p(v710) then
+		'<B><FONT FACE="MS SANS SERIF" SIZE=2 >Autor/es: </FONT></B>'
+	fi,
+	
+	if v100^9='' then
+		v100^a," "v100^b," "v100^c," "v100^d," "v100^e,
+	else
+		  v100^9, " "v100^d,
+	fi,
+
+	if p(v100) and p(v700) then ' ' fi,
+	
+	(if v700^9='' then ,
+		  | |+v700^a,| |v700^b,| |v700^c,| |v700^d,| |v700^e,
+	else
+		  | |+v700^9,| |v700^d,| (|v700^e|)|,
+	fi),
+
+	if s(v100,v700)>'' and s(v110,v710)>'' then ' ' fi,
+
+	if v100^9>'' and v100^a='' then ,
+		  v110^9," "v110^b," "v110^n, " "v110^d," "v110^c,
+		  if p(v110) and p(v710) then ' ' fi,
+		  (| |+v710^a,| |v710^b,| (|v710^9|)|,| |v710^n,| |v710^d,| |v710^c,),
+	else
+		  v110^a," "v110^b," ("v110^9")"," "v110^n, " "v110^d," "v110^c,
+		  if p(v110) and p(v710) then ' ' fi,
+		  (| |+v710^a,| |v710^b,| (|v710^9|)|,| |v710^n,| |v710^d,| |v710^c),
+	fi, 
+
+	/*
+	if p(v111)or p(v711) then
+		'<br><B><FONT FACE="MS SANS SERIF" SIZE=2 >Reunión : </FONT></B>'
+	fi,
+	*/
+	
+	(
+		| |+v111^a,
+		if s(v111^n,v111^c,v111^d)>'' then	' (' fi ,
+		v111^n,
+		if p(v111^n)and p(v111^d) then ' ' fi, v111^d, | |v111^c,
+		if s(v111^n,v111^c,v111^d)>'' then ') ' fi, V111^e ),
+		if p(v111)and p(v711) then fi
+		(| |+v711^a,
+		if s(v711^n,v711^c,v711^d)>'' then ' (' fi ,
+		v711^n, if p(v711^n) and p(v711^d) then ' ' fi, v711^d, | |v711^c,
+		if s(v711^n,v711^d,v711^c)>'' then ') ' fi, v711^e
+	),
+	
+	/*
+	if s(v240,v130)>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 >Título Unif. : </FONT></B>',fi,
+			v130^a," "v130^p," "v130^k" ",
+		if v130>'' and p(v240) then '' fi,
+			v240^a," "v240^p," "v240^k" ",
+	*/
+
+	if v245>'' then '<br><B><FONT FACE="MS SANS SERIF" SIZE=2 >Título: </FONT></B>' fi,
+		v245^a," "v245^n,
+		" "v245^p," "v245^h," "v245^f,
+		if v245^b.1=';' or v245^b.1='=' then " "v245^b else " "v245^b  fi,
+		
+	/*
+	if p(v260^c) then
+		'<br><B><FONT FACE="MS SANS SERIF" SIZE=2 >Fecha de publ: </font></B>',v260^c,'<br>'
+	fi
+	*/
+	
+	if v859^v<>'' then
+		'<TD width="20%" style="border-left:1px solid #5277AE; text-align:center">
+		 <FONT FACE="MS SANS SERIF" SIZE=2 >Tomos: </font><br><B>',
+			(
+				if not v2000[1]:v859^v or (v859^v='' and not v2000[1]:'Primera') then
+					proc('d2000a2000~',
+								v2000[1],
+								if v859^v='' then 'Primera' else v859^v fi,', ',
+							'~'
+			)
+	fi),
+		left(v2000,size(v2000)-2), /* Para eliminar la última coma*/
+		'</B></TD>'
+	fi,
+	
+	'<TD width="25%" style="border-left:1px solid #5277AE; text-align:center">',
+	if p(v250^a) then
+		'
+		 <B><FONT FACE="MS SANS SERIF" SIZE=2 >',v250^a,'</font></B><br>',
+	fi,
+	if p(v859^h) then
+		'<FONT FACE="MS SANS SERIF ITALIC" SIZE=2 >',
+			(if not v1000[1]:s(v859^h,'. ',v859^i) then proc('d1000a1000~',v1000[1],' ',s(v859^h,'. ',v859^i),'~') fi),(v1000),
+		'</font>',
+	fi,
+	'</TD>'
+	
+	
+	'</TD>
+</TR>
+
+</TABLE>
+'[/pft]

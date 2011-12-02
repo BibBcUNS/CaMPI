@@ -1,0 +1,117 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+
+<section>
+
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <field action=cgi tag=2001>valor_search_01</field>
+  <field action=cgi tag=2002>valor_search_02</field>
+  <field action=cgi tag=2003>valor_search_03</field>
+  <field action=cgi tag=2004>valor_search_04</field>
+  <field action=cgi tag=2005>valor_search_05</field>
+  <field action=cgi tag=2006>valor_search_06</field>
+  <field action=cgi tag=2007>valor_search_07</field>
+  <field action=cgi tag=2008>valor_search_08</field>
+  <field action=cgi tag=2009>valor_search_09</field>
+  <field action=cgi tag=2010>valor_search_10</field>
+  <field action=cgi tag=2011>valor_search_11</field>
+  <field action=cgi tag=2012>valor_search_12</field>
+  <field action=cgi tag=2013>valor_search_13</field>
+  <field action=cgi tag=2014>valor_search_14</field>
+  <field action=cgi tag=2015>valor_search_15</field>
+  <field action=cgi tag=2016>valor_search_16</field>
+  <field action=cgi tag=2017>valor_search_17</field>
+  <field action=cgi tag=2018>valor_search_18</field>
+  <field action=cgi tag=2019>valor_search_19</field>
+  <field action=cgi tag=2020>valor_search_20</field>
+
+  <display>
+	<html><head>
+		<title>Open MarcoPolo - Módulo OPAC</title>
+
+	<SCRIPT language="JavaScript1.1">
+	<!--
+	
+	function subir_expresion(item_seleccionado) {
+	var valor_item = item_seleccionado;
+	var compara = valor_item.substring(1,5);
+	if (compara != "<----") {
+			anterior = parent.frames["cabeza"].formulario1.expresion.value ;
+			parent.frames["cabeza"].formulario1.expresion.value = item_seleccionado;}
+	}
+	//-->
+	</SCRIPT>
+	</display>
+
+	<display><pft>
+	 '</head>
+		<body bgcolor="#E8E8D0" bgproperties="fixed">
+		<img align="left" src="',getenv('PATH_INFO'),'images/Busquedasant.gif">&nbsp;
+		<select style="font-size: x-small; font-family: Courier"
+			name="search_anterior" size="1"
+			OnChange=',"'subir_expresion(this.options[this.selectedIndex].value);'"n0,'>'
+	</pft></display>
+	
+	<list action=load type=freq><pft>v2001/,v2002/,v2003/,v2004/,v2005/,
+		v2006/,v2007/,v2008/,v2009/,v2010/,v2011/,v2012/,v2013/,v2014/,
+		v2015/,v2016/,v2017/,v2018/,v2019/,v2020/</pft>
+	</list>
+	
+	<do task=list>
+		<field action=define tag=1>Isis_Item</field>
+		<field action=define tag=2>Isis_Current</field>
+		<loop>
+			<flow action="exit"><pft>if v1='' then '1' fi</pft></flow>
+			<display><pft>'<option value=',"'"n0,v1,"'"n0,
+				,if val(v2)=1 then ' selected disabled>' else '>' fi,
+				v1.58,'</option>'
+			</pft></display>
+		</loop>	
+	</do>
+	<list action=delete>now</list>
+	<display></select></display>
+
+</section>
+</IsisScript>

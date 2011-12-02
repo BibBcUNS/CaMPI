@@ -1,0 +1,134 @@
+<IsisScript>
+
+<!-- Se utilizan los siguientes campos comunes a los scripts de control:
+v3000: invs_prestamo_A
+v3001: invs_prestamo_B
+v3002: lista de todos los inventarios (invs_prestamo_A + invs_prestamo_B)
+v3004: documento
+-->
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+	<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+	<field action="cgi" tag="3004">documento</field>
+	<field action="cgi" tag="3000">invs_prestamo_A</field>
+	<field action="cgi" tag="3001">invs_prestamo_B</field>  
+	<field action="cgi" tag="120">_enviar_invs</field>
+	<field action="replace" tag="120"  split="occ"><pft>v120</pft></field>
+	<field action="replace" tag="3002" split="occ"><pft>(v3000/)(v3001/)</pft></field>
+	<field action="cgi" tag="3003">_devoluciones_invs</field>
+	<field action="replace" tag="3003" split="occ"><pft>v3003</pft></field>
+
+	<!-- Se eliminan repetidos de la lista de inventarios -->
+	<list action="load" type="freq" previous="delete"><pft>(v3002/)</pft></list>
+	<field action="delete" tag="3002">ALL</field>
+	
+	<do task="list">
+           <field action="define" tag="4000">Isis_Item</field>
+           <loop>
+		   <field action="import" tag="3002">3002</field>
+		   <field action="add" tag="3002"><pft>v4000</pft></field>
+		   <field action="export" tag="3002">3002</field>
+	   </loop>
+	</do>
+
+<!--field action="cgi" tag="100">invs_prestamo_A</field>
+<field action="cgi" tag="110">invs_prestamo_B</field -->
+
+<field action="replace" tag="100"><pft>if v100:'s' then replace(v100,'s','') fi</pft></field>
+<field action="replace" tag="100"><pft>if v100:'S' then replace(v100,'S','') fi</pft></field>
+<field action="replace" tag="110"><pft>if v110:'s' then replace(v110,'s','') fi</pft></field>
+<field action="replace" tag="110"><pft>if v110:'S' then replace(v110,'S','') fi</pft></field>
+
+
+<field action="replace" tag="100"><pft>if v100:'m' then replace(v100,'m','') fi</pft></field>
+<field action="replace" tag="100"><pft>if v100:'M' then replace(v100,'M','') fi</pft></field>
+<field action="replace" tag="110"><pft>if v110:'m' then replace(v110,'m','') fi</pft></field>
+<field action="replace" tag="110"><pft>if v110:'M' then replace(v110,'M','') fi</pft></field>
+
+<include>circulacion/controles/controles_inc.xis</include>
+
+  <display>
+    <html>
+	<head>
+	<style>
+		body{
+			cursor:pointer;
+			padding:5px;
+			margin:5px;
+			background-color:#f6f6f6;
+		}
+		#error_title {
+			width:95%;
+			font-family: sans-serif;
+			font-size: 10pt;
+			color:white;
+			background-color:LightCoral ;
+			text-align:center;
+			padding: 5px 10px;
+			font-weight:bold;
+			margin:0px;
+		}
+		#error_message {
+			width:95%;
+			font-family: sans-serif;
+			font-size: 10pt;
+			text-align:left;
+			//color: #5277AE;
+			color: #C00000;
+			margin-top: 20px;
+		}
+		#close {
+			position: fixed;
+			bottom: 0;
+			right: 0;
+			height:20px;
+			width:45px;
+		}
+	</style>
+	</head>	
+	<body onclick="window.parent.ocultar_control()">
+	
+  </display>
+  
+	<display><pft>
+		if v5000:'Error' then 
+			'<div id="error_title">
+				No es posible realizar la operación
+			</div>
+			<div id="error_message">',
+				replace(v5000,'Error:',''),
+			'</div>
+			<img id="close" src="/omp/circulacion/images/close.gif">'
+		fi
+	</pft></display>
+	
+	<display>
+		</BODY>
+		</HTML>
+	</display>
+
+	<display><pft>if v5000:'Error' then '<tr><td>
+		<SCRIPT LANGUAGE="JavaScript">
+			window.parent.document.verifica.enviar.value = "0";
+			window.focus()
+		</script>
+		</td></tr>' 
+	else 
+		'<tr><td>
+		<SCRIPT LANGUAGE="JavaScript">
+		
+		window.parent.document.verifica.enviar.value = "1";
+		if (window.parent.document.verifica.enviar.value == ',"'"n0,'1',"'"n0,') {
+			window.parent.document.control.submit();
+			//window.close()
+		}
+		
+		</script>
+		</td></tr>' 
+	fi
+	</pft></display>
+
+</section>
+</IsisScript>
+

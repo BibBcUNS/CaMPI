@@ -1,0 +1,72 @@
+<!-- ==================================================================
+ * CaMPI
+ * Copyright (c) ¿?
+ *
+ * Desarrolladores:
+ *
+ * Fuhr, Claudio 
+ * e-mail: claudiofuhr@gmail.com
+ * Asociación Bernardino Rivadavia
+ * Av. Colón 31
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ *
+ * Ferracutti, Victor
+ * e-mail: vmferra@uns.edu.ar
+ * Biblioteca Central, UNS
+ * Av. Alem 1253
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ */ -->
+
+<!--
+ * ABM del Calendario
+-->
+
+<IsisScript>
+<section>  
+<display><pft>'Content-type: text/html'/#</pft></display>
+<trace>!BR</trace>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+<field action=cgi tag=900>anio</field> <!-- año a partir del cual mostrará -->
+<field action=cgi tag=1>1</field>
+<field action=cgi tag=2>2</field>
+<field action=cgi tag=3>3</field>
+<field action=cgi tag=4>4</field>
+<field action=cgi tag=5>5</field>
+<field action=cgi tag=6>6</field>
+<field action=cgi tag=7>7</field>
+<field action=cgi tag=8>8</field>
+<field action=cgi tag=9>9</field>
+<field action=cgi tag=10>10</field>
+<field action=cgi tag=11>11</field>
+<field action=cgi tag=12>12</field>
+
+
+<field action=replace tag=110><pft>f(l(['calendario']v100),1,0)</pft></field>
+
+<display><pft>if val(v110)>0 then 'error: El año que se intenta crear ya existe en la BD' fi</pft></display>
+<flow action=jump><pft>if val(v110)>0 then 'Fin' fi</pft></flow>
+
+<do task=update>
+	<parm name=db>calendario</parm>
+	<parm name=mfn>New</parm>
+	<parm name=fst><pft>cat('calendario.fst')</pft></parm>
+	<field action=define tag=1102>Isis_Status</field>
+	<update>
+		<field action=import tag=list>1,2,3,4,5,6,7,8,9,10,11,12,900</field>
+		<field action=replace tag=901><pft>f(size(v1)+size(v2)+size(v3)+size(v4)+size(v5)+size(v6)+size(v7)+size(v8)+size(v9)+size(v10)+size(v11)+size(v12),1,0)
+		</pft></field>
+        <write>Unlock</write>
+     </update>
+     </do>
+     
+<display>Los datos fueron guardados correctamente</display>
+<label>Fin</label>
+
+</section>
+</IsisScript>
