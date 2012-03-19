@@ -287,7 +287,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 <parm name=db>lector</parm>
 <parm name=from><pft>v2001</pft></parm>
 <parm name=count>1</parm>
-<!--parm name=gizmo>txt_htm</parm> -->
+<parm name=gizmo>txt_htm</parm>
 <loop>
 
         <!-- v2001 tendrá tantas ocurrencias como v8 (prestamos)
@@ -674,7 +674,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         La siguiente lista contiene por cada item el subcampo ^ttipo de operacion ("prestamo"),^iInventario,^pfecha prestamo (hoy) y ^vfecha Vto.
         -->
         <list action=delete>now</list>
-        <list action=load type=list><pft>
+        <list action=load type=list type=freq><pft>
              (if p(v1100) then '^tprestamo^i',
              if s(mpu,v1100):'M' or s(mpu,v1100):'S' then
                 left(v1100,size(v1100)-1),
@@ -1038,6 +1038,16 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                    '<td width="38%"><p align="right"><b>',v1.40,'<br>DNI ',v2,'</b>
                 </tr>
               </table>'
+			     if getenv('REMOTE_ADDR') = '10.10.1.29' or 
+				 getenv('REMOTE_ADDR') = '10.10.1.132' or
+				 getenv('REMOTE_ADDR') = '127.0.0.1' then 
+			'<script type="text/javascript">
+				pu=window.open("","ventana_resultado","width=640","height=480","toolbar=no","location=no","titlebar=no","directories=no","status=no","menubar=no","scrollbars=yes","resizable=yes");
+				var doc=pu.document.open("text/html","replace");
+				var txt="<html><head><title>Información para el usuario</title></head><body>";
+				txt=txt+"<table border=1 width=100% align=center cellpadding=1 cellspacing=0>";
+				txt=txt+"<tr><td align=center colspan=3><font size=4>',v1.40,' &mdash; ',v2,'</font></td></tr>";
+			</script>',fi
             </pft></display>
           </loop>
         </do> <!-- list -->
@@ -1070,7 +1080,11 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                      <th width="45%">Devoluciones:</th>
                      <td width="10%">&nbsp;</td>
                      <th width="45%">Devoluciones:</th>
-                   </tr>',fi
+                   </tr>
+				   <!-- Encabezado ventana de información de usuario. Devoluciones -->
+				   <!--script type="text/javascript">
+					  txt=txt+"<tr bgcolor=#d0d0d0><td align=center><font size=4><b>Devoluciones</b></font></td></tr>";
+				   </script-->',fi
                 </pft></display>
                 
                 <display><pft>
@@ -1085,8 +1099,12 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error ! </marquee>'
                         fi,
                         '<p>Inv. ',v1001^i,', ',v1001^b.60,
-                  '</p></td></tr>',
-                </pft></display>
+                  '</p></td></tr>
+<!-- Listado de devoluciones en ventana de información para el usuario -->
+				<!-- script type="text/javascript">
+				   txt=txt+"<tr><td><b>',v1001^b,'</b></td></tr>";
+				</script-->'
+				</pft></display>
         </loop>
         </do> <!-- list -->
     
@@ -1119,7 +1137,14 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                      <th width="45%" colspan="2">Préstamos:</th>
                      <td width="10%">&nbsp;</td>
                      <th width="45%" colspan="2">Préstamos:</th>
-                   </tr>',fi
+                   </tr>'
+				   if getenv('REMOTE_ADDR') = '10.10.1.29' or 
+				   getenv('REMOTE_ADDR') = '10.10.1.132' or
+				   getenv('REMOTE_ADDR') = '127.0.0.1' then 
+					'<script type="text/javascript">
+				      txt=txt+"<tr bgcolor=#d0d0d0><td align=center colspan=3><font size=4><b>Préstamos</b></font></td></tr>";
+					  txt=txt+"<tr align=center><td><b>Vencimiento</b></td><td><b>Inventario</b></td><td><b>Ejemplar</b></td></tr>";
+				   </script>',fi,fi
                </pft></display>
         
                <display><pft>
@@ -1148,8 +1173,15 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                         if (v1001^b.1:'!') then '
                  <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error !</marquee>'
                         fi,v1001^b.60,
-                  '</td></tr>',
-                </pft></display>
+                  '</td></tr>'
+			  if getenv('REMOTE_ADDR') = '10.10.1.29' or 
+				 getenv('REMOTE_ADDR') = '10.10.1.132' or
+				 getenv('REMOTE_ADDR') = '127.0.0.1' then 
+			'<!-- Listado de préstamos en ventana de información para el usuario -->
+				<script type="text/javascript">
+				   txt=txt+"<tr><td><b>',v1001^v.10,'</b></td><td><b>',v1001^i,'</td><td>',v1001^b,'</b></td></tr>";
+				</script>',fi
+			</pft></display>
         </loop>
         </do>   <!-- list -->
     
@@ -1158,7 +1190,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <label>IMPRIMIR_SANCION</label>
     
         <display><pft>
-           if s(mpu,v10):'SANCIONADO' then 
+           if s(mpu,v10,mpl):'SANCIONADO' then 
              '<br>
                 <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold" width="90%">S A N C I O N A D O !</marquee>
               <table border="0" width="90%" cellspacing="0">
@@ -1167,10 +1199,18 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                    <td width="10%"></td>
                    <td width="45%"><p>SANCIONADO hasta el ',v11^v[last],'</p></td>
                </tr>
-              </table>',
+              </table>
+			  <!-- Encabezado ventana de información de usuario. Sanciones -->
+			<!--script type="text/javascript">txt=txt+"<tr bgcolor=#d0d0d0><td align=center><font size=4><b>SANCIONADO hasta el ',v11^v[last],'</b></font></td></tr>";</script-->',
            fi/
         </pft></display>
-    
+    <display><pft>if getenv('REMOTE_ADDR') = '10.10.1.29' or 
+				  getenv('REMOTE_ADDR') = '10.10.1.132' or
+				  getenv('REMOTE_ADDR') = '127.0.0.1' then 
+			'<script type="text/javascript">
+				txt=txt+"</table></body></html>";
+				doc.write(txt);
+				doc.close();</script>' fi</pft></display>
         <label>IMPRIMIR_FIRMAS</label>
 
         <do task=mfnrange>
@@ -1474,7 +1514,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 				'">',
 				
 						 '<div id="head"> 
-		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="title">Módulo de Circulación - Open MarcoPolo</div>
 		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
     </div> 
     <div id="body_wrapper">
