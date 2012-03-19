@@ -10,24 +10,32 @@
 
 <flow action="jump"><pft>if v5000:'Error' then 'fin_tiene_prestado' fi</pft></flow>
 <field action="replace" tag="4001"><pft>ref(['lector']l(['lector']v3002),v3)</pft></field>
+
+
 <field action="replace" tag="4002"><pft>ref(['politicas']l(['politicas']v4005),v20^p)</pft></field> <!-- v20^p='1' en políticas indica que se le puede prestar ejemplares "hermanos" -->
+
 <flow action="jump"><pft>if v4002='1' then 'fin_tiene_prestado' fi</pft></flow>
+
+
 <!--  SI SE LE PERMITEN PRESTAMOS DUPLICADOS SALTEO TODO EL CONTROL -->
 	
-<!-- 4000	Lista de inventarios prestados-->
+<!-- 4000	Lista de inventarios prestados
+
 <field action="delete" tag="4000">all</field>
 <do task="search">
-<parm name="db">exist</parm> <!-- exist -->
-<parm name="expression"><pft>'IDU=',v3002</pft></parm> <!-- id del usuario -->
+
+<parm name="db">exist</parm> 
+<parm name="expression"><pft>'IDU=',v3002</pft></parm> 
 <loop>
 	<field action="import" tag="list">4000</field>
-	<field action="add" tag="4000"><pft>v977</pft></field> <!-- inventario a 4000 -->
+	<field action="add" tag="4000"><pft>v977</pft></field> 
 	<field action="export" tag="list">4000</field>
 </loop>
 </do>
-<!-- Así sacabamos los inventario de la base lector...
-<field action="replace" tag="4000" split="occ"><pft>ref(['lector']l(['lector']v3002),(v8^i/))</pft></field>
 -->
+<!-- Así sacabamos los inventario de la base lector...-->
+<field action="replace" tag="4000" split="occ"><pft>ref(['lector']l(['lector']v3002),(v8^i/))</pft></field>
+<!-- -->
 
 <!-- Lista de partes prestadas -->
 <field action="replace" tag="4005" split="occ"><pft>(ref(['partes']l(['partes']v4000),v1/))</pft></field>
