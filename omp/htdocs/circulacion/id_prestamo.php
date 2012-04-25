@@ -194,7 +194,7 @@ $usuario=$_SESSION["s_username"];
 $password=$_SESSION["s_password"];
 ?>
 
-<form name="form_id" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/"
+<form name="form_id" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/" AUTOCOMPLETE=off
  	onSubmit="
 		if (window.document.form_id.lector.value =='') {
 				window.document.form_id.lector.focus();
