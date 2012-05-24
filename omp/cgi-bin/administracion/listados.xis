@@ -51,6 +51,8 @@
 	<field action=cgi tag=100>opcion</field>
 
 <!--  <field action=cgi tag=110>operador</field> -->
+
+
 <display>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -109,7 +111,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 
   <label>morosos</label>
 
-  <display><p align="center"><big>Préstamos morosos a la fecha</big></p></display>
+  
   <do task=mfnrange>
     <parm name=db>lector</parm>
   
@@ -137,42 +139,66 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
      <field action=define tag=1100>Isis_Item</field>
      <field action=define tag=1101>Isis_Current</field>
      <field action=define tag=1102>Isis_Total</field>
-		 <parm name="sort"><pft>v1100^a</pft></parm>
-     <loop>
-				<field action="import" tag="list">2100</field>
-       	<display><pft>
-				if v1100^a<>v2100 then 
-        	 '<table class=tabla_admin    cellpadding="2" cellspacing="0">'/
-	         '<tr>'/
-			 		 if p(v1100^z) then 
-         	  '<td width="50%" colspan="2" bgcolor="#84b5d1">Lector: <b>',mhl,v1100^a,'</b></td>'/
-				
-				'<td bgcolor="#84b5d1" align="center"><div id=',"'"n0,'MailFormId#',v1100^x,"'"n0,'><a href=mailto:'v1100^z,'>Reclamar por email</a></div>'/
+	 <parm name="sort"><pft>v1100^a</pft></parm>
 
+    <field action=cgi tag=5000>diad</field>
+	<field action=cgi tag=5001>mesd</field>
+	<field action=cgi tag=5002>anod</field>
+	<field action=cgi tag=5003>diaf</field>
+	<field action=cgi tag=5004>mesf</field>
+	<field action=cgi tag=5005>anof</field>
+	
+	<display><pft>'<h4><center><b>Préstamos Morosos desde el ',v5000,'/',v5001,'/',v5002, ' hasta el ',v5003,'/',v5004,'/',v5005,'<b></center></h4>'</pft></display>
+	 <loop>
+	 		<field action="import" tag="5000">5000</field>
+			<field action="import" tag="5001">5001</field>
+			<field action="import" tag="5002">5002</field>
+			<field action="import" tag="5003">5003</field>
+			<field action="import" tag="5004">5004</field>
+			<field action="import" tag="5005">5005</field>
+			
+			<field action="replace" tag="6000"><pft>v5002,v5001,v5001</pft></field>
+			<field action="replace" tag="6002"><pft>v5005,v5004,v5003</pft></field>
+			<field action="replace" tag="6001"><pft>v1100^v*6.4,v1100^v*3.2,v1100^v*0.2</pft></field>
+			
+			<field action="import" tag="list">2100</field>
+       			
 				
-				 		'<form id="FormId#',v1100^x,'" method="post" action="/administracion/reclamo_moroso/reclamo.php">'/
-				 		'  <input type="hidden" name="nombre" value="',v1100^a,'">'/, 
-					  '  <input type="hidden" name="email" value="',v1100^z,'">'/,
-					  '  <input type="hidden" name="material[]" value="',mid(v1100^b,instr(v1100^b,')')+1,size(v1100^b)),' (prestado: ',v1100^p,'; vencimiento: ',v1100^v,')">'/,
-					  '</form>'/
-					 else
-            '<td width="100%" colspan="3" >Lector: <b>',mhl,v1100^a,'</b></td>'/
-					 fi
- 			    '</tr>'/
-		 		fi
-        '<tr>'/
-         '  <td width="10%" align="center">',v1100^i,'</td>'/
-         '  <td width="70%">',v1100^b,if v1100^o:'sala' then ' <font color="FF0000">(',v1100^o,')</font>' fi,'</td>'/
-         '  <td width="20%">Fecha: ',v1100^p,'<br>Vto. <b>',v1100^v,'</td>'/
-        '</tr>',
-       </pft></display>
+				<display><pft>
+					
+					
+					
+					if (v6001 >= v6000) and (v6001 <= v6002)
+						then
+							'<table class=tabla_admin  border=1  cellpadding="2" cellspacing="0">'/
+								'<tr>'/
+									'<td width="24%">',mhl,v1100^a,'</b></td>'/
+									'<td width="15%">',v1100^i,'</td>'/
+									'<td width="38%">',v1100^b,'</td>'/
+									'<td width="13%">',v1100^p,'</td>'/
+									'<td width="15%">',v1100^v,'</td>'/
+								'</tr>',
+							'</table>'/
+					fi				
+				<!--
+					if (v6001 = '')
+						then
+							'<table class=tabla_admin  border=1 bgcolor="#CCCCCC"  cellpadding="2" cellspacing="0">'/
+								'<tr><td colspan=5>OJO REVISAR - NO TIENEN FECHA DE DEVOLUCION</td></tr>'
+								'<tr>'/
+									'<td width="24%">',mhl,v1100^a,'</b></td>'/
+									'<td width="15%">',v1100^i,'</td>'/
+									'<td width="38%">',v1100^b,'</td>'/
+									'<td width="13%">',v1100^p,'</td>'/
+									'<td width="15%">',v1100^v,'</td>'/
+								'</tr>',
+							'</table>'/
+					fi				
+					-->
+					
+			 	</pft></display>
 			<field action="replace" tag="2100"><pft>v1100^a</pft></field>
 			<field action="export" tag="list">2100</field>
-			<display><pft>
-			 if val(v1101)=val(v1102) then 
-			 	 '</table>'/
-			 fi							 
-			</pft></display>
 		</loop>
    </do> 
 	<display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.php">Volver al Menú</a></p>'</pft></display>
