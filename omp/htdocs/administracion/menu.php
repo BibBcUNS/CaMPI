@@ -305,7 +305,16 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 			</select>
         </center>
         <input type="radio" value="circulante" name="opcion">Préstamos en circulaci&oacute;n
-		<br><br>
+		<br />
+		<center  style="font-size : x-small;">
+			Ordenamiento:
+			<select name="orden" style="font-size : xx-small;">
+			<option value="mfn" selected>Nº Movimiento</option>
+			<option value="inv">Nº Inventario</option>
+			<option value="nom">Lector</option>	
+			</select>
+        </center>
+		<br />
         <input type="submit" value="Enviar" name="B1">
         <input type="reset" value="Restablecer" name="B2"> 
         </form>

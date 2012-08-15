@@ -49,7 +49,7 @@
 
   <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 	<field action=cgi tag=100>opcion</field>
-
+    <field action=cgi tag=101>orden</field>
 <!--  <field action=cgi tag=110>operador</field> -->
 
 
@@ -61,7 +61,7 @@
     <title>Módulo de Administración </title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 </head>	
-	  <body>
+	  <body><center>
     <div id="head"> 
 		<div id="title">Módulo de Administración - Credenciales</div>
 		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
@@ -355,15 +355,13 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 
   <label>circulante</label>
 
-  <display><font face="Draft 10cpi"><h2 align="center">Préstamos en circulación</h2></display>
+ <display><font face="Draft 10cpi"><h2 align="center"> Préstamos en Circulación</h2></font></display>
 		
   <do task="mfnrange">
     <parm name="db">exist</parm>
-
-
     <parm name=gizmo>gizmo</parm>
     <loop>
-		
+   <field action=import tag=101>101</field>
   <flow action="skip"><pft>if s(mhu,v985)<>'PRES' then mhl,'Next' fi</pft></flow>
  			<!-- v1000 contiene el detalle del material prestado (autor y titulo) -->
 
@@ -382,9 +380,9 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 							</loop>
 						</do>
 
+			<field action="add" tag="1000"><pft>v977</pft></field>
+			<field action="add" tag="1001"><pft>v5001</pft></field>
 
-			<field action="add" tag="1000"><pft>'<b>Inv. ',v977,'</b> ',v5001</pft></field>
-			
 			<!-- Se busca el registro del lector -->
 
 			<do task="search">
@@ -397,12 +395,10 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 					<field action="add" tag="1000"><pft>'0',
 						(if val(v8^i) = val(v977[1]) then '1' fi)</pft></field>
 
-					
-					<field action="add" tag="1001"><pft>
-						if val(v1000)>0 then v1,' - ',v2 fi</pft></field>
 
-					<!-- v1001 contiene el Nombre y DNI del lector -->
-					<field action="export" tag="list">1001</field>
+						<field action="add" tag="1002"><pft>if val(v1000)>0 then v1,' - ',v2  fi</pft></field>
+
+					<field action="export" tag="list">1002</field> <!-- v1002 contiene el Nombre y DNI del lector -->
 					<field action="export" tag="list">8</field>
 				</loop>
 			</do>
@@ -414,47 +410,71 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 					' * fecha=',mid(v998^c[last],7,4),'/',mid(v998^c[last],4,2),'/',mid(v998^c[last],1,2),
 					</pft></parm>
 				<loop>
-					<field action="add" tag="1002"><pft>mfn</pft></field>
-					<!-- v1002 contiene el id del recibo que firma el usuario para el prestamo -->
-					<field action="export" tag="list">1002</field>
+					<field action="add" tag="1004"><pft>mfn</pft></field>
+					<field action="export" tag="list">1004</field>
 				</loop>
 			</do>
 
-			<!-- Se carga la lista con los valores ^abibliografia ^bLector ^cMovimiento-->
-
-			<list action="load"><pft>'^a',v1000,'^b',v1001,'^z',v1002/</pft></list>
+			<list action="load" type="sort"><pft>
+			if v101:'mfn' then '^z',v1004,'^a',v1000,'^b',v1001,'^c',v1002/ fi
+			if v101:'inv' then  '^a',v1000,'^b',v1001,'^c',v1002,'^z',v1004/ fi
+			if v101:'nom' then '^c',v1002,'^z',v1004,'^a',v1000,'^b',v1001/ fi
+			</pft></list>
 		</loop>
 	</do>
 
-	<display>
-      <table border="0" width="90%" bgcolor="#FAEFDD"> 
-       <tr>
-         <td width="50%" align="center" bgcolor="#F9C99A"><b>Material</b></td>
-         <td width="40%" align="center" bgcolor="#F9C99A"><b>Lector</b></td>
-         <td width="10%" align="center" bgcolor="#F9C99A"><b>Movimiento</b></td>
-       </tr></display>
 
 	<do task="list">
 	<field action="define" tag="1000">Isis_Item</field>
 	<field action="define" tag="1001">Isis_Total</field>
 	<parm name="count">1</parm>
 		<loop>
-			<display><pft>'<h3>Cantidad de material circulante: ',v1001,'</h3>'</pft></display>
+			<display><pft>'<div style="width:100%"><div align="left" style="font-size:18px;margin-left:20;width:50%;float:left;">Cantidad de material circulante: ',v1001,'</div><div align="right" style="font-size:12px;margin-right:20;width:35%;float:right;">		
+			<a href="/omp/listado.csv" ><img src="/omp/images/icono_csv.jpg" border="0" title="Bajar archivo CSV" alt="CSV"/> </a></div></div>'</pft></display>
 		</loop>
 	</do>
+<!--###################### Genera archivo csv #########################--> 
 
+  <do task="list">
+	<field action="define" tag="1000">Isis_Item</field>
+	<field action="define" tag="1001">Isis_Current</field>
+	  <file action=create type=output>../../omp/htdocs/listado.csv</file>
+	  <loop>
+	     <display><pft>if val(v1001)=1 then 'Movimiento,Inventario,Material,Lector', fi /</pft></display>
+		 <field action="replace" tag="1000"><pft>replace(v1000,',',' ')</pft></field>
+		 <display><pft>v1000^z,',',v1000^a,',',v1000^b,',',v1000^c,/ </pft></display>	
+	  </loop>
+	<file action=close type=output>../../omp/htdocs/listado.csv</file>	
+	</do>
+<!--######################listado por pantalla #########################--> 
+	<display>
+      <table border="1" width="90%"> 
+       <tr bgcolor="#BEE4FF">
+         <td width="10%" align="center" ><b>Movimiento</b></td>
+	     <td width="10%" align="center" ><b>Inventario</b></td>
+         <td width="40%" align="center" ><b>Material</b></td>
+         <td width="40%" align="center" ><b>Lector</b></td>
+       </tr></display>
+	   
 	<do task="list">
 	<field action="define" tag="1000">Isis_Item</field>
-
-	<parm name="sort"><pft>v1000^z</pft></parm>
 		<loop>
-			<display><pft>'<tr><td>',v1000^a,'</td>','<td>',v1000^b,'</td>','<td>',v1000^z,'</td></tr>'</pft></display>	
+			<display><pft>'<tr bgcolor="#F0FFFF"><td align="center">',
+			v1000^z,
+			'</td>','<td align="center">',
+			v1000^a,
+			'</td>','<td>',
+			v1000^b,
+			'</td>','<td>',
+			v1000^c,
+			'</td></tr>'</pft></display>	
 		</loop>
 	</do>
 
-	<display>
-		</table></display>	
+  <display></table> </display>	
+  
   <display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.php">Volver al Menú</a></p>'</pft></display>
+
 <display>
 <!--###############################################-->  
 								</div>
@@ -467,7 +487,7 @@ El campo v2000 valdrá ok si el usuario está correctamente validado
 	  </div>
     </div>
     <div id="end_body"></div>
-       <div id="footer"></div>
+       <div id="footer"></div></center>
   </body>
   </html>
 </display>
