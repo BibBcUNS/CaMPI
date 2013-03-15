@@ -110,10 +110,10 @@
 			'<!-- Begin'/
 			'		window.opener.document.form_abm.IsisScript.value="administracion/abmlector.xis";'/
 			'		window.opener.document.form_abm.documento_anterior.value=window.opener.document.form_abm.documento.value;'/
-			'		window.opener.focus();'/
- 			'		window.close();'/
 			'		window.opener.document.form_abm.target="_self";'/
 			'		window.opener.document.form_abm.opcion[0].click(); // hace click en "Grabar" enviando así el formulario '/
+			'		window.opener.focus();'/
+ 			'		window.close();'/
 			'// End -->'/
 			'</SCRIPT>'/
 		fi
