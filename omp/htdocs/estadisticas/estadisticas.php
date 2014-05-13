@@ -413,16 +413,11 @@ function CargarTerminal(Ip) {
       <td align="center">
           <select size="1" name="anio" 
 	onchange="comienzo_semana(window.document.form_stat.mes.options[window.document.form_stat.mes.selectedIndex].value,window.document.form_stat.anio.options[window.document.form_stat.anio.selectedIndex].value,1)">
-					    <option value="2005">2005</OPTION>          
-					    <option value="2006">2006</OPTION>          
-					    <option value="2007">2007</OPTION>          
-					    <option value="2008">2008</OPTION>
-					    <option value="2009">2009</OPTION>
 					    <option value="2010">2010</OPTION>
 					    <option value="2011">2011</OPTION>
 					    <option value="2012">2012</OPTION>
 					    <option value="2013">2013</OPTION>					
-					    <option value="2014">2014</OPTION>
+					    <option value="2014" selected>2014</OPTION>
 					    <option value="2015">2015</OPTION>
 				    </SELECT></TD>
       <td align="center">
