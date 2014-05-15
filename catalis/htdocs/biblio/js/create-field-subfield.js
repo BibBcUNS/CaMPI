@@ -654,12 +654,18 @@ function createSubfield( code, sfText, label, fieldTag )
 			catalisMessage(msg, true);
 			return;
 		}
+
+		// Advertencia: puntuación ISBD dentro de un subcampo del 264
+		if ( tag_code.search(/264[ab]/) != -1 && this.value.search(/\S ([;:]) (.+$)/) != -1 ) {
+			var msg = "ATENCION: no es correcto usar la puntuación «&nbsp;" + RegExp.$1 + "&nbsp;» dentro de este subcampo. Coloque «" + RegExp.$2 + "» en otro subcampo $" + code + ", o bien corrija la puntuación."		
+			catalisMessage(msg, true);
+			return;
+		}
 		
 		// ATENCION: esta regex nos da la lista de tags que admiten ajuste automático
 		// de la puntuación. ¿No sería mejor definirla en otro sitio, más cercano al
 		// código donde se maneja la puntuación de tales campos?
-		
-		var AUTO_PUNCT_TAGS = /020.|[167]00.|[167]10.|[167]11.|24[05].|2[56]0.|254.|300.|310.|321.|4[49]0.|50[0124]a|510.|773[^xz]|830./;
+		var AUTO_PUNCT_TAGS = /020.|[167]00.|[167]10.|[167]11.|24[05].|2[56]0.|2[56]4.|300.|310.|321.|4[49]0.|50[0124]a|510.|773[^xz]|830./;
 		
 		if ( AUTOMATIC_PUNCTUATION && tag_code.search(AUTO_PUNCT_TAGS) != -1 ) {
 			updatePunctuation(parentField(this, "subfieldBox"));

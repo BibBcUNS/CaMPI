@@ -128,6 +128,12 @@ function aacr2marc (aacrText)
 	field260 += firstFabricSubfield + fabricacion + FIELD_SEP;
 	marc["datafields"].push(field260);
 
+	// TO-DO: falta ajustar detalles en los datos de fabricación
+	var field264 = '264 #1 ' + DISP_SF_DELIM + 'a' + publicacion.replace(/ : /g,' :' + DISP_SF_DELIM + 'b').replace(/ ; /g,' ;' + DISP_SF_DELIM + 'a').replace(/,\s(c?\d{3,4})/, "," + DISP_SF_DELIM + "c$1");
+	field264 += firstFabricSubfield + fabricacion + FIELD_SEP;
+	marc["datafields"].push(field264);
+
+	
 	// Tratamos de detectar la fecha para el 008/07-10
 	if ( /\$c(\d{4})\./.exec(field260) != null ) {
 		marc["f008_06"] = "s";

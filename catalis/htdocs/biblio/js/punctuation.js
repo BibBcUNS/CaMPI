@@ -1,21 +1,11 @@
 /* =============================================================================
- * Catalis - puntuacion.js
+ * puntuacion.js
  *
  * Generación de la puntuación para algunos campos de datos MARC 21.
  *
- * (c) 2003-2005  Fernando J. Gómez - CONICET - INMABB
- *  Véase el archivo LICENCIA.TXT incluido en la distribución de Catalis
+ * (c) 2003-2004  Fernando J. Gómez - CONICET - INMABB
  * =============================================================================
  */
-
-
-
-
-
-
-
-
-
 
 
 // -----------------------------------------------------------------------------
@@ -160,6 +150,37 @@ function punctuation(tag,sf)
 			break;
 			
 		// ---------------------------------------------------------
+		case "264" :
+		// ---------------------------------------------------------
+			// ATENCION: paréntesis al final de $a o $b no deben eliminarse!
+			var regex = "("
+					  + " *[:;]"  // zero or more spaces followed by a colon or semicolon,
+					  + "|[,\)]"  // or a comma or right parenthesis,
+					  + "| \."    // or a space followed by a period
+					  + ")"
+					  + "(?="     // lookahead
+					  + "\\^"     // for subfield delimiter
+					  + "|$)";    // or end of string
+			var re_clean1 = new RegExp(regex,"g");   // Original: /( *[:;]|[,\)]| \.)(?=\^|$)/g;
+			sf = sf.replace(re_clean1, "");
+			var re_clean2 = /(\^[efg])\(/;
+			sf = sf.replace(re_clean2,"$1");
+			sf = sf.replace(/\^a/g, " ;^a");
+			sf = sf.replace(/\^b/g, " :^b");
+			sf = sf.replace(/\^c/, ",^c");
+			sf = sf.replace(/\^e/, "^e(");
+			var aux = (sf.search(/\^e/) != -1) ? " :^f" : "^f(";
+			sf = sf.replace(/\^f/,aux);
+			var aux = (sf.search(/\^[ef]/) != -1) ? ",^g" : "^g(";
+			sf = sf.replace(/\^g/,aux);
+			if (sf.search(/\^[efg]/) != -1) {
+				sf = sf + ")";
+			}
+			var re_end = /([^\.\)\?\]\-])$/;
+			sf = sf.replace(re_end,"$1 .");
+			break;
+			
+		// ---------------------------------------------------------
 		case "300" :
 		// ATENCION: Ends with a period if there is a 4XX in the record; otherwise it ends
 		// with a period unless another mark of punctuation or a closing parentheses is present.
@@ -262,7 +283,7 @@ function punctuation(tag,sf)
 		// ---------------------------------------------------------
 			var re_clean = / \.(?=\^|$)/g;
 			sf = sf.replace(re_clean, "");
-			sf = sf.replace(/\^b/, " .^b");
+			sf = sf.replace(/\^b/g, " .^b");   // 2011-05-02: "g" agregado (FG)
 			var re_end = /([^\.\-\?\)])$/;
 			sf = sf.replace(re_end, "$1 .");
 			break;
@@ -272,6 +293,7 @@ function punctuation(tag,sf)
 		case "111" :
 		case "611" : //ATENCION: arreglar problema con 611$2 
 		case "711" :
+		case "811" :
 		// ---------------------------------------------------------
 			var re_clean1 = /( :|,|\)|\)? \.)(?=\^|$)/g;
 			sf = sf.replace(re_clean1, "");
@@ -285,7 +307,7 @@ function punctuation(tag,sf)
 			var aux = (sf.search(/\^[nd]/) != -1) ? " :^c" : "^c(";
 			sf = sf.replace(/\^c/,aux);
 			if (sf.search(/\^[ndc]/) != -1) {
-				sf = sf + ")";
+				sf = sf + ")";                      // FIXME este paréntesis se añade aun donde no debe ir!!
 			}
 			
 			var re_end = /([^\.\-\?\]\)])$/;
