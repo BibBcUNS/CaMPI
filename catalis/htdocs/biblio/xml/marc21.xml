@@ -20,7 +20,11 @@
 	Fernando Gómez. Última actualización: 04/oct/2004.
 	
 	TO-DO: incorporar cambios del Update No. 5 (October 2004)
--->
+	
+        Incluye modificaciones realizadas por la Biblioteca del IAR. 
+        Inclusión de campos 525, 770, 775, 787, 866 y 950 
+		Inclusión de campos 264, -->
+		
 
 
 <marc21_bibliographic>
@@ -76,6 +80,8 @@
 		</indicator>
 		<indicator pos="2" />
 		<subfield code="a" repet="NR" lite="lite" label-spa="ISSN"	label-eng="International Standard Serial Number" />
+		<subfield code="l" repet="NR"             label-spa="ISSN-L"    label-eng="ISSN-L" />
+		<subfield code="m" repet="R"  	       	  label-spa="ISSN-L cancelado"    label-eng="Canceled ISSN-L" />
 		<subfield code="y" repet="R"  lite="lite" label-spa="ISSN incorrecto" label-eng="Incorrect ISSN" />
 		<subfield code="z" repet="R"  lite="lite" label-spa="ISSN cancelado" label-eng="Canceled ISSN" />
 		<subfield code="2" repet="NR"             label-spa="Fuente" label-eng="Source" />
@@ -662,6 +668,27 @@
 		<subfield code="g" repet="NR"             label-spa="Fecha de fabricación" label-eng="Date of manufacture" AACR2="1.4G" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="264" repet="R" label-spa="Producción, publicación, distribución, manufactura y mención de propiedad intelectual" label-eng="Production, publication, distribution, manufacture, and copyright notice" oblig="ALL" template="#1abc">
+		<indicator pos="1" label-eng="Sequence of statements" label-spa="Secuencia de menciones">
+			<i value="#" label-eng="Not applicable/No information provided/Earliest" label-spa="" />
+			<i value="2" label-eng="Intervening" label-spa="" />
+			<i value="3" label-eng="Current/latest" label-spa="" />
+ 		</indicator>
+		<indicator pos="2" label-eng="Function of entity"  label-spa="Función de la entidad">
+			<i value="0" label-eng="Production" label-spa="Producción" />
+			<i value="1" label-eng="Publication" label-spa="Publicación" />
+			<i value="2" label-eng="Distribution" label-spa="Distribución" />
+			<i value="3" label-eng="Manufacture" label-spa="Fabricación" />
+			<i value="4" label-eng="Copyright notice date" label-spa="" />
+ 		</indicator>
+		<subfield code="a" repet="R" label-spa="Lugar de producción, etc." label-eng="Place of production, publication, distribution, manufacture" AACR2="1.4C,A.7,B.14" />
+		<subfield code="b" repet="R" label-spa="Nombre del productor, etc." label-eng="Name of producer, publisher, distributor, manufacturer" AACR2="1.4D,2.4D,A.7,B.9" />
+		<subfield code="c" repet="R" label-spa="Fecha de producción, etc." label-eng="Date of production, publication, distribution, manufacture, or copyright notice" AACR2="1.4F,2.4F,C.2B1" />
+		<subfield code="3" repet="NR" label-spa="Material" label-eng="Materials specified" />
+		<subfield code="6" repet="NR" label-spa="" label-eng="Linkage" />
+		<subfield code="8" repet="R"  label-spa="" label-eng="Field link and sequence number" />
+	</datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="300" repet="R"  lite="lite" label-spa="Descripción física" label-eng="Physical description" oblig="ALL" template="##abc">
 		<indicator pos="1" />
 		<indicator pos="2" />
@@ -693,6 +720,49 @@
 		<subfield code="b" repet="NR" label-eng="Dates of former publication frequency" label-spa="Fechas" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="336" repet="R" label-eng="Content Type" label-spa="Tipo de Contenido" template="##a2">
+		<indicator pos="1" />
+		<indicator pos="2" />
+		<subfield code="a" repet="R" label-eng="Content type term" label-spa="Tipo de contenido (término)" />
+		<subfield code="b" repet="R" label-eng="Content type code" label-spa="Tipo de contenido (código)" />
+		<subfield code="2" repet="NR" label-eng="Source" label-spa="Fuente" />
+		<subfield code="3" repet="NR" label-eng="Materials specified" label-spa="Material" />
+	</datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="337" repet="R" label-eng="Media Type" label-spa="Tipo de Medio" template="##a2">
+		<indicator pos="1" />
+		<indicator pos="2" />
+		<subfield code="a" repet="R" label-eng="Media term type" label-spa="Tipo de medio (término)" />
+		<subfield code="b" repet="R" label-eng="Media type code" label-spa="Tipo de medio (código)" />
+		<subfield code="2" repet="NR" label-eng="Source" label-spa="Fuente" />
+		<subfield code="3" repet="NR" label-eng="Materials specified" label-spa="Material" />
+	</datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="338" repet="R" label-eng="Carrier Type" label-spa="Tipo de Soporte" template="##a2">
+		<indicator pos="1" />
+		<indicator pos="2" />
+		<subfield code="a" repet="R" label-eng="Carrier type term" label-spa="Tipo de soporte (término)" />
+		<subfield code="b" repet="R" label-eng="Carrier type code" label-spa="Tipo de soporte (código)" />
+		<subfield code="2" repet="NR" label-eng="Source" label-spa="Fuente" />
+		<subfield code="3" repet="NR" label-eng="Materials specified" label-spa="Material" />
+	</datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="344" repet="R" label-eng="Sound Characteristics" label-spa="Características de sonido" template="##a">
+		<indicator pos="1" />
+		<indicator pos="2" />
+		<subfield code="a" repet="R" label-eng="Type of recording" label-spa="Tipo de grabación" />
+		<subfield code="b" repet="R" label-eng="Recording medium" label-spa="Medio de grabación" />
+		<subfield code="c" repet="R" label-eng="Playing speed" label-spa="Velocidad de reproducción" />
+		<subfield code="d" repet="R" label-eng="Groove characteristic" label-spa="Groove characteristic" />
+		<subfield code="e" repet="R" label-eng="Track configuration" label-spa="Track configuration" />
+		<subfield code="f" repet="R" label-eng="Tape configuration" label-spa="Tape configuration" />
+		<subfield code="g" repet="R" label-eng="Configuration of playback channels" label-spa="Configuration of playback channels" />
+		<subfield code="h" repet="R" label-eng="Special playback characteristics" label-spa="Special playback characteristics" />
+		<subfield code="0" repet="R" label-eng="Authority record control number or standard number" label-spa="Nro. de autoridad" />
+		<subfield code="2" repet="NR" label-eng="Source" label-spa="Fuente" />
+		<subfield code="3" repet="NR" label-eng="Materials specified" label-spa="Material" />
+	</datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="362" repet="R" lite="lite" label-eng="Dates of publication and/or sequential designation" label-spa="Fechas de publicación y/o designación secuencial" aplic="CR" template="0#a">
 		<indicator pos="1" label-eng="Format of date" label-spa="Formato de fecha">
 			<i value="0" lite="lite" label-eng="Formatted style" label-spa="Estilo formateado" />
@@ -703,7 +773,7 @@
 		<subfield code="z" repet="NR" lite="lite" label-eng="Source of information" label-spa="Fuente de la información" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="440" repet="R"  lite="lite" label-spa="Mención de serie/punto de acceso por título" label-eng="Series statement/added entry--Title" template="#0av">
+	<datafield tag="440" repet="R"  lite="lite" label-spa="Mención de serie/punto de acceso por título [OBSOLETO]" label-eng="Series statement/added entry--Title [OBSOLETE]" template="#0av">
 		<indicator pos="1" />
 		<indicator pos="2" label-spa="Caract. no alfabet." label-eng="Nonfiling characters">
 			<i value="0" label-eng="" label-spa="" />
@@ -724,16 +794,16 @@
 		<subfield code="x" repet="NR" lite="lite" label-spa="ISSN" label-eng="ISSN" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="490" repet="R" label-spa="Mención de serie" label-eng="Series statement" template="0#av">
-		<indicator pos="1" label-eng="Specifies whether series is traced" label-spa="Trazado de la serie">
+	<datafield tag="490" repet="R" label-spa="Mención de serie" label-eng="Series statement" template="1#av">
+		<indicator pos="1" label-eng="Series tracing policy" label-spa="Política de trazado de la serie">
 			<i value="0" label-eng="Series not traced" label-spa="La serie no se traza" />
-			<i value="1" label-eng="Series traced differently" label-spa="La serie se traza en forma diferente" />		
+			<i value="1" label-eng="Series traced" label-spa="La serie se traza" />
 		</indicator>
 		<indicator pos="2" />
 		<subfield code="a" repet="R"  label-spa="Mención de serie" label-eng="Series statement" oblig="ALL" />
 		<subfield code="l" repet="NR" label-spa="Nro. de LC" label-eng="Library of Congress call number" />
 		<subfield code="v" repet="R"  label-spa="Número de volumen" label-eng="Volume number/sequential designation" />
-		<subfield code="x" repet="NR" label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="x" repet="R"  label-spa="ISSN" label-eng="International Standard Serial Number" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="500" repet="R"  lite="lite" label-spa="Nota general" label-eng="General note" template="##a">
@@ -875,6 +945,19 @@
 		<subfield code="b" repet="NR"             label-spa="Fuente" label-eng="Source" />
 		<subfield code="3" repet="NR" label-spa="Material" label-eng="Materials specified" />
 	</datafield>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+         <!-- Se crea 525 - Biblioteca del IAR (25/04/07)-->
+		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="525" repet="R"  lite="lite" label-spa="Nota de suplemento" label-eng="Supplement note" template="##a">
+		<indicator pos="1" />
+		<indicator pos="2" />
+		<subfield code="a" repet="R"  lite="lite" label-spa="Nota de suplemento" label-eng="Supplement note"  />
+		<subfield code="6" repet="NR"             label-spa="Enlace" label-eng="Linkage" />
+		<subfield code="8" repet="R" label-spa="Enlace y nro. de secuencia" label-eng="Field link and sequence number" />
+	</datafield>
+
+
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="530" repet="R"  lite="lite" label-spa="Nota de forma física adicional disponible" label-eng="Additional physical form available note" template="##a">
 		<indicator pos="1" />
@@ -944,6 +1027,12 @@
 		<subfield code="a" repet="NR" lite="lite" label-spa="Nota de idioma" label-eng="Language note" oblig="ALL" AACR2="X.7B2" />
 		<subfield code="b" repet="R"  lite="lite" label-spa="Information code or alphabet(?)" label-eng="Information code or alphabet" />
 	</datafield>
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <datafield tag="550" repet="R" label-spa="Issuing body note" label-eng="Issuing body note" template="##a">
+                <indicator pos="1" />
+                <indicator pos="2" />
+                <subfield code="a" repet="NR" label-spa="Issuing body note" label-eng="Issuing body note" oblig="ALL" />
+        </datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="555" repet="R" lite="" label-spa="Índice acumulativo, etc." label-eng="Cumulative index/finding aids note" template="##a">
 		<indicator pos="1" label-eng="Display constant controller" label-spa="">
@@ -976,6 +1065,14 @@
 		<subfield code="3" repet="NR" label-spa="Material" label-eng="Materials specified" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Se crea el campo local de notas 590 - Biblioteca del IAR (18/04/2007) -->
+       	<datafield tag="590" repet="R"  lite="lite" label-spa="Nota local" label-eng="Local note" template="##a">
+		<indicator pos="1" />
+		<indicator pos="2" />
+		<subfield code="a" repet="NR" lite="lite" label-spa="Nota local" label-eng="General note" oblig="ALL" />
+	</datafield>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="600" repet="R" lite="lite" label-eng="Subject added entry--Personal name" label-spa="Nombre personal" template="17ad2">
 		<indicator pos="1" label-eng="Type of personal name entry element" label-spa="">
 			<i value="0" label-eng="Forename" label-spa="Forename(?)" />
@@ -991,7 +1088,7 @@
 			<i value="5"             label-eng="Canadian Subject Headings" />
 			<i value="6"             label-eng="Répertoire de vedettes-matière" />
 			<i value="7" lite="lite" label-eng="Source specified in subfield $2" />
-		</indicator>	
+		</indicator>
 		<subfield code="a" repet="NR" lite="lite" label-spa="Nombre personal" label-eng="Personal name" oblig="ALL" />
 		<subfield code="b" repet="NR" lite="lite" label-spa="Numeración" label-eng="Numeration" />
 		<subfield code="c" repet="R"  lite="lite" label-spa="Títulos y otras palabras asociadas" label-eng="Titles and other words associated with a name" />
@@ -1148,7 +1245,7 @@
 			<i value="5"             label-eng="Canadian Subject Headings" label-spa="" />
 			<i value="6"             label-eng="Répertoire de vedettes-matière" label-spa="" />
 			<i value="7" lite="lite" label-eng="Source specified in subfield $2" label-spa="Fuente especificada en subcampo $2" />
-		</indicator>	
+		</indicator>
 		<subfield code="a" repet="NR" lite="lite" label-spa="Término temático" label-eng="Topical term or geographic name entry element" oblig="ALL" />
 		<subfield code="b" repet="NR"             label-spa="Topical term following geographic name entry element(?)" label-eng="Topical term following geographic name entry element" />
 		<subfield code="c" repet="NR"             label-spa="Location of event(?)" label-eng="Location of event" />
@@ -1172,7 +1269,7 @@
 			<i value="5"             label-eng="Canadian Subject Headings" />
 			<i value="6"             label-eng="Répertoire de vedettes-matière" />
 			<i value="7" lite="lite" label-eng="Source specified in subfield $2" />
-		</indicator>	
+		</indicator>
 		<subfield code="a" repet="NR" lite="lite" label-spa="Nombre geográfico" label-eng="Geographic name" oblig="ALL" />
 		<subfield code="v" repet="R"  lite="lite" label-spa="Subdiv. de forma" label-eng="Form subdivision" />
 		<subfield code="x" repet="R"  lite="lite" label-spa="Subdiv. general" label-eng="General subdivision" />
@@ -1376,198 +1473,444 @@
 		<subfield code="5" repet="NR"             label-spa="Código de institución" label-eng="Institution to which field applies" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="765" repet="R"  lite="lite" label-eng="Original language entry" label-spa="Entrada de idioma original" template="0#t">
+    <datafield tag="760" repet="R" label-eng="Main series entry" label-spa="Entrada de serie principal" template="0#t">
 		<indicator pos="1" label-eng="Note controller" label-spa="Control de nota">
-			<i value="0" lite="lite" label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="0"   label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="1"   label-eng="Do not display note" label-spa="No mostrar nota" />
+		</indicator>
+		<indicator pos="2" label-eng="Display constant controller" label-spa="Display constant controller(?)">
+			<i value="#"   label-eng="Main series" label-spa="Serie principal" />
+			<i value="8"   label-eng="No display constant generated" label-spa="No display constant generated(?)" />
+		</indicator>
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+		<subfield code="c" repet="NR"             label-spa="Información calificadora" label-eng="Qualifying information" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Relationship information" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
+		<subfield code="t" repet="NR"             label-spa="Título serie principal" label-eng="Title" />
+		<subfield code="w" repet="R"              label-spa="Record control number" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
+        <subfield code="7" repet="NR"             label-spa="Subcampo de control" label-eng="Control subfield" />
+    </datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <datafield tag="762" repet="R"              label-eng="Subseries entry" label-spa="Entrada de subserie" template="0#t">
+		<indicator pos="1" label-eng="Note controller" label-spa="Control de nota">
+			<i value="0"   label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="1"   label-eng="Do not display note" label-spa="No mostrar nota" />
+		</indicator>
+		<indicator pos="2" label-eng="Display constant controller" label-spa="Display constant controller(?)">
+			<i value="#"   label-eng="Has subseries" label-spa="Tiene subserie" />
+			<i value="8"   label-eng="No display constant generated" label-spa="No display constant generated(?)" />
+		</indicator>
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+		<subfield code="c" repet="NR"             label-spa="Información calificadora" label-eng="Qualifying information" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Relationship information" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
+		<subfield code="t" repet="NR"             label-spa="Título de subserie" label-eng="Title" />
+		<subfield code="w" repet="R"              label-spa="Record control number" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
+        <subfield code="7" repet="NR"             label-spa="Subcampo de control" label-eng="Control subfield" />
+    </datafield>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="765" repet="R"              label-eng="Original language entry" label-spa="Entrada de idioma original" template="0#t">
+		<indicator pos="1" label-eng="Note controller" label-spa="Control de nota">
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
 			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
 		</indicator>
 		<indicator pos="2" label-eng="Display constant controller" label-spa="Display constant controller(?)">
-			<i value="#" lite="lite" label-eng="Translation of" label-spa="Traducción de" />
+			<i value="#"             label-eng="Translation of" label-spa="Traducción de" />
 			<i value="8"             label-eng="No display constant generated" label-spa="No display constant generated(?)" />
 		</indicator>
-		<subfield code="a" repet="NR" lite="lite" label-eng="Main entry heading" label-spa="Encab. asiento principal" />
-		<subfield code="b" repet="NR" lite="lite" label-spa="Edición" label-eng="Edition" />
+		<subfield code="a" repet="NR"             label-eng="Main entry heading" label-spa="Encab. asiento principal" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
 		<subfield code="c" repet="NR"             label-spa="Qualifying information" label-eng="Qualifying information" />
-		<subfield code="d" repet="NR" lite="lite" label-spa="Lugar, editor, fecha" label-eng="Place, publisher, and date of publication" />
-		<subfield code="g" repet="R"  lite="lite" label-spa="Relationship information" label-eng="Relationship information" />
-		<subfield code="h" repet="NR" lite="lite" label-spa="Descripción física" label-eng="Physical description" />
-		<subfield code="i" repet="NR" lite="lite" label-spa="Display text" label-eng="Display text" />
+		<subfield code="d" repet="NR"             label-spa="Lugar, editor, fecha" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Relationship information" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descripción física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Display text" label-eng="Display text" />
 		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
 		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
-		<subfield code="n" repet="R"  lite="lite" label-spa="Nota" label-eng="Note" />
-		<subfield code="o" repet="R"  lite="lite" label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
 		<subfield code="r" repet="R"              label-spa="Nro. de informe" label-eng="Report number" />
 		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
-		<subfield code="t" repet="NR" lite="lite" label-spa="Título" label-eng="Title" />
+		<subfield code="t" repet="NR"             label-spa="Título original" label-eng="Title" />
 		<subfield code="u" repet="NR"             label-spa="STRN" label-eng="STRN" />
-		<subfield code="w" repet="R"  lite="lite" label-spa="Nro. de registro" label-eng="Record control number" />
-		<subfield code="x" repet="NR" lite="lite" label-spa="ISSN" label-eng="ISSN" />
+		<subfield code="w" repet="R"              label-spa="Nro. de registro" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="ISSN" />
 		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
-		<subfield code="z" repet="R"  lite="lite" label-spa="ISBN" label-eng="ISBN" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="ISBN" />
 	</datafield>
-	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="772" repet="R" lite="" label-spa="Supplement parent entry" label-eng="Supplement parent entry" template="0#tg">
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <datafield tag="767" repet="R" label-eng="Translation entry" label-spa="Entrada de traducción" template="0#t">
+		<indicator pos="1" label-eng="Note controller" label-spa="Control de nota">
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
+		</indicator>
+		<indicator pos="2" label-eng="Display constant controller" label-spa="Display constant controller(?)">
+			<i value="#"             label-eng="Translated as" label-spa="Traducido como" />
+			<i value="8"             label-eng="No display constant generated" label-spa="No display constant generated(?)" />
+		</indicator>
+		<subfield code="a" repet="NR"             label-eng="Main entry heading" label-spa="Encab. asiento principal" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+		<subfield code="c" repet="NR"             label-spa="Qualifying information" label-eng="Qualifying information" />
+		<subfield code="d" repet="NR"             label-spa="Lugar, editor, fecha" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Relationship information" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descripción física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Display text" label-eng="Display text" />
+		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
+		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="r" repet="R"              label-spa="Nro. de informe" label-eng="Report number" />
+		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
+		<subfield code="t" repet="NR"             label-spa="Título traducción" label-eng="Title" />
+		<subfield code="u" repet="NR"             label-spa="STRN" label-eng="STRN" />
+		<subfield code="w" repet="R"              label-spa="Nro. de registro" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="ISSN" />
+		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="ISBN" />
+    </datafield>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="770" repet="R"             label-spa="Suplemento/Número especial" label-eng="Supplement/special issue entry" template="0#tx">
 		<indicator pos="1" label-eng="Note controller" label-spa="Controlador de nota">
-			<i value="0" lite="lite" label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
 			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
 		</indicator>
 		<indicator pos="2" label-eng="Display constant controller" label-spa="">
-			<i value="#" lite="lite" label-eng="Supplement to" label-spa="Suplemento a" />
+			<i value="#"             label-eng="Has supplement" label-spa="Suplemento:" />
+			<i value="8"             label-eng="No display constant generated" label-spa="" />
+		</indicator>
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+		<subfield code="b" repet="NR"             label-spa="Calificador" label-eng="Qualifying information" />
+                <subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+                <subfield code="g" repet="R"             label-spa="Relaciones" label-eng="Relationship information" />
+                <subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
+		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="r" repet="R"              label-spa="Nro. de informe" label-eng="Report number" />
+		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
+		<subfield code="t" repet="NR"             label-spa="Título supl./nro. especial" label-eng="Title" />
+		<subfield code="u" repet="NR"             label-spa="STRN" label-eng="STRN" />
+		<subfield code="w" repet="R"              label-spa="Record control number" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="International Standard Book Number" />
+                <subfield code="6" repet="NR"             label-spa="Enlace" label-eng="Linkage" />
+		<subfield code="7" repet="NR"             label-spa="Subcampo de control" label-eng="Control subfield" />
+                <subfield code="8" repet="R"             label-spa="Enlace y nro. de secuencia" label-eng="Field link and sequence number" />
+	</datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="772" repet="R"             label-spa="Supplement parent entry" label-eng="Supplement parent entry" template="0#tg">
+		<indicator pos="1" label-eng="Note controller" label-spa="Controlador de nota">
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
+		</indicator>
+		<indicator pos="2" label-eng="Display constant controller" label-spa="">
+			<i value="#"             label-eng="Supplement to" label-spa="Suplemento a" />
 			<i value="0"             label-eng="Parent" label-spa="Parent" />
 			<i value="8"             label-eng="No display constant generated" label-spa="" />
 		</indicator>
-		<subfield code="a" repet="NR" lite="" label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
-		<subfield code="b" repet="NR" lite="" label-spa="Edición" label-eng="Edition" />
-		<subfield code="d" repet="NR" lite="" label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
-		<subfield code="g" repet="R"  lite="" label-spa="Ubicación del item" label-eng="Relationship information" />
-		<subfield code="h" repet="NR" lite="" label-spa="Descr. física" label-eng="Physical description" />
-		<subfield code="i" repet="NR" lite="" label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Ubicación del item" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
 		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
 		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
-		<subfield code="n" repet="R"  lite="" label-spa="Nota" label-eng="Note" />
-		<subfield code="o" repet="R"  lite="" label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
 		<subfield code="p" repet="NR"             label-spa="Título abreviado" label-eng="Abbreviated title" />
 		<subfield code="q" repet="NR"             label-spa="Enumeration and first page" label-eng="Enumeration and first page" />
 		<subfield code="r" repet="R"              label-spa="Nro. de informe" label-eng="Report number" />
 		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
-		<subfield code="t" repet="NR" lite="" label-spa="Título" label-eng="Title" />
+		<subfield code="t" repet="NR"             label-spa="Título" label-eng="Title" />
 		<subfield code="u" repet="NR"             label-spa="STRN" label-eng="STRN" />
-		<subfield code="w" repet="R"  lite="" label-spa="Record control number" label-eng="Record control number" />
-		<subfield code="x" repet="NR" lite="" label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="w" repet="R"              label-spa="Record control number" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
 		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
-		<subfield code="z" repet="R"  lite="" label-spa="ISBN" label-eng="International Standard Book Number" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="International Standard Book Number" />
 		<subfield code="7" repet="NR"             label-spa="Subcampo de control" label-eng="Control subfield" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="773" repet="R" lite="lite" label-spa="Item mayor" label-eng="Host item entry" template="0#7tgw">
+	<datafield tag="773" repet="R"             label-spa="Item mayor" label-eng="Host item entry" template="0#7tgw">
 		<indicator pos="1" label-eng="Note controller" label-spa="">
-			<i value="0" lite="lite" label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
 			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
 		</indicator>
 		<indicator pos="2" label-eng="Display constant controller" label-spa="">
-			<i value="#" lite="lite" label-eng="In" label-spa="En" />
+			<i value="#"             label-eng="In" label-spa="En" />
 			<i value="8"             label-eng="No display constant generated" label-spa="" />
 		</indicator>
-		<subfield code="a" repet="NR" lite="lite" label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
-		<subfield code="b" repet="NR" lite="lite" label-spa="Edición" label-eng="Edition" />
-		<subfield code="d" repet="NR" lite="lite" label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
-		<subfield code="g" repet="R"  lite="lite" label-spa="Ubicación del item" label-eng="Relationship information" />
-		<subfield code="h" repet="NR" lite="lite" label-spa="Descr. física" label-eng="Physical description" />
-		<subfield code="i" repet="NR" lite="lite" label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Ubicación del item" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
 		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
 		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
-		<subfield code="n" repet="R"  lite="lite" label-spa="Nota" label-eng="Note" />
-		<subfield code="o" repet="R"  lite="lite" label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
 		<subfield code="p" repet="NR"             label-spa="Título abreviado" label-eng="Abbreviated title" />
 		<subfield code="q" repet="NR"             label-spa="Enumeration and first page" label-eng="Enumeration and first page" />
 		<subfield code="r" repet="R"              label-spa="Nro. de informe" label-eng="Report number" />
 		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
-		<subfield code="t" repet="NR" lite="lite" label-spa="Título" label-eng="Title" />
+		<subfield code="t" repet="NR"             label-spa="Título" label-eng="Title" />
 		<subfield code="u" repet="NR"             label-spa="STRN" label-eng="STRN" />
-		<subfield code="w" repet="R"  lite="lite" label-spa="Record control number" label-eng="Record control number" />
-		<subfield code="x" repet="NR" lite="lite" label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="w" repet="R"              label-spa="Record control number" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
 		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
-		<subfield code="z" repet="R"  lite="lite" label-spa="ISBN" label-eng="International Standard Book Number" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="International Standard Book Number" />
 		<subfield code="7" repet="NR"             label-spa="Subcampo de control" label-eng="Control subfield" />
 	</datafield>
-	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="776" repet="R" lite="lite" label-eng="Additional physical form entry" label-spa="Forma física adicional" template="0#t">
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="774" repet="R"             label-spa="Entrada de unidad componente" label-eng="Constituent unit entry" template="0#t">
+		<indicator pos="1" label-eng="Note controller" label-spa="">
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
+		</indicator>
+		<indicator pos="2" label-eng="Display constant controller" label-spa="">
+			<i value="#"             label-eng="Constituent unit" label-spa="Unidad componente" />
+			<i value="8"             label-eng="No display constant generated" label-spa="" />
+		</indicator>
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+        <subfield code="c" repet="NR"             label-spa="Qualifying information" label-eng="Qualifying information" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Ubicación del item" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
+		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="r" repet="R"              label-spa="Nro. de informe" label-eng="Report number" />
+		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
+		<subfield code="t" repet="NR"             label-spa="Título de componente" label-eng="Title" />
+		<subfield code="u" repet="NR"             label-spa="STRN" label-eng="STRN" />
+		<subfield code="w" repet="R"              label-spa="Record control number" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="International Standard Book Number" />
+		<subfield code="7" repet="NR"             label-spa="Subcampo de control" label-eng="Control subfield" />
+    </datafield>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="775" repet="R"             label-spa="Entrada para otra edición" label-eng="Other edition entry" template="0#tx">
 		<indicator pos="1" label-eng="Note controller" label-spa="Controlador de nota">
-			<i value="0" lite="lite" label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
+		</indicator>
+		<indicator pos="2" label-eng="Display constant controller" label-spa="">
+			<i value="#"             label-eng="Other edition available" label-spa="Otras ediciones disponibles" />
+			<i value="8"             label-eng="No display constant generated" label-spa="" />
+		</indicator>
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+        <subfield code="c" repet="NR"             label-spa="Calificador" label-eng="Qualifying informatio" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+                <!-- Falta definir subcampos "e","f" Código de lengua y país -->
+
+        <subfield code="g" repet="R"              label-spa="Ubicación del item" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
+		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
+        <subfield code="r" repet="R"              label-spa="Nro. de informe" label-eng="Report number" />
+		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
+		<subfield code="t" repet="NR"             label-spa="Título otra edición" label-eng="Title" />
+		<subfield code="u" repet="NR"             label-spa="STRN" label-eng="STRN" />
+		<subfield code="w" repet="R"              label-spa="Record control number" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="International Standard Book Number" />
+		<subfield code="6" repet="NR"             label-spa="Enlace" label-eng="Linkage" />
+		<subfield code="7" repet="NR"             label-spa="Subcampo de control" label-eng="Control subfield" />
+		<subfield code="8" repet="R"             label-spa="Enlace y nro. de secuencia" label-eng="Field link and sequence numbe" />
+	</datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="776" repet="R"             label-eng="Additional physical form entry" label-spa="Forma física adicional" template="0#t">
+		<indicator pos="1" label-eng="Note controller" label-spa="Controlador de nota">
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
 			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
 		</indicator>
 		<indicator pos="2" label-eng="Display constant controller" label-spa="Display constant controller(?)">
-			<i value="#" lite="lite" label-eng="Available in another form" label-spa="Disponible en otra forma" />
+			<i value="#"             label-eng="Available in another form" label-spa="Disponible en otra forma" />
 			<i value="8"             label-eng="No display constant generated" label-spa="No display constant generated(?)" />
 		</indicator>
-		<subfield code="a" repet="NR" lite="lite" label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
-		<subfield code="b" repet="NR" lite="lite" label-spa="Edición" label-eng="Edition" />
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
 		<subfield code="c" repet="NR"             label-spa="Qualifying information" label-eng="Qualifying information" />
-		<subfield code="d" repet="NR" lite="lite" label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
-		<subfield code="g" repet="R"  lite="lite" label-spa="Relationship information" label-eng="Relationship information" />
-		<subfield code="h" repet="NR" lite="lite" label-spa="Descr. física" label-eng="Physical description" />
-		<subfield code="i" repet="NR" lite="lite" label-spa="Texto a desplegar" label-eng="Display text" />
-		<subfield code="n" repet="R"  lite="lite" label-spa="Nota" label-eng="Note" />
-		<subfield code="o" repet="R"  lite="lite" label-spa="Otro identificador" label-eng="Other item identifier" />
-		<subfield code="t" repet="NR" lite="lite" label-spa="Título" label-eng="Title" />
-		<subfield code="w" repet="R"  lite="lite" label-spa="Nro. de registro" label-eng="Record control number" />
-		<subfield code="x" repet="NR" lite="lite" label-spa="ISSN" label-eng="International Standard Serial Number" />
-		<subfield code="z" repet="R"  lite="lite" label-spa="ISBN" label-eng="International Standard Book Number" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Relationship information" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Otro identificador" label-eng="Other item identifier" />
+		<subfield code="t" repet="NR"             label-spa="Título" label-eng="Title" />
+		<subfield code="w" repet="R"              label-spa="Nro. de registro" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="International Standard Book Number" />
 	</datafield>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="777" repet="R" label-spa="Entrada de publicado con" label-eng="Issued with entry" template="0#t">
+		<indicator pos="1" label-eng="Note controller" label-spa="Controlador de nota">
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
+		</indicator>
+		<indicator pos="2" label-eng="Display constant controller" label-spa="Display constant controller(?)">
+			<i value="#"             label-eng="Issued with" label-spa="Publicado con" />
+			<i value="8"             label-eng="No display constant generated" label-spa="No display constant generated(?)" />
+		</indicator>
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+		<subfield code="c" repet="NR"             label-spa="Qualifying information" label-eng="Qualifying information" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Relationship information" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
+		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Otro identificador" label-eng="Other item identifier" />
+		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
+		<subfield code="t" repet="NR"             label-spa="Título" label-eng="Title" />
+		<subfield code="w" repet="R"              label-spa="Nro. de registro" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="7" repet="NR"             label-spa="Subcampo de control" label-eng="Control subfield" />
+    </datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- ATENCION: debe ser revisado -->
-	<datafield tag="780" repet="R" lite="????" label-spa="Predecesor (título anterior)" label-eng="Preceding entry" template="00tg">
+	<datafield tag="780" repet="R"             label-spa="Predecesor (título anterior)" label-eng="Preceding entry" template="00tg">
 		<indicator pos="1" label-eng="Note controller" label-spa="Controlador de nota">
-			<i value="0" lite="????" label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
 			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
 		</indicator>
 		<indicator pos="2" label-eng="Type of relationship" label-spa="Tipo de relación">
-			<i value="0" lite="????" label-eng="Continues" label-spa="Continúa" />
+			<i value="0"             label-eng="Continues" label-spa="Continúa" />
 			<i value="1"             label-eng="Continues in part" label-spa="Continúa en parte" />
-			<i value="2" lite="????" label-eng="Supersedes" label-spa="Reemplaza" />
-			<i value="3" lite="????" label-eng="Supersedes in part" label-spa="Reemplaza en parte" />
-			<i value="4" lite="????" label-eng="Formed by the union of... and ..." label-spa="Formado por la unión de... y..." />
-			<i value="5" lite="????" label-eng="Absorbed" label-spa="Absorbió" />
-			<i value="6" lite="????" label-eng="Absorbed in part" label-spa="Absorbió en parte" />
-			<i value="7" lite="????" label-eng="Separated from" label-spa="Separado de" />
+			<i value="2"             label-eng="Supersedes" label-spa="Reemplaza" />
+			<i value="3"             label-eng="Supersedes in part" label-spa="Reemplaza en parte" />
+			<i value="4"             label-eng="Formed by the union of... and ..." label-spa="Formado por la unión de... y..." />
+			<i value="5"             label-eng="Absorbed" label-spa="Absorbió" />
+			<i value="6"             label-eng="Absorbed in part" label-spa="Absorbió en parte" />
+			<i value="7"             label-eng="Separated from" label-spa="Separado de" />
 		</indicator>
-		<subfield code="a" repet="NR" lite="lite" label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
-		<subfield code="b" repet="NR" lite="lite" label-spa="Edición" label-eng="Edition" />
-		<subfield code="c" repet="NR" lite="????" label-spa="Información calificadora" label-eng="Qualifying information" />
-		<subfield code="d" repet="NR" lite="lite" label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
-		<subfield code="g" repet="R"  lite="lite" label-spa="Relationship information" label-eng="Relationship information" />
-		<subfield code="h" repet="NR" lite="lite" label-spa="Descr. física" label-eng="Physical description" />
-		<subfield code="i" repet="NR" lite="lite" label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+		<subfield code="c" repet="NR"             label-spa="Información calificadora" label-eng="Qualifying information" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Relationship information" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
 		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
 		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
-		<subfield code="n" repet="R"  lite="lite" label-spa="Nota" label-eng="Note" />
-		<subfield code="o" repet="R"  lite="lite" label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
 		<subfield code="r" repet="R"              label-spa="Nro. de informe" label-eng="Report number" />
 		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
-		<subfield code="t" repet="NR" lite="lite" label-spa="Título anterior" label-eng="Title" />
+		<subfield code="t" repet="NR"             label-spa="Título anterior" label-eng="Title" />
 		<subfield code="u" repet="NR"             label-spa="STRN" label-eng="STRN" />
-		<subfield code="w" repet="R"  lite="lite" label-spa="Record control number" label-eng="Record control number" />
-		<subfield code="x" repet="NR" lite="lite" label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="w" repet="R"              label-spa="Record control number" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
 		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
-		<subfield code="z" repet="R"  lite="lite" label-spa="ISBN" label-eng="International Standard Book Number" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="International Standard Book Number" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- ATENCION: debe ser revisado -->
-	<datafield tag="785" repet="R" lite="????" label-spa="Sucesor (título posterior)" label-eng="Succeeding entry" template="00tg">
+	<datafield tag="785" repet="R"             label-spa="Sucesor (título posterior)" label-eng="Succeeding entry" template="00tg">
 		<indicator pos="1" label-eng="Note controller" label-spa="Controlador de nota">
-			<i value="0" lite="????" label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="0"             label-eng="Display note" label-spa="Mostrar nota" />
 			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
 		</indicator>
 		<indicator pos="2" label-eng="Type of relationship" label-spa="Tipo de relación">
-			<i value="0" lite="????" label-eng="Continued by" label-spa="Continuado por" />
+			<i value="0"             label-eng="Continued by" label-spa="Continuado por" />
 			<i value="1"             label-eng="Continued in part by" label-spa="Continuado en parte por" />
-			<i value="2" lite="????" label-eng="Superseded by" label-spa="Reemplazado por" />
-			<i value="3" lite="????" label-eng="Superseded in part by" label-spa="Reemplazado en parte por" />
-			<i value="4" lite="????" label-eng="Absorbed by" label-spa="Absorbido por" />
-			<i value="5" lite="????" label-eng="Absorbed in part by" label-spa="Absorbido en parte por" />
-			<i value="6" lite="????" label-eng="Split into... and..." label-spa="Dividido en... y..." />
-			<i value="7" lite="????" label-eng="Merged with... to form ..." label-spa="Fusionado con... para formar..." />
-			<i value="8" lite="????" label-eng="Changed back to" label-spa="" />
+			<i value="2"             label-eng="Superseded by" label-spa="Reemplazado por" />
+			<i value="3"             label-eng="Superseded in part by" label-spa="Reemplazado en parte por" />
+			<i value="4"             label-eng="Absorbed by" label-spa="Absorbido por" />
+			<i value="5"             label-eng="Absorbed in part by" label-spa="Absorbido en parte por" />
+			<i value="6"             label-eng="Split into... and..." label-spa="Dividido en... y..." />
+			<i value="7"             label-eng="Merged with... to form ..." label-spa="Fusionado con... para formar..." />
+			<i value="8"             label-eng="Changed back to" label-spa="" />
 		</indicator>
-		<subfield code="a" repet="NR" lite="lite" label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
-		<subfield code="b" repet="NR" lite="lite" label-spa="Edición" label-eng="Edition" />
-		<subfield code="c" repet="NR" lite="????" label-spa="Información calificadora" label-eng="Qualifying information" />
-		<subfield code="d" repet="NR" lite="lite" label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
-		<subfield code="g" repet="R"  lite="lite" label-spa="Relationship information" label-eng="Relationship information" />
-		<subfield code="h" repet="NR" lite="lite" label-spa="Descr. física" label-eng="Physical description" />
-		<subfield code="i" repet="NR" lite="lite" label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+		<subfield code="c" repet="NR"             label-spa="Información calificadora" label-eng="Qualifying information" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Relationship information" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
 		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
 		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
-		<subfield code="n" repet="R"  lite="lite" label-spa="Nota" label-eng="Note" />
-		<subfield code="o" repet="R"  lite="lite" label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
 		<subfield code="r" repet="R"              label-spa="Nro. de informe" label-eng="Report number" />
 		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
-		<subfield code="t" repet="NR" lite="lite" label-spa="Título posterior" label-eng="Title" />
+		<subfield code="t" repet="NR"             label-spa="Título posterior" label-eng="Title" />
 		<subfield code="u" repet="NR"             label-spa="STRN" label-eng="STRN" />
-		<subfield code="w" repet="R"  lite="lite" label-spa="Record control number" label-eng="Record control number" />
-		<subfield code="x" repet="NR" lite="lite" label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="w" repet="R"              label-spa="Record control number" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
 		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
-		<subfield code="z" repet="R"  lite="lite" label-spa="ISBN" label-eng="International Standard Book Number" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="International Standard Book Number" />
+	</datafield>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PENDIENTE 786 Data Source Entry -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--Atención: hay que revisar. 787 Creado por Biblioteca del IAR - (27/04/2007)-->
+    <datafield tag="787" repet="R"             label-spa="Relación no especificada" label-eng="Nonspecific relationship entry" template="0#t">
+		<indicator pos="1" label-eng="Note controller" label-spa="Controlador de nota">
+			<i value="0"                 label-eng="Display note" label-spa="Mostrar nota" />
+			<i value="1"             label-eng="Do not display note" label-spa="No mostrar nota" />
+		</indicator>
+		<indicator pos="2" label-eng="Type of relationship" label-spa="Tipo de relación">
+			<i value="#"             label-eng="Related item" label-spa="Ítem relacionado" />
+			<i value="8"             label-eng="No display constant generate" label-spa="" />
+		</indicator>
+		<subfield code="a" repet="NR"             label-spa="Encabezamiento ppal." label-eng="Main entry heading" />
+		<subfield code="b" repet="NR"             label-spa="Edición" label-eng="Edition" />
+		<subfield code="c" repet="NR"             label-spa="Información calificadora" label-eng="Qualifying information" />
+		<subfield code="d" repet="NR"             label-spa="Pie de imprenta" label-eng="Place, publisher, and date of publication" />
+		<subfield code="g" repet="R"              label-spa="Relationship information" label-eng="Relationship information" />
+		<subfield code="h" repet="NR"             label-spa="Descr. física" label-eng="Physical description" />
+		<subfield code="i" repet="NR"             label-spa="Texto a desplegar" label-eng="Display text" />
+		<subfield code="k" repet="R"              label-spa="Series data for related item" label-eng="Series data for related item" />
+		<subfield code="m" repet="NR"             label-spa="Material-specific details" label-eng="Material-specific details" />
+		<subfield code="n" repet="R"              label-spa="Nota" label-eng="Note" />
+		<subfield code="o" repet="R"              label-spa="Other item identifier" label-eng="Other item identifier" />
+		<subfield code="r" repet="R"              label-spa="Nro. de informe" label-eng="Report number" />
+		<subfield code="s" repet="NR"             label-spa="Título uniforme" label-eng="Uniform title" />
+		<subfield code="t" repet="NR"             label-spa="Título" label-eng="Title" />
+		<subfield code="u" repet="NR"             label-spa="STRN" label-eng="STRN" />
+		<subfield code="w" repet="R"              label-spa="Record control number" label-eng="Record control number" />
+		<subfield code="x" repet="NR"             label-spa="ISSN" label-eng="International Standard Serial Number" />
+		<subfield code="y" repet="NR"             label-spa="CODEN" label-eng="CODEN" />
+		<subfield code="z" repet="R"              label-spa="ISBN" label-eng="International Standard Book Number" />
+		<subfield code="6" repet="NR"             label-spa="Enlace" label-eng="Linkage" />
+		<subfield code="7" repet="NR"             label-spa="Subcampo de control" label-eng="Control subfield" />
+		<subfield code="8" repet="R"              label-spa="Enlace y nro. de secuencia" label-eng="Field link and sequence numbe" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="800" repet="R" lite="lite" label-spa="Entrada de serie--Nombre personal" label-eng="Series added entry--Personal name" template="1#adt4">
@@ -1615,6 +1958,26 @@
 		<subfield code="u" repet="NR" lite="lite" label-spa="Afiliación" label-eng="Affiliation" />
 		<subfield code="v" repet="NR" lite="lite" label-spa="Volumen" label-eng="Volume/sequential designation" />
 		<subfield code="4" repet="R"  lite="lite" label-spa="Relación (código)" label-eng="Relator code" />
+	</datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<datafield tag="811" repet="R" lite="lite" label-spa="Serie--Nombre de reunión" label-eng="Series added entry--Meeting name" template="2#andctv">
+		<indicator pos="1" label-eng="Type of meeting name entry element">
+			<i value="0"             label-eng="Inverted name" label-spa="Nombre invertido" />
+			<i value="1" lite="lite" label-eng="Jurisdiction name" label-spa="Nombre de jurisdicción" />
+			<i value="2" lite="lite" label-eng="Name in direct order" label-spa="Nombre en orden directo" />
+		</indicator>
+		<indicator pos="2" />
+		<subfield code="a" repet="NR" lite="lite" label-spa="Nombre de reunión" label-eng="Meeting name as entry element" oblig="ALL" />
+		<subfield code="c" repet="NR" lite="lite" label-spa="Lugar" label-eng="Location of meeting" />
+		<subfield code="d" repet="NR" lite="lite" label-spa="Fecha" label-eng="Date of meeting" />
+		<subfield code="e" repet="R"  lite="lite" label-spa="Unidad subordinada" label-eng="Subordinate unit" />
+		<subfield code="n" repet="R"  lite="lite" label-spa="Número de reunión" label-eng="Number of part/section/meeting" />
+		<subfield code="t" repet="NR" lite="lite" label-spa="Título de una obra" label-eng="Title of a work" />
+		<subfield code="u" repet="NR" lite="lite" label-spa="Afiliación" label-eng="Affiliation" />
+		<subfield code="v" repet="NR" lite="lite" label-spa="Volumen" label-eng="Volume/sequential designation" />
+		<subfield code="3" repet="NR"             label-spa="Material" label-eng="Materials specified" />
+		<subfield code="4" repet="R"  lite="lite" label-spa="Relación (código)" label-eng="Relator code" />
+		<subfield code="5" repet="R"              label-spa="Código de institución" label-eng="Institution to which field applies" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="830" repet="R" lite="lite" label-eng="Series added entry--Uniform title" label-spa="Serie--Título uniforme" template="#0av">
@@ -1695,16 +2058,66 @@
 		<subfield code="3" repet="NR"             label-spa="Material" label-eng="Materials specified" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	
-	
-	<!-- Los fieldblock deberian generarse, via XSLT, a partir de un dato almacenado
+	<!-- Se agrega el campo 866 para las existencias de publicaciones periódicas. Biblioteca IAR (18/04/2007) -->
+	<datafield tag="866" repet="R" label-spa="Existencias" label-eng="Textual Holdings-Basic Bibliographic Unit" template="#0axz">
+		<indicator pos="1"	 label-eng="Field encoding level" label-spa="Nivel de codificación">
+			<i value="#" 	 label-eng="No information provided" label-spa="No se suministra información" />
+			<i value="3"             label-eng="Holdings level 3" label-spa="Existencias: nivel 3" />
+			<i value="4"             label-eng="Holdings level 4" label-spa="Exitencias: nivel 4" />
+			<i value="5"             label-eng="Holdings level 4 with piece designation" label-spa="Existencias: nivel 4 con designación de parte" />
+		</indicator>
+		<indicator pos="2" 			 label-eng="Type of notation" label-spa="Tipo de notación" >
+			<i value="0"             label-eng="Non-standard" label-spa="Sin estándar" />
+			<i value="1"             label-eng="ANSI/NISO Z39.71 or ISO 10324" label-spa="ANSI/NISO Z39.71 o ISO 10324" />
+			<i value="2"             label-eng="ANSI Z39.42" label-spa="ANSI Z39.42" />
+		</indicator>
+        <subfield code="a" repet="NR"              label-eng="Textual string" label-spa="Existencias" />
+		<subfield code="x" repet="R"  lite="lite" label-eng="Nonpublic note" label-spa="Nota no pública" />
+		<subfield code="z" repet="R"  lite="lite" label-eng="Public note" label-spa="Nota pública" />
+		<subfield code="6" repet="NR" label-eng="Linkage" label-spa="Enlace" />
+		<subfield code="8" repet="R"  label-eng="Field link and sequence number" label-spa="Campo de enlace y número de secuencia" />
+    </datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Se agrega el campo 867 para las existencias de publicaciones periódicas. Ver http://ticketsbc.uns.edu.ar/issues/2424 -->
+	<datafield tag="867" repet="R" label-spa="Inventarios Textuales - Material Suplementario" label-eng="Textual Holdings-Supplementary Material" template="#0axz">
+		<indicator pos="1"	 label-eng="Field encoding level" label-spa="Primer nivel de codificación">
+			<i value="#" 	 label-eng="No information provided" label-spa="No se suministra información" />
+		</indicator>
+		<indicator pos="2" 			 label-eng="Type of notation" label-spa="Tipo de notación" >
+			<i value="0"             label-eng="No information provided" label-spa="No se suministra información" />
+			<i value="1"             label-eng="ANSI/NISO Z39.71 or ISO 10324" label-spa="ANSI/NISO Z39.71 o ISO 10324" />
+			<i value="7"             label-eng="Source specified in subfield $2" label-spa="Fuente especificada en el subcampo $2" />
+		</indicator>
+        <subfield code="a" repet="NR"              label-eng="Textual string" label-spa="Existencias" />
+		<subfield code="x" repet="R"  lite="lite" label-eng="Nonpublic note" label-spa="Nota no pública" />
+		<subfield code="z" repet="R"  lite="lite" label-eng="Public note" label-spa="Nota pública" />
+		<subfield code="2" repet="NR"  lite="lite" label-eng="Source of notation" label-spa="Fuente de notación" />
+    </datafield>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Se agrega el campo 868 para las existencias de publicaciones periódicas. Ver http://ticketsbc.uns.edu.ar/issues/2424) -->
+	<datafield tag="868" repet="R" label-spa="Inventarios Textuales - Indices" label-eng="Textual Holdings-Indexes" template="#0axz">
+		<indicator pos="1"	 label-eng="Field encoding level" label-spa="Primer nivel de codificación">
+			<i value="#" 	 label-eng="No information provided" label-spa="No se suministra información" />
+		</indicator>
+		<indicator pos="2" 			 label-eng="Type of notation" label-spa="Tipo de notación" >
+			<i value="0"             label-eng="No information provided" label-spa="No se suministra información" />
+			<i value="1"             label-eng="ANSI/NISO Z39.71 or ISO 10324" label-spa="ANSI/NISO Z39.71 o ISO 10324" />
+			<i value="7"             label-eng="Source specified in subfield $2" label-spa="Fuente especificada en el subcampo $2" />
+		</indicator>
+        <subfield code="a" repet="NR"              label-eng="Textual string" label-spa="Existencias" />
+		<subfield code="x" repet="R"  lite="lite" label-eng="Nonpublic note" label-spa="Nota no pública" />
+		<subfield code="z" repet="R"  lite="lite" label-eng="Public note" label-spa="Nota pública" />
+		<subfield code="2" repet="NR"  lite="lite" label-eng="Source of notation" label-spa="Fuente de notación" />
+    </datafield>
+        
+    <!-- Los fieldblock deberian generarse, via XSLT, a partir de un dato almacenado
 		   en cada datafield, que lo asocie con un fieldblock en particular -->
 	<!-- Cada fieldblock podría llevar un texto que describa el bloque de campos que
 		   lo integran -->
-	
+
 	<!-- El bloque de vinculos deberia incluir 700,710,711 para autor/título? -->
 	<!-- Ponemos las notas en un orden más parecido al de las AACR2? -->
-	
+
 	<!--
 	<fieldblock id="description" label-eng="Descriptive information" label-spa="Información descriptiva">245,250,254,255,256,260,300,362,440,490</fieldblock>
 	<fieldblock id="notes" label-eng="Notes" label-spa="Notas">500,501,502,504,505,506,508,510,511,515,518,520,521,530,533,534,536,538,540,546,555,580,586,310,321</fieldblock>
@@ -1718,15 +2131,15 @@
 	<fieldblock id="01x-04x" label-eng="Number and Code Fields (01x-04x)" label-spa="Números y códigos (01X-04X)">010,015,016,017,020,022,024,027,028,030,033,035,041,043,044,046,047</fieldblock>
 	<fieldblock id="05x-08x" label-eng="Classification and Call Number Fields (05x-08x)" label-spa="Clasificación y signaturas topográficas (05X-08X)">050,052,080,082,084</fieldblock>
 	<fieldblock id="1xx"     label-eng="Main Entry Fields (1xx)" label-spa="Entrada principal (1xx)">100,110,111,130</fieldblock>
-	<fieldblock id="2xx"     label-eng="Title, edition, imprint, etc. (2xx)" label-spa="Título, edición, pie de imprenta, etc. (2xx)">210,222,240,242,243,245,246,247,250,254,255,256,260</fieldblock>
-	<fieldblock id="3xx"     label-eng="Physical Description, etc. Fields (3xx)" label-spa="Descripción física, etc. (3xx)">300,310,321,362</fieldblock>
+	<fieldblock id="2xx"     label-eng="Title, edition, imprint, etc. (2xx)" label-spa="Título, edición, pie de imprenta, etc. (2xx)">210,222,240,242,243,245,246,247,250,254,255,256,260,264</fieldblock>
+	<fieldblock id="3xx"     label-eng="Physical Description, etc. Fields (3xx)" label-spa="Descripción física, etc. (3xx)">300,310,336,337,338,321,344,362</fieldblock>
 	<fieldblock id="4xx"     label-eng="Series Statement Fields (4XX)" label-spa="Mención de serie (4XX)">440,490</fieldblock>
-	<fieldblock id="5xx"     label-eng="Note Fields (50x-58x)" label-spa="Notas (50x-58x)">500,501,502,504,505,506,508,510,511,515,518,520,521,530,533,534,536,538,540,546,555,580,586</fieldblock>
+	<fieldblock id="5xx"     label-eng="Note Fields (50x-59x)" label-spa="Notas (50x-59x)">500,501,502,504,505,506,508,510,511,515,518,520,521,525,530,533,534,536,538,540,546,550,555,580,586,590</fieldblock>
 	<fieldblock id="6xx"     label-eng="Subject Access Fields (6xx)" label-spa="Acceso temático (6xx)">600,610,630,650,651,653,655</fieldblock>
 	<fieldblock id="70x-75x" label-eng="Added Entry Fields (70x-75x)" label-spa="Entradas secundarias (70x-75x)">700,710,711,720,730,740</fieldblock>
-	<fieldblock id="76x-78x" label-eng="Linking Entry Fields (76x-78x)" label-spa="Entradas de vínculos (76x-78x)">765,772,773,776,780,785</fieldblock>
-	<fieldblock id="80x-830" label-eng="Series Added Entry Fields (80x-830)" label-spa="Entradas secundarias de serie (80x-830)">800,810,830</fieldblock>
-	<fieldblock id="841-88x" label-eng="Holdings, Location, Alternate Graphs, etc. Fields (841-88x)" label-spa="Holdings, Location, Alternate Graphs, etc. Fields (841-88X)">856</fieldblock>
-	
+	<fieldblock id="76x-78x" label-eng="Linking Entry Fields (76x-78x)" label-spa="Entradas de vínculos (76x-78x)">760,762,765,767,770,772,773,774,775,776,777,780,785,787</fieldblock>
+	<fieldblock id="80x-830" label-eng="Series Added Entry Fields (80x-830)" label-spa="Entradas secundarias de serie (80x-830)">800,810,811,830</fieldblock>
+	<fieldblock id="841-88x" label-eng="Holdings, Location, Alternate Graphs, etc. Fields (841-88x)" label-spa="Holdings, Location, Alternate Graphs, etc. Fields (841-88X)">856,866,867,868</fieldblock>
+    <fieldblock id="950-970" label-eng="Local fields (950-970)" label-spa="Campos locales (950-970)">950,951</fieldblock>
 
 </marc21_bibliographic>
