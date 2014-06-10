@@ -1,0 +1,27 @@
+<IsisScript>
+<section>
+	<display><pft>'Content-type: text/html'/#</pft></display>
+	<trace>!BR</trace>
+	<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+	<field action=cgi tag=100>documento</field>
+	<do task=search>
+		<parm name=db>lector</parm>
+		<parm name=expression><pft>v100</pft></parm>
+		<field action=define tag=900>Isis_Total</field>
+		<loop>
+		<field action=replace tag=200><pft>
+			if val(v900)>0 then
+				if p(v8) then 'ADEUDA',
+				else 'OK',fi,
+			fi
+		</pft></field>
+		<field action=export tag=200>200</field>
+	</loop>
+	</do>
+	<display><pft>
+		if val(v900)=0 then 'ERROR'
+		else v200 fi
+	</pft></display>
+</section>
+</IsisScript>
