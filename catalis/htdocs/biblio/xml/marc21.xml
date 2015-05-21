@@ -22,7 +22,7 @@
 	TO-DO: incorporar cambios del Update No. 5 (October 2004)
 	
         Incluye modificaciones realizadas por la Biblioteca del IAR. 
-        Inclusión de campos 525, 770, 775, 787, 866 y 950 
+        Inclusión de campos 525, 770, 775, 787, 866 y 950-951 
 		Inclusión de campos 264, -->
 		
 
@@ -2109,7 +2109,25 @@
 		<subfield code="z" repet="R"  lite="lite" label-eng="Public note" label-spa="Nota pública" />
 		<subfield code="2" repet="NR"  lite="lite" label-eng="Source of notation" label-spa="Fuente de notación" />
     </datafield>
-        
+    
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+ 	<!-- Campo local 950 corregido por la Biblioteca del IAR versión 1.1.0 -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <datafield tag="950" repet="NR"  lite="lite" label-spa="Uso local" label-eng="" oblig="ALL" template="##a" >
+		<indicator pos="1" />
+		<indicator pos="2" />
+		<subfield code="a" repet="R"  lite="lite" label-spa="Uso local" label-eng="Code" oblig="ALL"  />
+        </datafield>
+ 
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+ 	<!-- Campo local 951 corregido por la Biblioteca del IAR versión 1.1.0 -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <datafield tag="951" repet="NR"  lite="lite" label-spa="Uso local" label-eng="" oblig="ALL" template="##a" >
+		<indicator pos="1" />
+		<indicator pos="2" />
+		<subfield code="a" repet="R"  lite="lite" label-spa="Uso local" label-eng="Code" oblig="ALL"  />
+        </datafield>
+ 
     <!-- Los fieldblock deberian generarse, via XSLT, a partir de un dato almacenado
 		   en cada datafield, que lo asocie con un fieldblock en particular -->
 	<!-- Cada fieldblock podría llevar un texto que describa el bloque de campos que
