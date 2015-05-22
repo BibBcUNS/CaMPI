@@ -1,0 +1,48 @@
+<!-- ==================================================================
+ * CaMPI
+ * Copyright (c) ¿?
+ *
+ * Desarrolladores:
+ *
+ * Fuhr, Claudio 
+ * e-mail: claudiofuhr@gmail.com
+ * Asociación Bernardino Rivadavia
+ * Av. Colón 31
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ *
+ * Ferracutti, Victor
+ * e-mail: vmferra@uns.edu.ar
+ * Biblioteca Central, UNS
+ * Av. Alem 1253
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ */ -->
+
+<!--
+ * ABM del Calendario
+-->
+
+<IsisScript>
+<section>  
+<display><pft>'Content-type: text/html'/#</pft></display>
+<trace>!BR</trace>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+<field action=replace tag=120>0</field>
+<do task=mfnrange>
+<parm name=db>calendario</parm>
+<loop>
+	<field action=import tag=120>120</field>
+	<field action=replace tag=120><pft>if val(v900)>val(v120) then v900 else v120 fi</pft></field>
+	<field action=export tag=120>120</field>
+</loop>
+</do>
+
+<display><pft>v120</pft></display>
+</section>
+</IsisScript>

@@ -1,0 +1,68 @@
+body {
+	background-color : #E8E8D0;
+	color : #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size : 10px;
+}
+
+table  {
+	background-color : #D2E3AC;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #472901;
+}
+
+.celda_encabezado {
+	background-color : #D2E3AC;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #CC3333;
+}
+
+.celda_titulo {
+	background-color : #FFFFE1;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px
+}
+
+.datos {
+	background-color : #FEFFF6;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px
+}
+
+.datos_resaltados {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #CC3333;
+	font-size: 10px;
+}
+
+h4 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size : 13px;
+}
+
+h5 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size : 11px;
+}
+
+A:link  {
+	color : #472901;
+	background : transparent;
+}
+
+A:visited  {
+	color : #472901;
+	background : transparent;
+}
+
+A:active  {
+	color : #472901;
+	background : transparent;
+}
+
+A:hover  {
+	color : White;
+	background-color : #472901;
+}

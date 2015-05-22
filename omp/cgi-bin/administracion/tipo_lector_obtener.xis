@@ -1,0 +1,85 @@
+<!-- ==================================================================
+ * CaMPI
+ * Copyright (c) ¿?
+ *
+ * Desarrolladores:
+ *
+ * Fuhr, Claudio 
+ * e-mail: claudiofuhr@gmail.com
+ * Asociación Bernardino Rivadavia
+ * Av. Colón 31
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ *
+ * Ferracutti, Victor
+ * e-mail: vmferra@uns.edu.ar
+ * Biblioteca Central, UNS
+ * Av. Alem 1253
+ * (8000) - Bahía Blanca
+ * Buenos Aires
+ * Tel: 
+ * Web: 
+ */ -->
+
+<!--
+ * Obtener políticas de circulación
+-->
+
+<IsisScript>
+<section>  
+<display><pft>'Content-type: text/html'/#</pft></display>
+<trace>!BR</trace>
+<field action=cgi tag=100>cual</field>
+<field action=cgi tag=1>expresion</field>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+<flow action=jump><pft>v100</pft></flow>
+<flow action=exit>1</flow>
+
+<label>TODAS</label>
+
+  <do task=mfnrange>
+
+    <parm name=db>tipo_lector</parm>
+    <loop>
+       <list action=load>
+	     <pft>
+	       v1,'~',v2,'~',v10,'~',v12
+		 </pft>
+	   </list>
+    </loop>
+
+  </do>
+
+  <do task=list>
+     <field action=define tag=1001>Isis_Current</field>
+     <field action=define tag=1002>Isis_Items</field>
+     <field action=define tag=1>Isis_Item</field>
+     <loop>
+         <display>
+            <pft>v1,'#'</pft>
+         </display>
+     </loop>
+  </do>
+
+<flow action=exit>1</flow>
+
+<label>UNA</label>
+<field action=replace tag=110><pft>f(l(['tipo_lector']v1),1,0)</pft></field>
+  <do task=mfnrange>
+    <parm name=db>tipo_lector</parm>
+    <parm name=from><pft>v110</pft></parm>
+    <parm name=count>1</parm>
+    <loop>
+       <display>
+	     <pft>
+	       v1,'~',v2,'~',v10,'~',v12
+		 </pft>
+	   </display>
+    </loop>
+  </do>
+  
+</section>
+</IsisScript>

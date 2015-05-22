@@ -1,0 +1,37 @@
+[pft]
+			
+			if p(v100)
+					  then '<b>Autor(es): ',v100^a,'</b><br>'
+					  else
+		  			    if p(v110) then '<b>Institución: ',v110^a,'</b><br>',fi
+			fi,
+			if p(v700)
+					  then '<b>Autor(es): ',(v700^a+|, |),'</b><br>'
+			fi,
+			
+			if p(v245) 
+					  then '<b>Título: ',v245^a,'</b><br>',
+			fi,
+			if p(v260) 
+					  then 'Editorial: ',v260^b,'-',v260^a,'<br>',
+					fi,
+			if p(v300) 
+					  then 'Descrip. Fisica: ',v300^a,'-',v300^b,'-',v300^c,'<br>',
+			fi,
+			
+			if p(v250) 
+				          then 'Edición: ',v250^a,'<br>',
+			fi,
+			if p(v20) 
+				          then 'ISBN: ',(v20^a+|, |),'<br>',
+			fi,
+			
+			
+			if p(v859) 
+				          then '<b>Ubicación:  ',v859[1]^k, v859[1]^h,'-', v859[1]^i,'</b>',
+						  
+			fi,
+			
+		
+	
+[/pft]

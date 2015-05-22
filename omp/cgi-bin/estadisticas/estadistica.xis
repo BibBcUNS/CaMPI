@@ -1,0 +1,348 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+
+<function name="busqueda" action="replace" tag="9995">
+
+	<field action="replace" tag="9995"><pft>replace(v9995,'*  *','*')</pft></field>
+	<!-- v9995 trae la expresión de búsqueda -->
+
+<!--
+<display><pft>'Buscando: ',v9995,'<br>'</pft></display>
+-->
+
+  <do task=search>
+    <parm name=db>movi</parm>
+    <parm name=expression><pft>v9995</pft></parm>
+    <field action=define tag=1001>Isis_Current</field>
+    <field action=define tag=1002>Isis_Total</field>
+    <field action=define tag=1003>Isis_Posting</field>		
+    <field action=define tag=1004>Isis_Postings</field>		
+
+    <field action=add tag=9996>0</field>	 <!-- Totalizador de Operaciones -->
+
+	  <field action=cgi tag=500>inventario</field>
+  	<field action=cgi tag=600>tematica</field>
+	  <field action=cgi tag=700>material</field>
+		<field action="replace" tag="9995"><pft>          /* "Rearma" la expresión dejando solamente OPERACION=xx * INVENTARIO=xx * TEMATICA=xx * MATERIAL=xx */
+			left(s(mhu,v9995),instr(v9995,'Fecha=')-4), 		/* Deja de la expresión solo Operacion=XX  */
+			mhu,| * INVENTARIO=|v500, 										              /* Agrega el  Inventario=XX  */
+			mhu,| * TEMATICA=|v600, 											            /* Agrega la Tematica=XX  */
+			mhu,| * MATERIAL=|v700,											            /* Agraga el Material=XX  */
+		</pft></field>
+
+		<!--
+		Posible valores de operacion:
+			PRESTAMO
+			PRESTAMO_SALA
+			PRESTAMO_DOMICILIO
+			DEVOLUCION
+			DEVOLUCION_MOROSA
+			SANCION
+		-->
+
+    <loop>
+			<field action=import tag="list">9995,9996</field> <!-- Importa la expresión de búsqueda y el contador -->
+			
+			<!-- Si es un registro con una sola operación, se sobre entiende que el mismo coincide con la expresión de búsqueda. Por 
+			lo tanto se omite el análisis de las diferentes ocurrencias de v4 (operaciones) -->
+			<flow action="jump"><pft>if nocc(v4)=1 then 'Exportar' fi</pft></flow>
+			
+<!-- 
+A continuación se evalua cada ocurrencia del v4 para analizar si coinciden con los parámetros de búsqueda, de ser así el
+campo v9997 contiene tantos "1" como ocurrencias matcheadas halla.
+Para esto primero se limpia la expresión de búsqueda, quedando únicamente Operacion=xx * Inventario=xx * Tematica=xx * Material=xx, 
+esto se deja en v9995; 
+Luego con v53 se realiza de manera similar, armando estos valores con los datos de cada ocurrencia de v4.
+Finalmente se comparan v9995 y v53 para conocer si la ocurrencia analizada coincide con los parámetros de búsqueda.
+Considerar que v9996 es la contador de operaciones matcheadas
+-->
+		  <field action=cgi tag=600>tematica</field>
+		  
+			<field action=add previous=delete tag=53 split=occ><pft>
+				(mhu,
+
+          /* Tener en cuenta si se buscan devoluciones que las morosas figuran en el diccionario 
+          como OPERACION=DEVOLUCION MOROSA, por lo tanto se trabaja con el truncado $ para que al
+          buscar "todas" las devoluciones (morosas o no) sean incluidas (OPERACION=DEVOLUCION$).
+					De igual manera para los préstamos, estos figuran en el diccionaro como OPERACION=PRESTAMO SALA o
+					OPERACION=PRESTAMO DOMICILIO, en caso de no buscarse por destino se trunca la operación para incluir
+					ambos casos (OPERACION=PRESTAMO$)
+          */
+
+					'OPERACION=',v4^t,
+					  select s(mhu,v4^t)
+						 case 'DEVOLUCION': , if s(mhu,v9995[1]):'MOROSA' then 
+              											if s(mhu,v4^m):'S' then '_MOROSA' fi
+            											else
+              											'$'
+            											fi,
+						 case 'PRESTAMO': ,  if s(mhu,v9995[1]):'SALA' or s(mhu,v9995[1]):'DOMICILIO' then 
+              											if s(mhu,v4^o):'SALA' then 
+																			'_SALA' 
+																		else
+																			'_DOMICILIO'
+																		fi
+            											else
+              											'$'
+            											fi,
+						endsel,																							/* tipo de operacion */
+					
+					if s(mhu,v9995[1]):'INVENTARIO=' then 
+						' * INVENTARIO=',v4^i fi 														/* inventario */
+
+					if s(mhu,v9995[1]):'TEMATICA=' then
+						' * TEMATICA=',left(v4^c,size(v600[1])) fi 				/* clasificación, toma del subcampo solo la parte indicada en la expresión (v600, tematica) */
+
+					if s(mhu,v9995[1]):'MATERIAL=' then 
+						' * MATERIAL=',v4^l fi 								/* tipo material */
+
+					/)</pft></field> <!-- Arma la expresión (operacion= y fecha= ) con los datos de cada ocurrencia de v4 -->
+
+			<field action="add" tag="9997" split="occ"><pft>(if v53=v9995[1] then '1,' else '0,' fi)</pft></field> 
+			<!-- Compara la expresión "rearmada" con cada operación, si coincide agreta 1 sino 0 -->
+
+			<label>Exportar</label>
+			
+			<field action="add" tag="9997"><pft>"1"n9997</pft></field>
+				<!-- si no existe v9997 indica que se trata de un registro con una sola operación, se asume que el mismo coincide con la búsqueda -->
+			<field action="replace" tag="9996" previous="delete"><pft>f(val(v9996)+rsum(v9997),1,0)</pft></field>	<!-- suma al total las operaciones coincidentes -->
+	  	<field action=export tag="list" previous="delete">9996</field> <!-- exporta el contador -->
+
+    </loop>
+  </do>
+
+  <return action="export" tag="1002">9996</return>
+</function>
+
+<section>
+
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <trace>BR1</trace>
+  <parm name="buffersize">190000</parm>
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+	<!--   CONTENIDO DE LOS CAMPOS CGI -->
+  <field action=cgi tag=100>operaciones</field>     				<!-- (checkbox) presente/ausente -->
+  <field action=cgi tag=200>turno</field>
+  <field action=cgi tag=300>fecha</field>
+  <field action=cgi tag=400>doc</field>
+	<field action="replace" tag="400"><pft>v400^t,v400^n</pft></field>
+  <field action=cgi tag=500>inventario</field>
+  <field action=cgi tag=600>tematica</field>
+  <field action=cgi tag=700>material</field>
+  <field action=cgi tag=800>operador</field>
+  <field action=cgi tag=899>terminal</field>
+  <field action=cgi tag=9999>tipo_reporte</field>
+
+
+	
+ <!-- Este campo define las series seleccionadas para el gráfico 
+ 		'Operacion=Prestamo'/
+		'Operacion=Devolucion$'/
+		'Operacion=Devolucion morosa'/    
+		'Operacion=Sancion'/
+		'Operacion=Prestamo * Destino=sala'/
+		'Operacion=Prestamo * Destino=domicilio'/
+	-->
+	
+	<field action="add" tag="900" split="occ"><pft>(v100/)</pft></field> <!-- Operaciones -->
+	<field action="add" tag="901" split="occ"><pft>(v300/)</pft></field> <!-- Fecha -->
+	<field action="add" tag="903" split="occ"><pft>(v200/)</pft></field> <!-- Turno -->
+	<field action="add" tag="904"><pft>| * DNI=|v400,| * INVENTARIO=|v500|$|,| * TEMATICA=|v600|$|,| * MATERIAL=|v700|$|,| * OPERARIO=|v800|$|,| * TERMINAL=|v899|$|</pft></field>
+	<!-- v904= doc, inventario, temática, material, operador, terminal -->
+
+	<do>
+		<parm name="count"><pft>f(nocc(v903),1,0)</pft></parm>
+		<field action="define" tag="1001">Isis_Current</field>
+		<!-- Este loop "gira" una vez por turno seleccionado -->
+		<loop>
+			<field action="import" tag="list">900/904</field>
+			<field action="occ" tag="1" from="903"><pft>v1001</pft></field>
+			<field action="replace" tag="903"><pft>v1</pft></field>
+      
+			<do>
+				<parm name="count"><pft>f(nocc(v900),1,0)</pft></parm>
+				<field action="define" tag="1001">Isis_Current</field>
+				<!-- Este loop "gira" tantas veces como operaciones hayan sido seleccionadas  -->
+				<loop>
+					<field action="import" tag="list">900/904</field>
+					<field action="occ" tag="1" from="900"><pft>v1001</pft></field>
+					<field action="replace" tag="900"><pft>v1</pft></field>
+					
+					<!-- Se arma la cabecera de fila correspondiente a Operacion/Turno (para reporte impreso) -->
+					<field action="add" tag="4001"><pft>replace(v900,'Operacion=',''),replace(v903,'Turno=',' ')</pft></field>
+					<field action="export" tag="list" previous="add">4001</field>
+					
+					<do> <!-- Este do gira una vez por día de análisis -->
+						<parm name="count"><pft>f(nocc(v901),1,0)</pft></parm>
+						<!-- Se utiliza v2001 en Isis_Current para diferenciarlo del anterior Isis_Current (v1001)-->
+						<field action="define" tag="2001">Isis_Current</field>
+						<loop>
+							<field action="import" tag="list">900/904,3000</field>
+							<field action="occ" tag="1" from="901"><pft>v2001</pft></field>
+							<field action="replace" tag="901"><pft>v900,' * ',v1</pft></field>
+	            <call name="busqueda"><pft>v901," * "v903,v904</pft></call>
+							<!-- La función toma los siguientes parámetros de búsqueda, en el orden citado
+								OPERACION=XX * FECHA=XX * TURNO=XX * DNI=XX * INVENTARIO=XX * TEMATICA=XX * MATERIAL=XX * OPERADOR=XX * TERMINAL=XX -->
+							
+							<field action="add" tag="3000" previous="add"><pft>
+								'^e',s(v901," * "v903,v904),'^t',v1002</pft></field> <!-- guarda la expresión de búsqueda (^e) y los totales generados (^t) -->
+							<field action="export" tag="list">3000</field>
+						</loop>
+						<field action="add" tag="3001"><pft>
+							 (v3000^t,if iocc < nocc(v3000) then '|' fi)</pft></field> <!-- Arma las diferentes series del gráfico, separadas por '|' -->
+					</do>
+					
+					<field action="add" tag="4000"><pft>
+						('<td align="center" class="datos">',
+              if val(v3000^t)>0 then 
+                '<a href="JavaScript:Ver_Registros(',"'"n0,v3000^e,"'"n0,')">',v3000^t,'</a>'
+              else
+                v3000^t
+              fi,
+              '</td>')</pft></field>
+					
+					<field action="export" tag="list" previous="add">3000,3001,4000</field>
+				
+				</loop>
+				<field action="export" tag="list" previous="add">3000,3001,4000,4001</field>
+			</do>
+		</loop>
+	</do>
+
+
+<field action="replace" tag="300" split="occ"><pft>v300</pft></field> <!-- como v300 tiene incorporado el salto de línea lo hace repetible -->
+<field action="add" tag="4002" split="occ"><pft>
+	select v9999 
+			case 'diario':(v300*14,'/',v300*11.2/),
+			case 'semanal':(v300*14,'/',v300*11.2/),
+			case 'mensual':(v300*14,'/',
+				select s(v300*11.2)
+			    case '01': ,'Ene',
+			    case '02': ,'Feb',
+			    case '03': ,'Mar',
+			    case '04': ,'Abr',
+			    case '05': ,'May',
+			    case '06': ,'Jun',
+			    case '07': ,'Jul',
+			    case '08': ,'Ago',
+			    case '09': ,'Sep',
+			    case '10': ,'Oct',
+			    case '11': ,'Nov',
+			    case '12': ,'Dic',
+			  endsel,/),
+			case 'anual':
+				(select s(v300*11.2)
+			     case '01': ,'Ene',
+			     case '02': ,'Feb',
+			     case '03': ,'Mar',
+			     case '04': ,'Abr',
+			     case '05': ,'May',
+			     case '06': ,'Jun',
+			     case '07': ,'Jul',
+			     case '08': ,'Ago',
+			     case '09': ,'Sep',
+			     case '10': ,'Oct',
+			     case '11': ,'Nov',
+			     case '12': ,'Dic',
+			  endsel,/),
+			endsel,
+		</pft></field> <!-- Reformula v300 dejando unicamente los datos limpios de fecha -->
+
+<field action="replace" tag="4999" split="occ"><pft>
+	select v9999 
+			case 'mensual':
+				select s(v300[1]*11.2)
+			    case '01': ,'Enero',
+			    case '02': ,'Feb',
+			    case '03': ,'Mar',
+			    case '04': ,'Abr',
+			    case '05': ,'May',
+			    case '06': ,'Jun',
+			    case '07': ,'Jul',
+			    case '08': ,'Ago',
+			    case '09': ,'Sep',
+			    case '10': ,'Oct',
+			    case '11': ,'Nov',
+			    case '12': ,'Dic',
+			  endsel,
+	endsel,
+</pft></field> <!-- Reformula v300 dejando unicamente los datos limpios de fecha -->
+
+<field action="add" tag="4006" split="occ"><pft>(v4002/)</pft></field> <!-- Leyendas para el eje X (fechas) -->
+
+<field action="replace" tag="4002" split="occ"><pft>
+		select v9999 
+			case 'mensual':
+				
+				('<td class="celda_encabezado" align="center">',v4002.2,/),
+			elsecase
+				(|<td class="celda_encabezado">|v4002|</td>|/),
+			endsel,
+		</pft></field> <!-- Arma la fila de fecha y si la consulta es mensual reduce el ancho -->
+
+
+<!-- Leyendas de las operaciones -->
+<field action="replace" tag="4001" split="occ"><pft>(replace(v4001,'PRESTAMO','Préstamo')/)</pft></field>
+<field action="replace" tag="4001" split="occ"><pft>(replace(v4001,'DEVOLUCION', 'Devolución')/)</pft></field>
+<field action="replace" tag="4001" split="occ"><pft>(replace(v4001,'SANCION', 'Sanción')/)</pft></field>
+<field action="replace" tag="4001" split="occ"><pft>(replace(v4001,'MATUTINO', 'Matutino')/)</pft></field>
+<field action="replace" tag="4001" split="occ"><pft>(replace(v4001,'VESPERTINO', 'Vespertino')/)</pft></field>
+<field action="replace" tag="4001" split="occ"><pft>(replace(v4001,'MOROSA', 'Morosa')/)</pft></field>
+<field action="replace" tag="4001" split="occ"><pft>(replace(v4001,'EN SALA', 'en Sala')/)</pft></field>
+<field action="replace" tag="4001" split="occ"><pft>(replace(v4001,'A DOMICILIO', 'a Dom.')/)</pft></field>
+<field action="replace" tag="4001" split="occ"><pft>(replace(v4001,'$','')/)</pft></field>
+
+<!-- colores de las celdas y líneas -->
+<field action="add" tag="4008" split="occ"><pft>
+  '#00CC00'/'#336699'/'#993300'/'#ff9900'/'#66ccff'/'#99cc00'/'#FFCC66'/'#009933'</pft></field>
+<!--display><pft>ALL</pft></display-->
+<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_resultados.htm')</pft></htmlpft></display>
+
+</section>
+</IsisScript>
+
+
+

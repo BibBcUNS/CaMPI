@@ -1,0 +1,29 @@
+<function name=menor action=replace tag=1 split=occ>
+		<!-- Entrada: Una lista de números (como texto). Una ocurrencai por cada nro.
+		Retorna el valor más chico de la lísta y el nro de ocurrencia.
+		La comparación es como cadena. Sirve para nros con misma cant de digitos (alfabetico).
+		Salida: ^o<orden>^t<time_stamp>
+		Invocacion: <call name=menor><pft>(vXXX/)</pft></call>  -->
+
+		<!-- v2: contador -->
+		<field action=replace tag=2>2</field>		
+		
+		<!-- v3: cant. iteraciones -->		
+		<field action=replace tag=3><pft>f(nocc(v1),1,0)</pft></field>
+		
+		<!-- v30: es el campo retornado. Inicializamos con el valor de la primera ocurrencia -->
+		<field action=replace tag=30><pft>'^o1^t',v1[1]</pft></field>
+		
+		<loop> <!-- While. Hasta que el contador sea mayor que la cant. de ocurrencias -->
+			<field action=import tag=list>1,2,3,30</field>
+				<!-- 1) lista, de nros. 2) indice [2..nocc]. 3) nocc. 30) el mínimo actual.-->
+				<flow action=skip><pft>if val(v2)>val(v3) then 'Quit' else '' fi</pft></flow>
+				<!-- v10: campo temporal: Cargo la ocurrencia correspondiente -->
+				<field action=occ tag=10 from=1><pft>v2</pft></field>
+				<field action=replace tag=30><pft>if v10<v30^t then '^o',v2,'^t',v10 else v30 fi</pft></field> <!-- En 30 pongo el timestamp menor -->
+			<field action=replace tag=2><pft>f(val(v2)+1,1,0)</pft></field>
+			<field action=export tag=list>2,30</field>
+		</loop>
+		<field action=export tag=list>30</field>
+		
+</function> <!-- fin menor -->

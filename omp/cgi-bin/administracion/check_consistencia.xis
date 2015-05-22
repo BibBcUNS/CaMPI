@@ -1,0 +1,226 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+ 
+<IsisScript>
+<section>
+
+ <display><pft>'Content-type: text/html'/#</pft></display>
+ 
+ <parm name=cipar><pft>
+    cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+ <display>
+ 		<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
+</head>	
+	  <body>
+    <div id="head">
+		  <div id="title">Módulo de Administración - OPEN MarcoPolo  
+		  <div id="logo"><img src="/omp/images/logocampi2.gif"  width="156" height="71" ></div>
+		  </div>
+		 
+      
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!------------------------------------------------------------------------------------------------->  
+ </display>
+
+ <display><p align="center"><h3>Control de consistencia de inventarios</h3></p></display>   
+		
+
+	<!-- v5001 contiene el tag y el subcampo correspondiente al inventario de la base bibliográfica -->
+    <field action="add" tag="5001"><pft>ref(['config']1,v1)</pft></field>
+
+	<!-- v5009 define el formato de catalogación -->
+	<field action="add" tag="5009"><pft>ref(['config']1,v6)</pft></field>
+				  
+
+<!-- No invierte el primer registro de la base existencia, RARISIMO -->
+<display><pft>'<p><u>Invirtiendo diccionarios</u></p>'/#</pft></display>
+
+<do task="fullinvertion">
+	<parm name="db">marc</parm>
+	<parm name="fst"><pft>cat('marc.fst')</pft></parm>
+	<field action="define" tag="1102">Isis_Status</field>
+		<loop>
+		</loop>			
+	<display><pft>'Inversion diccionario de inventarios (EXIST) terminado, status: ',v1102|<br>|/#</pft></display>
+</do>
+
+<do task="mfnrange">
+  <parm name=db>config</parm>
+  <loop>
+	</loop>
+</do>
+
+<do task="fullinvertion">
+	<parm name="db">exist</parm>
+	<parm name="fst"><pft>cat('exist.fst')</pft></parm>
+	<field action="define" tag="1102">Isis_Status</field>
+		<loop>
+		</loop>			
+	<display><pft>'Inversion diccionario de existencias (EXIST) terminado, status: ',v1102/#</pft></display>
+</do>
+
+<do task="mfnrange">
+  <parm name=db>config</parm>
+  <loop>
+	</loop>
+</do>
+
+<!-- Recorre la base de existencia y verifica que el inventario figure en el diccionario de la base bibliográfica -->
+<display><pft>'<p><u>Control de integridad de ',v5009,' contra c:\OpenMP\Bases\Exist</u></p>'/#</pft></display>
+<do task="mfnrange">
+  <parm name=db>exist</parm>
+  <loop>
+		<field action=add tag=9990><pft>f(npost(['marc']v977),1,0)</pft></field>
+
+		<flow action="skip"><pft>if val(v9990)=1 then 'Next' fi</pft></flow>		
+		<display><pft>
+			'Inv: ',v977,' en MFN ',mfn(0),' de Exist:',
+			if val(v9990)=0 then ' Se encuentra en la base Exist pero no figura en la base bibliografica<br>'/ 
+			else
+			  ' Se encuentra en la base Exist y figura repetido (',v9990,' veces) en la base bibliografica<br>'/ 
+			fi
+			</pft></display>
+	</loop>
+</do>
+
+<!-- Recorre la base Biblio y verifica que el inventario figure en el diccionario de la base existencia -->
+<display><pft>'<p><u>Control de integridad de c:\OpenMP\Bases\Exist contra ',v5009/#,'</u></p>'</pft></display>
+<do task="mfnrange">
+  <parm name=db>marc</parm>
+  <loop>
+		<field action="import" tag="list">5001,5009</field> <!-- campo que contiene el nro. de inventario -->
+		<!-- v2001 tiene todos los inventarios del registro bibliográfico -->
+		<field action="add" tag="2001" split="occ"><htmlpft><pft>'[pft](',v5001,'/)[/pft]'</pft></htmlpft></field>
+		
+ 
+   	<list action="delete">Now</list>
+    <list action="load"><pft>(if v2001<>'' then mfn(0),|^i|v2001,|^b|v5009[1]/ fi)</pft></list> <!-- carga la lista con todos los nro. de inventarios -->
+
+    <do task=list>
+      <field action=define tag=1001>Isis_Item</field>
+      <field action=define tag=1002>Isis_Current</field>
+      <loop>
+				<field action=add tag=9990><pft>f(npost(['exist']v1001^i),1,0)</pft></field>
+        <display><pft>
+					if val(v9990)=0 then 'Inv: ',v1001^i,' en MFN ',v1001^*,' de ',v1001^b,': Es inexistente en Exist<br>'/ 
+					else
+					  if val(v9990)>1 then 'Inv: ',v1001^i,' en MFN ',v1001^*,' de ',v1001^b,': Se encuentra repetido (',v9990,' veces) en Exist<br>'/ fi
+					fi</pft></display>
+      </loop>
+    </do>
+    
+	</loop>
+</do>
+
+<!-- Verifica que el contenido del campo inventario figure en el diccionario -->
+<display><pft>'<p><u>Control del diccionario de la base bibliografica (',v5009,')</u></p>'</pft></display>
+<list action="delete">Now</list>
+<do task="mfnrange">
+  <parm name=db>marc</parm>
+  <loop>
+		<field action="import" tag="list">5001</field> <!-- campo que contiene el nro. de inventario -->
+		<!-- v2001 tiene todos los inventarios del registro bibliográfico -->
+		<field action="add" tag="2001" split="occ"><htmlpft><pft>'[pft](',v5001,'/)[/pft]'</pft></htmlpft></field>
+
+		<flow action="skip"><pft>if a(v2001) or rsum('0,',(if npost(v2001)>1 then '1,' fi))=0 then 'Next' fi</pft></flow>
+		<list action="load"><pft>(if npost(v2001)>1 then '^m',mfn(0),'^i',v2001/ fi)</pft></list>
+	</loop>
+</do>
+<do task="list">
+	<field action="define" tag="1001">Isis_Item</field>
+	<parm name="sort"><pft>v1001^i</pft></parm>
+	<loop>
+		<display><pft>
+       'Inv: ',v1001^i,' Se encuentra repetido en el registro: ',v1001^m/,'<br>'</pft></display>
+	</loop>
+</do>
+
+<!-- Recorre la base y verifica que el contenido del campo inventario figure en el diccionario -->
+<display><pft>'<p><u>Control del diccionario de la base existencias (Exist)</u></p>'/#</pft></display>
+<list action="delete">Now</list>
+<do task="mfnrange">
+  <parm name=db>exist</parm>
+  <loop>
+		<flow action="skip"><pft>if npost(['exist']v977)=1 then 'Next' fi</pft></flow>
+		<list action="load"><pft>'^m',mfn(0),'^i',v977/</pft></list>
+	</loop>
+</do>
+<do task="list">
+	<field action="define" tag="1001">Isis_Item</field>
+	<parm name="sort"><pft>v1001^i</pft></parm>
+	<loop>
+		<display><pft>'Inv: ',v1001^i,' se encuentra repetido en el registro: ',v1001^m/,'<br>'</pft></display>
+	</loop>
+</do>
+
+<display>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+
+           <div id="footer"></div>
+  </body>
+  </html>
+</display>
+
+</section>
+</IsisScript>

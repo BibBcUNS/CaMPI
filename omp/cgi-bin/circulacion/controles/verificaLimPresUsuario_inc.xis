@@ -1,0 +1,104 @@
+<!--
+Verificar si el usuario alcanzó el límite de préstamos (Total y por tipo de objeto).
+Se asume que el usuario es válido, los inventarios existen (validaInventarios_inc.xis)  y son prestables (verificaDispInv_inc.xis).
+
+v3002: lista de todos los inventarios a prestar (invs_prestamo_A + invs_prestamo_B)
+v3003: lista de todos los inventarios a devolver
+v3004: documento
+
+Obs.: Este control depende de políticas definidas en la biblioteca.
+ -->
+
+<!--
+   si prestados + a prestar - devoluciones > límite préstamos total entonces
+        Error: Límite total de préstamos excedido
+   sino
+       Inicializar un contador para cada tipo de objeto de los objetos a prestar.
+       Si el tipo de usuario no tiene políticas para alguno de los tipos de objetos a prestar entonces
+	   Error: El usuario no tiene permisos para el tipo de objeto
+       Para cada objeto a prestar y si no hay Error
+	   si cantidad del tipo de objeto para el objeto considerado + 1 <= límite para el tipo de objeto entonces
+	       cantidad del tipo de objeto para el objeto considerado <- cantidad del tipo de objeto para el objeto considerado + 1
+	   sino
+	       Error: Límite de préstamos para el tipo de objeto excedido.
+ -->
+<flow action="jump"><pft>if v5000:'Error' then 'FinValidaLimPrestamos' fi</pft></flow>
+
+<!-- Obtenemos el tipo de usuario dado el documento -->
+<field action="replace" tag="2000"><pft>
+	ref(['lector']l(['lector']v3004),v3)
+</pft></field>
+
+<!-- Obtenemos el límite de préstamos dado el tipo de usuario -->
+<field action="replace" tag="2010"><pft>
+	ref(['tipo_lector']l(['tipo_lector']v2000),v10)
+</pft></field>
+
+<!-- Obtenemos el total de préstamos actuales del usuario -->
+<field action="replace" tag="2020"><pft>	
+	ref(['lector']l(['lector']v3004),f(nocc(v8),1,0))
+</pft></field>
+
+<!-- Obtenemos el total de préstamos a realizar al usuario -->
+<field action="replace" tag="2030"><pft>
+	f(nocc(v3002),1,0)
+</pft></field>
+
+<!-- Obtenemos el total de devoluciones a realizar al usuario -->
+<field action="replace" tag="2040" split="occ"><pft>
+	f(nocc(v3003),1,0)
+</pft></field>
+
+<field action="replace" tag="5000"><pft>
+   if val(v2020) + val(v2030) - val(v2040) > val(v2010) then
+      'Error: Límite de préstamos superado.'
+   fi
+</pft></field>
+<flow action="jump"><pft>if v5000:'Error' then 'FinValidaLimPrestamos' fi</pft></flow>
+
+<!-- Inicialización de la lista con contadores para tipos de objetos a prestar -->
+<list action="delete">now</list>
+<list action="load" type="freq"><pft>
+	(ref(['exist']l(['exist']v3002),v987)/)
+</pft></list>
+
+<!-- v2050: inventarios actualmente prestados al lector -->
+<field action="add" tag="2050" split="occ"><pft>
+	ref(['lector']l(['lector']v3004),(v8^i/))
+</pft></field>
+
+<!-- v2060: cadena de inventarios a devolver separados por '~' -->
+<field action="replace" tag="2060"><pft>
+	'~',(v3003^y,'~')
+</pft></field>
+
+<!-- Agregamos a los contadores la cantidad de tipos de objetos que posee el lector si no los devuelve -->
+<list action="load" type="freq"><pft>
+	(if (not v2060[1]:v2050) then ref(['exist']l(['exist']v2050),v987)/ fi)
+</pft></list>
+
+<field action="delete" tag="4000">borrar</field>
+
+  <do task="list">
+     <!--field action="define" tag="1001">Isis_Current</field>
+     <field action="define" tag="1002">Isis_Items</field-->
+     <field action="define" tag="1">Isis_Item</field>
+	 <field action="define" tag="2">Isis_Value</field>
+     <loop>
+		<field action="import" tag="2000">2000</field>
+        <field action="replace" tag="4000"><pft>
+			if val(v2) > val(ref(['politicas']l(['politicas']'UO=',v2000,'-',v1),v10)) then v1 fi
+		</pft></field>
+		<field action="export" previous="add" tag="4000">4000</field>
+     </loop>
+  </do>
+
+<field action="replace" tag="5000"><pft>
+   if v4000='' then
+      'ok'
+   else
+      'Error: Límite para tipo de objeto excedido: ',(v4000+|;|)
+   fi
+</pft></field>
+
+<label>FinValidaLimPrestamos</label>

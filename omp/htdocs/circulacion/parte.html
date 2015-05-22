@@ -1,0 +1,12 @@
+[pft]
+
+	'<br><table border="0"  width="90%">',
+
+      '<tr><td><strong>PARTE: ',if v1^p='' then 'Primera' else v1^p fi,'</strong>'
+		  '<br>Ejemplares totales: ',f(nocc(v2),1,0),
+	      ' | Ejemplares disponibles: ',f(rsum((if ref(['exist']l(['exist']v2),v985)='PERM' then '1,' fi/)),1,0),
+      '</td></tr>',
+
+	'</table>'/,
+
+[/pft]

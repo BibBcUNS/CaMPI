@@ -1,0 +1,326 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ * -->
+
+<!-- Esta script realiza devoluciones rápidas identificando el préstamo por el inventario -->
+
+<IsisScript>
+
+<include>circulacion/menor_inc.xis</include>
+<include>circulacion/verif_reservas_inc.xis</include>
+
+<function name=operador action=replace tag=1000>
+
+<!-- Esta función valida al operarrio. 
+El campo 1000 contiene los datos del operador en formato:
+^inombre de usuario
+^pclave de acceso
+El campo v2000 que es exportado como v1000 valdrá ok si el usuario está correctamente validado -->
+
+  <field action=add tag=2000>error</field>
+  <do task=search>
+    <parm name=db>opera</parm>
+    <parm name=expression><pft>v1000^i</pft></parm>
+    <parm name=count>1</parm>
+    <loop>
+      <field action=import tag=1000>1000</field>
+      <field action=add tag=2000><pft>
+                if s(mpu,v1)=s(mpu,v1000^i) and s(mpu,v2)=s(mpu,v1000^p) then mhl,'ok' else mhl,'error' fi</pft></field>
+      <field action=export previous=delete tag=2000>2000</field>
+    </loop>
+  </do>
+  <return action=export tag=1000>2000</return>
+</function>
+
+<function name="bloqueo" action="replace" tag="1000">
+
+<!-- Bloquea/Desbloquea un registro 
+El campo v1000 trae 
+^bBase
+^uUserid
+^rRegistro
+^lLook o Unlock
+Se exporta el campo v2000 con OK o código error -->
+
+  <do task=update>
+    <parm name=db><pft>v1000^b</pft></parm>
+    <parm name=mfn><pft>v1000^r</pft></parm>
+    <parm name=lockid><pft>v1000^u</pft></parm>
+    <parm name=expire>60</parm>
+    <field action=define tag=1102>Isis_Status</field>
+    <field action=define tag=1011>Isis_Lock</field>
+    <update>
+      <field action="import" tag="list">1000</field>
+      <flow action="jump"><pft>v1000^l</pft></flow>
+      
+      <label>Lock</label>
+      <field action="delete" tag="list">1000</field>
+      <write>Lock</write>
+      <field action="export" tag="list">1102</field>
+      <flow action="skip">Next</flow>
+      
+      <label>Unlock</label>
+      <field action="delete" tag="list">1000</field>
+      <write>Unlock</write>
+      <field action="export" tag="list">1102</field>
+    </update>
+   </do>
+   <field action="replace" tag="1102"><pft>if val(v1102)>0 then f(val(v1102),1,0) else 'OK' fi</pft></field>
+   <return action="export" tag="2000">1102</return>
+</function>
+
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+
+  <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  <field action=cgi tag=2001>inventario</field>
+  <field action=cgi tag=2002>operador</field>
+
+  <field action="replace" tag="2002"><pft>s('^i',replace(v2002,'-','^p'))</pft></field> <!-- ^iid_operador^pclave -->
+  <call name=operador><pft>v2002</pft></call>
+  
+  <!-- mensaje en casos de error -->
+  <trace>!BR</trace>
+
+  <display><htmlpft><pft>
+        if v1000<>'ok' then 
+            proc('a9001#Bibliotecario desconocido#'),
+            proc('a9002#Su  identificación es incorrecta. La operación fue cancelada#')
+            cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') fi
+  </pft></htmlpft></display>
+  <flow action=exit><pft>if v1000<>'ok' then 'Now' fi</pft></flow>
+
+  <do task=search>
+  <parm name=db>exist</parm>
+  <parm name=expression><pft>v2001</pft></parm>
+  <parm name=count>1</parm>
+  <field action=define tag=1102>Isis_Status</field>
+  <field action=define tag=1103>Isis_Total</field>
+  <loop>
+            <!-- Si el material no se encuentra prestado aborta la devolución -->
+            <display><htmlpft><pft>
+            if s(mhu,v985)<>'PRES' then mhl,
+                        proc('a9001#Material en Biblioteca#'),
+                        proc('a9002#Según el estado del registro bibliográfico (',v977,'), el material no figura prestado#')
+                      cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') fi</pft></htmlpft></display>
+            <flow action="exit"><pft>if s(mhu,v985)<>'PRES' then 'Now' fi</pft></flow>
+            
+            <field action="add" tag="3001"><pft>v998[last]</pft></field>
+            
+            
+            
+            <!-- Si el material se encuentra moroso no se procesa la devolución -->
+            <display><htmlpft><pft>
+            if val(s(v3001^d)*6.4,s(v3001^d)*3.2,s(v3001^d)*0.2) < val(s(date).8) then 
+                        proc('a9001#Préstamo fuera de término#')
+                        proc('a9002#',
+                            'El préstamo está vencido, la fecha última para su devolución es: ',v3001^d,
+                            '<BR>Operación cancelada, proceda a identificar al '
+                            '<a href="Javascript:presenta_registro(',"'"n0,replace(replace(v3001^b,'',''),'LC',''),"'"n0,')">usuario</a> y considere su sanción#')
+              cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') fi</pft></htmlpft></display>
+            <flow action="exit"><pft>
+                    if val(s(v3001^d)*6.4,s(v3001^d)*3.2,s(v3001^d)*0.2) < val(s(date).8) then 'Now' fi</pft></flow>
+            
+            <field action=import tag=list>2002</field> <!-- ^iId_operador^pClave -->
+            
+            <call name="bloqueo"><pft>'^bexist^u',v2002^i,'^r',mfn,'^fLock'</pft></call>
+            
+            <display><htmlpft><pft>
+                    if v2000<>'OK' then 
+                        proc('a9001#No se pudo tomar el registro bibliográfico#')
+                        proc('a9002#La operación de escritura no pudo finalizarse con éxito. Error: ',v2000,
+                                select val(v2000)
+                          case 2: ' (registro editado por otro operador)</big></p>',
+                      endsel,
+                                '#')
+                        cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') fi
+            </pft></htmlpft></display>
+      
+            <flow action="exit"><pft>if v2000<>'OK' then 'Now' fi</pft></flow>
+              
+            
+            <!-- Linea origianal, considierando que el dni del lector está precedido por el tipo de documento -->
+            <field action="add" tag="3002"><pft>f(l(['lector']v3001^b),1,0)</pft></field> 
+           
+            
+            
+            <!--field action="add" tag="3002"><pft>f(l(['lector']replace(replace(v3001^b,'DNI',''),'LC','')),1,0)</pft></field--> <!-- Busca el lector y regresa su MFN -->        
+                
+            <call name="bloqueo"><pft>if val(v3002)=0 then '^bexist^u',v2002^i,'^r',mfn,'^fUnlock' fi</pft></call>
+            <display><htmlpft><pft>
+                    if val(v3002)=0 then 
+                        proc('a9001#No se encontró el registro de Lector cuyo documento es: ',v3001^b,'#')
+                        proc('a9002#El registro del préstamo no corresponde a ningún usuario#')
+                        cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') fi</pft></htmlpft></display>
+            <flow action="exit"><pft>if val(v3002)=0 then 'Now' fi</pft></flow> <!-- Si no se encuentra el reg. del lector, aborta -->
+            
+            <field action="add" tag="3003"><pft>mfn</pft></field> <!-- mfn reg. bibliográfico -->
+      
+    		<do task=update>
+    		<parm name=db>lector</parm>
+    		<parm name=mfn><pft>v3002</pft></parm>
+    		<parm name=lockid><pft>v2002^i</pft></parm>
+    		<parm name=expire>60</parm>
+    		<field action=define tag=1102>Isis_Status</field>
+    		<field action=define tag=1011>Isis_Lock</field>
+    		<update>
+        			<field action="export" tag="list">1,2</field> <!-- exporta AyN y DNI del lector -->
+        			<write>Lock</write>
+        			<!-- Si el bloqueo tuvo exito continua sino aborta, desbloqueando previamente el reg. bibliográfico -->
+        			<flow action="jump"><pft>if val(v1102)<=0 then 'SEGUIR' fi</pft></flow>
+        			
+        			<display><htmlpft><pft>
+        			proc('a9001#No se pudo tomar el registro Lector#')
+        			proc('a9002#La operación de escritura no pudo finalizarse con éxito. Error: ',v1102,'#')
+        			cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') </pft></htmlpft></display>
+        			
+        			
+        			<field action="import" tag="list">2002,3003</field> <!-- importa operador y el mfn de exist -->
+        			<call name="bloqueo"><pft>'^bexist^u',v2002^i,'^r',v3003,'^fUnlock'</pft></call>
+        			<flow action="exit">Now</flow>
+        			
+        			<label>SEGUIR</label>          
+        			<!-- Si se pudo bloquear el registro, reemplaza el campo v8 de préstamos quitando la ocurrencia de la devolución -->
+        			
+        			<field action=cgi tag=1000>inventario</field>
+        			<field action="replace" tag="1000"><pft>replace(v1000,' ','')</pft></field>
+        			<field action=import tag=list>v2002</field>
+        			
+        			<!-- verifico reservas -->
+					<!-- si es un ejemplar de consulta ignoro este control -->
+					<flow action=jump><pft>if ref(['exist']l(['exist']v1000),v987)='CONS' then 'FIN_VERIFICO_RESERVAS' fi</pft></flow>
+						<call name=verificarReservas><pft>'^i',v1000,'^o',v2002^i</pft></call> <!-- ^i es el ID del operador -->
+						<field action=export tag=list>4050</field> <!-- Reserva Caida y Espera Nueva -->
+					<label>FIN_VERIFICO_RESERVAS</label>
+        			
+        			
+        			<field action="occ" tag="3004" from="8"><pft>(if s(mhu,v8^i)=s(mhu,v1000[1]) then f(iocc,1,0) fi)</pft></field> <!-- Crea v3004 con el detalle del préstamo -->
+        			
+        			<field action="export" tag="list">3004</field>
+        			<field action="delete" tag="list">3004</field>
+        			<field action="delete" tag="8"><pft>if nocc(v8)=1 and s(mhu,v8^i)=s(mhu,v1000) then 'All' fi</pft></field> <!-- Si es el único prestamo registrado lo borra -->
+        			<field action="replace" tag="8" split="occ"><pft>(if s(mhu,v8^i)<>s(mhu,v1000[1]) then mpl,v8/ fi)</pft></field> <!-- Quita el préstamo de la devolución -->
+        			
+        			<field action="delete" tag=list>1000,4050,5051</field>
+        			<write>Unlock</write>
+        			
+        			<flow action="skip"><pft>if val(v1102)<=0 then 'Next' fi</pft></flow>
+        			
+        			<display><htmlpft><pft>
+        			proc('a9001#No se pudo terminar de grabar el registro Lector#')
+        			proc('a9002#La operación de escritura no pudo finalizarse con éxito. Error: ',v1102,'#')
+        			cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') </pft></htmlpft></display>
+        			<field action="import" tag="list">2002,3003</field> <!-- importa operador y el mfn de exist -->
+        			<call name="bloqueo"><pft>'^bexist^u',v2002,'^r',v3003,'^fUnlock'</pft></call>
+        			<flow action="exit">Now</flow>
+    		</update>
+    		</do>
+		
+    		<do task=update>
+    		<parm name=db>exist</parm>
+    		<parm name=mfn><pft>mfn</pft></parm>
+    		<parm name=lockid><pft>v2002^i</pft></parm>
+    		<field action=define tag=1102>Isis_Status</field>
+    		<field action=define tag=1011>Isis_Lock</field>
+    		<update>
+    		  <field action=delete tag=985>ALL</field>
+    		  <field action=add tag=985>PERM</field>
+    		  <write>Unlock</write>
+    		</update>
+    		</do>
+ 
+    		<do task=update>
+    		<parm name=db>movi</parm>
+    		<parm name=mfn>New</parm>
+    		<parm name=fst><pft>cat('movi.fst')</pft></parm>
+    		<field action=define tag=1102>Isis_Status</field>
+    		<field action=define tag=1011>Isis_Lock</field>
+    		<update>
+        			<field action=import tag=list>1,2,3004,2002,4050</field> <!-- importa el AyN, DNI, los datos del préstamo (v8 de lector) y el operador -->
+        			<field action=add tag=3><pft>
+        			'^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^h',mid(date,10,6)</pft></field>
+        			<field action="add" tag="4"><pft>'^tdevolucion',v3004</pft></field>
+        			
+        			<do task=search>
+        			<parm name=db>opera</parm>
+        			<parm name=expression><pft>v2002^i</pft></parm>
+        			<parm name=count>1</parm>
+        			<loop>
+        				<field action=export tag=5>3</field>
+        			</loop>
+        			</do>
+        			
+        			<field action=add tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
+        			
+        			<field action=add tag=7 split=occ><pft>(v4050/)</pft></field>
+        			
+        			<field action="delete" tag="list">3004,2002,4050</field>
+        			<write>Unlock</write>
+        			
+        			<!-- lee aplicando gizmo de manera que el detalle de la devolución se visualice correctamente -->
+        			<do task=mfnrange>
+        			<parm name=db>movi</parm>
+        			<parm name=from><pft>mfn</pft></parm>
+        			<parm name=count>1</parm>
+        			<!--parm name="gizmo">oemansi</parm-->
+        			<loop>
+        			    <field action=add tag=3005><pft>mfn(1)</pft></field>
+        			    <field action=replace tag=1000 split=occ><pft>(if v7^*='EN=' then v7^e fi)</pft></field> <!-- pongo aca las reservas -->
+        				<display><htmlpft><pft>
+        						cat(getenv('PATH_TRANSLATED'),'devolucion_exitosa.html')
+        				</pft></htmlpft></display>              
+        			</loop>
+        			</do>
+    		</update>
+    		</do>
+    </loop>
+  </do>
+
+ <display><htmlpft><pft>
+    if val(v1103)=0 then mhl,
+        proc('a9001#Inventario Inexistente#'),
+            proc('a9002#No se logró hallar el inventario especificado#'),
+          cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') fi</pft></htmlpft></display>
+    
+</section>
+</IsisScript>

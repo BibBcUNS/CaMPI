@@ -1,0 +1,212 @@
+<!-- /* ====================================================================
+ * OPEN biblooPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://bibloopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mai: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, bibloos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<!-- Esta script crea todos los nuevos registros hijos que estén indicados en el campo (o subcampo) de existencias con el prefijo &,
+Por defecto el programa recorre toda la base, siendo opcionales los parámetros from, to y count para limitar su ejecución.
+Así mismo se puede indicar el parámetro path_config indicando el directorio donde se encuentra el archivo config.txt -->
+
+
+<IsisScript>
+  <section>
+    <trace>On</trace>
+
+		<field action="cgi" tag="1000">path_config</field>
+		<parm name="cipar"><pft>'config.txt=',v1000|\|,'config.txt</pft></parm>
+		
+		
+		<field action="add" tag="5000" split="occ"><pft>cat('config.txt')</pft></field> <!-- Coloca en v5000 todos los parámetros de configuración -->
+		
+		<!-- v5001 contiene el tag y el subcampo correspondiente al inventario de la base bibliográfica -->
+		<field action="add" tag="5001"><pft>
+			(if v5000.1<>'#' and v5000:'Campo Inventario=' then 
+				mid(v5000,size('Campo Inventario=')+1,
+				instr(v5000,';')-size('Campo Inventario=')-1) fi)</pft></field>
+
+    <parm name=cipar><pft>
+			'biblo.*=/var/www/html/omp/bases/biblo/exist/exist.*'/
+			'biblo.mst=/var/www/html/omp/bases/biblo/biblo.mst'/
+			'biblo.xrf=/var/www/html/omp/bases/biblo/biblo.xrf'/
+			'exist.*=/var/www/html/omp/bases/exist/exist.*'/
+			'CI_TEMPDIR=/var/www/html/omp/temp'/</pft></parm>
+
+		<do task="mfnrange">
+			<parm name="db">biblo</parm>
+			<parm name="count">3</parm>
+			<loop>
+				<field action="import" tag="list">5001</field> <!-- campo que contiene el nro. de inventario -->
+				
+				<!-- v2001 tiene todos los inventarios del registro bibliográfico -->
+				<field action="add" tag="2001" split="occ"><htmlpft><pft>'[pft](',v5001,'/)[/pft]'</pft></htmlpft></field>
+			
+        <!-- Salta al siguiente registro si en el actual no se han definido inventarios para crear o borrar -->
+        <flow action="skip"><pft>if not v2001.1:'&' and not v2001.1:'@' then 'Next' fi</pft></flow>
+
+				<list action="delete">Now</list>
+        <list action="load"><pft>(v2001/)</pft></list> <!-- carga la lista con todos los nro. de inventarios -->
+
+		    <do task=update>
+		      <parm name=db>biblo</parm>
+		      <parm name=mfn><pft>mfn</pft></parm> <!-- mfn del reg. madre -->
+		      <parm name=lockid>Admin</parm>
+		      <parm name=expire>30</parm>
+		      <field action=define tag=1102>Isis_Status</field>
+		      <field action=define tag=1011>Isis_Lock</field>
+		        <update>
+		          <write>Lock</write>
+							<field action="export" tag="list">1102</field>
+		        </update>
+		    </do>
+		
+		    <display><pft>if val(v1102) > 0 then 'ERROR !, no se pudo BLOQUEAR el registro MADRE'/ fi</pft></display>
+		    <flow action="exit"><pft>if val(v1102) > 0 then 'Now' fi</pft></flow>
+		    
+		    <do task=list>
+		      <field action=define tag=1001>Isis_Item</field>
+		      <field action=define tag=1002>Isis_Current</field>
+		      <loop>
+						<field action="import" tag="list">5001</field> <!-- campo del inventario -->				
+		        <flow action="jump"><pft>
+						  if s(v1001.1)='&' then 
+							  'Crear registro' 
+							else 
+							  if s(v1001.1)='@' then 
+								  'Borrar registro'
+							  else 
+								  'Leer siguiente'
+								fi
+							fi
+						</pft></flow>
+						
+						<label>Crear registro</label>
+		
+		        <do task=update>
+		          <parm name=db>exist</parm>
+							<parm name="fst"><pft>cat('exist.fst')</pft></parm>
+		          <parm name=mfn>New</parm>
+		          <field action=define tag=1102>Isis_Status</field>
+		            <update>
+		              <field action="import" tag="list">1001</field> <!-- Isis_Item -->
+		              <field action="add" tag="977"><pft>v1001*1</pft></field> <!-- Inventario del reg. hijo, ignorando el prefijo ! -->
+		              <field action="add" tag="985">PERM</field> <!-- Disponibilidad -->
+		              <field action="delete" tag="list">1001</field>
+		              <write>Unlock</write>
+		              <display><pft>
+		                if val(v1102)>0 then 
+		                  'ERROR: !, no se logró grabar el reg. hijo ',v977/
+										fi</pft></display>
+									<field action="export" tag="list">1102</field>
+		            </update>
+		        </do>
+						<flow action="jump">Leer siguiente</flow>
+						
+						<label>Borrar registro</label>
+
+						<field action="add" tag="6001"><pft>f(l(['exist']v1001*1),1,0)</pft></field> <!-- v6001 mfn del registro exist a borrar -->
+						<display><pft>if val(v6001)=0 then 'Inventario ',v1001*1,' inexistente!'/ fi</pft></display>
+						<flow action="exit"><pft>if val(v6001)=0 then 'Now' fi</pft></flow>
+						
+		        <do task=update>
+		          <parm name=db>exist</parm>
+							<parm name="fst"><pft>cat('exist.fst')</pft></parm>
+		          <parm name=mfn><pft>v6001</pft></parm>
+				      <field action=define tag=1102>Isis_Status</field>
+				      <field action=define tag=1011>Isis_Lock</field>
+							<parm name="lockid">Admin</parm>
+		            <update>
+		              <write>Delete</write>
+		              <display><pft>
+		                if val(v1102)>0 then 
+		                  'ERROR: !, no se logró borrar el reg. hijo ',v977/
+										fi</pft></display>
+									<field action="export" tag="list">1102</field>
+		            </update>
+		        </do>
+
+						<label>Leer siguiente</label>
+
+            <flow action="exit"><pft>if val(v1102)>0 then 'Now' fi</pft></flow>
+		      </loop>
+		    </do>
+		
+		    <do task=update>
+		      <parm name=db>biblo</parm>
+		      <parm name=mfn><pft>mfn</pft></parm> <!-- mfn del reg. madre -->
+		      <parm name=lockid>Admin</parm>
+					<parm name="fst"><pft>'1 0 (',v5001,'/)'</pft></parm>
+		      <field action=define tag=1102>Isis_Status</field>
+		      <field action=define tag=1011>Isis_Lock</field>
+		      <update>
+						<field action="import" tag="list">5001</field> <!-- campo del inventario -->
+		
+						<field action="replace" tag="6004"><pft>if v5001:'^' then mid(v5001,1,instr(v5001,'^')-1) else v5001 fi</pft></field> <!-- v6004 contiene el tag del campo inventario (sin el indicador de subcampo ^ si lo tuviera) -->
+						<field action="replace" tag="6004"><pft>v6004*1</pft></field> <!-- le quita el indicador v dejando únicamente el valor del tag -->
+						<field action="add" tag="6005" split="occ"><htmlpft><pft>'[pft](if p(v',v6004,') then if p(',v5001,') then ',v5001,'/ else /# fi fi)[/pft]'</pft></htmlpft></field> <!-- los nros. de inventarios (con el prefijo &/@ si los tuviera) o ocurrencia vacía si no los tuviera -->
+						<field action="add" tag="6006" split="occ"><htmlpft><pft>'[pft](v',v6004,'/)[/pft]'</pft></htmlpft></field> <!-- todos las ocurrencias del campo que contiene el nro. de inventario, con todos los subcampos -->
+		
+						<field action="add" tag="6007" split="occ"><pft>
+						
+							(if v6005:'&' then 
+								 replace(v6006,v6005,v6005*1) 
+							 else 
+							   if not v6005:'@' then 
+								   v6006 
+								 fi
+							 fi/)</pft></field> <!-- deja en v6007 todo el campo de existencias, quitandole el prefijo & a los inventarios nuevos y respetando el resto de la información del campo -->
+						
+						<display><pft>proc('d',v6004),(if p(v6007) then proc('a',v6004[1],'`',v6007|`|) fi/)</pft></display> <!-- genera nuevamente el campo de existencias -->
+						<field action="delete" tag="list">6004,6005,6006,6007,5001</field>
+						
+		        <write>Unlock</write>
+		        <display><pft>
+		          if val(v1102)>0 then
+		            'ERROR: !, no se logró grabar el reg. ',mfn/
+							fi</pft></display>
+		      </update>
+		    </do>
+
+ 			</loop>
+		</do>
+    <display><pft>'Proceso finalizado !</pft></display>
+
+</section>
+</IsisScript>

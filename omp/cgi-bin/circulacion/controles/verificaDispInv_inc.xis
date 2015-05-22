@@ -1,0 +1,56 @@
+<!-- Verifica que los invs. están disponibles para préstamo (v985='PERM'), siempre que no sea un inv. de un ejemplar que se devuelve (renovación).
+Se asume que los invs. existen y estan en la base de existencia (validaInventarios_inc.xis).
+-->
+
+<!--
+v4000: lista de inventarios no disponibles
+v4020: lista de inventarios no devueltos por el lector
+v4030: lista de inventarios no devueltos por el lector y que desea renovar.
+v4040: lista de inventarios no disponibles para préstamos
+ -->
+
+<flow action="jump"><pft>if v5000:'Error' then 'FinVerificaDispInv' fi</pft></flow>
+
+<field action="delete" tag="4000">borrar</field>
+<field action="replace" tag="4010"><pft>'~',(v3003^y,'~')</pft></field>
+<field action="replace" tag="4020"><pft>'~',(v120^y,'~')</pft></field>
+<field action="delete" tag="4030">borrar</field>
+<field action="delete" tag="4040">borrar</field>
+<field action="delete" tag="4050">borrar</field>
+<list action=load previous="delete"><pft>(v3002/)</pft></list>
+
+<do task=list>
+   <field action="define" tag=1001>Isis_Item</field>
+   <loop>
+      <field action="import" tag="3004">3004</field>
+      <field action="import" tag="4000">4000</field>
+      <field action="import" tag="4010">4010</field>
+      <field action="import" tag="4020">4020</field>
+      <field action="import" tag="4030">4030</field>
+      <field action="import" tag="4040">4040</field>
+      <field action="import" tag="4050">4050</field>
+      <field action="replace" tag="4001"><pft>ref(['exist']l(['exist']v1001),s(mpu,v985))</pft></field>
+      <field action="add" tag="4000"><pft>if v4001<>'PERM' and (not v4010:v1001) then v1001 fi</pft></field>
+      <field action="add" tag="4030"><pft>if v4020:v1001 then v1001 fi</pft></field>
+      <field action="add" tag="4040"><pft>if v4001<>'PERM' and v4001<>'PRES' then v1001 fi</pft></field>
+      <field action="add" tag="4050"><pft>if (not v4020:v1001) and v4001='PRES' then v1001,' PRESTADO: ',ref(['exist']l(['exist']v1001),v998[last]^a,'(',v998[last]^b,') desde ',v998[last]^c,' hasta ',v998[last]^d) fi</pft></field>
+      <field action="export" tag="4000">4000</field>
+      <field action="export" tag="4030">4030</field>
+      <field action="export" tag="4040">4040</field>
+      <field action="export" tag="4050">4050</field>
+   </loop>
+</do>
+
+<field action="replace" tag="5000"><pft>
+      if v4000='' then
+         mhl,'ok'
+      else
+         mhl,'Error: Inventario/s no disponible/s: ',(v4000+|,|),'.<ul>',
+         if p(v4030) then '<li>No marcó la devolución: ',(v4030+|,|),'</li>' fi,
+         if p(v4040) then '<li>No disponible/s para préstamos a domicilio: ',(v4040+|,|),'</li>' fi,
+         if p(v4050) then '<li>Ejemplar/es prestado/s: <br>',(v4050+|,|,'<br>'),'</li>' fi,
+		 '</ul>'
+      fi
+</pft></field>
+
+<label>FinVerificaDispInv</label>

@@ -1,0 +1,497 @@
+<!-- ====================================================================
+ * OPEN MarcoPolo: Sistema de Gestión Bibliotecaria
+ * Copyright (c) UNER - http://marcopolo.uner.edu.ar
+ *
+ * Esta librería es software libre; usted puede redistribuirlo y\o
+ * modificarlo según los términos GNU Lesser Gereral Public Licence
+ * publicado por la Free Software Foundation; la versión 2 de la
+ * Licencia, (o en su opinión) cualquier versión posterior.
+ *
+ * Esta librería es distribuida con la esperanza que esto será de
+ * uso completo, pero SIN GARANTÍA ALGUNA; sin la garantía
+ * implícita de valor comercial o salud para un objetivo particular.
+ *
+ * Para más detalles, vea lo que especifica la licencia
+ * GNU Lesser General Public Licence.
+ * (http://www.gnu.org/copyleft/lesser.html) 
+ *
+ * Puede recibir una copia de GNU Lesser General 
+ * Public Licence escribiendo a 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+ * Ma 02111-1307 USA.
+ * 
+ * Desarrolladores:
+ *
+ * Bib. Deharbe, Hipólito
+ * e-mail: deharbe@schoenstatt.org.ar; deharbe@fcedu.uner.edu.ar
+ * Facultad de Ciencias de la Educación
+ * Rivadavia 106
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222033 Int. 25
+ * Web: http://biblio.fcedu.uner.edu.ar
+ *
+ * Lopez, Marcos G.
+ * e-mail: mlopez@fceco.uner.edu.ar
+ * Facultad de Ciencias Económicas - UNER
+ * Urquiza 552
+ * (3100) - Paraná
+ * Entre Ríos
+ * Tel: +54 343 4222172 Int. 22
+ * Web: http://www.fceco.uner.edu.ar
+ */ -->
+
+<IsisScript>
+<section>
+
+  <display><pft>'Content-type: text/html'/#</pft></display>
+<trace>BR1</trace>
+
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+	<field action=cgi tag=100>opcion</field>
+    <field action=cgi tag=101>orden</field>
+<!--  <field action=cgi tag=110>operador</field> -->
+
+
+<display>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Módulo de Administración </title>
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
+</head>	
+	  <body><center>
+    <div id="head"> 
+		<div id="title">Módulo de Administración - Credenciales</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div>     <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+								<div class="top"></div>
+								<div class="content">
+<!--#####################################-->
+</display>
+
+<!-- Validación del operador. 
+Esta validación ya no se utiliza, la seguridad se la da el servidor web 
+
+El campo v2000 valdrá ok si el usuario está correctamente validado 
+
+  <field action=add tag=2000><pft>
+    s('^i',mid(s(mpu,v110),1,instr(v110,'-')-1),
+    mhl,'^p',mid(s(mpu,v110),instr(v110,'-')+1,size(v110)))
+  </pft></field>
+
+  <display><pft>if a(v2000^i) or a(v2000^p) then 
+    '<p align="center"><big>Operador mal indicado</big></p>' fi</pft></display>
+  <flow action=exit><pft>if a(v2000^i) or a(v2000^p) then '1' fi</pft></flow>
+
+
+  <do task=search>
+    <parm name=db>opera</parm>
+    <parm name=expression><pft>v2000^i</pft></parm>
+    <parm name=count>1</parm>
+    <loop>
+      <field action=import tag=2000>2000</field>
+        <field action=replace tag=2000>
+        <pft>if s(mpu,v1)=s(mpu,v2000^i) and s(mpu,v2)=s(mpu,v2000^p) then mhl,'ok' fi</pft>
+      </field>
+      <field action=export previous=delete tag=2000>2000</field>
+    </loop>
+  </do>
+  <display><pft>if v2000<>'ok' then 
+    '<p align="center"><big>Operador mal indicado</big></p>' fi</pft></display>
+  <flow action=exit><pft>if v2000<>'ok' then '1' fi</pft></flow>
+
+-->
+
+  <flow action=jump><pft>v100</pft></flow>
+  <flow action=exit>1</flow>
+
+  <label>morosos</label>
+
+  
+  <do task=mfnrange>
+    <parm name=db>lector</parm>
+  
+    <loop>
+				
+  <list action=load><pft>
+    	if p(v8) then 
+       		(if val(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < val(s(date).8) then
+      	 		'^a',v1[1],mpl,v8,|^z|v12[1],'^x',mfn/ 
+			else 
+				if p(v8^o) then 
+					if val(replace(mid(v8^o,instr(v8^o,':')-2,5),':','')) < val(replace(mid(date(datetime),10,6),':','')) then
+						'^a',v1[1],mpl,v8,|^z|v12[1],'^x',mfn/ 
+					fi, 
+				fi,
+			fi,
+			),
+	 	fi
+      </pft></list>
+		</loop>
+	</do>
+	
+	<field action="add" tag="2100">Null</field>
+   <do task=list>
+     <field action=define tag=1100>Isis_Item</field>
+     <field action=define tag=1101>Isis_Current</field>
+     <field action=define tag=1102>Isis_Total</field>
+	 <parm name="sort"><pft>v1100^a</pft></parm>
+
+    <field action=cgi tag=5000>diad</field>
+	<field action=cgi tag=5001>mesd</field>
+	<field action=cgi tag=5002>anod</field>
+	<field action=cgi tag=5003>diaf</field>
+	<field action=cgi tag=5004>mesf</field>
+	<field action=cgi tag=5005>anof</field>
+	
+	<display><pft>'<h4><center><b>Préstamos Morosos desde el ',v5000,'/',v5001,'/',v5002, ' hasta el ',v5003,'/',v5004,'/',v5005,'<b></center></h4>'</pft></display>
+	 <loop>
+	 		<field action="import" tag="5000">5000</field>
+			<field action="import" tag="5001">5001</field>
+			<field action="import" tag="5002">5002</field>
+			<field action="import" tag="5003">5003</field>
+			<field action="import" tag="5004">5004</field>
+			<field action="import" tag="5005">5005</field>
+			
+			<field action="replace" tag="6000"><pft>v5002,v5001,v5001</pft></field>
+			<field action="replace" tag="6002"><pft>v5005,v5004,v5003</pft></field>
+			<field action="replace" tag="6001"><pft>v1100^v*6.4,v1100^v*3.2,v1100^v*0.2</pft></field>
+			
+			<field action="import" tag="list">2100</field>
+       			
+				
+				<display><pft>
+					
+					
+					
+					if (v6001 >= v6000) and (v6001 <= v6002)
+						then
+							'<table class=tabla_admin  border=1  cellpadding="2" cellspacing="0">'/
+								'<tr>'/
+									'<td width="24%">',mhl,v1100^a,'</b></td>'/
+									'<td width="15%">',v1100^i,'</td>'/
+									'<td width="38%">',v1100^b,'</td>'/
+									'<td width="13%">',v1100^p,'</td>'/
+									'<td width="15%">',v1100^v,'</td>'/
+								'</tr>',
+							'</table>'/
+					fi				
+				<!--
+					if (v6001 = '')
+						then
+							'<table class=tabla_admin  border=1 bgcolor="#CCCCCC"  cellpadding="2" cellspacing="0">'/
+								'<tr><td colspan=5>OJO REVISAR - NO TIENEN FECHA DE DEVOLUCION</td></tr>'
+								'<tr>'/
+									'<td width="24%">',mhl,v1100^a,'</b></td>'/
+									'<td width="15%">',v1100^i,'</td>'/
+									'<td width="38%">',v1100^b,'</td>'/
+									'<td width="13%">',v1100^p,'</td>'/
+									'<td width="15%">',v1100^v,'</td>'/
+								'</tr>',
+							'</table>'/
+					fi				
+					-->
+					
+			 	</pft></display>
+			<field action="replace" tag="2100"><pft>v1100^a</pft></field>
+			<field action="export" tag="list">2100</field>
+		</loop>
+   </do> 
+	<display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.php">Volver al Menú</a></p>'</pft></display>
+
+
+  <flow action=exit>1</flow>
+
+  <label>prestamos</label>
+  <!-- Muestra todos los préstamos del día -->
+  <!-- No hace referencia a un turno específico (VESPERTINO/MATUTINO) -->
+  
+
+  <display><pft>
+    '<p align="center"><big>Circulación de préstamos del día</big><br>',
+     if val(mid(date,10,6)) > 130000  then '-Por la tarde-' else '-Por la mañana' fi,'</p>'</pft></display>
+
+  <do task=search>
+    <parm name=db>movi</parm>
+
+    <parm name=expression>
+      <pft>'FECHA=',s(date).4,'/',s(date)*4.2,'/',s(date)*6.2,' * OPERACION=prestamo$'</pft></parm>
+    <parm name=gizmo>gizmo</parm>
+    <loop>
+      <list action=load>
+         <pft>(if v4^t='prestamo' then '^n',v1[1],'^d',v2[1],'^o',mfn,mpl,v4/,fi)</pft></list>
+    </loop>
+  </do>
+
+
+  <do task=list>
+    <parm name="count">1</parm>
+    <field action=define tag=1001>Isis_Item</field>
+    <field action=define tag=1102>Isis_Total</field>
+    <loop>
+    </loop>
+  </do>
+  <display><pft>'<font face="Draft 10cpi"><p><b>Total de préstamos: ',v1102,'</b></p>'
+    if val(v1102)>0 then '<table table class=tabla_admin  cellpadding="2" cellspacing="0">' fi</pft></display>
+
+  <do task=list>
+    <field action=define tag=1001>Isis_Item</field>
+    <field action=define tag=1102>Isis_Current</field>
+    <field action=define tag=1102>Isis_Total</field>
+    <parm name=sort><pft>v1001^n</pft></parm>
+    <loop>
+      <field action=import tag=list>1000</field>
+      <display><pft>if val(v1000)<>val(v1001^d) then 
+        '<tr>
+           <td width="80%" colspan="3" bgcolor="#F9C99A">Lector: <b>',mhl,v1001^n,'</b>
+           , Operación: ',v1001^o,'</td>
+         </tr>' fi</pft></display>
+      <display><pft>
+         '<tr>
+            <td width="10%" align="center">',v1001^i,'</td>
+            <td width="70%">',v1001^b,'</td>
+            <td width="20%">Vto. <b>',v1001^v,'</b></td>
+          </tr>'</pft></display>
+      <field action=replace tag=1000>
+        <pft>if val(v1000)<>val(v1001^d) then v1001^d fi</pft></field>
+      <field action=export previous=delete tag=list>1000</field>
+    </loop>
+  </do> 
+  <display></table></display>
+  <display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.php">Volver al Menú</a></p>'</pft></display>
+  <flow action=exit>1</flow>
+
+  <label>id_recibos</label>
+
+  <display><pft>'<p align="center"><big>Listado de Devoluciones del día</big><br>',
+     if val(mid(date,10,6)) > 130000  then '-Por la Tarde-' else '-Por la mañana-' fi,'</p>'</pft></display>
+
+  <do task=search>
+    <parm name=db>movi</parm>
+    <parm name=expression>
+      <pft>'Operacion=devolucion$ * Fecha=',s(date).4,'/',s(date)*4.2,'/',s(date)*6.2,
+         if val(mid(date,10,6)) > 130000  then ' * Turno=VESPERTINO' else ' * Turno=MATUTINO' fi
+      </pft></parm>
+    <loop>
+      <list action=load><pft>
+        (if v4^t='devolucion' then '^a',v2[1],'^b',v4^i,'^c',v4^v,'^d',mfn/fi)</pft></list>
+    </loop>
+  </do>
+
+  <do task=list>
+    <field action=define tag=1001>Isis_Item</field>
+    <field action=define tag=1102>Isis_Total</field>
+    <loop>
+      <do task=search>
+        <parm name=db>movi</parm>
+	<parm name=gizmo>gizmo</parm>
+        <parm name=expression>
+	<pft>'DNI=',v1001^a,' * Operacion=prestamo$ * Inventario=',v1001^b,' * Vencimiento=',v1001^c,</pft></parm>
+        <loop>
+          <field action=import tag=list>1001</field>
+
+	  <field action="cgi" tag="3000">Orden</field>
+	  <!-- Isis_Item: ^mMFN prestamo ^iInventario ^dMFN devolución ^oOrden "Prestamo" o "Devolucion" -->
+
+          <list action=load><pft>
+	  (if v4^t='prestamo' and v4^i=v1001^b[1] and v4^v=v1001^c[1] then '^m',mfn,'^f',v4^v,'^i',v1001^b[1],'^d',v1001^d[1],'^o',v3000[1]/ fi)</pft></list>
+          <!--list action=load><pft>('^m',mfn,'^i',v1001^b,/)</pft></list-->					
+        </loop>
+      </do>
+    </loop>
+  </do>
+
+  <do task="list">
+	<parm name="count">1</parm>
+	<field action=define tag=1001>Isis_Item</field>		
+	<field action=define tag=1102>Isis_Total</field>		
+		<loop>
+		</loop>
+  </do>
+
+
+  <display><pft>'<font face="Draft 10cpi"><p><b>Total de devoluciones: ',f(val(v1102)/2,1,0),'</b></p>'
+     if val(v1102)>0 then 
+      '<table border="0" width="90%" bgcolor="#FAEFDD"> 
+       <tr>
+         <td width="20%" align="center" bgcolor="#F9C99A"><b>Operación del préstamo</b></td>
+         <td width="10%" align="center" bgcolor="#F9C99A"><b>Inventario</b></td>
+         <td width="70%" align="center" bgcolor="#F9C99A"><b>Lector</b></td>
+       </tr>',fi</pft></display>
+
+  <field action="cgi" tag="3000">Orden</field>
+	   
+  <do task=list>
+    <field action=define tag=1001>Isis_Item</field>
+
+    <parm name="sort"><pft>if v1001^o='Prestamo' then v1001^m else v1001^d fi</pft></parm>
+    <!--parm name="reverse"><pft>if v3000='Devolucion' then 'On' fi</pft></parm-->
+
+	<loop>
+	      <flow action=skip><pft>if a(v1001^m) then 'Next' fi</pft></flow>
+	      <do task=mfnrange>
+	        <parm name=db>movi</parm>
+	        <parm name=from><pft>v1001^m</pft></parm>
+	        <parm name=count>1</parm>
+		<parm name="gizmo">txt_htm</parm>
+		   <loop>
+		       <field action=import tag=list>1001</field>
+		       <display><pft>
+		            '<tr>
+		              <td align="center" >',f(mfn,1,0),'</td>
+		              <td align="center" >',v1001^i,'</td>
+		              <td>',v1,' (',v2,' - Vto: ',v1001^f,' )</td>
+		            </tr>'</pft></display>
+		    </loop>
+	      </do>
+	</loop>
+  </do>
+  <display><pft>'</table><p><a href="',getenv('PATH_INFO'),'menu.php">Volver al Menú</a></p>'</pft></display>
+  <flow action=exit>1</flow>	
+
+  <label>circulante</label>
+
+ <display><font face="Draft 10cpi"><h2 align="center"> Préstamos en Circulación</h2></font></display>
+		
+  <do task="mfnrange">
+    <parm name="db">exist</parm>
+    <parm name=gizmo>gizmo</parm>
+    <loop>
+   <field action=import tag=101>101</field>
+  <flow action="skip"><pft>if s(mhu,v985)<>'PRES' then mhl,'Next' fi</pft></flow>
+ 			<!-- v1000 contiene el detalle del material prestado (autor y titulo) -->
+
+
+			<field action="add" tag="5000" previous="delete"><pft>f(l(['marc']v977),1,0)</pft></field>
+
+						<do task="mfnrange">
+							<parm name="db">marc</parm>
+							<parm name="from"><pft>v5000</pft></parm>
+							
+							<parm name=count>1</parm>
+							<loop>
+								<field action="add" tag="5001"><pft>@papeleta.pft</pft></field> <!-- Obtiene los datos utilizados en la papeleta -->
+								<field action="replace" tag="5001"><pft>v5001^b</pft></field> <!-- Deja únicamente el autor y título -->
+								<field action="export" tag="list">5001</field>
+							</loop>
+						</do>
+
+			<field action="add" tag="1000"><pft>v977</pft></field>
+			<field action="add" tag="1001"><pft>v5001</pft></field>
+
+			<!-- Se busca el registro del lector -->
+
+			<do task="search">
+				<parm name="db">lector</parm>
+				<parm name=gizmo>gizmo</parm>
+				<parm name="count">1</parm>
+				<parm name="expression"><pft>v998^b[LAST]</pft></parm>
+				<loop>
+					<field action="import" tag="list">977</field>
+					<field action="add" tag="1000"><pft>'0',
+						(if val(v8^i) = val(v977[1]) then '1' fi)</pft></field>
+
+
+						<field action="add" tag="1002"><pft>if val(v1000)>0 then v1,' - ',v2  fi</pft></field>
+
+					<field action="export" tag="list">1002</field> <!-- v1002 contiene el Nombre y DNI del lector -->
+					<field action="export" tag="list">8</field>
+				</loop>
+			</do>
+		
+			<do task="search">
+				<parm name="db">movi</parm>
+				<parm name="expression"><pft>
+					'operacion=prestamo$ * dni=',v998^b[last],' * inventario=',v977,
+					' * fecha=',mid(v998^c[last],7,4),'/',mid(v998^c[last],4,2),'/',mid(v998^c[last],1,2),
+					</pft></parm>
+				<loop>
+					<field action="add" tag="1004"><pft>mfn</pft></field>
+					<field action="export" tag="list">1004</field>
+				</loop>
+			</do>
+
+			<list action="load" type="sort"><pft>
+			if v101:'mfn' then '^z',v1004,'^a',v1000,'^b',v1001,'^c',v1002/ fi
+			if v101:'inv' then  '^a',v1000,'^b',v1001,'^c',v1002,'^z',v1004/ fi
+			if v101:'nom' then '^c',v1002,'^z',v1004,'^a',v1000,'^b',v1001/ fi
+			</pft></list>
+		</loop>
+	</do>
+
+
+	<do task="list">
+	<field action="define" tag="1000">Isis_Item</field>
+	<field action="define" tag="1001">Isis_Total</field>
+	<parm name="count">1</parm>
+		<loop>
+			<display><pft>'<div style="width:100%"><div align="left" style="font-size:18px;margin-left:20;width:50%;float:left;">Cantidad de material circulante: ',v1001,'</div><div align="right" style="font-size:12px;margin-right:20;width:35%;float:right;">		
+			<a href="/omp/listado.csv" ><img src="/omp/images/icono_csv.jpg" border="0" title="Bajar archivo CSV" alt="CSV"/> </a></div></div>'</pft></display>
+		</loop>
+	</do>
+<!--###################### Genera archivo csv #########################--> 
+
+  <do task="list">
+	<field action="define" tag="1000">Isis_Item</field>
+	<field action="define" tag="1001">Isis_Current</field>
+	  <file action=create type=output>../../omp/htdocs/listado.csv</file>
+	  <loop>
+	     <display><pft>if val(v1001)=1 then 'Movimiento,Inventario,Material,Lector', fi /</pft></display>
+		 <field action="replace" tag="1000"><pft>replace(v1000,',',' ')</pft></field>
+		 <display><pft>v1000^z,',',v1000^a,',',v1000^b,',',v1000^c,/ </pft></display>	
+	  </loop>
+	<file action=close type=output>../../omp/htdocs/listado.csv</file>	
+	</do>
+<!--######################listado por pantalla #########################--> 
+	<display>
+      <table border="1" width="90%"> 
+       <tr bgcolor="#BEE4FF">
+         <td width="10%" align="center" ><b>Movimiento</b></td>
+	     <td width="10%" align="center" ><b>Inventario</b></td>
+         <td width="40%" align="center" ><b>Material</b></td>
+         <td width="40%" align="center" ><b>Lector</b></td>
+       </tr></display>
+	   
+	<do task="list">
+	<field action="define" tag="1000">Isis_Item</field>
+		<loop>
+			<display><pft>'<tr bgcolor="#F0FFFF"><td align="center">',
+			v1000^z,
+			'</td>','<td align="center">',
+			v1000^a,
+			'</td>','<td>',
+			v1000^b,
+			'</td>','<td>',
+			v1000^c,
+			'</td></tr>'</pft></display>	
+		</loop>
+	</do>
+
+  <display></table> </display>	
+  
+  <display><pft>'<p><a href="',getenv('PATH_INFO'),'menu.php">Volver al Menú</a></p>'</pft></display>
+
+<display>
+<!--###############################################-->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer">
+</div>
+      </div>
+      <div class="clearer">
+	  </div>
+    </div>
+    <div id="end_body"></div>
+       <div id="footer"></div></center>
+  </body>
+  </html>
+</display>
+</section>
+</IsisScript>
+
+

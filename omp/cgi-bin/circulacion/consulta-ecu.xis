@@ -1,0 +1,147 @@
+<IsisScript>
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  
+  <field action=cgi tag=100>criterio</field>
+  <field action=cgi tag=110>expresion</field>
+  <field action=cgi tag=111>tipo</field>
+  <field action=cgi tag=112>campo</field>
+  <field action=cgi tag=120>usuario_id</field>
+  <field action=cgi tag=130>operario_id</field>
+ 
+  <display><htmlpft>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Circulacion</title>
+    <link REL="stylesheet" TYPE="text/css" HREF="/omp/css/style.css" >	
+		<SCRIPT LANGUAGE="JavaScript">
+	<!--
+
+	function asignar(documento) {
+		/*Cambio realizado en la sintaxis de la función para compatibilidad FF y IE -PLL-04/05/09 */
+		
+		
+		
+        window.parent.indice.document.form_id.lector.value = "";
+        window.parent.indice.document.form_id.lector.value = documento;
+        window.parent.indice.document.consultas.expresion.value = "";
+        window.parent.indice.document.consultas.expresion.value = documento;		
+	}
+
+	function ventana_reserva(mfn) {					
+					location.href = "/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/reserva_form.xis&mfn="+mfn+"&usuario_id="+usuario_id+"&operario_id="+operario_id;
+					/* Así se hace en una ventana nueva:
+						var ventana = window.open("","","width=600,height=450,top=10,left=15,resizable=yes,scrollbars=yes;location=yes");
+						ventana.location.href = "/cgi-bin/wxis.exe/circulacion/?IsisScript=circulacion/reserva_form.xis&mfn="+mfn;
+					*/
+	}
+	function ventana_estado(nc) {
+		location.href = "/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/consulta.xis&expresion="+nc+"&criterio=nc";
+	}
+	
+	usuario_id="[pft]v120[/pft]";
+	operario_id="[pft]v130[/pft]";
+	
+	//  End -->
+	</SCRIPT>
+
+  </head>
+<body bgcolor="d7e7e9">
+    <div id="head"> 
+		<img src=http://bc.uns.edu.ar/imagenes/titulo2.jpg>
+    </div> 
+	<br><br>
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div CLASS="top"></div>
+								<div CLASS="content">
+   
+<!--#########################################-->		    </htmlpft></display> 
+
+
+ 
+  <flow action=jump><pft>if p(v110) or v100='prestamos' then v100 else 'SALIDA' fi</pft></flow>
+
+	
+  <label>dni</label>
+
+  <do task=search>
+    <parm name=db>lector</parm>
+    <parm name=expression><pft>v110</pft></parm>
+    <parm name=count>1</parm>
+    <!--parm name=gizmo>gizmo</parm-->
+    <field action=define tag=1102>Isis_Total</field>
+    <loop>
+      <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'lector-ecu.html')</pft></htmlpft></display>
+    </loop>
+  </do>
+  <display><pft>if val(v1102)=0 then 
+   '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display>
+   <display>
+<br><br> 
+</display>
+<file action=close type=database>reservas</file>
+<do task=search>
+    <parm name=db>reservas</parm>
+    <parm name=expression><pft>v110</pft></parm>
+   
+    <!--parm name=gizmo>gizmo</parm-->
+    <field action=define tag=1102>Isis_Total</field>
+
+	<loop>
+		<field action=import tag=list>110</field>
+		<!-- <display><pft>'v110: ',v110</pft></display> -->
+      <!-- <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'lector-ecu.html')</pft></htmlpft></display> -->
+	  <display><pft> ref(['marc']l(['marc']'NC='v1^c),v245^a),'-',(if v2^i=v110[1] then '<font color=red size="+1"><b>Material Reservado</b></font>' fi),(if v3^i=v110[1] then '<font color=green size="+1"><b>El libro reservado por usted se encuentra en "Espera" para retirar "Hoy" por ventanilla.</b></font>' fi),'<br>' </pft></display>
+    </loop>
+  </do>
+  <display><pft>if val(v1102)=0 then 
+   '<p>&nbsp;</p><center><h2>El usuario no registra libros en "Reserva" ni en "Espera" en ventanilla para retirar.</h2></center>' fi</pft></display>
+   <display>
+
+
+								</div>
+								<div CLASS="bottom"></div>
+						</div>
+        <div CLASS="clearer"></div>
+      </div>
+      <div CLASS="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer"></div>
+  </body>
+</html>
+</display>
+<flow action=exit>1</flow>
+
+<!----------------------------------------------------------------------------->	
+
+
+
+  
+  <label>SALIDA</label>
+
+  <display><p>&nbsp;</p>
+   <center><h2>No se ha indicado una expresión</h3></center></display>
+<display>
+<br><br> 
+								</div>
+								<div CLASS="bottom"></div>
+						</div>
+        <div CLASS="clearer"></div>
+      </div>
+      <div CLASS="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer"></div>
+  </body>
+</html>
+</display>   
+   
+  </section>
+</IsisScript>

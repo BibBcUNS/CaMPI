@@ -1,0 +1,52 @@
+<IsisScript>
+<section>
+	<display><pft>'Content-type: text/html'/#</pft></display>
+	<trace>!BR</trace>
+	<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+	<field action="cgi" tag="5000">TipoConsulta</field>
+
+	<flow action="jump"><pft>v5000</pft></flow> <!-- salta a VerUsuario o ListarUsuarios -->
+	
+	<label>ListarUsuarios</label>
+	<field action="cgi" tag="5001">Nombre</field>
+	<do task="keyrange">
+		<parm name="db">lector</parm>
+		<parm name="from"><pft>v5001,"A"n5001</pft></parm>
+		<parm name="count">10</parm>
+		<field action="define" tag="1001">Isis_Key</field>
+		<field action="define" tag="1002">Isis_Current</field>
+		<loop>
+			<do task="search">
+				<parm name="db">lector</parm>
+				<parm name="expression"><pft>v1001</pft></parm>
+				<parm name="gizmo"><pft>if val(v1002)=1 then 'oemansi' fi</pft></parm> <!-- aplica gizmo solo a la primer ocurrencia -->
+				<loop>
+					<field action="export" tag="3001">1</field>  <!-- lista de nombres -->
+					<field action="export" tag="3002">2</field>  <!-- lista de documentos -->					
+				</loop>
+			</do>
+			<field action="export" tag="list" previous="add">3001,3002</field>  <!-- lista de nombres / documentos -->
+		</loop>
+	</do>
+	
+	<!--display><pft>ALL</pft></display-->
+	<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_listausuario.htm')</pft></htmlpft></display>
+	<flow action="exit">Now</flow>
+	
+	<label>VerUsuario</label>
+	
+	<field action="cgi" tag="5002">TipoDoc</field>
+	<field action="cgi" tag="5003">NroDoc</field>
+	<do task="search">
+		<parm name="db">lector</parm>
+		<parm name="expression"><pft>s(v5002,v5003)</pft></parm>
+		<parm name="gizmo">oemansi</parm>
+		<field action="define" tag="1002">Isis_Total</field>
+		<loop>
+			<field action="export" tag="list">1,2,1002</field>			
+		</loop>
+	</do>
+	<display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'plantilla_muestrausuario.htm')</pft></htmlpft></display>			
+	
+</section>
+</IsisScript>

@@ -1,0 +1,18 @@
+!ID 2
+!v001!AUTO
+!v002!Institución
+!v003!test
+!v004!autocampi
+!v005!auto^p3
+!ID 1
+!v001!BIBLIO
+!v002!Institución
+!v003!test
+!v004!bibliocampi
+!v005!campi^p3
+!v005!demo^p3
+!v005!celtic^p3
+
+
+
+

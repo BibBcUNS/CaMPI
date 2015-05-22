@@ -1,0 +1,29 @@
+fonts((roman,Times New Roman),(swiss,Arial)),
+f1,m(2550,-2650),
+e1:=0,
+(if p(v8) and val(s(date(2))*6,s(date(2)).2,s(date(2))*3.2) > val(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) then e1:=e1+1 fi),
+if e1>=1 then 
+{box(13),qc,fs30,cl15,'M O R O S O',cl1/#}
+fi
+'Nombre (1)',{b,tab(2500),v1}/
+"Documento (2)",tab(2500),v2/
+"Categoria (3)",tab(2500),v3/
+"Legajo (4)",tab(2500),v4/
+"Matricula (5)",tab(2500),v5/
+"Domicilio (6)",tab(2500),v6/
+"Telefono (7)",tab(2500),v7/
+"Domicilio Origen (14)",tab(2500),v14/
+"Telefono Origen (15)",tab(2500),v15/
+"Email (12)",tab(2500),v12/
+'Prestamos (8)',if a(v8) then tab(2500),'No Registra'/ fi,
+(if p(v8) then 
+  if val(s(date(2))*6,s(date(2)).2,s(date(2))*3.2) > val(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) then cl13 else cl0 fi,
+  tab(2500),'Inv. ',v8^i|; |,{b,v8^b},'; desde: ',{b,v8^p},' hasta: ',{b,v8^v},| - Tem tica: |v8^c/,
+fi),cl0,
+'Reservas (9)',if a(v9) then tab(2500),'No Registra'/ fi,
+(if p(v9) then tab(2500),{i,v9^d},| Pedido el: |v9^f,|Tem tica: |v9^s/ fi)
+"Estado (10)",tab(2500),v10/
+"Fin Sancion (11)",tab(2500),v11/
+"Foto (13)",tab(2500),mpl,v13/
+"Vigencia Datos (16)",tab(2500),v16/
+if p(v17) then 'Observaciones (17)',(tab(2500),v17/) fi

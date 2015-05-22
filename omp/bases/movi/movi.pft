@@ -1,0 +1,7 @@
+f2,cl4,m(2159,-2159),mdl
+"Lector (1):",tab(2159),v1/
+"Documento (2):",tab(2159),v2/
+"Fecha/Hora (3):",tab(2159),v3/
+(if p(v4) then 'Operacion (4):',tab(2159),v4/fi)
+"Operario (5):",tab(2159),v5/
+"IP Terminal (6):",tab(2159),v6/
