@@ -823,7 +823,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                         <field action=add tag=4050><pft>"EC=",v1,'^i',v4000^i,'^f',v4000^f,'^h',v4000^h</pft></field>
                         <field action=export tag=4050 previous=add>4050</field>
                         <field action=delete tag=3><pft>v55</pft></field>
-                        <field action=delete tag=list>50,55,4000</field>
+                        <field action=delete tag=list>50,55,4000,4050</field>
                         <write>Unlock</write>
                     </update>
                     </do> <!-- update reservas -->
