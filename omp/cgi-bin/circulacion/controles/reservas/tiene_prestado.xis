@@ -51,7 +51,7 @@
 		<field action="import" tag="list">4010,5000</field>		
 		<field action="replace" tag="4000"><pft>(mpu,v4000)</pft></field>
 		<field action="add" tag="5000"><pft>
-			if (v4010:v4000) then
+			if (v4010=v4000) then
 				'Error: El usuario tiene un ejemplar del material en su poder [',v4000,']<br>'
 			fi
 		</pft></field>
