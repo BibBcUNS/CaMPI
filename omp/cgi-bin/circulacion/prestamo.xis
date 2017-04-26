@@ -46,6 +46,8 @@
 <include>circulacion/menor_inc.xis</include>
 <include>circulacion/verif_reservas_inc.xis</include>
 <include>fecha_funciones.xis</include>
+<include>circulacion/reserva_mail.xis</include>
+
 
 <function name=operador action=replace tag=1000>
         <!-- Esta función valida al operarrio. 
@@ -823,7 +825,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                         <field action=add tag=4050><pft>"EC=",v1,'^i',v4000^i,'^f',v4000^f,'^h',v4000^h</pft></field>
                         <field action=export tag=4050 previous=add>4050</field>
                         <field action=delete tag=3><pft>v55</pft></field>
-                        <field action=delete tag=list>50,55,4000,4050</field>
+                        <field action=delete tag=list>50,55,4000</field>
                         <write>Unlock</write>
                     </update>
                     </do> <!-- update reservas -->
@@ -1252,6 +1254,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
             
             <label>si_hay_reservas</label>
             
+				<call name=mail_reservas><pft>(if v7^*='EN=' then v7 fi)</pft></call> 
+								
                 <display><pft>
                     '<script>
                     	function mostrar_reservas() {',
@@ -1269,9 +1273,41 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 					'<script>function mostrar_reservas(){}</script>'
 				</pft></display>
                 
-        </loop>
+        </loop>		
         </do> <!-- mfnrange movi -->
-        
+		
+		<label>email_log</label>				
+			<do task=mfnrange>
+			<parm name=db>movi</parm>
+			<parm name=from><pft>v1100</pft></parm>
+			<parm name=count>1</parm>
+			<field action=define tag=1102>Isis_Status</field>
+			<field action=define tag=1103>Isis_From</field>
+			<loop>
+				<display><pft>
+                    '<script>
+					function grabar_movi_log() {
+							var xmlhttp = new XMLHttpRequest();
+							var formdata = new FormData();	
+							var campos_log = new String();
+
+							campos_log = "'v2,'~',(f(iocc,2,0)'- 'v4^i),'~',(f(iocc,2,0)'- 'v4^t),'~',v3^f,'~',v3^h,'~',(f(iocc,2,0)'- 'v4^p),'~',(f(iocc,2,0)'- 'v4^v),'~',v5^a,'~',v5^b'";
+							formdata.append("mfn","'v1103'");
+							formdata.append("campos_log",campos_log);
+							
+							xmlhttp.onreadystatechange = function() {
+								if (xmlhttp.readyState == 4 && xmlhttp.status != 200) {
+									alert("Adevertencia!! No se pudo guardar el log. Error: "+xmlhttp.responseText);
+								}
+							};
+							xmlhttp.open("POST","/omp/circulacion/sendmail.php",true);
+							xmlhttp.send(formdata);
+					}
+					</script>'
+                </pft></display>
+			</loop>
+		</do> <!-- mfnrange movi -->			
+						        
 </update>
 </do> <!-- update lector -->
 
@@ -1508,6 +1544,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		 '<body
 			onload="
 				mostrar_reservas();
+				grabar_movi_log();
 				this.focus();
 				window.parent.indice.document.form_id.lector.value = ',"'"n0,"'"n0,if v120<>'CANCELA' then ';' fi,
 				if ref(['config']1,v11)='si' then 'print();' fi,

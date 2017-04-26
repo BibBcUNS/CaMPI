@@ -47,6 +47,7 @@
 
 <include>circulacion/menor_inc.xis</include>
 <include>circulacion/verif_reservas_inc.xis</include>
+<include>circulacion/reserva_mail.xis</include>
 
 <function name=operador action=replace tag=1000>
 
@@ -297,6 +298,14 @@ Se exporta el campo v2000 con OK o código error -->
         			<field action="delete" tag="list">3004,2002,4050</field>
         			<write>Unlock</write>
         			
+					<!-- Si hay una reserva se envia un mail al usuario notificando el ingreso del material-->
+					<flow action=jump><pft>if not v7:'EN=' then 'FIN_MAIL_RESERVAS' fi</pft></flow>
+					<call name=mail_reservas><pft>(if v7^*='EN=' then v7 fi)</pft></call> 
+					
+					<label>FIN_MAIL_RESERVAS</label>
+								
+					
+					
         			<!-- lee aplicando gizmo de manera que el detalle de la devolución se visualice correctamente -->
         			<do task=mfnrange>
         			<parm name=db>movi</parm>
@@ -306,7 +315,27 @@ Se exporta el campo v2000 con OK o código error -->
         			<loop>
         			    <field action=add tag=3005><pft>mfn(1)</pft></field>
         			    <field action=replace tag=1000 split=occ><pft>(if v7^*='EN=' then v7^e fi)</pft></field> <!-- pongo aca las reservas -->
-        				<display><htmlpft><pft>
+						<display><htmlpft><pft>
+								'<script>
+									function grabar_movi_log() {
+									var xmlhttp = new XMLHttpRequest();
+									var formdata = new FormData();	
+									var campos_log = new String();
+
+									campos_log = "'v2,'~',(f(iocc,2,0)'- 'v4^i),'~',(f(iocc,2,0)'- 'v4^t),'~',v3^f,'~',v3^h,'~',(f(iocc,2,0)'- 'v4^p),'~',(f(iocc,2,0)'- 'v4^v),'~',v5^a,'~',v5^b'";
+									formdata.append("mfn","'mfn'");
+									formdata.append("campos_log",campos_log);
+																		
+									xmlhttp.onreadystatechange = function() {
+										if (xmlhttp.readyState == 4 && xmlhttp.status != 200) {
+											alert("Adevertencia!! No se pudo guardar el log. Error: "+xmlhttp.responseText);
+										}
+									};
+									xmlhttp.open("POST","/omp/circulacion/sendmail.php",true);
+									xmlhttp.send(formdata);					}
+									
+									grabar_movi_log();
+								</script>'
         						cat(getenv('PATH_TRANSLATED'),'devolucion_exitosa.html')
         				</pft></htmlpft></display>              
         			</loop>

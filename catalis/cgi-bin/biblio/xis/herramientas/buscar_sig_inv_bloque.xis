@@ -1,0 +1,56 @@
+<IsisScript>
+<section>
+<display><pft>'Content-type: text/html;charset=iso-8859-1'/#</pft></display>
+
+<field action=cgi tag=2000>base</field>
+<field action=cgi tag=2001>sector</field>
+<field action=cgi tag=2002>sig_in</field>
+<field action=cgi tag=2003>sig_in_lib</field>
+<field action=cgi tag=2004>sig_out</field>
+<field action=cgi tag=2005>sig_out_lib</field>
+
+
+<!--<display><pft>v2003</pft></display>-->
+
+<parm name=cipar><pft>
+'campi.*=/var/www/catalis/bases/catalis_pack_en_produccion/catalis/ejemplares/lejemplares.*',/
+</pft></parm>
+
+
+<!--<display><pft>'sig in:',v2001,v2002,' ',v2003,'<br>'</pft></display>
+<display><pft>'sig out:',v2001,v2004,' ',v2005,'<br>'</pft></display>-->
+
+<do task=keyrange>
+
+    <parm name=db>campi</parm>
+    <parm name=from><pft>v2001,'#',v2002,' ',v2003</pft></parm>
+    <parm name=to><pft>v2001,'#',v2004,' ',v2005,'9',</pft></parm>
+
+    <field action=define tag=1001>Isis_Current</field>
+
+    <field action=define tag=1>Isis_Key</field>
+    <field action=define tag=2>Isis_Postings</field>
+
+
+    <loop>
+
+       <display>
+        <pft>v1,'~'</pft>
+       
+	</display>
+
+       <field action=export tag=1032><pft>v1001</pft></field>
+
+    </loop>
+
+    <!--<display>
+       <pft>v1032,'<br>'
+       </pft>
+    </display>-->
+
+  </do>
+
+
+</section>
+</IsisScript>
+

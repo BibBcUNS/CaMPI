@@ -1,0 +1,127 @@
+<IsisScript>
+<section>
+
+<display><pft>'Content-type: text/html'/#</pft></display>
+<display><html><head><style>form {width: 75%; background: brown; padding: 6px; margin: 6px 0;
+		color: #F0F0F0;	font-size: 16px; font:Verdana, Arial, Helvetica, sans-serif}</style></head><body>
+</display>
+<field action=cgi tag=5000>IsisScript</field>
+<field action=cgi tag=5001>estado</field>
+<field action=cgi tag=5003>usuario</field>
+<field action=cgi tag=5004>pw</field>
+<field action=cgi tag=6001>mfn</field>
+<field action=cgi tag=6002>base</field>
+<field action=add tag=6003>biblio</field>
+<field action=add tag=3030><pft>'/var/www/bases/catalis/catalis_pack_en_produccion/catalis/',v6002,'/'</pft></field>
+<parm name=cipar><pft>v6003,'.*=',v3030,v6003,'.*'/</pft></parm>    
+<flow action=jump><pft>v5001</pft></flow>
+
+<!-- **********************************  MOSTRADO DEL REGISTRO A BORRAR  *************************************** -->
+<label>mostrando</label>
+
+<do task=mfnrange>
+<parm name=db><pft>v6003</pft></parm>
+<parm name=from><pft>v6001</pft></parm>
+<parm name=to><pft>v6001</pft></parm>
+<field action=define tag=1002>Isis_Total</field>
+<field action=define tag=1003>Isis_Status</field>
+<flow action=jump><pft>if a(v6001) or (val(v6001)<=0) then 'error_mostrado' fi</pft></flow>
+
+<loop>
+<field action=import tag=5003>5003</field>
+<field action=import tag=5004>5004</field>
+<field action=import tag=6002>6002</field>
+<display>
+	<pft>if val(v1003)=0 then 
+		'<table align="center" bgcolor="brown" width="75%">
+		<tr><td><h2 align="center" style="color:#F0F0F0;">Borrado de registros de la base ',v6002,'</h2></td></tr>
+		<tr><td><table border="1" cellpadding="6" cellspacing="2" align="center">
+			<tr align="center" bgcolor="#CCCCCC">
+				<td><b>MFN</b></td><td><b>T&iacute;tulo</b></td><td><b>Autor/a</b></td>
+			</tr>
+			<tr bgcolor="#FFFFFF"><td>',mfn,'</td><td>',v245^a,if p(v245^b) then v245^b fi,'</td><td>',v245^c,'</td></tr>
+		</table><br>
+		<table border="0" cellspacing="8" align="center">
+			<tr>
+				<td><form action="wxis_in.php" method="post"> 
+					<input type="hidden" name="IsisScript" value="catalis/borrar_registros.xis"> 
+					<input type="hidden" name="estado" value="borrando">
+					<input type="hidden" name="mfn" value="',mfn,'">
+					<input type="hidden" name="base" value="',v6002,'">
+					<input type="hidden" name="usuario" value="',v5003,'">
+					<input type="hidden" name="pw" value="',v5004,'">
+					<input type="submit" value="Borrar">
+					</form></td>
+				<td><form action="herramientas.php" method="post"> 
+					<input type="hidden" name="usuario" value="',v5003,'">
+					<input type="hidden" name="pw" value="',v5004,'">
+					<input type="submit" value="Cancelar"></form></td>
+			</tr>
+		</table></td></tr></table></body></html>' fi</pft> 
+</display>
+<proc><pft>if val(v1003)=0 then 'a3000#0#' else 'a3000#1#' fi</pft></proc>
+<field action=export tag=3000>3000</field>
+</loop>
+<flow action=jump><pft>if (val(v6001)>val(v1002)) or (val(v3000)=1) then 'error_mostrado' fi</pft></flow>
+<flow action=exit>1</flow>
+
+<label>error_mostrado</label>
+<display><pft>
+	'<center><form action="herramientas.php" method="post">
+		<h2>Borrado de registros de la base ',v6002,'</h2>
+		<p><b>Error: MFN incorrecto.</b></p>
+		<input type="hidden" name="usuario" value="',v5003,'">
+		<input type="hidden" name="pw" value="',v5004,'">
+		<input type="submit" value="Volver">
+	</form></center></body></html>'</pft>
+</display>
+</do>
+<flow action=exit>1</flow>
+
+<!-- **************************************  BORRADO DEL REGISTRO  ***************************************** -->
+<label>borrando</label>
+
+<do task=update>
+<parm name=db><pft>v6003</pft></parm>
+<parm name=mfn><pft>v6001</pft></parm>
+<parm name=lockid><pft>v5003,v5004</pft></parm>
+<parm name=expire>60</parm>
+<field action=define tag=1102>Isis_Status</field>
+<field action=define tag=1101>Isis_Lock</field>
+
+<display><pft>'<center><form action="herramientas.php" method="post">
+		<h2>Borrado de registros de la base ',v6002,'</h2>'</pft>
+</display>
+	
+<update>
+	<write>Lock</write>
+	<flow action=jump><pft>if val(v1102)<>0 then 'error_borrado' fi</pft></flow>
+	<field action=delete tag=list>ALL</field>
+	<proc><pft>'d*'</pft></proc>
+	<write>Delete</write>
+	<flow action=jump><pft>if val(v1102)<>0 then 'error_borrado' fi</pft></flow>
+	<display><pft>
+			'<p align="center"><b>El registro ha sido borrado (MFN=',mfn,').</b></p>'
+			</pft>
+	</display>
+	<proc><pft>if val(v1102)=0 then 'a3000#0#' else 'a3000#1#' fi</pft></proc>
+	<field action=export tag=3000>3000</field>
+</update>
+<flow action=jump><pft>if val(v3000)=1 then 'error_borrado' else 'final_html' fi</pft></flow>
+
+<label>error_borrado</label>
+<display>
+	<pft>'<p><b>Error: El registro no est&aacute; disponible (MFN=',mfn,').</b></p>'</pft>
+</display>
+
+<label>final_html</label>
+<display><pft>
+	'<input type="hidden" name="usuario" value="',v5003,'">
+	<input type="hidden" name="pw" value="',v5004,'">
+	<input type="submit" value="Volver">
+	</form></center></body></html>'</pft>
+</display>
+</do>
+
+</section>
+</IsisScript>

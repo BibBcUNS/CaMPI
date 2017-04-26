@@ -2,44 +2,65 @@
 
 <include>fecha_funciones.xis</include>
 <include>circulacion/menor_inc.xis</include>
+<include>circulacion/reserva_mail.xis</include>
 
 <section>
 <display><pft>'Content-type: text/html'/#</pft></display>
 <trace>!BR</trace>
 <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 
+
+<!-- 2000 fecha actual-->
 <field action=replace tag=2000><pft>left(date,8)</pft></field>
+
 <do task=mfnrange>
 	<parm name=db>reservas</parm>
 	<parm name=from>1</parm>
     <loop>
+		<!-- Recorro la base reservas cargando en una lista todos las ocurrencias del campo v3 para cada registro
+		
+		Campos:
+		1901 ^b Base ^c NControl ^p Parte
+		1900 mfn
+		2000 Fecha actual
+		5555 Se importa vacio???
+		-->		
 		<field action=replace tag=1901><pft>v1</pft></field>
 		<field action=replace tag=1900><pft>mfn(1)</pft></field>
 		<field action=import tag=2000>2000</field>
 		<field action=import tag=5555>5555</field>
+		<!-- Cargo la lista con los campos v3-->
 		<list action=delete>now</list>
 		<list action=load><pft>(v3/)</pft></list>
+		
 		<do task=list>
+		<!-- Recorro la lista generada-->	
 			<field action=define tag=1001>Isis_Current</field>
 			<field action=define tag=1002>Isis_Items</field>
 			<field action=define tag=1>Isis_Item</field>
 			<loop>
+				<!-- Se importo nuevamente el registro 5555 vacio?-->
 				<field action=import tag=555>5555</field>
 			    <!-- IMPORTO EL MFN DE REGISTRO DE RESERVAS QUE ESTOY TRATANDO -->
 				<field action=import tag=1900>1900</field>
 			    <!-- OBTENGO EL TIPO DE USUARIO EN v1500 -->
 				<field action=replace tag=1500><pft>ref(['lector']l(['lector']v1^i),v3)</pft></field>
+				
+
 				<!--Los objetos de una parte pueden ser de tipo CONS u otro. Esto es, una parte podrá
 				tener objetos de a lo sumo 2 tipos uno de los cuales será CONS -->
 			    <!-- OBTENGO EL TIPO DE OBJETO EN v1504 -->
-				<field action=import tag=1501>1</field>
-				<field action=replace tag=1501><pft>v1501^b,'_',v1501^c,'_',v1501^p</pft></field>
 				
-				<!-- Inventarios de la parte -->
-				<field action="replace" tag="1502" split="occ"><pft>ref(['partes']l(['partes']v1501),(v2/))</pft></field>
+				<!-- Pongo en 1501 el campo v1 BASE Y NC de la base reservas, elimino los indicadores de subcampo
+				y los concateno por medio de "_" para realizar la busqeuda en el diccionario-->
+				<field action=import tag=1501>1</field>	
+				<field action=replace tag=1501><pft>v1501^b,'_',v1501^c,'_',v1501^p</pft></field>
+								
+				<!-- Busco en la base partes los inventarios correspondientes a la parte y los cargo en 1502-->
+				<field action=replace tag="1502" split="occ"><pft>ref(['partes']l(['partes']v1501),(v2/))</pft></field>
 
-				<!-- ejemplares con su estado (pres/perm) y cond de pres (v987)-->
-				<field action="replace" tag="1503" split="occ"><pft>
+				<!-- Guardo en 1503 ejemplares con su estado (pres/perm) y cond de prestamo/consulta (v987)-->
+				<field action=replace tag="1503" split="occ"><pft>
 					(
 					ref(['exist']l(['exist']v1502),'^i',v977,'^e',v985,'^c',v987/)
 					)
@@ -50,20 +71,22 @@
 					(if v1503^c<>'CONS' then v1503^c,break fi/) 
 				</pft></field>
 				
-				<!-- OBTENGO CANTIDAD DE DIAS DE ESPERA EN v1510-->
+				
+				<!-- OBTENGO CANTIDAD DE DIAS DE ESPERA PARA EL USUARIO EN v1510-->
 				<field action=replace tag=1510><pft>ref(['politicas']l(['politicas']'UO=',v1500,'-',v1504),v13^d)</pft></field>
 				
 			    <!-- OBTENGO EL ENESIMO DIA HABIL SIGUIENTE A LA FECHA DE LA ESPERA, 
-				DONDE N LO DEFINE LA POLITICA CORRESPONDIENTE. OJO SIN TERMINAR. -->
+				DONDE N LO DEFINE LA POLITICA CORRESPONDIENTE LA FUNCION DEVUELVE EL RESULTADO EN EL CAMPO 9000.
+				OJO SIN TERMINAR. -->
 				
 				<call name=SUMAH><pft>v1^f*6,v1^f*3.2,v1^f*0.2,' ',replace(v1^h,':','')/v1510</pft></call>
-
+				
 				<!-- FECHA Y HORA EN DONDE LA ESPERA ACTUAL DEBE VENCER (aaaammdd hhmmss)-->
 				<field action=replace tag=8000><pft>v9000,' ',replace(v1^h,':','')</pft></field>
 				<!-- FECHA Y HORA ACTUAL (aaaammdd hhmmss)-->
 				<field action=replace tag=8001><pft>left(date,15)</pft></field>
-			    <!-- ¿CORRESPONDE DAR DE BAJA LA ESPERA?-->
-				
+			    
+				<!-- ¿CORRESPONDE DAR DE BAJA LA ESPERA?-->				
 				<flow action=jump><pft>if v8000>v8001 then 'FIN_BAJAR_ESPERA' fi</pft></flow>
 
 				<do task=update>
@@ -74,6 +97,7 @@
 					 <field action=define tag=1103>Isis_Lock</field>
 					 <parm name=lockid>ID</parm>
 				     <update>
+						
 						<field action=import tag=200>1</field>
 						
 						<proc><pft>'d3',(if v3=v200[1] then else 'a3~',v3,'~' fi/)</pft></proc>
@@ -81,6 +105,7 @@
 						<!-- Busco el timestamp más chico usando la funcion menor. -->			
 						<call name=menor><pft>(v2^f*6,v2^f*3.2,v2^f*0.2,' ',replace(v2^h,':','')/)</pft></call>
 						<!-- Salida en v30 (^o^t, órden y timestamp respectivamente) -->						
+						
 						<field action=replace tag=553><pft>date</pft></field>
 						<field action=replace tag=554><pft>getenv('REMOTE_ADDR')</pft></field>
 						<!-- Construyo lo que grabaré en MOVI -->						
@@ -90,6 +115,8 @@
 						<field action=add tag=555><pft>'RC=',v444</pft></field>
 						<field action=add tag=555><pft>'EN=',if p(v444) then '^i',v444^i,'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',,'^p',v554 fi</pft></field>
 						<field action=export tag=5555>555</field>
+						<field action=export tag=5554>1</field>
+						
 						<!-- FALTA OBTENER EL OPERADOR -->
 						<proc><pft>if p(v2) then (if iocc=val(v30[1]^o) then 'a3~^i',v2^i,'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',,'^p',v554,'~' fi/) fi</pft></proc>
 						<field action=delete tag=2><pft>v30^o</pft></field>
@@ -97,12 +124,17 @@
 				        <write>Unlock</write>
 				     </update>
 				  </do>
+				  
+				  <field action=export tag=5554>5554</field>
 				 <field action=export tag=5555 previous=add>5555</field>
 				<field action=export tag=6000 previous=add>6000</field><!-- para contar las esperas caidas-->
 				<label>FIN_BAJAR_ESPERA</label>
 			</loop>
 		</do>
 		<flow action=jump><pft>if a(v5555) then 'NO_GRABAR_EN_MOVI' fi</pft></flow>
+		<!-- Si hay una reserva se envia un mail al usuario notificando el ingreso del material-->
+		
+		
 		<do task=update>
 			 <parm name=db>movi</parm>
 			 <parm name=mfn>New</parm>
@@ -124,9 +156,15 @@
 		  </do>
 		  <label>NO_GRABAR_EN_MOVI</label>
 		  <field action=export tag=6000 previous=add>6000</field><!-- para contar las esperas caidas-->
+		  <field action=export tag=5555>5555</field><!-- Datos del usuario para el envio del mail-->
+		  <field action=export tag=5554>5554</field><!-- Datos del libro para el envio del mail-->
 	</loop>
 </do>
-<display><pft>'Ha/n caído ',f(nocc(v6000)/3,1,0),' espera/s.'</pft></display>
+<!-- Se envia un correo al usuario notificando de la espera nueva -->
+<flow action=jump><pft>if not v5555:'EN=' or a(v5555) or a(v5554)then 'FIN_MAIL_RESERVAS' fi</pft></flow>
+			<call name=mail_reservas><pft>v5554,(if v5555^*='EN=' then v5554,v5555 fi)</pft></call> 
+		<label>FIN_MAIL_RESERVAS</label>
+<display><pft>'Ha/n caído ',f(nocc(v6000),1,0),' espera/s.'</pft></display>
 <!--
 
 RESERVAS:

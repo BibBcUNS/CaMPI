@@ -1,0 +1,43 @@
+<IsisScript>
+<section>
+
+<display><pft>'Content-type: text/html; charset=iso-8859-1'/#</pft></display>
+
+<field action=cgi tag=2000>usuario</field>
+
+
+<parm name="cipar"><pft>
+	/* ----- BASE DE DATOS (BIBLIOGRÁFICA) ----- */
+	'BIBLIO.*=',          v6003^b,'/catalis/',v2104,'/biblio.*'/
+	'CONTROL-NUMBER.TXT=',v6003^b,'/catalis/',v2104,'/cn.txt'/
+	'DB-DESCR.TXT=',      v6003^b,'/catalis/',v2104,'/db-descr.txt'/
+	
+	/* ----- Usuarios, permisos ----- */
+	/*'IP-TABLE=',            v6003^c,'/catalis/config/ip-table.txt'/*/
+	'USERS.*=',             'C:\CaMPI\catalis\bases\users\users.*'/
+	
+	/* ----- Directorio para archivos temporales ----- */
+	/*'CI_TEMPDIR=',v6003^t,/*/
+</pft></parm>
+
+<do task="search">
+	<parm name="db">USERS</parm>
+	<parm name="expression"><pft>v2000</pft></parm>
+	<field action=define tag=1001>Isis_Current</field>
+	<field action=define tag=1002>Isis_Total</field>		
+	<field action=define tag=1005>Isis_Keys</field>
+	<field action=define tag=1009>Isis_ErrorInfo</field>
+
+	<loop>
+		<field action=export tag=3000>5</field>
+	</loop>
+</do>
+
+
+
+<display><pft>(if v3000^s='1' then v3000^*,':' fi)</pft></display>
+
+
+<label>FIN</label>
+</section>
+</IsisScript>

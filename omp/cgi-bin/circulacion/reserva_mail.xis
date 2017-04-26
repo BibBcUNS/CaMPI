@@ -1,0 +1,72 @@
+<function name=mail_reservas tag=1 action=replace>
+<!--Esta funcion recibe como parametro el subcampo EN= del campo v7 el cual contiene
+^b Base
+^c Nro de Control
+^p Parte
+^i Dni del usuario
+^f Fecha
+^h Hora
+^e Inventario-->
+
+<!-- Busco en la base lector el email del alumno y si se encuentra cargado lo exporto en el campo 2004 con el formato ^e email, de lo contrario termino la función-->	
+	<do task=search>
+		<parm name=db>lector</parm>
+		<parm name=expression><pft>v1^i</pft></parm>
+		<parm name=count>1</parm>
+			<loop>
+			<field action=add tag=2004><pft>if a(v12) or size(v12) < 7 then '^e' else '^e',v12 fi</pft></field>
+			<field action=export tag=list>2004</field>
+			<field action=delete tag=list>2004</field>
+			</loop>			
+	</do>
+<flow action=jump><pft>if size(v2004^e)=0 then 'fin_reserva_mail' fi</pft></flow>
+
+<!-- Busco en la base marc el titulo de la obra y lo exporto anexandolo al campo 2004 con el formato ^a Titulo ^c Autor -->	
+	<do task=search>
+		<parm name=db>marc</parm>
+		<parm name=expression><pft>'NC='v1^c</pft></parm>
+		<parm name=count>1</parm>
+		
+			<loop>
+			<field action=import tag=2004>2004</field>
+			<field action=replace tag=2004><pft>
+				'^a',v245^a,
+				'^c',v245^c,
+				'^e',v2004^e,
+			</pft></field>
+			<field action=export tag=list>2004</field>
+			<field action=delete tag=list>2004</field>
+			</loop>			
+	</do>
+	<display><pft>'<script>
+						function enviar_reserva_mail() {
+							var xmlhttp = new XMLHttpRequest();
+							var formdata = new FormData();	
+							var mensaje = new String();
+							var email = new String();
+
+							email = "'v2004^e'";
+							mensaje = "Estimado Usuario/a:<br>\
+Le informamos que a partir del dia de la fecha y durante 24 horas se encuentra diponible y reservado para usted un ejemplar de <br> 'v2004^a,v2004^c'<br>\
+Lo/a esperamos a la brevedad para su retiro<br>\
+<br>\
+UNS<br>\
+Biblioteca Central\
+							";
+							formdata.append("email",email);
+							formdata.append("mensaje",mensaje);
+																
+							xmlhttp.onreadystatechange = function() {
+								if (xmlhttp.readyState == 4 && xmlhttp.status != 200) {
+											alert("Adevertencia!! No se pudo guardar el log. Error: "+xmlhttp.responseText);
+										}
+							};
+							xmlhttp.open("POST","/omp/circulacion/sendmail_reserva.php",true);
+							xmlhttp.send(formdata);		
+						}
+						
+						enviar_reserva_mail();
+	</script>'</pft></display>
+			
+<label>fin_reserva_mail</label>	
+</function>

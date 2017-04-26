@@ -1,0 +1,130 @@
+<IsisScript>
+<section> 
+
+
+
+<display><pft>'Content-type: text/html'/#</pft></display>
+<field action=cgi tag=5000>base_origenes</field>
+<field action=cgi tag=5001>base_destino</field>
+<field action=cgi tag=5002>lockid</field>
+<field action=cgi tag=6000>mfns_origenes</field>
+<field action=cgi tag=6001>mfn_destino</field>
+
+<field action=add tag=3030><pft>'/var/www/bases/catalis/catalis_pack_en_produccion/catalis/'</pft></field>
+
+<parm name=cipar><pft>
+
+	v5000,'.*=',v3030,v5000,'/','biblio.*'/
+	v5001,'.*=',v3030,v5001,'/','biblio.*'/
+	
+</pft></parm>
+
+<!--trace>BR</trace-->
+
+<display><pft>'<h2 align="center">Merge de registros ',v5000,'-',v5001,'</h2>'</pft></display>
+
+<!-- flow action=jump><pft>v5001</pft></flow -->
+
+<display>
+	<style>
+		.muestra_registros {}
+	</style>
+</display>
+
+
+
+<do task=mfnrange>
+<parm name=db><pft>v5000</pft></parm>
+<parm name=from><pft>v6000</pft></parm>
+<parm name=count><pft>'1'</pft></parm>
+<field action=define tag=1002>Isis_Total</field>
+<field action=define tag=1003>Isis_Status</field>
+
+<loop>
+	<field action=import tag=5000>5000</field>
+	<field action=import tag=5001>5001</field>
+	<field action=import tag=6001>6001</field>
+
+		
+		<do task=mfnrange>
+		<parm name=db><pft>v5001</pft></parm>
+		<parm name=from><pft>v6001</pft></parm>
+		<parm name=count><pft>'1'</pft></parm>
+		<field action=define tag=1002>Isis_Total</field>
+		<field action=define tag=1003>Isis_Status</field>		
+		
+		<loop>
+
+		<field action=import tag=5001>5001</field>
+		
+		<display>
+			<pft>
+			'<table border="1" cellpadding="6" cellspacing="0" align="center">
+					<tr align="center" bgcolor="#CCCCCC">
+						<td><b>Registro</b></td>
+						<td><b>T&iacute;tulo</b></td>
+						<td><b>Autor/es/as</b></td>
+						<td><b>Existencias</b></td>
+					</tr>
+					<tr>
+						<td><b>DESTINO</b><br>
+							Base: <b>',v5001,'</b><br>
+							(',mfn,')
+						</td>
+						<td>',v245^a,if p(v245^b) then v245^b fi,'</td>
+						<td>',v245^c,'</td>
+						<td>',(v859,'<br>'),'</td></tr>
+					' </pft> 
+		</display>
+
+		</loop></do>
+
+	<proc><pft>if val(v1003)=0 then 'a3000#0#' else 'a3000#1#' fi</pft></proc>
+
+	<display>
+			<pft>'
+				<tr><td><b>FUENTE</b><br>
+				<b>',v5000,'</b><br>
+				(',mfn,')</td>
+				<td>',v245^a,if p(v245^b) then v245^b fi,'</td>
+				<td>',v245^c,'</td>
+				<td>',
+					(v859+|<hr size="1">|),
+				'</td></tr>
+			</table>'
+		</pft> 
+	</display>
+
+<proc><pft>if val(v1003)=0 then 'a3000#0#' else 'a3000#1#' fi</pft></proc>
+<field action=export tag=3000>3000</field>
+</loop>
+
+<display><pft>'<br>
+		<form action="wxis_in.php"
+		style="width: 100%;
+		background: brown;
+		border: 1px solid #F0F0F0;
+		padding: 6px;
+		margin: 6px 0;
+		color: #F0F0F0;
+		font-size: 16px;
+		font:Verdana, Arial, Helvetica, sans-serif;
+		text-align:center;">
+		
+	<input type="hidden" name="IsisScript" value="catalis/unir.xis">
+
+	<input type="hidden" name="base_origenes" value="',v5000,'">	
+	<input type="hidden" name="base_destino" value="',v5001,'">	
+	<input type="hidden" name="mfns_origenes" value="',v6000,'">	
+	<input type="hidden" name="mfn_destino" value="',v6001,'">	
+	
+	<input type=submit value="Confirmar union">
+
+'</pft></display>
+
+</do>
+
+
+
+</section>
+</IsisScript>
