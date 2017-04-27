@@ -210,7 +210,7 @@
   <do task=keyrange>
     <parm name=db>lector</parm>
     <parm name=from><pft>v110</pft></parm>
-    <parm name=count>30</parm>
+    <parm name=count>1500</parm>
     <field action=define tag=1102>Isis_Total</field>
     <field action=define tag=1103>Isis_Key</field>
     <field action=define tag=1104>Isis_Current</field>

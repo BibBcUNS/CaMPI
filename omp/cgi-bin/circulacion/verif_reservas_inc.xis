@@ -43,6 +43,7 @@
             <do task=update>
             <parm name=db>reservas</parm>
             <parm name=mfn><pft>v3</pft></parm>
+            <parm name=fst><pft>cat('reservas.fst')</pft></parm>
             <parm name=lockid><pft>v1^o</pft></parm>
             <field action=define tag=1102>Isis_Status</field>
             <field action=define tag=1011>Isis_Lock</field>         

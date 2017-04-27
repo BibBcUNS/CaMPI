@@ -56,10 +56,11 @@
   </dataElement>
 
   <dataElement pos="L_18" name="LDR/18 · Forma de catalogación descriptiva" label="Descriptive cataloging form">
-    <option code="a"   name="AACR 2" />
-    <option code="#"   name="Non-ISBD" /> 
-    <option code="i"   name="ISBD" /> 
-    <option code="u"   name="Desconocido" />
+    <option code="a" name="AACR 2" />
+	<option code="#" name="No ISBD" />
+	<option code="i" name="Puntuación ISBD incluida" />
+	<option code="c" name="Puntuación ISBD omitida" />
+	<option code="u" name="Desconocido" />
   </dataElement>
 
   <dataElement pos="L_19" name="LDR/19 · Registro relacionado" label-eng="Linked record requirement">
