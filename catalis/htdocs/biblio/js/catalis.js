@@ -1587,6 +1587,20 @@ function catalisMessage(msg,button)
 	}
 }
 
+// -----------------------------------------------------------------------------
+function mostrarImagen() {
+// -----------------------------------------------------------------------------
+  if (document.getElementById("miniatura-imagen")) {
+    var imageUrl, displayBtn;
+    if (f985) {
+      var recordId = document.getElementById("marcEditForm").f001.value;
+      imageUrl = HTDOCS + "img/" + g_activeDatabase.name + "/" + recordId + "." + f985.substr(4) + "?" + Math.random();
+    } else {
+      imageUrl = HTDOCS + "img/book-cover-placeholder.jpg";
+    }
+    document.getElementById("miniatura-imagen").src = imageUrl;
+  }
+}
 
 // -----------------------------------------------------------------------------
 function init()

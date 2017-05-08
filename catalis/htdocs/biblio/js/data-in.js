@@ -118,7 +118,11 @@ function createRecord(newRecParams)
 	if ( document.getElementById("ejemplaresBtn") ) {
 		document.getElementById("ejemplaresBtn").style.backgroundColor = "";
 	}
-	
+
+	// Tipo de archivo de imagen - ABM tapas
+	f985 = "";
+ 	mostrarImagen();
+
 	// Original record state = el contenido de la plantilla
 	originalRecord = serializeRecord(true,true,true,true);
 	
@@ -218,7 +222,11 @@ function showRecordInForm(receivedRecord)
 	// Record OK
 	//form.recordOK.checked = (receivedRecord.OK == "OK");
 	//form.recordOK.parentNode.className = (receivedRecord.OK == "OK") ? "recordOK" : "recordNotOK";
-	
+
+    // Tipo de archivo de imagen - ABM tapas
+    f985 = receivedRecord.f985;
+    mostrarImagen();
+
 	// Save original record state
 	originalRecord = serializeRecord(true,true,true,true);
 	
@@ -509,6 +517,10 @@ function duplicateRecord()
 	if ( document.getElementById("ejemplaresBtn") ) {
 		document.getElementById("ejemplaresBtn").style.backgroundColor = "";
 	}
+
+    // Tipo de archivo de imagen - ABM tapas
+    f985 = "";
+    mostrarImagen();
 
 	// Original record state = empty (not saved yet)
 	originalRecord = "*";

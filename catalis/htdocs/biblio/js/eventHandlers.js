@@ -81,6 +81,12 @@ function setEditionFormEvents()
 		//this.blur();
 		editEjemplares();
 	}
+
+    if (document.getElementById("miniatura-imagen")) {
+  	  document.getElementById("miniatura-imagen").onclick = function() {
+      editImagenes();
+    }
+    }
 	
 	document.getElementById("btnDocHideShow").onclick = docIframeShow;
 	

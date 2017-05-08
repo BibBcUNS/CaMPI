@@ -118,6 +118,10 @@ function importRecord(isoRecord)
 		document.getElementById("ejemplaresBtn").style.backgroundColor = "";
 	}
 
+    // Tipo de archivo de imagen - ABM tapas
+    f985 = "";
+    mostrarImagen();
+
 	// Buttons
 	document.getElementById("btnGrabar").disabled = false;
 	document.getElementById("btnGrabar").style.backgroundImage = "url('" + HTDOCS + "img/stock_save-16.png')";

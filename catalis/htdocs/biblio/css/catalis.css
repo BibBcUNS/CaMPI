@@ -901,3 +901,26 @@ tr.oddRow {
 	border-bottom: 1px solid #FED;
 }
 
+/* ------------------------------------------- */
+/* Imágenes de tapas                           */
+/* ------------------------------------------- */
+.miniatura-tapa {
+    border: 1px solid #666;
+}
+.imagen-wrapper {
+    height: 180px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    padding: 3px 0;
+    text-align: center; /* para IE6 que no entiende margin: auto */
+    width: 100%; /* necesario para que una imagen ancha no deforme la interfaz */
+}
+
+/* Prueba para mostrar imagen en la pantalla de búsquedas */
+#aacrCell.cover-image {
+    background-image: url("/catalis_pack_en_produccion/catalis/img/book-cover-placeholder.jpg");
+    background-position: right top;
+    background-repeat: no-repeat;
+    padding-right: 136px;
+}

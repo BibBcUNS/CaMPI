@@ -235,6 +235,11 @@ function serializeRecord(leader, controlFields, dataFields, localData)
 			marcFields += "\n981 OK";
 		}*/
 		
+        // 985: Tipo de archivo de imagen - ABM tapas
+        if (window.f985 && f985 != "") {
+          marcFields += "\n985 " + f985;
+        }
+
 		// 991: Identificación del catalogador que creó el registro
 		// ATENCION: a los efectos de decidir si un registro ha sido modificado,
 		// este dato no es relevante!
