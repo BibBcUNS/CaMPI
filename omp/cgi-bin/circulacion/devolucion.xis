@@ -242,7 +242,7 @@ Se exporta el campo v2000 con OK o código error -->
         			<field action="delete" tag="8"><pft>if nocc(v8)=1 and s(mhu,v8^i)=s(mhu,v1000) then 'All' fi</pft></field> <!-- Si es el único prestamo registrado lo borra -->
         			<field action="replace" tag="8" split="occ"><pft>(if s(mhu,v8^i)<>s(mhu,v1000[1]) then mpl,v8/ fi)</pft></field> <!-- Quita el préstamo de la devolución -->
         			
-        			<field action="delete" tag=list>1000,4050,5051</field>
+        			<field action="delete" tag=list>1000,4050,5051,2002</field>
         			<write>Unlock</write>
         			
         			<flow action="skip"><pft>if val(v1102)<=0 then 'Next' fi</pft></flow>
