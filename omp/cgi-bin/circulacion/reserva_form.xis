@@ -120,7 +120,7 @@ En caso de no ser submit se Muestra el Formulario
 
 <label>CONTROL_OK</label>
 <!-- Obtengo la fecha y hora -->
-<field action=add tag=3010><pft>
+<field action=replace tag=3010><pft>
 	'^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^h',mid(date,10,2),':',mid(date,12,2),':',mid(date,14,2)</pft></field>
 
 <!-- cargo la lista con todo los identificadores de partes. -->
