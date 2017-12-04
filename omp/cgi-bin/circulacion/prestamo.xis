@@ -1333,7 +1333,18 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
   <head>
     <title>Circulación</title>
     <link REL="stylesheet" TYPE="text/css" HREF="/omp/css/style.css" />
+	<link REL="stylesheet" TYPE="text/css" HREF="/omp/css/jquery-ui.css"/>
+	<script src="/omp/webservices/jquery.js"></script>
+	<script src="/omp/webservices/jquery-ui.js"></script>
   </head>
+<script>
+	
+	$(function(){
+		$('#calendario1').datepicker({dateFormat: "dd/mm/yy"});
+		$('#calendario2').datepicker({dateFormat: "dd/mm/yy"});
+	});
+	</script>
+  
   <body onload="window.document.form_abm.credencial.value=window.parent.indice.document.form_id.lector.value">
      <div id="head-prestamo"> 
     </div>

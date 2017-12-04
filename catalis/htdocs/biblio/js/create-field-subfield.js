@@ -515,12 +515,7 @@ function createSubfield( code, sfText, label, fieldTag )
 	
 	// Parece necesario fijar el valor de 'width' para evitar problemas con URL largos
 	// Volver a mirar word-wrap, en	http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/wordwrap.asp
-	if ( 600 == screen.height ) { // 800x600
-		newSubfieldBox.style.width = ( DISPLAY_SUBFIELD_LABELS ) ? "346px" : "498px";
-	} else { // 1024x768
-		newSubfieldBox.style.width = ( DISPLAY_SUBFIELD_LABELS ) ? "570px" : "722px";
-		//newSubfieldBox.style.width = ( screen.height == 600 ) ? "346px" : "570px";
-	}
+  newSubfieldBox.style.width = g_Dimensions.subfieldTextarea.width;
 	
 	newSubfieldBox.onfocus = function() { highlightSubfieldBox(this) };
 	
@@ -618,7 +613,7 @@ function createSubfield( code, sfText, label, fieldTag )
 		
 		// Sustitución: caracteres especiales en URIs (según OCLC)
 		if ( "URI" == label || "856u" == tag_code ) {
-			this.value = this.value.replace(/_/g,"%5F").replace(/~/,"%7E");
+			this.value = this.value.replace(/_/g,"%5F").replace(/~/,"%7E").replace(/\^/,"%5E");
 		}
 		
 		// Corrección: raya sin espacios alrededor en una nota de contenido

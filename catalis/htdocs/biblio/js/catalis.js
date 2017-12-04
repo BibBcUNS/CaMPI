@@ -125,39 +125,38 @@ function defineSomeVars() {
 
 // -----------------------------------------------------------------------------
 function setDimensions()
-// Asigna dimensiones a algunos elementos de la UI, en base a la resolución
-// de pantalla.
-// TO-DO: usar variables para almacenar los valores que luego vuelven a aparecer
-// en la función que muestra/oculta el IFRAME de la documentación.
+// Asigna dimensiones a algunos elementos de la UI, independientemente de la
+// resolución de pantalla.
 // -----------------------------------------------------------------------------
 {
-	switch ( screen.width + "x" + screen.height ) {
-		case "800x600" :
+  var _innerHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+  var _innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  var freeHeight = _innerHeight - 61; // quito la altura ocupada por las barras superiores
+  var freeWidth = _innerWidth;
+
+  // Variable global con dimensiones
+  g_Dimensions = {
+    searchResultsIframe: {height: 0.572 * freeHeight},
+    recordVisualization: {height: 0.422 * freeHeight},
+    indexTerms: {height: freeHeight - 190},
+    theRightPanel: {height: freeHeight},
+    recordDiv: {height: freeHeight},
+    recordDivWithDocs: {height: 0.5 * freeHeight},
+    docIframe: {height: 0.5 * freeHeight},
+    docIframeCollapsed: {height: DOCWIN_MIN_HEIGHT},
+    subfieldTextarea: {width: freeWidth - 444},
+    subfieldTextareaNoLabels: {width: freeWidth - 292}
+  };
+
 			// Búsquedas
-			document.getElementById("searchResultsIframe").style.height = "278px";
-			document.getElementById("recordVisualization").style.height = "203px";
-			document.getElementById("indexTerms").style.height = "290px";
-			// Edición
-			document.getElementById("theRightPanel").style.height = "484px";
-			document.getElementById("recordDiv").style.height = "484px";
-			document.getElementById("docIframe").style.height = DOCWIN_MIN_HEIGHT;
-			break;
+  document.getElementById("searchResultsIframe").style.height = g_Dimensions.searchResultsIframe.height + "px";
+  document.getElementById("recordVisualization").style.height = g_Dimensions.recordVisualization.height + "px";
+  document.getElementById("indexTerms").style.height = g_Dimensions.indexTerms.height + "px";
 			
-		case "1024x768" :
-			// Búsquedas
-			document.getElementById("searchResultsIframe").style.height = "400px";
-			document.getElementById("recordVisualization").style.height = "248px";
-			document.getElementById("indexTerms").style.height = "450px";
 			// Edición
-			document.getElementById("theRightPanel").style.height = "652px";
-			document.getElementById("recordDiv").style.height = "652px";
-			document.getElementById("docIframe").style.height = DOCWIN_MIN_HEIGHT;
-			break;
-			
-		default :
-			//var message = screen.width + "x" + screen.height + ": resolución de pantalla no prevista.\n\nPor favor, comuníquese con:\n\nfgomez@criba.edu.ar";
-			//alert(message);
-	}
+  document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height + "px";
+  document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height + "px";
+  document.getElementById("docIframe").style.height = g_Dimensions.docIframeCollapsed.height + "px";
 }
 
 
@@ -182,11 +181,7 @@ function toggleSubfieldLabels()
 	for (var i=0; i < textareas.length; i++) {
 		if ( "subfieldBox" == textareas[i].className ) {
 			//textareas[i].style.width = "100%";
-			if ( 600 == screen.height ) { // 800x600
-				textareas[i].style.width = ( DISPLAY_SUBFIELD_LABELS ) ? "346px" : "498px";
-			} else { // 1024x768
-				textareas[i].style.width = ( DISPLAY_SUBFIELD_LABELS ) ? "570px" : "722px";
-			}
+      			textareas[i].style.width = (( DISPLAY_SUBFIELD_LABELS ) ? g_Dimensions.subfieldTextarea.width : g_Dimensions.subfieldTextareaNoLabels.width) + "px";
 		}
 	}
 }
@@ -381,11 +376,11 @@ function docIframeHide()
 // Oculta el iframe con documentación
 // -----------------------------------------------------------------------------
 {
-	document.getElementById("recordDiv").style.height = ( screen.height == 600 ) ? "484px" : "652px";
+	document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height + "px";
 	
 	// Cambios en el iframe
 	var docIframe = document.getElementById("docIframe");
-	docIframe.style.height = DOCWIN_MIN_HEIGHT + "px";
+	docIframe.style.height = g_Dimensions.docIframeCollapsed.height + "px";
 	docIframe.style.borderWidth = "0px";
 	var docIframeWrapper = document.getElementById("docIframeWrapper");
 	docIframeWrapper.style.display = "none";
@@ -409,11 +404,11 @@ function docIframeShow()
 // Muestra el iframe con documentación
 // -----------------------------------------------------------------------------
 {
-	document.getElementById("recordDiv").style.height = ( screen.height == 600 ) ? "240px" : "338px";
+	document.getElementById("recordDiv").style.height = g_Dimensions.recordDivWithDocs.height + "px";
 	
 	// Cambios en el iframe
 	var docIframe = document.getElementById("docIframe");
-	docIframe.style.height = ( screen.height == 600 ) ? "240px" : "310px";
+	docIframe.style.height = g_Dimensions.docIframe.height + "px";
 	docIframe.style.borderWidth = "1px";
 	var docIframeWrapper = document.getElementById("docIframeWrapper");
 	docIframeWrapper.style.display = "block";

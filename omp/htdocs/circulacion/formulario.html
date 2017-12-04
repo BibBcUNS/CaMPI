@@ -118,8 +118,8 @@
 			  if (_Fecha.getMonth() < 9) {_Mes = "0" + eval(_Fecha.getMonth()+1)} else {_Mes = eval(_Fecha.getMonth()+1)};
 			  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60)) 
 				{if (i == 0) {_Cant = "Hoy"} else {if (i == 1) {_Cant = i + " día"} else {_Cant = i + " días"}};
-				 window.parent.principal.document.control.dias_prestamo_A.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getYear());
-				 window.parent.principal.document.control.dias_prestamo_A.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getYear();
+				 window.parent.principal.document.control.dias_prestamo_A.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getFullYear());
+				 window.parent.principal.document.control.dias_prestamo_A.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getFullYear();
 				 j++};
 			  _Fecha.setHours(_Fecha.getHours() + 24);
 			}
@@ -143,8 +143,8 @@
 			  if (_Fecha.getMonth() < 9) {_Mes = "0" + eval(_Fecha.getMonth()+1)} else {_Mes = eval(_Fecha.getMonth()+1)};
 			  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60)) 
 				{if (i == 0) {_Cant = "Hoy"} else {if (i == 1) {_Cant = i + " día"} else {_Cant = i + " días"}};
-				 window.parent.principal.document.control.dias_prestamo_B.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getYear());
-				 window.parent.principal.document.control.dias_prestamo_B.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getYear();
+				 window.parent.principal.document.control.dias_prestamo_B.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getFullYear());
+				 window.parent.principal.document.control.dias_prestamo_B.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getFullYear();
 				 j++};
 			  _Fecha.setHours(_Fecha.getHours() + 24);
 			}
@@ -391,61 +391,43 @@ fi,
                         </strong><textarea rows="5" name="invs_prestamo_A" cols="12"></textarea><br>
 						<script>window.parent.principal.document.control.invs_prestamo_A.focus();</script>
                         
-                        ',if ref(['config']1,v10)='manual' then '
+                        ',if ref(['config']1,v10)='manual' then `
                         Días de Vigencia:<br>
                         <select name="dias_prestamo_A"
                                     size="1"
-                                    onclick="window.document.control.dias_vto_A.value=',"'"n0,'----',"'"n0,';">
+                                    onclick="window.document.control.dias_vto_A.value='----';">
                         </select><br>
-                        
-                        <DIV id=popCal_1 style="BORDER-RIGHT: 2px ridge; BORDER-TOP: 2px ridge; Z-INDEX: 100; VISIBILITY: hidden; BORDER-LEFT: 2px ridge;  BORDER-BOTTOM: 2px ridge; POSITION: absolute" onclick=event.cancelBubble=true>
-                        <IFRAME name=popFrame_1
-                                       src="/omp/circulacion/popcjs.htm"
-                                       frameBorder=0
-                                       width=183
-                                       scrolling=no
-                                       height=188>
-                        </IFRAME></DIV>
-                        
-                        <SCRIPT event=onclick() for=document>popCal_1.style.visibility = "hidden";</SCRIPT>
                         
                         <center>
                         Calendario:
-                        <INPUT style="TEXT-ALIGN: center" readOnly value="----" name="dias_vto_A" size="10">
-                        <INPUT onclick="window.document.control.Vto_AB.value=',"'"n0,'A',"'"n0,'; popFrame_1.fPopCalendar(dias_vto_A,dias_vto_A,popCal_1);return false;" type=button value=V>
+                        <INPUT style="TEXT-ALIGN: center" onclick="window.document.control.Vto_AB.value='A'" 
+						onchange="window.document.control.dias_prestamo_A.options[window.document.control.dias_prestamo_A.selectedIndex].text='Nuevo Vto.: '+this.value;"
+						readOnly value="----" name="dias_vto_A" size="10" id=calendario1>
+                        						
                         </center>
-                        ',fi,'
+                        `,fi,'
             	</td>
     
                 <!-- prestamos B -->',
                 if ref(['config']1,v10)='manual' then
-                '<td valign="top" width="40%">
+                `<td valign="top" width="40%">
                         <p align="center"><strong>Inventarios<br>
                         </strong><textarea rows="5" name="invs_prestamo_B" cols="12"></textarea><br>
                         Días de Vigencia:<br>
                         <select name="dias_prestamo_B"
                                     size="1"
-                                    onclick="window.document.control.dias_vto_B.value=',"'"n0,'----',"'"n0,';">
+                                    onclick="window.document.control.dias_vto_B.value='----';">
                         </select><br>
                 
-                    	<DIV id=popCal_2 style="BORDER-RIGHT: 2px ridge; BORDER-TOP: 2px ridge; Z-INDEX: 100; VISIBILITY: hidden; BORDER-LEFT: 2px ridge;  BORDER-BOTTOM: 2px ridge; POSITION: absolute" onclick=event.cancelBubble=true>
-                    	<IFRAME name=popFrame_2
-                                       src="/omp/circulacion/popcjs.htm" 
-                                       frameBorder=0
-                                       width=183
-                                       scrolling=no
-                                       height=188>
-                        </IFRAME></DIV>
-                	
-                    	<SCRIPT event=onclick() for=document>popCal_2.style.visibility = "hidden";</SCRIPT>
-                    
                         <center>
                         Calendario:
-                        <INPUT style="TEXT-ALIGN: center" readOnly value="----" name="dias_vto_B" size="10">
-                        <INPUT onclick="window.document.control.Vto_AB.value=',"'"n0,'B',"'"n0,'; popFrame_2.fPopCalendar(dias_vto_B,dias_vto_B,popCal_2); return false;" type=button value=V>
+                        <INPUT style="TEXT-ALIGN: center" onclick="window.document.control.Vto_AB.value='B'"
+						onchange="window.document.control.dias_prestamo_B.options[window.document.control.dias_prestamo_B.selectedIndex].text='Nuevo Vto.: '+this.value;"
+						readOnly value="----" name="dias_vto_B" size="10" id=calendario2>
+						
                         </center>
                 </td>
-                ',fi,'
+                `,fi,'
                 </td>
                 <td valign="top">
 						<p align="center">&nbsp;</p>
