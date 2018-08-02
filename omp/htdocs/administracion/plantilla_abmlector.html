@@ -1,4 +1,45 @@
-
+<script>
+function cargar_sancion() {
+    var estado = document.getElementById("estado").value;
+    
+    switch (estado) {
+	case "Sancionado":
+	    var patron =/[0-9]/;
+	    var dias = prompt("Ingrese la cantidad de dias de sancion","7");
+	    
+	    if (!(patron.test(dias))) {
+		document.getElementById("estado").value = "Habilitado";
+		alert("El valor ingresado debe ser un numero");
+	    } else {
+	    
+		var fecha = new Date();
+		var f_dia = fecha.getDate();
+		if (f_dia < 10) {
+		    f_dia = "0" + f_dia;
+		}
+		var meses = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+		var f_mes = meses[fecha.getMonth()];
+		var f_anio = fecha.getFullYear();
+	    
+		var vencimiento = new Date();
+		vencimiento.setDate(vencimiento.getDate()+parseInt(dias));
+		var v_dia = vencimiento.getDate();
+		if (v_dia < 10) {
+		    v_dia = "0" + v_dia;
+		}
+		var v_mes = meses[vencimiento.getMonth()];
+		var v_anio = vencimiento.getFullYear();
+		document.getElementById("sanciones").value = "^d"+dias+"^f" + f_dia + "/" + f_mes + "/" + f_anio + "^v" + v_dia + "/" + v_mes + "/" + v_anio;
+	    }
+	break;
+	case "Habilitado":
+	    document.getElementById("sanciones").value = "";
+	break;
+	
+	
+    }
+}
+</script>
 <table border="0" width="90%" bgcolor="#FFFFFF">
   <tr>
     <th width="40%">Registro de Lector:
@@ -61,13 +102,13 @@
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Estado</td>
       <td width="40%">
-      	<select name="estado">
+      	<select id="estado" name="estado" onchange="cargar_sancion()">
       		<option value="Habilitado" [pft]if s(mhu,v10).3='HAB' then 'selected' fi,mpl[/pft]>Habilitado</option>
       		<option value="Sancionado" [pft]if s(mhu,v10).3='SAN' then 'selected' fi,mpl[/pft]>Sancionado</option>
       	</select>
       </td>
       <td width="20%" bgcolor="#BEE4FF"><b>Sanciones</b></td>
-      <td><input type="text" name="sanciones" size="25" value="[pft]v11+|%|[/pft]"></td>
+      <td><input type="text" id="sanciones" name="sanciones" size="25" value="[pft]v11+|%|[/pft]"></td>
     </tr>    <tr>
       <td colspan="3" bgcolor="#BEE4FF"><b>Vigencia de Datos</td>
       <td><input type="text" name="vigencia_datos" size="10" value="[pft]
