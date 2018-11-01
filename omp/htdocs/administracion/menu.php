@@ -6,6 +6,7 @@ if (isset($_SESSION["s_username"])
 ?>
 <html>
   <head>
+
     <title>CaMPI - Administración</title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css">
 		<style>
@@ -36,6 +37,7 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
 	</script>
 
   <body>
+
   <div id="head"> 
 		<div id="title">CaMPI > Administración (OpenMarcoPolo)</div>
 		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
@@ -336,7 +338,10 @@ table td {border-width:0px; border-style:solid; border-color:#0099FF;}
     <td>
         <a href="etiquetas.html">Códigos de Barra libros</a><br>
 		<a href="credenciales.html">Generación de credenciales</a><br>
-		<a href="libre_deuda.html">Emisión de Libre Deuda</a>
+		<a href="libre_deuda.html">Emisión de Libre Deuda</a><br><br>
+		<form action="backup.php">
+	    <input type="submit" value="Backup">
+		</form>
     </td>
 </tr>
 </table>
