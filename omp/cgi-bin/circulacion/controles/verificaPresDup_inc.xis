@@ -9,7 +9,7 @@ Nota: Falta verificar si hay dos ejemplares iguales en la lista de inventarios c
 v3002=lista de inventarios a prestar
 v3003=lista de inventarios a devolver
 v3004=documento -->
-<flow action="jump"><pft>if v5000:'Error' then 'FinVerificaPresDup' fi</pft></flow>
+<flow action="jump"><pft>if v5000:'Error' or ref(['politicas']l(['politicas']ref(['lector']l(['lector']v3004),v3)),v20^p)<>'0' then 'FinVerificaPresDup' fi</pft></flow>
 
 <!-- v3050: lista de los mfns a los que apunta en PARTES cada inventario que el lector posee.
 Esta lista comienza, termina y se separa MFNs con el simbolo '~' -->
