@@ -1,0 +1,38 @@
+<? foreach ($holdings['holdings'] as $holding): ?>
+  <div class="panel panel-info">
+    <div class="panel-heading col-md-12" style="font-size: 1.5em">
+    <div class="col-md-9"><?= $holding['location'] ?></div>
+      <div class="col-md-3"><a href="../Content/bibliotecas" style="font-size: 0.6em; padding:0; color:#31708f">Ubicación de la biblioteca</a></div>
+  </div>
+    <div class="row"></div>
+  <div class="panel-body">
+  <?
+    $partes = [];
+    foreach ($holding['items'] as $item) {
+      if (isset($partes[$item['callnumber']])) {
+        $partes[$item['callnumber']] ['cantidad']++;
+      }
+      else {
+        $partes[$item['callnumber']] ['cantidad']=1;
+        $partes[$item['callnumber']] ['nombre_parte']=$item['parte'];
+      }
+    }
+    //var_dump($partes);
+  ?>
+  <? foreach ($partes as $signatura => $parte): ?>
+  
+      <div class="col-md-4">
+      <div class="panel panel-warning">
+          <div class="panel-heading">Volumen/Tomo: <?= ($parte['nombre_parte']!=='')?$parte['nombre_parte']:'No especificado' ?></div>
+          <div class="panel-body">
+            Ejemplares: <?= $parte['cantidad'] ?><br>
+            Signatura: <?= $signatura ?><br><br>
+            <!--<span class="btn btn-default">Reservar</span><br>-->
+          </div>
+      </div>
+      </div>
+
+  <? endforeach; ?>
+  </div>
+</div>
+<? endforeach; ?>

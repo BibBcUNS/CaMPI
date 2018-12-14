@@ -1,0 +1,220 @@
+<?
+$urlCampi="http://{$this->libraries[$this->library_code]->campi_url}/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/estado_ejemplares.xis&nc=$idCampi";
+   $estado_ejemplares_json = utf8_encode(file_get_contents($urlCampi));
+   $partes_campi = json_decode($estado_ejemplares_json, true);
+   $cantEjemTotales=0;
+   $cantEjemDomicilio=0;
+   $cantEjemConsulta=0;
+   $cantEjemDomicilioPrestados=0;
+   $cantEjemConsultaPrestados=0;
+   $resumen_parte = [];
+   $signaturas=[];
+   $reservas=[];
+   $esperas=[];
+   $sectorVacio=["ejemTotal"=>0, "totalPrestados"=>0, "ejemDomicilio"=>0, "ejemDomiciolioPrestados"=>0, "ejemConsulta"=>0, "ejemConsultaPrestados"=>0];
+   $sector_domicilio=[];
+   $sector_consulta=[];
+
+   // contamos
+   foreach ($partes_campi as $parte){
+        $parte_id = ($parte['parte']=='')?'No especificado':$parte['parte'];
+        $resumen_parte[$parte_id]=[];
+  //$resumen_parte[$parte_id]['signatura']=$parte['signatura'];
+        $esta_parte = &$resumen_parte[$parte_id];
+        $signaturas[$parte_id]=$parte['signatura'];
+        $reservas[$parte_id]=$parte['reservas'];
+        $esperas[$parte_id]=$parte['esperas'];
+
+              foreach ($parte['ejemplares_domicilio'] as $ejemplar){
+                      $sector=$ejemplar['sector'];
+          if (!in_array($sector, $sector_domicilio)) array_push($sector_domicilio, $sector);
+                      if (!isset($esta_parte[$sector])) $esta_parte[$sector]=$sectorVacio;
+                      $cantEjemTotales++;
+                      $cantEjemDomicilio++;
+                      $esta_parte[$sector]['ejemTotal']++;
+                      $esta_parte[$sector]['ejemDomicilio']++;
+                      if ($ejemplar['estado']=='PRES') {
+                              $cantEjemDomicilioPrestados++;
+                              $esta_parte[$sector]['totalPrestados']++;
+                              $esta_parte[$sector]['ejemDomiciolioPrestados']++;
+                      }
+        }
+        foreach ($parte['ejemplares_consulta'] as $ejemplar){
+                $sector=$ejemplar['sector'];
+    array_push($sector_consulta, $sector);
+                if (!isset($esta_parte[$sector])) $esta_parte[$sector]=$sectorVacio;
+                $cantEjemTotales++;
+                $cantEjemConsulta++;
+                $esta_parte[$sector]['ejemTotal']++;
+                $esta_parte[$sector]['ejemConsulta']++;
+                if ($ejemplar['estado']=='PRES') {
+                        $cantEjemConsultaPrestados++;
+                        $esta_parte[$sector]['totalPrestados']++;
+                        $esta_parte[$sector]['ejemConsultaPrestados']++;
+                }
+        }
+  }
+
+?>
+   <!-- biblioteca -->
+<div class="panel panel-info">
+    <div class="panel-heading col-md-12" style="font-size: 1.5em">
+                    <div class="col-md-9"><?= $this->libraries[$this->library_code]->name ?></div>
+                    <div class="col-md-3"><a href="../Content/bibliotecas" style="font-size: 0.6em; padding:0; color:#31708f">Ubicación de la biblioteca</a></div>
+    </div>
+    <div class="row"></div>
+
+   <!-- parte -->
+   <div class="panel-body">
+   <? foreach ($resumen_parte as $parte_id => $parte){ 
+      $parte_id_tag=preg_replace('/[^a-z,A-Z,0-9]/i', '_', $parte_id); //parte para html id tag
+      $cantidad_disponible = (array_sum(array_column($parte,'ejemDomicilio')))-(array_sum(array_column($parte,'ejemDomiciolioPrestados')))-$esperas[$parte_id];
+      $parte_id_url=($parte_id=='No especificado')?'':rawurlencode($parte_id); //parte para url reserva
+      $habilitar_reserva = $cantidad_disponible==0;
+      ?>
+
+      <div class="col-md-6">
+        <div class="panel panel-warning">
+          <div class="panel-heading">Volumen/Tomo: <?=$parte_id?></div>
+            <div class="panel-body">
+               <b>Disponibles para préstamo:</b> <?=$cantidad_disponible?><br>
+               
+                  Ubicación: <?=$signaturas[$parte_id] ?>
+                    <?=$this->library_collections[$sector_domicilio[0]]->name?>
+                    <? if (count($sector_domicilio)>1): ?>
+                      <a href="#"  type="button"  data-toggle="modal" class="link" data-target="#detalles_<?=$parte_id_tag?>">
+                        <span class="fa fa-plus" aria-hidden="true"> </span> 
+                      </a>
+                    <?endif?>
+                  <br>
+                  <? if (array_sum(array_column($parte,'ejemConsulta'))>0):?>
+                    <br><b>Consulta en sala:</b> <?=array_sum(array_column($parte,'ejemConsulta'))?>
+                    <br>Ubicación: <?=$signaturas[$parte_id]?>
+                    <?=$this->library_collections[$sector_consulta[0]]->name?>
+                    <? if (count($sector_consulta)>1): ?>
+                      <a href="#"  type="button"  data-toggle="modal" class="link" data-target="#detalles_<?=$parte_id_tag?>">
+                        <span class="fa fa-plus" aria-hidden="true"> </span> 
+                      </a>
+                    <?endif?>
+  
+                    <br>
+                  <? endif; ?>
+
+                  <!-- botón reservar -->            
+                  <div class="row">
+                    <a href="#"  type="button"  data-toggle="modal" class="link" data-target="#detalles_<?=$parte_id_tag?>"><?=$this->transEsc("Ver más...")?></a>
+                  </div>
+                  
+                  <div class="row"></div>
+                 
+                  <? if ($user) : ?>
+                    <div class="row"><input type="button" name="reservar" class="col-md-8 col-md-offset-2 btn btn-info" reserva="<?=($habilitar_reserva)?'enabled':'disabled'?>" value="Reservar" parte_id_tag="<?=$parte_id_tag?>" url="?library_code=<?=$this->library_code?>&control_number=<?=$idCampi?>^p<?=$parte_id_url?>"></div>
+                    <div id="resultado_<?=$parte_id_tag?>" class="border border-danger"></div>
+                  <? else: ?>
+                    <a href="<?=$this->url('myresearch-userlogin')?>" class="col-md-8 col-md-offset-2 btn btn-info <?=($habilitar_reserva)?'':'disabled'?>" data-lightbox><i class="fa fa-sign-in" aria-hidden="true"> </i> <?=$this->transEsc("Reservar")?></a>
+                  <? endif; ?>
+
+                  <!-- ventana modal con destalles de disponibilidad -->
+                  <div class="modal fade" id="detalles_<?=$parte_id_tag?>" role="dialog">
+                      <div class="modal-dialog">
+
+                        <div class="modal-content">
+                          <div class="modal-header">
+                             <button type="button" class="close" data-dismiss="modal">&times;</button>
+                             <h4 class="modal-title">Volumen/Tomo: <?=$parte_id?></h4>
+                          </div>
+                          <div class="modal-body">
+                              <b>Ejemplares totales: <?=array_sum(array_column($parte,'ejemTotal'))?></b>
+                                <blockquote>
+                                  <? foreach ($parte as $sector_id => $sector):?>
+                                    <?=$this->library_collections[$sector_id]->name?>: <?=$sector['ejemTotal']?></br>
+                                  <?endforeach?>
+                                </blockquote>
+
+                              <b>Ejemplares para préstamo a domicilio:</b>
+                                  <blockquote>
+                                  Disponibles en la biblioteca: <?= (array_sum(array_column($parte,'ejemDomicilio')))-(array_sum(array_column($parte,'ejemDomiciolioPrestados'))) ?><br>
+                                  
+                                  Prestados: <?=array_sum(array_column($parte,'ejemDomiciolioPrestados'))?>
+                                  </blockquote>
+                  
+                              <b>Ejemplares de consulta:</b>
+                                <blockquote>
+                                <? if (array_sum(array_column($parte,'ejemConsulta'))>0):?>
+                                              Disponibles en la biblioteca: <?= (array_sum(array_column($parte,'ejemConsulta')))-(array_sum(array_column($parte,'ejemConsultaPrestados')))?><br>
+                                              Siendo consultados: <?=array_sum(array_column($parte,'ejemConsultaPrestados'))?>
+                                <? else: ?>
+                                    No hay ejemplares de consulta en este registro.
+                                <? endif; ?>
+                                </blockquote>
+
+                              <? if ($reservas[$parte_id]==0):?>
+                                  <b>No se registran reservas.</b>
+                              <? else: ?> 
+                                  Registra <b><?=$reservas[$parte_id]?></b> reserva/s.
+                              <? endif; ?>
+                              <br>
+                              <? if ($esperas[$parte_id]==0):?>
+                                  <b>No se registran esperas.</b>
+                              <? else: ?> 
+                                  Registra <b><?=$esperas[$parte_id]?></b> espera/s.
+                              <? endif; ?>
+
+                          </div>
+                          <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                        </div>
+                    
+                        </div>
+                  </div>
+            <!-- fin ventana modal -->
+          </div>
+        </div>
+      </div>
+   <? } ?>
+   </div>
+</div>
+
+<script>
+  $(document).ready(inicio);
+    function inicio(){
+    var x=$("input[reserva]");
+    x.click(reservar);
+      function reservar(){
+       if (x.attr("reserva")=="disabled"){
+	var parte_id_tag= $(this).attr('parte_id_tag');
+        $("#resultado_"+parte_id_tag).removeClass('text-success');
+        $("#resultado_"+parte_id_tag).addClass('text-danger');
+
+	$("#resultado_"+parte_id_tag).html("<p>No se puede reservar este material porque hay ejemplares disponibles</p>");	
+	$("#resultado_"+parte_id_tag).slideDown(600).delay(3000).hide(350);
+       }
+       else {
+            $.ajax({
+            async: true,
+            type: "POST",
+            url: "<?=$this->basePath("MyResearch/reservar")?>"+$(this).attr('url'),
+            parte_id_tag: $(this).attr('parte_id_tag'),
+            success: function(datos,parte_id_tag){
+                $("#resultado_"+this.parte_id_tag).hide();
+                if (datos.substring(0,5)=='Error') {
+                    $("#resultado_"+this.parte_id_tag).removeClass('text-success');
+                    $("#resultado_"+this.parte_id_tag).addClass('text-danger');
+                    icon = '';
+                }
+                else {
+                    $("#resultado_"+this.parte_id_tag).addClass('text-success');
+                    $("#resultado_"+this.parte_id_tag).removeClass('text-danger');
+                    icon = '<i class="fa fa-ok" aria-hidden="true"></i> ';
+                }
+                $("#resultado_"+this.parte_id_tag).html(icon+datos);
+                $("#resultado_"+this.parte_id_tag).slideDown(600).delay(3000).hide(350);
+            }
+            });
+            return false;
+        }
+      }
+   
+  }
+</script>

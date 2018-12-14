@@ -1,0 +1,134 @@
+<?=$this->flashmessages()?>
+<?
+  $currPage = isset($list) ? 'List' : 'Estado de cuenta';
+  $this->layout()->breadcrumbs = '<li><a href="' .  $this->url('myresearch-home') . '">' . $this->transEsc('Your Account') . '</a></li> <li class="active">' . $this->transEsc($currPage) . '</li>';
+?>
+
+<div class="mainbody left"> <!-- estado cuenta usuario completo -->
+    <h1>Biblioteca Central</h1>
+    <div class="row"> <!-- prestamos -->
+
+        <h3><?=$this->transEsc('Libros en su poder') ?></h3>
+        <div class="col-md-11 col-md-offset-1" >
+        <? if (count($estado->prestamos)>0) { ?>
+
+            <?  foreach ($estado->prestamos as $prestamo){ ?>
+
+                    <div class="panel panel-success">
+                        <div class="panel-heading padding-md col-md-12">
+                            <div class="col-md-10"><?=$prestamo->titulo?></div>
+                            <div class="col-md-2">
+                               <? if (date("d/m/Y") != $prestamo->fecha_prestamo) { ?>
+                                    <form class="form-renovar" method="post"  action="renovar">
+                                    <input type="hidden" name="inventarios[]" value="<?=$prestamo->inventario ?>"/>
+                                    <input type=submit value="Renovar"  class="btn btn-info glyphicon glyphicon-refresh">
+                                    </form>
+                                <? } ?>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <span class="col-md-4"><b>Fecha:</b></span> <?=$prestamo->fecha_prestamo?><br>
+                                <span class="col-md-4 <?=(date("d/m/Y")==$prestamo->fecha_vencimiento)?'alert-danger':''?>"><b>Vencimiento:</b></span> <?=$prestamo->fecha_vencimiento?><br>                       
+                                <span class="col-md-4"><b>Inventario:</b></span> <?=$prestamo->inventario?><br>
+                            </div>
+                        </div>
+                    </div>
+            <? } ?>
+        <?
+        }
+        else { ?>
+            <div class="panel panel-success">
+                <div class="panel-heading padding-md"> No registra libros en su poder</div>
+            </div>
+        <? }
+        ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <h3 class="display-1"><?=$this->transEsc('Esperas') ?></h3>
+        <div class="col-md-11 col-md-offset-1">
+            <?
+            if (count($estado->esperas)>0) {
+                foreach ($estado->esperas as $espera){ ?>
+                    <div class="panel panel-success">
+                        <div class="panel-heading padding-md"><?=$espera->titulo?></div>
+                        <div class="panel-body">
+                            <div class="col-md-10">
+                                <span class="col-md-3"><b>Ingreso a espera:</b></span> <?=$espera->fecha?><br>
+                            </div>
+                        </div>
+                    </div>
+            <?    }     
+            }
+            else { ?>
+                <div class="panel panel-success">
+                    <div class="panel-heading padding-md">No registra esperas a su nombre</div>
+                </div>
+            <? } ?>
+        </div>
+    </div>
+
+    <div  class="row">
+        <h3><?=$this->transEsc('Reservas') ?></h3>
+        <div class="col-md-11 col-md-offset-1">
+        <? if (count($estado->reservas)>0) { ?>
+           <?  foreach ($estado->reservas as $reserva){ ?>
+                    <div class="panel panel-success">
+                        <div class="panel-heading padding-md col-md-12">
+                          <div class="col-md-10"><?=$reserva->titulo?></div>
+                            <div class="col-md-2"> <!-- botón reservas -->
+                                <form class="form-renovar" method="post"  action="reserva-eliminar">
+                                <input type="hidden" name="parte_id" value="<?= $reserva->parte_id ?>"/>
+                                <input type=submit value="Eliminar"  class="btn btn-danger">
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="col-md-10">
+                                <span class="col-md-4"><b>Fecha de la reserva:</b></span> <?=$reserva->fecha?><br>
+                            </div>
+                        </div>
+                    </div>
+            <? } ?>    
+        <?}
+        else { ?>
+            <div class="panel panel-success">
+                <div class="panel-heading padding-md">No registra reservas a su nombre</div>
+            </div>
+        <? } ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <h3 class="display-"><?=$this->transEsc('Sanciones') ?></h3>
+        <div class="col-md-11 col-md-offset-1">
+        <? if (count($estado->sanciones)>0) { ?>
+            <? foreach ($estado->sanciones as $sancion){ ?>
+                    <div class="panel panel-danger">
+                        <div class="panel-heading padding-md">Sancionado:</div>
+                        <div class="panel-body">
+                            <div class="col-md-10">
+                                <span class="col-md-3"><b>Fecha:</b></span> <?=$sancion->fecha?><br>
+                                <span class="col-md-3"><b>Días:</b></span> <?=$sancion->dias?><br>                       
+                                <span class="col-md-3"><b>Vencimiento:</b></span> <?=$sancion->vencimiento?><br>
+                            </div>
+                        </div>
+                    </div>
+            <? } ?>
+        <?}
+        else { ?>
+            <div class="panel panel-success">
+                <div class="panel-heading padding-md">No registra sanciones a su nombre</div>
+            </div>
+        <? } ?>
+        </div>
+    </div>
+
+</div>
+
+<div class="<?=$this->layoutClass('sidebar')?>">
+  <?=$this->context($this)->renderInContext("myresearch/menu.phtml", ['active' => isset($list) ? 'list' . $list['id'] : 'ecu'])?>
+</div>
