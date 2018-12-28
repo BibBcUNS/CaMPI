@@ -11,7 +11,7 @@ shell_exec(
 // Comprimo los archivos
 shell_exec(
     "cd backup &"
-    ."7z a campi.zip *"
+    ."c:\\CaMPI\\bin\\cisis\\7z\\7za a campi.zip *"
 );
 
 //Redirecciono el navegador para descargar el archivo
