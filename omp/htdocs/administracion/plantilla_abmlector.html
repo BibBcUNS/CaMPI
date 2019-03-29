@@ -105,6 +105,7 @@ function cargar_sancion() {
       	<select id="estado" name="estado" onchange="cargar_sancion()">
       		<option value="Habilitado" [pft]if s(mhu,v10).3='HAB' then 'selected' fi,mpl[/pft]>Habilitado</option>
       		<option value="Sancionado" [pft]if s(mhu,v10).3='SAN' then 'selected' fi,mpl[/pft]>Sancionado</option>
+      		<option value="Nohabilitado" [pft]if s(mhu,v10).3='NOH' then 'selected' fi,mpl[/pft]>No habilitado</option>
       	</select>
       </td>
       <td width="20%" bgcolor="#BEE4FF"><b>Sanciones</b></td>
