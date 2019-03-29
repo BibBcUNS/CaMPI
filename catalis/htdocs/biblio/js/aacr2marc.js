@@ -45,7 +45,7 @@ function aacr2marc (aacrText)
 	var tag, ind;
 	
 	// Eliminamos saltos de línea dobles, y espacios o tabs múltiples
-	aacrText = aacrText.replace(/\r\n\r\n/g,"\r\n").replace(/ +|\t+/g," "); // usamos /\s+/ ?
+	aacrText = aacrText.replace(/\r?\n\r?\n/g,"\r\n").replace(/ +|\t+/g," "); // usamos /\s+/ ?
 	
 	// Aceptamos un guión simple como separador de áreas (a pedido de AOE)
 	aacrText = aacrText.replace(/\. - /g,". -- ");
@@ -64,7 +64,7 @@ function aacr2marc (aacrText)
 	document.write(output);
 	*/
 	
-	var paragraphs = aacrText.split(/\r\n/);
+	var paragraphs = aacrText.split(/\r?\n/);
 
 	// ¿Tenemos un campo 1xx? (i.e. un párrafo inicial sin separador de áreas)
 	if ( paragraphs[0].search(RE_AREA_SEP) == -1 )	{ 

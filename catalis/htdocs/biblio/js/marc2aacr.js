@@ -1148,7 +1148,7 @@ function marc2aacr(materialType,f001,f005,f008,marcDatafields,ejemplares)
 	var aacrOutput = description + tracing + recordNumbers;
 
 	// Sustituciones finales
-	aacrOutput = aacrOutput.replace(/\r\n/g,"<br>").replace(REGEX_INDENT,"&nbsp;&nbsp;&nbsp;&nbsp;");
+	aacrOutput = aacrOutput.replace(/\r?\n/g,"<br>").replace(REGEX_INDENT,"&nbsp;&nbsp;&nbsp;&nbsp;");
 
 
 	// -------------------------------------------------------------

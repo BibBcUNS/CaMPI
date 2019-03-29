@@ -10,11 +10,6 @@
  */
 
 
-
-
-
-
-
 // -----------------------------------------------------------------------------
 function padWithZeros(num, totalLength)
 // Rellena num con ceros a la izquierda, hasta completar totalLength posiciones
@@ -225,8 +220,8 @@ function serializeRecord(leader, controlFields, dataFields, localData)
 		}
 		
 		// 980: PostIt note
-		if ( postItNote != "" ) {
-			marcFields += "\n980 " + postItNote.replace(/\r\n/g,"\\r\\n");
+		if ( postItNote != "" ) {			
+			marcFields += "\n980 " + postItNote.replace(/\r?\n/g,"\\r\\n");
 			// ATENCION: \r\n solo en Windows?
 		}
 		

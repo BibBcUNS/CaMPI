@@ -82,6 +82,8 @@ function init()
 				whichNote = "Subject";
 			else if ( "o" == notas[i].substr(0,1) )
 				whichNote = "Other";
+			else
+				continue;
 				
 			document.getElementById("postItNote" + whichNote).value = notas[i].substr(1).replace(/_ALT94_/g,"^");
 		}
