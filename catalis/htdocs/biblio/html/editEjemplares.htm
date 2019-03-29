@@ -446,7 +446,7 @@ function init()
 	userAttr = new Array();
 	userAttr = userAttr.concat("parte","institucion","coleccion","precio","donante");
 	userAttr = userAttr.concat("STclase","STlibristica","motivoBaja","STprefijo","donacion","notaBibliog");
-	userAttr = userAttr.concat("orden","inventario","estadoFisico","proveedor","numeroEj");
+	userAttr = userAttr.concat("orden","inventario","estadoFisico","proveedor", "fuente", "numeroEj");
 	userAttr = userAttr.concat("STvolumen","fechaAdq","instCanje");
 	
 	// Lista de atributos para un ejemplar, generados por el sistema
@@ -698,6 +698,10 @@ window.onload = init;
 						<td class="ejLabel">Proveedor</td>
 						<td><input id="proveedor" type="text" size="42"></td>
 					</tr>
+					<tr>
+						<td class="ejLabel">Fuente de Financiamiento</td>
+						<td><input id="fuente" type="text" size="42"></td>
+					</tr>					
 					
 					<tr style="background: #FCB;">
 						<td colspan="1" align="right" class="formaAdq"><b><em>Donación</em></b></td>

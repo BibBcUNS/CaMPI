@@ -193,6 +193,7 @@ function serializeRecord(leader, controlFields, dataFields, localData)
 				{code : "j", label : "motivoBaja"},
 				{code : "k", label : "STprefijo"},
 				{code : "l", label : "donacion"},
+				{code : "m", label : "fuente"},
 				{code : "n", label : "notaBibliog"},
 				{code : "o", label : "orden"},
 				{code : "p", label : "inventario"},
