@@ -1,0 +1,6 @@
+.gridview_click tbody tr {
+	cursor:pointer;
+}
+.gridview_click tbody tr:nth-of-type(odd):hover,.gridview_click tbody > tr:hover {
+	background-color: #EBF5FB;
+}
