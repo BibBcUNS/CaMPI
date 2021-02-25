@@ -631,7 +631,8 @@ abstract class Application extends Module
             'mailer' => ['class' => 'yii\swiftmailer\Mailer'],
             'urlManager' => ['class' => 'yii\web\UrlManager'],
             'assetManager' => ['class' => 'yii\web\AssetManager'],
-            'security' => ['class' => 'yii\base\Security'],
+            //'security' => ['class' => 'yii\base\Security'],
+            'security' => ['class' => 'app\models\base\Security'],
         ];
     }
 

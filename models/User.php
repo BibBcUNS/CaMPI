@@ -11,13 +11,19 @@ class User extends MdmUser
 
     public $permisos,$permiso; //permisos: una lista de permisos (solo fulladmin). permiso: Solo permiso para una biblioteca
 
+
+    public static function tableName()
+    {
+        return '{{%persona}}';
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['username', 'email','status'], 'required'],
+            [['username', 'nombre', 'apellido', 'email','status'], 'required'],
             [['permisos','permiso'], 'safe'],
         ];
     }

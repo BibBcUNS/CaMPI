@@ -15,6 +15,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+
 class UserController extends AdminUserController
 {
     public function actionSignup()
@@ -41,6 +42,7 @@ class UserController extends AdminUserController
     public function actionIndex()
     {
         $searchModel = new UserSearch();
+        $searchModel->status = 10; // default Activso
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -75,6 +77,7 @@ class UserController extends AdminUserController
    public function actionCreate()
    {
        $model = new User();
+       $model->status = 10; // Acivo por defecto
        if ($model->load(Yii::$app->request->post()) && $model->save()) {
            return $this->redirect(['view', 'id' => $model->id]);
        }

@@ -1,9 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\models\Biblioteca;
 use app\models\User;
+use app\models\TipoDocumento;
 use kartik\switchinput\SwitchInput;
 
 /* @var $this yii\web\View */
@@ -20,7 +22,24 @@ use kartik\switchinput\SwitchInput;
 			<div class="panel panel-default"">
 		    	<div class="panel-heading"><h4>Perfil</h4></div>
 		    	<div  class="panel-body">
+		    		<div class="row">
+		    		<div class="col-md-4"><?= $form->field($model, 'tipo_documento_id')->dropDownList(
+				            ArrayHelper::map(TipoDocumento::find()->all(), 'id', 'tipo'),
+				            [   'prompt' => 'Tipo de Documento',
+				                'style'=>'padding:0px',
+				                'readonly' => (!$model->isNewRecord), 
+				                'disabled' => (!$model->isNewRecord),
+				            ]); ?>
+				     </div>
+				     <div class="col-md-8"><?= $form->field($model, 'numero_documento')->textInput([
+				        'maxlength' => true,
+				        'readonly' => (!$model->isNewRecord), 
+				        'disabled' => (!$model->isNewRecord),
+				    ]) ?></div>
+					</div>	
 				    <?= $form->field($model, 'username')->textInput() ?>
+					<?= $form->field($model, 'nombre')->textInput() ?>
+				    <?= $form->field($model, 'apellido')->textInput() ?>
 				    <?= $form->field($model, 'email')->textInput() ?>
 
 				            <?= $form->field($model, 'status')->widget(SwitchInput::classname(), [
