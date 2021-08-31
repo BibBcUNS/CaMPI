@@ -44,6 +44,7 @@ $config = [
         ]
     ],
     'components' => [
+        'security' => ['class' => 'app\models\base\Security'],
         'formatter' => [
            'datetimeFormat'=>'php:d M Y - H:i:s'
         ],

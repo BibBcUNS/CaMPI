@@ -24,7 +24,8 @@
         "nhkey/yii2-activerecord-history": "*",
         "kartik-v/yii2-widget-switchinput": "^1.3",
         "kartik-v/yii2-widget-activeform": "@dev",
-        "kartik-v/yii2-tabs-x": "dev-master"
+        "kartik-v/yii2-tabs-x": "dev-master",
+        "kartik-v/bootstrap-fileinput": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
