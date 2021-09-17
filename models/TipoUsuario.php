@@ -7,17 +7,18 @@ use Yii;
 /**
  * This is the model class for table "{{%tipo_usuario}}".
  *
- * @property integer $id
- * @property string $nombre
+ * @property int $id
+ * @property string $nombre Tipo de Usuario
  *
+ * @property Politica[] $politicas
+ * @property PoliticaSeriadas[] $politicaSeriadas
  * @property Usuario[] $usuarios
- * @property Persona[] $personas
+ * @property Usuario[] $usuarios0
  */
 class TipoUsuario extends \yii\db\ActiveRecord
 {
-        const USUARIO_INDIVIDUAL = 1; //DNI
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -25,18 +26,17 @@ class TipoUsuario extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['nombre'], 'string', 'max' => 45],
-            [['biblioteca_id'], 'exist', 'skipOnError' => true, 'targetClass' => Biblioteca::className(), 'targetAttribute' => ['biblioteca_id' => 'id']],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -49,11 +49,18 @@ class TipoUsuario extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getBiblioteca()
+    public function getPoliticas()
     {
-        return $this->hasOne(Biblioteca::className(), ['id' => 'biblioteca_id']);
+        return $this->hasMany(Politica::className(), ['tipo_usuario_id' => 'id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPoliticaSeriadas()
+    {
+        return $this->hasMany(PoliticaSeriadas::className(), ['tipo_usuario_id' => 'id']);
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -66,8 +73,8 @@ class TipoUsuario extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersonas()
+    public function getUsuarios0()
     {
-        return $this->hasMany(Persona::className(), ['id' => 'persona_id'])->viaTable('{{%usuario}}', ['tipo_usuario_id' => 'id']);
+        return $this->hasMany(Usuario::className(), ['tipo_usuario_id' => 'id']);
     }
 }

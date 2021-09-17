@@ -29,7 +29,7 @@ class Usuario extends \yii\db\ActiveRecord
 
     public function init()
     {
-        if (isset($this->persona->username)) {
+        /*if (isset($this->persona->username)) {
             $url_usuario_campi = "http://{$this->biblioteca->url_campi}/omp/cgi-bin/wxis.exe/omp/webservices/?IsisScript=webservices/usuario.xis&usuario_id=".$this->persona->username;
             $usuario_json = utf8_encode(file_get_contents($url_usuario_campi));
             $usuario_campi = (Array)json_decode($usuario_json);
@@ -47,7 +47,7 @@ class Usuario extends \yii\db\ActiveRecord
             // sanciones:
             if (isset($usuario_campi['sanciones']))
                 $this->sanciones = $usuario_campi['sanciones'];
-        }
+        }*/
     }
 
     public function afterFind() {
@@ -67,7 +67,7 @@ class Usuario extends \yii\db\ActiveRecord
             [['persona_id', 'biblioteca_id'], 'integer'],
             [['persona_id'], 'exist', 'skipOnError' => true, 'targetClass' => Persona::className(), 'targetAttribute' => ['persona_id' => 'id']],
             [['biblioteca_id'], 'exist', 'skipOnError' => true, 'targetClass' =>  Biblioteca::className(), 'targetAttribute' => ['biblioteca_id' => 'id']],
-            //[['tipo_usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => TipoUsuario::className(), 'targetAttribute' => ['tipo_usuario_id' => 'id']],
+            [['tipo_usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => TipoUsuario::className(), 'targetAttribute' => ['tipo_usuario_id' => 'id']],
         ];
     }
 

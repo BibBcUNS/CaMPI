@@ -19,22 +19,21 @@
 	  	 <?php 
 	  	 	// ID usuario
 	     	if (! $usuario->isNewRecord) {
-                echo Html::activeHiddenInput($usuario, "[{$usuario->biblioteca->id}]id");
+                echo Html::activeHiddenInput($usuario, "id");
             }
-            // Tipo Usuario ID
-            $categorias = $usuario->biblioteca->categorias_usuarios();
-            echo $form->field($usuario, "[{$usuario->biblioteca->id}]categoria")
+
+            echo $form->field($usuario, "tipo_usuario_id")
 	     		->dropDownList(
 	     			//ArrayHelper::map(TipoUsuario::find()->where(['biblioteca_id'=>$usuario->biblioteca->id])->all(), 'id', 'nombre'),
-	     			$categorias,
+	     			$usuario->biblioteca->mapTiposDeUsuario,
 	     			[
-	     				'value'=>$usuario->categoria,
-	     				'prompt' => (count($categorias)>0)?'':'No es posible obtener la lista de categorias!!!',
-	     				'style'=>'padding:0px'
+	     				'value'=>$usuario->tipo_usuario_id,
+	     				'prompt' => 'Seleccionar categoría ...',
+	     				'style'=>'padding:0px',
 	     			]
 	     	);
 	     	// Observaciones
-	     	echo $form->field($usuario, "[{$usuario->biblioteca->id}]notas")->textarea(['rows' => '3']);
+	     	echo $form->field($usuario, "notas")->textarea(['rows' => '3']);
      	?>
      	<?php if (!is_null($usuario->prestamos)) {
      		echo "<div class='row'><div class='col-md-12'>";
@@ -52,7 +51,7 @@
      			echo "<li>$sancion</li>";
      		}
      		echo "</ul><br>";
-     		echo $form->field($usuario, "[{$usuario->biblioteca->id}]eliminar_sanciones")->widget(SwitchInput::classname(), [
+     		echo $form->field($usuario, "eliminar_sanciones")->widget(SwitchInput::classname(), [
 		        'name'=>'eliminar_sanciones',
 		        'options'=>['class'=>'col-md-5'],
 		        'pluginOptions'=>[

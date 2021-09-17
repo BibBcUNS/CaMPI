@@ -207,78 +207,23 @@ class PersonaController extends Controller
         return implode('&', $parametros);
     }
 
-    private function guardarPersona($model, $save_remote = true) {
-        if ($model->load(Yii::$app->request->post())) {
+    private function guardarPersona($model) {
+        $usuario = $model->usuario;
+        if ($model->load(Yii::$app->request->post()) && $usuario->load(Yii::$app->request->post())) {
+
             $model->persona_config->load(Yii::$app->request->post());
-            /*var_dump($model->lista_usuarios);
-            echo "<hr>";
-            var_dump(Yii::$app->request->post('Usuario'));exit;*/
-            Model::loadMultiple($model->lista_usuarios, Yii::$app->request->post());
             $this->load_datos_adicionales($model);
-            $todo_ok = true;
+
             $error_messages=[];
             $success_messages=[];
             if ($model->validate() && $this->validar_datos_adicionales($model)
-                && $this->validar_usuarios($model) && $this->validar_persona_config($model)) {
+                && $usuario->validate() && $this->validar_persona_config($model)) {
                 $model->username = ($model->tipoDocumento->tipo).$model->numero_documento;
                 $model->save();
                 $model->saveDatosAdicionales();
-                $model->saveUsuarios();
-                //Yii::$app->session->addFlash('success', "<span class='glyphicon glyphicon-ok'></span> Los datos se guardaron correctamente en la <b>BD Centralizada</b> ");
-                $success_messages[] = "<span class='glyphicon glyphicon-ok'></span> <b class='col-md-4'>BD Centralizada</b> Los datos se guardaron correctamente.";
-                // El TabularInput requiere si o si uno Objeto para armar el formulario
-                
-                // acá se podrían definir criterios dinámicos. Es decir, que se cree el registro donde no está y se actualice donde si está.
-                
-                if ($save_remote) {
-                    $bibliotecas = Biblioteca::bibliotecasHabilitadas();
-                    foreach ($bibliotecas as $biblioteca) {
-                        //echo $biblioteca->id.'--';
-                        //$usuario = $model->usuario_en($biblioteca->id);
-                        $usuario = $model->usuarios_post_get_por_biblioteca($biblioteca->id);
-                        $url_update_lector = "http://{$biblioteca->url_campi}/omp/cgi-bin/wxis.exe/omp/webservices/?IsisScript=webservices/lector-new-update.xis&id_operador=admin&".
-                                $this->array_to_url_params([
-                                    'credencial'        => $model->username,
-                                    'domicilio'         => $model->domicilio,
-                                    'nombre'            => $model->apellido.', '.$model->nombre,
-                                    'email'             => $model->email,
-                                    'telefono'          => $model->telefono,
-                                    'notificacion_proximo_a_vencer'
-                                                        => $model->persona_config->notificacion_proximo_a_vencer,
-
-                                    'categoria'         => ($usuario)?$usuario->categoria:'',
-                                    'eliminar_sanciones'=> ($usuario)?$usuario->eliminar_sanciones:'',
-                                ]);
-
-                        try {
-                            $renovaciones_json = file_get_contents($url_update_lector);
-                            $resultado=json_decode($renovaciones_json);
-
-                            if (is_null($resultado)) {
-                                $error_messages[] = "Error en <b>\"$biblioteca->nombre\"</b>: <i>{$biblioteca->url_campi}</i>";
-                                $todo_ok = false;
-                            }
-                            elseif ($resultado->estado == 'error') {
-                                $error_messages[] = "Error en <b>\"$biblioteca->nombre\"</b>({$biblioteca->url_campi}): <i>{$resultado->mensaje}</i>";
-                                $todo_ok = false;
-                            }
-                            else {
-                                $success_messages[] = "<span class='glyphicon glyphicon-ok'></span> <b class='col-md-4'>$biblioteca->nombre </b>".$resultado->message;
-                            }
-                        } catch (ErrorException $e) {
-                            $error_messages[] = "Error de conexión en <b>\"$biblioteca->nombre\"</b>: <i>http://{$biblioteca->url_campi}/omp/cgi-bin/...</i>";
-                            $todo_ok = false;
-                        }
-                    }
-                }
-
-                if (count($success_messages)>0)
-                    Yii::$app->session->addFlash('success', implode("<br>",$success_messages));
-
-                if (count($error_messages)>0)
-                    Yii::$app->session->addFlash('error', implode("<br>",$error_messages));
-                //exit;
-                return $todo_ok;
+                $usuario->save();
+                Yii::$app->session->addFlash('success', "<span class='glyphicon glyphicon-ok'></span> Los datos se guardaron correctamente");
+                return true;
             }
         }
     }
@@ -286,7 +231,7 @@ class PersonaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->lista_usuarios = $model->usuariosEditables;
+        //$model->lista_usuarios = $model->usuariosEditables;
         if ($this->guardarPersona($model)) { // esto es si se guarda correctamete
             return $this->redirect(['view', 'id' => $model->id]);
         }

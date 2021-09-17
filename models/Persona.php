@@ -32,7 +32,6 @@ class Persona extends \yii\db\ActiveRecord
 {
     public $masDatos;
     public $persona_config;
-    public $lista_usuarios;
 
     const DEFUALT_TIPO_DOC = 1; //DNI
     const ESTADO_DEFAULT = 0; //DNI
@@ -61,14 +60,6 @@ class Persona extends \yii\db\ActiveRecord
 
             [['tipo_documento_id'], 'exist', 'skipOnError' => true, 'targetClass' => TipoDocumento::className(), 'targetAttribute' => ['tipo_documento_id' => 'id']],
         ];
-    }
-
-    public function usuarios_post_get_por_biblioteca($biblioteca_id) {
-        foreach ($this->lista_usuarios as $usuario) {
-            if ($usuario->biblioteca_id == $biblioteca_id)
-                return $usuario;
-        }
-        return false;
     }
 
     public static function bloqueoEstado($estado_id = null) {
@@ -193,12 +184,6 @@ class Persona extends \yii\db\ActiveRecord
         }
     }
 
-    public function saveUsuarios() {
-        foreach ($this->lista_usuarios as $usuario) {
-                $usuario->save();
-        }
-    }
-    
     public function usuario_en($biblioteca_id)
     {
         foreach ($this->usuarios as $usuario) {
@@ -245,9 +230,19 @@ class Persona extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuarios()
+    /*public function getUsuarios()
     {
         return $this->hasMany(Usuario::className(), ['persona_id' => 'id']);
+    }*/
+
+    public function getUsuario()
+    {
+        if ($biblioteca = Yii::$app->session->get('library')) {
+            return $this->hasMany(Usuario::className(), ['persona_id' => 'id'])->where(['biblioteca_id' => $biblioteca->id])->one();
+        }
+        else {
+            return new Usuario();
+        }
     }
 
     public function getBibliotecasUsuarios()
