@@ -1,0 +1,81 @@
+AKK|Akkadian|Acadio
+ALB|Albanian|Alban‚s
+ARA|Arabic|Arabe
+ARC|Aramaic|Arameo
+ARM|Armenian|Armenio
+ARN|Mapuche|Mapuche
+BAQ|Basque|Vasco
+BUL|Bulgarian|B£lgaro
+CAI|Central American Indian (Other)|Indios de Centroam‚rica (Otros)
+CAS|cas?|cas?
+CAT|Catalan|Catal n
+CHI|Chinese|Chino
+CZE|Czech|Checo
+DAN|Danish|Dan‚s
+DEU|deu?|deu?
+DUT|Dutch|Holand‚s
+DYU|Dyula|Dyula?
+ENG|English|Ingl‚s
+EPO|Esperanto|Esperanto
+EST|Estonian|Estonio
+FIN|Finnish|Fin‚s
+FRE|French|Franc‚s
+FRM|French, Middle (ca. 1400-1600)|Franc‚s medio (ca. 1400-1600)
+FRO|French, Old (ca. 842-1400)|Franc‚s antiguo (ca. 842-1400)
+GER|German|Alem n
+GLG|Galician|Gallego
+GRC|Greek, Ancient (to 1453)|Griego antiguo (hasta 1453)
+GRE|Greek, Modern (1453- )|Griego moderno (1453- )
+GRN|Guarani|Guaran¡
+GUJ|Gujarati|Gujarati
+HEB|Hebrew|Hebreo
+HIN|Hindi|Hindi?
+HUN|Hungarian|H£ngaro
+IND|Indonesian|Indonesio
+ITA|Italian|Italiano
+JAP|jap?|jap?
+JPN|Japanese|Japon‚s
+KAN|Kannada|Kannada?
+KOR|Korean|Coreano
+KUR|Kurdish|Kurdo?
+LAD|Ladino|Ladino
+LAT|Latin|Lat¡n
+LAV|Latvian|Latvian?
+LIT|Lithuanian|Lituano
+MAP|Austronesian (Other)|Austronesian (Other)?
+MUL|Multiple languages|M£ltiples idiomas
+NAI|North American Indian (Other)|Indios de Norteam‚rica (Otros)
+NAV|Navajo|Navajo
+NIC|Niger-Kordofanian (Other)|Niger-Kordofanian (Other)
+NOR|Norwegian|Noruego
+OCI|Occitan (post-1500)|Occitano? (post-1500)
+ORM|Oromo|Oromo?
+PAN|Panjabi|Panjabi
+PER|Persian|Persa
+PLI|Pali|Pali?
+POL|Polish|Polaco
+POR|Portuguese|Portugu‚s
+QUE|Quechua|Quechua
+ROA|Romance (Other)|Romance (Otros)
+RUM|Romanian|Rumano
+RUS|Russian|Ruso
+SAI|South American Indian (Other)|Indios de sudam‚rica (Otros)
+SAN|Sanskrit|S nscrito
+SCC|Serbian|Serbio
+SCO|Scots|Scots?
+SCR|Croatian|Croata
+SLO|Slovak|Eslovaco
+SLV|Slovenian|Esloveno
+SOT|Sotho|Sotho?
+SPA|Spanish|Espa¤ol
+SWA|Swahili|Swahili
+SWE|Swedish|Sueco
+SYR|Syriac|Sirio?
+TGL|Tagalog|Tagalog?
+THA|Thai|Thai
+TUR|Turkish|Turco
+UKR|Ukrainian|Ucranio?
+UND|Undetermined|Indeterminado?
+VIE|Vietnamese|Vietnamita
+WEL|Welsh|Gal‚s
+YID|Yiddish|Yiddish

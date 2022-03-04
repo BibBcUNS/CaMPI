@@ -1,0 +1,23 @@
+/* ----------------------------------------------------------------------
+ *  Reasignacion de codigos (subcampo 9) a los campos de encabezamientos
+ *  de la base bibliografica
+ *
+ *  (c) Fernando J. Gomez, INMABB, 2003
+ * ----------------------------------------------------------------------
+ */
+
+if getenv('SUBJ_TAGS') : v1*1.4 then
+	replace(v1,
+		s('^9',v1^9),
+		s('^9',ref(['tmp\SUBJCODE']l(['tmp\SUBJCODE']v1^9),v2))
+		)/
+	
+else if getenv('NAME_TAGS') : v1*1.4 then
+	replace(v1,
+		s('^9',v1^9),
+		s('^9',ref(['tmp\NAMECODE']l(['tmp\NAMECODE']v1^9),v2))
+		)/
+	
+else
+	v1/
+fi,fi,

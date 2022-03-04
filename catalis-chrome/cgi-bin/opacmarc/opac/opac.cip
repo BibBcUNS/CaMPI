@@ -1,0 +1,34 @@
+
+# -----------------------------------------------------------------
+# Archivos utilizados en la generación del OPAC y en Catalis
+# -----------------------------------------------------------------
+AC-ANSI.TAB=/home/catalis/bases/catalis_pack_en_produccion/common/ac-ansi.tab
+BIBLIO.FST=/home/catalis/bases/catalis_pack_en_produccion/common/biblio.fst
+BIBLIO.STW=/home/catalis/bases/catalis_pack_en_produccion/common/biblio.stw
+COUNTRY.*=/home/catalis/bases/catalis_pack_en_produccion/common/country.*
+DICTGIZ.*=/home/catalis/bases/catalis_pack_en_produccion/common/dictgiz.*
+HEADSORT.PFT=/home/catalis/bases/catalis_pack_en_produccion/common/headsort.pft
+UC-ANSI.TAB=/home/catalis/bases/catalis_pack_en_produccion/common/uc-ansi.tab
+
+
+# -----------------------------------------------------------------
+# Archivos utilizados solamente en la generación del OPAC
+# -----------------------------------------------------------------
+ELIMDUP2.PFT=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/elimdup2.pft
+HEAD.PFT=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/head.pft
+HEADINGS.FST=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/headings.fst
+LANG.*=/home/catalis/bases/catalis_pack_en_produccion/common/lang.*
+LANG.FST=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/lang.fst
+LANG.TXT=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/lang.txt
+LOCATION_SORT.PFT=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/location_sort.pft
+NAME.PFT=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/name.pft
+RECODE.PFT=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/recode.pft
+REGPUNT.PFT=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/regpunt.pft
+SUBJ.PFT=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/subj.pft
+TITLE.PFT=/home/catalis/cgi-bin/catalis_pack_en_produccion/opacmarc/opac/title.pft
+
+
+***AC-OEM.TAB=/home/catalis/bases/opacmarc/ac-oem.tab
+***ANSI2OEM.*=/home/catalis/bases/opacmarc/ansi2oem.*
+***OEM2ANSI.*=/home/catalis/bases/opacmarc/oem2ansi.*
+***UC-OEM.TAB=/home/catalis/bases/opacmarc/uc-oem.tab

@@ -1,0 +1,88 @@
+/* ======================================================================
+ *  Extraccion de titulos de la base bibliografica.
+ *
+ *  ATENCION: agregar campos faltantes (505,711,76x-78x)
+ *  246: chequear indicador?
+ *
+ *  (c) 2003-2004  Fernando J. Gomez - CONICET - INMABB
+ * ======================================================================
+ */
+
+
+/* ------------------------------------------------------------------------------
+ *  EXPLICACION:
+ *
+ *  El input, v1, tiene la forma:
+ *
+ *     !v245!14^aThe title :^bremainder of title /^cstatement of responsibility.
+ *
+ *  Luego del proc() del paso 1, tenemos un campo 1000 con este aspecto:
+ *
+ *     1000 "aThe title :"
+ *     1000 "bremainder of title /"
+ *     1000 "cstatement of responsibility."
+ *     1000 "##"
+ *
+ *  Y este es el aspecto de la salida que este PFT genera:
+ *
+ *     !ID 0
+ *     !v001!~aThe title :~bremainder of title
+ *     !v002!245
+ *     !v013!4
+ * ------------------------------------------------------------------------------
+ */
+
+
+/#,
+'!ID 0'/,
+'!v001!',
+
+
+/* --------------------------------------------
+ * PASO 1: Dividimos el titulo en subcampos
+ * --------------------------------------------
+ */
+ 
+proc(
+		'd1000',
+		(,
+			'a1000¦', replace(v1*9,'^','¦a1000¦'), '¦a1000¦##¦',
+		),
+	),
+
+
+
+/* -----------------------------------------------
+ * PASO 2: Filtramos subcampos (loop sobre v1000)
+ * -----------------------------------------------
+ */
+ 
+(,
+	if v1000 = '##' then
+		/,'!v002!',v1[1]*2.3,/,      /* v002: tag del campo */
+		
+		if v1[1]*2.3 = '245' then
+			'!v013!',v1[1]*7.1,/,    /* v013: 2do indicador del 245 */
+			
+		else if v1[1]*2.3 = '740' then
+			'!v013!',v1[1]*6.1,/,    /* v013: 1er indicador del 740 */
+		fi,fi,
+		
+	else if v1000.1 = '9' then
+		/,'!v009!',v1000*1,          /* v009: identificador? */
+		
+	else
+		select v1[1]*2.3
+			case '130' : if 'a'            : v1000.1 then '~'v1000, fi,
+			case '240' : if 'a'            : v1000.1 then '~'v1000, fi,
+			case '245' : if 'abnp'         : v1000.1 then '~',replace(v1000,' /',''), fi,
+			case '246' : if 'abgnp'        : v1000.1 then '~'v1000, fi,
+			case '700' : if 'tnp'          : v1000.1 then '~'v1000, fi,
+			case '730' : if 'adfgkmnoprst' : v1000.1 then '~'v1000, fi,
+			case '740' : if 'anp'          : v1000.1 then '~'v1000, fi,
+			case '765' : if 't'            : v1000.1 then '~'v1000, fi,
+			case '773' : if 't'            : v1000.1 then '~'v1000, fi,
+		endsel,
+   fi,fi,
+),
+

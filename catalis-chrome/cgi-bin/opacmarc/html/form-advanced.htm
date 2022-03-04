@@ -1,0 +1,350 @@
+<div align="center">
+
+<table cellpadding="0" cellspacing="16" style="background: #F9F9F9; border: 1px solid #ccc; margin-top: 2em;" border="0">
+	<tr>
+	
+	<!-- TD: Container para el formulario -->
+	<td valign="top" style="border-width: 0 1px 1px 1px; border-style: solid; border-color: #bbb; background-color: #f0f0f0;">
+	
+	<form action="[pft]v6001^u[/pft]" method="get">
+	<input type="hidden" name="IsisScript" value="[pft]v2000[/pft]">
+	<input type="hidden" name="db" value="[pft]v2104[/pft]">
+	
+	<!-- Formulario búsqueda avanzada -->
+	<table width="100%" cellspacing="0" cellpadding="6" border="0">
+		<tr>
+			<td align="center" -colspan="3" style="color: white; background-color: #009; padding-left: 0.7em; /*#03c;*/">
+				<strong>BUSQUEDA avanzada</strong>
+			</td>
+		</tr>
+	</table>
+
+<!-- ================================================= -->
+
+<div align="center">
+<fieldset style="width: 96%;">
+<legend>Buscar registros donde</legend>
+
+<table width="100%" cellspacing="0" cellpadding="2" border="0">
+
+	<!--tr><td><strong>Buscar las palabras</strong></td></tr-->
+	
+	<tr>
+		<td>
+			<select name="searchType1">
+				<option value="TITLE" [pft]if v2002='TITLE' then 'selected' fi[/pft]>título</option>
+				<option value="NAME" [pft]if v2002='NAME' OR a(v2002) then 'selected' fi[/pft]>autor</option>
+				<option value="SUBJ" [pft]if v2002='SUBJ' then 'selected' fi[/pft]>tema</option>
+				<!--option value="SN">ISBN/ISSN</option-->
+			</select>
+			contiene
+			<input type="text" name="query1" size="28" value="[pft]v2001[/pft]" -style="font-size: 90%;">
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<select name="oper">
+				<option value="AND" [pft]if v2005='AND' OR a(v2005) then ' selected' fi[/pft]>y</option>
+				<option value="OR" [pft]if v2005='OR' then ' selected' fi[/pft]>o</option>
+				<option value="AND NOT" [pft]if v2005='OR' then ' selected' fi[/pft]>y no</option>
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<select name="searchType2">
+				<option value="TITLE" [pft]if v2002='TITLE' OR a(v2002) then 'selected' fi[/pft]>título</option>
+				<option value="NAME" [pft]if v2002='NAME' then 'selected' fi[/pft]>autor</option>
+				<option value="SUBJ" [pft]if v2002='SUBJ' then 'selected' fi[/pft]>tema</option>
+				<!--option value="SN">ISBN/ISSN</option-->
+			</select>
+			contiene
+			<input type="text" name="query2" size="28" value="[pft]v2001[/pft]" -style="font-size: 90%;">
+		</td>
+	</tr>
+
+</table>
+
+</fieldset>
+</div>
+
+<!-- ================================================ -->
+
+<table cellspacing="0" cellpadding="6" border="0">
+
+<!--tr>
+<td colspan="3" style="padding: 0.5em;"-->
+
+<!--table width="100%" cellspacing="0" -style="background-color: e9e9e9;" border="1"-->
+
+<tr>
+	<td>
+		<strong>Criterios para limitar la búsqueda:</strong>
+	</td>
+</tr>
+
+<tr>
+<td>
+
+<fieldset>
+<legend>Publicación</legend>
+<table cellpadding="2" cellspacing="0" border="0">
+	<tr>
+		<td align="right">Fecha:</td>
+		<td>desde <input size="4" name="fecha1" maxlength="4"> 
+		y hasta <input size="4" name="fecha2" maxlength="4">
+		&nbsp;<span style="color: #777;">(rango: [pft]cat('DATES.TXT')[/pft])</span> 
+		</td>
+	</tr>
+	<tr>
+		<td -align="right">Lugar:</td>
+		<td>
+			<input type="text" name="place" size="16"><!--/td>
+			</tr>
+			<tr>
+			<td align="right"-->&nbsp;&nbsp;Editorial:<!--/td>
+			<td-->
+			<input type="text" name="pub" size="16">
+		</td>
+	</tr>
+</table>
+</fieldset>
+
+</td>
+</tr>
+
+<tr>
+<td -colspan="2">
+
+<fieldset>
+<legend>Idioma</legend>
+
+<table cellpadding="2" cellspacing="0">
+	<tr>
+		<td align="right">Idioma: </td>
+		<td>
+			<select name="lang">
+				<option value="" selected>Cualquiera</option>
+				[pft]
+				proc('d5001a5001|',replace(s(cat('LANG_CODES.TXT')),s(#),'|a5001|'),'|'), 
+				(
+				  proc('d5002a5002|',ref(['LANG']l(['LANG']v5001^*),v3),'|'),
+				  if v5001 > '' then '<option value="',v5001^*,'^n',v5002[1],'">',v5002[1],' [',v5001^p,']','</option>'/ fi,
+				)
+				[/pft]
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td align="right">Es una traducción: </td>
+		<td>
+			<select name="trans">
+				<option value="" selected>No es relevante</option>
+				<option value="YES">Sí</option>
+				<option value="NO">No</option>
+			</select>
+		</td>
+	</tr>
+</table>
+
+</fieldset>
+
+</td>
+</tr>
+
+
+<!--tr><td align="right">
+Forma literaria:
+</td><td>   
+<select name="litForm">
+<option value="">Cualquiera</option>
+[pft]
+/*proc('d5001a5001|',replace(s(cat('LIT_CODES.TXT')),s(#),'|a5001|'),'|'),*/
+(
+  if v5001 > '' then '<option value="',v5001^c,'">',v5001^*,'</option>'/ fi,
+)
+[/pft]
+</select>
+</td></tr-->
+
+<tr>
+	<td -colspan="2">
+		
+		<fieldset>
+		<legend>Otras características</legend>
+		<table cellpadding="2" cellspancing="0">
+			<tr>
+				<td align="right" style="color: #999;">Tipo de material: </td>
+				<td>
+					<select name="m" disabled="disabled">
+						<option value="" selected>Cualquiera</option>
+						<!--option value=c>Printed Music</option>
+						<option value=d>Manuscript Music</option>
+						<option value=j>Musical Sound Recordings</option>
+						<option value=i>Nonmusical Sound Recordings</option-->
+						<option value=e>Mapas</option>
+						<!--option value=f>Manuscript Cartographic Materials</option>
+						<option value=p>Archival and Manuscript Material</option>
+						<option value=t>Unpublished Item</option>
+						<option value=g>Video, Film, Slides</option>
+						<option value=k>Photographs, Prints, Graphics</option>
+						<option value=m>Databases, Software, Data files</option>
+						<option value=r>Artifacts, Models, Realia</option>
+						<option value=o>Kit</option-->
+						<option value=a>Printed materials/Microforms</option>
+					</select> 
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">Forma literaria: </td>
+				<td>
+					<select name="litForm">
+						<option value="" selected>Cualquiera</option>
+						<option value="YES">Ficción</option>
+						<option value="NO">No ficción</option>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">Incluye material biográfico:</td>
+				<td>
+					<select name="biogr">
+						<option value="YES">Sí</option>
+						<option value="" selected>No es relevante</option>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">Es un homenaje: </td>
+				<td>
+					<select name="fest">
+						<option value="YES">Sí</option>
+						<option value="NO">No</option>
+						<option value="" selected>No es relevante</option>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">Biblioteca que lo posee: </td>
+				<td>
+					<select name="biblioteca">
+						<option value="">Cualquiera</option>
+						[pft]
+						proc('d5001a5001|',replace(s(cat('BIB_CODES.TXT')),s(#),'|a5001|'),'|'),
+						(
+						  if v5001 > '' then '<option value="',v5001^*,'">',v5001^*,' [',v5001^p,']','</option>'/ fi,
+						)
+						[/pft]
+					</select>
+				</td>
+			</tr>
+			
+		</table>
+		</fieldset>
+		
+		<!--
+		<input type="radio" name="trans" value="YES" id="trans-yes"><label for="trans-yes">Sí</label>
+		&nbsp;<input type="radio" name="trans" value="NO" id="trans-no"><label for="trans-no">No</label>
+		&nbsp;<input type="radio" name="trans" value="" id="trans-any" checked><label for="trans-any">No es relevante</label>
+		-->
+	</td>
+</tr>
+
+<!--/table>
+
+</td>
+</tr-->
+
+</table>
+
+<table width="100%" cellspacing="0" cellpadding="6" border="0">
+	<tr>
+		<td align="center" style="padding: 0.5em;">
+			<input type="reset" value="Limpiar">
+			<input type="submit" value="Buscar" style="width: 10em;">
+		</td>
+	</tr>
+</table>
+
+</form>
+
+</td>
+
+<!-- ======= La columna lateral ========  -->
+<td rowspan="2" width="195" valign="top">
+	<table cellspacing="0" cellpadding="2" width="100%" border="0">
+		<tr>
+			<td valign="top" width="9" style="padding-top: 0.3em;">
+				<img src="/opacmarc/img/right.gif" alt="">
+			</td>
+			<td valign="top">
+				<a class="newSearch" href="[pft]v6001^u[/pft]?IsisScript=[pft]v2000[/pft]&amp;db=[pft]v2104[/pft]&amp;showForm=simple">
+					Búsqueda simple e índices
+				</a>
+			</td>
+		</tr>
+		
+		[pft]if v2104 = 'bibima' then[/pft]
+		<tr>
+			<td style="line-height: 6px;" colspan="2">&nbsp;</td>
+		</tr>
+		
+		<tr>
+			<td valign="top" width="9" style="padding-top: 0.3em;">
+				<img src="/opacmarc/img/right.gif" alt="">
+			</td>
+			<td valign="top">
+				<a class="newSearch" href="[pft]v6001^u[1][/pft]?IsisScript=[pft]v2000[1][/pft]&amp;query=NI:1&amp;db=bibima&amp;searchType=SUBJ">
+					Clasificación temática MSC&nbsp;2000
+				</a>
+				<br>
+			</td>
+		</tr>
+		[pft]fi[/pft]
+		
+		<tr>
+			<td valign="top" width="9" style="padding-top: 0.3em;">
+				<img src="/opacmarc/img/right.gif" alt="">
+			</td>
+		<td valign="top"><a hhref="">Ayuda</a></td></tr>
+	</table>
+</td> 
+
+</tr>
+
+</table>
+
+</div>
+
+<!--hr style="width: 90%;">
+
+<blockquote style="font-size: 90%; margin: 1em 3em; line-height: 1.2em;">
+El presente catálogo está basado en una muestra de 
+[pft]
+proc('d5001a5001|',replace(s(cat('BASES.PAR')),s(#),'|a5001|'),'|'),
+(
+  if v5001:'BIBLIOGRAPHIC_TOTAL=' then mid(v5001,instr(v5001,'=')+1,10), break, fi,
+)
+[/pft]
+registros MARC de la <a href="http://bdu.siu.edu.ar/">BDU</a> (base de datos unificada del SIU).
+
+<p>
+<strong>Importante</strong>: las búsquedas temáticas dependen de encabezamientos de materias
+de LC, que en esta base están en idioma <strong>inglés</strong>.
+
+<p>
+Última actualización del catálogo: [pft]s(cat('UPDATED.TXT')).10[/pft].
+
+<p>
+Este desarrollo está siendo llevado a cabo en la Biblioteca
+Dr. Antonio Monteiro, del Instituto de Matemática de Bahía Blanca
+(CONICET/Universidad Nacional del Sur), Argentina.
+
+</blockquote-->
+

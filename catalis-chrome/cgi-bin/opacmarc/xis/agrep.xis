@@ -1,0 +1,112 @@
+
+<!--
+	====================================================================
+	AGREP: approximate matchings.
+	
+	(c) 2003-2004 Fernando J. Gómez - CONICET - INMABB
+
+	Implementado para expresiones formadas por una única palabra.
+	TO-DO: implementar de alguna manera razonable para expresiones de}
+	más de una palabra.
+	
+	Algunos links relevantes sobre agrep:
+	
+		http://www.tgries.de/agrep/ -- Port de agrep para Windows/DOS
+		http://www.tgries.de/agrep/agrephlp.html -- The Help Page for AGREP 3.35 / 3.37
+		ftp://ftp.cs.arizona.edu/agrep/ -- agrep sources
+	
+	De acuerdo con http://www.tgries.de/agrep/#COPYRIGHT , "All materials
+	developed as a consequence of the use of this software shall duly
+	acknowledge such use, in accordance with the usual standards of
+	acknowledging credit in academic research. "
+	====================================================================
+-->
+
+
+<!-- ATENCION: La opción -B no admite un tope para el número de errores, 
+	y eso en ciertas ocasiones puede dar resultados muy pobres -->
+
+<!-- Archivo temporal para almacenar la lista de coincidencias aproximadas -->
+<file action="create" type="tempfile">2098</file>
+
+<!-- Construimos el comando a utilizar, parte por parte -->
+<proc><pft>
+	/* agrep (exe) */ ,'a5550¦', v6003^p,                                        '¦',
+	/* parámetros */  ,'a5551¦', '-V0 -i -1',                                    '¦',
+	/* expresión */   ,'a5552¦', '"^',v2001,'$"',                                '¦',
+	/* diccionario */ ,'a5553¦', v6003^b,'/opacmarc/',v2104,'/dict',v2002,'.txt','¦',
+	/* salida */      ,'a5554¦', '>',v2098,                                      '¦',
+</pft></proc>
+
+
+<!-- El parámetro -V0 es necesario en Windows, pero no se usa (y causa error) en Unix -->
+<!-- TO-DO: buscar una solución más elegante (?), tal vez descartando las líneas que
+	arroja agrep bajo Windows cuando no se usa -V0 -->
+<proc><pft>
+	if not getenv('SERVER_SOFTWARE') : 'Win' and not getenv('OS') : 'Win' then
+		'd5551a5551¦',replace(v5551,'-V0 ',''),'¦'
+	fi
+</pft></proc>
+
+
+<!-- Esta línea permite ver el comando construido -->
+<!--display><pft>
+	'<span style="font-size: 10px; line-height: 12px; color: white;">'v5550,x1,v5551,x1,v5552,x1,v5553,x1,v5554'</span>'
+</pft></display-->
+
+<!-- Ejecutamos el comando -->
+<display><pft>
+	system(v5550,x1,v5551,x1,v5552,x1,v5553,x1,v5554)
+</pft></display>
+
+<!-- Leemos los resultados -->
+<field action="replace" tag="5555" split="occ"><pft>,cat(v2098),</pft></field>
+
+<!-- Si no hubo matching, y la palabra es "larga", volvemos a intentar -->
+<flow action="jump"><pft>
+	if p(v5555) or size(v2001) <= 6 then 'DISPLAY_AGREP_SUG' fi,
+</pft></flow>
+
+<!-- Segundo intento, tolerando dos errores (cambiamos -1 por -2) -->
+<field action="replace" tag="5551"><pft>replace(v5551,'-1','-2')</pft></field>
+<display><pft>system(v5550,x1,v5551,x1,v5552,x1,v5553,x1,v5554)</pft></display>
+<field action="add" tag="5555" split="occ"><pft>cat(v2098)</pft></field>
+
+<!-- Si no hubo matching, y la palabra es "más larga", volvemos a intentar -->
+<flow action="jump"><pft>
+	if p(v5555) or size(v2001) <= 10 then 'DISPLAY_AGREP_SUG' fi,
+</pft></flow>
+
+<!-- Tercer intento, tolerando tres errores  (cambiamos -2 por -3) -->
+<field action="replace" tag="5551"><pft>,replace(v5551,'-2','-3'),</pft></field>
+<display><pft>,system(v5550,x1,v5551,x1,v5552,x1,v5553,x1,v5554),</pft></display>
+<field action="add" tag="5555" split="occ"><pft>,cat(v2098),</pft></field>
+
+
+<!-- ================================================== -->
+<label>DISPLAY_AGREP_SUG</label>
+<!-- ================================================== -->
+
+<display><pft>
+	if p(v5555) then 
+		'<p align="center">Ud. puede encontrar resultados para ',
+			/*if nocc(v5555) > 1 then 'alguna de estas palabras: ', else 'la palabra ', fi,*/
+			
+			/* Loop sobre ocurrencias de v5555 (palabras sugeridas) */
+			(,
+				if iocc > val(v6001^b[1]) then break, fi,  /* v6001^b: AGREP_MAX_SUG */
+				
+				'<a href="',v6001^u[1],
+					'?IsisScript=',v2000[1],
+					'&amp;db=',v2104[1],
+					'&amp;task=',v2101[1],
+					'&amp;searchType=',v2002[1],
+					'&amp;query=',v5555,
+				'" title="Haga clic para buscar ',v5555,'">',
+					v5555,
+				'</a>',
+				if iocc < nocc(v5555) then ', ', fi,
+			),
+		'.</p>',
+	fi
+</pft></display>

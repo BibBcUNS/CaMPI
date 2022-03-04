@@ -1,0 +1,84 @@
+
+<!-- Mensajes y sugerencias para búsquedas sin resultados -->
+
+<display>
+	<table align="center" cellspacing="0" style="margin-top: 0.5em;" border="0">
+		<tr>
+			<td class="alertBox" style="white-space: no-wrap;">
+				No se encontraron coincidencias
+			</td>
+		</tr>
+	</table>
+</display>
+
+
+<!-- Si la palabra es muy corta, o hay más de una palabra, omitimos el agrep -->
+<flow action="jump"><pft>
+	if size(v2001) <= 3 or v2001 : ' ' then 'OTHER_SEARCH' fi
+</pft></flow>
+
+<!-- En otro caso, llamamos al agrep -->
+<include>opacmarc/xis/agrep.xis</include>
+
+
+<!-- ================================================== -->
+<label>OTHER_SEARCH</label>
+<!-- ================================================== -->
+<!-- Aquí sugerimos un tipo de búsqueda diferente -->
+
+<!-- Si la búsqueda era por autores, ofrecemos un enlace al índice respectivo -->
+<display><pft>
+	if v2002 = 'NAME' then
+		/* Codificamos el query en v7001 */
+		proc('d7000a7000|',v2001,'|'),
+		,@URLENCODE.PFT,
+		'<p align="center">',
+			'Puede ver los ',
+			'<a href="',v6001^u,
+				'?IsisScript=',v2000,
+				'&amp;db=',v2104,
+				'&amp;task=H-BROWSE',
+				'&amp;browseTerm=',v7000,
+				'&amp;index=NAME',
+			'">'
+				' términos cercanos a <b>',v2001,'</b>',
+			'</a>',
+			' en el índice de autores.',
+		'</p>',
+	fi
+</pft></display>
+
+<!-- Si la búsqueda era por tema, intentamos con una búsqueda por título -->
+<flow action="jump"><pft>if v2002 <> 'SUBJ' then 'CONSEJOS' fi</pft></flow>
+
+<do task="search">
+	<parm name="db">BIBLIO</parm>
+	<parm name="expression"><pft>v3002,'/(9204)'</pft></parm>
+	<parm name="count">1</parm>
+	<define>1002 Isis_Total</define>
+	<loop><!-- set v1002 --></loop>
+</do>
+
+<display><htmlpft>
+	[pft]if val(v1002) > 0 then[/pft]
+		<p align="center">
+		[pft]
+		if p(v5555) then    /* v5555: resultados de agrep */
+			'Además, hay ',
+		else
+			'Hay ',
+		fi,
+		[/pft]
+		[pft]v1002[/pft] resultado[pft]if val(v1002) > 1 then 's' fi[/pft]
+		para <b>[pft]v2001[/pft]</b> en una
+		<a href="[pft]v6001^u[/pft]?IsisScript=[pft]v2000[/pft]&amp;db=[pft]v2104[/pft]&amp;task=BIB-KW-SEARCH&amp;query=[pft]v2001[/pft]&amp;searchType=TITLE&amp;trunc=%24">
+			búsqueda por título</a>.
+		</p>
+	[pft]fi[/pft]
+</htmlpft></display>
+
+
+<!-- ================================================== -->
+<label>CONSEJOS</label>
+<!-- ================================================== -->
+<display><htmlpft><pft>,cat('CONSEJOS.HTM'),</pft></htmlpft></display>

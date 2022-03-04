@@ -1,0 +1,14 @@
+
+-------------------------------------------------------------
+M2I.BAT
+-------------------------------------------------------------
+Convierte un archivo MARC (.mrc) en una base ISIS
+
+m2i <mrc_file> <isis_db> [oem]
+
+ <mrc_file>  Archivo MARC
+ <isis_db>   Base ISIS a crear
+ oem         Pasar los registros a la codificaci¢n OEM (por
+             defecto, no son modificados, suponiendo que est n en ANSI)
+
+Ejemplo:  m2i \mrc-files\loc\music.mrc music

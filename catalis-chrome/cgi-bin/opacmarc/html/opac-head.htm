@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/aacr.css">
+<link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/wh.css">
+<link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/etiquetado.css">
+<link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/msc.css">
+<link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]opacmarc/css/opac.css">
+
+<!-- Funciones JS para generar el display AACR2 (ficha) -->
+<script language="JavaScript" type="text/javascript" src="[pft]v6003^h[/pft]common/js/marc2aacr.js"></script>
+<script language="JavaScript" type="text/javascript" src="[pft]v6003^h[/pft]common/js/isbn-hyphen.js"></script>
+<script language="JavaScript" type="text/javascript" src="[pft]v6003^h[/pft]common/js/getMaterialType.js"></script>
+
+<script type="text/javascript">
+function handleLoad() {
+	[pft]if v2011 = 'simple' then[/pft]
+	if ( document.forms["simpleSearchForm"] ) {
+		document.forms["simpleSearchForm"].query.focus();
+	}
+	[pft]else[/pft]
+		// do nothing
+	[pft]fi[/pft]
+}
+
+function helpPopup(elementId) {
+	switch ( elementId ) {
+		case "helpTruncate" :
+			alert("Usar palabras como raíces\n--------------------------------\nSi esta opción está activada, entonces al buscar BIOLOG encontrará BIOLOGY, BIOLOGICAL, BIOLOGIA, etc.");
+			break;
+	}
+}
+
+function auxWin(href) {
+	var auxWin = window.open(href,"","width=600, height=300, location=yes, menubar=yes, resizable=yes, toolbar=yes, scrollbars=yes, status=yes, top=50, left=50");
+}
+
+function checkMail()
+{
+	var x = document.forms["emailForm"].mail_to.value;
+	var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if ( filter.test(x) ) {
+		document.forms["emailForm"].submit();
+	}
+	else {
+		if (x == "")
+			alert ("No ha escrito una dirección de correo.")
+		else
+			alert("Lo que ha escrito no es una dirección de correo válida."); 
+		return false;
+	}
+}
+
+function checkQuery(theForm)
+{
+	var x = theForm.query.value;
+	if ( x != "" ) {
+		theForm.submit();
+	}
+	else {
+		alert ("No ha ingresado ninguna expresión para buscar.")
+		theForm.query.focus();
+		return false;
+	}
+}
+
+var MAIN_ENTRY_TOP = [pft]v6001^1[/pft];  // (boolean)
+
+window.onload = handleLoad;
+</script>
+
+<!-- Heading buscado -->
+[pft]
+	/* ATENCION: este formato va de la mano con la porcion de aacr2.pft 
+	   que genera la lista de headings */
+	proc('d3003a3003¦',
+		if p(v2003) and p(v2001) then
+			proc('d2001a2001¦',replace(v2001,'\',''),'¦'),
+			proc('d1000a1000¦',replace(v2001*1,'^','¦a1000¦'),'¦'),
+			(,
+				if 'xyzv' : v1000.1 then
+					'--'
+				else if iocc > 1 then
+					x1,
+				fi, fi,
+				v1000*1,
+			),
+		fi
+	'¦'),
+	proc('d3004a3004¦',replace(v3003,'--','&#8212;'),'¦'),
+[/pft]
+
+
+<!-- TO-DO: Ajustar el <title> para las diferentes situaciones -->
+<title>
+[pft]
+	if p(v2109) then 'MSC 2000',
+	else if p(v2002) then v2001,
+	else if p(v3003) then v3003,
+	else if p(v2003) then 'Indice 'v2003, ": "v2007,
+	else 'Catálogo',
+	fi,fi,fi,fi,
+[/pft]
+</title>
+
+</head>
+
+<body topmargin="3" leftmargin="6">
