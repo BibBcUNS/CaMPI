@@ -197,6 +197,8 @@ class PersonaController extends Controller
         setlocale(LC_ALL, 'en_US.UTF8');
         $cadena= preg_replace("/[^A-Za-z0-9 @,._-]/", '',iconv('UTF-8', 'ASCII//TRANSLIT', $cadena));
         return urlencode($cadena);
+        // return str_replace('%2C',',',urlencode($cadena));
+        // Tengo que reemplazar "%2C" porque por razones que desconozco en la instalación campi-cems lo guarda como "%2C" en lugar de ","
     }
 
     public function array_to_url_params($arreglo) {
@@ -277,7 +279,7 @@ class PersonaController extends Controller
 
                 if (count($error_messages)>0)
                     Yii::$app->session->addFlash('error', implode("<br>",$error_messages));
-                //exit;
+        	//exit;
                 return $todo_ok;
             }
         }

@@ -13,13 +13,12 @@ use yii\console\ExitCode;
 use app\models\Persona;
 use app\models\Biblioteca;
 
-
-
-class HelloController extends Controller
+class Incorporar_usuariosController extends Controller
 {
     
-    public function actionIndex()
+    public function actionIndex($generar_completa=false)
     {
+         
         // ------------------------------------------------
         //  Declaraciones
         // ------------------------------------------------
@@ -66,6 +65,7 @@ class HelloController extends Controller
                 $persona-> numero_documento = $registro_dgsi['nro_documento'];
                 $persona-> tipo_documento_id = $mapeo_tipo_doc[$registro_dgsi['tipo_documento']];
                 $persona-> username = ($persona->tipoDocumento->tipo).$persona->numero_documento;
+		$persona-> created_by = '0';
                 
                 if ($persona->save()){
                     
@@ -99,14 +99,42 @@ class HelloController extends Controller
         echo "Registros Nuevos: $registros_nuevos \n";
         echo "Registros Presentens: $registros_presentes \n";
         
-        $bibliotecas = Biblioteca::bibliotecasHabilitadas();
-        
-        foreach ($bibliotecas as $biblioteca) {
-           
-            //Este if se coloca para probar unicamente con la url de campi humanidades
-            if ($biblioteca->id==4){
+        if ($generar_completa){
+                
+            $rows = (new \yii\db\Query())
+            ->select(['id','apellido','nombre','username','domicilio','telefono','email','created_by','created_at'])
+            ->from('persona')
+            //->where(['last_name' => 'Smith'])
+            ->all();
+            
+            $persona_csv = "runtime/persona.csv";
+            file_put_contents($persona_csv, "");
 
-                                
+            foreach ($rows as $persona) {
+
+                $linea_csv =    $persona['apellido'].', '.$persona['nombre'].'['.
+                                        $persona['username'].'['.
+                                        'SIN_CATEGORIA'.'['.
+                                        $persona['domicilio'].'['.
+                                        trim($persona['telefono']).'['.
+                                        'Nohabilitado'.'['.
+                                        $persona['email'].'['.
+                                        date("d/m/Y",$persona['created_at']).'['.
+                                        $persona['created_by'].PHP_EOL                                    
+                                        ;
+
+                        $linea_csv = mb_convert_encoding($linea_csv, 'iso-8859-1');
+                        file_put_contents($persona_csv, $linea_csv,FILE_APPEND);
+            }
+        }
+        
+        $bibliotecas = Biblioteca::bibliotecasHabilitadas();
+
+        foreach ($bibliotecas as $biblioteca) {
+        
+	    //Esta condición es para ignorar CMES (8) porque es local y por HTTPS tengo inconvenientes. Podría ser configurable el protocolo http/https	
+            //if ($biblioteca->id == 8){
+
                 $target_url = 'http://'.$biblioteca->url_campi.'/receive_files/receive_files.php';
 
                 //$file_name_with_full_path = realpath('./persona.csv');
@@ -124,80 +152,10 @@ class HelloController extends Controller
                 curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
 
                 $result=curl_exec ($ch);
-                
                 curl_close ($ch);
-                
                 echo $result;
-                           
-            }
+            //}
         }
-        
-
         return ExitCode::OK;
     }
-
-//    public function actionActualizarTodos()
-//    {
-//        function normaliza ($cadena){
-//            setlocale(LC_ALL, 'en_US.UTF8');
-//            $cadena= preg_replace("/[^A-Za-z0-9 ]/", '',iconv('UTF-8', 'ASCII//TRANSLIT', $cadena));
-//            return urlencode($cadena);
-//        }
-//        function array_to_url_params($arreglo) {
-//            $parametros = [];
-//            foreach ($arreglo as $nombre => $valor) {
-//                $parametros [] = "{$nombre}=".
-//                    (($nombre=='email')
-//                        ? $valor // porque normaliza elimina el @
-//                        : normaliza($valor));
-//            }
-//            return implode('&', $parametros);
-//        }
-//
-//        function microtime_float()
-//        {
-//            list($useg, $seg) = explode(" ", microtime());
-//            return ((float)$useg + (float)$seg);
-//        }
-//        $tiempo_inicio = microtime_float();
-//
-//        $wxis_script = 'update';
-//        $bibliotecas = Biblioteca::bibliotecasHabilitadas();
-//        $array = [];
-//
-//        //for ($i=1; $i < 10; $i++) { 
-//        $count=0;
-//        foreach(Persona::find()->select(['id','username','apellido','nombre','telefono','email'])->each(100) as $persona) {
-//            //if ($count++ == 1000) break;
-//            file_put_contents('archivo.csv',
-//                    $persona->username.';'.
-//                    $persona->domicilio.';'.
-//                    $persona->apellido.', '.$persona->nombre.';'.
-//                    str_replace(' ','',$persona->email).';'.
-//                    $persona->telefono."\n",
-//                FILE_APPEND);
-//
-//                /*
-//                $url_update_lector = "http://10.10.1.24/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/auto-lector-{$wxis_script}.xis&id_operador=admin&".
-//                                    array_to_url_params([
-//                                        'credencial'=> $persona->username,
-//                                        'domicilio' => $persona->domicilio,
-//                                        'nombre'    => $persona->apellido.', '.$persona->nombre,
-//                                        'email'     => str_replace(' ','',$persona->email),
-//                                        'telefono'  => $persona->telefono,
-//                                    ]);
-//                $update_json = file_get_contents($url_update_lector);
-//                $resultado=json_decode($update_json);
-//                //var_dump($resultado);
-//                //$persona->save();
-//
-//                //echo $persona->apellido."\n";
-//                */
-//                
-//        }
-//        $tiempo_fin = microtime_float();
-//        $tiempo = $tiempo_fin - $tiempo_inicio;
-//
-//        echo "Tiempo empleado: " . ($tiempo_fin - $tiempo_inicio);
-//    }
 }
