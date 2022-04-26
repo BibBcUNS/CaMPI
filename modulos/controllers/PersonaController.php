@@ -66,6 +66,44 @@ class PersonaController extends Controller
         }
     }
     
+    public function actionViewDgsiPersonal($id) {
+        try {        
+            $model = $this->findModel($id);
+            $target_url = Yii::$app->params['dgsi_personal.url'].'?documento='.$model->numero_documento;
+            $ch = curl_init();
+            $username = Yii::$app->params['dgsi_personal.user'];
+            $password = Yii::$app->params['dgsi_personal.password'];
+            curl_setopt($ch, CURLOPT_URL,$target_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+            curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
+            $datos_dgsi=curl_exec ($ch);
+            curl_close ($ch);
+
+            $datos_dgsi = json_decode($datos_dgsi, true);
+            if (count($datos_dgsi)>0){
+                return Json::encode($this->renderPartial('viewDgsiPersonal', [
+                    'model' => $model,
+                    'datos_dgsi' => $datos_dgsi[0],
+                ]));
+            }
+            else {
+                return Json::encode("<span>Sin información</span>");
+            }
+            
+            $model = $this->findModel($id);
+            $datos_dgsi = Yii::$app->dbDgsi->createCommand("SELECT * FROM vw834_alumnos_bib where nro_documento='$model->numero_documento'")->queryOne();
+            
+            return Json::encode($this->renderPartial('viewDgsiPersonal', [
+                'model' => $model,
+                'datos_dgsi' => $datos_dgsi,
+            ]));
+
+        } catch (\Exception $exc) {
+            return Json::encode("<span class='text-danger'>No es posible establecer la conexión con el servidor</span>");
+        }
+    }
+    
     public function actionUpdateByUsername($username)
     {
 	if ($model = Persona::findByUsername($username)) {

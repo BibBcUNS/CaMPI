@@ -138,9 +138,14 @@ if (Helper::checkRoute('verlogs')) {
                 'content' => wrapPjax($html_log_mas_datos),
             ],
             [
-                'label' => 'Datos de la DGSI',
+                'label' => 'DGSI: Alumnos',
                 //'url' => ['view-dgsi','id'=>'67778']
                 'linkOptions'=>['data-url'=>Url::to(['view-dgsi','id'=>$model->id])]
+            ],
+            [
+                'label' => 'DGSI: Personal',
+                //'url' => ['view-dgsi','id'=>'67778']
+                'linkOptions'=>['data-url'=>Url::to(['view-dgsi-personal','id'=>$model->id])]
             ],
         ],
     ]);
