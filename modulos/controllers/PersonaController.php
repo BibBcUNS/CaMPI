@@ -81,6 +81,7 @@ class PersonaController extends Controller
             curl_close ($ch);
 
             $datos_dgsi = json_decode($datos_dgsi, true);
+            
             if (count($datos_dgsi)>0){
                 return Json::encode($this->renderPartial('viewDgsiPersonal', [
                     'model' => $model,
@@ -91,14 +92,6 @@ class PersonaController extends Controller
                 return Json::encode("<span>Sin información</span>");
             }
             
-            $model = $this->findModel($id);
-            $datos_dgsi = Yii::$app->dbDgsi->createCommand("SELECT * FROM vw834_alumnos_bib where nro_documento='$model->numero_documento'")->queryOne();
-            
-            return Json::encode($this->renderPartial('viewDgsiPersonal', [
-                'model' => $model,
-                'datos_dgsi' => $datos_dgsi,
-            ]));
-
         } catch (\Exception $exc) {
             return Json::encode("<span class='text-danger'>No es posible establecer la conexión con el servidor</span>");
         }
@@ -159,7 +152,7 @@ class PersonaController extends Controller
 
     public function actionFoto($username)
     {
-        Yii::$app->response->format = yii\web\Response::FORMAT_RAW;
+        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         Yii::$app->response->headers->add('content-type','image/png');
         $img_link = "http://campi-bc.int.uns.edu.ar/omp/circulacion/fotos/{$username}.jpg";
         
