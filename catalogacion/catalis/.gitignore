@@ -9,3 +9,5 @@
 # todas las bases 
 # FIX-ME! seleccionar bases necesarias y limpiarlas antes de subirlas
 /bases
+
+/cgi-bin/wxis

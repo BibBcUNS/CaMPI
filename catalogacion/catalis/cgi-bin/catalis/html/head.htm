@@ -2,9 +2,9 @@
 
 <!--
   =======================================================================
-  Encabezamiento para las páginas de Catalis.
+  Encabezamiento para las pï¿½ginas de Catalis.
 
-  (c) 2003-2004  Fernando J. Gómez - CONICET - INMABB
+  (c) 2003-2004  Fernando J. Gï¿½mez - CONICET - INMABB
   =======================================================================
 -->
 
@@ -39,7 +39,7 @@
   <script type="text/javascript">
     // -----------------------------------------------------------------------------
     function handleErrors(errorMessage, url, line) {
-    // Genera un mensaje más o menos amable, y (opcionalmente) invoca al script PHP
+    // Genera un mensaje mï¿½s o menos amable, y (opcionalmente) invoca al script PHP
     // que envia un email para informar al adminisrador sobre el error.
     // -----------------------------------------------------------------------------
       var recordID;
@@ -56,15 +56,15 @@
       msg += "Se ha producido un error.\n\n";
       msg += "---------------------------------------------------------------------------------\n";
       msg += "Mensaje de error: " + errorMessage + "\n";
-      msg += "Línea #: " + line + "\n";
+      msg += "Lï¿½nea #: " + line + "\n";
       msg += "URL: " + url + "\n";
       msg += "Base de datos: " + db + "\n";
       msg += "Registro: " + recordID + "\n";
       msg += "---------------------------------------------------------------------------------\n\n";
-      msg += "Si tiene datos aún sin grabar, intente grabarlos.\n";
-      msg += "Luego presione «Ctrl F5» para volver a cargar todos\n";
+      msg += "Si tiene datos aï¿½n sin grabar, intente grabarlos.\n";
+      msg += "Luego presione ï¿½Ctrl F5ï¿½ para volver a cargar todos\n";
       msg += "los archivos de Catalis en su navegador.\n";
-      msg += "Si el problema persiste, póngase en contacto con " + ADMIN_EMAIL + ".\n";
+      msg += "Si el problema persiste, pï¿½ngase en contacto con " + ADMIN_EMAIL + ".\n";
       alert(msg);
 
       if (REPORT_JS_ERRORS) {
@@ -93,20 +93,20 @@
   <script type="text/javascript">
 
     // =============================================================================
-    //  Variables de configuración globales.
+    //  Variables de configuraciï¿½n globales.
     //
     //  Algunos valores provienen del archivo catalis.conf.
     // =============================================================================
 
 
-    var SOFT_NAME = "Catalis"; // para mostrarlo en el título de la ventana
+    var SOFT_NAME = "Catalis"; // para mostrarlo en el tï¿½tulo de la ventana
 
 
-    // Usamos wxis directamente, o bien a través PHP
+    // Usamos wxis directamente, o bien a travï¿½s PHP
     var SCRIPT_URL = "[pft]v6001^u[/pft]";
 
     var DISPLAY_SUBFIELD_LABELS = true; // Mostrar etiquetas para los subcampos
-    var AUTOMATIC_PUNCTUATION = [pft]v6001^p[/pft];  // Asignar automáticamente la puntuación (boolean)
+    var AUTOMATIC_PUNCTUATION = [pft]v6001^p[/pft];  // Asignar automï¿½ticamente la puntuaciï¿½n (boolean)
     var USE_FIELD_BLOCKS = [pft]v6001^b[/pft];  // Agrupar campos en bloques (boolean)
     var MODIFY_NOT_AACR2 = true;  // Corregir datos en registros no-AACR2 (boolean)
     var AUTHORITY_CONTROL = false;
@@ -120,14 +120,14 @@
     // Idioma para las etiquetas de campos y subcampos
     var LANG = "spa";
 
-    // Patterns para especificar qué campos pertenecen a cada bloque
+    // Patterns para especificar quï¿½ campos pertenecen a cada bloque
     var FIELD_BLOCK_PATTERN = new Object;
-    // FIELD_BLOCK_PATTERN.description = no lo definimos explícitamente
+    // FIELD_BLOCK_PATTERN.description = no lo definimos explï¿½citamente
     FIELD_BLOCK_PATTERN.access = /1..|240|7[0-5].|8[013]./;
     FIELD_BLOCK_PATTERN.subject = /6..|08.|043|052/;
     FIELD_BLOCK_PATTERN.other = /02[^02]|0[1367].|04[^3]|05[^2]|856/;
 
-    // Directorio público (para documentos HTML, CSS, XML)
+    // Directorio pï¿½blico (para documentos HTML, CSS, XML)
     var HTDOCS = "[pft]v6003^h[/pft]catalis/";
 
     // URLs de ventanas auxiliares
@@ -158,27 +158,27 @@
     var ISO_RECORD_TERMINATOR = String.fromCharCode(0x1D);
 
     // Delimitador de subcampo usado internamente por el sistema
-    // TO-DO: implementar el uso de un carácter diferente, para permitir el uso de
+    // TO-DO: implementar el uso de un carï¿½cter diferente, para permitir el uso de
     // '^' como parte de los datos?
     var SYSTEM_SUBFIELD_DELIMITER = String.fromCharCode(0x5E);   // '^', el delimitador de ISIS, '^'
     var REGEX_SYSTEM_SUBFIELD_DELIMITER = new RegExp("\\" + SYSTEM_SUBFIELD_DELIMITER, "g");
 
-    // Símbolo para representar elementos "indecidibles" en aacr2marc()
+    // Sï¿½mbolo para representar elementos "indecidibles" en aacr2marc()
     var UNK = "\u2666";  // Black diamond suit
     var REGEX_UNK = new RegExp(UNK, "g");
 
-    // A qué llamamos "subcampos vacíos"
+    // A quï¿½ llamamos "subcampos vacï¿½os"
     var REGEX_EMPTY_SUBFIELD = new RegExp("^\\s*$");
 
-    // Ancho de los menúes contextuales (px)
+    // Ancho de los menï¿½es contextuales (px)
     var CONTEXT_MENU_WIDTH = 150;
 
     var V_HEIGHT = 95;  // ??
 
-    // Altura mínima de los subfield boxes (debe ir asociada a .subfieldBox en el archivo CSS)
+    // Altura mï¿½nima de los subfield boxes (debe ir asociada a .subfieldBox en el archivo CSS)
     var SUBFIELDBOX_MIN_HEIGHT = 26; //23;
 
-    // Altura del frame con la documentación de MARC (px)
+    // Altura del frame con la documentaciï¿½n de MARC (px)
     var DOCWIN_MIN_HEIGHT = 0; //22;
 
     // Algunos colores
@@ -196,14 +196,14 @@
     var moz = ( document.implementation && document.implementation.createDocument );
     var ie = ( window.ActiveXObject );
 
-    var originalRecord;                   // para comparar con la versión actual, y decidir si hubo cambios
-    var resultSet = new Array();          // relación entre MFNs y posición en la lista de resultados, para los resultados de la última búsqueda
-    var g_editResultIndex = "";           // índice (dentro de la tabla de resultados) del registro actualmente editado
-    var g_HighlightIndexRowId = "";       // ID de la fila resaltada dentro de la tabla de términos del diccionario
+    var originalRecord;                   // para comparar con la versiï¿½n actual, y decidir si hubo cambios
+    var resultSet = new Array();          // relaciï¿½n entre MFNs y posiciï¿½n en la lista de resultados, para los resultados de la ï¿½ltima bï¿½squeda
+    var g_editResultIndex = "";           // ï¿½ndice (dentro de la tabla de resultados) del registro actualmente editado
+    var g_HighlightIndexRowId = "";       // ID de la fila resaltada dentro de la tabla de tï¿½rminos del diccionario
     var g_HighlightRowId = "";            // ID de la fila resaltada dentro de la tabla de resultados
     var g_RecordDisplayStyle = "aacr";    // estilo inicial para presentar detalles de un registro
-    var g_NextTask = "";                  // la tarea a ejecutar luego de una grabación del registr
-    var g_activeDatabase = new Object();  // datos de la base bibliográfica activa
+    var g_NextTask = "";                  // la tarea a ejecutar luego de una grabaciï¿½n del registr
+    var g_activeDatabase = new Object();  // datos de la base bibliogrï¿½fica activa
     var g_currentUser = null;             // el usuario actual
     var g_MARCOrganizationCode = "";
 
@@ -227,14 +227,14 @@
   <script type="text/javascript">
 
     // ATENCION: revisar este mecanismo para prevenir un cierre accidental de la ventana
-    //window.onbeforeunload = function() {if (confirm("¿Cierra la sesión?")) return true; else return;}
+    //window.onbeforeunload = function() {if (confirm("ï¿½Cierra la sesiï¿½n?")) return true; else return;}
 
     // -----------------------------------------------------------------------------
     function showSystemInformation()
     // -----------------------------------------------------------------------------
     {
       var message = "Catalis\n\n";
-      message += "© 2003-2004  Fernando J. Gómez - CONICET - INMABB\n\n";
+      message += "ï¿½ 2003-2004  Fernando J. Gï¿½mez - CONICET - INMABB\n\n";
       message += "Comunique problemas, dudas o sugerencias a: fgomez@criba.edu.ar";
       alert(message);
     }
@@ -247,7 +247,7 @@
         // Cuando se presenta el formulario de acceso
         document.getElementById("loginForm").userid.focus();
       } else {
-        // Cuando se presenta la aplicación propiamente dicha
+        // Cuando se presenta la aplicaciï¿½n propiamente dicha
         init();
       }
     }
@@ -260,9 +260,6 @@
   <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/etiquetado.css?[pft]date(DATETIME)[/pft]">
 
   <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/simModal.js"></script>
-
-  <!-- Prueba. Ver https://github.com/niutech/showModalDialog -->
-  <script type="text/javascript" src="https://unpkg.com/showmodaldialog"></script>
 
   [pft]if p(v2001) and not 'FIN_SESION' : v2001 then[/pft]
     <!--script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/config.js"></script-->
@@ -306,7 +303,7 @@
 
   [pft]if 'FIN_SESION' <> v2001 and p(v2001) and a(v2005) then[/pft]
     <!-- Cartel para mensajes -->
-    <!-- "display: none" pues no queremos que sea visible antes de haber establecido su posición vía Javascript -->
+    <!-- "display: none" pues no queremos que sea visible antes de haber establecido su posiciï¿½n vï¿½a Javascript -->
     <div id="cartel" style="display: none; border-width: 1px; border-style: solid; border-top-color: #A07C60; border-right-color: #333; border-bottom-color: #333; border-left-color: #A07C60;">
       <div style="border-width: 1px; border-style: solid; border-top-color: #FED; border-right-color: #805C40; border-bottom-color: #805C40; border-left-color: #FED; height: 100%;">
         <div id="cartelHead">Catalis</div>
@@ -320,7 +317,7 @@
     </div>
 
     <script type="text/javascript">
-      // Cartel para mensajes: fijamos su posición en la pantalla
+      // Cartel para mensajes: fijamos su posiciï¿½n en la pantalla
       // (inicialmente, centrado) y lo hacemos visible
       document.getElementById("cartel").style.top = (document.documentElement.clientHeight - 100)/2.2 + "px";
       document.getElementById("cartel").style.left = (document.documentElement.clientWidth - 420)/2 + "px";
@@ -328,8 +325,8 @@
       document.getElementById("cartelBtn").onclick = function() {
         this.style.display = "none";
         document.getElementById("cartel").style.display = "none";
-        // ATENCION: sería bueno saber dónde colocar el foco una vez eliminado el cartel de mensajes!
-        // Para ello, habría que almacenar en una variable esa información en cada ocasión en que
+        // ATENCION: serï¿½a bueno saber dï¿½nde colocar el foco una vez eliminado el cartel de mensajes!
+        // Para ello, habrï¿½a que almacenar en una variable esa informaciï¿½n en cada ocasiï¿½n en que
         // se muestra el cartel.
       }
       document.getElementById("cartelMsg").innerHTML = "Descargando archivos del servidor...";
@@ -344,11 +341,11 @@
       style="color: #FED;" tabindex="-1"><span id="appName">Catalis</span></a>
     <span style="font-size: 11px; color: #FED;">[[pft]getenv('SERVER_NAME')[/pft]]</span>
 
-    <!-- Botón que permite mostrar el iframe oculto para analizar su contenido -->
+    <!-- Botï¿½n que permite mostrar el iframe oculto para analizar su contenido -->
     <button id="showHiddenData" tabindex="-1" accesskey="*">*</button>
 
 
-    <!-- Catalogador / base / fin de sesión; p(v2005) => login fallido -->
+    <!-- Catalogador / base / fin de sesiï¿½n; p(v2005) => login fallido -->
     [pft]if p(v2001) and not 'FIN_SESION' = v2001 and a(v2005) then[/pft]
       <div style="position: absolute; top: 1px; right: 1px; font-size: 13px; color: #F0F0F0;">
 
@@ -370,7 +367,7 @@
           Base:
           <select id="selDatabase"
               tabindex="-1"
-              title="Desde aquí puede pasar a otra base de datos">
+              title="Desde aquï¿½ puede pasar a otra base de datos">
           [pft]
             (,
               '<option value="',v3007^*,'" ', if v3007^* = v2104[1] then ' selected="selected"' fi, ' >',
@@ -416,7 +413,7 @@
           fi
           [/pft]
 
-          &nbsp;<button id="btnFinSesion" type="button" class="marcEditButton" -accesskey="F" tabindex="-1">&nbsp;Fin sesión&nbsp;</button>
+          &nbsp;<button id="btnFinSesion" type="button" class="marcEditButton" -accesskey="F" tabindex="-1">&nbsp;Fin sesiï¿½n&nbsp;</button>
         </form>
       </div>
     [pft]fi[/pft]

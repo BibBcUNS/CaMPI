@@ -9,7 +9,7 @@
 	<input type="hidden" name="userid" value="[pft]v2002[/pft]">
 	<input type="hidden" name="recordID" value="">
 	
-	<!-- Esta es la celda izquierda, donde están los campos de datos y el iframe con la documentación -->
+	<!-- Esta es la celda izquierda, donde est?n los campos de datos y el iframe con la documentaci?n -->
 	
 	<div id="theLeftPanel">
 		
@@ -26,11 +26,11 @@
 					<col width="*" />
 				</colgroup>
 				
-				<tbody id="recordContainer_noblocks"><!-- Aquí van los campos de datos cuando no se usan bloques --></tbody>
+				<tbody id="recordContainer_noblocks"><!-- Aqu? van los campos de datos cuando no se usan bloques --></tbody>
 				
 				<thead>
 					<tr>
-						<th colspan="3"><span>Descripción</span></th>
+						<th colspan="3"><span>Descripci?n</span></th>
 					</tr>
 				</thead>
 				<tbody id="recordContainer_description"><!-- datos --></tbody>
@@ -44,7 +44,7 @@
 				
 				<thead>
 					<tr>
-						<th colspan="3"><span>Análisis temático</span></th>
+						<th colspan="3"><span>An?lisis tem?tico</span></th>
 					</tr>
 				</thead>
 				<tbody id="recordContainer_subject"><!-- datos --></tbody>
@@ -64,7 +64,7 @@
 			MARC21 (LC) |
 			OCLC |
 			CRS |
-			Guía local
+			Gu?a local
 		</td>
 		</tr-->
 		<div id="docIframeWrapper" style="width: 100%;"> <!-- El div parece necesario en IE6 para evitar que el width del iframe tome el 100% del viewport -->
@@ -87,21 +87,21 @@
 			<table class="control" style="border-bottom-width: 0; width: 100%;" cellpadding="0" cellspacing="0" border="0">
 				<tr>
 					<td colspan="2" class="system">
-						<span class="docLink" onclick=showDoc("001") title="001: Número de control del registro">Registro:</span>&nbsp;<input type="text" name="f001" id="f001" value="" readonly="readonly" tabindex="-1">
+						<span class="docLink" onclick=showDoc("001") title="001: N?mero de control del registro">Registro:</span>&nbsp;<input type="text" name="f001" id="f001" value="" readonly="readonly" tabindex="-1">
 					</td>
 				</tr>
 			</table>
 			
 			<table class="control" border="0" rules="none" cellpadding="0" cellspacing="0" style="width: 100%;" align="center">
 				<tr>
-					<td colspan="2" class="system"><span class="docLink" onclick=showDoc("ecbd008s.html#mrcb008a") title="008/00-05: Fecha de creación">C:</span>&nbsp;<input type="hidden" name="f008_00_05" value=""><input type="text" name="f008_00_05_nice" id="f008_00_05_nice" value="" readonly="readonly" tabindex="-1"><input type="text" -class="identData" name="createdBy" id="createdBy" value="" readonly="readonly" tabindex="-1"></td>
+					<td colspan="2" class="system"><span class="docLink" onclick=showDoc("ecbd008s.html#mrcb008a") title="008/00-05: Fecha de creaci?n">C:</span>&nbsp;<input type="hidden" name="f008_00_05" value=""><input type="text" name="f008_00_05_nice" id="f008_00_05_nice" value="" readonly="readonly" tabindex="-1"><input type="text" -class="identData" name="createdBy" id="createdBy" value="" readonly="readonly" tabindex="-1"></td>
 				</tr>
 				<tr>
-					<td colspan="2" class="system"><span class="docLink" onclick=showDoc("005") title="005: Fecha y hora de la última modificación">M:</span>&nbsp;<input type="hidden" name="f005" value=""><input type="text" -class="identData" name="f005_nice" id="f005_nice" value="" readonly="readonly" tabindex="-1"></td>
+					<td colspan="2" class="system"><span class="docLink" onclick=showDoc("005") title="005: Fecha y hora de la ?ltima modificaci?n">M:</span>&nbsp;<input type="hidden" name="f005" value=""><input type="text" -class="identData" name="f005_nice" id="f005_nice" value="" readonly="readonly" tabindex="-1"></td>
 				</tr>
 			</table>
 			
-			<!-- ATENCION: Campos que aún no decidimos dónde ubicar y cómo manejar
+			<!-- ATENCION: Campos que a?n no decidimos d?nde ubicar y c?mo manejar
 				003 NR  The MARC code for the organization whose control number is contained
 						in field 001
 				006 R	18 character positions (00-17) that provide for coding information
@@ -115,8 +115,8 @@
 						contained in 007/00.
 			-->
 			<input type="hidden" name="f003">
-			<input type="hidden" name="f006"> <!-- múltiples occ separadas con '~' -->
-			<input type="hidden" name="f007"> <!-- múltiples occ separadas con '~' -->
+			<input type="hidden" name="f006"> <!-- m?ltiples occ separadas con '~' -->
+			<input type="hidden" name="f007"> <!-- m?ltiples occ separadas con '~' -->
 			
 			
 			<!-- ======================================================================= -->
@@ -125,7 +125,7 @@
 			<table class="control" style="margin-top: 4px; width: 100%;" border="0" rules="all" cellpadding="0" cellspacing="0" align="center">
 				<tr>
 					<td colspan="2" class="controlBlockHeader">
-						<span class="docLink" onclick=showDoc("ecbdldrd.html#mrcblea") title="Acceso a la documentación">LDR &#183; <b>Cabecera</b></span>
+						<span class="docLink" onclick=showDoc("ecbdldrd.html#mrcblea") title="Acceso a la documentaci?n">LDR &#183; <b>Cabecera</b></span>
 					</td>
 				</tr>
 				<tr>
@@ -137,7 +137,7 @@
 					</td>
 					<!--L/07-->
 					<td align="right" id="TD_L_07">
-						<span -class="docLink" -onclick=showDoc("ecbdldrd.html#L07") title="Leader/07: Nivel bibliográfico&#13;&#10;a - Monographic component part&#13;&#10;b - Serial component part&#13;&#10;c - Collection&#13;&#10;d - Subunit&#13;&#10;i - Integrating resource&#13;&#10;m - Monograph/item&#13;&#10;s - Serial">NivBib</span>&nbsp;<input type="text" name="L_07" value="" size="1" maxlength="1" readonly="readonly" tabindex="-1">
+						<span -class="docLink" -onclick=showDoc("ecbdldrd.html#L07") title="Leader/07: Nivel bibliogr?fico&#13;&#10;a - Monographic component part&#13;&#10;b - Serial component part&#13;&#10;c - Collection&#13;&#10;d - Subunit&#13;&#10;i - Integrating resource&#13;&#10;m - Monograph/item&#13;&#10;s - Serial">NivBib</span>&nbsp;<input type="text" name="L_07" value="" size="1" maxlength="1" readonly="readonly" tabindex="-1">
 					</td>
 					<!--L/09-->
 					<input type="hidden" name="L_09" value="">
@@ -150,7 +150,7 @@
 					<!--L/18-->
 					<td align="right" id="TD_L_18">
             <span -class="docLink" -onclick=showDoc("ecbdldrd.html#L18")
-              title="Leader/18: Forma de catalogación
+              title="Leader/18: Forma de catalogaci?n
             descriptiva">Desc</span>&nbsp;<input type="text" name="L_18"
           value="" size="1" maxlength="1" readonly="readonly" class="marcCode"
           tabindex="-1">
@@ -159,7 +159,7 @@
 				<tr>
 					<!--L/17-->
 					<td align="right" id="TD_L_17">
-						<span -class="docLink" -onclick=showDoc("ecbdldrd.html#L17") title="Leader/17: Nivel de codificación&#13;&#10;# - Full level&#13;&#10;1 - Full level, material not examined&#13;&#10;2 - Less-than-full level, material not examined&#13;&#10;3 - Abbreviated level&#13;&#10;4 - Core level&#13;&#10;5 - Partial (preliminary) level&#13;&#10;7 - Minimal level&#13;&#10;8 - Prepublication level&#13;&#10;u - Unknown&#13;&#10;z - Not applicable">NivCodif</span>&nbsp;<input type="text" name="L_17" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+						<span -class="docLink" -onclick=showDoc("ecbdldrd.html#L17") title="Leader/17: Nivel de codificaci?n&#13;&#10;# - Full level&#13;&#10;1 - Full level, material not examined&#13;&#10;2 - Less-than-full level, material not examined&#13;&#10;3 - Abbreviated level&#13;&#10;4 - Core level&#13;&#10;5 - Partial (preliminary) level&#13;&#10;7 - Minimal level&#13;&#10;8 - Prepublication level&#13;&#10;u - Unknown&#13;&#10;z - Not applicable">NivCodif</span>&nbsp;<input type="text" name="L_17" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 					</td>
 					<!--L/18-->
 					<!--input type="hidden" name="L_18" value=""-->
@@ -181,7 +181,7 @@
 			<table class="control" style="margin-top: 2px; width: 100%;" border="0" rules="all" cellpadding="0" cellspacing="0" align="center">
 				<tr>
 					<td colspan="2" class="controlBlockHeader">
-						<span class="docLink" onclick=showDoc("ecbd008s.html#mrcb008a") title="Acceso a la documentación">
+						<span class="docLink" onclick=showDoc("ecbd008s.html#mrcb008a") title="Acceso a la documentaci?n">
 							008 &#183; <b>General</b>
 						</span>
 					</td>
@@ -193,7 +193,7 @@
 							<tr>
 								<!--06-->
 								<td id="TD_f008_06" style="border-right: 0; padding-right: 1px;">
-									<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-06") -title="008/06: Tipo de fecha/Estado de la publicación&#13;&#10;008/07-14: Fecha 1 y Fecha 2&#13;&#10;b - No dates given; B.C. date involved&#13;&#10;c - Continuing resource currently published&#13;&#10;d - Continuing resource ceased publication&#13;&#10;e - Detailed date&#13;&#10;i - Inclusive dates of collection&#13;&#10;k - Range of years of bulk of collection&#13;&#10;m - Multiple dates&#13;&#10;n - Dates unknown&#13;&#10;p - Date of distribution/release/issue and production/recording session when different&#13;&#10;q - Questionable date&#13;&#10;r - Reprint/reissue date and original date&#13;&#10;s - Single known date/probable date&#13;&#10;t - Publication date and copyright date&#13;&#10;u - Continuing resource status unknown&#13;&#10;| - No attempt to code">Fechas</span>
+									<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-06") -title="008/06: Tipo de fecha/Estado de la publicaci?n&#13;&#10;008/07-14: Fecha 1 y Fecha 2&#13;&#10;b - No dates given; B.C. date involved&#13;&#10;c - Continuing resource currently published&#13;&#10;d - Continuing resource ceased publication&#13;&#10;e - Detailed date&#13;&#10;i - Inclusive dates of collection&#13;&#10;k - Range of years of bulk of collection&#13;&#10;m - Multiple dates&#13;&#10;n - Dates unknown&#13;&#10;p - Date of distribution/release/issue and production/recording session when different&#13;&#10;q - Questionable date&#13;&#10;r - Reprint/reissue date and original date&#13;&#10;s - Single known date/probable date&#13;&#10;t - Publication date and copyright date&#13;&#10;u - Continuing resource status unknown&#13;&#10;| - No attempt to code">Fechas</span>
 									<input type="text" name="f008_06" value="" readonly="readonly" class="marcCode" size="1" maxlength="1">
 								</td>
 								<td>
@@ -207,11 +207,11 @@
 				<tr>
 					<!--15-17-->
 					<td align="right" id="TD_f008_15_17">
-						<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-15") -title="008/15-17: Lugar de publicación, producción o ejecución">País</span>&nbsp;<input type="text" name="f008_15_17" value="" -style="width: 2.4em;" size="3" maxlength="3" readonly="readonly" class="marcCode"><button class="additionalCodes" onclick="this.blur(); editField044(); window.event.cancelBubble=true; return false;" title="044: Códigos adicionales de país" tabindex="-1">+</button>
+						<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-15") -title="008/15-17: Lugar de publicaci?n, producci?n o ejecuci?n">Pa?s</span>&nbsp;<input type="text" name="f008_15_17" value="" -style="width: 2.4em;" size="3" maxlength="3" readonly="readonly" class="marcCode"><button class="additionalCodes" onclick="this.blur(); editField044(); window.event.cancelBubble=true; return false;" title="044: C?digos adicionales de pa?s" tabindex="-1">+</button>
 					</td>
 					<!--35-37-->
 					<td align="right" id="TD_f008_35_37">
-						<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-35") -title="008/35-37: Idioma del ítem">Leng</span>&nbsp;<input type="text" name="f008_35_37" value="" -style="width: 2.4em;" size="3" maxlength="3" readonly="readonly" class="marcCode"><button class="additionalCodes" onclick="this.blur(); editField041(); window.event.cancelBubble=true; return false;" title="041: Códigos de idioma adicionales" tabindex="-1">+</button>
+						<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-35") -title="008/35-37: Idioma del ?tem">Leng</span>&nbsp;<input type="text" name="f008_35_37" value="" -style="width: 2.4em;" size="3" maxlength="3" readonly="readonly" class="marcCode"><button class="additionalCodes" onclick="this.blur(); editField041(); window.event.cancelBubble=true; return false;" title="041: C?digos de idioma adicionales" tabindex="-1">+</button>
 					</td>
 				</tr>
 				<tr>
@@ -237,7 +237,7 @@
 				<tbody id="f008BK" style="display: none;">
 					<tr>
 						<td colspan="2" class="controlBlockHeader">
-							<span class="docLink" onclick=showDoc("ecbd008s.html#mrcb008b") title="Acceso a la documentación">008 &#183; <b>Libros</b>/<b>artículos</b></span>
+							<span class="docLink" onclick=showDoc("ecbd008s.html#mrcb008b") title="Acceso a la documentaci?n">008 &#183; <b>Libros</b>/<b>art?culos</b></span>
 							<input type="hidden" name="marc_008_type" value="BK">
 						</td>
 					</tr>
@@ -253,18 +253,18 @@
 					</tr>
 					<tr>
 						<!--23-->
-						<td align="right" id="TD_f008_BK_23"><span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-23") -title="008/23: Forma del ítem">FItem</span>&nbsp;<input type="text" name="f008_BK_23" value="" size="1" maxlength="1" readonly="readonly" class="marcCode"></td>
+						<td align="right" id="TD_f008_BK_23"><span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-23") -title="008/23: Forma del ?tem">FItem</span>&nbsp;<input type="text" name="f008_BK_23" value="" size="1" maxlength="1" readonly="readonly" class="marcCode"></td>
 						<!--24-27-->
 						<td align="right" id="TD_f008_BK_24_27"><span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-24") -title="008/24-27: Naturaleza del contenido">Cont</span>&nbsp;<input type="text" name="f008_BK_24_27" value="" size="4" maxlength="4" readonly="readonly" class="marcCode"></td>
 					</tr>
 					<tr>
 						<!--28-->
 						<td align="right" id="TD_f008_BK_28">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-28") -title="008/28: Publicación gubernamental">PubGub</span>&nbsp;<input type="text" name="f008_BK_28" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-28") -title="008/28: Publicaci?n gubernamental">PubGub</span>&nbsp;<input type="text" name="f008_BK_28" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<!--34-->
 						<td align="right" id="TD_f008_BK_34">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-34") -title="008/34: Biografía&#13;&#10;# - No biographical material&#13;&#10;a - Autobiography&#13;&#10;b - Individual biography&#13;&#10;c - Collective biography&#13;&#10;d - Contains biographical information&#13;&#10;| - No attempt to code">Biogr</span>&nbsp;<input type="text" name="f008_BK_34" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-34") -title="008/34: Biograf?a&#13;&#10;# - No biographical material&#13;&#10;a - Autobiography&#13;&#10;b - Individual biography&#13;&#10;c - Collective biography&#13;&#10;d - Contains biographical information&#13;&#10;| - No attempt to code">Biogr</span>&nbsp;<input type="text" name="f008_BK_34" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 					</tr>
 					<tr>
@@ -274,7 +274,7 @@
 						</td>
 						<!--31-->
 						<td align="right" id="TD_f008_BK_31">
-						<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-31") -title="008/31: Indice&#13;&#10;0 - No index&#13;&#10;1 - Index present&#13;&#10;| - No attempt to code">Índice</span>&nbsp;<input type="text" name="f008_BK_31" value="" size="1" maxlength="1" readonly="readonly" class="marcCode"></td>
+						<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-31") -title="008/31: Indice&#13;&#10;0 - No index&#13;&#10;1 - Index present&#13;&#10;| - No attempt to code">?ndice</span>&nbsp;<input type="text" name="f008_BK_31" value="" size="1" maxlength="1" readonly="readonly" class="marcCode"></td>
 					</tr>
 					<tr>
 						<!--33-->
@@ -282,7 +282,7 @@
 							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-33") -title="008/33: Forma literaria">FLit</span>&nbsp;<input type="text" name="f008_BK_33" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<!--29-->
-						<td align="right" id="TD_f008_BK_29" title="008/29: Publicación de una conferencia">
+						<td align="right" id="TD_f008_BK_29" title="008/29: Publicaci?n de una conferencia">
 							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-BK-29")>PubConf</span>&nbsp;<input type="text" name="f008_BK_29" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 					</tr>
@@ -294,18 +294,18 @@
 				<tbody id="f008MU" style="display: none;">
 					<tr>
 						<td colspan="2" class="controlBlockHeader">
-							<span class="docLink" onclick=showDoc("ecbd008s.html#mrcb008m")>008 &#183; <b>Música</b>/<b>audio</b></span>
+							<span class="docLink" onclick=showDoc("ecbd008s.html#mrcb008m")>008 &#183; <b>M?sica</b>/<b>audio</b></span>
 							<input type="hidden" name="marc_008_type" value="MU">
 						</td>
 					</tr>
 					<tr>
 						<!--18-19-->
 						<td align="right" id="TD_f008_MU_18_19">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MU-18") title="008/18-19: Forma de composición">FComp</span>&nbsp;<input type="text" name="f008_MU_18_19" value="" size="2" maxlength="2" readonly="readonly" class="marcCode"><button class="additionalCodes" onclick="this.blur();editField047(); window.event.cancelBubble=true; return false" title="047: Código de forma de composición musical">+</button>
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MU-18") title="008/18-19: Forma de composici?n">FComp</span>&nbsp;<input type="text" name="f008_MU_18_19" value="" size="2" maxlength="2" readonly="readonly" class="marcCode"><button class="additionalCodes" onclick="this.blur();editField047(); window.event.cancelBubble=true; return false" title="047: C?digo de forma de composici?n musical">+</button>
 						</td>
 						<!--20-->
 						<td align="right" id="TD_f008_MU_20">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MU-20") title="008/20: Formato de la música (?)">Formato</span>&nbsp;<input type="text" name="f008_MU_20" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MU-20") title="008/20: Formato de la m?sica (?)">Formato</span>&nbsp;<input type="text" name="f008_MU_20" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 					</tr>
 					<tr>
@@ -321,7 +321,7 @@
 					<tr>
 						<!--23-->
 						<td align="right" id="TD_f008_MU_23">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MU-23") title="008/23: Forma del ítem">FItem</span>&nbsp;<input type="text" name="f008_MU_23" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MU-23") title="008/23: Forma del ?tem">FItem</span>&nbsp;<input type="text" name="f008_MU_23" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<!--30-31-->
 						<td align="right" id="TD_f008_MU_30_31">
@@ -331,7 +331,7 @@
 					<tr>
 						<!--33-->
 						<td colspan="2" align="right" id="TD_f008_MU_33">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MU-33") title="008/33: Trasposición y arreglo">TraspArr</span>&nbsp;<input type="text" name="f008_MU_33" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MU-33") title="008/33: Trasposici?n y arreglo">TraspArr</span>&nbsp;<input type="text" name="f008_MU_33" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<!--td>&nbsp;</td-->
 					</tr>
@@ -347,7 +347,7 @@
 					[/pft]
 					<tr style="display: none;">
 						<td colspan="2" class="marc-008-MU">
-							<!--047:--><span class="docLink" onclick=showDoc("047") title="047: Forma de composición musical">FComp</span>&nbsp;<input type="text" name="f047" value="[pft](v9047+|,|)[/pft]" size="" maxlength="">
+							<!--047:--><span class="docLink" onclick=showDoc("047") title="047: Forma de composici?n musical">FComp</span>&nbsp;<input type="text" name="f047" value="[pft](v9047+|,|)[/pft]" size="" maxlength="">
 						</td>
 					</tr>
 					[pft]fi[/pft]
@@ -376,7 +376,7 @@
 					<tr>
 						<!--28-->
 						<td align="right" id="TD_f008_CF_28">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CF-28") title="008/28: Publicación gubernamental">PubGub</span>&nbsp;<input type="text" name="f008_CF_28" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CF-28") title="008/28: Publicaci?n gubernamental">PubGub</span>&nbsp;<input type="text" name="f008_CF_28" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<td>&nbsp;</td>
 					</tr>
@@ -394,18 +394,18 @@
 					</tr>
 					<tr>
 						<!--18-20-->
-						<td align="right"><span -class="docLink" onclick=showDoc("ecbd008s.html#008-VM-18") title="008/18-20: Duración, para películas y videograbaciones">Durac</span>&nbsp;<input type="text" name="f008_VM_18_20" id="f008_VM_18_20" value="" size="3" maxlength="3"></td>
+						<td align="right"><span -class="docLink" onclick=showDoc("ecbd008s.html#008-VM-18") title="008/18-20: Duraci?n, para pel?culas y videograbaciones">Durac</span>&nbsp;<input type="text" name="f008_VM_18_20" id="f008_VM_18_20" value="" size="3" maxlength="3"></td>
 						<!--22-->
 						<td align="right" id="TD_f008_VM_22"><span -class="docLink" -onclick=showDoc("ecbd008s.html#008-VM-22") title="008/22: Audiencia">Aud</span>&nbsp;<input type="text" name="f008_VM_22" value="" size="1" maxlength="1" readonly="readonly" class="marcCode"></td>
 					</tr>
 					<tr>
 						<!--28-->
 						<td align="right" id="TD_f008_VM_28">
-							<span class="docLink" -onclick=showDoc("ecbd008s.html#008-VM-28") title="008/28: Publicación gubernamental">PubGub</span>&nbsp;<input type="text" name="f008_VM_28" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span class="docLink" -onclick=showDoc("ecbd008s.html#008-VM-28") title="008/28: Publicaci?n gubernamental">PubGub</span>&nbsp;<input type="text" name="f008_VM_28" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<!--29-->
 						<td align="right" id="TD_f008_VM_29">
-							<span class="docLink" -onclick=showDoc("ecbd008s.html#008-VM-29") title="008/29: Forma del ítem">FItem</span>&nbsp;<input type="text" name="f008_VM_29" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span class="docLink" -onclick=showDoc("ecbd008s.html#008-VM-29") title="008/29: Forma del ?tem">FItem</span>&nbsp;<input type="text" name="f008_VM_29" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 					</tr>
 					<tr>
@@ -415,7 +415,7 @@
 						</td>
 						<!--34-->
 						<td align="right" id="TD_f008_VM_34">
-							<span class="docLink" -onclick=showDoc("ecbd008s.html#008-VM-34") title="008/34: Técnica (para películas y videograbaciones)">Técn</span>&nbsp;<input type="text" name="f008_VM_34" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span class="docLink" -onclick=showDoc("ecbd008s.html#008-VM-34") title="008/34: T?cnica (para pel?culas y videograbaciones)">T?cn</span>&nbsp;<input type="text" name="f008_VM_34" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 					</tr>
 				</tbody>
@@ -455,11 +455,11 @@
 					<tr>
 						<!--22-->
 						<td align="right" id="TD_f008_CR_22">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CR-22") title="008/22: Forma del ítem original">FOrig</span>&nbsp;<input type="text" name="f008_CR_22" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CR-22") title="008/22: Forma del ?tem original">FOrig</span>&nbsp;<input type="text" name="f008_CR_22" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<!--23-->
 						<td align="right" id="TD_f008_CR_23">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CR-23") title="008/23: Forma del ítem">FItem</span>&nbsp;<input type="text" name="f008_CR_23" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CR-23") title="008/23: Forma del ?tem">FItem</span>&nbsp;<input type="text" name="f008_CR_23" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 					</tr>
 					<tr>
@@ -475,17 +475,17 @@
 					<tr>
 						<!--28-->
 						<td align="right" id="TD_f008_CR_28">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CR-28") title="008/28: Publicación gubernamental">PubGub</span>&nbsp;<input type="text" name="f008_CR_28" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CR-28") title="008/28: Publicaci?n gubernamental">PubGub</span>&nbsp;<input type="text" name="f008_CR_28" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<!--29-->
 						<td align="right" id="TD_f008_CR_29">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CR-29") title="008/29: Publicación de una conferencia">PubConf</span>&nbsp;<input type="text" name="f008_CR_29" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CR-29") title="008/29: Publicaci?n de una conferencia">PubConf</span>&nbsp;<input type="text" name="f008_CR_29" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 					</tr>
 					<tr>
 						<!--33-->
 						<td align="right" id="TD_f008_CR_33">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CR-33") title="008/33: Alfabeto original del título">AlfOrig</span>&nbsp;<input type="text" name="f008_CR_33" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-CR-33") title="008/33: Alfabeto original del t?tulo">AlfOrig</span>&nbsp;<input type="text" name="f008_CR_33" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<!--34-->
 						<td align="right" id="TD_f008_CR_34">
@@ -511,23 +511,23 @@
 						</td>
 						<!--22-23-->
 						<td align="right" id="TD_f008_MP_22_23">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MA-22") title="008/22-23: Proyección">Proy</span>&nbsp;<input type="text" name="f008_MP_22_23" value="" size="2" maxlength="2" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MA-22") title="008/22-23: Proyecci?n">Proy</span>&nbsp;<input type="text" name="f008_MP_22_23" value="" size="2" maxlength="2" readonly="readonly" class="marcCode">
 						</td>
 					</tr>
 					<tr>
 						<!--25-->
 						<td align="right" id="TD_f008_MP_25">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MA-25") title="008/25: Tipo de material cartográfico">TipoMC</span>&nbsp;<input type="text" name="f008_MP_25" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MA-25") title="008/25: Tipo de material cartogr?fico">TipoMC</span>&nbsp;<input type="text" name="f008_MP_25" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<!--29-->
 						<td align="right" id="TD_f008_MP_29">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MA-29") title="008/29: Forma del ítem">FItem</span>&nbsp;<input type="text" name="f008_MP_29" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MA-29") title="008/29: Forma del ?tem">FItem</span>&nbsp;<input type="text" name="f008_MP_29" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 					</tr>
 					<tr>
 						<!--28-->
 						<td align="right" id="TD_f008_MP_28">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MA-28") title="008/28: Publicación gubernamental">PubGub</span>&nbsp;<input type="text" name="f008_MP_28" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MA-28") title="008/28: Publicaci?n gubernamental">PubGub</span>&nbsp;<input type="text" name="f008_MP_28" value="" size="1" maxlength="1" readonly="readonly" class="marcCode">
 						</td>
 						<!--31-->
 						<td align="right" id="TD_f008_MP_31">
@@ -537,7 +537,7 @@
 					<tr>
 						<!--33-34-->
 						<td colspan="2" align="right" id="TD_f008_MP_33_34">
-							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MA-33") title="008/33-34: Características especiales de formato">CaractEsp</span>&nbsp;<input type="text" name="f008_MP_33_34" value="" size="2" maxlength="2" readonly="readonly" class="marcCode">
+							<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-MA-33") title="008/33-34: Caracter?sticas especiales de formato">CaractEsp</span>&nbsp;<input type="text" name="f008_MP_33_34" value="" size="2" maxlength="2" readonly="readonly" class="marcCode">
 						</td>
 					</tr>
 				</tbody>
@@ -562,10 +562,10 @@
 		
 		
 		[pft]if not v906 = 'a' or not 'b~s' : v907 then[/pft]
-		<!-- Ejemplares (ATENCION: ¿excepto para Continuing Resources?) -->
+		<!-- Ejemplares (ATENCION: ?excepto para Continuing Resources?) -->
 		<div id="ejemplaresDiv" style="margin-top: 2px;">
 			<button id="ejemplaresBtn" class="marcEditButton"
-					title="Edite la información referida a los ejemplares"
+					title="Edite la informaci?n referida a los ejemplares"
 					accesskey="X">
 				E<u>x</u>istencias<!--: <span id="cantEjemplares">[pft]f(nocc(v859),1,0)[/pft]</span-->
 			</button>
@@ -576,13 +576,13 @@
 		<div id="posteItDiv" style="margin-top: 2px;">
 			<button id="postItNoteBtn" class="marcEditButton"
 					accesskey="T"
-					title="Aquí puede dejar notas personales referidas a la catalogación de este item (dudas, tareas pendientes, etc.)"><img src="[pft]v6003^h[/pft]catalis/img/stock_edit-16.png" align="top">&nbsp;Ano<u>t</u>aciones</button>
-			<!--td align="center" class="[pft]if p(v981) then 'recordOK' else 'recordNotOK' fi[/pft]" title="&quot;OK&quot; indica que el registro ya está en condiciones para ser utilizado; por ejemplo, para incorporarlo al OPAC, o para exportarlo.">
+					title="Aqu? puede dejar notas personales referidas a la catalogaci?n de este item (dudas, tareas pendientes, etc.)"><img src="[pft]v6003^h[/pft]catalis/img/stock_edit-16.png" align="top">&nbsp;Ano<u>t</u>aciones</button>
+			<!--td align="center" class="[pft]if p(v981) then 'recordOK' else 'recordNotOK' fi[/pft]" title="&quot;OK&quot; indica que el registro ya est? en condiciones para ser utilizado; por ejemplo, para incorporarlo al OPAC, o para exportarlo.">
 				<input type="checkbox" name="recordOK" value="OK" [pft]if p(v981) then 'checked' fi[/pft] onclick=this.parentNode.className=(this.checked)?"recordOK":"recordNotOK";this.blur()><span style="font-size: 12px;">OK</span>
 			</td-->
 		</div>
 		
-		</form>  <!-- ATENCION: está bien cerrar aquí el FORM? -->
+		</form>  <!-- ATENCION: est? bien cerrar aqu? el FORM? -->
 		
     [pft]if '~demo~ead~eeo~agrono~bibima~cartografia~eunm~ucod-marc~carpc~e-libros~' : v2104 then[/pft]
     <div class="imagen-wrapper">
@@ -591,12 +591,12 @@
     </div>
     [pft]fi[/pft]
 		
-		<!-- Acceso a documentación para un campo particular -->
+		<!-- Acceso a documentaci?n para un campo particular -->
 		<div id="docFormWrapper">
 			<form id="docForm" action="javascript:void(0)" style="margin: 0;">
-				<span style="font-size: 11px;"><u>D</u>ocumentación</span><br>
+				<span style="font-size: 11px;"><u>D</u>ocumentaci?n</span><br>
 				<input type="button" id="btnDocHideShow" class="marcEditButton"
-					title="Mostrar el panel con la documentación de MARC 21">
+					title="Mostrar el panel con la documentaci?n de MARC 21">
 				<select id="docSource">
 					<option value="LC">LC</option>
 					<option value="OCLC">OCLC</option>
@@ -605,7 +605,7 @@
 				</select>
 				<input type="text" name="docItem" id="docItem"
 					maxlength="3" accesskey="D" -tabindex="-1"
-					title="Escriba el número de campo y presione Enter. Escriba “toc” para acceder a la página inicial de la documentación de LC."><!--
+					title="Escriba el n?mero de campo y presione Enter. Escriba ?toc? para acceder a la p?gina inicial de la documentaci?n de LC."><!--
 				--><input type="submit" class="marcEditButton" value="Ir" style="height: 20px; width: 23px; margin-left: 3px;">
 			</form>
 		</div>
