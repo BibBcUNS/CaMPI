@@ -26,7 +26,7 @@ function rawEdit(oldDatafields, aacr)
     var dWidth = (screen.width == 1024) ? "820px" : "660px";
     var dHeight = (screen.width == 1024) ? "550px" : "450px";
     var winProperties = "dialogWidth:" + dWidth + "; dialogHeight:" + dHeight + "; status:no; resizable:no; help:no";
-    var dialogArgs = { datafields : oldDatafields, aacrParsedData : aacr };
+    var dialogArgs = { datafields : oldDatafieldsGlobal, aacrParsedData : aacr };
     var newDatafields;
 
     // Presentamos la ventana
@@ -40,19 +40,25 @@ function rawEdit(oldDatafields, aacr)
         //statements before showing a modal dialog
         console.log("before dialog");
 
+        console.log(URL_RAW_EDIT)
         newDatafields = window.showModalDialog(URL_RAW_EDIT, dialogArgs, winProperties);
 
+        
         //statements after closing a modal dialog
         console.log("after dialog");
         console.log("newDatafields: ", newDatafields);
 
-        if ( "undefined" == typeof(newDatafields) || null == newDatafields ) {
-            return false;
-        }
+        //M.A 22/03/2023 comento las siguientes 3 lineas
+        //if ( "undefined" == typeof(newDatafields) || null == newDatafields ) {
+        //    return false;
+        //}
 
         // Procesamos lo que devuelve la ventana
         newDatafields = newDatafields.replace(/\r/g, "");  //  \r del textarea
-        if ( newDatafields != "" && newDatafields != oldDatafields ) {
+
+        //M.A 22/03/2023 comento la siguiente linea ( y la duplico a continuacion modificada )
+        //if ( newDatafields != "" && newDatafields != oldDatafields ) {
+        if ( newDatafields != "" && newDatafields != oldDatafieldsGlobal ) {
             // Necesitamos el form de edición visible, para el caso en que esta
             // función sea llamada al crear un registro desde la pantalla de
             // búsqueda.
@@ -257,22 +263,26 @@ function editEjemplares()
 // (cuando se pide el registro para editar).
 // -----------------------------------------------------------------------------
 {
-    var winProperties = "font-size:10px; dialogWidth:680px; dialogHeight:480px; status:no; help:no";
+    var winProperties = "font-size:10px; dialogWidth:800px; dialogHeight:450px; status:no; help:no";
 
     // El array ejemplares es pasado por referencia
     // TO-DO: pasar el userID para usarlo en los ejemplares modificados
-    //var newEjemplares = showModalDialog(URL_EDIT_EJEMPLARES, ejemplares, winProperties);
-    var newEjemplares = showModalDialog(URL_EDIT_EJEMPLARES, {ejemplares: ejemplares, database: g_activeDatabase.name}, winProperties);
 
-    // Verificamos que la ventana realmente haya devuelto el array con los ejemplares
-    if ( "undefined" == typeof(newEjemplares) || null == newEjemplares ) {
-        return;  // abortamos
-    }
+
+    var newEjemplares = window.showModalDialog(URL_EDIT_EJEMPLARES, {ejemplares: ejemplares, database: g_activeDatabase.name}, winProperties);
+
+    //ToDo: sacar X de ventana hija porque return acá rompe el polyfill (y verificar controles en modal) (M.A)
+    // Opción: invertir control y asignar sólo si no falla
+    // Verificamos que la ventana realmente haya devuelto el array con los ejemplares 
+    //if ( "undefined" == typeof(newEjemplares) || null == newEjemplares ) {
+    //    return;  // abortamos
+    //}
 
     ejemplares = newEjemplares;  // actualiza la variable global
 
     var bgColor = ( ejemplares.length > 0 ) ? HOLDINGS_BGCOLOR : "";
     document.getElementById("ejemplaresBtn").style.backgroundColor = bgColor;
+
     //document.getElementById("cantEjemplares").innerHTML = ejemplares.length;
 }
 
@@ -281,20 +291,21 @@ function editEjemplares()
 function editPostItNote()
 // -----------------------------------------------------------------------------
 {
-    var winProperties = "font-size: 10px; dialogWidth: 604px; dialogHeight: 470px; status: no; help: no";
+    var winProperties = "font-size: 10px; dialogWidth: 610px; dialogHeight: 470px; status: no; help: no";
 
-    var newPostItNote = showModalDialog(URL_EDIT_POSTITNOTE, postItNote, winProperties);
+    var newPostItNote = window.showModalDialog(URL_EDIT_POSTITNOTE, postItNote, winProperties);
 
-    if ( "undefined" == typeof(newPostItNote) || null == newPostItNote ) {
-        return;  // abortamos
-    }
+    //if ( "undefined" == typeof(newPostItNote) || null == newPostItNote ) {
+    //    return;  // abortamos
+    //}
 
     postItNote = newPostItNote;  // actualiza la variable global
     //alert(postItNote);
 
+    
     var bgColor = ( postItNote != "" ) ? POSTITNOTE_BGCOLOR : "";
     document.getElementById("postItNoteBtn").style.backgroundColor = bgColor;
-    document.getElementById("postItNoteBtn").title = ( postItNote != "" ) ? postItNote.substr(2).replace(/\^\w/g,"\n\n") : "";
+    //document.getElementById("postItNoteBtn").title = ( postItNote != "" ) ? postItNote.substr(2).replace(/\^\w/g,"\n\n") : "";
 }
 
 
@@ -377,7 +388,7 @@ function promptNewField()
     }
 
     // Mostramos la ventana
-    var tags = showModalDialog(URL_SELECT_FIELD, window, winProperties);
+    var tags = window.showModalDialog(URL_SELECT_FIELD, window, winProperties);
 
     if ( "undefined" == typeof(tags) || null == tags || tags.length == 0 ) {
         return;  // abortamos
@@ -484,6 +495,7 @@ function promptSaveChanges()
 }
 
 
+/*
 // -----------------------------------------------------------------------------
 function catalis_confirm(question,w,h,pos)
 // Cuadro de diálogo "confirm" modificado
@@ -493,7 +505,7 @@ function catalis_confirm(question,w,h,pos)
     if ( "left" == pos ) winProperties += "; dialogLeft:10px";
 
     // Mostramos la ventana
-    var answer = showModalDialog(URL_CONFIRM_DIALOG, question, winProperties);
+    var answer = window.showModalDialog(URL_CONFIRM_DIALOG, question, winProperties);
 
     if ( "undefined" == typeof(answer) || null == answer ) {
         answer = false;
@@ -501,3 +513,4 @@ function catalis_confirm(question,w,h,pos)
 
     return answer;
 }
+*/
