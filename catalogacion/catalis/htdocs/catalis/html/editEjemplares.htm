@@ -60,7 +60,15 @@ function handleOK()
 //--------------------------------------------------------
 {
 	window.returnValue = ejemplares;
-	window.close();
+	//window.close();
+
+	var dialog = parent.document.getElementsByTagName('dialog');
+  	if (dialog) {
+      parent.document.getElementsByTagName('dialog')[0].close();
+  	} else {
+      window.close();
+  	}
+	//cerrarDialog();
 }
 
 
@@ -68,8 +76,15 @@ function handleOK()
 function handleCancel()
 //--------------------------------------------------------
 {
-	//window.returnValue = oldEjemplares;
-	window.close();
+	window.returnValue = window.dialogArguments.ejemplares;
+
+	var dialog = parent.document.getElementsByTagName('dialog');
+  	if (dialog) {
+      parent.document.getElementsByTagName('dialog')[0].close();
+  	} else {
+      window.close();
+  	}
+	//window.close();
 }
 
 
@@ -196,7 +211,7 @@ function showEjemplar(ejID)
 	// 2010-10-14. FG, para Bib. Central UNS
 	
 	
-	usarSelectParaColeccion(dialogArguments.database);
+	usarSelectParaColeccion(window.dialogArguments.database);
 	
 }
 
@@ -211,7 +226,7 @@ function usarSelectParaColeccion(database) {
 	//No es necesario que estén todas. Si no está en esta lista toma el caso por defecto
 	//Viene como parametro database (el nombre de la base en la que estoy)
 	bibliotecas=[
-		   ["Biblioteca Central",["eunm","ucod-marc"]],
+		   ["Biblioteca Central",["eunm","ucod-marc", "demo","bibima"]],
 		   ["Biblioteca Administracion",["ead","bibadm"]],
 		   ["Biblioteca Economia",["eeo","bibeco"]],
 		   ["Biblioteca Humanidades",["bham"]],
@@ -235,7 +250,11 @@ function usarSelectParaColeccion(database) {
 		valor = coleccion.value;
 		coleccion_select = document.createElement("SELECT");
 		coleccion_select.id = "coleccion";
-		coleccion.replaceNode(coleccion_select);
+
+		// replaceNode est\E1 deprecado, solo tiene soporte para IE 
+		// http://help.dottoro.com/ljxvjvcg.php
+		// replaceNode(coleccion_select);
+		coleccion.parentElement.replaceChild(coleccion_select, coleccion); 
 		
 		
 		switch (biblioteca)
@@ -647,14 +666,17 @@ function init()
 	
 	
 	//oldEjemplares = dialogArguments;  // referencia al array ejemplares de la ventana principal
-	oldEjemplares = dialogArguments.ejemplares;  // referencia al array ejemplares de la ventana principal
+	oldEjemplares = window.dialogArguments.ejemplares;  // referencia al array ejemplares de la ventana principal
+	
 	//ejemplares = dialogArguments;
 	window.returnValue = null;
-	//window.returnValue = oldEjemplares; // lo necesito por si la ventana se cierra sin usar un botón de la aplicación
+	//window.returnValue = oldEjemplares; // lo necesito por si la ventana se cierra sin usar un bot?n de la aplicaci?n
 	//var ejemplares = new cloneObject(oldEjemplares);
 	//var ejemplares = oldEjemplares.clone();
 	
-	// Clonamos el array (solución ad hoc) para poder conservar la versión original
+	// Clonamos el array (soluci?n ad hoc) para poder conservar la versi?n original
+
+	/*
 	ejemplares = new Array();
 	for (var i=0; i < oldEjemplares.length; i++) {
 		ejemplares[i] = new Array();
@@ -662,8 +684,21 @@ function init()
 			ejemplares[i][prop] = oldEjemplares[i][prop];
 		}
 	}
-	
-	// De acá en más, trabajamos con el array ejemplares de *esta* ventana.
+	*/
+
+	//ejemplares = oldEjemplares ;  NO se puede asignar un objeto a otro porque se asigna la referencia (rompe el hanldeCancel);
+
+	ejemplares = JSON.parse(JSON.stringify(oldEjemplares));
+
+
+	/*
+	const entries = Object.entries(obj);
+	var ejArray = Object.keys(obj).map((key)=>[ key ,obj[key]]);
+	console.log("Array con keys: "+ejArray)
+	console.log("Array con entries: "+ entries );
+	*/ 
+
+	// De ac? en m?s, trabajamos con el array ejemplares de *esta* ventana.
 	
 	// Lista de atributos para un ejemplar, modificables por el usuario
 	// ATENCION: falta isCopy
@@ -802,7 +837,7 @@ window.onload = init;
 
 	<!-- Celda derecha: datos de un ejemplar -->
 	<td>
-		<div style="height: 340px; width: 480px; overflow: auto; border: 1px solid #666; background: #FED; /*#F3F3F3;*/">
+		<div style="height: 340px; width: 100%; overflow: auto; border: 1px solid #666; background: #FED; /*#F3F3F3;*/">
 			<form action="javascript:void(0)" id="ejForm">
 			
 			<table width="100%" style="font-family: verdana; font-size: 13px; background: #FED; /*#F3F3F3;*/" cellspacing="2" border="0">
