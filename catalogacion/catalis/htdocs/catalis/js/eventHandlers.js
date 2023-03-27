@@ -218,11 +218,20 @@ function setToolbarEvents()
     saveRecord();
   };
   
+  //M.A 22/03/2023 comentolas siguientes 4 lineas ( y reescribo la funcion justo debajo )
+  //document.getElementById("btnRawEdit").onclick = function() {
+  //  this.blur();
+  //  rawEdit(serializeRecord(false,false,true,false));
+  //};
+
   document.getElementById("btnRawEdit").onclick = function() {
     this.blur();
-    rawEdit(serializeRecord(false,false,true,false));
+
+    oldDatafieldsGlobal = serializeRecord(false,false,true,false);
+
+    rawEdit();
   };
-  
+
   document.getElementById("btnBorrar").onclick = function() {
     this.blur();
     deleteRecord();
