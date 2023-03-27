@@ -14,14 +14,27 @@ function handleOK()
 //--------------------------------------------------------
 {
 	window.returnValue = true;
-	window.close();
+	//window.close();
+	var dialog = parent.document.getElementsByTagName('dialog');
+    if (dialog) {
+        parent.document.getElementsByTagName('dialog')[0].close();
+    } else {
+        window.close();
+    }
 }
 
 //--------------------------------------------------------
 function handleCancel()
 //--------------------------------------------------------
 {
-	window.close();
+	window.returnValue = false;
+	//window.close();
+	var dialog = parent.document.getElementsByTagName('dialog');
+    if (dialog) {
+        parent.document.getElementsByTagName('dialog')[0].close();
+    } else {
+        window.close();
+    }
 }
 
 //--------------------------------------------------------
@@ -83,7 +96,7 @@ window.onload = init;
 
 <div id="question"></div>
 
-<div align="center" style="margin-top: 8px">
+<div align="center" style="margin-top: 8px;">
 	<button id="btnOK" class="marcEditButton" accesskey="A"><u>A</u>ceptar</button>
 	<button id="btnCancel" class="marcEditButton" accesskey="C"><u>C</u>ancelar</button>
 </div>

@@ -446,7 +446,8 @@ function viewRecord()
         //winProperties += "dialogLeft: " + (screen.width - 553) + "px; ";
         winProperties += "resizable: yes; scroll: yes; status: no; help: no";
         //alert(winProperties);
-        modelessWin = showModalDialog(URL_RECORD_VISUALIZATION, window, winProperties);
+        
+        modelessWin = window.showModalDialog(URL_RECORD_VISUALIZATION, window, winProperties);
         displayWindowClosed = false;
     }
 
@@ -480,7 +481,7 @@ function saveRecord()
 // Envía el registro al servidor para su grabación.
 // -----------------------------------------------------------------------------
 {
-    // Sólo grabamos si hubo alguna modificación
+    // Solo grabamos si hubo alguna modificación
     if ( !modifiedRecord() ) {
         var msg = "El registro no ha sido modificado, y por lo tanto no es necesario volver a grabarlo.";
         catalisMessage(msg,true);
@@ -502,26 +503,38 @@ function saveRecord()
         return;
     }
 
-    var form = document.getElementById("hiddenFORM");
-    form.marcFields.value = marcFields;
-
-    form.recordID.value = document.getElementById("marcEditForm").f001.value;
-    form.tarea.value = "GRABAR_REG";
-    form.method = "POST";  // method="GET" genera errores, como es de esperar
-    form.target = "hiddenIFRAME";
-    //form.debug = "1";
-
-    var message = "DATOS QUE SE ENVIAN PARA SER GRABADOS<p>\nNúmero de registro: " + form.recordID.value;
-    message += "<div id='dataToBeSaved'><pre>" + form.marcFields.value + "</pre></div>";
+    var message = "DATOS QUE SE ENVIAN PARA SER GRABADOS<p>\nNúmero de registro: " + document.getElementById("marcEditForm").f001.value;
+    message += "<div id='dataToBeSaved'><pre>" + marcFields + "</pre></div>";
 
     // suspendemos el cuadro de confirmación (FG, 06/sep/2005)
     // lo volvemos a activar, ya que de lo contrario se pueden llegar a grabar datos en forma accidental (FG, 16/sep/2005)
-    if ( !catalis_confirm(message,640,460) ) {
-        return false;
+
+    //-------------(M.A) Funcion copiada de aux-windows.js:
+    var winProperties = "dialogWidth:" + 640 + "px; dialogHeight:" + 460 + "px; status:no; help:no";
+    //if ( "left" == pos ) winProperties += "; dialogLeft:10px";
+
+    // Mostramos la ventana
+    var answer = window.showModalDialog(URL_CONFIRM_DIALOG, message, winProperties);
+    //---------------
+
+    if (answer == true) {
+    
+        //if ( !catalis_confirm(message,640,460) ) {
+        //    return false;
+        //}
+    
+        // Cartelito
+        catalisMessage(document.getElementById("grabandoRegistro").innerHTML);
+    
+        var form = document.getElementById("hiddenFORM");
+        form.marcFields.value = serializeRecord(true,true,true,true);//marcFields;
+    
+        form.recordID.value = document.getElementById("marcEditForm").f001.value;
+        form.tarea.value = "GRABAR_REG";
+        form.method = "POST";  // method="GET" genera errores, como es de esperar
+        form.target = "hiddenIFRAME";
+        //form.debug = "1";
+    
+        form.submit();
     }
-
-    // Cartelito
-    catalisMessage(document.getElementById("grabandoRegistro").innerHTML);
-
-    form.submit();
 }
