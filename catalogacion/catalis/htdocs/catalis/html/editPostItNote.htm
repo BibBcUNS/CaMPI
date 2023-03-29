@@ -32,24 +32,14 @@ function handleOK()
 	//Retorno para showModalDialog
 	window.returnValue = notes;
 
-	var dialog = parent.document.getElementsByTagName('dialog');
-  	if (dialog) {
-      parent.document.getElementsByTagName('dialog')[0].close();
-  	} else {
-      window.close();
-  	}
+	window.top.cerrarDialog();
 }
 
 
 function handleCancel(){
 	window.returnValue = window.dialogArguments;
 
-	var dialog = parent.document.getElementsByTagName('dialog');
-  	if (dialog) {
-      parent.document.getElementsByTagName('dialog')[0].close();
-  	} else {
-      window.close();
-  	}
+	window.top.cerrarDialog();
 }
 
 //--------------------------------------------------------

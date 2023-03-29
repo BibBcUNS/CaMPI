@@ -4,7 +4,14 @@
 //  (c) 2003-2004  Fernando J. Gómez - CONICET - INMABB
 // =============================================================================
 
-
+function cerrarDialog(){
+    var dialog = parent.document.getElementsByTagName('dialog');
+  	if (dialog) {
+      parent.document.getElementsByTagName('dialog')[0].close();
+  	} else {
+      window.close();
+  	}
+}
 
 // Las dos funciones que siguen son alternativas para realizar la misma tarea:
 // traer un documento XML desde el servidor hasta el browser. Analizar pros y

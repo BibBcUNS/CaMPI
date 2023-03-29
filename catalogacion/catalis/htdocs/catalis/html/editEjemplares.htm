@@ -62,13 +62,7 @@ function handleOK()
 	window.returnValue = ejemplares;
 	//window.close();
 
-	var dialog = parent.document.getElementsByTagName('dialog');
-  	if (dialog) {
-      parent.document.getElementsByTagName('dialog')[0].close();
-  	} else {
-      window.close();
-  	}
-	//cerrarDialog();
+	window.top.cerrarDialog();
 }
 
 
@@ -78,13 +72,7 @@ function handleCancel()
 {
 	window.returnValue = window.dialogArguments.ejemplares;
 
-	var dialog = parent.document.getElementsByTagName('dialog');
-  	if (dialog) {
-      parent.document.getElementsByTagName('dialog')[0].close();
-  	} else {
-      window.close();
-  	}
-	//window.close();
+	cerrarDialog();
 }
 
 
