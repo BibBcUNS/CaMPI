@@ -390,12 +390,12 @@ function promptNewField()
     // Mostramos la ventana
     var tags = window.showModalDialog(URL_SELECT_FIELD, window, winProperties);
 
-    if ( "undefined" == typeof(tags) || null == tags || tags.length == 0 ) {
-        return;  // abortamos
+    //(M.A) 31/03/2023 cambio condiciones del if por el siguiente (si se editó el array tags entonces se crea el campo nuevo).
+    if ( tags.length !== 0 ) {
+        // Procesamos los datos devueltos por la ventana en el array tags
+        createFieldList(tags);
     }
 
-    // Procesamos los datos devueltos por la ventana en el array tags
-    createFieldList(tags);
 }
 
 

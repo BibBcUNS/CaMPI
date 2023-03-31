@@ -4,6 +4,8 @@
 //  (c) 2003-2004  Fernando J. Gómez - CONICET - INMABB
 // =============================================================================
 
+var xmlData = {};
+
 function cerrarDialog(){
     var dialog = parent.document.getElementsByTagName('dialog');
   	if (dialog) {
@@ -11,6 +13,25 @@ function cerrarDialog(){
   	} else {
       window.close();
   	}
+}
+
+
+function selectNodesPoly(path, xmlDoc){
+    //Devuelve un arreglo con todos los nodos del XML buscados por path
+    var result = xmlDoc.evaluate(path, xmlDoc, null, XPathResult.ANY_TYPE , null);
+    let node = null;
+    var arrayResult = [];
+
+    while(node = result.iterateNext()){
+        arrayResult.push(node)
+    }
+
+    return arrayResult;
+}
+
+function selectSingleNodePoly(path, xmlDoc){
+    var nodes = document.evaluate(path, xmlDoc, null, XPathResult.ANY_TYPE, null);
+    return nodes.iterateNext();
 }
 
 // Las dos funciones que siguen son alternativas para realizar la misma tarea:
