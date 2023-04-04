@@ -75,9 +75,10 @@ function rawEdit(oldDatafields, aacr)
         //return true;  // así sabemos, desde createRecord(), que la operación no fue cancelada
     })();
 
+    
 }
 
-
+/*
 // -----------------------------------------------------------------------------
 function editCodedData(dataElement)
 // Para editar códigos del "fixed field" (leader & 008), campos 041, 044, etc.
@@ -130,6 +131,75 @@ function editCodedData(dataElement)
     }
 
     event.srcElement.focus();  // no produce el efecto deseado (el elemento obtiene el foco, pero no se ve resaltado)
+}
+
+*/
+
+
+// -----------------------------------------------------------------------------
+function editCodedData()
+// Para editar códigos del "fixed field" (leader & 008), campos 041, 044, etc.
+// -----------------------------------------------------------------------------
+{
+    
+    let dataElement = window.top.dataElement;
+    var URL = URL_EDIT_CODES;
+
+    if ( dataElement.search(/relator|f041|f044/) != -1 ) {
+        var srcObject = event.srcElement;
+        var activeCode = srcObject.value;  // TO-DO: evt for mozilla
+        var codeType = "single";
+        var dialogLeft = event.clientX - 70;
+        var dialogTop = event.clientY - 130;
+        
+    } else if ( "subfield7" == dataElement ) {
+        var dialogLeft = event.clientX - 70;
+        var dialogTop = event.clientY - 130;
+        URL = HTDOCS + "html/subfield-7.htm";
+    } else { 
+        var form = document.getElementById("marcEditForm");
+        var activeCode = form[dataElement].value;
+
+        var elementoPadre = window.top.selectNodesPoly("/" + "/dataElement[@pos='"+dataElement+"']", xmlData.xmlFixedField)[0];
+        
+        console.log(elementoPadre)
+
+        var codeType;
+        if(elementoPadre != undefined){
+            if(elementoPadre.getAttribute("multiple") != null ){
+                codeType = "multiple";
+            }else{
+                codeType = "single";
+            }
+        }else{
+            console.log("elementoPadre es pais o leng");
+            codeType = "single";
+        }
+
+        var dialogLeft = event.clientX - 300;
+        var dialogTop = event.clientY - 200; // con event.clientY - 38 hacemos que el puntero quede justo sobre la opción activa en el select
+    }
+
+    var dialogArgs = [window, dataElement, activeCode, codeType];
+    var dialogHeight = ( "multiple" == codeType ) ? 230 : 145;
+    var dialogWidth = 300;
+    var winProperties = "font-size:10px; dialogLeft:" + dialogLeft + "px; dialogTop:" + dialogTop + "px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
+
+    var newCode = window.showModalDialog(URL, dialogArgs, winProperties);
+
+    if ( null != newCode ) {
+        if ( dataElement.search(/relator|f041|f044/) != -1 ) {
+            srcObject.value = newCode.value;
+            //displayPermanentTitle(srcObject,newCode.description.substr(6),40,0);
+        } else {
+            document.getElementById("marcEditForm")[dataElement].value = newCode.value;
+            if ( document.getElementById("TD_" + dataElement) ) {
+                document.getElementById("TD_" + dataElement).title = newCode.description;
+            }
+        } 
+        event.srcElement.focus();  // no produce el efecto deseado (el elemento obtiene el foco, pero no se ve resaltado)
+    }
+    
 }
 
 
@@ -413,7 +483,7 @@ function promptNewSubfield(field)
     var path = "marc21_bibliographic/datafield[@tag='" + tag + "']";
     var xmlDatafield = crossBrowserNodeSelector(xmlMARC21,path);
 
-    // Parámetros para la ventana de diálogo
+    // Parametros para la ventana de diálogo
     // ATENCION: también podemos pasar el objeto window como parámetro
     var dialogArgs = new Array();
     dialogArgs[0] = xmlDatafield;
@@ -498,7 +568,7 @@ function promptSaveChanges()
 /*
 // -----------------------------------------------------------------------------
 function catalis_confirm(question,w,h,pos)
-// Cuadro de diálogo "confirm" modificado
+// Cuadro de dialogo "confirm" modificado
 // -----------------------------------------------------------------------------
 {
     var winProperties = "dialogWidth:" + w + "px; dialogHeight:" + h + "px; status:no; help:no";

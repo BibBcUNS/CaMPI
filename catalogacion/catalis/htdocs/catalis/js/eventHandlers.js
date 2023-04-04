@@ -3,7 +3,7 @@
 //
 //  Event handler definitions for some (static) UI elements.
 //
-//  (c) 2003-2004  Fernando J. GÃ³mez - CONICET - INMABB
+//  (c) 2003-2004  Fernando J. Gómez - CONICET - INMABB
 // =============================================================================
 
 
@@ -103,8 +103,8 @@ function setControlFormEvents()
 // -----------------------------------------------------------------------------
 {
   // Queremos que un ENTER en los textboxes equivalga a un TAB, y que un F12
-  // abra la ventana con los cÃ³digos, si la hay.
-  // ATENCION: no funciona la deshabilitaciÃ³n del Backspace (en IE6-home parece que sÃ­)
+  // abra la ventana con los códigos, si la hay.
+  // ATENCION: no funciona la deshabilitación del Backspace (en IE6-home parece que sí)
   var inputFields = document.getElementById("control").getElementsByTagName("input");
   for (var i=0; i < inputFields.length; i++) {
     if ( "text" == inputFields[i].type ) {
@@ -127,13 +127,15 @@ function setControlFormEvents()
     }
   }
   
-  // Un click sobre una celda abre la ventana con los cÃ³digos
+  // Un click sobre una celda abre la ventana con los códigos
   var allCells = document.getElementById("control").getElementsByTagName("td");
   for (var i=0; i < allCells.length; i++) {
     if ( allCells[i].id.search(/^TD_f008_|^TD_L_/) != -1 ) {
       //alert(allCells[i].id);
       allCells[i].onclick = function() {
-        editCodedData(this.id.substr(3));
+        window.top.dataElement = this.id.substr(3);
+        console.log("codigo: ---------------------------------- "+window.top.dataElement)
+        editCodedData();
       };
       allCells[i].onmouseover = function() {
         this.style.backgroundColor = FIXEDFIELD_HL_BGCOLOR;
@@ -169,7 +171,7 @@ function setWindowEvents()
 // -----------------------------------------------------------------------------
 {
   // Queremos emular en Mozilla el comportamiento del objeto popup de IE.
-  // ATENCION: Â¿hay que agregar cada posible evt.target asociado a un popup?
+  // ATENCION: ¿hay que agregar cada posible evt.target asociado a un popup?
   // TO-DO: si el click es en el IFRAME...
   if (moz) {
     console.log('moz');
@@ -179,7 +181,7 @@ function setWindowEvents()
         console.log('hiding');
         hidePopup();
     });
-    //window.onblur = hidePopup;  // efecto indeseado: no funciona el menÃº "Nuevo"
+    //window.onblur = hidePopup;  // efecto indeseado: no funciona el menú "Nuevo"
   }
 }
 

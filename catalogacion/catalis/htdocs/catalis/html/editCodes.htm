@@ -20,7 +20,8 @@ function handleOK()
 		selectedCode = singleCodeChange();
 	}
 	window.returnValue = selectedCode;
-	window.close();
+
+	window.top.cerrarDialog();
 }
 
 
@@ -28,7 +29,7 @@ function handleOK()
 function handleCancel()
 // -----------------------------------------------------------------------------
 {
-	window.close();
+	window.top.cerrarDialog();
 }
 
 
@@ -107,16 +108,19 @@ function updateEnabledOptions(checkbox)
 
 
 //-----------------------------------------------------------
+
 function adjustWindowSize()
 // Ajusta las dimensiones de la ventana en función de su contenido.
 //-----------------------------------------------------------
 {
+	//(M.A) Comento por ahora las 3 llamadas a updateDialogHeight y width
+
 	// Ajustamos la altura
-	callingWindowObject.updateDialogHeight(window);
+	//callingWindowObject.updateDialogHeight(window);
 	// Ajustamos el ancho
-	callingWindowObject.updateDialogWidth(window);
+	//callingWindowObject.updateDialogWidth(window);
 	// Ajustamos la altura
-	callingWindowObject.updateDialogHeight(window);
+	//callingWindowObject.updateDialogHeight(window);
 	// (Sí, parece necesario repetir el primer tipo de ajuste)
 	
 	/*
@@ -180,20 +184,20 @@ function useEquivalentCodes(dataElement) {
 	return dataElement;
 }
 
-
+/*
 //-----------------------------------------------------------
 function readCodesAndTitle(dataElement)
 // Lee la lista de códigos, y el título para la ventana.
 //-----------------------------------------------------------
 {
 	xmlFixedField = callingWindowObject.xmlData.xmlFixedField;
-	
+
 	switch ( dataElement ) {
 		
-		/*
-		case "f008_06" :
-			Para Continuing Resources podemos agregar "/ estado de publicación"
-		*/
+		
+		//case "f008_06" :
+		//	Para Continuing Resources podemos agregar "/ estado de publicación"
+		
 		
 		case "f008_15_17" :
 		case "f044" :
@@ -229,6 +233,64 @@ function readCodesAndTitle(dataElement)
 	}
 	catch(err) {}
 	
+	
+
+	document.getElementById("winLabel").innerHTML = title;
+}
+*/
+
+
+//-----------------------------------------------------------
+function readCodesAndTitle(dataElement)
+// Lee la lista de códigos, y el título para la ventana.
+//-----------------------------------------------------------
+{
+	xmlFixedField = callingWindowObject.xmlData.xmlFixedField;
+	switch ( dataElement ) {
+		
+		/*
+		case "f008_06" :
+			Para Continuing Resources podemos agregar "/ estado de publicación"
+		*/
+		
+		case "f008_15_17" :
+		case "f044" :
+			xmlCodes = callingWindowObject.xmlData.xmlCountryCodes;
+			Codes = window.top.selectNodesPoly("/" + "/country", xmlCodes);
+			title = "008/15-17 · Lugar de publicación";
+			break;
+			
+		case "f008_35_37" :
+		case "f041" :
+			xmlCodes = callingWindowObject.xmlData.xmlLanguageCodes;
+			Codes = window.top.selectNodesPoly("/" + "/language", xmlCodes);
+			title = "008/35-37 · Idioma";
+			break;
+			
+		case "relator" :
+			// TO-DO: pensar de qué manera se puede acotar la larga lista, en función del tipo
+			// de documento (video, musica, libro, etc.)
+			xmlCodes = callingWindowObject.xmlData.xmlRelatorCodes;
+			Codes = window.top.selectNodesPoly("/" + "/relator", xmlCodes);
+			title = "Relator codes";
+			break;
+		
+		default :
+			//Codes = xmlFixedField.selectNodes("/" + "/dataElement[@pos='" + dataElement + "']/option");
+			//title = xmlFixedField.selectNodes("/" + "/dataElement[@pos='" + dataElement + "']/@name")[0].nodeValue;
+			Codes = window.top.selectNodesPoly("/" + "/dataElement[@pos='" + dataElement + "']/option", window.top.xmlData.xmlFixedField);
+			title = window.top.selectNodesPoly("/" + "/dataElement[@pos='" + dataElement + "']/@name", window.top.xmlData.xmlFixedField)[0].nodeValue;
+			break;
+	}
+	
+
+	try {
+		var path = "/" + "/dataElement[@pos='" + dataElement + "']/@maxcodes";
+		g_maxCodes = window.top.selectSingleNodePoly(path, window.top.xmlData.xmlFixedField).nodeValue;
+	}
+	catch(err) {}
+	
+
 	document.getElementById("winLabel").innerHTML = title;
 }
 
@@ -412,13 +474,18 @@ function init()
 //--------------------------------------------------------
 {
 	window.returnValue = null;
-	callingWindowObject = dialogArguments[0];
-	var dataElement = dialogArguments[1];
-	var activeCode = dialogArguments[2];
-	g_codeType = dialogArguments[3];
+	callingWindowObject = window.dialogArguments[0];
+	var dataElement = window.dialogArguments[1];
+	var activeCode = window.dialogArguments[2];
+	g_codeType = window.dialogArguments[3];
 	
 	var xmlCodes, Codes, title;
+
 	dataElement = useEquivalentCodes(dataElement);
+
+	console.log("dataElement: "+dataElement)
+
+
 	readCodesAndTitle(dataElement);
 	renderMenu(dataElement,activeCode,"code");
 	
