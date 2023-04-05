@@ -344,20 +344,16 @@ function editEjemplares()
 
 
     var newEjemplares = window.showModalDialog(URL_EDIT_EJEMPLARES, {ejemplares: ejemplares, database: g_activeDatabase.name}, winProperties);
-
-    //ToDo: sacar X de ventana hija porque return acá rompe el polyfill (y verificar controles en modal) (M.A)
-    // Opción: invertir control y asignar sólo si no falla
+    
     // Verificamos que la ventana realmente haya devuelto el array con los ejemplares 
-    //if ( "undefined" == typeof(newEjemplares) || null == newEjemplares ) {
-    //    return;  // abortamos
-    //}
+    if ( null != newEjemplares ) {
+        ejemplares = newEjemplares;  // actualiza la variable global
 
-    ejemplares = newEjemplares;  // actualiza la variable global
-
-    var bgColor = ( ejemplares.length > 0 ) ? HOLDINGS_BGCOLOR : "";
-    document.getElementById("ejemplaresBtn").style.backgroundColor = bgColor;
-
-    //document.getElementById("cantEjemplares").innerHTML = ejemplares.length;
+        var bgColor = ( ejemplares.length > 0 ) ? HOLDINGS_BGCOLOR : "";
+        document.getElementById("ejemplaresBtn").style.backgroundColor = bgColor;
+        //document.getElementById("cantEjemplares").innerHTML = ejemplares.length;
+    }
+    
 }
 
 
@@ -370,13 +366,12 @@ function editPostItNote()
     var newPostItNote = window.showModalDialog(URL_EDIT_POSTITNOTE, postItNote, winProperties);
 
     if ( null != newPostItNote ) {
-        postItNote = newPostItNote;  // actualiza la variable global
+        postItNote = newPostItNote;  // Actualiza la variable global
         var bgColor = ( postItNote != "" ) ? POSTITNOTE_BGCOLOR : "";
         document.getElementById("postItNoteBtn").style.backgroundColor = bgColor;
+        document.getElementById("postItNoteBtn").title = ( postItNote != "" ) ? postItNote.substr(2).replace(/\^\w/g,"\n\n") : "";
     }
 
-    
-    //document.getElementById("postItNoteBtn").title = ( postItNote != "" ) ? postItNote.substr(2).replace(/\^\w/g,"\n\n") : "";
 }
 
 
