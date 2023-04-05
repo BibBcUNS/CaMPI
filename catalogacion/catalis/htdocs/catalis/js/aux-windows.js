@@ -84,6 +84,7 @@ function editCodedData(dataElement)
 // Para editar códigos del "fixed field" (leader & 008), campos 041, 044, etc.
 // -----------------------------------------------------------------------------
 {
+    
     if ( dataElement.search(/relator|f041|f044/) != -1 ) {
         var srcObject = event.srcElement;
         var activeCode = srcObject.value;  // TO-DO: evt for mozilla
@@ -99,6 +100,7 @@ function editCodedData(dataElement)
         var form = document.getElementById("marcEditForm");
         var activeCode = form[dataElement].value;
         //var multiple = xmlData.xmlFixedField.selectNodes("/" + "/dataElement[@pos='" + dataElement + "']/@multiple");
+     
         var multiple = xmlData.xmlFixedField.evaluate("/" + "/dataElement[@pos='" + dataElement + "']/@multiple", xmlData.xmlFixedField);
         var codeType = ( multiple.length > 0 ) ? multiple[0].value : "single";
         var dialogLeft = event.clientX;
@@ -241,8 +243,10 @@ function editIndicators(field)
 // donde se hizo click (?)
 // -----------------------------------------------------------------------------
 {
+    
     var tag = field.tag;
     var path = "marc21_bibliographic/datafield[@tag='" + tag + "']";
+
     var xmlDatafield = crossBrowserNodeSelector(xmlMARC21,path);
     var oldIndicators = getIndicators(field);
 
@@ -365,16 +369,13 @@ function editPostItNote()
 
     var newPostItNote = window.showModalDialog(URL_EDIT_POSTITNOTE, postItNote, winProperties);
 
-    //if ( "undefined" == typeof(newPostItNote) || null == newPostItNote ) {
-    //    return;  // abortamos
-    //}
-
-    postItNote = newPostItNote;  // actualiza la variable global
-    //alert(postItNote);
+    if ( null != newPostItNote ) {
+        postItNote = newPostItNote;  // actualiza la variable global
+        var bgColor = ( postItNote != "" ) ? POSTITNOTE_BGCOLOR : "";
+        document.getElementById("postItNoteBtn").style.backgroundColor = bgColor;
+    }
 
     
-    var bgColor = ( postItNote != "" ) ? POSTITNOTE_BGCOLOR : "";
-    document.getElementById("postItNoteBtn").style.backgroundColor = bgColor;
     //document.getElementById("postItNoteBtn").title = ( postItNote != "" ) ? postItNote.substr(2).replace(/\^\w/g,"\n\n") : "";
 }
 
