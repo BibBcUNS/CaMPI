@@ -37,6 +37,7 @@ function handleOK()
 
 
 function handleCancel(){
+	
 	window.returnValue = window.dialogArguments;
 
 	window.top.cerrarDialog();
@@ -82,27 +83,30 @@ function init()
 	//Retorno para show modal dialog
 	var postItNote = window.dialogArguments;
 
-	if ( postItNote.search(/\^/) == -1 ) {
+	if(postItNote != null){
+		if ( postItNote.search(/\^/) == -1 ) {
 		document.getElementById("postItNoteOther").value = postItNote;
 	} 
 	else {
-		var notas = postItNote.split(/\^/);
-		var whichNote = "";
-		for (var i=0; i < notas.length; i++) {
-			if ( "d" == notas[i].substr(0,1) )
-				whichNote = "Description";
-			else if ( "a" == notas[i].substr(0,1) )
-				whichNote = "Access";
-			else if ( "s" == notas[i].substr(0,1) )
-				whichNote = "Subject";
-			else if ( "o" == notas[i].substr(0,1) )
-				whichNote = "Other";
-			else
-			    continue;  // ver ticket #5878
-				
-			document.getElementById("postItNote" + whichNote).value = notas[i].substr(1).replace(/_ALT94_/g,"^");
+			var notas = postItNote.split(/\^/);
+			var whichNote = "";
+			for (var i=0; i < notas.length; i++) {
+				if ( "d" == notas[i].substr(0,1) )
+					whichNote = "Description";
+				else if ( "a" == notas[i].substr(0,1) )
+					whichNote = "Access";
+				else if ( "s" == notas[i].substr(0,1) )
+					whichNote = "Subject";
+				else if ( "o" == notas[i].substr(0,1) )
+					whichNote = "Other";
+				else
+				    continue;  // ver ticket #5878
+
+				document.getElementById("postItNote" + whichNote).value = notas[i].substr(1).replace(/_ALT94_/g,"^");
+			}
 		}
 	}
+	
 	document.getElementById("postItNoteOther").focus();
 }
 
