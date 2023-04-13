@@ -1441,6 +1441,21 @@ function showHiddenData()
 function showPopup(x,y,width,height,refObject)
 // -----------------------------------------------------------------------------
 {
+
+    //(M.A) 10/04 agrego las siguientes lineas para simular el blur
+    let body = document.getElementsByTagName("body")[0];
+    body.addEventListener("click", function(e){
+        clickedElement = e.target;
+
+        if ( ( !clickedElement.classList.contains ("menu") && (clickedElement.id != "btnNuevo") ) &&
+            (!clickedElement.classList.contains("tip1") && (clickedElement.tagName != "SPAN")) &&
+            (!clickedElement.classList.contains("tip2") && (clickedElement.tagName != "SPAN")) &&
+            (clickedElement.id != "contextMenu") && (!clickedElement.classList.contains("fieldTag"))
+        ){
+           killmenu(); 
+        }
+    })
+
     if (ie) {
         oPopup.show(x,y,width,height,refObject);
     } else if (moz) {
@@ -1448,14 +1463,32 @@ function showPopup(x,y,width,height,refObject)
         var offsetTrail = refObject;
         var offsetLeft = 0;
         var offsetTop = 0;
+
         while (offsetTrail) {
             offsetLeft += offsetTrail.offsetLeft;
             offsetTop += offsetTrail.offsetTop;
             offsetTrail = offsetTrail.offsetParent;
         }
-        
-        var left = x + offsetLeft;
-        var top = y + offsetTop;
+
+        //(M.A) 12/04 Si se hizo click en uno de los campos, entonces se toman las coordenadas del click
+        //xq sino el popUp aparece por debajo de la pantalla
+        var left;
+        var top;
+        if(event.srcElement.classList.contains("fieldTag") || (event.srcElement.tagName == "SPAN") ){
+            left = event.clientX;
+            top = event.clientY + 1;
+
+            //(M.A) 13/04 Calculamos el top si se hace click en uno de los ultimos registros (al fondo de la pantalla)
+            if(top > window.innerHeight - 160){ 
+                top = window.innerHeight - 160
+            }
+
+        }else{
+            //PopUP Nuevo Registro
+            left = x + offsetLeft;
+            top = y + offsetTop;
+        }
+
         //alert(refObject.tagName + "\n" + offsetLeft + "\n" + offsetTop);
         oPopup.style.width = width;
         oPopup.style.height = height;
@@ -1465,6 +1498,7 @@ function showPopup(x,y,width,height,refObject)
         oPopup.style.zIndex = "200";
         oPopup.style.display = "block";
     }
+
 }
 
 
@@ -1650,6 +1684,7 @@ function init()
 // Funciones ejecutadas al finalizar la carga de la página principal.
 // -----------------------------------------------------------------------------
 {
+
     document.getElementById("cartelMsg").innerHTML += "<br><br>Ejecutando funciones de inicio...";
     loadXML();          // Cargamos los documentos XML
     defineSomeVars();
@@ -1674,6 +1709,7 @@ function init()
         oPopup = document.createElement("div");
         oPopup.style.display = "none";
         document.body.appendChild(oPopup);
+
     }
 
     //document.getElementById("cartel").style.display = "none";
@@ -1685,6 +1721,7 @@ function init()
 
     document.getElementById("searchResultsIframe").src = SEARCH_RESULTS_IFRAME_SRC;
     document.getElementById("theToolbar").style.visibility = "visible";
+   
 }
 
 

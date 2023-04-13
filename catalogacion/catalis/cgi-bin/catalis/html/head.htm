@@ -88,21 +88,22 @@
       return true;
     }
     //window.onerror = handleErrors;
+
   </script>
 
   <script type="text/javascript">
 
     // =============================================================================
-    //  Variables de configuraciÃ³n globales.
+    //  Variables de configuración globales.
     //
     //  Algunos valores provienen del archivo catalis.conf.
     // =============================================================================
 
 
-    var SOFT_NAME = "Catalis"; // para mostrarlo en el tÃ­tulo de la ventana
+    var SOFT_NAME = "Catalis"; // para mostrarlo en el tí­tulo de la ventana
 
 
-    // Usamos wxis directamente, o bien a travÃ©s PHP
+    // Usamos wxis directamente, o bien a través PHP
     var SCRIPT_URL = "[pft]v6001^u[/pft]";
 
     var DISPLAY_SUBFIELD_LABELS = true; // Mostrar etiquetas para los subcampos
@@ -120,14 +121,14 @@
     // Idioma para las etiquetas de campos y subcampos
     var LANG = "spa";
 
-    // Patterns para especificar quÃ© campos pertenecen a cada bloque
+    // Patterns para especificar qué campos pertenecen a cada bloque
     var FIELD_BLOCK_PATTERN = new Object;
-    // FIELD_BLOCK_PATTERN.description = no lo definimos explÃ­citamente
+    // FIELD_BLOCK_PATTERN.description = no lo definimos explí­citamente
     FIELD_BLOCK_PATTERN.access = /1..|240|7[0-5].|8[013]./;
     FIELD_BLOCK_PATTERN.subject = /6..|08.|043|052/;
     FIELD_BLOCK_PATTERN.other = /02[^02]|0[1367].|04[^3]|05[^2]|856/;
 
-    // Directorio pÃºblico (para documentos HTML, CSS, XML)
+    // Directorio público (para documentos HTML, CSS, XML)
     var HTDOCS = "[pft]v6003^h[/pft]catalis/";
 
     // URLs de ventanas auxiliares
@@ -230,6 +231,10 @@
 
     //Para FixedFiles
     var dataElement;
+
+    //Para confirmar eliminar en contextmenu.field.js
+    var fieldGlobal;
+
   </script>
 
   <script type="text/javascript">

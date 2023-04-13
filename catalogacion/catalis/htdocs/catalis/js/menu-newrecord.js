@@ -28,6 +28,9 @@ function showNewRecordMenu(evt)
   
   // Construimos el menú
   var newMenu = theDocument.createElement("DIV");
+
+  //(M.A) 10/04 Agrego clase al div del menu para luego tomarlo en el blur 
+  newMenu.classList.add("menu")
   //newMenu.className = "menuSkin";
   // ATENCION: el archivo .css no es visto desde oPopup, por eso están aquí
   // los .style
@@ -136,8 +139,8 @@ function showNewRecordMenu(evt)
   }
   // Menú construido
 
-  var eventSource = (evt.target) ? evt.target : event.srcElement;
-  
+  var eventSource = (evt.target) ? evt.target : evt.srcElement;
+
   var MENU_WIDTH = 230;
   
   if (ie) {
@@ -157,6 +160,7 @@ function showNewRecordMenu(evt)
   //oPopup.show(event.srcElement.offsetWidth, 0, MENU_WIDTH, realHeight, event.srcElement);
   //oPopup.show(event.offsetX+2, event.offsetY+2, MENU_WIDTH, realHeight, event.srcElement);
   showPopup(0, eventSource.offsetHeight, MENU_WIDTH, realHeight, eventSource);
+
 
   return false;
 }
