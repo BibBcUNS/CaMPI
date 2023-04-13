@@ -1450,7 +1450,8 @@ function showPopup(x,y,width,height,refObject)
         if ( ( !clickedElement.classList.contains ("menu") && (clickedElement.id != "btnNuevo") ) &&
             (!clickedElement.classList.contains("tip1") && (clickedElement.tagName != "SPAN")) &&
             (!clickedElement.classList.contains("tip2") && (clickedElement.tagName != "SPAN")) &&
-            (clickedElement.id != "contextMenu") && (!clickedElement.classList.contains("fieldTag"))
+            (!clickedElement.classList.contains("fieldTag")) &&
+            (!clickedElement.classList.contains("subfieldTag")) && (!clickedElement.classList.contains("contextMenu"))
         ){
            killmenu(); 
         }
@@ -1474,7 +1475,7 @@ function showPopup(x,y,width,height,refObject)
         //xq sino el popUp aparece por debajo de la pantalla
         var left;
         var top;
-        if(event.srcElement.classList.contains("fieldTag") || (event.srcElement.tagName == "SPAN") ){
+        if(event.srcElement.classList.contains("fieldTag") || (event.srcElement.tagName == "SPAN") || event.srcElement.classList.contains("subfieldTag") ){
             left = event.clientX;
             top = event.clientY + 1;
 

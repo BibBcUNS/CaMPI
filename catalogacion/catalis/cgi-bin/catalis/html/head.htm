@@ -62,9 +62,9 @@
       msg += "Registro: " + recordID + "\n";
       msg += "---------------------------------------------------------------------------------\n\n";
       msg += "Si tiene datos aún sin grabar, intente grabarlos.\n";
-      msg += "Luego presione ï¿½Ctrl F5ï¿½ para volver a cargar todos\n";
+      msg += "Luego presione «Ctrl F5» para volver a cargar todos\n";
       msg += "los archivos de Catalis en su navegador.\n";
-      msg += "Si el problema persiste, pÃ³ngase en contacto con " + ADMIN_EMAIL + ".\n";
+      msg += "Si el problema persiste, póngase en contacto con " + ADMIN_EMAIL + ".\n";
       alert(msg);
 
       if (REPORT_JS_ERRORS) {
@@ -100,14 +100,14 @@
     // =============================================================================
 
 
-    var SOFT_NAME = "Catalis"; // para mostrarlo en el tí­tulo de la ventana
+    var SOFT_NAME = "Catalis"; // para mostrarlo en el título de la ventana
 
 
     // Usamos wxis directamente, o bien a través PHP
     var SCRIPT_URL = "[pft]v6001^u[/pft]";
 
     var DISPLAY_SUBFIELD_LABELS = true; // Mostrar etiquetas para los subcampos
-    var AUTOMATIC_PUNCTUATION = [pft]v6001^p[/pft];  // Asignar automÃ¡ticamente la puntuaciÃ³n (boolean)
+    var AUTOMATIC_PUNCTUATION = [pft]v6001^p[/pft];  // Asignar automáticamente la puntuación (boolean)
     var USE_FIELD_BLOCKS = [pft]v6001^b[/pft];  // Agrupar campos en bloques (boolean)
     var MODIFY_NOT_AACR2 = true;  // Corregir datos en registros no-AACR2 (boolean)
     var AUTHORITY_CONTROL = false;
@@ -123,7 +123,7 @@
 
     // Patterns para especificar qué campos pertenecen a cada bloque
     var FIELD_BLOCK_PATTERN = new Object;
-    // FIELD_BLOCK_PATTERN.description = no lo definimos explí­citamente
+    // FIELD_BLOCK_PATTERN.description = no lo definimos explícitamente
     FIELD_BLOCK_PATTERN.access = /1..|240|7[0-5].|8[013]./;
     FIELD_BLOCK_PATTERN.subject = /6..|08.|043|052/;
     FIELD_BLOCK_PATTERN.other = /02[^02]|0[1367].|04[^3]|05[^2]|856/;
@@ -159,12 +159,12 @@
     var ISO_RECORD_TERMINATOR = String.fromCharCode(0x1D);
 
     // Delimitador de subcampo usado internamente por el sistema
-    // TO-DO: implementar el uso de un caracter diferente, para permitir el uso de
+    // TO-DO: implementar el uso de un carácter diferente, para permitir el uso de
     // '^' como parte de los datos?
     var SYSTEM_SUBFIELD_DELIMITER = String.fromCharCode(0x5E);   // '^', el delimitador de ISIS, '^'
     var REGEX_SYSTEM_SUBFIELD_DELIMITER = new RegExp("\\" + SYSTEM_SUBFIELD_DELIMITER, "g");
 
-    // Sí­mbolo para representar elementos "indecidibles" en aacr2marc()
+    // Símbolo para representar elementos "indecidibles" en aacr2marc()
     var UNK = "\u2666";  // Black diamond suit
     var REGEX_UNK = new RegExp(UNK, "g");
 
@@ -198,8 +198,8 @@
     var ie = ( window.ActiveXObject );
 
     var originalRecord;                   // para comparar con la versión actual, y decidir si hubo cambios
-    var resultSet = new Array();          // relación entre MFNs y posición en la lista de resultados, para los resultados de la ï¿½ltima bï¿½squeda
-    var g_editResultIndex = "";           // Índice (dentro de la tabla de resultados) del registro actualmente editado
+    var resultSet = new Array();          // relación entre MFNs y posición en la lista de resultados, para los resultados de la última búsqueda
+    var g_editResultIndex = "";           // índice (dentro de la tabla de resultados) del registro actualmente editado
     var g_HighlightIndexRowId = "";       // ID de la fila resaltada dentro de la tabla de términos del diccionario
     var g_HighlightRowId = "";            // ID de la fila resaltada dentro de la tabla de resultados
     var g_RecordDisplayStyle = "aacr";    // estilo inicial para presentar detalles de un registro
@@ -240,14 +240,14 @@
   <script type="text/javascript">
 
     // ATENCION: revisar este mecanismo para prevenir un cierre accidental de la ventana
-    //window.onbeforeunload = function() {if (confirm("ï¿½Cierra la sesiï¿½n?")) return true; else return;}
+    //window.onbeforeunload = function() {if (confirm("¿Cierra la sesión?")) return true; else return;}
 
     // -----------------------------------------------------------------------------
     function showSystemInformation()
     // -----------------------------------------------------------------------------
     {
       var message = "Catalis\n\n";
-      message += "ï¿½ 2003-2004  Fernando J. Gómez - CONICET - INMABB\n\n";
+      message += "© 2003-2004  Fernando J. Gómez - CONICET - INMABB\n\n";
       message += "Comunique problemas, dudas o sugerencias a: fgomez@criba.edu.ar";
       alert(message);
     }
@@ -260,7 +260,7 @@
         // Cuando se presenta el formulario de acceso
         document.getElementById("loginForm").userid.focus();
       } else {
-        // Cuando se presenta la aplicacion propiamente dicha
+        // Cuando se presenta la aplicación propiamente dicha
         init();
       }
     }
@@ -342,7 +342,7 @@
       document.getElementById("cartelBtn").onclick = function() {
         this.style.display = "none";
         document.getElementById("cartel").style.display = "none";
-        // ATENCION: sería bueno saber dï¿½nde colocar el foco una vez eliminado el cartel de mensajes!
+        // ATENCION: sería bueno saber dónde colocar el foco una vez eliminado el cartel de mensajes!
         // Para ello, habría que almacenar en una variable esa información en cada ocasión en que
         // se muestra el cartel.
       }

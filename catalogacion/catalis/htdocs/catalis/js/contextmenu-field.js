@@ -379,7 +379,7 @@ function construirMenuChrome(field){
 	window.top.fieldGlobal = field;
 
 	var newMenu = document.createElement("div");
-	newMenu.id = "contextMenu";
+	newMenu.classList.add ("contextMenu");
 	newMenu.style.border = "1px solid black";
 	newMenu.style.backgroundColor = "white"; //"#E2DFD0";
 	newMenu.style.fontFamily = "arial, verdana, sans-serif";
