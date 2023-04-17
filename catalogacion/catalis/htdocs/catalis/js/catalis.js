@@ -1451,31 +1451,22 @@ function showPopup(x,y,width,height,refObject)
             (!clickedElement.classList.contains("tip1") && (clickedElement.tagName != "SPAN")) &&
             (!clickedElement.classList.contains("tip2") && (clickedElement.tagName != "SPAN")) &&
             (!clickedElement.classList.contains("fieldTag")) &&
-            (!clickedElement.classList.contains("subfieldTag")) && (!clickedElement.classList.contains("contextMenu"))
+            (!clickedElement.classList.contains("subfieldTag")) && (!clickedElement.classList.contains("contextMenu")) &&
+            (!clickedElement.classList.contains("checkButton"))
         ){
-           killmenu(); 
+            killmenu(); 
         }
     })
 
     if (ie) {
         oPopup.show(x,y,width,height,refObject);
     } else if (moz) {
-        // Truco para obtener las coordenadas (de: JavaScript and DHTML Cookbook)
-        var offsetTrail = refObject;
-        var offsetLeft = 0;
-        var offsetTop = 0;
-
-        while (offsetTrail) {
-            offsetLeft += offsetTrail.offsetLeft;
-            offsetTop += offsetTrail.offsetTop;
-            offsetTrail = offsetTrail.offsetParent;
-        }
 
         //(M.A) 12/04 Si se hizo click en uno de los campos, entonces se toman las coordenadas del click
         //xq sino el popUp aparece por debajo de la pantalla
         var left;
         var top;
-        if(event.srcElement.classList.contains("fieldTag") || (event.srcElement.tagName == "SPAN") || event.srcElement.classList.contains("subfieldTag") ){
+        if(event.srcElement.classList.contains("fieldTag") || (event.srcElement.tagName == "SPAN") || event.srcElement.classList.contains("subfieldTag") || event.srcElement.classList.contains("checkButton") ){
             left = event.clientX;
             top = event.clientY + 1;
 
@@ -1485,6 +1476,16 @@ function showPopup(x,y,width,height,refObject)
             }
 
         }else{
+            // Truco para obtener las coordenadas (de: JavaScript and DHTML Cookbook)
+            var offsetTrail = refObject;
+            var offsetLeft = 0;
+            var offsetTop = 0;
+
+            while (offsetTrail) {
+                offsetLeft += offsetTrail.offsetLeft;
+                offsetTop += offsetTrail.offsetTop;
+                offsetTrail = offsetTrail.offsetParent;
+            }
             //PopUP Nuevo Registro
             left = x + offsetLeft;
             top = y + offsetTop;
@@ -1500,6 +1501,12 @@ function showPopup(x,y,width,height,refObject)
         oPopup.style.display = "block";
     }
 
+    //(M.A) 17/04 se cierra el popUp si se scrollea.
+    let div = document.getElementById("recordDiv");
+    div.onscroll = function () {
+        hidePopup()
+    }
+    
 }
 
 
