@@ -6,13 +6,23 @@ function displayMessage(box,type,number_OK)
 	//var messageBackground = number_OK ? "#ff9" : "red";
 	//var messageColor = number_OK ? "black" : "white";
 	
-	oPopup.document.body.innerHTML = document.getElementById("valid_" + type).innerHTML;
-	var popupHeight = 26;
-	showPopup(0,0,0,popupHeight);
-	var realWidth = (ie) ? oPopup.document.body.scrollWidth : oPopup.offsetWidth;
-	hidePopup();
-	showPopup(96,box.offsetHeight-24,realWidth,popupHeight,box);
-	setTimeout("hidePopup()",600);
+	if(ie){
+		oPopup.document.body.innerHTML = document.getElementById("valid_" + type).innerHTML;
+		var popupHeight = 26;
+		showPopup(0,0,0,popupHeight);
+		var realWidth = (ie) ? oPopup.document.body.scrollWidth : oPopup.offsetWidth;
+		hidePopup();
+		showPopup(96,box.offsetHeight-24,realWidth,popupHeight,box);
+		setTimeout("hidePopup()",600);
+	}else{
+		oPopup.innerHTML = document.getElementById("valid_" + type).innerHTML;
+		var popupHeight = 26;
+		showPopup(0,0,0,popupHeight);
+		var realWidth = (ie) ? oPopup.document.body.scrollWidth : oPopup.offsetWidth;
+		hidePopup();
+		showPopup(96,box.offsetHeight-24,realWidth+120,popupHeight,box);
+		setTimeout("hidePopup()",1000);
+	}
 }
 
 
@@ -49,7 +59,7 @@ function checkStandardNumber(box,type)
 		default :
 			alert ("ERROR: checkStandardNumber() fue llamada con type = " + type);
 	}
-	
+
 	if ( number_OK ) {  // no hay error
 		box.style.color = "black";
 		box.style.backgroundColor = "";
