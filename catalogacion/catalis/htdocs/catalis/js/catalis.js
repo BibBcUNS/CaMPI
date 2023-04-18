@@ -1447,6 +1447,7 @@ function showPopup(x,y,width,height,refObject)
     body.addEventListener("click", function(e){
         clickedElement = e.target;
 
+        //(M.A) Controles para que el menu no se cierre al clickear en el boton o el mismo popUp
         if ( ( !clickedElement.classList.contains ("menu") && (clickedElement.id != "btnNuevo") ) &&
             (!clickedElement.classList.contains("tip1") && (clickedElement.tagName != "SPAN")) &&
             (!clickedElement.classList.contains("tip2") && (clickedElement.tagName != "SPAN")) &&
@@ -1466,7 +1467,23 @@ function showPopup(x,y,width,height,refObject)
         //xq sino el popUp aparece por debajo de la pantalla
         var left;
         var top;
-        if(event.srcElement.classList.contains("fieldTag") || (event.srcElement.tagName == "SPAN") || event.srcElement.classList.contains("subfieldTag") || event.srcElement.classList.contains("checkButton") ){
+       
+        if(event.srcElement.id == "btnNuevo"){
+              // Truco para obtener las coordenadas (de: JavaScript and DHTML Cookbook)
+              var offsetTrail = refObject;
+              var offsetLeft = 0;
+              var offsetTop = 0;
+  
+              while (offsetTrail) {
+                  offsetLeft += offsetTrail.offsetLeft;
+                  offsetTop += offsetTrail.offsetTop;
+                  offsetTrail = offsetTrail.offsetParent;
+              }
+              //PopUP Nuevo Registro
+              left = x + offsetLeft;
+              top = y + offsetTop;
+        }else{
+            //left = event.clientX;
             left = event.clientX;
             top = event.clientY + 1;
 
@@ -1474,21 +1491,6 @@ function showPopup(x,y,width,height,refObject)
             if(top > window.innerHeight - 160){ 
                 top = window.innerHeight - 160
             }
-
-        }else{
-            // Truco para obtener las coordenadas (de: JavaScript and DHTML Cookbook)
-            var offsetTrail = refObject;
-            var offsetLeft = 0;
-            var offsetTop = 0;
-
-            while (offsetTrail) {
-                offsetLeft += offsetTrail.offsetLeft;
-                offsetTop += offsetTrail.offsetTop;
-                offsetTrail = offsetTrail.offsetParent;
-            }
-            //PopUP Nuevo Registro
-            left = x + offsetLeft;
-            top = y + offsetTop;
         }
 
         //alert(refObject.tagName + "\n" + offsetLeft + "\n" + offsetTop);
