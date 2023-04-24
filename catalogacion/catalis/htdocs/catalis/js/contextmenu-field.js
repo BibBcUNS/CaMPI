@@ -65,7 +65,7 @@ function canRemoveF(field)
 	var tag = field.tag;
 	var oblig;
 	try {
-		oblig = window.top.selectNodesPoly("/" + "/datafield[@tag='" + tag + "']/@oblig", xmlData.xmlMARC21)[0].value;
+		oblig = window.top.selectNodesChrome("/" + "/datafield[@tag='" + tag + "']/@oblig", xmlData.xmlMARC21)[0].value;
 	}
 	catch(err) {
 		oblig = "";

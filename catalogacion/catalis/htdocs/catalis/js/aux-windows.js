@@ -162,9 +162,7 @@ function editCodedData()
         var form = document.getElementById("marcEditForm");
         var activeCode = form[dataElement].value;
 
-        var elementoPadre = window.top.selectNodesPoly("/" + "/dataElement[@pos='"+dataElement+"']", xmlData.xmlFixedField)[0];
-        
-        console.log(elementoPadre)
+        var elementoPadre = window.top.selectNodesChrome("/" + "/dataElement[@pos='"+dataElement+"']", xmlData.xmlFixedField)[0];
 
         var codeType;
         if(elementoPadre != undefined){

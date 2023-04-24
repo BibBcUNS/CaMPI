@@ -15,8 +15,7 @@ function cerrarDialog(){
   	}
 }
 
-
-function selectNodesPoly(path, xmlDoc){
+function selectNodesChrome(path, xmlDoc){
     //Devuelve un arreglo con todos los nodos del XML buscados por path
     var result = xmlDoc.evaluate(path, xmlDoc, null, XPathResult.ANY_TYPE , null);
     let node = null;

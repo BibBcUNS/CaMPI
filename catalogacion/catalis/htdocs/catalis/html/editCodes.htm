@@ -256,14 +256,14 @@ function readCodesAndTitle(dataElement)
 		case "f008_15_17" :
 		case "f044" :
 			xmlCodes = callingWindowObject.xmlData.xmlCountryCodes;
-			Codes = window.top.selectNodesPoly("/" + "/country", xmlCodes);
+			Codes = window.top.selectNodesChrome("/" + "/country", xmlCodes);
 			title = "008/15-17 · Lugar de publicación";
 			break;
 			
 		case "f008_35_37" :
 		case "f041" :
 			xmlCodes = callingWindowObject.xmlData.xmlLanguageCodes;
-			Codes = window.top.selectNodesPoly("/" + "/language", xmlCodes);
+			Codes = window.top.selectNodesChrome("/" + "/language", xmlCodes);
 			title = "008/35-37 · Idioma";
 			break;
 			
@@ -271,15 +271,15 @@ function readCodesAndTitle(dataElement)
 			// TO-DO: pensar de qué manera se puede acotar la larga lista, en función del tipo
 			// de documento (video, musica, libro, etc.)
 			xmlCodes = callingWindowObject.xmlData.xmlRelatorCodes;
-			Codes = window.top.selectNodesPoly("/" + "/relator", xmlCodes);
+			Codes = window.top.selectNodesChrome("/" + "/relator", xmlCodes);
 			title = "Relator codes";
 			break;
 		
 		default :
 			//Codes = xmlFixedField.selectNodes("/" + "/dataElement[@pos='" + dataElement + "']/option");
 			//title = xmlFixedField.selectNodes("/" + "/dataElement[@pos='" + dataElement + "']/@name")[0].nodeValue;
-			Codes = window.top.selectNodesPoly("/" + "/dataElement[@pos='" + dataElement + "']/option", window.top.xmlData.xmlFixedField);
-			title = window.top.selectNodesPoly("/" + "/dataElement[@pos='" + dataElement + "']/@name", window.top.xmlData.xmlFixedField)[0].nodeValue;
+			Codes = window.top.selectNodesChrome("/" + "/dataElement[@pos='" + dataElement + "']/option", window.top.xmlData.xmlFixedField);
+			title = window.top.selectNodesChrome("/" + "/dataElement[@pos='" + dataElement + "']/@name", window.top.xmlData.xmlFixedField)[0].nodeValue;
 			break;
 	}
 	

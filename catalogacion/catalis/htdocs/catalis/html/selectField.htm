@@ -93,8 +93,8 @@
 				HTMLstring += "<tr><td colspan='3' style='height: 1px; background: #999;'></td></tr>"; 
 			}
 			else {
-				var fieldLabel = window.top.selectNodesPoly("marc21_bibliographic/datafield[@tag=" + tag + "]/@label-" + LANG, xmlMARC21)[0].nodeValue.replace("--","&#8212;"); 
-				var repet = window.top.selectNodesPoly("marc21_bibliographic/datafield[@tag=" + tag + "]/@repet", xmlMARC21)[0].nodeValue;
+				var fieldLabel = window.top.selectNodesChrome("marc21_bibliographic/datafield[@tag=" + tag + "]/@label-" + LANG, xmlMARC21)[0].nodeValue.replace("--","&#8212;"); 
+				var repet = window.top.selectNodesChrome("marc21_bibliographic/datafield[@tag=" + tag + "]/@repet", xmlMARC21)[0].nodeValue;
 				var disabled = ( disabledTags[tag] ) ? "disabled" : "";
 				var labelClass = ( disabledTags[tag] ) ? "disabledLabel" : "";
 				HTMLstring += "<tr><td style='vertical-align: top; width: 20px'>" 
@@ -245,8 +245,8 @@
 		<td id="navCell" style="width: 150px;" valign="top">
 		<script language="JavaScript" type="text/javascript">
 
-			var nodos = window.top.selectNodesPoly("marc21_bibliographic/fieldblock/@label-" + LANG, xmlMARC21 );
-			var nodosIds = window.top.selectNodesPoly("marc21_bibliographic/fieldblock/@id", xmlMARC21);
+			var nodos = window.top.selectNodesChrome("marc21_bibliographic/fieldblock/@label-" + LANG, xmlMARC21 );
+			var nodosIds = window.top.selectNodesChrome("marc21_bibliographic/fieldblock/@id", xmlMARC21);
 
 			let n = 1;
 			nodos.forEach(element => {
