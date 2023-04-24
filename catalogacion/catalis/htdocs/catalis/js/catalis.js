@@ -1278,49 +1278,55 @@ function modifiedRecord()
 
 
 // -----------------------------------------------------------------------------
-function checkModified(elementID)
+function checkModified()
 // Ante el intento de abandonar el registro que está siendo editado,
 // necesitamos verificar si el registro fue modificado, y en caso afirmativo,
 // consultar si éste debe grabarse antes de continuar.
 // -----------------------------------------------------------------------------
-{
-    // Si el elementID corresponde a un elemento de un popup, éste ya no existe!
-    if ( document.getElementById(elementID) ) {
-        //document.getElementById(elementID).blur(); // no va con Mozilla
-    }
-    // ATENCION: ¿adónde debería ir el foco?
-    
-    
+{ 
+    var elementID = window.top.elementIDGlobal;
     // La condición sobre el botón de Grabar tiene que ver con el nivel de permisos del usuario; ver showRecordInForm(). Tal vez sea mejor usar una variable global.
     if ( !document.getElementById("btnGrabar").disabled && typeof(originalRecord) != "undefined" && modifiedRecord() ) {
-        
-        // El usuario debe tomar una decisión
-        var userDecision = promptSaveChanges();
-        
-        switch ( userDecision ) {
-            case "cancel" :
-                if ( "selDatabase" == elementID ) {
-                    // Restauramos la opción correspondiente a la base activa
-                    document.getElementById("selDatabase").selectedIndex = g_activeDatabase.index;
-                }
-                return false;  // nos vamos, y acá no ha pasado nada
-                break;
-            case "save" :
-                g_NextTask = elementID; // para que, luego de grabar, sepamos qué hacer
-                saveRecord();
-                break;
-            case "doNotSave" :
-                break;      // seguimos adelante, hacia handleNextTask()
-            default :
-                alert("Error! userDecision = " + userDecision);
-                return;
+        mostrarModalConfirmacion()
+    }else{
+        handleNextTask(elementID);
+    }
+}
+
+function mostrarModalConfirmacion(){
+//----------------------------------------------------------------------------------------------...-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+    var winProperties = [
+        "font-size: 10px",
+        "dialogWidth: 620px",
+        "dialogHeight: 140px",
+        "dialogTop: 80px",
+        "status: no",
+        "help: no"
+    ];
+
+    // Mostramos la ventana
+    window.top.answerGlobal = window.showModalDialog(URL_SAVE_CHANGES, window, winProperties.join(";"));
+//----------------------------------------------------------------------------------------------.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+    
+    var elementID = window.top.elementIDGlobal;
+    var userDecision = window.top.answerGlobal;
+
+    if ( userDecision == "cancel" ){
+        if ( "selDatabase" == elementID ){
+            document.getElementById("selDatabase").selectedIndex = g_activeDatabase.index;
         }
     }
 
-    // Si no hay cambios, o el usuario decidió que no deben guardarse
-    handleNextTask(elementID);
-}
+    if ( userDecision == "save" ){
+        g_NextTask = elementID;
+        saveRecord();
+        handleNextTask(elementID);
+    }
 
+    if ( userDecision == "doNotSave" ){
+        handleNextTask(elementID);
+    }
+}
 
 // -----------------------------------------------------------------------------
 function handleNextTask(elementID)

@@ -59,7 +59,8 @@ function showNewRecordMenu(evt)
   });
   menuFunctions.push(function() {
     killmenu();
-    checkModified(this.id);
+    window.top.elementIDGlobal = this.id;
+    checkModified();
   });
 
   /*itemID.push("newImport");
@@ -79,7 +80,8 @@ function showNewRecordMenu(evt)
   itemEnabled.push(canDuplicate);
   menuFunctions.push(function() {
     killmenu();
-    checkModified(this.id);
+    window.top.elementIDGlobal = this.id;
+    checkModified();
   });
 
   // Recorremos los items del menú

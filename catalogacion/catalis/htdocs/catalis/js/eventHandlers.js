@@ -197,7 +197,8 @@ function setToolbarEvents()
   
   document.getElementById("btnImport").onclick = function() {
     this.blur();
-    checkModified("newImport");
+    window.top.elementIDGlobal = "newImport";
+    checkModified();
   };
   
   document.getElementById("toggleLabels").onclick = function() {
@@ -262,11 +263,13 @@ function setToolbarEvents()
   };
   
   document.getElementById("btnPrevResult").onclick = function() {
-    checkModified(this.id);
+    window.top.elementIDGlobal = this.id;
+    checkModified();
   };
   
   document.getElementById("btnNextResult").onclick = function() {
-    checkModified(this.id);
+    window.top.elementIDGlobal = this.id;
+    checkModified();
   };
   
   document.getElementById("resultSetCounter").onfocus = function() {
@@ -274,7 +277,8 @@ function setToolbarEvents()
   };
   
   document.getElementById("btnBuscar").onclick = function() {
-    checkModified(this.id);
+    window.top.elementIDGlobal = this.id;
+    checkModified();
   };
   
   document.getElementById("btnEditar").onclick = showEditDiv;
@@ -286,11 +290,13 @@ function setHeaderEvents()
 // -----------------------------------------------------------------------------
 {
   document.getElementById("btnFinSesion").onclick = function() {
-    checkModified(this.id);
+    window.top.elementIDGlobal = this.id;
+    checkModified();
   };
   
   document.getElementById("selDatabase").onchange = function() {
-    checkModified(this.id);
+    window.top.elementIDGlobal = this.id;
+    checkModified();
   };
   
   document.getElementById("showHiddenData").onclick = showHiddenData;

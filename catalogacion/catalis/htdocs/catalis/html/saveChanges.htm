@@ -192,14 +192,23 @@ function heckelDiff(inputO,inputN)
 	document.getElementById("newFile").innerHTML = "<pre>" + newFile + "</pre>";
 	document.getElementById("oldFile").innerHTML = "<pre>" + oldFile + "</pre>";
 	document.getElementById("diff").style.display = "block";
+
+	ajustarVentana();
 	
+}
+
+function ajustarVentana(){
+	let dialog = window.top.document.getElementsByTagName("dialog")[0];
+	dialog.style.height = "500px";
+	dialog.style.width = "630px";
+	dialog.style.top = "20px";
 }
 
 // -----------------------------------------------------------------------------
 function handleCancel()
 // -----------------------------------------------------------------------------
 {
-	window.close();
+	window.top.cerrarDialog()
 }
 
 // -----------------------------------------------------------------------------
@@ -207,7 +216,7 @@ function save()
 // -----------------------------------------------------------------------------
 {
 	window.returnValue = "save";	
-	window.close();
+	window.top.cerrarDialog()
 }
 
 // -----------------------------------------------------------------------------
@@ -215,7 +224,7 @@ function doNotSave()
 // -----------------------------------------------------------------------------
 {
 	window.returnValue = "doNotSave";
-	window.close();
+	window.top.cerrarDialog()
 }
 
 // -----------------------------------------------------------------------------
