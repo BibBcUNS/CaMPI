@@ -28,7 +28,7 @@ function selectNodesChrome(path, xmlDoc){
     return arrayResult;
 }
 
-function selectSingleNodePoly(path, xmlDoc){
+function selectSingleNodeChrome(path, xmlDoc){
     var nodes = document.evaluate(path, xmlDoc, null, XPathResult.ANY_TYPE, null);
     return nodes.iterateNext();
 }

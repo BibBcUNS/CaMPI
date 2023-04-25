@@ -22,7 +22,8 @@ function crossBrowserNodeSelector(xmlObj,path)
     if (ie)
         node = xmlObj.selectSingleNode(path);
     else if (moz) {
-        node = xmlObj.evaluate(path,xmlObj,null,9,null).singleNodeValue;
+        //node = xmlObj.evaluate(path,xmlObj,null,9,null).singleNodeValue;
+        node = window.top.selectSingleNodeChrome(path, xmlObj)
     }
     return node;
 }

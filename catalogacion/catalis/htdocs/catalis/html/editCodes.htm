@@ -286,7 +286,7 @@ function readCodesAndTitle(dataElement)
 
 	try {
 		var path = "/" + "/dataElement[@pos='" + dataElement + "']/@maxcodes";
-		g_maxCodes = window.top.selectSingleNodePoly(path, window.top.xmlData.xmlFixedField).nodeValue;
+		g_maxCodes = window.top.selectSingleNodeChrome(path, window.top.xmlData.xmlFixedField).nodeValue;
 	}
 	catch(err) {}
 	
@@ -482,9 +482,6 @@ function init()
 	var xmlCodes, Codes, title;
 
 	dataElement = useEquivalentCodes(dataElement);
-
-	console.log("dataElement: "+dataElement)
-
 
 	readCodesAndTitle(dataElement);
 	renderMenu(dataElement,activeCode,"code");

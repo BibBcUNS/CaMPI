@@ -83,7 +83,7 @@
 	function buildBlock(i)
 	//------------------------------------------------------------------------------
 	{
-		var tagList = window.top.selectSingleNodePoly(`marc21_bibliographic/fieldblock[${i}]/text()`, xmlMARC21).nodeValue.split(",");
+		var tagList = window.top.selectSingleNodeChrome(`marc21_bibliographic/fieldblock[${i}]/text()`, xmlMARC21).nodeValue.split(",");
 		var HTMLstring = "<table border='0' width='100%' style='background: #EEE;'>";
 		for (var j=0; j < tagList.length; j++)
 		{
