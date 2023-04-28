@@ -232,11 +232,13 @@ function createField(tag, ind, subfields)
   if ( xmlDatafield && xmlDatafield.getElementsByTagName("i").length > 0 ) {
     newField.hasIndicators = true;
     newIndPair.onclick = function() {
-      editIndicators(parentField(this,"ind"));
+      fieldGlobal = parentField(this, "ind");
+      editIndicators();
     };
     newIndPair.title = "Ver/modificar los indicadores";
     newIndPair.className = "indicators";
     var oneIndicatorOnly = false;
+
     for (var j=0; j <= 1; j++) {
       var newInd = document.createElement("span");
       if ( xmlDatafield && xmlDatafield.getElementsByTagName("indicator")[j].getElementsByTagName("i").length == 0 ) {

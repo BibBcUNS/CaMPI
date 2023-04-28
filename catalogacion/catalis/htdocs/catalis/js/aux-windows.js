@@ -172,18 +172,19 @@ function editCodedData()
                 codeType = "single";
             }
         }else{
-            console.log("elementoPadre es pais o leng");
             codeType = "single";
         }
 
         var dialogLeft = event.clientX - 300;
-        var dialogTop = event.clientY - 200; // con event.clientY - 38 hacemos que el puntero quede justo sobre la opción activa en el select
+        var dialogTop = event.clientY - 500; // con event.clientY - 38 hacemos que el puntero quede justo sobre la opción activa en el select
+
     }
 
     var dialogArgs = [window, dataElement, activeCode, codeType];
     var dialogHeight = ( "multiple" == codeType ) ? 230 : 145;
     var dialogWidth = 300;
-    var winProperties = "font-size:10px; dialogLeft:" + dialogLeft + "px; dialogTop:" + dialogTop + "px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
+
+    var winProperties = "visibility:hidden; font-size:10px; dialogLeft:" + ( dialogLeft  ) + "px; dialogTop:" + ( dialogTop ) + "px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
 
     var newCode = window.showModalDialog(URL, dialogArgs, winProperties);
 
@@ -236,16 +237,16 @@ function editField047()
 
 
 // -----------------------------------------------------------------------------
-function editIndicators(field)
+function editIndicators()
 // TO-DO: Ubicar la ventana en una posición independiente del lugar exacto
 // donde se hizo click (?)
 // -----------------------------------------------------------------------------
 {
-    
+    var field = fieldGlobal;
     var tag = field.tag;
     var path = "marc21_bibliographic/datafield[@tag='" + tag + "']";
 
-    var xmlDatafield = crossBrowserNodeSelector(xmlMARC21,path);
+    var xmlDatafield = crossBrowserNodeSelector(xmlData.xmlMARC21,path);
     var oldIndicators = getIndicators(field);
 
     var dialogArgs = new Object();
@@ -258,45 +259,54 @@ function editIndicators(field)
         dialogArgs.title = firstSubfieldBox(field).value;
     }
     var path1 = path + "/indicator[@pos='1']/i";
-    var options1 = xmlMARC21.selectNodes(path1).length;
+    //var options1 = xmlMARC21.selectNodes(path1).length;
+    var options1 = window.top.selectNodesChrome(path1, window.top.xmlData.xmlMARC21).length;
+    
     var path2 = path + "/indicator[@pos='2']/i";
-    var options2 = xmlMARC21.selectNodes(path2).length;
+    //var options2 = xmlMARC21.selectNodes(path2).length;
+    var options2 = window.top.selectNodesChrome(path2, window.top.xmlData.xmlMARC21).length;
 
     var dialogHeight;
     if ( 2 == options1 && 2 == options2 ) {
-        dialogHeight = "200";
+        dialogHeight = 200;
+        dialogWidth = 400;
     } else if ( options1 > 0 && options2 > 0 ) {
-        dialogHeight = "188";
-    } else dialogHeight = "135";
-    var dialogWidth = 350;
-    var dialogLeft = event.clientX + 6;
-    var dialogTop = event.clientY + 36;
-    var winProperties = "font-size:10px; dialogLeft:" + dialogLeft + "px; dialogTop:" + dialogTop + "px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
+        dialogHeight = 170;
+        dialogWidth = 500;
+    } else {
+        dialogHeight = 135;
+        dialogWidth = 530;
+    }
+    var dialogLeft = event.clientX - 1300 ;
+    var dialogTop = event.clientY - 620 ;
+    
+    var winProperties = "font-size:10px; status:no; help:no";
 
     // newIndicators contiene los indicadores devueltos por el cuadro de diálogo
-    var newIndicators = showModalDialog(URL_EDIT_INDICATORS, dialogArgs, winProperties);
+    var newIndicators = window.showModalDialog(URL_EDIT_INDICATORS, dialogArgs, winProperties);
 
-    if ( "undefined" == typeof(newIndicators) || null == newIndicators ) {
-        return;  // abortamos
-    }
+    //Volvemos a setear variables por showModalDialog
+    field = fieldGlobal;
+    tag = field.tag;
 
-    newIndicators = newIndicators.replace(/ /g,"#");
-    updateIndicators(field,newIndicators);
-    // TO-DO: actualizar el .title para que se vean los nuevos valores
+    if ( null != newIndicators ) {
+      //  return;  // abortamos
+        newIndicators = newIndicators.replace(/ /g,"#");
+        updateIndicators(field,newIndicators);
+        // TO-DO: actualizar el .title para que se vean los nuevos valores
 
-
-    // Campo 505: el cambio del primer indicador puede producir un cambio en la estructura
-    // de subcampos (basic vs. enhanced)
-    if ( "505" == tag ) {
-        var fieldContent = getSubfields(field,"","empty");
-        if ( oldIndicators.substr(1,1) == "#" && newIndicators.substr(1,1) == "0" && fieldContent.search(/\^[rt]/) == -1 ) {
-            // basic => enhanced
-            enhance505(field,true);
-        } else if ( oldIndicators.substr(1,1) == "0" && newIndicators.substr(1,1) == "#"  && fieldContent.search(/\^[rt]/) != -1 ) {
-            // enhanced => basic
-            enhance505(field,false);
+        // Campo 505: el cambio del primer indicador puede producir un cambio en la estructura
+        // de subcampos (basic vs. enhanced)
+         if ( "505" == tag ) {
+            var fieldContent = getSubfields(field,"","empty");
+            if ( oldIndicators.substr(1,1) == "#" && newIndicators.substr(1,1) == "0" && fieldContent.search(/\^[rt]/) == -1 ) {
+                // basic => enhanced
+                enhance505(field,true);
+            } else if ( oldIndicators.substr(1,1) == "0" && newIndicators.substr(1,1) == "#"  && fieldContent.search(/\^[rt]/) != -1 ) {
+                // enhanced => basic
+                enhance505(field,false);
+            }
         }
-    }
 
 
     // En ciertos casos (ej.: campo 246, ind2) podemos hacer que el cambio
@@ -326,6 +336,9 @@ function editIndicators(field)
 
     // Foco al primer subcampo del campo
     firstSubfieldBox(field).focus();
+}
+
+    
 }
 
 
@@ -549,13 +562,13 @@ function promptSaveChanges()
     ];
 
     // Mostramos la ventana
-    var answer = showModalDialog(URL_SAVE_CHANGES, window, winProperties.join(";"));
+    let answer = window.showModalDialog(URL_SAVE_CHANGES, window, winProperties.join(";"));
 
-    if ( "undefined" == typeof(answer) || null == answer ) {
-        answer = "cancel";
-    }
+    window.top.answerGlobal = answer;
 
-    return answer;
+    //if ( "undefined" == typeof(window.top.answerGlobal) || null == window.top.answerGlobal ) {
+    //    window.top.answerGlobal = "cancel";
+    //}
 }
 
 

@@ -4,6 +4,7 @@
 //  (c) 2003-2004  Fernando J. Gómez - CONICET - INMABB
 // =============================================================================
 
+
 var xmlData = {};
 
 function cerrarDialog(){
@@ -112,7 +113,7 @@ function loadXML()
     URL_MARC21 = HTDOCS + "xml/marc21.xml";
     
     // Cargamos los documentos
-    xmlData = {};
+    
     importXML("xmlMARC21", URL_MARC21);
     importXML("xmlCountryCodes", URL_COUNTRY_CODES);
     importXML("xmlLanguageCodes", URL_LANGUAGE_CODES);
@@ -836,7 +837,8 @@ function checkKey(evt)
         case 73 :       // Ctrl+I
             if ( evt.ctrlKey ) {
                 if ( parentField(subfield,"subfield").hasIndicators ) {
-                    editIndicators(parentField(subfield,"subfield"));
+                    fieldGlobal = parentField(subfield,"subfield");
+                    editIndicators();
                 }
                 return false;
             }
@@ -1400,6 +1402,33 @@ function updateDialogHeight(objWindow)
     objWindow.dialogHeight = newHeight + "px";
 }
 
+function updateDialogSizeChrome(){
+    let dialog = document.getElementsByTagName("dialog")[0];
+    let nodes = dialog.childNodes;
+
+    let body = nodes[1].contentWindow.document.body;
+
+    let alto = body.scrollHeight;
+    let ancho = body.scrollWidth;
+
+    dialog.style.width = ancho + 11 + "px";
+    dialog.style.height = alto + 5 + "px";
+}
+
+function moveDialog(){
+    let dialog = document.getElementsByTagName("dialog")[0];
+    let nodes = dialog.childNodes;
+
+    let body = nodes[1].contentWindow.document.body;
+
+    let dialogWidth = parseInt(body.scrollWidth);
+
+    let dialogLeft = parseInt(dialog.style.left.split("p")[0]);
+
+    if (dialogLeft > window.innerWidth - dialogWidth - 32 ){
+        dialog.style.left = (window.innerWidth - dialogWidth - 32) + "px" ;
+    }
+}
 
 // -----------------------------------------------------------------------------
 function updateDialogWidth(objWindow)
