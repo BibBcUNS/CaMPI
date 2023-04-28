@@ -113,6 +113,13 @@ function adjustWindowSize()
 // Ajusta las dimensiones de la ventana en función de su contenido.
 //-----------------------------------------------------------
 {
+	window.top.updateDialogSizeChrome();
+	window.top.moveDialog();
+
+	//mostrar (quitar display:none en dialog)
+	let dialog = window.top.document.getElementsByTagName("dialog")[0];
+	dialog.style.visibility = "visible";
+
 	//(M.A) Comento por ahora las 3 llamadas a updateDialogHeight y width
 
 	// Ajustamos la altura
