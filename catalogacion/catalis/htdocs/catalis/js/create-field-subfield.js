@@ -60,7 +60,8 @@ function createSubfieldList(field,codes)
 // -----------------------------------------------------------------------------
 {
   if ( codes.length === 0 ) {
-    alert("ATENCION: createSubfieldList() fue llamada con codes.length = 0");
+    //alert("ATENCION: createSubfieldList() fue llamada con codes.length = 0");
+    console.log("Atencion: createSubfieldList() fue llamada con codes.length = 0");
     return;
   }
 
@@ -73,7 +74,12 @@ function createSubfieldList(field,codes)
   var validCodes = [];
   for (var i=0; i < codes.length; i++) {
     try {
-      var repetible = xmlDatafield.selectNodes("subfield[@code = '" + codes[i] + "']/@repet")[0].value;
+      var repetible;
+      if(ie){
+        repetible = xmlDatafield.selectNodes("subfield[@code = '" + codes[i] + "']/@repet")[0].value;
+      }else{
+        repetible = window.top.selectNodesChrome(path+"/subfield[@code = '"+codes[i]+"']/@repet", window.top.xmlData.xmlMARC21)[0].value;
+      }
     }
     catch (err) {
       alert("No está definido el subcampo $" + codes[i] + " para el campo " + tag + ".\n\nSi considera que se trata de un error, por favor póngase en contacto con fjgomez@gmail.com.");
@@ -91,8 +97,14 @@ function createSubfieldList(field,codes)
     return;
 
   for (var i=0; i < validCodes.length; i++) {
-    var label = xmlDatafield.selectNodes("subfield[@code = '" + validCodes[i] + "']/@label-" + LANG)[0].value;
-    
+
+    var label;
+    if(ie){
+      label = xmlDatafield.selectNodes("subfield[@code = '" + validCodes[i] + "']/@label-" + LANG)[0].value; 
+    }else{
+      label = window.top.selectNodesChrome(path+"/subfield[@code = '"+ validCodes[i] + "']/@label-"+LANG, window.top.xmlData.xmlMARC21)[0].value;
+    }
+
     //findNewSubfieldPosition(field,codes[i]); return;
     
     var newSubfield = createSubfield(validCodes[i], "", label, tag);

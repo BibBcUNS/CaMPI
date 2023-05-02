@@ -259,7 +259,8 @@ function setToolbarEvents()
   
   document.getElementById("btnNewSubfield").onclick = function() {
     this.blur();
-    promptNewSubfield(selectedField);
+    fieldGlobal = selectedField;
+    promptNewSubfield();
   };
   
   document.getElementById("btnPrevResult").onclick = function() {

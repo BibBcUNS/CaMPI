@@ -475,68 +475,70 @@ function promptNewField()
 
 }
 
+function getArguments(field){
+    let resultado;
+    let xmlMARC21 = xmlData.xmlMARC21;
+    if ( field != null ) {
+        var tag = field.tag;
+        var path = "marc21_bibliographic/datafield[@tag='" + tag + "']";
+        var xmlDatafield = crossBrowserNodeSelector(xmlMARC21,path);
+        // Parámetros para la ventana de diálogo
+        // ATENCION: también podemos pasar el objeto window como parámetro
+        var dialogArgs = new Array();
+        dialogArgs[0] = xmlDatafield;
+        dialogArgs[1] = LANG;
+        
+        var disabledCodes = new Array();
+        var nonRepSubfields, resultLength, code;
+        var path = "subfield[@repet='NR']/@code";
+        
+        if (ie) {
+            nonRepSubfields = xmlDatafield.selectNodes(path);
+            resultLength = nonRepSubfields.length;
+        } else if (moz) {
+            //nonRepSubfields = xmlMARC21.evaluate(path,xmlDatafield,null,7,null);
+            path = "marc21_bibliographic/datafield[@tag='" + tag + "']"+"/subfield[@repet='NR']/@code";
+            nonRepSubfields = window.top.selectNodesChrome(path, xmlMARC21);
+            resultLength = nonRepSubfields.length;
+        }
+    
+        for (var i=0; i < resultLength; i++) {
+            if (ie) {
+                code = nonRepSubfields[i].value;
+            } else if (moz) {
+                code = nonRepSubfields[i].nodeValue;
+            }
+            disabledCodes[code] = isSubfieldPresent(field,code);
+        }
+        
+        dialogArgs[2] = disabledCodes;
+        
+        resultado = dialogArgs;
+        return resultado;
+    }
+    
+}
 
 // -----------------------------------------------------------------------------
-function promptNewSubfield(field)
+function promptNewSubfield()
 // Presenta la ventana que solicita los codes de los subcampos a crear.
 // -----------------------------------------------------------------------------
-{
-    if ( field == null ) {
-        alert("No hay ningún campo seleccionado.");
-        return;
-    }
-
-    var tag = field.tag;
-    var path = "marc21_bibliographic/datafield[@tag='" + tag + "']";
-    var xmlDatafield = crossBrowserNodeSelector(xmlMARC21,path);
-
-    // Parametros para la ventana de diálogo
-    // ATENCION: también podemos pasar el objeto window como parámetro
-    var dialogArgs = new Array();
-    dialogArgs[0] = xmlDatafield;
-    dialogArgs[1] = LANG;
-
-    var disabledCodes = new Array();
-    var nonRepSubfields, resultLength, code;
-    var path = "subfield[@repet='NR']/@code";
-    if (ie) {
-        nonRepSubfields = xmlDatafield.selectNodes(path);
-        resultLength = nonRepSubfields.length;
-    } else if (moz) {
-        nonRepSubfields = xmlMARC21.evaluate(path,xmlDatafield,null,7,null);
-        resultLength = nonRepSubfields.snapshotLength;
-    }
-    for (var i=0; i < resultLength; i++) {
-        if (ie) {
-            code = nonRepSubfields[i].value;
-        } else if (moz) {
-            code = nonRepSubfields.snapshotItem(i).nodeValue;
-        }
-        disabledCodes[code] = isSubfieldPresent(field,code);
-    }
-    dialogArgs[2] = disabledCodes;
-
+{  
+    let field = fieldGlobal;
+    console.log(field.tag+"--------------------------------------------------------------------")
+    let dialogArgs = getArguments(field);
     // Mostramos la ventana
     var dWidth = 500;
     var dHeight = 480;
-    if ( !codes ) {
-        if (ie) {
-            var winProperties = "font-size:10px; dialogWidth:" + dWidth + "px; dialogHeight:" + dHeight + "px; status:no; help:no";
-            var codes = showModalDialog(URL_SELECT_SUBFIELD, dialogArgs, winProperties);
-        } else if (moz) {
-            openSimDialog(URL_SELECT_SUBFIELD, dWidth, dHeight, null, dialogArgs);
-            return;
-        }
+    
+    var winProperties = "font-size:10px; dialogWidth:" + dWidth + "px; dialogHeight:" + dHeight + "px; status:no; help:no";
+    var codes = window.showModalDialog(URL_SELECT_SUBFIELD, dialogArgs, winProperties);
+    field = fieldGlobal;
+    if ( codes != null ) {
+        // Procesamos los datos devueltos por la ventana en el array codes
+        createSubfieldList(field,codes);
     }
-
-    if ( "undefined" == typeof(codes) || null == codes || codes.length == 0 ) {
-        return;  // abortamos
-    }
-
-    // Procesamos los datos devueltos por la ventana en el array codes
-    createSubfieldList(field,codes);
 }
-
 
 // -----------------------------------------------------------------------------
 function showSpecialChars()
