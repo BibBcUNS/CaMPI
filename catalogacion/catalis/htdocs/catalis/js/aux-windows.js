@@ -534,7 +534,7 @@ function promptNewSubfield()
     var winProperties = "font-size:10px; dialogWidth:" + dWidth + "px; dialogHeight:" + dHeight + "px; status:no; help:no";
     var codes = window.showModalDialog(URL_SELECT_SUBFIELD, dialogArgs, winProperties);
     field = fieldGlobal;
-    if ( codes != null ) {
+    if ( codes.length != 0  ) { //(M.A) VER CUANDO AGREGA EL SUBCAMPO
         // Procesamos los datos devueltos por la ventana en el array codes
         createSubfieldList(field,codes);
     }
