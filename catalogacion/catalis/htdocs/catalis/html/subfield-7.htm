@@ -14,7 +14,8 @@ function handleOK()
 // -----------------------------------------------------------------------------
 {
 	window.returnValue = getSelectedCodes();
-	window.close();
+	//window.close();
+	window.top.cerrarDialog();
 }
 
 
@@ -22,7 +23,8 @@ function handleOK()
 function handleCancel()
 // -----------------------------------------------------------------------------
 {
-	window.close();
+	//window.close();
+	window.top.cerrarDialog();
 }
 
 
@@ -70,15 +72,8 @@ function init()
 	}
 	document.getElementById("pos0").onchange = handlePos0change;
 	
-	// Ajustamos la altura
-	callingWindowObject.updateDialogHeight(window);
-	// Ajustamos el ancho
-	callingWindowObject.updateDialogWidth(window);
-	// Ajustamos la altura
-	callingWindowObject.updateDialogHeight(window);
-	// (Sí, parece necesario repetir el primer tipo de ajuste)
-	// Ajustamos el ancho
-	callingWindowObject.updateDialogWidth(window);
+	window.top.document.getElementsByTagName("dialog")[0].style.visibility = "visible";
+	window.top.updateDialogSizeChrome();
 	
 	// Códigos seleccionados
 	

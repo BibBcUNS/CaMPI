@@ -598,7 +598,9 @@ function createSubfield( code, sfText, label, fieldTag )
   if ( "4" == code ) {   // Relator code
     newSubfieldBox.readOnly = true;  // ATENCION: esta propiedad produce un bug al subir/bajar un subcampo $4 vacío
     newSubfieldBox.onclick = function() {
-      editCodedData("relator");
+      window.top.dataElement = "relator";
+      window.top.globalObject = event.srcElement;
+      editCodedData();
     }
     newSubfieldBox.style.fontFamily = "lucida console, monospace";
     newSubfieldBox.style.fontSize = "14px";
@@ -607,7 +609,9 @@ function createSubfield( code, sfText, label, fieldTag )
   else if ( fieldTag.search(/041|044/) != -1 ) {   // Language & country codes
     newSubfieldBox.readOnly = true;  // ATENCION: esta propiedad produce un bug al subir/bajar un subcampo $4 vacío
     newSubfieldBox.onclick = function() {
-      editCodedData("f" + fieldTag);
+      window.top.dataElement = "f" + fieldTag;
+      window.top.globalObject = event.srcElement;
+      editCodedData();
     }
     newSubfieldBox.style.fontFamily = "lucida console, monospace";
     newSubfieldBox.style.fontSize = "14px";
@@ -628,7 +632,9 @@ function createSubfield( code, sfText, label, fieldTag )
   else if ( "7" == code ) {   // Control subfield for 76x-78x
     newSubfieldBox.readOnly = true;
     newSubfieldBox.onclick = function() {
-      editCodedData("subfield7");
+      window.top.dataElement = "subfield7";
+      window.top.globalObject = event.srcElement;
+      editCodedData();
     }
     newSubfieldBox.style.fontFamily = "lucida console, monospace";
     newSubfieldBox.style.fontSize = "14px";

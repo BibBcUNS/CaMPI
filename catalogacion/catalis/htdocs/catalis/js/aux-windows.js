@@ -151,12 +151,11 @@ function editCodedData()
         var srcObject = event.srcElement;
         var activeCode = srcObject.value;  // TO-DO: evt for mozilla
         var codeType = "single";
-        var dialogLeft = event.clientX - 70;
-        var dialogTop = event.clientY - 130;
-        
+        var dialogLeft = event.clientX ;
+        var dialogTop = event.clientY ;
     } else if ( "subfield7" == dataElement ) {
-        var dialogLeft = event.clientX - 70;
-        var dialogTop = event.clientY - 130;
+        var dialogLeft = event.clientX ;
+        var dialogTop = event.clientY ;
         URL = HTDOCS + "html/subfield-7.htm";
     } else { 
         var form = document.getElementById("marcEditForm");
@@ -166,7 +165,7 @@ function editCodedData()
 
         var codeType;
         if(elementoPadre != undefined){
-            if(elementoPadre.getAttribute("multiple") != null ){
+            if( elementoPadre.getAttribute("multiple") != null ){
                 codeType = "multiple";
             }else{
                 codeType = "single";
@@ -175,9 +174,8 @@ function editCodedData()
             codeType = "single";
         }
 
-        var dialogLeft = event.clientX - 300;
-        var dialogTop = event.clientY - 500; // con event.clientY - 38 hacemos que el puntero quede justo sobre la opción activa en el select
-
+        var dialogLeft = event.clientX ;
+        var dialogTop = event.clientY ; // con event.clientY - 38 hacemos que el puntero quede justo sobre la opción activa en el select
     }
 
     var dialogArgs = [window, dataElement, activeCode, codeType];
@@ -187,10 +185,13 @@ function editCodedData()
     var winProperties = "visibility:hidden; font-size:10px; dialogLeft:" + ( dialogLeft  ) + "px; dialogTop:" + ( dialogTop ) + "px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
 
     var newCode = window.showModalDialog(URL, dialogArgs, winProperties);
+    let objEvent = window.top.globalObject;
+
+    srcObject = event.srcElement;
 
     if ( null != newCode ) {
         if ( dataElement.search(/relator|f041|f044/) != -1 ) {
-            srcObject.value = newCode.value;
+            objEvent.value = newCode.value;
             //displayPermanentTitle(srcObject,newCode.description.substr(6),40,0);
         } else {
             document.getElementById("marcEditForm")[dataElement].value = newCode.value;

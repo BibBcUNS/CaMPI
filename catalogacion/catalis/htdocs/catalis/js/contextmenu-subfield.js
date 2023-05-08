@@ -59,7 +59,7 @@ function canDuplicateSf(subfield)
 	var code = subfield.code;
 	var repet;
 	try {
-		repet = xmlMARC21.selectNodes("//datafield[@tag='" + tag + "']/subfield[@code='" + code + "']/@repet")[0].value;
+		repet = window.top.selectNodesChrome("//datafield[@tag='" + tag + "']/subfield[@code='" + code + "']/@repet", window.top.xmlData.xmlMARC21)[0].value;
 	}
 	catch(err) {
 		repet = "NR";
@@ -185,7 +185,9 @@ function showSubfieldMenuIE(subfield){
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	itemEnabled.push(canAddSubfield);
 	menuFunctions.push(function() {
-		promptNewSubfield(field); killmenu();
+		fieldGlobal = field;
+		promptNewSubfield(); 
+		killmenu();
 	});
 
 	// Recorremos los items del menú
@@ -338,7 +340,9 @@ function showSubfieldMenuChrome(subfield){
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	itemEnabled.push(canAddSubfield);
 	menuFunctions.push(function() {
-		promptNewSubfield(field); killmenu();
+		fieldGlobal = field;
+		promptNewSubfield(); 
+		killmenu();
 	});
 
 	// Recorremos los items del menú
