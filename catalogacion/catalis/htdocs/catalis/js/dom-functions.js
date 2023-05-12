@@ -395,11 +395,11 @@ function moveField(field, dir)
     switch ( dir ) {
         case "up" :
             //mField = field.swapNode(field.previousSibling);
-            window.top.swapElements(field, field.previousSibling)
+            swapElements(field, field.previousSibling)
             break;
         case "down" :
             //mField = field.swapNode(field.nextSibling);
-            window.top.swapElements(field.nextSibling, field )
+            swapElements(field.nextSibling, field )
             break;
         default :
             alert("moveField error: dir=" + dir);
@@ -421,10 +421,12 @@ function moveSubfield(subfield, dir)
     var mSubfield;
     switch ( dir ) {
         case "up" :
-            mSubfield = subfield.swapNode(subfield.previousSibling);
+            //mSubfield = subfield.swapNode(subfield.previousSibling);
+            swapElements(subfield, subfield.previousSibling)
             break;
         case "down" :
-            mSubfield = subfield.swapNode(subfield.nextSibling);
+            //mSubfield = subfield.swapNode(subfield.nextSibling);
+            swapElements(subfield.nextSibling, subfield)
             break;
         default :
             alert("moveSubfield error: dir=" + dir);
