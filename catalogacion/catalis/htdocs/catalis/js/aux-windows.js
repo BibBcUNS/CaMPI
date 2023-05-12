@@ -182,17 +182,15 @@ function editCodedData()
     var dialogHeight = ( "multiple" == codeType ) ? 230 : 145;
     var dialogWidth = 300;
 
-    var winProperties = "visibility:hidden; font-size:10px; dialogLeft:" + ( dialogLeft  ) + "px; dialogTop:" + ( dialogTop ) + "px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
+    //var winProperties = "visibility:hidden; font-size:10px; dialogLeft:" + ( dialogLeft  ) + "px; dialogTop:" + ( dialogTop ) + "px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
+    var winProperties = "visibility:hidden; font-size:10px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
 
     var newCode = window.showModalDialog(URL, dialogArgs, winProperties);
     let objEvent = window.top.globalObject;
 
-    srcObject = event.srcElement;
-
     if ( null != newCode ) {
         if ( dataElement.search(/relator|f041|f044/) != -1 ) {
             objEvent.value = newCode.value;
-            //displayPermanentTitle(srcObject,newCode.description.substr(6),40,0);
         } else {
             document.getElementById("marcEditForm")[dataElement].value = newCode.value;
             if ( document.getElementById("TD_" + dataElement) ) {

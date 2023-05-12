@@ -394,10 +394,12 @@ function moveField(field, dir)
 
     switch ( dir ) {
         case "up" :
-            mField = field.swapNode(field.previousSibling);
+            //mField = field.swapNode(field.previousSibling);
+            window.top.swapElements(field, field.previousSibling)
             break;
         case "down" :
-            mField = field.swapNode(field.nextSibling);
+            //mField = field.swapNode(field.nextSibling);
+            window.top.swapElements(field.nextSibling, field )
             break;
         default :
             alert("moveField error: dir=" + dir);

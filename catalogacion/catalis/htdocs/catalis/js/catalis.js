@@ -7,6 +7,10 @@
 
 var xmlData = {};
 
+function swapElements(elemento1, elemento2){
+    elemento1.parentNode.insertBefore(elemento1, elemento2);
+}
+
 function cerrarDialog(){
     var dialog = parent.document.getElementsByTagName('dialog');
   	if (dialog) {
@@ -17,7 +21,7 @@ function cerrarDialog(){
 }
 
 function selectNodesChrome(path, xmlDoc){
-    //Devuelve un arreglo con todos los nodos del XML buscados por path
+    //Devuelve un arreglo con todos los nodos del XML buscados por xPath
     var result = xmlDoc.evaluate(path, xmlDoc, null, XPathResult.ANY_TYPE , null);
     let node = null;
     var arrayResult = [];
