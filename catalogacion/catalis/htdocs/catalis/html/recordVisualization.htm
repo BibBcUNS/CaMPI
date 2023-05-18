@@ -10,13 +10,17 @@
 <link rel="stylesheet" type="text/css" href="../../common/css/aacr.css">
 <link rel="stylesheet" type="text/css" href="../../common/css/etiquetado.css">
 <link rel="stylesheet" type="text/css" href="../../common/css/wh.css">
+<!-- (M.A) Comento la siguiente linea porque no encuentra el archivo -->
+
+<!--
 <link rel="stylesheet" type="text/css" href="../../opacmarc/css/opac.css">
+-->
 
 <!--script src="../js/clipboard.min.js"></script-->
 <!-- FG, 2018-04-09: prueba para solucionar error en copia al portapapeles en IE (Guille) -->
 
 <script type="text/javascript">
-var callerWindowObject = dialogArguments;
+var callerWindowObject = window.dialogArguments;
 // window.onresize = function() { /* hacer algo para que el width tenga un mínimo razonable */ }
 
 
@@ -86,11 +90,10 @@ function displayRecord(displayType)
 // -----------------------------------------------------------------------------
 {
 	event.srcElement.blur();
-	
+
 	if ( displayType.search(/etiq|breve/) != -1 ) {
-		
 		// ATENCION: si el registro no está grabado (f001 sin valor) ==> return
-		if ( callerWindowObject.document.getElementById("marcEditForm").f001.value.indexOf("[") != -1 ) {
+		if ( window.top.document.getElementById("marcEditForm").f001.value.indexOf("[") != -1 ) {
 			document.getElementById("cartelMsg").innerHTML = "Para visualizar usando este estilo, debe antes grabar el registro.";
 			document.getElementById("cartel").style.display = "block";
 			document.getElementById("cartelBtn").style.display = "block";
@@ -99,10 +102,10 @@ function displayRecord(displayType)
 		
 		document.getElementById("cartelMsg").innerHTML = "Solicitando datos al servidor...";
 		document.getElementById("cartel").style.display = "block";
-		var database = callerWindowObject.g_activeDatabase.name;
-		var recordID = callerWindowObject.document.getElementById("marcEditForm").f001.value;
+		var database = window.top.g_activeDatabase.name;
+		var recordID = window.top.document.getElementById("marcEditForm").f001.value;
 		var tarea = ( displayType == "etiq" ) ? "ETIQUETADO" : "BREVE";
-		var myURL = callerWindowObject.SCRIPT_URL + "?IsisScript=catalis/xis/catalis.xis"
+		var myURL = window.top.SCRIPT_URL + "?IsisScript=catalis/xis/catalis.xis"
 			+ "&tarea=SEND_" + tarea
 			+ "&userid=" + "FG"
 			+ "&db=" + database
@@ -110,7 +113,7 @@ function displayRecord(displayType)
 			+ "&useModelessWindow=1";
 		frames.newHiddenIframe.location.href = myURL;
 	}
-	
+
 	var displayTypes = ["aacr","marc","etiq","breve"];
 
 	for (var i=0; i < displayTypes.length; i++) {
@@ -132,8 +135,8 @@ function displayRecord(displayType)
 			linksArray[i].onclick = function() {return false};
 		}
 	}
-	
-	callerWindowObject.updateDialogHeight(window);
+
+	//callerWindowObject.updateDialogHeight(window);
 }
 
 //------------------------------------------------------------------------------
@@ -168,7 +171,7 @@ function init()
 	
 	document.getElementById("btnUpdate").onclick = function() {
 		this.blur();
-		callerWindowObject.viewRecord();
+		callerWindowObject.viewRecord(); //NO SE USA
 	}
 	
 	document.getElementById("aacrTab").onclick = function() {
@@ -192,6 +195,38 @@ function init()
 	}
 	
 	window.focus();
+
+
+	let cruz = window.top.document.getElementById("dialog-close");
+
+	cruz.style.display = "block";
+
+	document.getElementById("aacrDiv").innerHTML = window.dialogArguments[0];
+	document.getElementById("chkAccess").checked = true;
+    document.getElementById("chkDescription").checked = true;
+    document.getElementById("marcDiv").innerHTML = window.dialogArguments[1];
+    document.getElementById("chkSubfieldSplit").checked = false;
+
+	//(M.A) Arreglo estilos
+	window.top.updateDialogSizeChrome();
+
+	let dialogHeight = window.top.document.getElementsByTagName("dialog")[0].style.height;
+
+
+	dialogHeight = dialogHeight.split("p")[0];
+
+	dialogHeight = parseInt(dialogHeight);
+
+	let cuadroAacr = document.getElementById("aacrDiv");
+
+	cuadroAacr.style.padding = "10px";
+	cuadroAacr.style.width = "96.8%";
+
+	let cuadroMarc = document.getElementById("marcDiv");
+
+	cuadroMarc.style.width = "97.9%";
+	cuadroMarc.style.maxHeight= dialogHeight - 80 +"px";
+	cuadroMarc.style.overflowY = "scroll";
 }
 
 window.onload = init;

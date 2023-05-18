@@ -391,6 +391,7 @@ function viewRecord()
 
     var fieldContainers = getDatafields();
     var marcDatafields = [];
+
     for (var i=0; i < fieldContainers.length; i++) {
         var subfields = getSubfields(fieldContainers[i]).replace(/ \.(?=\^|$)/g,".");
         if ( subfields.search(REGEX_EMPTY_SUBFIELD) == -1 ) {    // Ignoramos campos sin datos
@@ -427,52 +428,16 @@ function viewRecord()
     var f008 = serialize008(materialType);
     var marcTagged = marc2marcTagged(leader, f001, f003, f005, f006, f007, f008, marcDatafields, ejemplares, postItNote);
 
-
-    // Capturamos el error que se produce al usar la referencia a la ventana cuando ésta ya fue cerrada
-    try {
-        var tmp = modelessWin.document;
-    }
-    catch(err) {
-        displayWindowClosed = true;
-    }
-
-    // Creamos la ventana
-    if ( displayWindowClosed ) {
-        var dialogHeight = 350;
-        var dialogWidth = 660;
-        var winProperties = "dialogHeight: " + dialogHeight + "px; ";
-        winProperties += "dialogWidth: " + dialogWidth + "px; ";
-        winProperties += "dialogTop: 25px; ";
-        //winProperties += "dialogLeft: " + (screen.width - 553) + "px; ";
-        winProperties += "resizable: yes; scroll: yes; status: no; help: no";
-        //alert(winProperties);
-        
-        modelessWin = window.showModalDialog(URL_RECORD_VISUALIZATION, window, winProperties);
-        displayWindowClosed = false;
-    }
-
-    // Este loop es para librarnos del error al abrir la ventanita por primera vez
-    var popupOK = false;
-    while( !popupOK ) {
-        try {
-            var tmp = modelessWin.document.getElementById("aacrDiv").innerHTML;
-            popupOK = true;
-        }
-        catch (err) {   // Sólo se ejecuta si se produjo un error
-            popupOK = false;
-        }
-    }
+    var dialogHeight = 350;
+    var dialogWidth = 660;
+    var winProperties = "dialogHeight: " + dialogHeight + "px;dialogWidth: "+dialogWidth+"px; dialogTop: 25px; ";
 
 
-    // Actualizamos el contenido de la ventana
-    modelessWin.document.getElementById("aacrDiv").innerHTML = fichaHTML;
-    modelessWin.document.getElementById("chkAccess").checked = true;
-    modelessWin.document.getElementById("chkDescription").checked = true;
-    modelessWin.document.getElementById("marcDiv").innerHTML = marcTagged;
-    modelessWin.document.getElementById("chkSubfieldSplit").checked = false;
+    let arrayArgs = [fichaHTML, marcTagged];
 
-    // Y ajustamos su altura, para que se aprecie mejor el contenido.
-    updateDialogHeight(modelessWin);
+
+    modelessWin = window.showModalDialog(URL_RECORD_VISUALIZATION, arrayArgs, winProperties);
+    displayWindowClosed = false;   
 }
 
 
