@@ -523,13 +523,14 @@ function marcHelpPopup(tag,code)
 function generalHelpPopup(messageType)
 // -----------------------------------------------------------------------------
 {
-    oPopup.document.body.innerHTML = document.getElementById("searchHelp").innerHTML;
-    oPopup.document.getElementById("searchMessage").innerHTML = document.getElementById( messageType + "HelpMessage").innerHTML;
+    oPopup.innerHTML = document.getElementById("searchHelp").innerHTML;
+    document.getElementById("searchMessage").innerHTML = document.getElementById( messageType + "HelpMessage").innerHTML;
     
     var popupWidth = 500;
     showPopup(0, 0, popupWidth, 0);
-    var realHeight = oPopup.document.body.scrollHeight;
-    hidePopup();
+    var realHeight = oPopup.scrollHeight;
+    killmenu()
+    event.target.click();
     showPopup(0, event.srcElement.offsetHeight, popupWidth, realHeight, event.srcElement);
 }
 
@@ -850,7 +851,8 @@ function checkKey(evt)
         
         case 123 :       // F12
             if ( "4" == this.code ) {
-                editCodedData("relator");
+                window.top.dataElement = "relator";
+                editCodedData();
                 return false;
             }
             // TO-DO: agregar campos 041, 044
@@ -1127,6 +1129,7 @@ function viewRecordDetails(evt,recordID,recordDisplayStyle)
 // inferior de la pantalla de búsquedas.
 // -----------------------------------------------------------------------------
 {
+    killmenu();
     // Resaltamos la fila que corresponde al registro seleccionado
     // ATENCION: el resaltado debe posponerse hasta que el registro sea recibido
     if ( recordID != null ) {
@@ -1177,6 +1180,7 @@ function editRecord(recordID,evt)
 // búsqueda más reciente.
 // -----------------------------------------------------------------------------
 {
+    killmenu();
     switch ( recordID ) {
         case null :
             recordID = document.getElementById("hiddenFORM").recordID.value;
@@ -1216,6 +1220,7 @@ function showSearchForm(formType)
 // de búsqueda.
 // -----------------------------------------------------------------------------
 {
+    killmenu();
     document.getElementById("searchNotIndex").style.display = "none";
     document.getElementById("indexNotSearch").style.display = "none";
     document.getElementById(formType + "Tab").className += " activeTab";
@@ -1491,8 +1496,13 @@ function showPopup(x,y,width,height,refObject)
             (!clickedElement.classList.contains("tip2") && (clickedElement.tagName != "SPAN")) &&
             (!clickedElement.classList.contains("fieldTag")) &&
             (!clickedElement.classList.contains("subfieldTag")) && (!clickedElement.classList.contains("contextMenu")) &&
-            (!clickedElement.classList.contains("checkButton"))
+            (!clickedElement.classList.contains("checkButton")) &&
+            (!clickedElement.id != "searchMessage") && (clickedElement.id != "kwSearchHelpLink") &&
+            (!clickedElement.id != "searchMessage") && (clickedElement.id != "mfnSearchHelpLink") &&
+            (!clickedElement.id != "searchMessage") && (clickedElement.id != "testConditionSearchHelpLink") &&
+            (!clickedElement.id != "searchMessage") && (clickedElement.id != "indexHelpLink")           
         ){
+            console.log("Kill xq no es menu")
             killmenu(); 
         }
     })
