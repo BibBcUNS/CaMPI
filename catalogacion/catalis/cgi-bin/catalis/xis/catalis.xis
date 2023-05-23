@@ -173,7 +173,7 @@
     'URLENCODE.PFT=',     v6003^c,'/common/pft/urlencode.pft'/
     'WH.PFT=',            v6003^c,'/common/pft/wh.pft'/
 
-    'BIB-LIST-HEAD.HTM=', v6003^c,'/opacmarc/html/bib-list-head.htm'/
+    'BIB-LIST-HEAD.HTM=', v6003^c,'/catalis/html/bib-list-head.htm'/
     
     /* ----- Archivo de logs (uno por fecha) ----- */
     'LOGFILE.TXT=',v6003^l,'/log-',s(date).8,'.txt'/
@@ -601,14 +601,16 @@
         <!--proc><pft>'a1001~ ~'</pft></proc--> <!-- el contador -->
         <display><pft>@WH.PFT</pft></display>
         <display></table></div></display>
-        
+
         <display><htmlpft>
             <script>
                 [pft]if v4002 = '1' then[/pft]
+                    var a = window.top.document.getElementsByTagName("dialog")[0].querySelector("iframe").contentWindow.document; 
                     // El registro se muestra en la ventana auxiliar de visualización
-                    top.document.getElementById("cartel").style.display = "none";
-                    top.document.getElementById("[pft]v6019[/pft]Div").innerHTML = document.getElementById("[pft]v6019[/pft]").innerHTML;
-                    top.callerWindowObject.updateDialogHeight(top.window);
+                    a.getElementById("cartel").style.display = "none";
+                    //top.document.getElementById("[pft]v6019[/pft]Div").innerHTML = document.getElementById("[pft]v6019[/pft]").innerHTML;
+                    a.getElementById("[pft]v6019[/pft]Div").innerHTML = document.getElementById("[pft]v6019[/pft]").innerHTML;
+                    //top.callerWindowObject.updateDialogHeight(top.window);
                 [pft]else[/pft]
                     // El registro se muestra en la pantalla de búsquedas
                     var receivedRecord = new Object();
