@@ -143,21 +143,32 @@ function editCodedData()
 // Para editar códigos del "fixed field" (leader & 008), campos 041, 044, etc.
 // -----------------------------------------------------------------------------
 {
-    
     let dataElement = window.top.dataElement;
     var URL = URL_EDIT_CODES;
 
-    if ( dataElement.search(/relator|f041|f044/) != -1 ) {
+    var dialogLeft;
+    var dialogTop;
+
+    var winProperties;
+
+    if ( dataElement.search(/relator|f041|f044/) != -1 ) {  //Codigos de theLeftPanel
+
+        if( dataElement == "subfield7"){
+            URL = HTDOCS + "html/subfield-7.htm"; //Diferente plantilla para subfield-7
+        }
+
         var srcObject = event.srcElement;
         var activeCode = srcObject.value;  // TO-DO: evt for mozilla
         var codeType = "single";
-        var dialogLeft = event.clientX ;
-        var dialogTop = event.clientY ;
-    } else if ( "subfield7" == dataElement ) {
-        var dialogLeft = event.clientX ;
-        var dialogTop = event.clientY ;
-        URL = HTDOCS + "html/subfield-7.htm";
-    } else { 
+
+        dialogLeft = event.clientX;
+        dialogTop =  event.clientY;
+
+        winProperties = "visibility: hidden; font-size:10px; dialogWidth: $dialogWidthToReplace; dialogHeight: $dialogHeightToReplace; status:no; help:no";
+
+
+    } else {  //Codigos de theRightPanel
+
         var form = document.getElementById("marcEditForm");
         var activeCode = form[dataElement].value;
 
@@ -174,20 +185,36 @@ function editCodedData()
             codeType = "single";
         }
 
-        var dialogLeft = event.clientX ;
-        var dialogTop = event.clientY ; // con event.clientY - 38 hacemos que el puntero quede justo sobre la opción activa en el select
+        dialogLeft = event.clientX  ;
+        dialogTop = event.clientY - 600  ; // con event.clientY - 600 hacemos que el puntero quede justo sobre la opción activa en el select
+
+        winProperties = "visibility: hidden; font-size:10px; dialogLeft: "+dialogLeft+"px; dialogTop: "+dialogTop+"px; dialogWidth: $dialogWidthToReplace; dialogHeight: $dialogHeightToReplace; status:no; help:no";
+
     }
 
     var dialogArgs = [window, dataElement, activeCode, codeType];
     var dialogHeight = ( "multiple" == codeType ) ? 230 : 145;
     var dialogWidth = 300;
 
-    //var winProperties = "visibility:hidden; font-size:10px; dialogLeft:" + ( dialogLeft  ) + "px; dialogTop:" + ( dialogTop ) + "px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
-    var winProperties = "visibility:hidden; font-size:10px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
+    console.log(winProperties)
+
+    winProperties = winProperties.replace("$dialogWidthToReplace", dialogWidth+"px")
+    winProperties = winProperties.replace("$dialogHeightToReplace", dialogHeight+"px")
+
+
+    console.log(winProperties)
+
+
+    //var winProperties = "visibility:hidden; font-size:10px; dialogLeft:" + ( dialogLeft ) + "px; dialogTop:" + ( dialogTop ) + "px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
+
+
+
 
     var newCode = window.showModalDialog(URL, dialogArgs, winProperties);
     let objEvent = window.top.globalObject;
 
+    srcObject = event.srcElement;
+    
     if ( null != newCode ) {
         if ( dataElement.search(/relator|f041|f044/) != -1 ) {
             objEvent.value = newCode.value;
@@ -246,7 +273,7 @@ function editIndicators()
     var path = "marc21_bibliographic/datafield[@tag='" + tag + "']";
 
     var xmlDatafield = crossBrowserNodeSelector(xmlData.xmlMARC21,path);
-    var oldIndicators = getIndicators(field);
+    oldIndicators = getIndicators(field);
 
     var dialogArgs = new Object();
     dialogArgs.ind = oldIndicators     //.replace(/#/g," ");
@@ -276,16 +303,15 @@ function editIndicators()
         dialogHeight = 135;
         dialogWidth = 530;
     }
-    var dialogLeft = event.clientX - 1300 ;
-    var dialogTop = event.clientY - 620 ;
     
     var winProperties = "font-size:10px; status:no; help:no";
 
     // newIndicators contiene los indicadores devueltos por el cuadro de diálogo
     var newIndicators = window.showModalDialog(URL_EDIT_INDICATORS, dialogArgs, winProperties);
 
-    //Volvemos a setear variables por showModalDialog
+    //Volvemos a setear variables (por showModalDialog)
     field = fieldGlobal;
+    oldIndicators = getIndicators(field);
     tag = field.tag;
 
     if ( null != newIndicators ) {
