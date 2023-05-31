@@ -148,7 +148,8 @@ function init()
 		var evt = (evt) ? evt : window.event;
 		if ( evt.keyCode == 27 ) {
 			window.returnValue = "";
-			window.close();
+			//window.close();
+			window.top.cerrarDialog();
 		}
 	}
 	
