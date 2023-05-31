@@ -7,6 +7,23 @@
 
 var xmlData = {};
 
+function updateTextareaHeight(){    
+    const subfieldBoxes = document.getElementsByClassName("subfieldBox");
+
+    for (let i = 0; i < subfieldBoxes.length; i++) {
+      //Setea altura de los existentes  
+      subfieldBoxes[i].style.height = 0;
+      subfieldBoxes[i].style.height = (subfieldBoxes[i].scrollHeight) + 1 + "px";
+
+      //Setear evento para que se actualice cada vez que se escribe
+      subfieldBoxes[i].addEventListener("input", function(){
+          this.style.height = 0;
+          this.style.height = (this.scrollHeight) + 1 + "px";
+      }, false);
+    }
+    console.log("Textareas height actualizada");
+}
+
 function swapElements(elemento1, elemento2){
     elemento1.parentNode.insertBefore(elemento1, elemento2);
 }
@@ -1180,6 +1197,7 @@ function editRecord(recordID,evt)
 // búsqueda más reciente.
 // -----------------------------------------------------------------------------
 {
+    //(M.A) Cerramos el popUp en caso de que este abierto
     killmenu();
     switch ( recordID ) {
         case null :

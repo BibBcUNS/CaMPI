@@ -242,6 +242,7 @@ function displayField(newField,refNode)
             container.appendChild(newField);
         }
     }
+    window.top.updateTextareaHeight();
 }
 
 
@@ -281,6 +282,7 @@ function displaySubfield(newSubfield, field)
         // el nuevo subcampo se agrega al final
         container.appendChild(newSubfield);
     }
+    window.top.updateTextareaHeight();
 }
 
 
