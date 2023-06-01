@@ -41,9 +41,20 @@ function copyText(elementID)
 // http://www.htmlgoodies.com/beyond/clipboard.html
 // ATENCION: IE only
 {
-	textHolder.innerText = document.getElementById(elementID + "Div").innerText;
-	Copied = textHolder.createTextRange();
-	Copied.execCommand("Copy");
+	//Se recomiendo usar Clipboard API, por el momento se utiliza document.execCommand para evitar problemas con https en implementacion
+    let range = new Range();
+
+    let divToCopy = document.getElementById(elementID+"Div");
+
+    //Seleccionamos todos los nodos del elemento
+    range.setStart(divToCopy, 0);
+    range.setEnd(divToCopy, divToCopy.childNodes.length);
+
+    document.getSelection().removeAllRanges();
+    document.getSelection().addRange(range);
+    document.execCommand("copy");
+	alert("Texto copiado.");
+	document.getSelection().removeRange(range);
 }
 
 
