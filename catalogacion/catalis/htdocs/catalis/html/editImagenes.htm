@@ -17,7 +17,7 @@ var parentWindow = dialogArguments.window;
 function handleClose()
 //--------------------------------------------------------
 {
-  window.close();
+  window.top.cerrarDialog();
 }
 
 //--------------------------------------------------------
@@ -29,10 +29,14 @@ function init()
   //var isbns = dialogArguments.isbns;
   var recordId = dialogArguments.recordId;
   var database = parentWindow.g_activeDatabase.name;
+  // parentWindow.f985 para los que ya tienen tapa definida
   var fileType = parentWindow.f985 ? parentWindow.f985.substr(4) : null;
 
   var emptyGif = parentWindow.HTDOCS + "img/1x1.gif";
   //var dummyCover = parentWindow.HTDOCS + "img/book-cover-placeholder.jpg";
+
+  //agrego esta línea por actualizaciones para IE11 en Windows 10. Ver #6779 (Gonzalo)
+  document.getElementById("submit-subir").disabled = false;
 
   // Event handlers
   document.onkeydown = function(evt) {
@@ -45,8 +49,10 @@ function init()
   document.getElementById("btnClose").onclick = handleClose;
 
   document.getElementById("imagenParaSubir").onchange = function() {
-    document.getElementById("imagen-seleccionada").src = "file:///" + this.value;
-    document.getElementById("submit-subir").disabled = (this.value == "");
+
+  document.getElementById("imagen-seleccionada").src = "file:///" + this.value;
+   
+  document.getElementById("submit-subir").disabled = (this.value == "");
   }
 
   if (fileType) {

@@ -449,7 +449,7 @@ function editImagenes()
   //   }
   // }
 
-  var winProperties = "font-size: 10px; dialogWidth: 680px; dialogHeight: 520px; status: no; help: no";
+  var winProperties = "font-size: 10px; dialogWidth: 700px; dialogHeight: 500px; status: no; help: no";
   var params = {
     // isbns: isbns,
     recordId: recordId,
@@ -462,9 +462,11 @@ function editImagenes()
   //   2. se subió una imagen nueva
   //   3. se borró una imagen existente
   var status = returnValue.status;
-  if (status == null) {
-    return;
-  }
+
+  //(M.A) 28/03/2023 comento las siguientes 3 lineas
+  //if (status == null) {
+  //  return;
+  //}
   if (status == "imagen-subida") {
     var newFileType = returnValue.fileType;
     f985 = "##^a" + newFileType;
