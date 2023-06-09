@@ -11,6 +11,12 @@ window.onresize = function(){
   setDimensions();
 };
 
+window.onbeforeunload = function(){
+  if(modifiedRecord()){
+    return true;
+  }
+}
+
 // -----------------------------------------------------------------------------
 function setSearchFormEvents()
 // -----------------------------------------------------------------------------
