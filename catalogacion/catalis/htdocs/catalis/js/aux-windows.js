@@ -26,7 +26,7 @@ function rawEdit(oldDatafields, aacr)
     var dWidth = (screen.width == 1024) ? "820px" : "660px";
     var dHeight = (screen.width == 1024) ? "550px" : "450px";
     var winProperties = "dialogWidth:" + dWidth + "; dialogHeight:" + dHeight + "; status:no; resizable:no; help:no";
-    var dialogArgs = { datafields : oldDatafieldsGlobal, aacrParsedData : aacr };
+    var dialogArgs = { datafields : top.globalParameter, aacrParsedData : aacr };
     var newDatafields;
 
     // Presentamos la ventana
@@ -58,7 +58,7 @@ function rawEdit(oldDatafields, aacr)
 
         //M.A 22/03/2023 comento la siguiente linea ( y la duplico a continuacion modificada )
         //if ( newDatafields != "" && newDatafields != oldDatafields ) {
-        if ( newDatafields != "" && newDatafields != oldDatafieldsGlobal ) {
+        if ( newDatafields != "" && newDatafields != top.globalParameter ) {
             // Necesitamos el form de edición visible, para el caso en que esta
             // función sea llamada al crear un registro desde la pantalla de
             // búsqueda.
@@ -137,13 +137,16 @@ function editCodedData(dataElement)
 
 */
 
-
 // -----------------------------------------------------------------------------
 function editCodedData()
 // Para editar códigos del "fixed field" (leader & 008), campos 041, 044, etc.
 // -----------------------------------------------------------------------------
 {
-    let dataElement = window.top.dataElement;
+    let dataElement = top.globalParameter;
+    console.log("GLOBAL PARAMETER ----------------------")
+    console.log(top.globalParameter)
+    console.log("--------------------------------")
+
     var URL = URL_EDIT_CODES;
 
     var dialogLeft;
@@ -215,6 +218,9 @@ function editCodedData()
 
     srcObject = event.srcElement;
     
+    dataElement = top.globalParameter;
+    
+    
     if ( null != newCode ) {
         if ( dataElement.search(/relator|f041|f044/) != -1 ) {
             objEvent.value = newCode.value;
@@ -226,7 +232,6 @@ function editCodedData()
         } 
         event.srcElement.focus();  // no produce el efecto deseado (el elemento obtiene el foco, pero no se ve resaltado)
     }
-    
 }
 
 
@@ -268,7 +273,7 @@ function editIndicators()
 // donde se hizo click (?)
 // -----------------------------------------------------------------------------
 {
-    var field = fieldGlobal;
+    var field = top.globalParameter;
     var tag = field.tag;
     var path = "marc21_bibliographic/datafield[@tag='" + tag + "']";
 
@@ -310,7 +315,7 @@ function editIndicators()
     var newIndicators = window.showModalDialog(URL_EDIT_INDICATORS, dialogArgs, winProperties);
 
     //Volvemos a setear variables (por showModalDialog)
-    field = fieldGlobal;
+    field = top.globalParameter;
     oldIndicators = getIndicators(field);
     tag = field.tag;
 
@@ -377,7 +382,6 @@ function editEjemplares()
 
     // El array ejemplares es pasado por referencia
     // TO-DO: pasar el userID para usarlo en los ejemplares modificados
-
 
     var newEjemplares = window.showModalDialog(URL_EDIT_EJEMPLARES, {ejemplares: ejemplares, database: g_activeDatabase.name}, winProperties);
     
@@ -551,7 +555,7 @@ function promptNewSubfield()
 // Presenta la ventana que solicita los codes de los subcampos a crear.
 // -----------------------------------------------------------------------------
 {  
-    let field = fieldGlobal;
+    let field = globalParameter;
     console.log(field.tag+"--------------------------------------------------------------------")
     let dialogArgs = getArguments(field);
     // Mostramos la ventana
@@ -560,7 +564,8 @@ function promptNewSubfield()
     
     var winProperties = "font-size:10px; dialogWidth:" + dWidth + "px; dialogHeight:" + dHeight + "px; status:no; help:no";
     var codes = window.showModalDialog(URL_SELECT_SUBFIELD, dialogArgs, winProperties);
-    field = fieldGlobal;
+    field = globalParameter;
+
     if ( codes.length != 0  ) { //(M.A) VER CUANDO AGREGA EL SUBCAMPO
         // Procesamos los datos devueltos por la ventana en el array codes
         createSubfieldList(field,codes);
@@ -575,7 +580,7 @@ function showSpecialChars()
     var specialChar = showModalDialog(HTDOCS + "html/specialChars.htm", null, winProperties);
 }
 
-
+/*
 // -----------------------------------------------------------------------------
 function promptSaveChanges()
 // Abre una ventana que informa que el registro ha sido modificado.
@@ -599,9 +604,9 @@ function promptSaveChanges()
     //    window.top.answerGlobal = "cancel";
     //}
 }
+*/
 
-
-/*
+/* 
 // -----------------------------------------------------------------------------
 function catalis_confirm(question,w,h,pos)
 // Cuadro de dialogo "confirm" modificado

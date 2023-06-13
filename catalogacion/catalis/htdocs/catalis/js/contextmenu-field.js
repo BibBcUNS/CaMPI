@@ -309,7 +309,8 @@ function construirMenuIE(field){
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	itemEnabled.push(canAddSubfield);
 	menuFunctions.push( function() {
-		promptNewSubfield(field);
+		globalParameter = field;
+		promptNewSubfield();
 		killmenu();
 	});
 
@@ -355,8 +356,8 @@ function construirMenuIE(field){
 			newMenu.appendChild(newDiv);
 		}
 	}
-	// Menú construido
 
+	// Menú construido
 	oPopup.document.body.innerHTML = "";  // Elimina contenido previo
 	oPopup.document.body.appendChild(newMenu);
 	oPopup.show(0, 0, CONTEXT_MENU_WIDTH, 0);
@@ -376,8 +377,7 @@ function construirMenuChrome(field){
 
 	//ARMAR MENU -----------------------------------------------------------
 
-	window.top.fieldGlobal = field;
-
+	globalParameter = field;
 	var newMenu = document.createElement("div");
 	newMenu.classList.add ("contextMenu");
 	newMenu.style.border = "1px solid black";
@@ -456,7 +456,7 @@ function construirMenuChrome(field){
 		var answer = window.showModalDialog(URL_CONFIRM_DIALOG, question, winProperties);
 
 		if ( answer ) {
-			removeField(fieldGlobal);
+			removeField(top.globalParameter);
 		}
 
 		killmenu();
@@ -532,7 +532,8 @@ function construirMenuChrome(field){
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	itemEnabled.push(canAddSubfield);
 	menuFunctions.push( function() {
-		promptNewSubfield(field);
+		globalParameter = field;
+		promptNewSubfield();
 		killmenu();
 	});
 
@@ -581,6 +582,7 @@ function construirMenuChrome(field){
 
 	oPopup.innerHTML = "";
 	oPopup.appendChild(newMenu);
+
 
 	showPopup(0, 0, 450, 0);
     hidePopup();

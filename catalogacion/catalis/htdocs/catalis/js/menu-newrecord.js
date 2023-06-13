@@ -21,7 +21,7 @@ function showNewRecordMenu(evt)
 // -----------------------------------------------------------------------------
 {
   //event.srcElement.blur();   // el blur() ahora está en el srcElement
-  
+
   var theDocument;
   if (ie) theDocument = oPopup.document;
   else if (moz) theDocument = document;
@@ -59,7 +59,7 @@ function showNewRecordMenu(evt)
   });
   menuFunctions.push(function() {
     killmenu();
-    window.top.elementIDGlobal = this.id;
+    top.globalParameter = this.id;
     checkModified();
   });
 
@@ -80,7 +80,7 @@ function showNewRecordMenu(evt)
   itemEnabled.push(canDuplicate);
   menuFunctions.push(function() {
     killmenu();
-    window.top.elementIDGlobal = this.id;
+    top.globalParameter = this.id;
     checkModified();
   });
 

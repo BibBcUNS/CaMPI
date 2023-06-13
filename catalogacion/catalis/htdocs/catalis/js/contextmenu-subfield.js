@@ -185,7 +185,7 @@ function showSubfieldMenuIE(subfield){
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	itemEnabled.push(canAddSubfield);
 	menuFunctions.push(function() {
-		fieldGlobal = field;
+		globalParameter = field;
 		promptNewSubfield(); 
 		killmenu();
 	});
@@ -340,7 +340,7 @@ function showSubfieldMenuChrome(subfield){
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	itemEnabled.push(canAddSubfield);
 	menuFunctions.push(function() {
-		fieldGlobal = field;
+		globalParameter = field;
 		promptNewSubfield(); 
 		killmenu();
 	});

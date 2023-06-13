@@ -6,7 +6,6 @@
 //  (c) 2003-2004  Fernando J. Gómez - CONICET - INMABB
 // =============================================================================
 
-
 window.onresize = function(){
   setDimensions();
 };
@@ -121,7 +120,8 @@ function setControlFormEvents()
           return true;
         }
         else if ( evt.keyCode == 123 && this.name.search(/f008_07_10|f008_11_14/) == -1 ) {
-          editCodedData(this.name);
+          top.globalParameter = this.name;
+          editCodedData();
           return false;   // 123 = F12
         }
         else if ( evt.keyCode == 8 ) {  // Backspace
@@ -139,8 +139,7 @@ function setControlFormEvents()
     if ( allCells[i].id.search(/^TD_f008_|^TD_L_/) != -1 ) {
       //alert(allCells[i].id);
       allCells[i].onclick = function() {
-        window.top.dataElement = this.id.substr(3);
-        console.log("codigo: ---------------------------------- "+window.top.dataElement)
+        top.globalParameter = this.id.substr(3);
         editCodedData();
       };
       allCells[i].onmouseover = function() {
@@ -196,14 +195,14 @@ function setWindowEvents()
 function setToolbarEvents()
 // -----------------------------------------------------------------------------
 {
-  document.getElementById("btnNuevo").onclick = function() {
+  document.getElementById("btnNuevo").onclick = function(event) {
     this.blur();
     showNewRecordMenu(event);
   };
   
   document.getElementById("btnImport").onclick = function() {
     this.blur();
-    window.top.elementIDGlobal = "newImport";
+    top.globalParameter = "newImport";
     checkModified();
   };
   
@@ -235,9 +234,8 @@ function setToolbarEvents()
 
   document.getElementById("btnRawEdit").onclick = function() {
     this.blur();
-
-    oldDatafieldsGlobal = serializeRecord(false,false,true,false);
-
+    //(M.A) globalParameter almacena el estado actual del registro
+    top.globalParameter = serializeRecord(false,false,true,false);
     rawEdit();
   };
 
@@ -265,17 +263,17 @@ function setToolbarEvents()
   
   document.getElementById("btnNewSubfield").onclick = function() {
     this.blur();
-    fieldGlobal = selectedField;
+    globalParameter = selectedField;
     promptNewSubfield();
   };
   
   document.getElementById("btnPrevResult").onclick = function() {
-    window.top.elementIDGlobal = this.id;
+    top.globalParameter = this.id;
     checkModified();
   };
   
   document.getElementById("btnNextResult").onclick = function() {
-    window.top.elementIDGlobal = this.id;
+    top.globalParameter = this.id;
     checkModified();
   };
   
@@ -284,7 +282,7 @@ function setToolbarEvents()
   };
   
   document.getElementById("btnBuscar").onclick = function() {
-    window.top.elementIDGlobal = this.id;
+    top.globalParameter = this.id;
     checkModified();
   };
   
@@ -297,12 +295,12 @@ function setHeaderEvents()
 // -----------------------------------------------------------------------------
 {
   document.getElementById("btnFinSesion").onclick = function() {
-    window.top.elementIDGlobal = this.id;
+    top.globalParameter = this.id;
     checkModified();
   };
   
   document.getElementById("selDatabase").onchange = function() {
-    window.top.elementIDGlobal = this.id;
+    top.globalParameter = this.id;
     checkModified();
   };
   

@@ -3,8 +3,6 @@
 //
 //  (c) 2003-2004  Fernando J. Gómez - CONICET - INMABB
 // =============================================================================
-
-
 var xmlData = {};
 
 function updateTextareaHeight(){    
@@ -859,7 +857,7 @@ function checkKey(evt)
         case 73 :       // Ctrl+I
             if ( evt.ctrlKey ) {
                 if ( parentField(subfield,"subfield").hasIndicators ) {
-                    fieldGlobal = parentField(subfield,"subfield");
+                    globalParameter = parentField(subfield, "subfield");
                     editIndicators();
                 }
                 return false;
@@ -868,7 +866,7 @@ function checkKey(evt)
         
         case 123 :       // F12
             if ( "4" == this.code ) {
-                window.top.dataElement = "relator";
+                top.globalParameter = "relator";
                 editCodedData();
                 return false;
             }
@@ -1312,7 +1310,7 @@ function checkModified()
 // consultar si éste debe grabarse antes de continuar.
 // -----------------------------------------------------------------------------
 { 
-    var elementID = window.top.elementIDGlobal;
+    var elementID = top.globalParameter;
     // La condición sobre el botón de Grabar tiene que ver con el nivel de permisos del usuario; ver showRecordInForm(). Tal vez sea mejor usar una variable global.
     if ( !document.getElementById("btnGrabar").disabled && typeof(originalRecord) != "undefined" && modifiedRecord() ) {
         mostrarModalConfirmacion()
@@ -1333,11 +1331,9 @@ function mostrarModalConfirmacion(){
     ];
 
     // Mostramos la ventana
-    window.top.answerGlobal = window.showModalDialog(URL_SAVE_CHANGES, window, winProperties.join(";"));
+    var userDecision = window.showModalDialog(URL_SAVE_CHANGES, window, winProperties.join(";"));
 //----------------------------------------------------------------------------------------------.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
-    
-    var elementID = window.top.elementIDGlobal;
-    var userDecision = window.top.answerGlobal;
+    var elementID = top.globalParameter;
 
     if ( userDecision == "cancel" ){
         if ( "selDatabase" == elementID ){
