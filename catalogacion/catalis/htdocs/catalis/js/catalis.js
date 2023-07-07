@@ -19,7 +19,7 @@ function updateTextareaHeight(){
           this.style.height = (this.scrollHeight) + 1 + "px";
       }, false);
     }
-    console.log("Textareas height actualizada");
+    //console.log("Textareas height actualizada");
 }
 
 function swapElements(elemento1, elemento2){
@@ -201,17 +201,20 @@ function setDimensions()
 
   // Variable global con dimensiones
   g_Dimensions = {
-    searchResultsIframe: {height: 0.572 * freeHeight},
-    recordVisualization: {height: 0.422 * freeHeight},
+    // panel de búsquedas
+    searchResultsIframe: {height: 0.565 * freeHeight},
+    recordVisualization: {height: (1 - 0.565) * freeHeight - 16},
     indexTerms: {height: freeHeight - 210},
-    theRightPanel: {height: 0.995*freeHeight},
-    recordDiv: {height: 0.992*freeHeight},
-    recordDivWithDocs: {height: 0.49 * freeHeight},
-    docIframe: {height: 0.49 * freeHeight},
+    // panel de edición
+    theRightPanel: {height: 0.999 * freeHeight},
+    recordDiv: {height: 0.999 * freeHeight},
+    recordDivWithDocs: {height: 0.497 * freeHeight},
+    docIframe: {height: (1 - 0.497) * freeHeight - 4},
     docIframeCollapsed: {height: DOCWIN_MIN_HEIGHT},
     subfieldTextarea: {width: freeWidth - 444},
     subfieldTextareaNoLabels: {width: freeWidth - 292}
   };
+  console.log(_innerHeight, _innerWidth, g_Dimensions);
 
   // Búsquedas
   document.getElementById("searchResultsIframe").style.height = g_Dimensions.searchResultsIframe.height + "px";

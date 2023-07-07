@@ -124,14 +124,15 @@ window.onload = init;
 	body {
 		margin: 3px;
 	}
-	textarea#postItNote {
+	/*textarea#postItNote {
 		width: 412px;
 		height: 232px;
 		font-family: verdana;
 		font-size: 13px;
 		font-weight: bold;
 		background: #FFA;
-	}
+        resize: none;
+	}*/
 	textarea {
 		width: 278px;
 		height: 140px;
@@ -139,6 +140,7 @@ window.onload = init;
 		font-size: 13px;
 		font-weight: bold;
 		background: #FFA;
+        resize: none;
 	}
 	table#notes td {
 		position: relative; /* para poder posicionar los botones */
@@ -188,7 +190,6 @@ window.onload = init;
 			<table id="notes" cellspacing="4" cellpadding="2" border="0">
 				<tr>
 					<td>
-						<!--textarea id="postItNote"></textarea-->
 						<span class="noteLabel">Descripción</span>
 						<button id="removeDescription" class="marcEditButton removeNote" tabindex="2" title="Borrar esta anotación">x</button>
 						<br>

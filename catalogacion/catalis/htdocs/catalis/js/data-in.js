@@ -713,7 +713,7 @@ function renderField008(f008,materialType)
 
     switch (materialType) {
         case "BK" :
-            document.getElementById("f008BK").style.display = "block";
+            document.getElementById("f008BK").style.display = "table-row-group";
             form.f008_BK_18_21.value = f008.substr(18,4);
             form.f008_BK_22.value = f008.substr(22,1);
             form.f008_BK_23.value = f008.substr(23,1);
@@ -727,7 +727,7 @@ function renderField008(f008,materialType)
             break;
 
         case "VM" :
-            document.getElementById("f008VM").style.display = "block";
+            document.getElementById("f008VM").style.display = "table-row-group";
             form.f008_VM_18_20.value = f008.substr(18,3);
             form.f008_VM_22.value = f008.substr(22,1);
             form.f008_VM_28.value = f008.substr(28,1);
@@ -737,7 +737,7 @@ function renderField008(f008,materialType)
             break;
 
         case "MU" :
-            document.getElementById("f008MU").style.display = "block";
+            document.getElementById("f008MU").style.display = "table-row-group";
             form.f008_MU_18_19.value = f008.substr(18,2);
             form.f008_MU_20.value = f008.substr(20,1);
             form.f008_MU_21.value = f008.substr(21,1);
@@ -749,14 +749,14 @@ function renderField008(f008,materialType)
             break;
 
         case "CF" :
-            document.getElementById("f008CF").style.display = "block";
+            document.getElementById("f008CF").style.display = "table-row-group";
             form.f008_CF_22.value = f008.substr(22,1);
             form.f008_CF_26.value = f008.substr(26,1);
             form.f008_CF_28.value = f008.substr(28,1);
             break;
 
         case "CR" :
-            document.getElementById("f008CR").style.display = "block";
+            document.getElementById("f008CR").style.display = "table-row-group";
             form.f008_CR_18.value = f008.substr(18,1);
             form.f008_CR_19.value = f008.substr(19,1);
             //form.f008_CR_20.value = f008.substr(20,1);  // obsolete (2003)
@@ -772,7 +772,7 @@ function renderField008(f008,materialType)
             break;
 
         case "MP" :
-            document.getElementById("f008MP").style.display = "block";
+            document.getElementById("f008MP").style.display = "table-row-group";
             form.f008_MP_18_21.value = f008.substr(18,4);
             form.f008_MP_22_23.value = f008.substr(22,2);
             form.f008_MP_25.value = f008.substr(25,1);
@@ -783,7 +783,7 @@ function renderField008(f008,materialType)
             break;
 
         case "MIX" :
-            document.getElementById("f008MIX").style.display = "block";
+            document.getElementById("f008MIX").style.display = "table-row-group";
             form.f008_MIX_23.value = f008.substr(23,1);
             break;
     }

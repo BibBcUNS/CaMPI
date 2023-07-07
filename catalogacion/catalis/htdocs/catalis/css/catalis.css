@@ -151,6 +151,11 @@ td.value {
     margin-top: 3px;
     margin-left: 20px;
     padding: 0px 0px 2px 0px;
+
+    /* prueba, 2023-06-23 (mal) */
+    position: relative;
+    right: -80px;
+    top: -15px;
 }
 
 
@@ -427,7 +432,7 @@ table.control input {
 }
 
 #f008_00_05_nice {
-    width: 86px;
+    width: 90px;
     border-width: 0;
     font-family: "open sans", verdana, sans-serif;
     font-size: 13px;
@@ -467,9 +472,10 @@ button.additionalCodes {
     background-color: #E2DFD0;
     margin: 0 0 0px 2px;
     width: 13px;
-    height: 17px;
+    height: 15px;
     border: 1px solid #666;
     line-height: 14px;
+    padding: 0;
 }
 
 #f008_VM_18_20 {
