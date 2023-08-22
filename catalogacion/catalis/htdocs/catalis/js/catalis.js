@@ -1367,6 +1367,7 @@ function handleNextTask(elementID)
     switch ( elementID ) {
         case 'btnBuscar' :
             showSearchDiv();
+            showNewRecords();
             break;
         case 'btnPrevResult' :
             editRecord("prev");
