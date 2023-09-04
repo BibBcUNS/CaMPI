@@ -151,24 +151,20 @@ td.value {
     margin-top: 3px;
     margin-left: 20px;
     padding: 0px 0px 2px 0px;
-
-    /* prueba, 2023-06-23 (mal) */
-    position: relative;
-    right: -80px;
-    top: -15px;
+    display: none;
 }
 
 
 #docFormWrapper {
     position: absolute; /*relative?*/
-    /*top: 498px; Mozilla?
-    left: 622px;*/
-    bottom: 0px; /* anda bien para IE */
-    width: 100%;
-    background-color: #EEDFCC;
-    border: 1px solid #999;
-    padding: 2px 0px;
-    line-height: 1em; /* ?? */
+	/*top: 498px; Mozilla?
+	left: 622px;*/
+	bottom: 0px; /* anda bien para IE */
+	width: 94%;
+	background: #EEDFCC;
+	border: 1px solid #999;
+	padding: 2px 4px;
+	line-height: 1em; /* ?? */
 }
 
 

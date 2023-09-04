@@ -287,6 +287,12 @@ function setToolbarEvents()
   };
   
   document.getElementById("btnEditar").onclick = showEditDiv;
+
+  document.getElementById("btnOnline").addEventListener("click", function(e){
+    e.preventDefault();
+    let tag = document.getElementById("docItem").value;
+    showDocOnline(tag)
+  });
 }
 
   

@@ -201,20 +201,17 @@ function setDimensions()
 
   // Variable global con dimensiones
   g_Dimensions = {
-    // panel de búsquedas
-    searchResultsIframe: {height: 0.565 * freeHeight},
-    recordVisualization: {height: (1 - 0.565) * freeHeight - 16},
+    searchResultsIframe: {height: 0.572 * freeHeight},
+    recordVisualization: {height: 0.422 * freeHeight},
     indexTerms: {height: freeHeight - 210},
-    // panel de edición
-    theRightPanel: {height: 0.999 * freeHeight},
-    recordDiv: {height: 0.999 * freeHeight},
-    recordDivWithDocs: {height: 0.497 * freeHeight},
-    docIframe: {height: (1 - 0.497) * freeHeight - 4},
+    theRightPanel: {height: 0.995*freeHeight},
+    recordDiv: {height: 0.992*freeHeight},
+    recordDivWithDocs: {height: 0.49 * freeHeight},
+    docIframe: {height: 0.49 * freeHeight},
     docIframeCollapsed: {height: DOCWIN_MIN_HEIGHT},
     subfieldTextarea: {width: freeWidth - 444},
     subfieldTextareaNoLabels: {width: freeWidth - 292}
   };
-  console.log(_innerHeight, _innerWidth, g_Dimensions);
 
   // Búsquedas
   document.getElementById("searchResultsIframe").style.height = g_Dimensions.searchResultsIframe.height + "px";
@@ -222,8 +219,8 @@ function setDimensions()
   document.getElementById("indexTerms").style.height = g_Dimensions.indexTerms.height + "px";
 
   // Edición
-  document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height + "px";
-  document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height + "px";
+  document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height + 10 + "px";
+  document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height + 10 + "px";
   document.getElementById("docIframe").style.height = g_Dimensions.docIframeCollapsed.height + "px";
 }
 
@@ -331,111 +328,62 @@ function showDoc(tag)
         
         frames.docIframe.focus();
         //document.getElementById("docIframe").focus();  ==> No tiene el efecto deseado, en IE
+        let iframe = document.getElementById("docIframe");
+		iframe.style.backgroundColor = "white";
+
+		setTimeout(function(){
+			if(iframe.contentDocument.getElementsByTagName("h1")[0].textContent == "Not Found"){
+				document.getElementById("btnDocHideShow").click();
+				setTimeout(() => {
+					alert("El campo "+tag+" no aparece en la documentación de MARC 21.")
+				}, 50);
+			}
+		}, 50)
+
     }
 }
 
+function showDocOnline(tag){
+	var menu = document.getElementById("docSource");
+	var docSource = menu.options[menu.selectedIndex].value;
+	var url = docURL(docSource,tag, true);
 
-// -----------------------------------------------------------------------------
-function docURL(docSource,tag)
-// -----------------------------------------------------------------------------
-{
-    var url;
-    switch ( docSource ) {
-        case "LC" :
-            var url_dir = ( DOC_LC_REMOTE ) ? "http:/" + "/www.loc.gov/marc/bibliographic/" : HTDOCS + "doc/loc/marc/bibliographic/";
-            if ( tag == "" )
-                tag = "TOC";
-            if ( "TOC" == tag.toUpperCase() )
-                url = url_dir + "ecbdhome.html#TOC";
-            else
-            if ( "EJE" == tag.toUpperCase() )
-                url = url_dir + "examples.html";
-            else
-            if ( tag.search("#") != -1 )
-                url = url_dir + tag;
-            else
-            if ( "001~003~005~006".search(tag) != -1 )
-                url = url_dir + "ecbdcntr.html#mrcb" + tag;
-            else
-            if ( "007" == tag )
-                url = url_dir + "ecbd007s.html";
-            else
-            if ( "008" == tag )
-                url = url_dir + "ecbd008s.html";
-            else
-            if ( "01~02~03~04".search(tag.substr(0,2)) != -1 )
-                url = url_dir + "ecbdnumb.html#mrcb" + tag;
-            else
-            if ( "05~06~07~08".search(tag.substr(0,2)) != -1 )
-                url = url_dir + "ecbdclas.html#mrcb" + tag;
-            else
-            if ( "100~110~111~130".search(tag) != -1 )
-                url = url_dir + "ecbdmain.html#mrcb" + tag;
-            else
-            if ( "21~22~24".search(tag.substr(0,2)) != -1 )
-                 url = url_dir + "ecbdtils.html#mrcb" + tag;
-            else
-            if ( "25~26~27".search(tag.substr(0,2)) != -1 )
-                url = url_dir + "ecbdimpr.html#mrcb" + tag;
-            else
-            if ( "3" == tag.substr(0,1) )
-                url = url_dir + "ecbdphys.html#mrcb" + tag;
-            else
-            if ( "4" == tag.substr(0,1) )
-                url = url_dir + "ecbdsers.html#mrcb" + tag;
-            else
-            if ( "50~51~52".search(tag.substr(0,2)) != -1 || "530~533~534~535".search(tag) != -1 )
-                url = url_dir + "ecbdnot1.html#mrcb" + tag;
-            else
-            if ( "54~55~56~58~59".search(tag.substr(0,2)) != -1 || "536~538".search(tag) != -1 )
-                url = url_dir + "ecbdnot2.html#mrcb" + tag;
-            else
-            if ( "6" == tag.substr(0,1) )
-                url = url_dir + "ecbdsubj.html#mrcb" + tag;
-            else
-            if ( "70~71~72~73~74~75".search(tag.substr(0,2)) != -1 )
-                url = url_dir + "ecbdadde.html#mrcb" + tag;
-            else
-            if ( "76~77~78".search(tag.substr(0,2)) != -1 )
-                url = url_dir + "ecbdlink.html#mrcb" + tag;
-            else
-            if ( "80~81~83".search(tag.substr(0,2)) != -1 )
-                url = url_dir + "ecbdsrae.html#mrcb" + tag;
-            else
-            if ( "84~85~86~87~88".search(tag.substr(0,2)) != -1 )
-                url = url_dir + "ecbdhold.html#mrcb" + tag;
-            else {
-                url = "notFound";
-            }
-            break;
-            
-        case "OCLC" :
-            var url_dir = "http:/" + "/www.oclc.org/bibformats/en/";
-            url = url_dir + tag.substr(0,1) + "xx/" + tag + ".shtm";
-            break;
-            
-        case "FOLLETT" :
-            var url_dir = "http:/" + "/www.fsc.follett.com/resources/tagofthemonth/";
-            if ( "TOC" == tag.toUpperCase() ) {
-                url = "http:/" + "/www.fsc.follett.com/resources/tagofthemonth/index.cfm";
-            }
-            else {
-                url = url_dir + tag + "b.cfm";
-            }
-            break;
-            
-        case "TLC" :
-            var url_dir = "http:/" + "/www.carl.org/tlc/crs/";
-            if ( "TOC" == tag.toUpperCase() ) {
-                url = "http:/" + "/www.carl.org/tlc/crs/bib0001.htm";
-            }
-            else {
-                url = "";
-            }
-            break;
-    }
-    
-    return url;
+	if("notFound" == url){
+		alert( "El campo " + tag + " no aparece en la documentación de MARC 21." );
+	}else{
+		window.open(url, '_blank')
+	}
+}
+
+function docURL(docSource, tag, online){
+	var url;
+	switch( docSource ){
+		case "OCLC" :
+			var url_dir = "http:/" + "/www.oclc.org/bibformats/en/";
+			url = url_dir + tag.substr(0,1) + "xx/" + tag + ".shtm";
+			break;
+		case "LC" : // AGREGAR LINK ONLINE
+			if( (isNaN ( parseInt(tag) ) == false) && ( !tag.includes(".") ) ){
+				tag = parseInt(tag);
+
+				if(tag < 10){
+					tag = "00" + tag;
+				}
+
+				if((tag >= 10) && (tag <=99)){
+					tag = "0" + tag
+				}
+
+				//var url_dir = ( DOC_LC_REMOTE ) ? "https:/" + "/www.loc.gov/marc/authority/" : HTDOCS + "doc/loc/marc/";
+				//(M.A) comento linea de arriba. Por ahora la doc se consulta online si se especifica en el parametro online. Pero deberia usarse la variable de configuracion DOC_LC_REMOTE
+				var url_dir = online ? "https:/" + "/www.loc.gov/marc/bibliographic/" : HTDOCS + "doc/loc/marc/";
+				url = url_dir + "bd" + tag + ".html";
+			}else{
+				url = 'notFound'
+			}
+			break;
+	}
+	return url;
 }
 
 
