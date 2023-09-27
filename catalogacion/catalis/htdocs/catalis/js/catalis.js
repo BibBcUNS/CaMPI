@@ -196,7 +196,7 @@ function setDimensions()
 {
   var _innerHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
   var _innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  var freeHeight = _innerHeight - 61; // quito la altura ocupada por las barras superiores
+  var freeHeight = _innerHeight - 77; // quito la altura ocupada por las barras superiores
   var freeWidth = _innerWidth;
 
   // Variable global con dimensiones
@@ -219,8 +219,8 @@ function setDimensions()
   document.getElementById("indexTerms").style.height = g_Dimensions.indexTerms.height + "px";
 
   // Edición
-  document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height - 6  + "px";
-  document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height - 7 + "px";
+  document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height + 8  + "px";
+  document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height + 7.09 + "px";
   document.getElementById("docIframe").style.height = g_Dimensions.docIframeCollapsed.height + "px";
 }
 
