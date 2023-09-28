@@ -15,9 +15,9 @@ echo $0 $* >> backups/$1/logerror-unir.txt
 echo ---------------------------------------- >> backups/$1/log-unir.txt
 echo ---------------------------------------- >> backups/$1/logerror-unir.txt
 
-base=/var/www/catalis/bases/catalis_pack_en_produccion/catalis/$1/biblio
-base_backup_count=`cat backups/$1/count.txt`
-base_backup=/var/www/catalis/htdocs/herramientas/union_registros/backups/$1/$base_backup_count/biblio
+base=/var/www/catalogacion/catalis/bases/catalis/$1/biblio
+base_backup_count=$(cat backups/$1/count.txt)
+base_backup=/var/www/catalogacion/catalis/htdocs/herramientas/union_registros/backups/$1/$base_backup_count/biblio
 
 # muevo el campo de un registro al otro y borro el registro origen.
 # =ref(['biblio']l(['biblio']'-NC=011300'),v859)
@@ -30,7 +30,7 @@ echo Obteniendo MFN del registro origen NC:$NC de la base $1 >> backups/$1/log-u
 echo ----------------------------------------------------------------- >> backups/$1/log-unir.txt
 echo Obteniendo MFN del registro origen NC:$NC de la base $1 >> backups/$1/logerror-unir.txt
 echo ----------------------------------------------------------------- >> backups/$1/logerror-unir.txt
-MFN_ORIGEN=`mx $base btell=0 "-NC=$NC" "pft=f(mfn,1,0)" now -all`
+MFN_ORIGEN=$(mx $base btell=0 "-NC=$NC" "pft=f(mfn,1,0)" now -all)
 echo MFN=$MFN_ORIGEN >> backups/$1/log-unir.txt
 echo MFN=$MFN_ORIGEN >> backups/$1/logerror-unir.txt
 
@@ -48,7 +48,7 @@ echo Obteniendo MFN del registro destino NC:$NC de la base $1 >> backups/$1/log-
 echo ----------------------------------------------------------------- >> backups/$1/log-unir.txt
 echo Obteniendo MFN del registro destino NC:$NC de la base $1 >> backups/$1/logerror-unir.txt
 echo ----------------------------------------------------------------- >> backups/$1/logerror-unir.txt
-MFN_DESTINO=`mx $base btell=0 "-NC=$3" "pft=f(mfn,1,0)" now -all`
+MFN_DESTINO=$(mx $base btell=0 "-NC=$3" "pft=f(mfn,1,0)" now -all)
 echo MFN=$MFN_DESTINO >> backups/$1/log-unir.txt
 echo MFN=$MFN_DESTINO >> backups/$1/logerror-unir.txt 
 

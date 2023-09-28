@@ -1,10 +1,186 @@
-.catalis {
-	background-color: brown;
-	border: 1px solid white;
-	padding: 6px;
-	margin: 6px 0;
-	color: #F0F0F0;
-	font-size: 16px;
-	font:Verdana, Arial, Helvetica, sans-serif;
-	width: 75%;
+/* -----------------------------------------------------------------------------------------------
+                                         Pantallas de logeo 
+ ------------------------------------------------------------------------------------------------ */
+
+body {
+    background-color:#C9C7BA;
+    margin: 0;
+}
+
+#divForm{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginForm{
+    width: 400px;
+    text-align: center;
+    margin: 20px;
+    background-color: brown;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#titleLogin{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #FED;
+    font-weight: bold;
+}
+
+#inputsDiv{
+    border-top: 1px solid #C9C7BA;
+    text-align: right;
+    margin-bottom: 7px;
+    padding-right: 90px;
+    padding-top: 15px;
+}
+
+#inputsDiv input{
+    margin-left: 4px;
+}
+
+.labelLogin{
+    color: white;
+}
+
+.btnSubmitForm{
+    background-color: #E2DFD0;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 6px;
+}
+
+.btnSubmitForm:hover{
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------------------------------------------------------ */
+
+/* --------------------------------------------------------------------------------------------------------
+                                            Estilos para herramientas
+  -------------------------------------------------------------------------------------------------------- */
+
+#navHerramientas{
+    background-color: brown;
+    color: #FED;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+#navHerramientas h1{
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#herramientasContainer{
+    background-color: #C9C7BA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+}
+
+.btnHerramientas{
+    background-color: #E2DFD0;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+.btnHerramientas:hover{
+    cursor: pointer;
+}
+
+
+#divDescargaBase{
+    background-color: brown;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid white;
+    width: 800px;
+    color: #FED;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+#divDescargaBase h2, #divImpresionEtiquetas h2, #divControlStock h2,
+#divUnionRegistros h2, #divMoverRegistro h2
+{
+    margin: 0;
+    padding-bottom: 7px ;
+    border-bottom: 1px solid white;
+}
+
+#selectBase{
+    width: 172px;
+}
+
+select{
+    font-size: 16px;
+}
+
+#divImpresionEtiquetas{
+    background-color: brown;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid white;
+    width: 800px;
+    color: #FED;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+#divControlStock{
+    background-color: brown;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid white;
+    width: 800px;
+    color: #FED;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+
+}
+
+
+#divControlStock #divTipoListado{
+    text-align: left;
+    padding-left: 300px;
+}
+
+#divUnionRegistros{
+    background-color: brown;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid white;
+    width: 800px;
+    color: #FED;
+    font-size: 20px;
+    text-align: center;
+
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+#divMoverRegistro{
+    background-color: brown;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid white;
+    width: 800px;
+    color: #FED;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }

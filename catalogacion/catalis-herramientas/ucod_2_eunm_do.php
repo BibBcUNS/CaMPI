@@ -1,16 +1,29 @@
 <?php
-$usuario=$_POST['usuario'];
-$pw=$_POST['pw'];
-$verificar = file_get_contents("http://catalis.uns.edu.ar/cgi-bin/catalis_pack_en_produccion/wxis?IsisScript=catalis/xis/herramientas/verificarpw.xis&usuario=$usuario&pw=$pw");
-print $verificar;
-if ($verificar != 'OK') {
-?>  <!-- Esto es si ingresa mal la contraseña o usuario -->
-	<HTML><HEAD><TITLE>Redireccionado</TITLE>
+	$usuario=$_POST['usuario'];
+	$pw=$_POST['pw'];
+	$nc_fuente=$_POST['nc_fuente'];
+	$fuente=$_POST['fuente'];
+	$destino=$_POST['destino'];
+
+	$verificar = file_get_contents("https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/verificarpw.xis&usuario=$usuario&pw=$pw");
+	print $verificar;
+	if ($verificar != 'OK') {
+?>  
+
+<!-- Esto es si ingresa mal la contraseña o usuario -->	
+<html>
+	<head>
+		<title>Redireccionado</title>
 	<!-- <META HTTP-EQUIV="Refresh" CONTENT="0; URL=/"> -->
-	</HEAD><BODY>
+	</head>
+	<body>
    
-    hola Fallo
-    </BODY></HTML>
+   
+    </body>
+</html>
+
+<!---------------------------------------------------------------->
+
 <?php
 }
 else {
@@ -24,31 +37,27 @@ else {
 	<!--link rel="stylesheet" type="text/css" href="http://inmabb.criba.edu.ar/catalis/catalis.css"-->
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
-	<style>
-			body {
-				margin-top:20px;
-				text-align:center;
-				background-color:#C9C7BA;
-				font:Verdana, Arial, Helvetica, sans-serif;
-				color:#FFFFFF;
-			}
-	</style>
+	<link rel="stylesheet" href="css/herramientas.css">
 
 	</head>
 	<body>
-	<?php
-		$nc_fuente = str_pad($nc_fuente,6,"0", STR_PAD_LEFT);
-		shell_exec('cd /var/www/catalis/htdocs/herramientas/union_registros;sh ./ucod_2_eunm.sh '.$nc_fuente.' '.$usuario.' '.$fuente.' '.$destino);
-		echo '<div style="background: brown; border: 1px solid #F0F0F0;	padding: 18px; margin: 6px 0; font-size: 16px;">'.
-		     'El registro con Número de Control (NC) <b style="font-size:1.5em">'.$nc_fuente.'</b> en la base <font style="font-size:1.1em">'.$fuente.' </font> fue movido al final de la base <font style="font-size:1.1em">'.$destino.' </font>'.
-			 '<br><form action=unir_registros.php>'.
-			 	'<input type="hidden" name="usuario" value="'.$usuario.'">'.
-			 	'<input type="hidden" name="pw" value="'.$pw.'">'.
-				'<input type="submit" value="Volver a Herramienta">'.
-			 '</form>'.
-			 '</div>';
+		<nav id="navHerramientas">
+			<h1>CaMPI Catalogación - Herramientas</h1>        
+		</nav>
+<?php
+			$nc_fuente = str_pad($nc_fuente,6,"0", STR_PAD_LEFT);
+			shell_exec('cd /var/www/catalogacion/catalis/htdocs/herramientas/union_registros;sh ./ucod_2_eunm.sh '.$nc_fuente.' '.$usuario.' '.$fuente.' '.$destino);
+			echo '<div style="background: brown; border: 1px solid #F0F0F0;	padding: 18px; margin: 6px 0; font-size: 16px;">'.
+			     'El registro con N&uacute;mero de Control (NC) <b style="font-size:1.5em">'.$nc_fuente.'</b> en la base <font style="font-size:1.1em">'.$fuente.' </font> fue movido al final de la base <font style="font-size:1.1em">'.$destino.' </font>'.
+				 '<br><form action=herramientas.php>'.
+				 	'<input type="hidden" name="usuario" value="'.$usuario.'">'.
+				 	'<input type="hidden" name="pw" value="'.$pw.'">'.
+					'<input class="btnHerramientas" type="submit" value="Volver a Herramientas">'.
+				 '</form>'.
+				 '</div>';
 
-}?>
+}
+?>
 
 
 </body>

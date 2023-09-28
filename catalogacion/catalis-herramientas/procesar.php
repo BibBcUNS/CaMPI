@@ -7,8 +7,8 @@ $so=$_POST['so'];
 shell_exec("rm $base/$so/*;"
 		  . "rmdir $base/$so -p;"
 		  . "mkdir $base;mkdir $base/$so;"
-		  . "cp /var/www/catalis/bases/catalis_pack_en_produccion/catalis/$base/biblio.mst $base/$so;"
-		  . "cp /var/www/catalis/bases/catalis_pack_en_produccion/catalis/$base/biblio.xrf $base/$so"
+		  . "cp /var/www/catalis/bases/catalis/$base/biblio.mst $base/$so;"
+		  . "cp /var/www/catalis/bases/catalis/$base/biblio.xrf $base/$so"
 );
 
 // Paso 2: si es necesario, las convertimos al formato de Windows

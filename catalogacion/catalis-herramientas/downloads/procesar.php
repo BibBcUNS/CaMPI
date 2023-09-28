@@ -7,8 +7,8 @@ $so=$_POST['so'];
 shell_exec("rm $base/$so/*;"
 		  . "rmdir $base/$so -p;"
 		  . "mkdir $base;mkdir $base/$so;"
-		  . "cp /var/www/catalis/bases/catalis_pack_en_produccion/catalis/$base/biblio.mst $base/$so;"
-		  . "cp /var/www/catalis/bases/catalis_pack_en_produccion/catalis/$base/biblio.xrf $base/$so"
+		  . "cp /var/www/catalogacion/catalis/bases/catalis/$base/biblio.mst $base/$so;"
+		  . "cp /var/www/catalogacion/catalis/bases/catalis/$base/biblio.xrf $base/$so"
 );
 
 // Paso 2: si es necesario, las convertimos al formato de Windows
@@ -16,8 +16,8 @@ if ($so=="windows") {
 	shell_exec("cd $base/$so;"
 			  . "rename biblio biblioLin biblio.*;"
 			  . "/opt/cisis/crunchmf "
-			  . "/var/www/catalis/htdocs/herramientas/downloads/$base/$so/biblioLin "
-			  . "/var/www/catalis/htdocs/herramientas/downloads/$base/$so/biblio");
+			  . "/var/www/catalogacion/catalis/htdocs/herramientas/downloads/$base/$so/biblioLin "
+			  . "/var/www/catalogacion/catalis/htdocs/herramientas/downloads/$base/$so/biblio");
 }
 
 // Paso 3: comprimimos los archivos

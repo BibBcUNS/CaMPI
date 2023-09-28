@@ -39,7 +39,7 @@
 
 <table align="center" width="270" cellspacing="0" cellpadding="0" border="0"
 style="	width: 75%;
-		background: brown;
+		background: brown;	
 		border: 1px solid #F0F0F0;
 		padding: 6px;
 		margin: 6px 0;
@@ -62,9 +62,9 @@ style="	width: 75%;
 			</td>
 		</tr>
 		<tr>
-			<td align="right" valign="middle">Contraseña</td>
+			<td align="right" valign="middle">Contrasena</td>
 			<td align="left" valign="middle">
-				<INPUT type="password" name="pw" size="10" maxlength="20">
+				<INPUT type="password" name="pw" size="10" maxlength="20">	
 			</td>
 		</tr>
 		</table>

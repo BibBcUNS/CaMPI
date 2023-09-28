@@ -14,7 +14,7 @@
 	
 	/* ----- Usuarios, permisos ----- */
 	/*'IP-TABLE=',            v6003^c,'/catalis/config/ip-table.txt'/*/
-	'USERS.*=',             '/var/www/catalis/bases/catalis_pack_en_produccion/catalis/users/users.*'/
+	'USERS.*=',             '/var/www/catalis/bases/catalis/users/users.*'/
 	
 	/* ----- Directorio para archivos temporales ----- */
 	'CI_TEMPDIR=',v6003^t,/

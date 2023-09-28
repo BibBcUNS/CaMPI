@@ -7,13 +7,15 @@ then
 fi
 
 # recupero el contador de backup y lo incremento en uno (modulo 5)
-bkcount=`cat backups/$1/count.txt`
-if [ $bkcount == '' ]
+
+bkcount= $(cat backups/$1/count.txt)
+
+if [ -z $bkcount ]
 then
     bkcount=0
 fi
 
-bkcount=$[($bkcount+1)%6]
+bkcount=$(((bkcount+1)% 6))
 echo $bkcount > backups/$1/count.txt
 
 
@@ -27,5 +29,4 @@ fi
 
 
 # hago la copia
-cp -p /var/www/catalis/bases/catalis_pack_en_produccion/catalis/$1/* backups/$1/$bkcount/ >> backups/$1/logs.txt 2>> backups/$1/logerror.txt
-
+cp -p /var/www/catalogacion/catalis/bases/catalis/$1/* backups/$1/$bkcount/ >> backups/$1/logs.txt 2>> backups/$1/logerror.txt

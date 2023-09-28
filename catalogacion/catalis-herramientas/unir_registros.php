@@ -1,9 +1,10 @@
 <?php
 
 //$verificar = file_get_contents("http://127.0.0.1/cgi-car/wxis.exe?IsisScript=catalis/verificarpw.xis&usuario=$usuario&pw=$pw");
+$usuario=$_POST['usuario'];
+$pw=$_POST['pw'];
 
-
-$verificar = file_get_contents("http://catalis.uns.edu.ar/cgi-bin/catalis_pack_en_produccion/wxis?IsisScript=catalis/xis/herramientas/verificarpw.xis&usuario=$usuario&pw=$pw");
+$verificar = file_get_contents("https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/verificarpw.xis&usuario=$usuario&pw=$pw");
 
 
 
@@ -64,13 +65,13 @@ else {
 				caracter_i = passForm.mfns_origenes.value.charAt(i);  
 				if ( (caracter_i != ",") && (!EsEntero(caracter_i)) )
 				{
-					alert("El campo ORÍGENES contiene caracteres inválidis.\nEvite espacios");
+					alert("El campo ORÍGENES contiene caracteres inválidos.\nEvite espacios");
 					passForm.mfns_origenes.focus();
 					return false;
 				}
 			}
 
-			// Controlamos que el campo DESTINO no seté vacio
+			// Controlamos que el campo DESTINO no esté vacio
 			if (passForm.mfn_destino.value == "") {
 				alert("Debe indicar el REGISTRO DESTINO")
 				passForm.base.focus()
@@ -170,7 +171,7 @@ else {
 		padding: 0px;
 		margin: 10px;
 		font-size: 16px;">
-	<H3 style="padding:0; margin:0">Unión de registros</H3>
+	<H3 style="padding:0; margin:0">Uni&oacute;n de registros</H3>
 		<input type="hidden" name="usuario" value="<?php print $usuario?>">
 		<input type="hidden" name="pw" value="<?php print $pw?>">
 	<table border="0" cellspacing="10" align="center" width="100%">
@@ -178,11 +179,11 @@ else {
 		<select name=base>
 		<?php
 		echo '<option selected value=""></option>';		
-		$basesxis = file_get_contents("http://catalis.uns.edu.ar/cgi-bin/catalis_pack_en_produccion/wxis?IsisScript=catalis/xis/herramientas/bases.xis&usuario=$usuario");
+		$basesxis = file_get_contents("https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/bases.xis&usuario=$usuario");
 		$bases = explode(":",$basesxis);
 		for($i=0;$i<count($bases)-1;$i++){
 		    // Esto es una restricción QUE HAY QUE BORRAR
-			if ($bases[$i] == "eunm" || $bases[$i] == "ucod-marc" || $bases[$i] == "carpc" || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "cems" || $bases[$i] == "demo")
+			if ($bases[$i] == "eunm-p" || $bases[$i] == "ucod-marc-p" || $bases[$i] == "carpc" || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "cems" || $bases[$i] == "demo")
 			echo "<option value=$bases[$i]>$bases[$i]</option>";}
 		?>
 		</select>
@@ -221,11 +222,11 @@ else {
 		echo '<option selected value=""></option>';		
 		for($i=0;$i<count($bases)-1;$i++){
 		    // Esto es una restricción QUE HAY QUE BORRAR
-			if ($bases[$i] == "ucod-marc"  || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "eunm" || $bases[$i] == "huber" || $bases[$i] == "demo")
+			if ($bases[$i] == "ucod-marc-p"  || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "eunm-p" || $bases[$i] == "huber" || $bases[$i] == "demo")
 			echo "<option value=$bases[$i]>$bases[$i]</option>";}
 		?>
 		</select>
-        Número de registro <input type="text" name="nc_fuente" size="6"></input>
+        N&uacute;mero de registro <input type="text" name="nc_fuente" size="6"></input>
 	</td></tr>
 	<tr><td>
         Moverlo a ====>>
@@ -234,7 +235,7 @@ else {
 		echo '<option selected value=""></option>';		
 		for($i=0;$i<count($bases)-1;$i++){
 		    // Esto es una restricción QUE HAY QUE BORRAR
-			if ($bases[$i] == "eunm" || $bases[$i] == "ead" || $bases[$i] == "eeo" || $bases[$i] == "eunm-ebook"  || $bases[$i] == "ucod-marc" || $bases[$i] == "demo")
+			if ($bases[$i] == "eunm-p" || $bases[$i] == "ead" || $bases[$i] == "eeo" || $bases[$i] == "eunm-ebook"  || $bases[$i] == "ucod-marc-p" || $bases[$i] == "demo")
 			echo "<option value=$bases[$i]>$bases[$i]</option>";}
 		?>
 		</select>

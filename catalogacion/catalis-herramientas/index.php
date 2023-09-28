@@ -4,77 +4,40 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>Documento sin t&iacute;tulo</title>
+<title>CaMPI Catalogación - Herramientas</title>
 
-	<script language="Javascript" type="text/javascript">
-		<!-- Hide script from older browsers
-
-		function validForm(passForm) {
-			if (passForm.usuario.value == "") {
-				alert("Debe ingresar el usuario")
-				passForm.usuario.focus()
-				return false
-			}
-			if (passForm.pw.value == "") {
-				alert("Debe ingresar una contrase�a")
-				passForm.pw.focus()
-				return false
-			}
-			return true
-		}
-		
-		// End hiding script -->
-	</script>
-	
-	<style>
-		body {
-		background-color:#C9C7BA;
-		}
-	</style>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="herramientas.css">
 
 </head>
 <body>
-<FORM NAME="entrada"  ACTION="herramientas.php" METHOD="post">
+	<nav class="navbar mb-4" style="background-color: brown;">
+		<div style="margin: auto;">
+		    <h1 style="color: #FED;font-family: georgia, 'times new roman', serif ;"> <b>CaMPI Catalogación</b></h1>  
+		</div>           
+	</nav>
 
-<table align="center" width="270" cellspacing="0" cellpadding="0" border="0"
-style="	width: 75%;
-		background: brown;
-		border: 1px solid #F0F0F0;
-		padding: 6px;
-		margin: 6px 0;
-		color: #F0F0F0;
-		font-size: 16px;
-		font:Verdana, Arial, Helvetica, sans-serif">
-<tr>
-	<td height="20" align="center" class="titulo" colspan="2"><strong>Entrada Usuario</strong></td>
-</tr>
-<tr>
-	<td valign="middle" height="60">
-		<table width="100%" cellspacing="5" cellpadding="0" border="0">
-		<tr>
-			<td align="right" valign="middle" width="50%">Usuario</td>
-			<td align="left" valign="middle" width="50%">
-				<INPUT type="text" name="usuario" size="5" maxlength="20">
-				
-			</td>
-		</tr>
-		<tr>
-			<td align="right" valign="middle">Contrase�a</td>
-			<td align="left" valign="middle">
-				<INPUT type="password" name="pw" size="10" maxlength="20">
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-<tr>
-  <td height="35" align="center">
-		<INPUT type="Submit" value="Aceptar" class="boton">
-	</td>
-</tr>			
-</table>
-</form>
+	<div id="divForm">
+		<form id="loginForm" name="entrada" action="herramientas.php" method="post" style="margin: 0;">
+			<h2 id="titleLogin">Herramientas  | Log In</h2>
+			<div id="inputsDiv">
+				<label class="labelLogin" for="usuario">Usuario: </label><input required id="usuario" type="text" name="usuario" size="9" maxlength="20"> 
+				<label class="labelLogin" for="password">Contraseña: </label><input required type="password" name="pw" size="9" maxlength="20"> 
+			</div>
+
+			<input type="Submit" value="Iniciar sesión" class="btnSubmitForm">
+
+			<!-- [pft]if p(v2005) then[/pft]
+
+        		<div style="color: white; margin-top: 5px; font-style: italic;">
+        		    Usuario o contraseña incorrectos. Por favor, intentelo nuevamente.
+        		</div>
+        
+    		[pft]fi[/pft] -->
+
+		</form>
+	</div>		
 
 
 </body>

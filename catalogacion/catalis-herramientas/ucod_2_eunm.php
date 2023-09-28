@@ -1,4 +1,6 @@
 <?
+$usuario=$_POST['usuario'];
+$pw=$_POST['pw'];
 
 $verificar = file_get_contents("http://127.0.0.1/cgi-car/wxis.exe?IsisScript=catalis/verificarpw.xis&usuario=$usuario&pw=$pw");
 

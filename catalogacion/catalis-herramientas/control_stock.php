@@ -36,7 +36,7 @@ td, th {
 
 <?php
 function buscar_signatura ($inv,$base){
-    $buscar_signatura = file_get_contents("http://catalis.uns.edu.ar/cgi-bin/catalis_pack_en_produccion/wxis?IsisScript=catalis/xis/herramientas/buscar_signaturas.xis&inventario=$inv&base=$base");
+    $buscar_signatura = file_get_contents("https://campi-catalogacion.uns.edu.ar/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/buscar_signaturas.xis&inventario=$inv&base=$base");
     $buscar_signatura = str_replace(";","",$buscar_signatura);
     return $buscar_signatura;
 }
@@ -306,10 +306,10 @@ Se carga en $listado_base el sector, signatura, inv, y estado de prestamos de lo
 listado base para a ser un arreglo multidimensional
 --------------------------------------------------------------------------------------------------------------------------------------------------*/
 if ($sector !='ALL'){
-$listado_base=file_get_contents("http://catalis.uns.edu.ar/cgi-bin/catalis_pack_en_produccion/wxis60?IsisScript=catalis/xis/herramientas/buscar_sig_inv_bloque.xis&base=$base&sector=$sector&sig_in=$sig_in&sig_in_lib=$sig_in_lib&sig_out=$sig_out&sig_out_lib=$sig_out_lib");
+$listado_base=file_get_contents("https://campi-catalogacion.uns.edu.ar/cgi-bin/wxis60?IsisScript=catalis/xis/herramientas/buscar_sig_inv_bloque.xis&base=$base&sector=$sector&sig_in=$sig_in&sig_in_lib=$sig_in_lib&sig_out=$sig_out&sig_out_lib=$sig_out_lib");
 }
 else {
-$listado_base=file_get_contents("http://catalis.uns.edu.ar/cgi-bin/catalis_pack_en_produccion/wxis60?IsisScript=catalis/xis/herramientas/buscar_sig_inv_bloque2.xis&base=$base&sector=$sector&sig_in=$sig_in&sig_in_lib=$sig_in_lib&sig_out=$sig_out&sig_out_lib=$sig_out_lib");
+$listado_base=file_get_contents("https://campi-catalogacion.uns.edu.ar/cgi-bin/wxis60?IsisScript=catalis/xis/herramientas/buscar_sig_inv_bloque2.xis&base=$base&sector=$sector&sig_in=$sig_in&sig_in_lib=$sig_in_lib&sig_out=$sig_out&sig_out_lib=$sig_out_lib");
 }
 $listado_base = explode("~",$listado_base);
 array_pop($listado_base);
