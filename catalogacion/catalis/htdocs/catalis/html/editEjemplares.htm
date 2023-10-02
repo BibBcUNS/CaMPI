@@ -441,6 +441,12 @@ function newEjemplar()
 	
 	document.getElementById("ejForm").style.visibility = "visible";
 	showEjemplar("nuevo-" + newIndex);
+
+	if( dialogArguments.database == "eunm" || dialogArguments.database == "ucod-marc" ){
+		inputInstitucion = document.getElementById("institucion")
+		inputInstitucion.disabled = true
+		inputInstitucion.value = "AR-BaUNS"
+	}
 }
 
 
