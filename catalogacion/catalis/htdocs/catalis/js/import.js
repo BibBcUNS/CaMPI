@@ -627,4 +627,3 @@ function anselToLatin1 (text) {
 
     return text;
 }
-
