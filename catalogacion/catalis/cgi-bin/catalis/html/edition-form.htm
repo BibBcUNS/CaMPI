@@ -192,13 +192,13 @@
 						<table cellpadding="0" cellspacing="0" class="control" style="border: 0; width: 100%;">
 							<tr>
 								<!--06-->
-								<td id="TD_f008_06" style="border-right: 0; padding-right: 1px;">
+								<td id="TD_f008_06" style="text-align: center;">
 									<span -class="docLink" -onclick=showDoc("ecbd008s.html#008-06") -title="008/06: Tipo de fecha/Estado de la publicación&#13;&#10;008/07-14: Fecha 1 y Fecha 2&#13;&#10;b - No dates given; B.C. date involved&#13;&#10;c - Continuing resource currently published&#13;&#10;d - Continuing resource ceased publication&#13;&#10;e - Detailed date&#13;&#10;i - Inclusive dates of collection&#13;&#10;k - Range of years of bulk of collection&#13;&#10;m - Multiple dates&#13;&#10;n - Dates unknown&#13;&#10;p - Date of distribution/release/issue and production/recording session when different&#13;&#10;q - Questionable date&#13;&#10;r - Reprint/reissue date and original date&#13;&#10;s - Single known date/probable date&#13;&#10;t - Publication date and copyright date&#13;&#10;u - Continuing resource status unknown&#13;&#10;| - No attempt to code">Fechas</span>
 									<input type="text" name="f008_06" value="" readonly="readonly" class="marcCode" size="1" maxlength="1">
 								</td>
-								<td>
-								<!--07-10:Fecha1, 11-14:Fecha2-->
-								<input type="text" name="f008_07_10" id="f008_07_10" value="" size="4" maxlength="4" title="Fecha 1"><input type="text" name="f008_11_14" id="f008_11_14" value="" size="4" maxlength="4" title="Fecha 2"><button class="additionalCodes" onclick="this.blur(); editField046(); window.event.cancelBubble=true; return false" title="046: Fechas adicionales" tabindex="-1">+</button>
+								<td style="text-align: center;padding: 0px !important; width: 98px;">
+									<!--07-10:Fecha1, 11-14:Fecha2-->
+									<input type="text" name="f008_07_10" id="f008_07_10" value="" size="4" maxlength="4" title="Fecha 1"><input type="text" name="f008_11_14" id="f008_11_14" value="" size="4" maxlength="4" title="Fecha 2"><button class="additionalCodes" onclick="this.blur(); editField046(); window.event.cancelBubble=true; return false" title="046: Fechas adicionales" tabindex="-1">+</button>
 								</td>
 							</tr>
 						</table>
@@ -602,7 +602,7 @@
             			<option value="LC">LC</option>
             			<option value="OCLC">OCLC</option>
 					</select>
-          			<input type="text" name="docItem" id="docItem" maxlength="3" accesskey="D" -tabindex="-1" style="width: 67px;">
+          			<input type="text" name="docItem" id="docItem" maxlength="3" accesskey="D" -tabindex="-1">
       			</div>
 
       			<div style="margin-top: 5px ;display: flex; justify-content: center;">
