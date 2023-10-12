@@ -1,0 +1,41 @@
+.navbar {
+    background-color: brown;
+}
+
+.navbar-text{
+    color: #FED;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.card{
+    border-radius: 20px;
+    border-color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #FED;
+    margin: 20px;
+}
+
+.card-text{
+    color: #FED;
+    white-space: normal;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.card-title{
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.card-text:hover{
+    opacity: .5;
+    color: #FED;
+}
+
+.btn-habilitado{
+    background-color: brown;
+}
+
+.btn-deshabilitado{
+    background-color: gray;
+    color: #FED !important;
+}

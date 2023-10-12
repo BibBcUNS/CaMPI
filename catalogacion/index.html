@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link href="estilo.css" rel="stylesheet" />
     <title>CAMPI CATALOGACIÓN</title>
     <link rel="icon" href="img/favIcon.ico">
     <style type="text/css"> BODY{ font-family: georgia, 'times new roman', times, serif ;} </style>
@@ -13,43 +13,43 @@
 
 <!-- Barra superior de navegación-->
 
-    <nav class="navbar" style="background-color:brown; " >
+    <nav class="navbar" >
         <div style="margin: auto;">
-          <h1 style="color: #FED;font-family: georgia, 'times new roman', serif ;"> <b>CaMPi Catalogación</b></h1>  
+          <h1 class="navbar-text"> <b>CaMPi Catalogación</b></h1>  
         </div>           
     </nav>
     
     <!-- Cards-->
     
     <div class="card-deck">
-      <div class="card" style="border-radius: 20px; border-color: black; background-color: #FED; margin: 20px;">
+      <div class="card" >
         <div class="card-body">
-          <h3 class="card-title" style="text-align: center;font-family: georgia, 'times new roman', serif ;">CATALOGACIÓN BIBLIOGRÁFICA</h3>
-          <a class="card-text btn btn-block w3-hover-opacity" style="background-color:brown ;color: #FED;white-space: normal;" href="https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/catalis.xis" target="_blank">Acceso a Catalis</a>
+          <h3 class="card-title" >CATALOGACIÓN BIBLIOGRÁFICA</h3>
+          <a class="card-text btn btn-block btn-habilitado"  href="https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/catalis.xis" target="_blank">Acceso a Catalis</a>
           <p></p>
-          <a class="card-text btn btn-block w3-hover-opacity" style="background-color:brown ;color: #FED; white-space: normal;" href="https://inmabb.criba.edu.ar/catalis/" target="_blank">Sitio web</a>
+          <a class="card-text btn btn-block btn-habilitado"  href="https://inmabb.criba.edu.ar/catalis/" target="_blank">Sitio web</a>
           <p></p>
-          <a class="card-text btn btn-block w3-hover-opacity" style="background-color:brown ;color: #FED;white-space: normal;" href="http://catalis.uns.edu.ar/doku/doku.php" target="_blank">CatalisWiki</a>
+          <a class="card-text btn btn-block btn-habilitado"  href="http://catalis.uns.edu.ar/doku/doku.php" target="_blank">CatalisWiki</a>
         </div>
       </div>
-      <div class="card" style="border-radius: 20px; border-color: black; background-color: #FED;margin: 20px; ">
+      <div class="card" >
         <div class="card-body">
           <h3 class="card-title" style="text-align: center;font-family: georgia, 'times new roman', serif;">CATALOGACIÓN DE AUTORIDADES</h3>
-          <a class="card-text btn btn-block w3-hover-opacity" style="background-color:brown ;color: #FED;white-space: normal;" href="https://campi-catalogacion.uns.edu.ar/catauto/cgi-bin/wxis?IsisScript=catauto/xis/catalis.xis" target="_blank">Acceso a Catauto</a>
+          <a class="card-text btn btn-block btn-habilitado"  href="https://campi-catalogacion.uns.edu.ar/catauto/cgi-bin/wxis?IsisScript=catauto/xis/catalis.xis" target="_blank">Acceso a Catauto</a>
         </div>
       </div>
-      <div class="card" style="border-radius: 20px; border-color: black; background-color: #FED;margin: 20px;">
+      <div class="card" >
         <div class="card-body">
-          <h3 class="card-title" style="text-align: center;font-family: georgia, 'times new roman', serif;">HERRAMIENTAS</h3>              
-          <a class="card-text btn btn-block w3-hover-opacity" style="background-color:brown ;color: #FED;white-space: normal ;font-family: georgia, 'times new roman', serif ;" href="https://campi-catalogacion.uns.edu.ar/catalis/htdocs/herramientas/" target="_blank">Descarga de base de datos</a>
+          <h3 class="card-title">HERRAMIENTAS</h3>              
+          <a class="card-text btn btn-block btn-habilitado"  href="https://campi-catalogacion.uns.edu.ar/catalis/htdocs/herramientas/" target="_blank">Descarga de base de datos</a>
           <p></p>
-          <a class="card-text btn btn-block w3-hover-opacity" style="background-color:gray ;color: #FED;white-space: normal;" aria-disabled="true">Impresión de etiquetas</a>
+          <a class="card-text btn btn-block btn-deshabilitado"  aria-disabled="true">Impresión de etiquetas</a>
           <p></p>
-          <a class="card-text btn btn-block w3-hover-opacity" style="background-color:gray ;color: #FED;white-space: normal;" aria-disabled="true">Control de stock</a>
+          <a class="card-text btn btn-block btn-deshabilitado"  aria-disabled="true">Control de stock</a>
           <p></p>
-          <a class="card-text btn btn-block w3-hover-opacity" style="background-color:brown ;color: #FED;white-space: normal;" href="https://campi-catalogacion.uns.edu.ar/catalis/htdocs/herramientas/" target="_blank" >Unión de registros</a>
+          <a class="card-text btn btn-block btn-habilitado"  href="https://campi-catalogacion.uns.edu.ar/catalis/htdocs/herramientas/" target="_blank" >Unión de registros</a>
           <p></p>
-          <a class="card-text btn btn-block w3-hover-opacity" style="background-color:brown ;color: #FED;white-space: normal;" href="https://campi-catalogacion.uns.edu.ar/catalis/htdocs/herramientas/" target="_blank" >Mover registros</a>
+          <a class="card-text btn btn-block btn-habilitado"  href="https://campi-catalogacion.uns.edu.ar/catalis/htdocs/herramientas/" target="_blank" >Mover registros</a>
         </div>
       </div>
     </div>
