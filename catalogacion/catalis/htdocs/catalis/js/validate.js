@@ -1,3 +1,27 @@
+function highlightDate(){
+	let inputDate = document.getElementById("f008_07_10");
+	let inputDate2 = document.getElementById("f008_11_14");
+	let parentInput = inputDate.parentElement;
+
+	let elementsToHighlight = [inputDate, inputDate2, parentInput];
+
+	elementsToHighlight.forEach( e => {
+		e.classList.add("parpadear")
+	});
+
+	inputDate.addEventListener("click", (e)=>{
+		elementsToHighlight.forEach((e)=>{
+			e.classList.remove("parpadear")
+		});
+	})
+
+	setTimeout(() => {
+		elementsToHighlight.forEach(e =>{
+			e.classList.remove("parpadear")
+		})
+	}, 7000);
+}
+
 // -----------------------------------------------------------------------------
 function marcValidate() {
 // -----------------------------------------------------------------------------
@@ -13,7 +37,7 @@ function marcValidate() {
 	// Fecha1 obligatoria
 	if ( document.getElementById("marcEditForm").f008_07_10.value == "####" ) {
 		msg += "<li>Debe colocar una fecha en el campo 008/07-10.";
-		//document.getElementById("marcEditForm").f008_07_10.focus();
+		highlightDate()
 	}
 	
 	return msg;
