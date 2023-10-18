@@ -1,24 +1,13 @@
 function highlightDate(){
 	let inputDate = document.getElementById("f008_07_10");
-	let inputDate2 = document.getElementById("f008_11_14");
-	let parentInput = inputDate.parentElement;
+	inputDate.classList.add("parpadear")
 
-	let elementsToHighlight = [inputDate, inputDate2, parentInput];
-
-	elementsToHighlight.forEach( e => {
-		e.classList.add("parpadear")
-	});
-
-	inputDate.addEventListener("click", (e)=>{
-		elementsToHighlight.forEach((e)=>{
-			e.classList.remove("parpadear")
-		});
+	inputDate.addEventListener("click", function(){
+		inputDate.classList.remove("parpadear")
 	})
 
 	setTimeout(() => {
-		elementsToHighlight.forEach(e =>{
-			e.classList.remove("parpadear")
-		})
+		inputDate.classList.remove("parpadear")
 	}, 7000);
 }
 
