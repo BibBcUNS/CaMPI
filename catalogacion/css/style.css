@@ -2,6 +2,10 @@
     background-color: brown;
 }
 
+.general{
+    padding: 15px;
+}
+
 .navbar-text{
     color: #FED;
     font-family: Georgia, 'Times New Roman', Times, serif;
