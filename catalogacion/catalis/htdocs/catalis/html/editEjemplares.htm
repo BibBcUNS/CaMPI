@@ -214,12 +214,14 @@ function usarSelectParaColeccion(database) {
 	//No es necesario que estén todas. Si no está en esta lista toma el caso por defecto
 	//Viene como parametro database (el nombre de la base en la que estoy)
 	bibliotecas=[
-		   ["Biblioteca Central",["eunm","ucod-marc", "demo","bibima"]],
-		   ["Biblioteca Administracion",["ead","bibadm"]],
+		   ["Biblioteca Central",["eunm","ucod-marc", "demo","bibima", "huber"]],
+		   ["Biblioteca Administracion",["ead","bibadm", "gabcoop"]],
 		   ["Biblioteca Economia",["eeo","bibeco"]],
 		   ["Biblioteca Humanidades",["bham"]],
-		   ["Biblioteca Derecho",["derecho"]]
-		   ];
+		   ["Biblioteca Fundeme", ["estrada"]],
+		   ["Biblioteca Derecho",["derecho"]],
+		   ["Biblioteca del CEMS",["cems"]]
+		];
 	
 	biblioteca="default";
 	//Recorro la lista de bibliotecas
@@ -254,6 +256,7 @@ function usarSelectParaColeccion(database) {
 				["SB", "BC - Sector B"],
 				["SC", "BC - Sector C"],
 				["PA", "BC - Sector A - Andrés"],
+				["SAH", "BC - Sector A - Huber"],
 				["c-ms", "BC - Sector A - Cons."],
 				["SCS", "BC - Sector A - CS"],
 				["CSCS", "BC - Sector A - Cons. CS"],
@@ -277,6 +280,7 @@ function usarSelectParaColeccion(database) {
 				["BGEOGRAFIA", "Bibl. Geografia"],
 				["BHUMANIDADES", "Bibl. Humanidades"],
 				["BMATEMATICA", "Bibl. Matemática"],
+				["DF", "Dpto. Física"],
 				["DI", "Dpto. Ingeniería"],
 				["BGEOGRAFIA", "Bibl. Geografía"],
 				["DG", "Dpto. Geología"],
@@ -305,10 +309,20 @@ function usarSelectParaColeccion(database) {
 				["manual", "ECO - Manuales"]
 			];
 			break;
+		case 'Biblioteca Fundeme':
+			opciones = [
+				["", "--- Elegir sector ---"],
+				["general","Sector General"],
+				["original", "Biblioteca Original"],
+				["obras", "Obras E.M.E"],
+				["brandariz", "Colección Brandariz"],
+			];
+			break;
 		case 'Biblioteca Humanidades':
 			opciones = [
 				["", "--- Elegir sector ---"],
 				["CD","CD's y DVD's"],
+				["CONS", "Consulta"],
 				["CER", "CER"],
 				["CN", "Conicet"],
 				["DH", "Derechos Humanos"],
@@ -319,6 +333,7 @@ function usarSelectParaColeccion(database) {
 				["NODISP", "No Disponible"],
 				["Referencia", "Referencia"],				
 				["SG", "Sección Griega"],
+				["tablets", "Tablets"],
 				["BC", "Sección BC"],
 				["LEJA", "Donación Lejarraga"],
 			];
@@ -351,6 +366,17 @@ function usarSelectParaColeccion(database) {
 
 			];
 			break;
+		case 'Biblioteca del CEMS':
+			opciones = [
+				["","--- Elegir sector ---"],
+				["CEMS", "CEMS"],
+				["AYG", "AyG"],
+				["IYP", "IyP"],
+				["DRD", "DRD"],
+				["LUDO", "Ludoteca"],
+				["CE", "BCE"]
+			];
+		break;
 		
 		default:
 			opciones = [
