@@ -715,6 +715,10 @@ table#theToolbar td {
     background-position: center;
 }
 
+#btnGrabar:disabled{
+    background-image: url("../img/stock_save-disabled.png") !important;
+}
+
 #btnPrevResult {
     width: 21px;
     height: 21px;
