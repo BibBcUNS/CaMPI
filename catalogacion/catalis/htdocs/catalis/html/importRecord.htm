@@ -23,13 +23,17 @@ function handleCancel()
 function handleOK()
 // -----------------------------------------------------------------------------
 {
-	if ( opener && opener.dialogWin && opener.dialogWin.returnFunc ) {  // mozilla
-		opener.dialogWin.returnFunc(document.getElementById("isoRecord").value);
-	} else {  // ie
-		window.returnValue = document.getElementById("isoRecord").value;
-	}
+	if(document.getElementById("isoRecord").value[9] == "a"){ //Si en la posición 9 del registro hay una a quiere decir que esta codificado en UTF-8
+		alert("Ha importado un registro codificado en formato UTF-8. Debe importarlo en formato MARC-8 (non-Unicode)")
+	}else{
+		if ( opener && opener.dialogWin && opener.dialogWin.returnFunc ) {  // mozilla
+			opener.dialogWin.returnFunc(document.getElementById("isoRecord").value);
+		} else {  // ie
+			window.returnValue = document.getElementById("isoRecord").value;
+		}
 	
-	window.close();
+		window.close();
+	}
 }
 
 // -----------------------------------------------------------------------------
@@ -59,24 +63,25 @@ window.onload = init;
 <style>
 	body, table {
 		font-family: verdana;
-		font-size: 13px;
+		font-size: 15px;
 		background: #CDC7A9;
 	}
 	body {
-		margin-top: 3px;
+		margin-top: 8px;
 	}
 	#sampleRecord {
-		height: 120px;
+		height: 187px;
 		margin-top: 3px;
-		width: 210px;
+		width: 400px;
 		background: #f0f0f0;
 		font-family: "courier new";
-		font-size: 13px;
+		font-size: 15px;
 		overflow: auto;
 	}
 	#isoRecord {
+		font-size: 15px;
 		background: #F9F9F9;
-		width: 320px;
+		width: 500px;
 		height: 200px;
 	}
 </style>
@@ -85,12 +90,13 @@ window.onload = init;
 
 <body>
 
-<table cellpadding="6" border="0">
+<table cellpadding="6">
 <tr>
 <td valign="top">
-	<div style="font-size: 13px;"><!--a href="javascript:document.getElementById('isoRecord').execCommand('paste')"-->Pegue<!--/a--> aquí el registro a importar:</div>
-	<textarea id="isoRecord"></textarea>
-	<div align="center" style="margin-top: 12px">
+	<div style="font-size: 14px;"><b>Atención:</b> debe importar un registro codificado en formato MARC-8 (non-Unicode). Asegúrese de pegar un registro codificado en ese formato.</div>
+	<hr>
+	<textarea placeholder="Pegue aquí el registro a importar..." id="isoRecord"></textarea>
+	<div align="center" style="margin-top: 12px">	
 		<button id="btnOK" class="marcEditButton" accesskey="A">&nbsp;<u>A</u>ceptar&nbsp;</button>
 		<button id="btnCancel" class="marcEditButton" accesskey="C">&nbsp;<u>C</u>ancelar&nbsp;</button>
 	</div>
@@ -108,10 +114,5 @@ window.onload = init;
 </td>
 </tr>
 </table>
-
-<!--div align="center">
-<iframe src="http://catalog.loc.gov" style="width:98%;height:320px"></iframe>
-</div-->
-
 </body>
 </html>

@@ -21,7 +21,7 @@ function getIsoRecord()
         }
         importRecord(isoRecord);
     } else if (moz) {
-        openSimDialog(URL_IMPORT_RECORD, 580, 330, importRecord);
+        openSimDialog(URL_IMPORT_RECORD, 931, 340, importRecord);
         return;
         // La ventana de diálogo pasa el control a importRecord()
     }
