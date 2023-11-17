@@ -197,7 +197,6 @@ a:hover {
     margin-top: 3px;
     margin-left: 20px;
     padding: 0px 0px 2px 0px;
-    display: none;
 }
 
 
@@ -667,7 +666,7 @@ input#docItem {
 \*----------------------------------------------------------------------------------------------------------------------*/
 
 div#topBar {
-    height: 26px;
+    /* height: 26px; */
     background-color: brown;
     border: solid 1px #777;
     position: relative;
