@@ -401,6 +401,25 @@ function loadTemplates() {
       '520 ##^aUniversidad Nacional del Sur.^bDirección de Medios Audiovisuales.\n' +
       '710 2#^a^b\n'
   };
+
+  // ------------------------ RECURSO 3D ------------------------------
+  templates["recurso-3d"] = {
+    html_help : "",
+    leader: 'nrm##5a#',
+    f001  : "[pendiente]",
+    f008: '######s########xx#' + '---############vl' + 'spa#d',
+    datafields:
+      '082 04^a^2\n' +
+      '245 10^a^b^c\n' +
+      '260 ##^a^b^c^e\n' +
+      '300 ##^a^b^c\n' +
+      '490 1#^a^v\n'+
+      '500 ##^a\n'+
+      '650 #7^a^x^2\n' +
+      '700 1#^a^d^4\n' +
+      '710 2#^a\n' +
+      '856 ##^u^y\n'
+  }
 }
 
 
