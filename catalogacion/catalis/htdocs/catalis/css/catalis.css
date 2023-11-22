@@ -99,9 +99,30 @@ a:hover {
 \*----------------------------------------------------------------------------------------------------------------------*/
 
 
+#aacrDisplayDiv {
+    display: block;
+    height: 95.1%;
+    background-color: #FEFEF0;
+    border: 1px solid #666;
+    -ms-scrollbar-face-color: #C9C7BA;
+    padding: 6px 10px 10px 10px;
+    overflow: auto;
+}
+
+#marcDisplayDiv {
+    display: none;
+    height: 96.2%;
+    overflow: auto;
+    background-color: #FEFEF0;
+    padding: 6px 6px;
+    border: 1px solid #666;
+    font-size: 13px;
+    -ms-scrollbar-face-color: #C9C7BA;
+}
+
 #etiqDisplayDiv {
     display: none;
-    height: 100%; /* parece necesario en IE */
+    height: 99.3%;
     overflow: auto;
     background-color: #F6F6F6;
     padding: 0;
@@ -109,29 +130,6 @@ a:hover {
     font-size: 14px;
     -ms-scrollbar-face-color: #C9C7BA;
 }
-
-#aacrDisplayDiv {
-    display: block;
-    height: 100%; /* parece necesario en IE */
-    background-color: #FEFEF0; /*#FFF8DC*/
-    border: 1px solid #666;
-    -ms-scrollbar-face-color: #C9C7BA;
-    padding: 6px 10px 10px 10px;
-    /*height: 183px;*/ /* para mozilla */
-    overflow: auto;
-}
-
-#marcDisplayDiv {
-    display: none;
-    height: 100%;
-    overflow: auto;
-    background-color: #FEFEF0; /*#FFF8DC*/
-    padding: 6px 6px;
-    border: 1px solid #666;
-    font-size: 13px;
-    -ms-scrollbar-face-color: #C9C7BA;
-}
-
 
 #marcEditForm {
     margin: 0;
@@ -693,6 +691,7 @@ table#theToolbar td {
 #field_subfield_block,
 #resultNavigation_block {
     visibility: hidden;
+    padding: 4px;
 }
 
 #toggleLabels {
