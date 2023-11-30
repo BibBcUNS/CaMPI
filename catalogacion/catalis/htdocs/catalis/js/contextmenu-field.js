@@ -155,12 +155,7 @@ function construirMenuIE(field){
 	newMenu.id = "contextMenu";
 	// ATENCION: el archivo .css no es visto desde oPopup, por eso
 	// están aquí los .style
-	/*
-		newMenu.style.borderTop = "1px solid ThreeDHighlight";
-		newMenu.style.borderLeft = "1px solid ThreeDHighlight";
-		newMenu.style.borderBottom = "1px solid ThreeDShadow";
-		newMenu.style.borderRight = "1px solid ThreeDShadow";
-	*/
+
 	newMenu.style.border = "1px solid black";
 	newMenu.style.backgroundColor = "white"; //"#E2DFD0";
 	newMenu.style.fontFamily = "arial, verdana, sans-serif";
@@ -381,11 +376,14 @@ function construirMenuChrome(field){
 	var newMenu = document.createElement("div");
 	newMenu.classList.add ("contextMenu");
 	newMenu.style.border = "1px solid black";
-	newMenu.style.backgroundColor = "white"; //"#E2DFD0";
+	newMenu.style.backgroundColor = "white";
 	newMenu.style.fontFamily = "arial, verdana, sans-serif";
-	newMenu.style.lineHeight = "15px";
+	newMenu.style.lineHeight = "19px";
 	newMenu.style.cursor = "default";
-	newMenu.style.fontSize = "12px";
+	newMenu.style.fontSize = "14px";
+	newMenu.style.overflow = "hidden";
+	newMenu.style.cursor = "pointer";
+	newMenu.style.boxShadow = "#232323b3 5px 6px 6px 2px";
 	
 	
 	var newText;
