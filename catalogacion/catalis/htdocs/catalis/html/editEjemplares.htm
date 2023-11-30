@@ -214,7 +214,7 @@ function usarSelectParaColeccion(database) {
 	//No es necesario que estén todas. Si no está en esta lista toma el caso por defecto
 	//Viene como parametro database (el nombre de la base en la que estoy)
 	bibliotecas=[
-		   ["Biblioteca Central",["eunm","ucod-marc", "demo","bibima", "huber"]],
+		   ["Biblioteca Central",["eunm","ucod-marc","demo","bibima","huber"]],
 		   ["Biblioteca Administracion",["ead","bibadm", "gabcoop"]],
 		   ["Biblioteca Economia",["eeo","bibeco"]],
 		   ["Biblioteca Humanidades",["bham"]],
@@ -468,10 +468,12 @@ function newEjemplar()
 	document.getElementById("ejForm").style.visibility = "visible";
 	showEjemplar("nuevo-" + newIndex);
 
-	if( dialogArguments.database == "eunm" || dialogArguments.database == "ucod-marc" ){
+	if( dialogArguments.database == "demo" || dialogArguments.database == "ucod-marc" ){
 		inputInstitucion = document.getElementById("institucion")
 		inputInstitucion.disabled = true
 		inputInstitucion.value = "AR-BaUNS"
+		// Uso funcion saveData para almacenar en el array ejemplares el cambio de institucion (ya que no se hizo por evento de cambio)
+		saveData("institucion");
 	}
 }
 
@@ -668,10 +670,11 @@ function init()
 	document.getElementById("btnConfirmarBaja").onclick = darDeBaja;
 	document.getElementById("btnConfirmarAlta").onclick = darDeAlta;
 	var allInputs = document.getElementsByTagName("input");
+
 	for (var i=0; i < allInputs.length; i++) {
 		if ( allInputs[i].type == "text" ) {
-			allInputs[i].onchange = function() {
-				saveData(this.id);
+			allInputs[i].onkeyup = function(){
+				saveData(this.id)
 				return true;
 			}
 		}
@@ -684,41 +687,14 @@ function init()
 		}
 	}
 	
-	
-	//oldEjemplares = dialogArguments;  // referencia al array ejemplares de la ventana principal
 	oldEjemplares = window.dialogArguments.ejemplares;  // referencia al array ejemplares de la ventana principal
 	
-	//ejemplares = dialogArguments;
 	window.returnValue = null;
-	//window.returnValue = oldEjemplares; // lo necesito por si la ventana se cierra sin usar un bot?n de la aplicaci?n
-	//var ejemplares = new cloneObject(oldEjemplares);
-	//var ejemplares = oldEjemplares.clone();
 	
-	// Clonamos el array (soluci?n ad hoc) para poder conservar la versi?n original
-
-	/*
-	ejemplares = new Array();
-	for (var i=0; i < oldEjemplares.length; i++) {
-		ejemplares[i] = new Array();
-		for (var prop in oldEjemplares[i]) {
-			ejemplares[i][prop] = oldEjemplares[i][prop];
-		}
-	}
-	*/
-
-	//ejemplares = oldEjemplares ;  NO se puede asignar un objeto a otro porque se asigna la referencia (rompe el hanldeCancel);
-
+	//Copia del array original que viene por parametro a la modal
 	ejemplares = JSON.parse(JSON.stringify(oldEjemplares));
 
-
-	/*
-	const entries = Object.entries(obj);
-	var ejArray = Object.keys(obj).map((key)=>[ key ,obj[key]]);
-	console.log("Array con keys: "+ejArray)
-	console.log("Array con entries: "+ entries );
-	*/ 
-
-	// De ac? en m?s, trabajamos con el array ejemplares de *esta* ventana.
+	// De acá en más, trabajamos con el array ejemplares de *esta* ventana.
 	
 	// Lista de atributos para un ejemplar, modificables por el usuario
 	// ATENCION: falta isCopy
@@ -741,6 +717,9 @@ function init()
 	// Si hay algún ejemplar, mostramos el primero de la lista
 	if ( ejemplares.length > 0 ) {
 		showEjemplar(ejemplares[0].inventario);
+		if( (window.dialogArguments.database == "demo") || (window.dialogArguments.database == "ucod-marc") ){
+			document.getElementById("institucion").disabled = true
+		}
 	}
 	else {
 		document.getElementById("ejForm").style.visibility = "hidden";
