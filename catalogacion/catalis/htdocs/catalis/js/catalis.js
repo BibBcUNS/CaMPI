@@ -207,7 +207,7 @@ function setDimensions()
     theRightPanel: {height: 0.995*freeHeight},
     recordDiv: {height: 0.992*freeHeight},
     recordDivWithDocs: {height: 0.49 * freeHeight},
-    docIframe: {height: 0.49 * freeHeight},
+    docIframe: {height: 0.49 * freeHeight + 14},
     docIframeCollapsed: {height: DOCWIN_MIN_HEIGHT},
     subfieldTextarea: {width: freeWidth - 444},
     subfieldTextareaNoLabels: {width: freeWidth - 292}
@@ -412,6 +412,8 @@ function docIframeHide()
     } else {
         document.getElementById("btnDocHideShow").blur();
     }
+
+    setDimensions();
 }
 
 

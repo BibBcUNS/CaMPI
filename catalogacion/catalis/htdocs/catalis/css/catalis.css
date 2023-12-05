@@ -369,7 +369,7 @@ col.subfieldLabelColumn {
     text-align: center;
     height: 22px;
     cursor: pointer;
-    cursor: hand;
+    width: 20px;
 }
 
 .subfieldLabelCell {
@@ -391,7 +391,7 @@ col.subfieldLabelColumn {
 
 iframe#docIframe {
     height: 0px; /* final height set dinamically onload */
-    width: 100%;
+    width: 99.8%;
     border: 0px solid #999;
     margin-left: 1px; /* parece necesario en IE */
     margin-top: 2px;
