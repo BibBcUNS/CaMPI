@@ -16,14 +16,15 @@
 function handleCancel()
 // -----------------------------------------------------------------------------
 {
-	window.close();
+	// window.close();
+	window.top.cerrarDialog();
 }
 
 // -----------------------------------------------------------------------------
 function handleOK()
 // -----------------------------------------------------------------------------
 {
-	if(document.getElementById("isoRecord").value[9] == "a"){ //Si en la posición 9 del registro hay una a quiere decir que esta codificado en UTF-8
+	if(document.getElementById("isoRecord").value[9] == "a"){ //Si en la posición 9 del registro hay una 'a' quiere decir que esta codificado en UTF-8
 		alert("Ha importado un registro codificado en formato UTF-8. Debe importarlo en formato MARC-8 (non-Unicode)")
 	}else{
 		if ( opener && opener.dialogWin && opener.dialogWin.returnFunc ) {  // mozilla
@@ -32,7 +33,8 @@ function handleOK()
 			window.returnValue = document.getElementById("isoRecord").value;
 		}
 	
-		window.close();
+		// window.close();
+		window.top.cerrarDialog();
 	}
 }
 
