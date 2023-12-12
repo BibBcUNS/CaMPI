@@ -29,7 +29,8 @@ function handleOK()
 	else // ie
 		window.returnValue = returnThis;
 	
-	window.close();
+	//window.close();
+	window.top.cerrarDialog();
 }
 
 
@@ -37,7 +38,8 @@ function handleOK()
 function handleCancel()
 //------------------------------------------------------------------------------
 {
-	window.close();
+	//window.close();
+	window.top.cerrarDialog();
 }
 
 
