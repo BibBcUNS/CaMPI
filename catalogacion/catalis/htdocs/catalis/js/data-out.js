@@ -391,7 +391,7 @@ function viewRecord()
     var materialType = getMaterialType(form.L_06.value,form.L_07.value);
     var f008 = serialize008(materialType);
 
-    var fichaHTML = marc2aacr(materialType,f001,f005,f008,marcDatafields,ejemplares);
+    var fichaHTML = marc2aacr(materialType,f001,f005,f008,marcDatafields,ejemplares, (top.f985 ? top.f985.substr(4) : null) );
 
 
     // 2. Construcción de la lista de campos MARC
