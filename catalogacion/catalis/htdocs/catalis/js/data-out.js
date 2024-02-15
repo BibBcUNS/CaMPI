@@ -453,31 +453,35 @@ function saveRecord()
     // suspendemos el cuadro de confirmación (FG, 06/sep/2005)
     // lo volvemos a activar, ya que de lo contrario se pueden llegar a grabar datos en forma accidental (FG, 16/sep/2005)
 
-    //-------------(M.A) Funcion copiada de aux-windows.js:
-    var winProperties = "dialogWidth:" + 640 + "px; dialogHeight:" + 460 + "px; status:no; help:no";
-    //if ( "left" == pos ) winProperties += "; dialogLeft:10px";
+    var winProperties = "dialogWidth:" + 640 + "px; dialogHeight:" + 460 + "px; status: no; help: no";
 
     // Mostramos la ventana
     var answer = window.showModalDialog(URL_CONFIRM_DIALOG, message, winProperties);
-    //---------------
 
     if (answer == true) {
-    
-        //if ( !catalis_confirm(message,640,460) ) {
-        //    return false;
-        //}
     
         // Cartelito
         catalisMessage(document.getElementById("grabandoRegistro").innerHTML);
     
+        // IF ORIGINAL RECORD TENIA UNA IMAGEN Y LA ACTUAL NO, ENTONCES BORRAR IMAGEN
+        if( (originalRecord.includes("\n985")) && (f985=='') ){
+            let database = top.ACTIVE_DATABASE;
+            let recordId = top.document.getElementById("f001").value;
+            let filetype = f985aux ? f985aux.substr(4) : null;
+            f985aux = "";
+            borrarImagen(database, recordId, filetype);      
+        }else{
+            console.log("No se deberia eliminar la imagen");
+        }
+
+
         var form = document.getElementById("hiddenFORM");
-        form.marcFields.value = serializeRecord(true,true,true,true);//marcFields;
+        form.marcFields.value = serializeRecord(true,true,true,true);
     
         form.recordID.value = document.getElementById("marcEditForm").f001.value;
         form.tarea.value = "GRABAR_REG";
         form.method = "POST";  // method="GET" genera errores, como es de esperar
         form.target = "hiddenIFRAME";
-        //form.debug = "1";
     
         form.submit();
     }

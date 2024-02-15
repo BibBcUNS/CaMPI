@@ -28,7 +28,7 @@ if (isset($_POST["submit"])) {
 
 // Verifica el tamaño del archivo
 if ($_FILES["imagenParaSubir"]["size"] > MAX_FILE_SIZE) {
-    $message = "El archivo es muy grande.";
+    $message = "El archivo es muy grande. (Supera los 100 KB)";
     $uploadOk = 0;
 }
 
@@ -61,6 +61,17 @@ if ($uploadOk == 1) {
 <script type="text/javascript">
     function init() {
         var uploadOk = <?php echo $uploadOk ? 'true' : 'false'; ?>;
+
+        let messageWrapper = top.document.getElementById("dialog-body").contentDocument.getElementById("server-message-wrapper");
+
+        if(uploadOk){
+            messageWrapper.classList.add("okMessage");
+            messageWrapper.classList.remove("errorMessage");
+        }else{
+            messageWrapper.classList.remove("okMessage");
+            messageWrapper.classList.add("errorMessage");
+        }
+
         var message = "<?php echo $message; ?>";
         var database = "<?php echo $_POST['database']; ?>";
         var recordId = "<?php echo $_POST['recordId']; ?>";
@@ -72,7 +83,6 @@ if ($uploadOk == 1) {
             parent.document.getElementById("imagenParaSubir").value = ""; // FIXME no borra el valor; ver http://stackoverflow.com/questions/1703228/how-can-i-clear-an-html-file-input-with-javascript
             var emptyGif = parent.parentWindow.HTDOCS + "img/1x1.gif";
             parent.document.getElementById("imagen-seleccionada").src = emptyGif;
-            parent.document.getElementById("submit-borrar").disabled = false;
             parent.document.getElementById("submit-subir").disabled = true;
 
             // Cambios en el formulario de edición

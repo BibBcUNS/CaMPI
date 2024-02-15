@@ -425,35 +425,7 @@ function editImagenes()
     return;
   }
 
-  // var fieldContainers = getDatafields();
-  // var marcDatafields = [];
-  // for (var i=0; i < fieldContainers.length; i++) {
-  //     var subfields = getSubfields(fieldContainers[i]).replace(/ \.(?=\^|$)/g,".");
-  //     if ( subfields.search(REGEX_EMPTY_SUBFIELD) == -1 ) {    // Ignoramos campos sin datos
-  //         var tag = fieldContainers[i].tag;
-  //         var ind = getIndicators(fieldContainers[i]);
-  //         marcDatafields.push(tag + " " + ind + subfields);
-  //     }
-  // }
-
-  // var fields_byTag = [];
-  // for (var i=0; i < marcDatafields.length; i++) {
-  //   var tag = marcDatafields[i].substr(0,3);
-  //   if ( !fields_byTag[tag] ) {
-  //     fields_byTag[tag] = new Array();
-  //   }
-  //   fields_byTag[tag][fields_byTag[tag].length] = marcDatafields[i].substr(4);
-  // }
-
-  // var isbn_pattern = new RegExp(/^(\d{13}|\d{12}X|\d{10}|\d{9}X)/); // the order of testing is important
-  // var isbns = [];
-  // if (fields_byTag["020"]) {
-  //   for (var i=0; i < fields_byTag["020"].length; i++) {
-  //     isbns.push(isbn_pattern.exec(fields_byTag["020"][i].substr(4))[0]);
-  //   }
-  // }
-
-  var winProperties = "font-size: 10px; dialogWidth: 700px; dialogHeight: 500px; status: no; help: no";
+  var winProperties = "font-size: 10px; dialogWidth: 700px; dialogHeight: 415px; status: no; help: no";
   var params = {
     // isbns: isbns,
     recordId: recordId,
@@ -467,10 +439,6 @@ function editImagenes()
   //   3. se borró una imagen existente
   var status = returnValue.status;
 
-  //(M.A) 28/03/2023 comento las siguientes 3 lineas
-  //if (status == null) {
-  //  return;
-  //}
   if (status == "imagen-subida") {
     var newFileType = returnValue.fileType;
     f985 = "##^a" + newFileType;

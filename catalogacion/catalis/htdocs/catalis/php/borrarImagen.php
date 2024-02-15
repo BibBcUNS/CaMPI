@@ -1,44 +1,23 @@
-<?php
+<?php    
+    if( isset($_POST['database']) && isset($_POST['recordId']) && isset($_POST['fileType'])   ){
+        $database = ($_POST['database']);
+        $recordId = ($_POST['recordId']);
+        $fileType = ($_POST['fileType']);
 
-// TODO: validar presencia de parámetros obligatorios
+        $target_dir = '../img/' . $database . '/';
+        $target_file = $target_dir . $recordId . "." . $fileType;
 
-$target_dir = "../img/" . $_POST["database"] . "/";
-$imageFileType = $_POST["fileType"];
-$target_file = $target_dir . $_POST["recordId"] . "." . $imageFileType;
-$deleteOk = 1;
-$message = "";
-
-if (unlink($target_file)) {
-    $message = "La imagen fue borrada. Recuerde guardar el registro.";
-} else {
-    $message = "Hubo un error al borrar la imagen.";
-    $deleteOk = 0;
-}
-?>
-
-<html>
-<head>
-<!-- La respuesta es JavaScript que va a un iframe oculto del diálogo de edición de imágenes -->
-<script type="text/javascript">
-    function init() {
-        var deleteOk = <?php echo $deleteOk ? 'true' : 'false'; ?>;
-        var message = "<?php echo $message; ?>";
-        if (deleteOk) {
-            // Cambios en el diálogo
-            var emptyGif = parent.parentWindow.HTDOCS + "img/1x1.gif";
-            var dummyCover = parent.parentWindow.HTDOCS + "img/book-cover-placeholder.jpg";
-            parent.document.getElementById("imagen-actual").src = emptyGif;
-            parent.document.getElementById("submit-borrar").disabled = true;
-
-            // Cambios en el formulario de edición
-            parent.parentWindow.document.getElementById("miniatura-imagen").src = dummyCover;
-
-            // Valores que el diálogo devuelve a la ventana principal
-            parent.returnValue.status = "imagen-borrada";
+        // Logica de eliminacion de imagen
+        if (unlink($target_file)) {
+            $respuesta = json_encode("Imagen eliminada");
+        } else {
+            $respuesta = json_encode("Fallo al eliminar la imagen");
         }
-        parent.document.getElementById("server-message").innerHTML = message;
+
+    }else{
+        $respuesta = json_encode("Error. Faltan parametros.");
     }
-    window.onload = init;
-</script>
-</head>
-</html>
+
+
+    echo json_encode($target_file);
+?>

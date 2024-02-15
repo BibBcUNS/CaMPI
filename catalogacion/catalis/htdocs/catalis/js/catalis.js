@@ -201,8 +201,8 @@ function setDimensions()
 
   // Variable global con dimensiones
   g_Dimensions = {
-    searchResultsIframe: {height: 0.575 * freeHeight},
-    recordVisualization: {height: 0.475 * freeHeight},
+    searchResultsIframe: {height: 0.580 * freeHeight},
+    recordVisualization: {height: 0.470 * freeHeight},
     indexTerms: {height: freeHeight - 210},
     theRightPanel: {height: 0.995*freeHeight},
     recordDiv: {height: 0.992*freeHeight},
@@ -1722,6 +1722,23 @@ function mostrarImagen() {
     }
     document.getElementById("miniatura-imagen").src = imageUrl;
   }
+}
+
+async function borrarImagen(database, recordId, filetype){
+    // Peticion a borrarImagen.php (se ejecuta al momento de guardar el registro)
+    let formData = new FormData();
+    formData.append("database", database);
+    formData.append("fileType", filetype);
+    formData.append("recordId", recordId);
+    let options = {
+        'method': 'POST',
+        'body': formData
+    }
+    try {
+        await fetch("../catalis/php/borrarImagen.php", options);
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 // -----------------------------------------------------------------------------

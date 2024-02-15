@@ -1384,11 +1384,11 @@ function marc2aacr(materialType,f001,f005,f008,marcDatafields,ejemplares,imageFi
     if (imageFileType) {
         imageUrl += database + "/" + f001 + "." + imageFileType + "?" + Math.random();
     } else {
-        imageUrl += "1x1.gif";
+        imageUrl += "book-cover-placeholder.jpg";
     }
     var documentImage = "";
     documentImage += "<div id='imageCell'>";
-    documentImage += "<p><img src='" + imageUrl + "'></p>";
+    documentImage += "<p><img src='" + imageUrl + "' style='max-height: 160px; min-width: 123px'></p>";
     documentImage += "</div>";
 
     if ( DISPLAY_CALL_NUMBER ) {

@@ -32,11 +32,26 @@ function init()
   // parentWindow.f985 para los que ya tienen tapa definida
   var fileType = parentWindow.f985 ? parentWindow.f985.substr(4) : null;
 
-  var emptyGif = parentWindow.HTDOCS + "img/1x1.gif";
-  //var dummyCover = parentWindow.HTDOCS + "img/book-cover-placeholder.jpg";
-
+  var dummyCover = "/catalis/img/book-cover-placeholder.jpg";
   //agrego esta línea por actualizaciones para IE11 en Windows 10. Ver #6779 (Gonzalo)
   document.getElementById("submit-subir").disabled = false;
+
+  document.getElementById("deleteImage").addEventListener("click", function(){
+    // Eliminacion de imagen solo a nivel front, al confirmar los cambios y guardar registro se elimina del server el archivo.
+    if(confirm("¿Desea eliminar la imagen del libro?")){
+
+      // Eliminar campo 985
+      top.f985aux = top.f985; // Necesito el valor original de f985 para luego eliminar la imagen del server
+      top.f985 = ""; 
+
+      // Eliminar imagen de modal.
+      document.getElementsByClassName("miniatura-tapa")[0].src = dummyCover;
+
+      // Eliminar imagen de pantalla principal.
+      top.document.getElementsByClassName("miniatura-tapa")[0].src = dummyCover;
+
+    }
+  });
 
   // Event handlers
   document.onkeydown = function(evt) {
@@ -50,13 +65,11 @@ function init()
 
   document.getElementById("imagenParaSubir").onchange = function() {
 
-  document.getElementById("imagen-seleccionada").src = "file:///" + this.value;
+    document.getElementById("imagen-seleccionada").src = "file:///" + this.value;
    
-  document.getElementById("submit-subir").disabled = (this.value == "");
-  }
+    document.getElementById("submit-subir").disabled = (this.value == "");
 
-  if (fileType) {
-    document.getElementById("submit-borrar").disabled = false;
+    document.getElementById("submit-subir").click();
   }
 
   document.getElementById("upload-form").onsubmit = function() {
@@ -72,21 +85,11 @@ function init()
     document.getElementById("server-message").innerHTML = "Subiendo archivo..."
   }
 
-  document.getElementById("delete-form").onsubmit = function() {
-    if (! confirm("¿Confirma el borrado de la imagen?")) {
-      return false;
-    }
-    this.database.value = database;
-    this.recordId.value = recordId;
-    this.fileType.value = fileType;
-    document.getElementById("server-message").innerHTML = "Borrando archivo..."
-  }
-
   var currentUrl;
   if (fileType) {
     currentUrl = parentWindow.HTDOCS + "img/" + database + "/" + recordId + "." + fileType + "?" + Math.random();
   } else {
-    currentUrl = emptyGif;
+    currentUrl = dummyCover;
   }
   document.getElementById("imagen-actual").src = currentUrl;
 
@@ -117,20 +120,31 @@ window.onload = init;
   body {
     margin: 3px;
   }
-  /* #imageSearch { */
-  /*   border: none; */
-  /*   height: 270px; */
-  /*   width: 570px; */
-  /* } */
+
   #hiddenFrame {
     display: none;
   }
   #server-message-wrapper {
     background-color: #FED;
     clear: both;
-    margin: 2em 6px;
-    padding: 0.5em;
     text-align: center;
+    padding: 5px;
+  }
+
+  #submit-borrar{
+    margin-top: 7px;
+  }
+
+  .errorMessage{
+    background-color: #ed6161 !important;
+  }
+
+  .okMessage{
+    background-color: #35dc35 !important;
+  }
+
+  #imagen-actual:hover{
+    opacity: 0.5;
   }
 </style>
 
@@ -138,61 +152,54 @@ window.onload = init;
 
 <body topmargin="1">
 
-<div style="padding-left: 8px; font-size: 130%; font-weight: bold; margin: 1em; text-align: center;">
-  <b>Imagen en miniatura de la tapa &mdash; EN PRUEBA</b>
+<div style="padding-left: 8px; font-size: 130%; font-weight: bold; margin: 8px; text-align: center;">
+  <b>Imagen en miniatura de la tapa</b>
 </div>
 
 <div align="center" style="margin: 3px 6px;">
-  <div style="float: left; width: 48%; padding: 0.5em; background-color: #FED;">
-    Imagen actual
-    <div class="imagen-wrapper">
-      <img id="imagen-actual" class="miniatura-tapa" />
-    </div>
-    <form id="delete-form" action="../php/borrarImagen.php" method="post" enctype="multipart/form-data" target="hiddenFrame">
-      <input type="hidden" name="database" id="database" />
-      <input type="hidden" name="recordId" id="recordId" />
-      <input type="hidden" name="fileType" id="fileType" />
-      <input type="submit" name="submit" id="submit-borrar" value="Borrar imagen" class="marcEditButton" disabled="disabled" />
-    </form>
+
+  <div style="margin-bottom: 0.7em;">
+    Seleccionar imagen para subir
+    (si la imagen es grande puede <a target="_blank" href="http://picresize.com?preheight=160">reducirla con PicResize</a>)
   </div>
 
-  <div style="float: right; width: 48%; padding: 0.5em; background-color: #FED;">
 
-    <!-- <div> -->
-    <!-- ISBNs: <input type="text" id="isbns" size="40" /> -->
-    <!-- </div> -->
+  <div style="padding-top: 5px; background-color: #FED;">
+    Haga click en la imagen para elegir una nueva...
+    <div class="imagen-wrapper">
+      <img id="imagen-actual" class="miniatura-tapa" src="/catalis/img/book-cover-placeholder.jpg" onclick="document.getElementById('imagenParaSubir').click()"/>
+    </div>
 
-    <!-- <div> -->
-    <!-- Búsqueda en la web: -->
-    <!-- <br> -->
-    <!-- <iframe id="imageSearch"></iframe> -->
-    <!-- </div> -->
+    <button id="deleteImage" class="marcEditButton" style="margin-top: 5px;">Eliminar imagen</button>
+  </div>
+
+  
+
+  <div style="background-color: #FED; padding-bottom: 8px;">
 
     <div>
       <form id="upload-form" action="../php/subirImagen.php" method="post" enctype="multipart/form-data" target="hiddenFrame">
-        <div style="margin-bottom: 0.7em;">
-          Seleccionar imagen para subir
-          (si la imagen es grande puede <a href="http://picresize.com?preheight=160">reducirla con PicResize</a>)
-        </div>
-        <input type="file" name="imagenParaSubir" id="imagenParaSubir" class="marcEditButton" />
+        
+        <input type="file" name="imagenParaSubir" id="imagenParaSubir" class="marcEditButton" style="display: none;" />
         <input type="hidden" name="database" id="database" />
         <input type="hidden" name="recordId" id="recordId" />
         <input type="hidden" name="fileType" id="fileType" />
         <br />
-        <div class="imagen-wrapper" style="margin-bottom: 6px;">
+        <div class="imagen-wrapper" style="margin-bottom: 6px; display: none;">
           <img id="imagen-seleccionada" class="miniatura-tapa" />
         </div>
-        <input type="submit" name="submit" id="submit-subir" value="Subir imagen" class="marcEditButton" disabled="disabled" />
+        <input type="submit" name="submit" id="submit-subir" value="Subir imagen" class="marcEditButton" disabled="disabled" style="display: none;"/>
       </form>
     </div>
 
+    <div id="server-message-wrapper">
+      <span id="server-message"></span>
+    </div>
 
   </div>
 </div>
 
-<div id="server-message-wrapper">
-  <span id="server-message"></span>
-</div>
+
 
 <!-- En este iframe se reciben las respuestas del servidor -->
 <iframe name="hiddenFrame" id="hiddenFrame"></iframe>
