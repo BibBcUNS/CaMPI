@@ -7,17 +7,20 @@
         $target_dir = '../img/' . $database . '/';
         $target_file = $target_dir . $recordId . "." . $fileType;
 
-        // Logica de eliminacion de imagen
+        // Lógica de eliminacion de imagen
         if (unlink($target_file)) {
-            $respuesta = json_encode("Imagen eliminada");
+            http_response_code(200);
+            $respuesta = json_encode("Imagen eliminada satisfactoriamente.");
         } else {
-            $respuesta = json_encode("Fallo al eliminar la imagen");
+            http_response_code(500);
+            $respuesta = json_encode("Error al eliminar la imagen.");
         }
 
     }else{
-        $respuesta = json_encode("Error. Faltan parametros.");
+        http_response_code(400);
+        $respuesta = ("Error. Faltan parametros.");
     }
 
 
-    echo json_encode($target_file);
+    echo json_encode($respuesta);
 ?>
