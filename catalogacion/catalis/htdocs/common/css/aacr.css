@@ -39,7 +39,7 @@
 
 /* Columna izquierda, para acceso al documento */
 #aacrTable td#documentLocationCell {
-    text-align: left;
+    text-align: center;
     vertical-align: top;
     width: 65px;
     border-right: 1px dashed #C0C0C0;

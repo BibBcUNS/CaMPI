@@ -1051,6 +1051,10 @@ function deleteRecord()
 // -----------------------------------------------------------------------------
 {
     if ( confirm("BORRADO DEL REGISTRO\n\nSi borra este registro, no podrá recuperarlo. ¿Confirma el borrado?") ) {
+
+        // Eliminamos su imagen del servidor
+        borrarImagen(top.ACTIVE_DATABASE, top.document.getElementById("f001").value, f985 ? f985.substr(4) : null);
+
         var form = document.getElementById("hiddenFORM");
         form.tarea.value = "BORRAR_REG";
         form.recordID.value = document.getElementById("marcEditForm").f001.value;
@@ -1299,6 +1303,14 @@ function mostrarModalConfirmacion(){
     }
 
     if ( userDecision == "doNotSave" ){
+        // Si el registro no tenia imagen o se cambio la extension de imagen entonces eliminar imagen del servidor.
+        let index985original = originalRecord.indexOf("\n985");
+        let index985New = serializeRecord(1,1,1,1).indexOf("\n985");
+
+        if( ( !(originalRecord.includes("\n985")) && (f985!='') ) || (originalRecord.substr(index985original, 12).substr(9)) != (serializeRecord(1,1,1,1).substr(index985New,12).substr(9))   ){
+            borrarImagen(top.ACTIVE_DATABASE, top.document.getElementById("f001").value, serializeRecord(1,1,1,1).substr(index985New, 12).substr(9) )
+        }
+
         handleNextTask(elementID);
     }
 }
@@ -1725,7 +1737,7 @@ function mostrarImagen() {
 }
 
 async function borrarImagen(database, recordId, filetype){
-    // Peticion a borrarImagen.php (se ejecuta al momento de guardar el registro)
+    // Peticion a borrarImagen.php (se ejecuta al momento de guardar el registro y de eliminar un registro)
     let formData = new FormData();
     formData.append("database", database);
     formData.append("fileType", filetype);

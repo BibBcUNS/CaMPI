@@ -463,17 +463,27 @@ function saveRecord()
         // Cartelito
         catalisMessage(document.getElementById("grabandoRegistro").innerHTML);
     
-        // IF ORIGINAL RECORD TENIA UNA IMAGEN Y LA ACTUAL NO, ENTONCES BORRAR IMAGEN
-        if( (originalRecord.includes("\n985")) && (f985=='') ){
-            let database = top.ACTIVE_DATABASE;
-            let recordId = top.document.getElementById("f001").value;
-            let filetype = f985aux ? f985aux.substr(4) : null;
-            f985aux = "";
+        // Borrado de imagen
+        let database = top.ACTIVE_DATABASE;
+        let recordId = top.document.getElementById("f001").value;
+        let filetype;
+
+        let index985original = originalRecord.indexOf("\n985");
+        let index985New = serializeRecord(1,1,1,1).indexOf("\n985");
+
+        // Si el registro original contenia una imagen y ahora no, el usuario la ha eliminado y debe eliminarse del server.
+        if( (originalRecord.includes("\n985")) && (f985=='')  ){
+            filetype = f985aux ? f985aux.substr(4) : f985.substr(4); // Filetype debe tomar valor desde una variable auxiliar (ya que al eliminar la imagen la variable original quedó vacia)
             borrarImagen(database, recordId, filetype);      
+        }else if((originalRecord.substr( index985original , 12).substr(9)) != (serializeRecord(1,1,1,1).substr( index985New ,12).substr(9))){
+            // En caso de cambiar el formato de la imagen (jpg a png por ejemplo) debe eliminarse la vieja
+            filetype = originalRecord.substr(index985original, 12).substr(9);
+            borrarImagen(database, recordId, filetype);
         }else{
-            console.log("No se deberia eliminar la imagen");
+            console.log("No se debería eliminar la imagen.")
         }
 
+        f985aux = "";
 
         var form = document.getElementById("hiddenFORM");
         form.marcFields.value = serializeRecord(true,true,true,true);
