@@ -199,11 +199,8 @@ a:hover {
 
 
 #docFormWrapper {
-    position: absolute; /*relative?*/
-	/*top: 498px; Mozilla?
-	left: 622px;*/
-	bottom: 0px; /* anda bien para IE */
-	width: 94%;
+    position: relative;
+	width: auto;
 	background: #EEDFCC;
 	border: 1px solid #999;
 	padding: 4px 4px;
