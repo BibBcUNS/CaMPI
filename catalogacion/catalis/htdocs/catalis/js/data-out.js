@@ -356,7 +356,9 @@ function exportRecord()
     var isoString = isoRecord.leader + isoRecord.directory + isoRecord.body;
     var winProperties = "width: 550px; height: 350px";
     
-    newWin = window.showModalDialog(URL_EXPORT_RECORD, isoString, winProperties)
+    (async function(){
+        newWin = window.showModalDialog(URL_EXPORT_RECORD, isoString, winProperties);
+    })();
     
 }
 
@@ -415,8 +417,10 @@ function viewRecord()
     let arrayArgs = [fichaHTML, marcTagged];
 
 
-    modelessWin = window.showModalDialog(URL_RECORD_VISUALIZATION, arrayArgs, winProperties);
-    displayWindowClosed = false;   
+    (async function(){
+        modelessWin = await window.showModalDialog(URL_RECORD_VISUALIZATION, arrayArgs, winProperties);
+        displayWindowClosed = false; 
+    })();
 }
 
 
@@ -450,49 +454,50 @@ function saveRecord()
     var message = "DATOS QUE SE ENVIAN PARA SER GRABADOS<p>\nNúmero de registro: " + document.getElementById("marcEditForm").f001.value;
     message += "<div id='dataToBeSaved'><pre>" + marcFields + "</pre></div>";
 
-    // suspendemos el cuadro de confirmación (FG, 06/sep/2005)
-    // lo volvemos a activar, ya que de lo contrario se pueden llegar a grabar datos en forma accidental (FG, 16/sep/2005)
-
     var winProperties = "dialogWidth:" + 640 + "px; dialogHeight:" + 460 + "px; status: no; help: no";
-
-    // Mostramos la ventana
-    var answer = window.showModalDialog(URL_CONFIRM_DIALOG, message, winProperties);
-
-    if (answer == true) {
     
-        // Cartelito
-        catalisMessage(document.getElementById("grabandoRegistro").innerHTML);
+
+    (async function(){
+        var answer = await window.showModalDialog(URL_CONFIRM_DIALOG, message, winProperties);
+
+        if (answer == true) {
     
-        // Borrado de imagen
-        let database = top.ACTIVE_DATABASE;
-        let recordId = top.document.getElementById("f001").value;
-        let filetype;
-
-        let index985original = originalRecord.indexOf("\n985");
-        let index985New = serializeRecord(1,1,1,1).indexOf("\n985");
-
-        // Si el registro original contenia una imagen y ahora no, el usuario la ha eliminado y debe eliminarse del server.
-        if( (originalRecord.includes("\n985")) && (f985=='')  ){
-            filetype = f985aux ? f985aux.substr(4) : f985.substr(4); // Filetype debe tomar valor desde una variable auxiliar (ya que al eliminar la imagen la variable original quedó vacia)
-            borrarImagen(database, recordId, filetype);      
-        }else if((originalRecord.substr( index985original , 12).substr(9)) != (serializeRecord(1,1,1,1).substr( index985New ,12).substr(9))){
-            // En caso de cambiar el formato de la imagen (jpg a png por ejemplo) debe eliminarse la vieja
-            filetype = originalRecord.substr(index985original, 12).substr(9);
-            borrarImagen(database, recordId, filetype);
-        }else{
-            console.log("No se debería eliminar la imagen.")
+            // Cartelito
+            catalisMessage(document.getElementById("grabandoRegistro").innerHTML);
+        
+            // Borrado de imagen
+            let database = top.ACTIVE_DATABASE;
+            let recordId = top.document.getElementById("f001").value;
+            let filetype;
+    
+            let index985original = originalRecord.indexOf("\n985");
+            let index985New = serializeRecord(1,1,1,1).indexOf("\n985");
+    
+            // Si el registro original contenia una imagen y ahora no, el usuario la ha eliminado y debe eliminarse del server.
+            if( (originalRecord.includes("\n985")) && (f985=='')  ){
+                filetype = f985aux ? f985aux.substr(4) : f985.substr(4); // Filetype debe tomar valor desde una variable auxiliar (ya que al eliminar la imagen la variable original quedó vacia)
+                borrarImagen(database, recordId, filetype);      
+            }else if((originalRecord.substr( index985original , 12).substr(9)) != (serializeRecord(1,1,1,1).substr( index985New ,12).substr(9))){
+                // En caso de cambiar el formato de la imagen (jpg a png por ejemplo) debe eliminarse la vieja
+                filetype = originalRecord.substr(index985original, 12).substr(9);
+                borrarImagen(database, recordId, filetype);
+            }else{
+                console.log("No se debería eliminar la imagen.")
+            }
+    
+            f985aux = "";
+    
+            var form = document.getElementById("hiddenFORM");
+            form.marcFields.value = serializeRecord(true,true,true,true);
+        
+            form.recordID.value = document.getElementById("marcEditForm").f001.value;
+            form.tarea.value = "GRABAR_REG";
+            form.method = "POST";  // method="GET" genera errores, como es de esperar
+            form.target = "hiddenIFRAME";
+        
+            form.submit();
         }
+    })();
 
-        f985aux = "";
 
-        var form = document.getElementById("hiddenFORM");
-        form.marcFields.value = serializeRecord(true,true,true,true);
-    
-        form.recordID.value = document.getElementById("marcEditForm").f001.value;
-        form.tarea.value = "GRABAR_REG";
-        form.method = "POST";  // method="GET" genera errores, como es de esperar
-        form.target = "hiddenIFRAME";
-    
-        form.submit();
-    }
 }

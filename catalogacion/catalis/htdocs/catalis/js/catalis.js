@@ -210,7 +210,8 @@ function setDimensions()
     docIframe: {height: 0.49 * freeHeight + 14},
     docIframeCollapsed: {height: DOCWIN_MIN_HEIGHT},
     subfieldTextarea: {width: freeWidth - 444},
-    subfieldTextareaNoLabels: {width: freeWidth - 292}
+    subfieldTextareaNoLabels: {width: freeWidth - 292},
+    docIframeWrapper: {marginTop: freeHeight - 686 }
   };
 
   // Búsquedas
@@ -222,6 +223,8 @@ function setDimensions()
   document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height + 8  + "px";
   document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height + 7.09 + "px";
   document.getElementById("docIframe").style.height = g_Dimensions.docIframeCollapsed.height + "px";
+
+  document.getElementById("docFormWrapper").style.marginTop = g_Dimensions.docIframeWrapper.marginTop + "px";
 }
 
 
@@ -1283,36 +1286,37 @@ function mostrarModalConfirmacion(){
         "help: no"
     ];
 
-    // Mostramos la ventana
-    var userDecision = window.showModalDialog(URL_SAVE_CHANGES, window, winProperties.join(";"));
-//----------------------------------------------------------------------------------------------.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
-    var elementID = top.globalParameter;
+    (async function(){
+        // Mostramos la ventana
+        var userDecision = await window.showModalDialog(URL_SAVE_CHANGES, window, winProperties.join(";"));
+        var elementID = top.globalParameter;
 
-    if ( userDecision == "cancel" ){
-        if ( "selDatabase" == elementID ){
-            document.getElementById("selDatabase").selectedIndex = g_activeDatabase.index;
+        if ( userDecision == "cancel" ){
+            if ( "selDatabase" == elementID ){
+                document.getElementById("selDatabase").selectedIndex = g_activeDatabase.index;
+            }
+
+            top.globalParameter = "";
         }
 
-        top.globalParameter = "";
-    }
-
-    if ( userDecision == "save" ){
-        g_NextTask = elementID;
-        saveRecord();
-        handleNextTask(elementID);
-    }
-
-    if ( userDecision == "doNotSave" ){
-        // Si el registro no tenia imagen o se cambio la extension de imagen entonces eliminar imagen del servidor.
-        let index985original = originalRecord.indexOf("\n985");
-        let index985New = serializeRecord(1,1,1,1).indexOf("\n985");
-
-        if( ( !(originalRecord.includes("\n985")) && (f985!='') ) || (originalRecord.substr(index985original, 12).substr(9)) != (serializeRecord(1,1,1,1).substr(index985New,12).substr(9))   ){
-            borrarImagen(top.ACTIVE_DATABASE, top.document.getElementById("f001").value, serializeRecord(1,1,1,1).substr(index985New, 12).substr(9) )
+        if ( userDecision == "save" ){
+            g_NextTask = elementID;
+            saveRecord();
+            handleNextTask(elementID);
         }
 
-        handleNextTask(elementID);
-    }
+        if ( userDecision == "doNotSave" ){
+            // Si el registro no tenia imagen o se cambio la extension de imagen entonces eliminar imagen del servidor.
+            let index985original = originalRecord.indexOf("\n985");
+            let index985New = serializeRecord(1,1,1,1).indexOf("\n985");
+
+            if( ( !(originalRecord.includes("\n985")) && (f985!='') ) || (originalRecord.substr(index985original, 12).substr(9)) != (serializeRecord(1,1,1,1).substr(index985New,12).substr(9))   ){
+                borrarImagen(top.ACTIVE_DATABASE, top.document.getElementById("f001").value, serializeRecord(1,1,1,1).substr(index985New, 12).substr(9) )
+            }
+
+            handleNextTask(elementID);
+        }
+    })();
 }
 
 function highlightRecord(changedRecord){

@@ -22,8 +22,12 @@ function getNewRecordParams()
 
     //openSimDialog(URL_SELECT_TEMPLATE, dWidth, dHeight, createRecord);
     var winProperties = "font-size: 10px; dialogWidth: " + dWidth + "px; dialogHeight: " + dHeight + "px;";
-    var newRecParams = window.showModalDialog(URL_SELECT_TEMPLATE, null, winProperties);
-    createRecord(newRecParams);
+    
+    (async function(){
+        var newRecParams = await window.showModalDialog(URL_SELECT_TEMPLATE, null, winProperties);
+        createRecord(newRecParams);
+    })();
+
     
 }
 
