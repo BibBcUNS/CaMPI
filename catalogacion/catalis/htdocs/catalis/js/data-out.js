@@ -357,7 +357,7 @@ function exportRecord()
     var winProperties = "width: 550px; height: 350px";
     
     (async function(){
-        newWin = window.showModalDialog(URL_EXPORT_RECORD, isoString, winProperties);
+        newWin = await window.showModalDialog(URL_EXPORT_RECORD, isoString, winProperties);
     })();
     
 }
