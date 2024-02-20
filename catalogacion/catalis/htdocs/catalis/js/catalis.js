@@ -886,8 +886,10 @@ function showCodeTable(name)
     var dialogLeft = event.clientX;
     var dialogTop = event.clientY;
     var winProperties = "font-size:10px; dialogLeft:" + dialogLeft + "px; dialogTop:" + dialogTop + "px; dialogWidth:550px; dialogHeight:200px; status:no; help:no";
-    var newCode = showModalDialog(HTDOCS + "html/relatorCodes.htm", "", winProperties);
-    alert(newCode);
+    (async function(){
+        var newCode = await showModalDialog(HTDOCS + "html/relatorCodes.htm", "", winProperties);
+        alert(newCode);
+    })();
 }
 
 

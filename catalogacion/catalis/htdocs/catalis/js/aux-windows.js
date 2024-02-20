@@ -109,14 +109,14 @@ function editCodedData()
 
         winProperties = "visibility: hidden; font-size:10px; dialogLeft: "+dialogLeft+"px; dialogTop: "+dialogTop+"px; dialogWidth: $dialogWidthToReplace; dialogHeight: $dialogHeightToReplace; status:no; help:no";
 
-    }
+    };
 
     var dialogArgs = [window, dataElement, activeCode, codeType];
     var dialogHeight = ( "multiple" == codeType ) ? 230 : 145;
     var dialogWidth = 300;
 
-    winProperties = winProperties.replace("$dialogWidthToReplace", dialogWidth+"px")
-    winProperties = winProperties.replace("$dialogHeightToReplace", dialogHeight+"px")
+    winProperties = winProperties.replace("$dialogWidthToReplace", dialogWidth+"px");
+    winProperties = winProperties.replace("$dialogHeightToReplace", dialogHeight+"px");
 
     (async function(){
         var newCode = await window.showModalDialog(URL, dialogArgs, winProperties);
