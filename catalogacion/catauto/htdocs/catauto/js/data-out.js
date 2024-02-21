@@ -238,8 +238,10 @@ function exportRecord()
 	var isoRecord = buildISO2709();
 	var isoString = isoRecord.leader + isoRecord.directory + isoRecord.body;
 	var winProperties = "width: 550px; height: 350px";
-	newWin = window.showModalDialog(URL_EXPORT_RECORD, isoString, winProperties)
 	
+	(async function(){
+		newWin = await window.showModalDialog(URL_EXPORT_RECORD, isoString, winProperties)
+	})();
 	
 }
 
@@ -279,7 +281,9 @@ function viewRecord()
     var dialogWidth = 660;
     var winProperties = "dialogHeight: " + dialogHeight + "px;dialogWidth: "+dialogWidth+"px; dialogTop: 25px; ";
 
-    modelessWin = window.showModalDialog(URL_RECORD_VISUALIZATION, marcTagged, winProperties);
+    (async function(){
+		modelessWin = await window.showModalDialog(URL_RECORD_VISUALIZATION, marcTagged, winProperties);
+	})();
 }
 
 
@@ -315,31 +319,26 @@ function saveRecord()
 	var message = "DATOS QUE SE ENVIAN PARA SER GRABADOS<p>\nNúmero de registro: " + document.getElementById("marcEditForm").f001.value;
     message += "<div id='dataToBeSaved'><pre>" + marcFields + "</pre></div>";
 
-    // suspendemos el cuadro de confirmación (FG, 06/sep/2005)
-    // lo volvemos a activar, ya que de lo contrario se pueden llegar a grabar datos en forma accidental (FG, 16/sep/2005)
-
-    //-------------(M.A) Funcion copiada de aux-windows.js:
     var winProperties = "dialogWidth:" + 640 + "px; dialogHeight:" + 460 + "px; status:no; help:no";
-    //if ( "left" == pos ) winProperties += "; dialogLeft:10px";
 
-    // Mostramos la ventana
-    var answer = window.showModalDialog(URL_CONFIRM_DIALOG, message, winProperties);
-    //---------------
+    (async function(){
+		// Mostramos la ventana
+		var answer = await window.showModalDialog(URL_CONFIRM_DIALOG, message, winProperties);
 
-    if (answer == true) {
-
-        // Cartelito
-        catalisMessage(document.getElementById("grabandoRegistro").innerHTML);
-    
-        var form = document.getElementById("hiddenFORM");
-        form.marcFields.value = serializeRecord(true,true,true,true);//marcFields;
-    
-        form.recordID.value = document.getElementById("marcEditForm").f001.value;
-        form.tarea.value = "GRABAR_REG";
-        form.method = "POST";  // method="GET" genera errores, como es de esperar
-        form.target = "hiddenIFRAME";
-        //form.debug = "1";
-    
-        form.submit();
-    }
+		if (answer == true) {
+	
+			// Cartelito
+			catalisMessage(document.getElementById("grabandoRegistro").innerHTML);
+		
+			var form = document.getElementById("hiddenFORM");
+			form.marcFields.value = serializeRecord(true,true,true,true);
+		
+			form.recordID.value = document.getElementById("marcEditForm").f001.value;
+			form.tarea.value = "GRABAR_REG";
+			form.method = "POST";  // method="GET" genera errores, como es de esperar
+			form.target = "hiddenIFRAME";
+		
+			form.submit();
+		}
+	})();
 }

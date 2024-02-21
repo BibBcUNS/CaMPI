@@ -23,8 +23,10 @@ function getIsoRecord()
 {
 	
 	var winProperties = "font-size:10px; dialogWidth:931px; dialogHeight:330px; status:no; help:no; resizable:yes";
-	var isoRecord = window.showModalDialog(URL_IMPORT_RECORD, null, winProperties);
-	importRecord(isoRecord);
+	(async function(){
+		var isoRecord = await window.showModalDialog(URL_IMPORT_RECORD, null, winProperties);
+		importRecord(isoRecord);
+	})();
 }
 
 
