@@ -452,13 +452,36 @@ function saveRecord()
     }
 
     var message = "DATOS QUE SE ENVIAN PARA SER GRABADOS<p>\nNúmero de registro: " + document.getElementById("marcEditForm").f001.value;
+
+    // (21/02/2024) Armo cartel para mostrar tamaño del registro
+    let recordSize = serializeRecord(1,1,1,1).length;
+    let divClass = "okMessage";
+
+    if(recordSize >= 4000){
+        divClass = "errorMessage";
+    }else if(recordSize > 2000){
+        divClass = "warningMessage";
+    }
+
+    message += `
+        <div id="recordSizeWrapper">
+	    	<div>Tamaño del registro:</div>
+	    	<div id="recordSize" class="${divClass}" title="No podrá grabar el registro si éste supera los 4000 Bytes">${recordSize} Bytes</div>
+	    </div>
+    `;
+
     message += "<div id='dataToBeSaved'><pre>" + marcFields + "</pre></div>";
 
-    var winProperties = "dialogWidth:" + 640 + "px; dialogHeight:" + 460 + "px; status: no; help: no";
+    var winProperties = "dialogWidth:" + 650 + "px; dialogHeight:" + 480 + "px; status: no; help: no";
     
 
     (async function(){
         var answer = await window.showModalDialog(URL_CONFIRM_DIALOG, message, winProperties);
+
+        if(answer == "-"){
+            let errorMessage = "No se puede guardar el registro porque supera los 4000 Bytes.";
+            catalisMessage(errorMessage, true);
+        }
 
         if (answer == true) {
     
