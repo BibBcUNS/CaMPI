@@ -575,6 +575,18 @@ input#docItem {
     font-style: italic;
 }
 
+.errorMessage{
+    background-color: #ed6161 !important;
+}
+
+.warningMessage{
+    background-color: rgb(255, 255, 129) !important;
+}
+
+.okMessage{
+    background-color: #35dc35 !important;
+}
+
 /*---------------------------------------------------------------------------------------------------------------------*\
    --------------------------------------------------- Context menu -----------------------------------------------------
                             No estan siendo usados pues desde el iPopup no se ve este archivo
