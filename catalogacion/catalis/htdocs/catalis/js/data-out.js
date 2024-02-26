@@ -457,9 +457,9 @@ function saveRecord()
     let recordSize = serializeRecord(1,1,1,1).length;
     let divClass = "okMessage";
 
-    if(recordSize >= 4000){
+    if(recordSize >= MAX_RECORD_SIZE){
         divClass = "errorMessage";
-    }else if(recordSize > 2000){
+    }else if(recordSize > MAX_RECORD_SIZE - 2000){
         divClass = "warningMessage";
     }
 
@@ -473,10 +473,10 @@ function saveRecord()
     message += "<div id='dataToBeSaved'><pre>" + marcFields + "</pre></div>";
 
     var winProperties = "dialogWidth:" + 650 + "px; dialogHeight:" + 480 + "px; status: no; help: no";
-    
+
 
     (async function(){
-        var answer = await window.showModalDialog(URL_CONFIRM_DIALOG, message, winProperties);
+        var answer = await window.showModalDialog(URL_CONFIRM_DIALOG, {message: message, maxRecordSize: MAX_RECORD_SIZE}, winProperties);
 
         if(answer == "-"){
             let errorMessage = "No se puede guardar el registro porque supera los 4000 Bytes.";

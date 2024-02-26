@@ -1308,7 +1308,7 @@ function mostrarModalConfirmacion(){
         }
 
         if ( userDecision == "doNotSave" ){
-            // Si el registro no tenia imagen o se cambio la extension de imagen entonces eliminar imagen del servidor.
+            // Si el registro no tenía imagen (se la agregaron en el último cambio) o se cambió la extensión de imagen entonces eliminar imagen del servidor.
             let index985original = originalRecord.indexOf("\n985");
             let index985New = serializeRecord(1,1,1,1).indexOf("\n985");
 
