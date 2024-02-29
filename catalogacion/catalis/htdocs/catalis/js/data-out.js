@@ -459,14 +459,14 @@ function saveRecord()
 
     if(recordSize >= MAX_RECORD_SIZE){
         divClass = "errorMessage";
-    }else if(recordSize > MAX_RECORD_SIZE - 2000){
+    }else if(recordSize > MAX_RECORD_SIZE - 10000){
         divClass = "warningMessage";
     }
 
     message += `
         <div id="recordSizeWrapper">
 	    	<div>Tamaño del registro:</div>
-	    	<div id="recordSize" class="${divClass}" title="No podrá grabar el registro si éste supera los 4000 Bytes">${recordSize} Bytes</div>
+	    	<div id="recordSize" class="${divClass}" title="No podrá grabar el registro si éste supera los 20000 Bytes">${recordSize} Bytes</div>
 	    </div>
     `;
 
@@ -479,7 +479,7 @@ function saveRecord()
         var answer = await window.showModalDialog(URL_CONFIRM_DIALOG, {message: message, maxRecordSize: MAX_RECORD_SIZE}, winProperties);
 
         if(answer == "-"){
-            let errorMessage = "No se puede guardar el registro porque supera los 4000 Bytes.";
+            let errorMessage = "No se puede guardar el registro porque supera los 20000 Bytes.";
             catalisMessage(errorMessage, true);
         }
 
