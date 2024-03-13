@@ -1,0 +1,123 @@
+<!-- Pantalla de login/noticias -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script type="text/javascript">
+    // Detección del navegador
+    var moz = ( document.implementation && document.implementation.createDocument );
+    var ie = window.ActiveXObject;
+
+
+    // Detección de IE, actualizada a Internet Explorer 12+ aka Edge
+    // http://codepen.io/gapcode/pen/vEJNZN
+    // Suspendido por un error de sintaxis no determinado -- FG, 26/4/2016
+    //function detectIE() {
+    //  var ua = window.navigator.userAgent;
+    //
+    //  var msie = ua.indexOf('MSIE ');
+    //  if (msie > 0) {
+    //    // IE 10 or older => return version number
+    //    return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    //  }
+    //
+    //  var trident = ua.indexOf('Trident/');
+    //  if (trident > 0) {
+    //    // IE 11 => return version number
+    //    var rv = ua.indexOf('rv:');
+    //    return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    //  }
+    //
+    //  var edge = ua.indexOf('Edge/');
+    //  if (edge > 0) {
+    //    // Edge (IE 12+) => return version number
+    //    return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    //  }
+    //
+    //  // other browser
+    //  return false;
+    //}
+
+    // Aviso para quien no ingrese con IE
+    // if ( navigator.appName != "Microsoft Internet Explorer" ) {
+        //var msg = "Please consider that Catalis does not work properly on browsers other than Internet Explorer 5.5 or 6. Fortunately, that will change, once we can fix some problems with Mozilla. If you would like to help with this task, please send an email to fgomez@uns.edu.ar. Thank you.";
+        // var msg = "Si estás usando un navegador que no es Internet Explorer, no vas a poder usar Catalis";
+        // alert(msg);
+    // Aviso para quien ingrese con IE < 5.5
+    // } else if ( navigator.appVersion.search(/MSIE (7\.\d?|6\.\d?|5\.5)/) == -1 ) {
+        // var msg = "La versión de Internet Explorer que está utilizando (" + RegExp.$1 + ") no permite trabajar con Catalis. Recomendamos usar la versión 6.";
+        //alert(msg);
+    // }
+
+
+    // -----------------------------------------------------------------------------
+    function handleKey(evt)
+    // -----------------------------------------------------------------------------
+    {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.charCode) ? evt.charCode : evt.keyCode;
+        if ( charCode == 13 ) {
+            if (ie) {
+                event.keyCode = 9;
+            } else if (moz) {
+                document.getElementById("loginForm").pw.focus();
+            }
+        }
+    }
+
+
+    // -----------------------------------------------------------------------------
+    function handleLoginSubmit()
+    // -----------------------------------------------------------------------------
+    {
+        var form = document.getElementById("loginForm");
+        var userid = form.userid.value;
+        var password = form.pw.value;
+        if ( userid == "" || password == "" ) {
+            alert("Debe ingresar su nombre de usuario y su contraseña");
+        } else {
+        var _innerHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        var _innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        form.screen.value = screen.width + "x" + screen.height + ", " + screen.availWidth + "x" + screen.availHeight + ", " + _innerWidth + "x" + _innerHeight;
+            form.submit();
+        }
+    }
+
+    document.getElementById("topBar").style.display = "none";
+</script>
+
+
+<nav class="navbar mb-4" style="background-color: brown;">
+    <div style="margin: auto;">
+        <h1 style="color: #FED;font-family: georgia, 'times new roman', serif ;"> <b>Catalis - Catalogación Bibliográfica</b></h1>  
+    </div>           
+</nav>
+
+<div id="divForm">
+    <form name="loginForm" id="loginForm" action="[pft]v6001^u[/pft]" method="POST" onsubmit="handleLoginSubmit(); return false" style="margin:0; background-color: brown;">
+        <input type="hidden" name="IsisScript" value="[pft]v2000[/pft]">
+        <input type="hidden" name="tarea" value="INICIAR_SESION">
+        <input type="hidden" name="screen">
+    
+        <h2 id="titleLogin">Catalis  | Log In</h2>
+        <div id="inputsDiv">
+            <div>
+                <label class="labelLogin" for="usuario">Usuario: </label><input required id="usuario" type="text" name="userid" value="[pft]v2002[/pft]" size="9" maxlength="20" onkeydown="handleKey(event); return true;">
+            </div>
+            <div>
+                <label class="labelLogin" for="password">Contraseña: </label><input required type="password" name="pw" size="9" maxlength="20">
+            </div>
+        </div>
+
+        <input type="submit" value="Iniciar sesión" class="btnSubmitForm">      
+
+        [pft]if p(v2005) then[/pft]
+    
+            <div style="color: white; margin-top: 5px; font-style: italic;">
+                Usuario o contraseña incorrectos. Por favor, inténtelo nuevamente.
+            </div>
+    
+        [pft]fi[/pft]
+    
+      </form>
+</div>
