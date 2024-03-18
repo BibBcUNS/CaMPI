@@ -1,0 +1,88 @@
+<!-- Pantalla de login/noticias -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script language="JavaScript" type="text/javascript">
+// Aviso para quien no ingrese con IE
+if ( navigator.appName != "Microsoft Internet Explorer" ) {
+	var msg = "Please consider that this version of Catalis does not work properly on browsers other than Internet Explorer 6. That will change, once we finish the next version which will also work on Mozilla. The development version can be tested online; please check the website.";
+	// alert(msg);
+// Aviso para quien ingrese con IE < 5.5
+} else if ( navigator.appVersion.search(/MSIE (8\.\d?|7\.\d?|6\.\d?|5\.5)/) == -1 ) {
+	var msg = "La versión de Internet Explorer que está utilizando (" + RegExp.$1 + ") no permite trabajar con Catalis. Recomendamos usar la versión 6.";
+	alert(msg);
+}
+	
+// Detección del navegador
+var moz = ( document.implementation && document.implementation.createDocument );
+var ie = window.ActiveXObject;
+
+
+// -----------------------------------------------------------------------------
+function handleKey(evt)
+// -----------------------------------------------------------------------------
+{
+	
+	evt = (evt) ? evt : window.event;
+	var charCode = (evt.charCode) ? evt.charCode : evt.keyCode;
+	if ( charCode == 13 ) {
+		if (ie) {
+			event.keyCode = 9;
+		} else if (moz) {
+			document.getElementById("loginForm").pw.focus();
+		}
+	}
+}
+
+
+// -----------------------------------------------------------------------------
+function handleLoginSubmit()
+// -----------------------------------------------------------------------------
+{
+	var form = document.getElementById("loginForm");
+	var userid = form.userid.value;
+	var password = form.pw.value;
+	if ( userid == "" || password == "" ) { 
+		alert("Debe ingresar su nombre de usuario y su contraseña");
+	} else {
+		form.submit();
+	}
+}
+	document.getElementById("topBar").style.display = "none";
+</script>
+
+<nav class="navbar mb-4" style="background-color: rgb(0, 53, 148);">
+    <div style="margin: auto;">
+        <h1 style="color: #FED;font-family: georgia, 'times new roman', serif ;"> <b>Catauto - Catalogación de Autoridades</b></h1>  
+    </div>           
+  </nav>
+  
+<div id="divForm">
+  <form name="loginForm" id="loginForm" action="[pft]v6001^u[/pft]" method="POST" onsubmit="handleLoginSubmit(); return false" style="margin:0; background-color: rgb(0, 53, 148);">
+    <input type="hidden" name="IsisScript" value="[pft]v2000[/pft]">
+    <input type="hidden" name="tarea" value="INICIAR_SESION">
+    <input type="hidden" name="screen">
+  
+    <h2 id="titleLogin">Catauto  | Log In</h2>
+    <div id="inputsDiv">
+		<div>
+			<label class="labelLogin" for="usuario">Usuario: </label><input required id="usuario" type="text" name="userid" value="[pft]v2002[/pft]" size="9" maxlength="20" onkeydown="handleKey(event); return true;">
+		</div>
+		<div>
+			<label class="labelLogin" for="password">Contraseña: </label><input required type="password" name="pw" size="9" maxlength="20">
+		</div>
+	</div>
+
+    <input type="submit" value="Iniciar sesión" class="btnSubmitForm">      
+
+    [pft]if p(v2005) then[/pft]
+
+        <div style="color: white; margin-top: 5px; font-style: italic;">
+            Usuario o contraseña incorrectos. Por favor, inténtelo nuevamente.
+        </div>
+        
+    [pft]fi[/pft]
+
+  </form>
+</div>
