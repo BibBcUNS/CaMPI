@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="pragma" content="no-cache">
+<title>Confirmar operación</title>
+<link rel="stylesheet" type="text/css" href="../css/catalis.css">
+
+<script language="JavaScript" type="text/javascript">
+	//--------------------------------------------------------
+	function handleOK()
+	//--------------------------------------------------------
+	{
+		if(top.serializeRecord(1,1,1,1).length >= window.dialogArguments.maxRecordSize){
+			window.returnValue = "-";
+		}else{
+			window.returnValue = true;
+		}
+
+		var dialog = parent.document.getElementsByTagName('dialog');
+		if (dialog) {
+		    parent.document.getElementsByTagName('dialog')[0].close();
+		} else {
+		    window.close();
+		}
+	}
+
+	//--------------------------------------------------------
+	function handleCancel()
+	//--------------------------------------------------------
+	{
+		window.returnValue = false;
+		//window.close();
+		var dialog = parent.document.getElementsByTagName('dialog');
+	    if (dialog) {
+        parent.document.getElementsByTagName('dialog')[0].close();
+ 		} else {
+	        window.close();
+	    }
+	}
+
+	//--------------------------------------------------------
+	function init()
+	//--------------------------------------------------------
+	{
+		var question = window.dialogArguments.message;
+		window.returnValue = false;
+		
+		document.onkeydown = function(evt) {
+			var evt = (evt) ? evt : window.event;
+			if ( evt.keyCode == 27 ) {
+				handleCancel();
+			}
+		}
+		document.getElementById("btnOK").onclick = handleOK;
+		document.getElementById("btnCancel").onclick = handleCancel;
+	
+		document.getElementById("question").innerHTML = question;
+	
+		document.getElementById("btnOK").focus();
+	}
+
+	window.onload = init;
+</script>
+
+<style type="text/css">
+	body, table {
+		font-family: verdana;
+		font-size: 13px;
+		background: #CDC7A9;
+	}
+	
+	body {
+		margin: 3px;
+	}
+	
+	#question {
+		font-weight: bold;
+		font-size: 13px;
+		padding: 0.3em 1em;
+	}
+	
+	#dataToBeSaved {
+		width: 600px;
+		height: 320px;
+		overflow: scroll;
+		font-weight: normal;
+		padding: 6px;
+		background: #FED;
+		border: 1px solid #999;
+		margin-top: 4px;
+	}
+
+	#recordSizeWrapper{
+		float: right;
+		width: 265px;
+		margin-bottom: 10px;
+		margin-right: 4px;
+		text-align: right;
+	}
+
+	#recordSizeWrapper div{
+		display: inline;
+	}
+
+	#recordSize{
+		cursor: pointer;
+		padding: 2px;
+	}
+</style>
+
+</head>
+
+<body>
+
+	<div id="question"></div>
+
+	<div align="center" style="margin-top: 8px;">
+		<button id="btnOK" class="marcEditButton" accesskey="A"><u>A</u>ceptar</button>
+		<button id="btnCancel" class="marcEditButton" accesskey="C"><u>C</u>ancelar</button>
+	</div>
+
+</body>
+</html>
