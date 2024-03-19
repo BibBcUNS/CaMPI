@@ -1,0 +1,163 @@
+Fri Dec  1 09:35:41 -03 2023
+./unir.sh ucod-marc 028092 028091 gb
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:028092 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=28192
+
+Desbloqueando el registro origen 028092, MFN:28192, de la base ucod-marc
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:028092 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=28191
+
+Desbloqueando el registro destino 028091, MFN:28191, de la base ucod-marc
+-----------------------------------------------------------------
+
+Agregando al registro 028091 el campo v859 del registro 028092
+-----------------------------------------------------------------
+
+Borrando el registro 028092 de la base ucod-marc
+-----------------------------------------------------------------
+
+=============================================================================
+Fri Dec  1 10:29:07 -03 2023
+./unir.sh ucod-marc 057295 057296 057294 GB
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:057295 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=57395
+
+Desbloqueando el registro origen 057295, MFN:57395, de la base ucod-marc
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:057295 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=57394
+
+Desbloqueando el registro destino 057294, MFN:57394, de la base ucod-marc
+-----------------------------------------------------------------
+
+Agregando al registro 057294 el campo v859 del registro 057295
+-----------------------------------------------------------------
+
+Borrando el registro 057295 de la base ucod-marc
+-----------------------------------------------------------------
+
+
+Obteniendo MFN del registro origen NC:057296 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=57396
+
+Desbloqueando el registro origen 057296, MFN:57396, de la base ucod-marc
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:057296 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=57394
+
+Desbloqueando el registro destino 057294, MFN:57394, de la base ucod-marc
+-----------------------------------------------------------------
+
+Agregando al registro 057294 el campo v859 del registro 057296
+-----------------------------------------------------------------
+
+Borrando el registro 057296 de la base ucod-marc
+-----------------------------------------------------------------
+
+=============================================================================
+Fri Dec  1 10:51:53 -03 2023
+./unir.sh ucod-marc 038429 038431 038432 038430 GB
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:038429 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38529
+
+Desbloqueando el registro origen 038429, MFN:38529, de la base ucod-marc
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:038429 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38530
+
+Desbloqueando el registro destino 038430, MFN:38530, de la base ucod-marc
+-----------------------------------------------------------------
+
+Agregando al registro 038430 el campo v859 del registro 038429
+-----------------------------------------------------------------
+
+Borrando el registro 038429 de la base ucod-marc
+-----------------------------------------------------------------
+
+
+Obteniendo MFN del registro origen NC:038431 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38531
+
+Desbloqueando el registro origen 038431, MFN:38531, de la base ucod-marc
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:038431 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38530
+
+Desbloqueando el registro destino 038430, MFN:38530, de la base ucod-marc
+-----------------------------------------------------------------
+
+Agregando al registro 038430 el campo v859 del registro 038431
+-----------------------------------------------------------------
+
+Borrando el registro 038431 de la base ucod-marc
+-----------------------------------------------------------------
+
+
+Obteniendo MFN del registro origen NC:038432 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38532
+
+Desbloqueando el registro origen 038432, MFN:38532, de la base ucod-marc
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:038432 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38530
+
+Desbloqueando el registro destino 038430, MFN:38530, de la base ucod-marc
+-----------------------------------------------------------------
+
+Agregando al registro 038430 el campo v859 del registro 038432
+-----------------------------------------------------------------
+
+Borrando el registro 038432 de la base ucod-marc
+-----------------------------------------------------------------
+
+=============================================================================
+Mon Dec 11 08:56:11 -03 2023
+./unir.sh ucod-marc 029493 029492 GB
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:029493 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=29593
+
+Desbloqueando el registro origen 029493, MFN:29593, de la base ucod-marc
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:029493 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=29592
+
+Desbloqueando el registro destino 029492, MFN:29592, de la base ucod-marc
+-----------------------------------------------------------------
+
+Agregando al registro 029492 el campo v859 del registro 029493
+-----------------------------------------------------------------
+
+Borrando el registro 029493 de la base ucod-marc
+-----------------------------------------------------------------
+
+=============================================================================

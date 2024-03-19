@@ -1,0 +1,26 @@
+^bsubsueloA|^bSA
+^bsubsueloa|^bSA
+^bsubsuueloA|^bSA
+^bsusbsueloA|^bSA
+^bsubsueloB|^bSB
+^bsubsueloC|^bSC
+^bsubsueloc|^bSC
+^bsubsuelom|^bSA
+^bsubsueloV|^bSA
+^bsubsuelo|^bSA
+^bC.D.B.|^bCDB
+^bseguridad e higiene|^bDSH
+^bSala de lectura|^bSL
+^bSala de Lectura|^bSL
+^bsala de lectura|^bSL
+^bINIQO|^bINIEC
+^bEEA|^bBECONOMIA
+^bpasilloDCM|^bSCS
+^bPasilloDCM|^bSCS
+^bCM|^bHM
+^bDCM|^bHM
+^bDCS|^bHM
+^bb^|^bBAJA^
+^bconsulta|^bMM
+^bc^|^bMM^
+

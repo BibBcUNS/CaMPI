@@ -1,19 +1,7 @@
-<?php
-
-$usuario=$_POST['usuario'];
-$pw=$_POST['pw'];
-
-$verificar = file_get_contents("https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/verificarpw.xis&usuario=$usuario&pw=$pw");
-
-if ($verificar != 'OK') {
-?>  <!-- Esto es si ingresa mal la contraseña o usuario -->
-	<HTML><HEAD><TITLE>Redireccionado</TITLE>
-	<META HTTP-EQUIV="Refresh" CONTENT="0; URL=/herramientas">
-	</HEAD>
-<?php
-}
-else {
-?>
+	<?php
+		$usuario = $_POST["usuario"];
+		$pw = $_POST["password"];
+	?>
 	<!-- Aca comienzan las herramientas, en caso de log correcto -->
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 	"http://www.w3.org/TR/html4/loose.dtd">
@@ -150,6 +138,17 @@ else {
 
 		<nav id="navHerramientas">
 			<h1>CaMPI Catalogación - Herramientas</h1>
+
+			<div id="quickAccessWrapper">
+      			<div id="goToLabel">Acceso rápido:</div>
+      			<div title="Ir a Catalis..." id="goToCatalis" class="goToButton">Catalis</div>
+      			<div title="Ir a Catauto..." id="goToCatauto" class="goToButton">Catauto</div>
+    		</div>
+
+			<div id="closeSessionWraper" style="font-size: 19px;">
+				<div>Usuario: <span><?php echo($_POST['usuario']) ?></span> </div>
+				<button id="btnFinSesion">Cerrar Sesión</button>
+			</div>
 		</nav>
 
 		<div id="herramientasContainer">
@@ -222,7 +221,7 @@ else {
 												Control de stock
 		-------------------------------------------------------------------------------------------------->
 
-		<div id="divControlStock">
+		<!--div id="divControlStock">
 		<form onsubmit="return validForm(this)" action="control_stock.php" method="post">
 			<h2>Control de Stock y Generación de Etiquetas</h2><br>
 			Seleccione la Base de datos de la cual quiere generar el listado <br> 
@@ -290,11 +289,9 @@ else {
 			</div>
 			<input class="btnHerramientas" type="submit" value="   Comprobar    ">
 		</form>
-		</div>
+		</div-->
 
-		<!-------------------------------------------------------------------------------------------------
-												Unión de registros
-		-------------------------------------------------------------------------------------------------->
+<!-- UNIÓN DE REGISTROS -->
 
 	<div id="divUnionRegistros">
 		<form onsubmit="return validForm1(this)" action="unir_registros_do.php" method="post">
@@ -311,7 +308,7 @@ else {
 						$bases = explode(":",$basesxis);
 						for($i=0;$i<count($bases)-1;$i++){
 							// Esto es una restricción QUE HAY QUE BORRAR
-							if ($bases[$i] == "eunm-p" || $bases[$i] == "ucod-marc-p" || $bases[$i] == "carpc" || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "cems" || $bases[$i] == "demo")
+							if ($bases[$i] == "eunm" || $bases[$i] == "ucod-marc" || $bases[$i] == "carpc" || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "cems" || $bases[$i] == "demo")
 							echo "<option value=$bases[$i]>$bases[$i]</option>";
 						}
 					?>
@@ -331,13 +328,12 @@ else {
 		</form>	
 	</div>
 
-	<!-------------------------------------------------------------------------------------------------
-											Mover registros
-    -------------------------------------------------------------------------------------------------->
+<!-- MOVER REGISTROS -->
+
 	<div id="divMoverRegistro">
 		<form onsubmit="return validForm2(this)" action="ucod_2_eunm_do.php" method="post">
-			<input type="hidden" name="usuario" value="<?php $usuario ?>">
-			<input type="hidden" name="pw" value="<?php $pw ?>">
+			<input type="hidden" name="usuario" value="<?php print $usuario ?>">
+			<input type="hidden" name="pw" value="<?php print $pw ?>">
 			
 			<table border="0" cellspacing="10" align="center">
 			<tbody><h2>Mover Registro</h2>
@@ -348,7 +344,7 @@ else {
 						echo '<option selected value=""></option>';
 						for($i=0;$i<count($bases)-1;$i++){
 							// Esto es una restricción QUE HAY QUE BORRAR
-							if ($bases[$i] == "ucod-marc-p"  || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "eunm-p" || $bases[$i] == "huber" || $bases[$i] == "demo")
+							if ($bases[$i] == "ucod-marc"  || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "eunm" || $bases[$i] == "huber" || $bases[$i] == "demo")
 							echo "<option value=$bases[$i]>$bases[$i]</option>";
 						}
 					?>
@@ -362,7 +358,7 @@ else {
 						echo '<option selected value=""></option>';		
 						for($i=0; $i<count($bases)-1; $i++){
 							// Esto es una restricción QUE HAY QUE BORRAR
-							if ($bases[$i] == "eunm-p" || $bases[$i] == "ead" || $bases[$i] == "eeo" || $bases[$i] == "eunm-ebook"  || $bases[$i] == "ucod-marc-p" || $bases[$i] == "demo")
+							if ($bases[$i] == "eunm" || $bases[$i] == "ead" || $bases[$i] == "eeo" || $bases[$i] == "eunm-ebook"  || $bases[$i] == "ucod-marc" || $bases[$i] == "demo")
 							echo "<option value=$bases[$i]>$bases[$i]</option>";
 						}
 					?>
@@ -379,8 +375,20 @@ else {
 	</div>
 	<!-- fin container -->
 
-<?php } ?>
+	<script>
+		document.getElementById("btnFinSesion").addEventListener("click", function(){
+			if ( confirm("¿Confirma que desea finalizar la sesión?") ) {
+				window.location.href = "../login/php/logout.php";
+			}
+		});
 
+		document.getElementById("goToCatalis").addEventListener("click", function(){
+			window.open("/login/php/openModule.php?modulo=catalis", "_blank")
+		});
 
+		document.getElementById("goToCatauto").addEventListener("click", function(){
+			window.open("/login/php/openModule.php?modulo=catauto", "_blank")
+		});
+	</script>
 </body>
 </html>

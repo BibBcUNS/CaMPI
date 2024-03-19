@@ -17,5 +17,5 @@
 #   4. Configurar las rutas *dentro* del archivo fullinv.cip
 # ---------------------------------------------------------------------
 
-CIPAR=/var/www/catauto/cgi-bin/catalis/fullinv.cip
+CIPAR=/var/www/campi-catalogacion/catauto/cgi-bin/catauto/fullinv.cip
 mx cipar=$CIPAR db=$1 gizmo=DICTGIZ fst=@BIBLIO.FST actab=AC-ANSI.TAB uctab=UC-ANSI.TAB stw=@BIBLIO.STW fullinv=$1 tell=500

@@ -32,7 +32,7 @@ function init()
   // parentWindow.f985 para los que ya tienen tapa definida
   var fileType = parentWindow.f985 ? parentWindow.f985.substr(4) : null;
 
-  var dummyCover = "/catalis/img/book-cover-placeholder.jpg";
+  var dummyCover = "../img/book-cover-placeholder.jpg";
   //agrego esta línea por actualizaciones para IE11 en Windows 10. Ver #6779 (Gonzalo)
   document.getElementById("submit-subir").disabled = false;
 
@@ -48,8 +48,7 @@ function init()
       document.getElementsByClassName("miniatura-tapa")[0].src = dummyCover;
 
       // Eliminar imagen de pantalla principal.
-      top.document.getElementsByClassName("miniatura-tapa")[0].src = dummyCover;
-
+      top.document.getElementsByClassName("miniatura-tapa")[0].src = "/catalis/htdocs/catalis/img/book-cover-placeholder.jpg";
     }
   });
 
@@ -161,7 +160,7 @@ window.onload = init;
   <div style="padding-top: 5px; background-color: #FED;">
     Haga click en la imagen para elegir una nueva...
     <div class="imagen-wrapper">
-      <img id="imagen-actual" class="miniatura-tapa" src="/catalis/img/book-cover-placeholder.jpg" onclick="document.getElementById('imagenParaSubir').click()"/>
+      <img id="imagen-actual" class="miniatura-tapa" src="../img/book-cover-placeholder.jpg" onclick="document.getElementById('imagenParaSubir').click()"/>
     </div>
 
     <button id="deleteImage" class="marcEditButton" style="margin-top: 5px;">Eliminar imagen</button>

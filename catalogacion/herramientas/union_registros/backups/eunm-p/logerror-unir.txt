@@ -1,0 +1,413 @@
+Wed Aug  9 08:39:07 -03 2023
+./unir.sh eunm-p 007305 006722 rap
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=7280
+
+Desbloqueando el registro origen 007305, MFN:7280, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=6708
+
+Desbloqueando el registro destino 006722, MFN:6708, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 006722 el campo v859 del registro 007305
+-----------------------------------------------------------------
+
+Borrando el registro 007305 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Sep 13 12:10:48 -03 2023
+./unir.sh eunm-p 001128 001129 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:001128 de la base eunm-p
+-----------------------------------------------------------------
+MFN=1220
+
+Desbloqueando el registro origen 001128, MFN:1220, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:001128 de la base eunm-p
+-----------------------------------------------------------------
+MFN=1221
+
+Desbloqueando el registro destino 001129, MFN:1221, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 001129 el campo v859 del registro 001128
+-----------------------------------------------------------------
+
+Borrando el registro 001128 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Sep 13 12:29:01 -03 2023
+./unir.sh eunm-p 008106 008104 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:008106 de la base eunm-p
+-----------------------------------------------------------------
+MFN=8065
+
+Desbloqueando el registro origen 008106, MFN:8065, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:008106 de la base eunm-p
+-----------------------------------------------------------------
+MFN=8063
+
+Desbloqueando el registro destino 008104, MFN:8063, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 008104 el campo v859 del registro 008106
+-----------------------------------------------------------------
+
+Borrando el registro 008106 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Sep 13 14:48:05 -03 2023
+./unir.sh eunm-p 007305 009049 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 007305, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Obteniendo MFN del registro destino NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9007
+
+Desbloqueando el registro destino 009049, MFN:9007, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009049 el campo v859 del registro 007305
+-----------------------------------------------------------------
+
+fatal: ,('a859~',v859,'~'))
+
+
+Borrando el registro 007305 de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+=============================================================================
+Wed Sep 13 14:58:46 -03 2023
+./unir.sh eunm-p 007305 006722 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 007305, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Obteniendo MFN del registro destino NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro destino 006722, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 006722 el campo v859 del registro 007305
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Borrando el registro 007305 de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+=============================================================================
+Wed Sep 13 15:07:51 -03 2023
+./unir.sh eunm-p 001550 002354 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:001550 de la base eunm-p
+-----------------------------------------------------------------
+MFN=1642
+
+Desbloqueando el registro origen 001550, MFN:1642, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:001550 de la base eunm-p
+-----------------------------------------------------------------
+MFN=2438
+
+Desbloqueando el registro destino 002354, MFN:2438, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 002354 el campo v859 del registro 001550
+-----------------------------------------------------------------
+
+Borrando el registro 001550 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Fri Sep 15 12:20:14 -03 2023
+./unir.sh eunm-p 003399 003400 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:003399 de la base eunm-p
+-----------------------------------------------------------------
+MFN=3455
+
+Desbloqueando el registro origen 003399, MFN:3455, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:003399 de la base eunm-p
+-----------------------------------------------------------------
+MFN=3456
+
+Desbloqueando el registro destino 003400, MFN:3456, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 003400 el campo v859 del registro 003399
+-----------------------------------------------------------------
+
+Borrando el registro 003399 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Oct 11 13:18:29 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9046
+
+Desbloqueando el registro origen 009088, MFN:9046, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Oct 11 13:32:25 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 009088, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+fatal: ,('a859~',v859,'~'))
+
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+=============================================================================
+Wed Oct 11 13:36:18 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 009088, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+fatal: ,('a859~',v859,'~'))
+
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+=============================================================================
+Wed Oct 11 13:36:53 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 009088, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+fatal: ,('a859~',v859,'~'))
+
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+=============================================================================
+Wed Oct 11 13:37:05 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 009088, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+fatal: ,('a859~',v859,'~'))
+
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+=============================================================================
+Wed Oct 11 13:37:17 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 009088, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+fatal: ,('a859~',v859,'~'))
+
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+=============================================================================
+Wed Oct 11 14:45:03 -03 2023
+./unir.sh eunm-p 009090 009088 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009090 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9048
+
+Desbloqueando el registro origen 009090, MFN:9048, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:009090 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9046
+
+Desbloqueando el registro destino 009088, MFN:9046, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009088 el campo v859 del registro 009090
+-----------------------------------------------------------------
+
+Borrando el registro 009090 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================

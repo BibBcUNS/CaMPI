@@ -1,0 +1,3 @@
+base: /var/www/catalis/bases/catalis/eunm-p/biblio
+base_backup_count: 1
+base_backup=/var/www/catalis/htdocs/herramientas/union_registros/backups/eunm-p/1/biblio

@@ -87,12 +87,13 @@
     (,
         ,if v6000.1 = '#' then /* ignorar líneas de comentarios */
         ,else if v6000 : 'PATH_DB='          then '^b',mid(v6000,instr(v6000,'=')+1,size(v6000))
+        ,else if v6000 : 'PATH_DBU='         then '^u',mid(v6000,instr(v6000,'=')+1,size(v6000))
         ,else if v6000 : 'PATH_CGI-BIN='     then '^c',mid(v6000,instr(v6000,'=')+1,size(v6000))
         ,else if v6000 : 'PATH_HTDOCS='      then '^h',mid(v6000,instr(v6000,'=')+1,size(v6000))
         ,else if v6000 : 'PATH_CISIS='       then '^i',mid(v6000,instr(v6000,'=')+1,size(v6000))
         ,else if v6000 : 'PATH_LOGS='        then '^l',mid(v6000,instr(v6000,'=')+1,size(v6000))
         ,else if v6000 : 'PATH_TEMP='        then '^t',mid(v6000,instr(v6000,'=')+1,size(v6000))
-        ,fi,fi,fi,fi,fi,fi,fi,
+        ,fi,fi,fi,fi,fi,fi,fi,fi,
     ),
 </pft></field>
 
@@ -120,8 +121,8 @@
     if v2001 = 'INICIAR_SESION' and a(v2104) then
         /* Buscamos la primera base en la lista de bases para este usuario */
         ref(
-            [v6003^b,'/catalis/users/users']
-            l([v6003^b,'/catalis/users/users']v2002),
+            [v6003^u,'/users/users']
+            l([v6003^u,'/users/users']v2002),
             v5^*[1],
         )
     fi
@@ -134,9 +135,9 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <parm name="cipar"><pft>
     /* ----- BASE DE DATOS (BIBLIOGRÁFICA) ----- */
-    'BIBLIO.*=',          v6003^b,'/catalis/',v2104,'/biblio.*'/
-    'CONTROL-NUMBER.TXT=',v6003^b,'/catalis/',v2104,'/cn.txt'/
-    'DB-DESCR.TXT=',      v6003^b,'/catalis/',v2104,'/db-descr.txt'/
+    'BIBLIO.*=',          v6003^b, '/catalis/' ,v2104,'/biblio.*'/
+    'CONTROL-NUMBER.TXT=',v6003^b, '/catalis/' , v2104,'/cn.txt'/
+    'DB-DESCR.TXT=',      v6003^b, '/catalis/' , v2104,'/db-descr.txt'/
 
     /* ----- BASE DE DATOS (CLASIFICACION) ----- */
     'MSC.*=',             v6003^b,'/opacmarc/msc2000/msc.*'/
@@ -166,7 +167,7 @@
 
     /* ----- Usuarios, permisos ----- */
     /*'IP-TABLE=',            v6003^c,'/catalis/config/ip-table.txt'/*/
-    'USERS.*=',             v6003^b,'/catalis/users/users.*'/
+    'USERS.*=',             v6003^u,'/users/users.*'/
     
     /* ----- PFT (compartidos con el OPAC) ----- */
     'DOCUMENT-TYPE.PFT=', v6003^c,'/common/pft/doc-type.pft'/
@@ -177,7 +178,7 @@
     'BIB-LIST-HEAD.HTM=', v6003^c,'/catalis/html/bib-list-head.htm'/
     
     /* ----- Archivo de logs (uno por fecha) ----- */
-    'LOGFILE.TXT=',v6003^l ,'catalis.log'/
+    'LOGFILE.TXT=',v6003^l ,'/catalis.log'/
     
     /* ----- Directorio para archivos temporales ----- */
     'CI_TEMPDIR=',v6003^t,/
