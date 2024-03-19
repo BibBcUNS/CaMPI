@@ -26,10 +26,8 @@ function getNewRecordParams()
 	var dHeight = ( screen.width == 800 ) ? 250 : 220;
 
 	var winProperties = "font-size: 10px; dialogWidth: " + dWidth + "px; dialogHeight: " + dHeight + "px;";
-	(async function(){
-		var newRecParams = await window.showModalDialog(URL_SELECT_TEMPLATE, null, winProperties);
-		createRecord(newRecParams);
-	})();
+	var newRecParams = window.showModalDialog(URL_SELECT_TEMPLATE, null, winProperties);
+	createRecord(newRecParams);
 
 }
 

@@ -1,0 +1,58 @@
+/* -----------------------------------------------------------------------------------------------
+                                         Pantallas de logeo 
+ ------------------------------------------------------------------------------------------------ */
+
+ body {
+    background-color:#C9C7BA;
+    margin: 0;
+}
+
+#divForm{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginForm{
+    width: 400px;
+    text-align: center;
+    margin: 20px;
+    background-color: brown;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid white;
+}
+
+#titleLogin{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #FED;
+    font-weight: bold;
+}
+
+#inputsDiv{
+    border-top: 1px solid #C9C7BA;
+    text-align: right;
+    margin-bottom: 7px;
+    padding-right: 90px;
+    padding-top: 15px;
+}
+
+#inputsDiv input{
+    margin-left: 4px;
+}
+
+.labelLogin{
+    color: white;
+}
+
+.btnSubmitForm{
+    background-color: #E2DFD0;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 6px;
+}
+
+.btnSubmitForm:hover{
+    cursor: pointer;
+}

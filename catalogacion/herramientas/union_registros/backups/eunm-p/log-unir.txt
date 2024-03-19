@@ -1,0 +1,795 @@
+Wed Aug  9 08:39:07 -03 2023
+./unir.sh eunm-p 007305 006722 rap
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=7280
+
+Desbloqueando el registro origen 007305, MFN:7280, de la base eunm-p
+-----------------------------------------------------------------
+unlock: mfn=7280 mfrl=916
+
+Obteniendo MFN del registro destino NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=6708
+
+Desbloqueando el registro destino 006722, MFN:6708, de la base eunm-p
+-----------------------------------------------------------------
+unlock: mfn=6708 mfrl=1432
+
+Agregando al registro 006722 el campo v859 del registro 007305
+-----------------------------------------------------------------
+mfn=  6708 
+  1  "006722"
+  5  "20161229082825.0"
+  8  "161214s2015####cl#a#####b####000#0#spa#d"
+ 20  "##^a9789211218831"
+ 82  "04^a336.2^215"
+245  "00^aDesigualdad, concentración del ingreso y tributación sobre las altas rentas en América Latina /^cJuan Pablo Jiménez, editor."
+260  "##^aSantiago de Chile :^bComisión Económica para América Latina y el Caribe (CEPAL),^c2015."
+300  "##^a164 p. :^bil. ;^c23 cm."
+490  "1#^aLibros de la CEPAL ;^v134"
+500  "##^a"Desarrollo económico"--Cubierta."
+504  "##^aIncluye referencias bibliográficas."
+505  "0#^aPrólogo -- Introducción -- Cap.I. Desigualdad, concentración y rentas altas en América Latina / Verónica Amarante, Juan Pablo Jiménez -- Cap.II. La tributación sobre las altas rentas en América Latina / Juan Carlos Gómez Sabaíni, Darío Rossignolo -- Cap.III. Desigualdad y altas rentas en el Uruguay: un análisis basado en los registros tributarios y las encuestas de hogares del período 2009-2011 / Gabriel Burdín, Fernando Esponda, Andrea Vigorito -- Cuadros -- Gráficos."
+650  "#7^aEconomía.^2unbist"
+650  "#7^aPrecios.^2unbist"
+650  "#7^aRenta.^2unbist"
+650  "#7^aIngresos fiscales.^2unbist"
+651  "#7^aAmérica Latina^2unbist"
+700  "1#^aGiménez, Juan Pablo.^4edt"
+830  "#0^aLibros de la CEPAL ;^v134"
+859  "##^aAR-BaUNS^bSA^c$100,00.-^dCEPAL^f20161227^h336.2^iJ564^p125818/016^uPDC^y20161214"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+991  "PDC"
+1106  "^iRAP@192.168.0.1^t202308090822^x1691580125"
+859  "##^aAR-BaUNS^bSA^c$100,00.-^dMICAELA MUZI^f20180320^h658.403^iB147^p126473/018^uGC^y20180320"
+
+Borrando el registro 007305 de la base eunm-p
+-----------------------------------------------------------------
+mfn=  7280 [DELETED]
+  1  "007305"
+  5  "20180320110604.0"
+  8  "180319s1975####ag#a#####b####000#0#spa#d"
+ 82  "04^a658.403^221"
+ 82  "04^a519.54^219"
+100  "1#^aBagur, Bernardino Jorge."
+245  "10^aModelos de decisión /^cJorge Bagur, Beatriz Calvo de Bagur, Rodolfo Pérez."
+250  "##^aEd. previa 1."
+260  "##^aBuenos Aires :^bMacchi,^cc1975."
+300  "##^a534 p. :^bil. ;^c24 cm."
+490  "0#^aSerie de manuales universitarios ;^v1"
+504  "##^aIncluye referencias bibliográficas."
+650  "#7^aAdministración de empresas.^2unbist"
+650  "#7^aTeoría de la decisión.^2Isoc"
+650  "#7^aProgramación lineal.^2unbist"
+650  "#7^aTeoría de los juegos.^2unbist"
+650  "#7^aProbabilidad.^2unbist"
+700  "1#^aCalvo, Beatriz."
+700  "1#^aPérez, Rodolfo H."
+859  "##^aAR-BaUNS^bSA^c$100,00.-^dMICAELA MUZI^f20180320^h658.403^iB147^p126473/018^uGC^y20180320"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+985  "##^ajpg"
+991  "GC"
+1106  "^iRAP@192.168.0.1^t202308090829^x1691580560"
+
+=============================================================================
+Wed Sep 13 12:10:48 -03 2023
+./unir.sh eunm-p 001128 001129 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:001128 de la base eunm-p
+-----------------------------------------------------------------
+MFN=1220
+
+Desbloqueando el registro origen 001128, MFN:1220, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:001128 de la base eunm-p
+-----------------------------------------------------------------
+MFN=1221
+
+Desbloqueando el registro destino 001129, MFN:1221, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 001129 el campo v859 del registro 001128
+-----------------------------------------------------------------
+mfn=  1221 
+  1  "001129"
+  5  "20061122123351.0"
+  8  "011012s2002####nyua#####b####001#0#eng##"
+ 10  "##^a##2001054912"
+ 20  "##^a0387953698"
+ 40  "##^aDLC^cDLC^dC#P^dOHX^dDLC"
+ 50  "00^aQH585.5.D38^bC65 2002"
+ 72  "##^aQH^2lcco"
+ 82  "00^a571.6/01/13^221"
+245  "00^aComputational cell biology /^cChristopher P. Fall ... [et al.], editors."
+260  "##^aNew York :^bSpringer,^cc2002."
+300  "##^axx, 468 p. :^bil. ;^c25 cm."
+440  "#0^aInterdisciplinary applied mathematics ;^vv. 20"
+504  "##^aIncluye referencias bibliográficas (p. [451]-461) e índice."
+650  "#7^aBiología.^2unbist"
+650  "#7^aCitología.^2unbist"
+650  "#7^aSimulación por computadora.^2unbist"
+650  "#7^aModelos matemáticos.^2unbist"
+700  "1#^aFall, Christopher P."
+856  "41^3Tabla de contenido^uhttp://www.loc.gov/catdir/toc/fy032/2001054912.html"
+859  "##^aAr-BaUNS^bplapiqui^c$213,83.-^f20061122^o410/06^p117252/006^sM&A - PROCEDENCIA DIQ^uGC^y20061107"
+905  "c"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "4"
+918  "a"
+919  "#"
+991  "GC"
+1106  "^iPDC@192.168.0.1^t201905311711^x1559333464"
+859  "##^aAr-BaUNS^bSA^c$15,00.-^dRECTORADO UNS^f20061106^h378.825^iR259^p117250/006^uGC^y20061106"
+
+Borrando el registro 001128 de la base eunm-p
+-----------------------------------------------------------------
+mfn=  1220 [DELETED]
+  1  "001128"
+  5  "20061107145349.0"
+  8  "890605s1989####ag############100#0#spa##"
+ 10  "##^a###89148802#"
+ 20  "##^a9506001359"
+ 40  "##^aDLC^cDLC^dDLC"
+ 43  "##^as-ag---"
+ 50  "00^aLE21.C72^bR39 1989"
+ 82  "00^a378.82/54^220"
+245  "03^aLa Reforma universitaria :^b1918-1988."
+260  "##^aBuenos Aires, Argentina :^bLegasa,^cimpreso en 1989."
+300  "##^a220 p. ;^c23 cm."
+440  "#0^aEnsayo crítico"
+500  "##^aInforme de un seminario realizado durante los días 13 y 14 de junio de 1988."
+500  "##^aCabecera de portada: Ministerio de Educación y Justicia de la Nación; Universidad Nacional de Córdoba; Fundación Friedrich Ebert."
+610  "20^aUniversidad Nacional de Córdoba."
+650  "#7^aEnseñanza superior.^2unbist"
+651  "#7^aArgentina.^2unbist"
+710  "1#^aArgentina.^bMinisterio de Educación y Justicia."
+710  "2#^aUniversidad Nacional de Córdoba."
+710  "2#^aFriedrich-Ebert-Stiftung."
+859  "##^aAr-BaUNS^bSA^c$15,00.-^dRECTORADO UNS^f20061106^h378.825^iR259^p117250/006^uGC^y20061106"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "#"
+918  "a"
+919  "#"
+991  "GC"
+1106  "^iPDC@192.168.0.1^t201509041855^x1441403749"
+
+=============================================================================
+Wed Sep 13 12:29:01 -03 2023
+./unir.sh eunm-p 008106 008104 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:008106 de la base eunm-p
+-----------------------------------------------------------------
+MFN=8065
+
+Desbloqueando el registro origen 008106, MFN:8065, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:008106 de la base eunm-p
+-----------------------------------------------------------------
+MFN=8063
+
+Desbloqueando el registro destino 008104, MFN:8063, de la base eunm-p
+-----------------------------------------------------------------
+unlock: mfn=8063 mfrl=888
+
+Agregando al registro 008104 el campo v859 del registro 008106
+-----------------------------------------------------------------
+mfn=  8063 
+  1  "008104"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "191105s2008####ag#a#####b####000#0#spa#d"
+245  "10^aDesempeño por competencias :^bevaluación de 360° /^cMartha Alicia Alles."
+250  "##^aNueva ed. actualizada."
+260  "##^aBuenos Aires :^bGranica,^c2008."
+300  "##^a328 p. :^bil. ;^c23 cm."
+490  "0#^aRecursos humanos"
+500  "##^a"2a. ed."--Verso port."
+504  "##^aIncluye referencias bibliográficas."
+ 20  "##^a9789506415402"
+100  "1#^aAlles, Martha,^d1947-"
+ 82  "04^a658.3^221"
+650  "#7^aAdministración de personal.^2unbist"
+650  "#7^aEvaluación del desempeño.^2unbist"
+653  "##^aComportamiento organizacional"
+653  "##^aGestión por competencias"
+985  "##^ajpg"
+991  "GC"
+  5  "20191105135853.0"
+859  "##^aAR-BaUNS^bSA^c$725,00.-^dARCHIVO GENERAL DE LA NACIÓN (ARGENTINA)^f20191105^h658.3^iAL54-4a2^lAGN2019^p127360/019^uGC^y20191105"
+1106  "^iLV@192.168.0.1^t202308071135^x1691418922"
+859  "##^aAR-BaUNS^bSA^c$356,00.-^dARCHIVO GENERAL DE LA NACIÓN (ARGENTINA)^f20191105^h658.3^iN112^lAGN2019^p127362/019^uPDC^y20191105"
+
+Borrando el registro 008106 de la base eunm-p
+-----------------------------------------------------------------
+mfn=  8065 [DELETED]
+  1  "008106"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "191105s2016####ag#######b####000#0#spa#d"
+245  "10^aGestión del desempeño de personas :^bun enfoque conceptual y práctico /^cRodolfo Nabhen."
+250  "##^a1a. ed."
+260  "##^aCABA [i.e. Ciudad Autónoma de Buenos Aires] :^bEDICON,^c[2016]"
+300  "##^a166 p. ;^c21 cm."
+504  "##^aIncluye referencias bibliográficas."
+ 20  "##^a9789877410273"
+100  "1#^aNabhen, Rodolfo."
+ 82  "04^a658.3^221"
+650  "#7^aAdministración de personal.^2unbist"
+650  "#7^aEvaluación del desempeño.^2unbist"
+650  "#7^aDirección por objetivos.^2unbist"
+653  "##^aGestión por competencias"
+985  "##^ajpg"
+991  "PDC"
+  5  "20191111113035.0"
+859  "##^aAR-BaUNS^bSA^c$356,00.-^dARCHIVO GENERAL DE LA NACIÓN (ARGENTINA)^f20191105^h658.3^iN112^lAGN2019^p127362/019^uPDC^y20191105"
+1106  "^iGC@192.168.0.1^t201911111130^x1573482635"
+
+=============================================================================
+Wed Sep 13 14:48:05 -03 2023
+./unir.sh eunm-p 007305 009049 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 007305, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9007
+
+Desbloqueando el registro destino 009049, MFN:9007, de la base eunm-p
+-----------------------------------------------------------------
+unlock: mfn=9007 mfrl=1186
+
+Agregando al registro 009049 el campo v859 del registro 007305
+-----------------------------------------------------------------
+
+Borrando el registro 007305 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Sep 13 14:58:46 -03 2023
+./unir.sh eunm-p 007305 006722 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 007305, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:007305 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro destino 006722, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 006722 el campo v859 del registro 007305
+-----------------------------------------------------------------
+
+Borrando el registro 007305 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Sep 13 15:07:51 -03 2023
+./unir.sh eunm-p 001550 002354 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:001550 de la base eunm-p
+-----------------------------------------------------------------
+MFN=1642
+
+Desbloqueando el registro origen 001550, MFN:1642, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:001550 de la base eunm-p
+-----------------------------------------------------------------
+MFN=2438
+
+Desbloqueando el registro destino 002354, MFN:2438, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 002354 el campo v859 del registro 001550
+-----------------------------------------------------------------
+mfn=  2438 
+  1  "002354"
+  5  "20090312132116.0"
+  8  "090312s2002####sp#a##########001#0#spa#d"
+ 20  "##^a8471013134"
+ 41  "1#^aspa^hger"
+ 82  "04^a616.0757^221"
+100  "1#^aMöller, Torsten B."
+245  "10^aAnatomía radiológica /^cTorsten B. Möller, Emil Reif."
+250  "##^a2a. ed."
+260  "##^aMadrid :^bMarbán,^cc2002."
+300  "##^avii, 364 p. :^bprincipalmente il. ;^c22 cm."
+500  "##^aTraducción de: Taschenatlas der Röntgenanatomic, 2. überarb. Aufl."
+500  "##^aIncluye índice."
+650  "#7^aMedicina.^2unbist"
+653  "##^aRadiología"
+653  "##^aAnatomía humana"
+700  "1#^aReif, Emil."
+859  "##^aAr-BaUNS^bCSCS^c$52,00.-^f20090312^h616.0757^iM736a2^o44/06^p120398/009^sLIBRERÍA CULTURAL AMERICANA - PROCEDENCIA CM^uGC^y2006"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+991  "GC"
+1106  "^iGC@200.49.228.12^t200906181227^x1245338855"
+859  "##^aAr-BaUNS^bSA^c$25,00.-^dFONDEC (FONDO NACIONAL DE LA CULTURA Y LAS ARTES)^f20071030^h759.9892^iP111^p118431/007^uGC^y20071030"
+
+Borrando el registro 001550 de la base eunm-p
+-----------------------------------------------------------------
+mfn=  1642 [DELETED]
+  1  "001550"
+  5  "20071031085935.0"
+  8  "071030s2007####py#ao####bc###000#0#spa#d"
+ 82  "04^a759.9892^221"
+100  "1#^aPaats Martínez, William."
+245  "13^aEl mundo imaginado por Olga Blinder :^bsus pinturas /^cWilliam Paats Martínez."
+260  "##^aAsunción, Paraguay :^bCentro Cultural de España Juan de Salazar,^c2007.^f(Imprenta Arte Nuevo)"
+300  "##^aix, 83 p. :^bil. ;^c21 x 22 cm."
+504  "##^aIncluye referencias bibliográficas."
+650  "#7^aPintura.^2unbist"
+651  "#7^aParaguay.^2unbist"
+700  "1#^aBlinder, Olga,^d1921-"
+859  "##^aAr-BaUNS^bSA^c$25,00.-^dFONDEC (FONDO NACIONAL DE LA CULTURA Y LAS ARTES)^f20071030^h759.9892^iP111^p118431/007^uGC^y20071030"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+980  "^dISBN-13: 978-99953-828-0-3^aPaats Martínez, William\r\nAR-BaUNS"
+991  "GC"
+1106  "^iGC@200.49.224.88^t200710310859^x1193831975"
+
+=============================================================================
+Fri Sep 15 12:20:14 -03 2023
+./unir.sh eunm-p 003399 003400 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:003399 de la base eunm-p
+-----------------------------------------------------------------
+MFN=3455
+
+Desbloqueando el registro origen 003399, MFN:3455, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:003399 de la base eunm-p
+-----------------------------------------------------------------
+MFN=3456
+
+Desbloqueando el registro destino 003400, MFN:3456, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 003400 el campo v859 del registro 003399
+-----------------------------------------------------------------
+mfn=  3456 
+  1  "003400"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "101202s1986####ag#a#####b####000#0#spa#d"
+245  "10^aCómputos y presupuestos :^bmanual para la construcción de edificios con computación aplicada /^cMario E. Chandías."
+250  "##^a12a. ed."
+260  "##^aBuenos Aires :^bLibrería y Editorial Alsina,^c1986."
+300  "##^axii, 525 [1] p. :^bil. ;^c23 cm."
+504  "##^aIncluye referencias bibliográficas."
+ 20  "##^a9505530099"
+100  "1#^aChandías, Mario Eduardo."
+ 82  "04^a692.5^221"
+650  "#7^aConstrucción.^2unbist"
+650  "#7^aConstrucciones.^2unbist"
+650  "#7^aPresupuestación.^2unbist"
+653  "##^aCómputo métrico"
+991  "MI"
+  5  "20191227082239.0"
+859  "##^aAr-BaUNS^bSA^c$30,00.-^f20101202^h692.5^iC361a12^o1022/86^p121865/010^sEL ATENEO - PROCEDENCIA DCA^uMI^y20101202"
+859  "##^aAr-BaUNS^bSA^c$30,00.-^f20101202^h692.5^iC361a12^o1022/86^p121866/010^sEL ATENEO - PROCEDENCIA DCA^tEj.2^uMI^y20101202"
+1106  "^iGC@192.168.0.1^t201912270822^x1577445759"
+859  "##^aAr-BaUNS^bSC^f20101125^h581.98^iH862^p77483/977^uMI^y1977"
+
+Borrando el registro 003399 de la base eunm-p
+-----------------------------------------------------------------
+mfn=  3455 [DELETED]
+  1  "003399"
+  5  "20101125142306.0"
+  8  "771220s1974####it#bf####b####001#0#ita##"
+ 10  "##^a###75408748#"
+ 40  "##^aDLC^cICU^dICU^dDLC"
+ 41  "0#^aita^aspa^apor^aeng"
+ 43  "##^acl-----"
+ 50  "00^aZ5358.L38^bH8^aQK205"
+100  "1#^aHuber, Otto."
+245  "13^aLe savane neotropicali :^bbibliografia sulla loro ecologia vegetale e fitogeografia = Las sabanas neotropicales : bibliografía sobre su ecología vegetal y fitogeografía = The neotropical savannas : select bibliography on their plant ecology and phytogeography /^cdi Otto Huber."
+246  "11^aLas sabanas neotropicales : bibliografía sobre su ecología vegetal y fitogeografía"
+246  "11^aThe neotropical savannas : select bibliography on their plant ecology and phytogeography"
+260  "##^aRoma :^bIstituto Ítalo-Latino Americano,^c1974."
+300  "##^axlii, 855 p. :^b2 maps ;^c24 cm."
+490  "1#^aPublicación del Instituto Italo-Latino Americano 3 ;^v3"
+500  "##^aTexto en italiano, español, portugués e inglés."
+500  "##^aIncluye índice."
+650  "#7^aBibliografías.^2unbist"
+650  "#7^aFitoecología.^2unbist"
+651  "#7^aAmérica Latina.^2unbist"
+830  "#0^aPublicación del Instituto Italo-Latinoamericano ;^v3."
+859  "##^aAr-BaUNS^bSC^f20101125^h581.98^iH862^p77483/977^uMI^y1977"
+905  "c"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "1"
+918  "a"
+919  "#"
+991  "MI"
+1106  "^iPDC@192.168.0.1^t201509031552^x1441306347"
+
+=============================================================================
+Wed Oct 11 13:18:29 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9046
+
+Desbloqueando el registro origen 009088, MFN:9046, de la base eunm-p
+-----------------------------------------------------------------
+unlock: mfn=9046 mfrl=2490
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+unlock: mfn=9045 mfrl=1870
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+mfn=  9045 
+  1  "009087"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1975####ag#a##########000#0#spa#d"
+245  "10^a[Inspección de Obra del edificio de nueve pisos de la Caja Nacional de Ahorro y Seguro-Sucursal Bahía Blanca] /^cJulio César Cavilla ; Profesor padrino: Rubén Achilli."
+260  "##^aBahía Blanca,^c1975."
+300  "##^a21 h. :^bilus., planos, mapas, fot. ;^c30 cm."
+502  "##^aTrabajo final de carrera--Universidad Nacional del Sur. Departamento de Ingeniería."
+505  "0#^aIntroducción -- Comentario previo -- Análisis del edificio -- Obras ejecutadas durante mi estadía -- Proceso antes del encofrado -- Encofrado -- Armaduras -- Hormigón -- Operaciones antes del hormigonado -- Hormigonado -- Desencofrado -- Muros y tabiques -- Jaharro -- Explicación de las Fotografías -- Comentario final."
+590  "##^aMaterial adjunto: Solicitud del trabajo final de carrera firmado por Julio C. Cavilla. Documento de la Comisión de Prácticas Finales de la carrera de Ingeniería Civil del 4 de dic. de 1975 en que se aprueba el plan de trabajo y se propone al profesor asesor. Disposición de la que emanan los dos memorándum que se hallan a continuación. Memorándum del 5 de dic. 1975 a Rubén Achilli notificando su designación como profesor asesor del trabajo final de Rubén Achilli. Memorándum del 5 de dic. 1975 a Julio C. Cavilla en que se notifica la designación de Rubén Achili como profesor asesor del trabajo final. Fragmento de una nota al Dir. del Departamento de Ingeniería de la UNS, remitente Ing. Panayoti Conghos."
+100  "1#^aCavilla, Julio C."
+ 82  "04^a692"
+980  "^aAR-BaUNS"
+991  "SI"
+  5  "20230519110720.0"
+859  "##^aAr-BaUNS^bT^cwindow..000,00.-^dDepartamento de Ingeniería^f20230519^h692^iC316^jhhhhhh^nCambio a Sector Tesoro el 20230509 en el marco de la petición 12019^p86497/981^uGB^w20230519^y1981"
+1106  "^iLV@192.168.0.1^t202310111300^x1697040038"
+859  "##^3V.10^aAr-BaUNS^bT^c$322,00-^f20230510^h935^iP249-3^p107841/997^sFundación Ford^uGB^v10^y1965"
+859  "##^3V.12^aAr-BaUNS^bT^c$358,00.-^f20230510^h935^iP249-3^p890/965^sFundación Ford^uGB^v12^y1965"
+859  "##^3V.2^aAr-BaUNS^bT^c$214,00.-^f20230510^h935^iP249-3^p107833/997^sFundación Ford^uGB^v2^y1965"
+859  "##^3V.3^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p862/965^sFundación Ford^uGB^v3^y1965"
+859  "##^3V.4^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107835/997^sFundación Ford^uGB^v4^y1965"
+859  "##^3V.5^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107836/997^sFundación Ford^uGB^v5^y1965"
+859  "##^3V.6^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p864/965^sFundación Ford^uGB^v6^y1965"
+859  "##^3V.7^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107838/997^sFundación Ford^uGB^v7^y1965"
+859  "##^3V.8^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107839/997^sFundación Ford^uGB^v8^y1965"
+859  "##^3V.9^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107840/997^sFundación Ford^uGB^v9^y1965"
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+mfn=  9046 [DELETED]
+  1  "009088"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125m19361955fr############000#0#fre#d"
+245  "14^aLes fouilles de Mari /^cAndré Parrot."
+260  "##^aParís :^bLibraire Orientalist Paul Geuthner,^c1936-1955."
+300  "##^a12 v. :^blám., il. ;^c28 cm."
+500  "##^aLa Biblioteca posee los v. 2-10, 12."
+505  "0#^aVol. 2: Deuxième champagne (Hiver 1934-1935), Extrait de la Revue Syria, 1936 -- vol. 3: Troisième champagne (Hiver 1935-36), Extrait de la Revue Syria, 1937, fasc. 1 -- vol. 4: Quatrième champagne (Hiver 1936-1937), Extrait de la Revue Syria, 1938, fasc. 1 -- vol. 5: Cinquième champagne (Automne 1937), Extrait de la Revue Syria, 1939, fasc. 1 -- vol. 6: Sixième champagne (Automne 1938). Inscriptions de fondation provenant de Mari / Georges Dossin, Extrait de la Revue Syria, 1940, fasc. 1 et 2 -- vol. 7: Septième champagne (Hiver 1951-1952), Extrait de la Revue Syria, xxix, 1952, fasc. 3-4 -- vol. 8: Huitième champagne (Automne 1952), Extrait de la Revue Syria, xxx, 1953, fasc. 3-4 -- vol. 9: Neuvième champagne (Automne 1953), Extrait de la Revue Syria, xxxi, 1954, fasc. 3-4 -- vol. 10: Dixième champagne (Automne 1954), Extrait de la Revue Syria, xxxii, 1955, fasc. 3-4 -- vol. 12: Douziéme champagne (Automne 1961), Extrait de la Revue Syria, xxxix, 1962, Fasc. 3-4."
+100  "1#^aParrot, André,^d1901-1980."
+700  "1#^aDossin, Georges,^d1896-1983."
+ 82  "04^a935"
+991  "SI"
+  5  "20230518123241.0"
+859  "##^3V.10^aAr-BaUNS^bT^c$322,00-^f20230510^h935^iP249-3^p107841/997^sFundación Ford^uGB^v10^y1965"
+859  "##^3V.12^aAr-BaUNS^bT^c$358,00.-^f20230510^h935^iP249-3^p890/965^sFundación Ford^uGB^v12^y1965"
+859  "##^3V.2^aAr-BaUNS^bT^c$214,00.-^f20230510^h935^iP249-3^p107833/997^sFundación Ford^uGB^v2^y1965"
+859  "##^3V.3^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p862/965^sFundación Ford^uGB^v3^y1965"
+859  "##^3V.4^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107835/997^sFundación Ford^uGB^v4^y1965"
+859  "##^3V.5^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107836/997^sFundación Ford^uGB^v5^y1965"
+859  "##^3V.6^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p864/965^sFundación Ford^uGB^v6^y1965"
+859  "##^3V.7^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107838/997^sFundación Ford^uGB^v7^y1965"
+859  "##^3V.8^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107839/997^sFundación Ford^uGB^v8^y1965"
+859  "##^3V.9^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107840/997^sFundación Ford^uGB^v9^y1965"
+1106  "^iLV@192.168.0.1^t202310111306^x1697040378"
+
+=============================================================================
+Wed Oct 11 13:32:25 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 009088, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+unlock: mfn=9045 mfrl=2874
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Oct 11 13:36:18 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 009088, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Oct 11 13:36:53 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 009088, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Oct 11 13:37:05 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 009088, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Oct 11 13:37:17 -03 2023
+./unir.sh eunm-p 009088 009087 lv
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 009088, MFN:, de la base eunm-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:009088 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9045
+
+Desbloqueando el registro destino 009087, MFN:9045, de la base eunm-p
+-----------------------------------------------------------------
+
+Agregando al registro 009087 el campo v859 del registro 009088
+-----------------------------------------------------------------
+
+Borrando el registro 009088 de la base eunm-p
+-----------------------------------------------------------------
+
+=============================================================================
+Wed Oct 11 14:45:03 -03 2023
+./unir.sh eunm-p 009090 009088 LV
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:009090 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9048
+
+Desbloqueando el registro origen 009090, MFN:9048, de la base eunm-p
+-----------------------------------------------------------------
+unlock: mfn=9048 mfrl=2216
+
+Obteniendo MFN del registro destino NC:009090 de la base eunm-p
+-----------------------------------------------------------------
+MFN=9046
+
+Desbloqueando el registro destino 009088, MFN:9046, de la base eunm-p
+-----------------------------------------------------------------
+unlock: mfn=9046 mfrl=2490
+
+Agregando al registro 009088 el campo v859 del registro 009090
+-----------------------------------------------------------------
+mfn=  9046 
+  1  "009088"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125m19361955fr############000#0#fre#d"
+245  "14^aLes fouilles de Mari /^cAndré Parrot."
+260  "##^aParís :^bLibraire Orientalist Paul Geuthner,^c1936-1955."
+300  "##^a12 v. :^blám., il. ;^c28 cm."
+500  "##^aLa Biblioteca posee los v. 2-10, 12."
+505  "0#^aVol. 2: Deuxième champagne (Hiver 1934-1935), Extrait de la Revue Syria, 1936 -- vol. 3: Troisième champagne (Hiver 1935-36), Extrait de la Revue Syria, 1937, fasc. 1 -- vol. 4: Quatrième champagne (Hiver 1936-1937), Extrait de la Revue Syria, 1938, fasc. 1 -- vol. 5: Cinquième champagne (Automne 1937), Extrait de la Revue Syria, 1939, fasc. 1 -- vol. 6: Sixième champagne (Automne 1938). Inscriptions de fondation provenant de Mari / Georges Dossin, Extrait de la Revue Syria, 1940, fasc. 1 et 2 -- vol. 7: Septième champagne (Hiver 1951-1952), Extrait de la Revue Syria, xxix, 1952, fasc. 3-4 -- vol. 8: Huitième champagne (Automne 1952), Extrait de la Revue Syria, xxx, 1953, fasc. 3-4 -- vol. 9: Neuvième champagne (Automne 1953), Extrait de la Revue Syria, xxxi, 1954, fasc. 3-4 -- vol. 10: Dixième champagne (Automne 1954), Extrait de la Revue Syria, xxxii, 1955, fasc. 3-4 -- vol. 12: Douziéme champagne (Automne 1961), Extrait de la Revue Syria, xxxix, 1962, Fasc. 3-4."
+100  "1#^aParrot, André,^d1901-1980."
+700  "1#^aDossin, Georges,^d1896-1983."
+ 82  "04^a935"
+991  "SI"
+  5  "20230518123241.0"
+859  "##^3V.10^aAr-BaUNS^bT^c$322,00-^f20230510^h935^iP249-3^p107841/997^sFundación Ford^uGB^v10^y1965"
+859  "##^3V.12^aAr-BaUNS^bT^c$358,00.-^f20230510^h935^iP249-3^p890/965^sFundación Ford^uGB^v12^y1965"
+859  "##^3V.2^aAr-BaUNS^bT^c$214,00.-^f20230510^h935^iP249-3^p107833/997^sFundación Ford^uGB^v2^y1965"
+859  "##^3V.3^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p862/965^sFundación Ford^uGB^v3^y1965"
+859  "##^3V.4^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107835/997^sFundación Ford^uGB^v4^y1965"
+859  "##^3V.5^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107836/997^sFundación Ford^uGB^v5^y1965"
+859  "##^3V.6^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p864/965^sFundación Ford^uGB^v6^y1965"
+859  "##^3V.7^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107838/997^sFundación Ford^uGB^v7^y1965"
+859  "##^3V.8^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107839/997^sFundación Ford^uGB^v8^y1965"
+859  "##^3V.9^aAr-BaUNS^bT^c$250,00.-^f20230510^h935^iP249-3^p107840/997^sFundación Ford^uGB^v9^y1965"
+1106  "^iLV@192.168.0.1^t202310111444^x1697046246"
+859  "##^aAR-BaUNS^bSA^c$5.287,00.-^f20230510^h540^iB815a12-1^l20230425^p128663/023^sUrsino^uGB^y20230510"
+
+Borrando el registro 009090 de la base eunm-p
+-----------------------------------------------------------------
+mfn=  9048 [DELETED]
+  1  "009090"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "230510s2014####mx#a##########000#0#spa#d"
+245  "10^aQuímica de Brown para cursos con enfoque por competencias /^cTheodore L. Brown … [et al.] ; traducción: Ana Elizabeth García Hernández ; adaptación técnica: Ma. del Carmen Domínguez Reyes ; revisión técnica: Jaime Villanueva Sánchez … [et al.]."
+250  "##^a1ra. ed."
+260  "##^aCiudad de México :^bPearson,^c2014."
+300  "##^axxiv, 404 p. :^bil. ;^c28 cm."
+500  "##^aTraducción autorizada de: Chemistry: The central science 12a edición; publicada por Pearson Education, c2012."
+520  "##^a"El enfoque por competencias en la educación superior se va adoptando paulatinamente en gran parte de las instituciones universitarias. Más allá de los esfuerzos que se realizan por ofrecer capacitación a los profesores, y del interés que ellos muestran en prepararse para este nuevo desafío, hacen falta apoyos para comprender esta forma diferente de guiar a los alumnos en el aprendizaje. Química de Brown para cursos con enfoque por competencias ofrece las bases de la química moderna, apoyadas en una serie de nuevas metodologías e ideas sobre cómo enseñar química, sin perder las características relevantes que han distinguido a este libro. Cuenta con descripciones de estrategias de resolución de problemas y destaca muchas aplicaciones importantes de la química en la vida cotidiana. Los elementos gráficos se mejoraron para hacer accesible la química mediante la visualización de conceptos. La estructura del libro incorpora secciones específicas con elementos para el aprendizaje, tanto desde el punto de vista del campo de la química como desde el enfoque por competencias."--Contratapa."
+ 20  "##^a9786073223393"
+100  "1#^aBrown, Theodore L.^q(Theodore Lawrence),^d1928-"
+700  "1#^aGarcía Hernández, Ana Elizabeth.^4trl"
+700  "1#^aDomínguez Reyes, Ma. del Carmen."
+700  "1#^aVillanueva Sánchez, Jaime."
+ 82  "04^a540^221"
+650  "#7^aQuímica.^2unbist"
+653  "##^aEnfoque por competencias"
+ 41  "1#^aspa^heng"
+980  "^dasdfasdf"
+991  "GB"
+  5  "20230515131531.0"
+859  "##^aAR-BaUNS^bSA^c$5.287,00.-^f20230510^h540^iB815a12-1^l20230425^p128663/023^sUrsino^uGB^y20230510"
+1106  "^iLV@192.168.0.1^t202310111443^x1697046228"
+
+=============================================================================

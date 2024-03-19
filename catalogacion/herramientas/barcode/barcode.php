@@ -126,14 +126,14 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 
 	imagefill( $image, 0, 0, $white );
 	if ( $print ) {
-		imagestring($image, 5, 31, $img_height, $text, $black );
+		imagestring($image, 5, 40, $img_height, $text, $black ); //centra texto del codigo de barras
 	}
 
 	$location = 10;
 	for ( $position = 1 ; $position <= strlen($code_string); $position++ ) {
 		$cur_size = $location + ( substr($code_string, ($position-1), 1) );
 		if ( strtolower($orientation) == "horizontal" )
-			imagefilledrectangle( $image, $location*$SizeFactor, 0, $cur_size*$SizeFactor, $img_height, ($position % 2 == 0 ? $white : $black) );
+			imagefilledrectangle( $image, $location*$SizeFactor, 1, $cur_size*$SizeFactor, $img_height, ($position % 2 == 0 ? $white : $black) );
 		else
 			imagefilledrectangle( $image, 0, $location*$SizeFactor, $img_width, $cur_size*$SizeFactor, ($position % 2 == 0 ? $white : $black) );
 		$location = $cur_size;

@@ -46,7 +46,7 @@
 
 <!-- v5210: Nivel de autorización del usuario para esta base -->
 <field action="replace" tag="5210" split="occ"><pft>
-	ref(['USERS']l(['USERS']v2002),(v5/)), /* listas de bases + permisos */
+	ref(['USERS']l(['USERS']v2002),(v7/)), /* listas de bases + permisos */
 </pft></field>
 <field action="replace" tag="5210"><pft>
 	(,

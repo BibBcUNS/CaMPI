@@ -6,7 +6,6 @@ $mfns_origenes=$_POST['mfns_origenes'];
 $mfn_destino=$_POST['mfn_destino'];
 
 $verificar = file_get_contents("https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/verificarpw.xis&usuario=$usuario&pw=$pw");
-
 if ($verificar != 'OK') {
 ?>  <!-- Esto es si ingresa mal la contraseña o usuario -->
 	<HTML><HEAD><TITLE>Redireccionado</TITLE>
@@ -25,14 +24,14 @@ else {
 	<title>Merge registros</title>
 	<!--link rel="stylesheet" type="text/css" href="http://inmabb.criba.edu.ar/catalis/catalis.css"-->
 
-	<link rel="stylesheet" href="css/herramientas.css">
+	<link rel="stylesheet" href="herramientas.css">
 
 	</head>
 
 <body>
 
 	<nav id="navHerramientas">
-		<h1>CaMPI Catalogación - Herramientas</h1>        
+		<h1>CaMPI Catalogaci&oacute;n - Herramientas</h1>        
 	</nav>
 
 	<?php 
@@ -63,7 +62,7 @@ else {
 
 			echo '<h3>El campo v859 de dichos registros fue movido al registro<br>'.
 			'<font color=red>Verifique las existencias en este registro</font></h3> <h2>'.$mfn_destino.'</h2>';
-			shell_exec('cd /var/www/catalogacion/catalis/htdocs/herramientas/union_registros;sh ./unir.sh '.$base.' "'.$nros_control.'" '.$mfn_destino.' '.$usuario);
+			shell_exec('cd /var/www/campi-catalogacion/catalis/htdocs/herramientas/union_registros;sh ./unir.sh '.$base.' "'.$nros_control.'" '.$mfn_destino.' '.$usuario);
 
 		}else {
 			echo "Ocurrió un error: El campo MFNs ORÍGENES o DESTINO, no debe contener espacios.<BR>";
@@ -71,12 +70,13 @@ else {
 		}
 		echo '</div>';	
 
-		echo '<form action="herramientas.php">';
+/*		echo '<form action="herramientas.php">';
 		echo '<input type="hidden" name="usuario" value="'$usuario'">';
+		echo '<input type="hidden" name="usuario" value="LV">';
 		echo '<input type="hidden" name="pw" value="'$pw'"> <br>';
 		echo '<input class="btnHerramientas" type="submit" value="Volver a Herramientas">';
 		echo '</form>'
-
+ */
 	echo '</div>';
 
 }?>

@@ -1,0 +1,189 @@
+Wed Sep 20 10:42:52 -03 2023
+./unir.sh ucod-marc-p 021651 021652 021653 rap
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:021651 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=21751
+
+Desbloqueando el registro origen 021651, MFN:21751, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:021651 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=21753
+
+Desbloqueando el registro destino 021653, MFN:21753, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Agregando al registro 021653 el campo v859 del registro 021651
+-----------------------------------------------------------------
+
+Borrando el registro 021651 de la base ucod-marc-p
+-----------------------------------------------------------------
+
+
+Obteniendo MFN del registro origen NC:021652 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=21752
+
+Desbloqueando el registro origen 021652, MFN:21752, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:021652 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=21753
+
+Desbloqueando el registro destino 021653, MFN:21753, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Agregando al registro 021653 el campo v859 del registro 021652
+-----------------------------------------------------------------
+
+Borrando el registro 021652 de la base ucod-marc-p
+-----------------------------------------------------------------
+
+=============================================================================
+Tue Oct 17 09:10:54 -03 2023
+./unir.sh ucod-marc-p 015651 015560 rap
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:015651 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=15751
+
+Desbloqueando el registro origen 015651, MFN:15751, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:015651 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=15660
+
+Desbloqueando el registro destino 015560, MFN:15660, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Agregando al registro 015560 el campo v859 del registro 015651
+-----------------------------------------------------------------
+
+Borrando el registro 015651 de la base ucod-marc-p
+-----------------------------------------------------------------
+
+=============================================================================
+Tue Oct 17 09:12:31 -03 2023
+./unir.sh ucod-marc-p 015561 015560 rap
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:015561 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=15661
+
+Desbloqueando el registro origen 015561, MFN:15661, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:015561 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=15660
+
+Desbloqueando el registro destino 015560, MFN:15660, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Agregando al registro 015560 el campo v859 del registro 015561
+-----------------------------------------------------------------
+
+Borrando el registro 015561 de la base ucod-marc-p
+-----------------------------------------------------------------
+
+=============================================================================
+Tue Oct 17 09:13:33 -03 2023
+./unir.sh ucod-marc-p 015562 015560 rap
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:015562 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 015562, MFN:, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Obteniendo MFN del registro destino NC:015562 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro destino 015560, MFN:, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Agregando al registro 015560 el campo v859 del registro 015562
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Borrando el registro 015562 de la base ucod-marc-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+=============================================================================
+Tue Oct 17 09:14:33 -03 2023
+./unir.sh ucod-marc-p 015562 015560 rap
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:015562 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=15662
+
+Desbloqueando el registro origen 015562, MFN:15662, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Obteniendo MFN del registro destino NC:015562 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=15660
+
+Desbloqueando el registro destino 015560, MFN:15660, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Agregando al registro 015560 el campo v859 del registro 015562
+-----------------------------------------------------------------
+
+Borrando el registro 015562 de la base ucod-marc-p
+-----------------------------------------------------------------
+
+=============================================================================
+Tue Oct 17 09:16:08 -03 2023
+./unir.sh ucod-marc-p 015562 015560 rap
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:015562 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=
+
+Desbloqueando el registro origen 015562, MFN:, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+Obteniendo MFN del registro destino NC:015562 de la base ucod-marc-p
+-----------------------------------------------------------------
+MFN=15660
+
+Desbloqueando el registro destino 015560, MFN:15660, de la base ucod-marc-p
+-----------------------------------------------------------------
+
+Agregando al registro 015560 el campo v859 del registro 015562
+-----------------------------------------------------------------
+
+fatal: ,('a859~',v859,'~'))
+
+
+Borrando el registro 015562 de la base ucod-marc-p
+-----------------------------------------------------------------
+
+fatal: from=
+
+
+=============================================================================
