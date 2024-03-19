@@ -216,12 +216,12 @@ function setDimensions()
 
   // Búsquedas
   document.getElementById("searchResultsIframe").style.height = g_Dimensions.searchResultsIframe.height + "px";
-  document.getElementById("recordVisualization").style.height = g_Dimensions.recordVisualization.height - 40 + "px";
+  document.getElementById("recordVisualization").style.height = g_Dimensions.recordVisualization.height - 50 + "px";
   document.getElementById("indexTerms").style.height = g_Dimensions.indexTerms.height + "px";
 
   // Edición
-  document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height + 8  + "px";
-  document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height + 7.09 + "px";
+  document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height - 1 + "px";
+  document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height - 1 + "px";
   document.getElementById("docIframe").style.height = g_Dimensions.docIframeCollapsed.height + "px";
 
   document.getElementById("docFormWrapper").style.marginTop = g_Dimensions.docIframeWrapper.marginTop + "px";
@@ -1308,7 +1308,7 @@ function mostrarModalConfirmacion(){
         }
 
         if ( userDecision == "doNotSave" ){
-            // Si el registro no tenía imagen (se la agregaron en el último cambio) o se cambió la extensión de imagen entonces eliminar imagen del servidor.
+            // Si el registro no tenia imagen o se cambio la extension de imagen entonces eliminar imagen del servidor.
             let index985original = originalRecord.indexOf("\n985");
             let index985New = serializeRecord(1,1,1,1).indexOf("\n985");
 
@@ -1497,13 +1497,14 @@ function showPopup(x,y,width,height,refObject)
         if ( ( !clickedElement.classList.contains ("menu") && (clickedElement.id != "btnNuevo") ) &&
             (!clickedElement.classList.contains("tip1") && (clickedElement.tagName != "SPAN")) &&
             (!clickedElement.classList.contains("tip2") && (clickedElement.tagName != "SPAN")) &&
+            (clickedElement.id != "btnRedirect") &&
             (!clickedElement.classList.contains("fieldTag")) &&
             (!clickedElement.classList.contains("subfieldTag")) && (!clickedElement.classList.contains("contextMenu")) &&
             (!clickedElement.classList.contains("checkButton")) &&
             (!clickedElement.id != "searchMessage") && (clickedElement.id != "kwSearchHelpLink") &&
             (!clickedElement.id != "searchMessage") && (clickedElement.id != "mfnSearchHelpLink") &&
             (!clickedElement.id != "searchMessage") && (clickedElement.id != "testConditionSearchHelpLink") &&
-            (!clickedElement.id != "searchMessage") && (clickedElement.id != "indexHelpLink")           
+            (!clickedElement.id != "searchMessage") && (clickedElement.id != "indexHelpLink") 
         ){
             console.log("Kill xq no es menu")
             killmenu(); 
@@ -1519,7 +1520,7 @@ function showPopup(x,y,width,height,refObject)
         var left;
         var top;
        
-        if(event.srcElement.id == "btnNuevo"){
+        if((event.srcElement.id == "btnNuevo") || (event.srcElement.id == "btnRedirect")){
               // Truco para obtener las coordenadas (de: JavaScript and DHTML Cookbook)
               var offsetTrail = refObject;
               var offsetLeft = 0;
@@ -1831,6 +1832,6 @@ function endSession()
 // -----------------------------------------------------------------------------
 {
     if ( confirm("¿Confirma que desea finalizar la sesión?") ) {
-        document.getElementById("logoutForm").submit();
+		window.location.href = "../../../../login/php/logout.php";
     }
 }

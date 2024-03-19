@@ -13,7 +13,7 @@
 	function handleOK()
 	//--------------------------------------------------------
 	{
-		if(top.serializeRecord(1,1,1,1).length >= window.dialogArguments.maxRecordSize){
+		if(top.serializeRecord(1,1,1,1).length >= 4000){
 			window.returnValue = "-";
 		}else{
 			window.returnValue = true;
@@ -45,7 +45,7 @@
 	function init()
 	//--------------------------------------------------------
 	{
-		var question = window.dialogArguments.message;
+		var question = window.dialogArguments;
 		window.returnValue = false;
 		
 		document.onkeydown = function(evt) {

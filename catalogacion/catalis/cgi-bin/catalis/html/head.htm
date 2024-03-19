@@ -129,7 +129,7 @@
     FIELD_BLOCK_PATTERN.other = /02[^02]|0[1367].|04[^3]|05[^2]|856/;
 
     // Directorio público (para documentos HTML, CSS, XML)
-    var HTDOCS = "[pft]v6003^h[/pft]catalis/";
+    var HTDOCS = "[pft]v6003^h[/pft]/catalis/";
 
     // URLs de ventanas auxiliares
     var URL_AUTHORITY = HTDOCS + "html/authority.htm";
@@ -235,10 +235,6 @@
     //Variable global (a causa de polyfill)
     var globalParameter;
 
-    const MAX_RECORD_SIZE = 20000;
-    // Seteo 4000 bytes como tamaño máximo de registro a grabar. (Estoy midiendo la longitud de caracteres del registro suponiendo que todos ocupan 1 Byte)
-    // (Luego de realizar pruebas se ve que en Linux es posible almacenar registros de hasta aproximadamente 5.500 Bytes y en Windows 10.000 Bytes)
-
     document.getElementById("linkFavicon").href = HTDOCS + "img/favIcon.ico";
   </script>
 
@@ -274,89 +270,89 @@
        Corroboramos la variable TIMESTAMP_FILES almacenada en 6001^f. -->
   [pft]if (v6001^f = 'true') then[/pft]
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]catalis/css/catalis.css?[pft]date(DATETIME)[/pft]">
-    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/aacr.css?[pft]date(DATETIME)[/pft]">
-    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/etiquetado.css?[pft]date(DATETIME)[/pft]">
+    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]/catalis.css?[pft]date(DATETIME)[/pft]">
+    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]/aacr.css?[pft]date(DATETIME)[/pft]">
+    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]/etiquetado.css?[pft]date(DATETIME)[/pft]">
 
     <!--SHOWMODALDIALOG y SIMMODAL-->
-    <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/showModalDialog.js?[pft]date(DATETIME)[/pft]"></script>
-    <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/simModal.js?[pft]date(DATETIME)[/pft]"></script>
+    <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/showModalDialog.js?[pft]date(DATETIME)[/pft]"></script>
+    <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/simModal.js?[pft]date(DATETIME)[/pft]"></script>
 
     <!-- JS -->
     [pft]if p(v2001) and not 'FIN_SESION' : v2001 then[/pft]
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/catalis.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/create-field-subfield.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/eventHandlers.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/disable-keys.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/dom-functions.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/aux-windows.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/data-out.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/validate.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/data-in.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/import.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/menu-newrecord.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/punctuation.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/templates.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/contextmenu-field.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/contextmenu-subfield.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/aacr2marc.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/marc2marcTagged.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/getMaterialType.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/isbn-hyphen.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/marc2aacr.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/catalis.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/create-field-subfield.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/eventHandlers.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/disable-keys.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/dom-functions.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/aux-windows.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/data-out.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/validate.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/data-in.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/import.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/menu-newrecord.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/punctuation.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/templates.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/contextmenu-field.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/contextmenu-subfield.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/aacr2marc.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/marc2marcTagged.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/getMaterialType.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/isbn-hyphen.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/marc2aacr.js?[pft]date(DATETIME)[/pft]"></script>
       <!-- Para mostrar correctamente ISBN-13 con http://code.google.com/p/isbnjs/ (FG, 13-sep-2012) -->
-      <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/isbnjs-1.0.0/isbn.js?[pft]date(DATETIME)[/pft]"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/isbnjs-1.0.0/isbn-groups.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/isbnjs-1.0.0/isbn.js?[pft]date(DATETIME)[/pft]"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/isbnjs-1.0.0/isbn-groups.js?[pft]date(DATETIME)[/pft]"></script>
 
       [pft]if v2104 = 'bibima' then[/pft]
-          <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/isbncheck-test.js?[pft]date(DATETIME)[/pft]"></script>
+          <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/isbncheck-test.js?[pft]date(DATETIME)[/pft]"></script>
       [pft]else[/pft]
-              <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/isbncheck.js?[pft]date(DATETIME)[/pft]"></script>
+              <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/isbncheck.js?[pft]date(DATETIME)[/pft]"></script>
       [pft]fi[/pft]
       
     [pft]fi[/pft]    
 
   [pft] else [/pft]
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]catalis/css/catalis.css">
-    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/aacr.css">
-    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]common/css/etiquetado.css">
+    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]/catalis/css/catalis.css">
+    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]/common/css/aacr.css">
+    <link rel="stylesheet" type="text/css" href="[pft]v6003^h[/pft]/common/css/etiquetado.css">
 
     <!--SHOWMODALDIALOG y SIMMODAL-->
-    <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/showModalDialog.js"></script>
-    <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/simModal.js"></script>
+    <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/showModalDialog.js"></script>
+    <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/simModal.js"></script>
 
     <!-- JS -->
     [pft]if p(v2001) and not 'FIN_SESION' : v2001 then[/pft]
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/catalis.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/create-field-subfield.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/eventHandlers.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/disable-keys.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/dom-functions.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/aux-windows.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/data-out.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/validate.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/data-in.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/import.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/menu-newrecord.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/punctuation.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/templates.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/contextmenu-field.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/contextmenu-subfield.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/aacr2marc.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/marc2marcTagged.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/getMaterialType.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/isbn-hyphen.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/marc2aacr.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/catalis.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/create-field-subfield.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/eventHandlers.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/disable-keys.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/dom-functions.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/aux-windows.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/data-out.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/validate.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/data-in.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/import.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/menu-newrecord.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/punctuation.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/templates.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/contextmenu-field.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/contextmenu-subfield.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/aacr2marc.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/marc2marcTagged.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/getMaterialType.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/isbn-hyphen.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/marc2aacr.js"></script>
 
       <!-- Para mostrar correctamente ISBN-13 con http://code.google.com/p/isbnjs/ (FG, 13-sep-2012) -->
-      <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/isbnjs-1.0.0/isbn.js"></script>
-      <script type="text/javascript" src="[pft]v6003^h[/pft]common/js/isbnjs-1.0.0/isbn-groups.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/isbnjs-1.0.0/isbn.js"></script>
+      <script type="text/javascript" src="[pft]v6003^h[/pft]/common/js/isbnjs-1.0.0/isbn-groups.js"></script>
 
       [pft]if v2104 = 'bibima' then[/pft]
-          <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/isbncheck-test.js"></script>
+          <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/isbncheck-test.js"></script>
       [pft]else[/pft]
-            <script type="text/javascript" src="[pft]v6003^h[/pft]catalis/js/isbncheck.js"></script>
+            <script type="text/javascript" src="[pft]v6003^h[/pft]/catalis/js/isbncheck.js"></script>
       [pft]fi[/pft]
     [pft]fi[/pft]
 
@@ -407,11 +403,25 @@
       title="Acerca de Catalis"
       onclick="showSystemInformation(); return false;"
       style="color: #FED;" tabindex="-1"><span id="appName">Catalis</span></a>
-    <span style="font-size: 11px; color: #FED;">[[pft]getenv('SERVER_NAME')[/pft]]</span>
+    <span style="font-size: 14px; color: #FED;">[[pft]getenv('SERVER_NAME')[/pft]]</span>
+
+    [pft]
+          /* v3008: Información de los módulos habilitados para este catalogador */
+          proc(
+              ref(
+                  ['USERS']l(['USERS']v2002),
+    
+                  'd3008a3008~',
+                  if p(v5) then '^c1' fi,
+                  if p(v7) then '^a1' fi,
+                  if p(v5^s) then '^h1' fi,
+                  '~'
+              )
+            ),
+    [/pft]    
 
     <!-- Botón que permite mostrar el iframe oculto para analizar su contenido -->
     <button id="showHiddenData" tabindex="-1" accesskey="*">*</button>
-
 
     <!-- Catalogador / base / fin de sesión; p(v2005) => login fallido -->
     [pft]if p(v2001) and not 'FIN_SESION' = v2001 and a(v2005) then[/pft]
@@ -422,6 +432,20 @@
           <input type="hidden" name="userid" value="[pft]v2002[/pft]">
           <input type="hidden" name="db" value="[pft]v2104[/pft]">
           <input type="hidden" name="tarea" value="FIN_SESION">
+
+          <div id="quickAccessWrapper">
+            <!-- Accesos rápidos controlados por pft, a partir del contenido de 3008 -->
+            <div id="goToLabel">Acceso rápido:</div>
+            [pft] if p(v3008^a) then [/pft] 
+              <div title="Ir a Catauto..." id="goToCatauto" class="goToButton">Catauto</div>
+            [pft]fi[/pft]
+
+            [pft] if p(v3008^h) then [/pft] 
+            <div title="Ir a Herramientas..." id="goToHerramientas" class="goToButton">Herramientas</div>
+            [pft]fi[/pft] 
+          </div>
+
+
           [pft]
           /* v3007: lista con las bases de datos para este catalogador */
           proc(
@@ -432,14 +456,16 @@
             ),
           [/pft]
 
-          Base:
+          Base: 
+        
+          
           <select id="selDatabase"
               tabindex="-1"
               title="Desde aquí puede pasar a otra base de datos">
           [pft]
             (,
               '<option value="',v3007^*,'" ', if v3007^* = v2104[1] then ' selected="selected"' fi, ' >',
-                '[',v3007^p,'] ',v3007^*,
+                '[',v3007^p,'] ',v3007^*
               '</option>'/
             ),
           [/pft]

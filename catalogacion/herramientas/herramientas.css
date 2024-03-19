@@ -56,22 +56,108 @@ body {
     cursor: pointer;
 }
 
+
+#goToLabel{
+    color: white;
+    font-size: 16px;
+    font-family: Georgia;
+    float: left;
+    margin-top: 5px;
+    margin-right: 7px;
+}
+
+.goToButton{
+    float: left;
+    font-size: 15px;
+    font-family: Georgia;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 5px;
+    width: 70px;
+}
+
+#goToCatalis{
+    text-align: center;
+    background-color: brown;
+    margin-right: 3px;
+}
+
+#goToCatalis:hover{
+    background-color: rgb(194, 68, 68);
+}
+
+#goToCatauto{
+    text-align: center;
+    background-color: rgb(0, 53, 148);
+    margin-right: 3px;
+}
+
+#goToCatauto:hover{
+    background-color: rgb(22, 77, 179) ;
+}
+
+#goToButton:hover{
+    text-shadow: 2px 2px 3px rgb(17, 17, 16);
+}
+
 /* ------------------------------------------------------------------------------------------------------ */
 
 /* --------------------------------------------------------------------------------------------------------
                                             Estilos para herramientas
   -------------------------------------------------------------------------------------------------------- */
 
+
 #navHerramientas{
+    position: relative;
     background-color: brown;
     color: #FED;
     padding: 12px;
     margin-bottom: 10px;
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* justify-content: space-between; */
 }
 
 #navHerramientas h1{
     margin: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    display: inline;
+}
+
+#quickAccessWrapper{
+    float: right;
+    margin-right: 257px;
+}
+
+#closeSessionWraper{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    width: 265px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+
+#navHerramientas #btnFinSesion{
+    padding: 6px;
+    display: inline;
+
+    background-color: #E2DFD0;
+    font: bold 14px "open sans", verdana, sans-serif;
+    border: 1px solid black;
+    margin: 0px 5px;
+    cursor: pointer;
+}
+
+#navHerramientas span{
+    font-weight: bold;
 }
 
 #herramientasContainer{

@@ -6,7 +6,6 @@
 	$destino=$_POST['destino'];
 
 	$verificar = file_get_contents("https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/verificarpw.xis&usuario=$usuario&pw=$pw");
-	print $verificar;
 	if ($verificar != 'OK') {
 ?>  
 
@@ -37,23 +36,23 @@ else {
 	<!--link rel="stylesheet" type="text/css" href="http://inmabb.criba.edu.ar/catalis/catalis.css"-->
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
-	<link rel="stylesheet" href="css/herramientas.css">
+	<link rel="stylesheet" href="herramientas.css">
 
 	</head>
 	<body>
 		<nav id="navHerramientas">
-			<h1>CaMPI Catalogación - Herramientas</h1>        
+			<h1>CaMPI Catalogaci&oacute;n - Herramientas</h1>        
 		</nav>
 <?php
 			$nc_fuente = str_pad($nc_fuente,6,"0", STR_PAD_LEFT);
-			shell_exec('cd /var/www/catalogacion/catalis/htdocs/herramientas/union_registros;sh ./ucod_2_eunm.sh '.$nc_fuente.' '.$usuario.' '.$fuente.' '.$destino);
+			shell_exec('cd /var/www/campi-catalogacion/catalis/htdocs/herramientas/union_registros;sh ./ucod_2_eunm.sh '.$nc_fuente.' '.$usuario.' '.$fuente.' '.$destino);
 			echo '<div style="background: brown; border: 1px solid #F0F0F0;	padding: 18px; margin: 6px 0; font-size: 16px;">'.
-			     'El registro con N&uacute;mero de Control (NC) <b style="font-size:1.5em">'.$nc_fuente.'</b> en la base <font style="font-size:1.1em">'.$fuente.' </font> fue movido al final de la base <font style="font-size:1.1em">'.$destino.' </font>'.
-				 '<br><form action=herramientas.php>'.
+				'El registro con N&uacute;mero de Control (NC) <b style="font-size:1.5em">'.$nc_fuente.'</b> en la base <font style="font-size:1.1em">'.$fuente.' </font> fue movido al final de la base <font style="font-size:1.1em">'.$destino.' </font>'.
+				 /*'<br><form action=herramientas.php>'.
 				 	'<input type="hidden" name="usuario" value="'.$usuario.'">'.
 				 	'<input type="hidden" name="pw" value="'.$pw.'">'.
 					'<input class="btnHerramientas" type="submit" value="Volver a Herramientas">'.
-				 '</form>'.
+					'</form>'.*/
 				 '</div>';
 
 }

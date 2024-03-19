@@ -917,10 +917,8 @@ function showCodeTable(name)
 	var dialogLeft = event.clientX;
 	var dialogTop = event.clientY;
 	var winProperties = "font-size:10px; dialogLeft:" + dialogLeft + "px; dialogTop:" + dialogTop + "px; dialogWidth:550px; dialogHeight:200px; status:no; help:no";
-	(async function(){
-		var newCode = await window.showModalDialog(HTDOCS + "html/relatorCodes.htm", "", winProperties);
-		alert(newCode);
-	})();
+	var newCode = showModalDialog(HTDOCS + "html/relatorCodes.htm", "", winProperties);
+	alert(newCode);
 }
 
 
@@ -1307,29 +1305,27 @@ function checkModified()
 function mostrarModalConfirmacion(){
 	var winProperties = "font-size: 10px; dialogWidth: 620px; dialogHeight: 100px; dialogTop: 80px; status: no; help: no";
 
-	(async function(){
-		// Mostramos la ventana
-		var userDecision = await window.showModalDialog(URL_SAVE_CHANGES, window, winProperties);
-		var elementID = top.globalParameter;
+	// Mostramos la ventana
+	var userDecision = window.showModalDialog(URL_SAVE_CHANGES, window, winProperties);
+	var elementID = top.globalParameter;
 
-		if ( userDecision == "cancel" ){
-			if ( "selDatabase" == elementID ){
-				document.getElementById("selDatabase").selectedIndex = g_activeDatabase.index;
-			}
-
-			top.globalParameter = "";
+	if ( userDecision == "cancel" ){
+		if ( "selDatabase" == elementID ){
+			document.getElementById("selDatabase").selectedIndex = g_activeDatabase.index;
 		}
 
-		if ( userDecision == "save" ){
-			g_NextTask = elementID;
-			saveRecord();
-			handleNextTask(elementID);
-		}
+		top.globalParameter = "";
+	}
 
-		if ( userDecision == "doNotSave" ){
-			handleNextTask(elementID);
-		}
-	})();
+	if ( userDecision == "save" ){
+		g_NextTask = elementID;
+		saveRecord();
+		handleNextTask(elementID);
+	}
+
+	if ( userDecision == "doNotSave" ){
+		handleNextTask(elementID);
+	}
 }
 
 function highlightRecord(changedRecord){
@@ -1694,6 +1690,6 @@ function endSession()
 // -----------------------------------------------------------------------------
 {
 	if ( confirm("¿Confirma que desea finalizar la sesión?") ) {
-        document.getElementById("logoutForm").submit();
+		window.location.href = "../../../../login/php/logout.php?modulo=catauto";
     }
 }

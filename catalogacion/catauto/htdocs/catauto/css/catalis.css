@@ -702,13 +702,62 @@ input#docItem {
  */
 
 div#topBar {
-	height: 26px;
 	background: rgb(0, 53, 148);
 	border: solid 1px #777;
 	position: relative;
-	padding: 4px;
+	padding: 7px;
 	font-size: 20px;
 }
+
+#quickAccessWrapper{
+    display: inline;
+    margin-right: 5px;
+}
+
+#topBar #goToLabel{
+    color: white;
+    font-size: 13px;
+    float: left;
+    margin-right: 7px;
+    margin-top: 2px;
+}
+
+#topBar .goToButton{
+    float: left;
+    font-size: 15px;
+    font-family: Georgia;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 5px;
+    position: relative;
+    top: -5;
+}
+
+#goToCatalis{
+	background-color: brown;
+	border: 1px solid white;
+	color: white;
+    margin-right: 3px;
+}
+
+#goToCatalis:hover{
+	background-color: rgb(192, 77, 77);
+}
+
+#goToHerramientas{
+	background-color: brown;
+	border: 1px solid white;
+	color: white;
+    margin-right: 3px;
+}
+
+#goToHerramientas:hover{
+	background-color: rgb(192, 77, 77);
+}
+
 
 
 /*---------------------------------------*\
@@ -824,15 +873,14 @@ table#theToolbar td {
 }
 
 #logoutForm {
-	margin: 6px;
+	margin: 9px;
 }
 
 #appName {
 	font-weight: bold;
-	font-family: georgia;
-	font-size: 20px;
-	background-color: rgb(0, 53, 148);
-	margin-left: 5px;
+    font-family: Georgia;
+    font-size: 24px;
+    margin-left: 5px;
 }
 
 

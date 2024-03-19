@@ -400,8 +400,24 @@
 			title="Acerca de Catalis"
 			onclick="showSystemInformation(); return false;"
 			style="color: #FED;" tabindex="-1"><span id="appName">Catauto</span></a>
-		<span style="font-size: 11px; color: #FED;">[[pft]getenv('SERVER_NAME')[/pft]]</span>
+
+		<span style="font-size: 14px; color: #FED;">[[pft]getenv('SERVER_NAME')[/pft]]</span>
 		
+		[pft]
+          /* v3008: Información de los módulos habilitados para este catalogador */
+          proc(
+              ref(
+                  ['USERS']l(['USERS']v2002),
+    
+                  'd3008a3008~',
+                  if p(v5) then '^c1' fi,
+                  if p(v7) then '^a1' fi,
+                  if p(v5^s) then '^h1' fi,
+                  '~'
+              )
+            ),
+    	[/pft]
+
 		<!-- Botón que permite mostrar el iframe oculto para analizar su contenido -->
 		<button id="showHiddenData" tabindex="-1" accesskey="*">*</button>
 		
@@ -415,12 +431,25 @@
 					<input type="hidden" name="userid" value="[pft]v2002[/pft]">
 					<input type="hidden" name="db" value="[pft]v2104[/pft]">
 					<input type="hidden" name="tarea" value="FIN_SESION">
+
+					<div id="quickAccessWrapper">
+						<!-- Accesos rápidos controlados por pft, a partir del contenido de 3008 -->
+						<div id="goToLabel">Acceso rápido:</div>
+						[pft] if p(v3008^a) then [/pft] 
+						  <div title="Ir a Catalis..." id="goToCatalis" class="goToButton">Catalis</div>
+						[pft]fi[/pft]
+			
+						[pft] if p(v3008^h) then [/pft] 
+						<div title="Ir a Herramientas..." id="goToHerramientas" class="goToButton">Herramientas</div>
+						[pft]fi[/pft] 
+					</div>
+
 					[pft]
 					/* v3007: lista con las bases de datos para este catalogador */
 					proc( 
 							ref(
 									['USERS']l(['USERS']v2002),
-									( 'a3007#',v5,'#' )
+									( 'a3007#',v7,'#' )
 								)
 						),
 					[/pft]

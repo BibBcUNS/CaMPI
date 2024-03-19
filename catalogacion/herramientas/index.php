@@ -22,23 +22,24 @@
 		<form id="loginForm" name="entrada" action="herramientas.php" method="post" style="margin: 0;">
 			<h2 id="titleLogin">Herramientas  | Log In</h2>
 			<div id="inputsDiv">
+			<div>
 				<label class="labelLogin" for="usuario">Usuario: </label><input required id="usuario" type="text" name="usuario" size="9" maxlength="20"> 
+			</div>
+			<div>
 				<label class="labelLogin" for="password">Contraseña: </label><input required type="password" name="pw" size="9" maxlength="20"> 
+			</div>
 			</div>
 
 			<input type="Submit" value="Iniciar sesión" class="btnSubmitForm">
 
-			<!-- [pft]if p(v2005) then[/pft]
-
-        		<div style="color: white; margin-top: 5px; font-style: italic;">
-        		    Usuario o contraseña incorrectos. Por favor, intentelo nuevamente.
-        		</div>
-        
-    		[pft]fi[/pft] -->
-
 		</form>
 	</div>		
 
+	<script>
+		window.onload = function(){
+			alert("Debería enviarse el form");
+		}
+	</script>
 
 </body>
 </html>

@@ -44,6 +44,13 @@ function checkStandardNumber(box,type)
 				number_OK = false;
 			break;
 			
+		case "ISBN13":
+			// Verificar y asignar a number_OK el booleano para que luego aplique estilos
+
+			type = "ISBN" //Para luego mostrar cartel solo por "ISBN VALIDO"
+			number_OK = true;
+			break;
+
 		case "ISSN" :
 			var number_OK;
 			if ( box.value == "" )

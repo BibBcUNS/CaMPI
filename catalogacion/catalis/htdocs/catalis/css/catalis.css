@@ -199,7 +199,8 @@ a:hover {
 
 
 #docFormWrapper {
-    position: relative;
+    position: absolute;
+    bottom: 0px;
 	width: auto;
 	background: #EEDFCC;
 	border: 1px solid #999;
@@ -592,6 +593,8 @@ input#docItem {
                             No estan siendo usados pues desde el iPopup no se ve este archivo
 \*----------------------------------------------------------------------------------------------------------------------*/
 
+
+
 .menuSkin {
     position: absolute;
     width: 138px;
@@ -677,12 +680,57 @@ input#docItem {
 \*----------------------------------------------------------------------------------------------------------------------*/
 
 div#topBar {
-    /* height: 26px; */
     background-color: brown;
     border: solid 1px #777;
     position: relative;
-    padding: 4px;
+    padding: 7px;
     font-size: 20px;
+}
+
+#quickAccessWrapper{
+    display: inline;
+    margin-right: 5px;
+}
+
+#topBar #goToLabel{
+    color: white;
+    font-size: 13px;
+    float: left;
+    margin-right: 7px;
+    margin-top: 2px;
+}
+
+#topBar .goToButton{
+    float: left;
+    font-size: 15px;
+    font-family: Georgia;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 5px;
+    position: relative;
+    top: -5;
+}
+
+#goToCatauto{
+    background-color: rgb(0, 53, 148);
+    width: 61px;
+    margin-right: 3px;
+}
+
+#goToCatauto:hover{
+    background-color: rgb(8, 71, 187);
+}
+
+#goToHerramientas{
+    width: 109px;
+    margin-right: 3px;
+}
+
+#goToHerramientas:hover{
+    background-color: rgb(198, 89, 89);
 }
 
 
@@ -786,7 +834,7 @@ table#theToolbar td {
 }
 
 #btnNuevo{
-    margin: 3px 6px;
+    margin-left: 5px;
 }
 
 #selDatabase {
@@ -800,13 +848,13 @@ table#theToolbar td {
 }
 
 #logoutForm {
-    margin: 6px;
+    margin: 11px;
 }
 
 #appName {
     font-weight: bold;
     font-family: Georgia;
-    font-size: 20px;
+    font-size: 24px;
     margin-left: 5px;
 }
 

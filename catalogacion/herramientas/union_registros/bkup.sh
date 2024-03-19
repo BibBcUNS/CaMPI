@@ -29,4 +29,4 @@ fi
 
 
 # hago la copia
-cp -p /var/www/catalogacion/catalis/bases/catalis/$1/* backups/$1/$bkcount/ >> backups/$1/logs.txt 2>> backups/$1/logerror.txt
+cp -p /var/www/campi-catalogacion/catalis/bases/catalis/$1/* backups/$1/$bkcount/ >> backups/$1/logs.txt 2>> backups/$1/logerror.txt

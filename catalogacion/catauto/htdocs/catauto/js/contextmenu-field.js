@@ -465,7 +465,7 @@ function construirMenuChrome(field){
 	itemText.push("Eliminar");
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	itemEnabled.push(canRemoveF);
-	menuFunctions.push(async function() {
+	menuFunctions.push(function() {
 		// window.event es null; oPopup.event es undefined... Y entonces, ¿cómo sabremos
 		// dónde ubicar la ventana con el confirm?
 		var fieldContent = getSubfields(field).replace(/\^/g," ^");
@@ -475,7 +475,7 @@ function construirMenuChrome(field){
 		//(M.A) 12/04 Edito las siguientes lineas que llamaban a catalis_confirm comentada en aux-windows.js
 		var winProperties = "dialogWidth:" + 380 + "px; dialogHeight:" + 160 + "px; status:no; help:no";
     	winProperties += "; dialogLeft:10px";
-		var answer = await window.showModalDialog(URL_CONFIRM_DIALOG, question, winProperties);
+		var answer = window.showModalDialog(URL_CONFIRM_DIALOG, question, winProperties);
 
 		if ( answer ) {
 			removeField(top.globalParameter);

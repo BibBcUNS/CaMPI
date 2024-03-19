@@ -62,7 +62,7 @@ function imprimir_etiqueta($inv,$alto,$ancho)
 
       print "<table border=\"0\" style=\"height: $alto"."cm; width: $ancho"."cm\"  bordercolor=\"#999999\" cellpadding=\"0\" cellspacing=\"0\" align=center>";
 
-      if ($base=="ucod-marc-p" or $base=="eunm-p" or $base=="allbc")
+      if ($base=="ucod-marc" or $base=="eunm" or $base=="allbc")
       {
     print "<tr><td class=texto style=\"font-size: 2.5mm\"align=center height=10%><b>Universidad Nacional del Sur - BC</b></td></tr>";
       }
