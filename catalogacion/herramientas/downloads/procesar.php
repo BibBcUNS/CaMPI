@@ -14,7 +14,7 @@ shell_exec("rm $base/$so/*;"
 // Paso 2: si es necesario, las convertimos al formato de Windows
 if ($so=="windows") {
 	shell_exec("cd $base/$so;"
-			  . "rename biblio biblioLin biblio.*;"
+			  . "rename 's/biblio/biblioLin/' biblio.*;"
 			  . "/opt/cisis/crunchmf "
 			  . "/var/www/catalogacion/catalis/htdocs/herramientas/downloads/$base/$so/biblioLin "
 			  . "/var/www/catalogacion/catalis/htdocs/herramientas/downloads/$base/$so/biblio");

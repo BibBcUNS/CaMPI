@@ -451,7 +451,7 @@ function construirMenuChrome(field){
 		//(M.A) 12/04 Edito las siguientes lineas que llamaban a catalis_confirm comentada en aux-windows.js
 		var winProperties = "dialogWidth:" + 380 + "px; dialogHeight:" + 160 + "px; status:no; help:no";
     	winProperties += "; dialogLeft:10px";
-		var answer = await window.showModalDialog(URL_CONFIRM_DIALOG, {message: question}, winProperties);
+		var answer = await window.showModalDialog(URL_CONFIRM_DIALOG, question, winProperties);
 
 		if ( answer ) {
 			removeField(top.globalParameter);

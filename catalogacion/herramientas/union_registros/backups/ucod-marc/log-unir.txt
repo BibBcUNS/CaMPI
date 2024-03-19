@@ -1,0 +1,503 @@
+Fri Dec  1 09:35:41 -03 2023
+./unir.sh ucod-marc 028092 028091 gb
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:028092 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=28192
+
+Desbloqueando el registro origen 028092, MFN:28192, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=28192 mfrl=594
+
+Obteniendo MFN del registro destino NC:028092 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=28191
+
+Desbloqueando el registro destino 028091, MFN:28191, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=28191 mfrl=572
+
+Agregando al registro 028091 el campo v859 del registro 028092
+-----------------------------------------------------------------
+mfn= 28191 
+  1  "028091"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1955####xxua##########000#0#eng#d"
+245  "10^aCollege physics :^bmechanics, heat and sound /^cFrancis Weston Sears and Mark W. Zemansky."
+260  "##^aCambridge :^bAddison-Wesley,^c1955."
+300  "##^a2 v. :^bil. ;^c23 cm."
+250  "##^a2nd. ed."
+100  "1#^aSears, Francis Weston,^d1898-1975.^4aut"
+700  "1#^aZemansky, Mark Waldo,^d1900-1981.^4aut"
+ 82  "04^a531"
+991  "SI"
+  5  "20231122111414.0"
+859  "##^aAr-BaUNS^bSA^h531^iSe17-3a2^p2500/958^v1^y1958"
+1106  "^iGB@192.168.0.1^t202311221114^x1700662454"
+859  "##^aAR-BaUNS^bSA^f20231122^h531^iSe17-3a2^p2501/958^uGB^v2^y1958"
+
+Borrando el registro 028092 de la base ucod-marc
+-----------------------------------------------------------------
+mfn= 28192 [DELETED]
+  1  "028092"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1953####xxua##########000#0#eng#d"
+245  "10^aCollege physics :^belectricity, magnetism and optics /^cFrancis Weston Sears and Mark W. Zemansky."
+260  "##^aCambridge :^bAddison-Wesley,^c1953."
+300  "##^a2 v. :^bil. ;^c23 cm."
+250  "##^a2nd. ed."
+100  "1#^aSears, Francis Weston,^d1898-1975.^4aut"
+700  "1#^aZemansky, Mark Waldo,^d1900-1981.^4aut"
+ 82  "04^a531"
+991  "SI"
+  5  "20231122111104.0"
+859  "##^aAR-BaUNS^bSA^f20231122^h531^iSe17-3a2^p2501/958^uGB^v2^y1958"
+1106  "^iGB@192.168.0.1^t202311221112^x1700662336"
+
+=============================================================================
+Fri Dec  1 10:29:07 -03 2023
+./unir.sh ucod-marc 057295 057296 057294 GB
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:057295 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=57395
+
+Desbloqueando el registro origen 057295, MFN:57395, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=57395 mfrl=572
+
+Obteniendo MFN del registro destino NC:057295 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=57394
+
+Desbloqueando el registro destino 057294, MFN:57394, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=57394 mfrl=1466
+
+Agregando al registro 057294 el campo v859 del registro 057295
+-----------------------------------------------------------------
+mfn= 57394 
+  1  "057294"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1980####ag#a##########000#0#spa#d"
+245  "10^aVilla transitoria Casa de Piedra /^cRaúl Armando Leyton ; profesor padrino Néstor Murga."
+260  "##^c1980."
+300  "##^a3 v. :^bil., fotos col., planos, mapas ;^c30 cm."
+502  "##^aTrabajo final de carrera (Ingeniería)--Universidad Nacional del Sur. Departamento de Ingeniería, 1980."
+500  "##^aEl t.I posee la tabla de contenidos del t.I y t.II., el t.III consiste en la Carpeta de Planos."
+520  "##^a"El presente informe está realizado en base a la experiencia recogida durante mi permanencia en la obra 'Villa Transitoria Dique Casa de Piedra' [...] Se comienza el trabajo haciendo una descripción general de la obra como así su ubicación geográfica, para posteriormente pasar a puntos específicos como lo son las tareas de movimientos de suelos, elaboración de hormigones, construcción de diversas estructuras y algunas que por particulares no se pueden encasillar dentro de las actividades anteriormente expuestas..."--Introducción"
+100  "1#^aLeyton, Raúl Armando.^4dis"
+700  "1#^aMurga, Néstor Daniel,^d1938-^4ths"
+710  "2#^aUniversidad Nacional del Sur. Departamento de Ingeniería."
+ 82  "04^a627.8F"
+ 82  "04^a620.136"
+980  "^aLeyton, Raúl Armando\r\n"
+991  "SI"
+  5  "20231101091241.0"
+859  "##^3Vol. 1^aAR-BaUNS^bSC^c10.000,00.-^dDpto. Ingeniería^f20231031^h627.8^iL598^kF^p86396/981^uGB^v1^y1981"
+1106  "^iGB@192.168.0.1^t202312011005^x1701435915"
+859  "##^3v.2^aAR-BaUNS^bSC^cA10.000,00.-^dDpto. Ingeniería^f20231031^h627.8^iL598^kF^p86395/981^uGB^v2^y1981"
+
+Borrando el registro 057295 de la base ucod-marc
+-----------------------------------------------------------------
+mfn= 57395 [DELETED]
+  1  "057295"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1980####ag#a##########000#0#spa#d"
+245  "10^aVilla transitoria Casa de Piedra /^cRaúl A. Leyton."
+260  "##^aBahía Blanca :^bUniversidad nacional del Sur,^c1980."
+300  "##^a3 v. :^bilus. ;^c29,5 cm.."
+490  "0#^aTrabajo final de carrera"
+100  "1#^aLeyton, Raúl A."
+ 82  "04^a627.8F"
+ 82  "04^a620.136"
+991  "SI"
+  5  "20231031133258.0"
+859  "##^3v.2^aAR-BaUNS^bSC^cA10.000,00.-^dDpto. Ingeniería^f20231031^h627.8^iL598^kF^p86395/981^uGB^v2^y1981"
+1106  "^iGB@192.168.0.1^t202312011026^x1701437192"
+
+
+Obteniendo MFN del registro origen NC:057296 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=57396
+
+Desbloqueando el registro origen 057296, MFN:57396, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=57396 mfrl=578
+
+Obteniendo MFN del registro destino NC:057296 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=57394
+
+Desbloqueando el registro destino 057294, MFN:57394, de la base ucod-marc
+-----------------------------------------------------------------
+
+Agregando al registro 057294 el campo v859 del registro 057296
+-----------------------------------------------------------------
+mfn= 57394 
+  1  "057294"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1980####ag#a##########000#0#spa#d"
+245  "10^aVilla transitoria Casa de Piedra /^cRaúl Armando Leyton ; profesor padrino Néstor Murga."
+260  "##^c1980."
+300  "##^a3 v. :^bil., fotos col., planos, mapas ;^c30 cm."
+502  "##^aTrabajo final de carrera (Ingeniería)--Universidad Nacional del Sur. Departamento de Ingeniería, 1980."
+500  "##^aEl t.I posee la tabla de contenidos del t.I y t.II., el t.III consiste en la Carpeta de Planos."
+520  "##^a"El presente informe está realizado en base a la experiencia recogida durante mi permanencia en la obra 'Villa Transitoria Dique Casa de Piedra' [...] Se comienza el trabajo haciendo una descripción general de la obra como así su ubicación geográfica, para posteriormente pasar a puntos específicos como lo son las tareas de movimientos de suelos, elaboración de hormigones, construcción de diversas estructuras y algunas que por particulares no se pueden encasillar dentro de las actividades anteriormente expuestas..."--Introducción"
+100  "1#^aLeyton, Raúl Armando.^4dis"
+700  "1#^aMurga, Néstor Daniel,^d1938-^4ths"
+710  "2#^aUniversidad Nacional del Sur. Departamento de Ingeniería."
+ 82  "04^a627.8F"
+ 82  "04^a620.136"
+980  "^aLeyton, Raúl Armando\r\n"
+991  "SI"
+  5  "20231101091241.0"
+859  "##^3Vol. 1^aAR-BaUNS^bSC^c10.000,00.-^dDpto. Ingeniería^f20231031^h627.8^iL598^kF^p86396/981^uGB^v1^y1981"
+1106  "^iGB@192.168.0.1^t202312011005^x1701435915"
+859  "##^3v.2^aAR-BaUNS^bSC^cA10.000,00.-^dDpto. Ingeniería^f20231031^h627.8^iL598^kF^p86395/981^uGB^v2^y1981"
+859  "##^3Vol. 3^aAR-BaUNS^bSC^cwindow.0.000,.-^dDpto. Ingeniería^f20231031^h627.8^iL598^kF^p86404/981^uGB^v3^y1981"
+
+Borrando el registro 057296 de la base ucod-marc
+-----------------------------------------------------------------
+mfn= 57396 [DELETED]
+  1  "057296"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1980####ag#a##########000#0#spa#d"
+245  "10^aVilla transitoria Casa de Piedra /^cRaúl A. Leyton."
+260  "##^aBahía Blanca :^bUniversidad nacional del Sur,^c1980."
+300  "##^a3 v. :^bilus. ;^c29,5 cm.."
+490  "0#^aTrabajo final de carrera"
+100  "1#^aLeyton, Raúl A."
+ 82  "04^a627.8F"
+ 82  "04^a620.136"
+991  "SI"
+  5  "20231031135525.0"
+859  "##^3Vol. 3^aAR-BaUNS^bSC^cwindow.0.000,.-^dDpto. Ingeniería^f20231031^h627.8^iL598^kF^p86404/981^uGB^v3^y1981"
+1106  "^iGB@192.168.0.1^t202312011027^x1701437230"
+
+=============================================================================
+Fri Dec  1 10:51:53 -03 2023
+./unir.sh ucod-marc 038429 038431 038432 038430 GB
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:038429 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38529
+
+Desbloqueando el registro origen 038429, MFN:38529, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=38529 mfrl=632
+
+Obteniendo MFN del registro destino NC:038429 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38530
+
+Desbloqueando el registro destino 038430, MFN:38530, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=38530 mfrl=1370
+
+Agregando al registro 038430 el campo v859 del registro 038429
+-----------------------------------------------------------------
+mfn= 38530 
+  1  "038430"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1980####ag#a#####b####000#0#spa#d"
+245  "10^aModelo a escala reducida de las obras de evacuación de crecidas del dique a construir en Segunda Angostura -Provincia de Río Negro y Neuquén /^cNéstor Daniel Murga."
+260  "##^aBahía Blanca :^bUniversidad Nacional del Sur, Departamento de Ingeniería,^c1980."
+300  "##^a5 v. :^bil., mapas, planos ;^c30 cm."
+500  "##^aConvenio Universidad Nacional del Sur y Agua y Energía Eléctrica."
+504  "##^aPrimera pte. Ensayo físico de la obra de toma del túnel de desvío -- Seg. pte. Ensayo físico de la obra de toma del túnel de desvío modificada, canal de descarga, vertedero y disipador de energía para obra de desvío -- Tercera pte. Ensayo físico de la obra de evacuación de crecidas : vertedero y túnel de desvío -- Cuarta pte. Ensayo físico de la obra de evacuación de crecidas : funcionamiento de las compuertas de sector circular."
+100  "1#^aMurga, Néstor Daniel,^d1938-"
+246  "15^aModelo a escala reducida de las obras de evacuación de crecidas del dique a construir sobre el río Limay -Segunda Angostura- Provincia de Río Negro y Neuquén"
+ 82  "04^a627.4"
+991  "SI"
+  5  "20231101091610.0"
+859  "##^3Vol. 1^aAR-BaUNS^bSC^cA30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88733/982^uGB^v1^y1982"
+1106  "^iGB@192.168.0.1^t202312011046^x1701438365"
+859  "##^3Vol. 2^aAR-BaUNS^bSC^cA30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88732/982^uGB^v2^y1982"
+
+Borrando el registro 038429 de la base ucod-marc
+-----------------------------------------------------------------
+mfn= 38529 [DELETED]
+  1  "038429"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1980####ag#a##########000#0#spa#d"
+245  "10^aModelo a escala reducida de las obras de evacuación de crecidas del dique a construir en Segunda Angostura - Provincias de Río Negro y Neuquén /^cNéstor D. Murga."
+260  "##^aBahía Blanca :^bUniversidad Nacional del Sur,^c1980."
+300  "##^a5 v. :^bilus. ;^c29,5 cm."
+100  "1#^aMurga, Néstor D."
+ 82  "04^a627.4"
+991  "SI"
+  5  "20231031104815.0"
+859  "##^3Vol. 2^aAR-BaUNS^bSC^cA30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88732/982^uGB^v2^y1982"
+1106  "^iGB@192.168.0.1^t202312011047^x1701438420"
+
+
+Obteniendo MFN del registro origen NC:038431 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38531
+
+Desbloqueando el registro origen 038431, MFN:38531, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=38531 mfrl=632
+
+Obteniendo MFN del registro destino NC:038431 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38530
+
+Desbloqueando el registro destino 038430, MFN:38530, de la base ucod-marc
+-----------------------------------------------------------------
+
+Agregando al registro 038430 el campo v859 del registro 038431
+-----------------------------------------------------------------
+mfn= 38530 
+  1  "038430"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1980####ag#a#####b####000#0#spa#d"
+245  "10^aModelo a escala reducida de las obras de evacuación de crecidas del dique a construir en Segunda Angostura -Provincia de Río Negro y Neuquén /^cNéstor Daniel Murga."
+260  "##^aBahía Blanca :^bUniversidad Nacional del Sur, Departamento de Ingeniería,^c1980."
+300  "##^a5 v. :^bil., mapas, planos ;^c30 cm."
+500  "##^aConvenio Universidad Nacional del Sur y Agua y Energía Eléctrica."
+504  "##^aPrimera pte. Ensayo físico de la obra de toma del túnel de desvío -- Seg. pte. Ensayo físico de la obra de toma del túnel de desvío modificada, canal de descarga, vertedero y disipador de energía para obra de desvío -- Tercera pte. Ensayo físico de la obra de evacuación de crecidas : vertedero y túnel de desvío -- Cuarta pte. Ensayo físico de la obra de evacuación de crecidas : funcionamiento de las compuertas de sector circular."
+100  "1#^aMurga, Néstor Daniel,^d1938-"
+246  "15^aModelo a escala reducida de las obras de evacuación de crecidas del dique a construir sobre el río Limay -Segunda Angostura- Provincia de Río Negro y Neuquén"
+ 82  "04^a627.4"
+991  "SI"
+  5  "20231101091610.0"
+859  "##^3Vol. 1^aAR-BaUNS^bSC^cA30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88733/982^uGB^v1^y1982"
+1106  "^iGB@192.168.0.1^t202312011046^x1701438365"
+859  "##^3Vol. 2^aAR-BaUNS^bSC^cA30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88732/982^uGB^v2^y1982"
+859  "##^3Vol. 3^aAR-BaUNS^bSC^c$30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88731/982^uGB^v3^y1982"
+
+Borrando el registro 038431 de la base ucod-marc
+-----------------------------------------------------------------
+mfn= 38531 [DELETED]
+  1  "038431"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1980####ag#a##########000#0#spa#d"
+245  "10^aModelo a escala reducida de las obras de evacuación de crecidas del dique a construir en Segunda Angostura - Provincias de Río Negro y Neuquén /^cNéstor D. Murga."
+260  "##^aBahía Blanca :^bUniversidad Nacional del Sur,^c1980."
+300  "##^a5 v. :^bilus. ;^c29,5 cm."
+100  "1#^aMurga, Néstor D."
+ 82  "04^a627.4"
+991  "SI"
+  5  "20231031105417.0"
+859  "##^3Vol. 3^aAR-BaUNS^bSC^c$30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88731/982^uGB^v3^y1982"
+1106  "^iGB@192.168.0.1^t202312011047^x1701438440"
+
+
+Obteniendo MFN del registro origen NC:038432 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38532
+
+Desbloqueando el registro origen 038432, MFN:38532, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=38532 mfrl=632
+
+Obteniendo MFN del registro destino NC:038432 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=38530
+
+Desbloqueando el registro destino 038430, MFN:38530, de la base ucod-marc
+-----------------------------------------------------------------
+
+Agregando al registro 038430 el campo v859 del registro 038432
+-----------------------------------------------------------------
+mfn= 38530 
+  1  "038430"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1980####ag#a#####b####000#0#spa#d"
+245  "10^aModelo a escala reducida de las obras de evacuación de crecidas del dique a construir en Segunda Angostura -Provincia de Río Negro y Neuquén /^cNéstor Daniel Murga."
+260  "##^aBahía Blanca :^bUniversidad Nacional del Sur, Departamento de Ingeniería,^c1980."
+300  "##^a5 v. :^bil., mapas, planos ;^c30 cm."
+500  "##^aConvenio Universidad Nacional del Sur y Agua y Energía Eléctrica."
+504  "##^aPrimera pte. Ensayo físico de la obra de toma del túnel de desvío -- Seg. pte. Ensayo físico de la obra de toma del túnel de desvío modificada, canal de descarga, vertedero y disipador de energía para obra de desvío -- Tercera pte. Ensayo físico de la obra de evacuación de crecidas : vertedero y túnel de desvío -- Cuarta pte. Ensayo físico de la obra de evacuación de crecidas : funcionamiento de las compuertas de sector circular."
+100  "1#^aMurga, Néstor Daniel,^d1938-"
+246  "15^aModelo a escala reducida de las obras de evacuación de crecidas del dique a construir sobre el río Limay -Segunda Angostura- Provincia de Río Negro y Neuquén"
+ 82  "04^a627.4"
+991  "SI"
+  5  "20231101091610.0"
+859  "##^3Vol. 1^aAR-BaUNS^bSC^cA30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88733/982^uGB^v1^y1982"
+1106  "^iGB@192.168.0.1^t202312011046^x1701438365"
+859  "##^3Vol. 2^aAR-BaUNS^bSC^cA30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88732/982^uGB^v2^y1982"
+859  "##^3Vol. 3^aAR-BaUNS^bSC^c$30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88731/982^uGB^v3^y1982"
+859  "##^3Vol. 4^aAR-BaUNS^bSC^c$30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88727/982^uGB^v4^y1982"
+
+Borrando el registro 038432 de la base ucod-marc
+-----------------------------------------------------------------
+mfn= 38532 [DELETED]
+  1  "038432"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1980####ag#a##########000#0#spa#d"
+245  "10^aModelo a escala reducida de las obras de evacuación de crecidas del dique a construir en Segunda Angostura - Provincias de Río Negro y Neuquén /^cNéstor D. Murga."
+260  "##^aBahía Blanca :^bUniversidad Nacional del Sur,^c1980."
+300  "##^a5 v. :^bilus. ;^c29,5 cm."
+100  "1#^aMurga, Néstor D."
+ 82  "04^a627.4"
+991  "SI"
+  5  "20231031110659.0"
+859  "##^3Vol. 4^aAR-BaUNS^bSC^c$30.000,00.-^dDpto. Ingeniería^f20231031^h627.4^iM943^p88727/982^uGB^v4^y1982"
+1106  "^iGB@192.168.0.1^t202312011047^x1701438471"
+
+=============================================================================
+Mon Dec 11 08:56:11 -03 2023
+./unir.sh ucod-marc 029493 029492 GB
+----------------------------------------
+
+Obteniendo MFN del registro origen NC:029493 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=29593
+
+Desbloqueando el registro origen 029493, MFN:29593, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=29593 mfrl=698
+
+Obteniendo MFN del registro destino NC:029493 de la base ucod-marc
+-----------------------------------------------------------------
+MFN=29592
+
+Desbloqueando el registro destino 029492, MFN:29592, de la base ucod-marc
+-----------------------------------------------------------------
+unlock: mfn=29592 mfrl=3686
+
+Agregando al registro 029492 el campo v859 del registro 029493
+-----------------------------------------------------------------
+mfn= 29592 
+  1  "029492"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1988####ag#a#####bm###000#0#spa#d"
+245  "10^aEstado de transición de carácter variable  en la eliminación de 1,2,3 - Trifenilpropanonas :^bmecanismo de fragmentación de 2,2 -Dihalo -1,3 -Difenilpropanonas /^cRosana Silvia Montani."
+260  "##^c1988."
+300  "##^a108 p. :^bilus. ;^c29 cm."
+502  "##^aTesis--Universidad Nacional del Sur, 1989."
+504  "##^aIncluye referencias bibliográficas."
+520  "##^a1. INTRODUCCION Y TEORIA :1.1 Los mecanismos E2 y E1cB reversible e irreversible: Las reacciones de eliminación inducidas por bases y conducentes a la formación de alquenos caen desde el punto de vista mecanístico dentro de dos categorías principales: el mecanismo concertado E2 y el esquema en dos pasos E1cB con sus variantes reversible e irreversible (1,2,3,4,5,6,7)* . La distinción entre las variantes E1cB depende de si la formación del alqueno ocurre a partir de un carbanión formado reversible o irreversiblemente (8,9).  Bordwell sostiene que si bien el mecanismo E2 es el camino seguido por sistemas alquílicos comunes no activados, el mecansimo E1cB es más corriente que lo que generalmente se supone, ya que una combinación de estabilización carbaniónica en el carbono-ß con un grupo nucleófugo pobre favorecerá el proceso en dos etapas. De los tres posibles procesos de eliminación-ß promovida por bases hay dos que presentan cierta dificultad para ser distintos entre sí: son el mecanismo carbaniónico irreversible (E1cB)I y el proceso concertado E2.  La definición del mecanismo E2 fue presentada inicialmente por Hanhart e Ingold (10) quienes propusieron un proceso de eliminación en una etapa durante la cual la base ataca al hidrógeno-ß y lo retira al mismo tiempo que se separa el grupo saliente y se forma el doble enlace carbono-carbono. Para el mecanismo E2, el hidrógeno-ß estará parcial pero no totalmente transferido a la base en el estado de transición, y la unión carbono-Ó- - - grupo saliente se encontrará parcial pero no completamente rota.  Una de las técnicas que pueden usarse para una estimación del grado de transferencia del protón y por ende para una diferenciación del proceso concertado con el carbaniónico, consiste en determinar la influencia de los sustituyentes-ß (11,12). En la literatura se encuentran resultados de numerosas determinaciones cuantitativas de estos efectos. Sin embargo, esos valores deben interpretarse con cautela ya que no sólo dependen del grado de transferencia del protón sino también del de ruptura de la unión del grupo saliente en el estado de transición.  Una diferencia importante entre las eliminaciones concertadas y en etapas es la fuerza impulsora. Para que una reacción siga el camino concertado es necesario que su energía sea menor que la de cualquiera de los pasos de los procesos en etapas. Para poder aplicar este criterio experimentalmente, debe poder realizarse una estimación de la velocidad del paso lento en el proceso no concertado.  Este valor es entonces comparado con el de la velocidad observada.  Para distinguir entre (E1cB)I y el proceso E2, por ejemplo, puede calcularse la velocidad de transferencia del protón que es la del paso lento en el primer mecanismo. La velocidad observada deberá ser por lo menos uno o dos órdenes de magnitud mayor que la velocidad calculada para poder establecer con total certeza que el proceso es el concertado (13). //  * No se transcribe el esquema."
+100  "1#^aMontani, Rosana Silvia.^4dis"
+ 82  "04^a040"
+ 82  "04^a547.01"
+991  "SI"
+  5  "20231211085530.0"
+859  "##^aAr-BaUNS^bST^f20231206^h040^iB148 1988-184^kR^p97648/989^uGB^y1989"
+1106  "^iGB@192.168.0.1^t202312110855^x1702295730"
+859  "##^aAr-BaUNS^bSAT^f20140825^h040^iB148 1988-184^p98797/990^uGC^y1990"
+
+Borrando el registro 029493 de la base ucod-marc
+-----------------------------------------------------------------
+mfn= 29593 [DELETED]
+  1  "029493"
+905  "n"
+906  "a"
+907  "m"
+908  "#"
+909  "#"
+917  "5"
+918  "a"
+919  "#"
+  8  "041125s1988####ag#a#####bm###000#0#spa#d"
+245  "10^aEstado de transición de carácter variable  en la eliminación de 1,2,3 - Trifenilpropanonas :^bmecanismo de fragmentación de 2,2 -Dihalo -1,3 -Difenilpropanonas. /^cRosana Silvia Montani."
+260  "##^c1988."
+300  "##^a108 p. :^bilus. ;^c28,5 cm."
+502  "##^aTesis--Universidad Nacional del Sur, 1990."
+504  "##^aIncluye referencias bibliográficas."
+100  "1#^aMontani, Rosana Silvia.^4dis"
+ 82  "04^a040"
+ 82  "04^a547.01"
+991  "SI"
+  5  "20231206110652.0"
+859  "##^aAr-BaUNS^bSAT^f20140825^h040^iB148 1988-184^p98797/990^uGC^y1990"
+1106  "^iGB@192.168.0.1^t202312110852^x1702295551"
+
+=============================================================================

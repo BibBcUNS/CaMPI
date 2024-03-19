@@ -316,6 +316,21 @@ function setHeaderEvents()
 		top.globalParameter = this.id;
 		checkModified();
 	}
+
+	if(document.getElementById("goToCatalis")){
+		document.getElementById("goToCatalis").addEventListener("click", function(){
+			window.open("/login/php/openModule.php?modulo=catalis", "_blank")
+		})
+	}
+
+	
+	if(document.getElementById("goToHerramientas")){
+		document.getElementById("goToHerramientas").addEventListener("click", function(){
+			window.open("/login/php/openModule.php?modulo=herramientas", "_blank")
+		})
+	}
+	  
+	
 	
 	document.getElementById("showHiddenData").onclick = showHiddenData;
 }

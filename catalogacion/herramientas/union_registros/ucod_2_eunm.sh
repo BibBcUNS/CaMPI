@@ -13,9 +13,9 @@ destino=$4;
 #cn_txt=/var/www/bases/catalis/catalis_pack_en_produccion/catalis/carpc/cn.txt
 
 
-path_fuente=/var/www/catalogacion/catalis/bases/catalis/$fuente/biblio
-path_destino=/var/www/catalogacion/catalis/bases/catalis/$destino/biblio
-cn_txt=/var/www/catalogacion/catalis/bases/catalis/$destino/cn.txt
+path_fuente=/var/www/campi-catalogacion/catalis/bases/catalis/$fuente/biblio
+path_destino=/var/www/campi-catalogacion/catalis/bases/catalis/$destino/biblio
+cn_txt=/var/www/campi-catalogacion/catalis/bases/catalis/$destino/cn.txt
 
 # haciendo backup de las bases
 ./bkup.sh $destino
@@ -70,7 +70,7 @@ echo Generando el invertido de $destino >> logMover.txt
 echo ---------------------------------------------- >> logMover.txt
 echo Generando el invertido de $destino >> logerrorMover.txt
 echo ---------------------------------------------- >> logerrorMover.txt
-/var/www/catalogacion/catalis/cgi-bin/fullinv.sh $path_destino >> logMover.txt 2>> logerrorMover.txt
+/var/www/campi-catalogacion/catalis/cgi-bin/fullinv.sh $path_destino >> logMover.txt 2>> logerrorMover.txt
 
 echo ==================================================================== >> logMover.txt
 echo ==================================================================== >> logerrorMover.txt

@@ -1,0 +1,43 @@
+<IsisScript>
+
+<!--
+===========================================================================
+    userExist.xis
+
+    Este script recibe usuario y contraseña del login de catalogacion, y consulta
+	a la base users para saber si existe este usuario. Si existe devuelve true, si no, false.
+===========================================================================
+-->
+
+<section>
+<display><pft>'Content-type: text/html'/#</pft></display>
+
+<parm name="cipar"><pft>
+	/* ----- BASE DE DATOS (USERS) ----- */
+    'USERS.*=',          '/var/www/campi-catalogacion/users/users.*'/
+</pft></parm> 
+
+<field action=cgi tag=100>user</field>
+<field action=cgi tag=101>pwd</field>
+
+<do task=search>
+<parm name=db>USERS</parm>
+<parm name=expression><pft>v100</pft></parm>
+<loop>
+	<field action=replace tag=200><pft>v3</pft></field>
+	<field action=export tag=200>200</field>
+</loop>
+</do>
+
+<display><pft>
+	if p(v200) and v200=v101 then
+		'true',
+	else
+		'false'
+	fi
+</pft></display>
+
+
+</section>
+</IsisScript>
+
