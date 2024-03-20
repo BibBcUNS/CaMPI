@@ -22,10 +22,8 @@
 
         $cadena_archivo = "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/catalis/cgi-bin/wxis?IsisScript=../../login/xis/userExist.xis&user=".$username."&pwd=".$password;
         
-        $ptr_userpwd = fopen($cadena_archivo, "r");
-        $permiso = fread($ptr_userpwd,8192);
-    
-        fclose($ptr_userpwd);
+        $permiso = file_get_contents($cadena_archivo);
+        
 
         if($permiso=="false"){
             echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.php?error=si&modulo=$modulo>";
