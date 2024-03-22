@@ -7,8 +7,10 @@
     // Tomar modulo por get
 
     // Cierra la sesion del Modulo y lo lleva al Logeo correspondiente
-    $url = '../../catalis/cgi-bin/wxis?IsisScript=catalis/xis/catalis.xis&userid=AUTO&db=auto&tarea=FIN_SESION';
+
+    $modulo = $_GET["modulo"];
+
+    $url = "login.php?modulo=" . $modulo;
 
     header('Location: ' . $url);
 ?>
-<script>window.close()</script>

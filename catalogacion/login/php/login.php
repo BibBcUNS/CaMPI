@@ -59,6 +59,16 @@
 
 			<input type="Submit" value="Iniciar sesión" class="btnSubmitForm">
 
+			<?php
+				$error = $_GET["error"];
+				if($error == "data"){
+					?>
+					<div style="color: white; margin-top: 5px; font-style: italic;">
+                		Usuario o contraseña incorrectos. Por favor, inténtelo nuevamente.
+            		</div>
+					<?php
+				}
+			?>
 		</form>
 	</div>		
 
