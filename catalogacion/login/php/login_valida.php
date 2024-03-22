@@ -14,7 +14,7 @@
     
 
     if ($password==NULL or $username==NULL) {
-        echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.php?error=si&modulo=$modulo>";
+        echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.php?error=data&modulo=$modulo>";
     }else{
 
         // TO-DO En esta seccion deberiamos encriptar la contraseña para buscarla con el archivo .xis...
@@ -26,7 +26,7 @@
         
 
         if($permiso=="false"){
-            echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.php?error=si&modulo=$modulo>";
+            echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.php?error=data&modulo=$modulo>";
         }else{
             $_SESSION["s_username"] = $username;
             $_SESSION["s_password"] = $password;

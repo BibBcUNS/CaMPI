@@ -10,7 +10,7 @@
     // Si no existe la sesión se devuelve a login.php con aviso de error
     if (!isset($_SESSION["s_username"]) && !isset($_SESSION["s_permiso"]))
     {
-        echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.php?error=si&modulo=$modulo>";
+        echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.php?error=data&modulo=$modulo>";
     }else{
         // Si la sesion existe se genera un form oculto con los datos para ingresar al modulo correspondiente. Al cargar la pagina se realiza el submit
         if($modulo == 'catalis'){
