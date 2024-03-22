@@ -1832,6 +1832,7 @@ function endSession()
 // -----------------------------------------------------------------------------
 {
     if ( confirm("¿Confirma que desea finalizar la sesión?") ) {
-		window.location.href = "../../../../login/php/logout.php";
+        // TO-DO Realizar peticion para almacenar en logs el fin de sesion. ("Sesion" de Catalis , no de php)
+		window.location.href = "../../../../login/php/logout.php?modulo=catalis";
     }
 }
