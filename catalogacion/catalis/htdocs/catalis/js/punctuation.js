@@ -198,7 +198,7 @@ function punctuation(tag,sf)
             break;
 
         // ---------------------------------------------------------
-        case "510" :
+        // case "510" :
         // ---------------------------------------------------------
             var re_clean = /,(?=\^|$)/g;
             sf = sf.replace(re_clean, "");
@@ -247,9 +247,9 @@ function punctuation(tag,sf)
             break;
 
         // ---------------------------------------------------------
-        case "110" :
+        // case "110" :
         case "610" : //ATENCION: arreglar problema con 610$2 
-        case "710" :
+        // case "710" :
         // ---------------------------------------------------------
             var re_clean = / \.(?=\^|$)/g;
             sf = sf.replace(re_clean, "");
