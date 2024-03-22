@@ -26,6 +26,8 @@
 <loop>
 	<field action=replace tag=200><pft>v3</pft></field>
 	<field action=export tag=200>200</field>
+
+	<!-- TO-DO generar campo que almacene el acceso a catauto (se al igual que el 200 con la pw, se generará si existe y sino no) -->
 </loop>
 </do>
 
