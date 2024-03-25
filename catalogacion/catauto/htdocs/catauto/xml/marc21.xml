@@ -211,7 +211,7 @@
 		<subfield code="8" repet="R" label-spa="Vínculo de campo y número de secuencia" />
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="046" repet="R" label-spa="Fechas con codificación especial" label-eng="Special Coded Dates" template="##a">
+	<datafield tag="046" repet="R" label-spa="Fechas con codificación especial" label-eng="Special Coded Dates" template="##f">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="f" repet="NR" label-spa="Fecha de nacimiento" label-eng="Birth date" />
@@ -962,7 +962,7 @@
 		<subfield code="8" repet="R" label-spa="Enlace entre campos y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="378" repet="NR" label-spa="Forma completa del nombre personal" oblig="ALL" template="##a">
+	<datafield tag="378" repet="NR" label-spa="Forma completa del nombre personal" oblig="ALL" template="##q">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="q" repet="NR" label-spa="Forma completa del nombre personal" label-eng="Fuller form of personal name" />
@@ -2636,9 +2636,9 @@
 	<fieldblock id="links" label-eng="Links" label-spa="Vínculos con otros registros">730,740,765,772,773,776,780,785</fieldblock>
 	-->
 
-	<fieldblock id="01x-09x" label-eng="Number and Code Fields (01x-04x)" label-spa="Números y códigos (01X-04X)">010,014,016,020,022,024,031,035,040,042,043,045,050,052,053,055,060,065,066,070,072,073,075,080,082,083,086,087</fieldblock>
+	<fieldblock id="01x-09x" label-eng="Number and Code Fields (01x-04x)" label-spa="Números y códigos (01X-04X)">010,014,016,020,022,024,031,035,040,042,043,045,046,050,052,053,055,060,065,066,070,072,073,075,080,082,083,086,087</fieldblock>
 	<fieldblock id="1xx" label-eng="Heading Fields(1xx)" label-spa="Campos de Enacabezamientos (1xx)">100,110,111,130,150,151,155,180,181,182,185</fieldblock>
-	<fieldblock id="2xx-3xx" label-eng="Complex Subject Reference Fields (2xx-3xx)" label-spa="Campos de referencias Complejas (2xx-3xx)">260,335,336,348,360,368,371,372,373,374,375,376,377,378,388</fieldblock>
+	<fieldblock id="2xx-3xx" label-eng="Complex Subject Reference Fields (2xx-3xx)" label-spa="Campos de referencias Complejas (2xx-3xx)">260,335,336,348,360,368,370,371,372,373,374,375,376,377,378,388</fieldblock>
 	<fieldblock id="4xx" label-eng="See From Tracing Fields (4xx)" label-spa="Campos de Referencia - Véase (4xx)">400,410,411,430,447,448,450,451,455,462,480,481,482,485</fieldblock>
 	<fieldblock id="5xx" label-eng="See Also From Tracing Fields (5xx)" label-spa="Campos de Referencia - Véase además (5xx)">500,510,511,530,548,550,551,555,562,580,581,582,585</fieldblock>
 	<fieldblock id="64x" label-eng="Series Treatment Fields (64x)" label-spa="Campos de Tratamiento de las series (64x)">640,641,642,643,644,645,646</fieldblock>
