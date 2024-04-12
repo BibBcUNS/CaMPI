@@ -343,6 +343,23 @@ function setHeaderEvents()
   document.getElementById("showHiddenData").onclick = showHiddenData;
 }
 
+function setFieldsHandlers(){
+  // Agrego un keyup al documento para controlar la longitud de los subcampos del 245.
+  document.addEventListener("input", (e) => {
+    var element = e.target;
+    // Establezco el limite en 1000 caracteres.
+    let limit = 1000;
+
+    // TO-DO Agregar control a otros campos
+    if(element.closest("#field245")){
+      if(element.value.length >= limit){
+        element.value = element.value.substring(0, limit);
+        top.catalisMessage("Ha alcanzado el límite de longitud del campo.", true);
+        top.updateTextareaHeight();
+      }
+    }    
+  })
+}
 
 // -----------------------------------------------------------------------------
 function setEventHandlers()
@@ -354,4 +371,5 @@ function setEventHandlers()
   setSearchFormEvents();
   setEditionFormEvents();
   setControlFormEvents();
+  setFieldsHandlers();
 }

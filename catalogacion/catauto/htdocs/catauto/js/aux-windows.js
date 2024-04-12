@@ -1,4 +1,3 @@
-
 /* =============================================================================
  *  Catalis - aux-windows.js
  *
@@ -38,11 +37,9 @@ function rawEdit(aacr)
     var newDatafields;
 
 
-    // Esto según https://github.com/niutech/showModalDialog
-    (function() {
-        //statements before showing a modal dialog
+    (async function() {
 
-        newDatafields = window.showModalDialog(URL_RAW_EDIT, dialogArgs, winProperties);
+        newDatafields = await window.showModalDialog(URL_RAW_EDIT, dialogArgs, winProperties);
 
         // Procesamos lo que devuelve la ventana
         newDatafields = newDatafields.replace(/\r/g, "");  //  \r del textarea
@@ -126,33 +123,31 @@ function editCodedData()
     var dialogHeight = ( "multiple" == codeType ) ? 230 : 145;
     var dialogWidth = 300;
 
-    winProperties = winProperties.replace("$dialogWidthToReplace", dialogWidth+"px")
-    winProperties = winProperties.replace("$dialogHeightToReplace", dialogHeight+"px")
+    winProperties = winProperties.replace("$dialogWidthToReplace", dialogWidth+"px");
+    winProperties = winProperties.replace("$dialogHeightToReplace", dialogHeight+"px");
 
 
-    //var winProperties = "visibility:hidden; font-size:10px; dialogLeft:" + ( dialogLeft ) + "px; dialogTop:" + ( dialogTop ) + "px; dialogWidth:" + dialogWidth + "px; dialogHeight:" + dialogHeight + "px; status:no; help:no";
+    (async function(){
+        var newCode = await window.showModalDialog(URL, dialogArgs, winProperties);
+        let objEvent = window.top.globalObject;
 
-
-    var newCode = window.showModalDialog(URL, dialogArgs, winProperties);
-    let objEvent = window.top.globalObject;
-
-    srcObject = event.srcElement;
-    
-    dataElement = top.globalParameter;
-    
-    
-    if ( null != newCode ) {
-        if ( dataElement.search(/relator|f041|f044/) != -1 ) {
-            objEvent.value = newCode.value;
-            //displayPermanentTitle(srcObject,newCode.description.substr(6),40,0);
-        } else {
-            document.getElementById("marcEditForm")[dataElement].value = newCode.value;
-            if ( document.getElementById("TD_" + dataElement) ) {
-                document.getElementById("TD_" + dataElement).title = newCode.description;
-            }
-        } 
-        event.srcElement.focus();  // no produce el efecto deseado (el elemento obtiene el foco, pero no se ve resaltado)
-    }
+        srcObject = event.srcElement;
+        
+        dataElement = top.globalParameter;
+        
+        
+        if ( null != newCode ) {
+            if ( dataElement.search(/relator|f041|f044/) != -1 ) {
+                objEvent.value = newCode.value;
+            } else {
+                document.getElementById("marcEditForm")[dataElement].value = newCode.value;
+                if ( document.getElementById("TD_" + dataElement) ) {
+                    document.getElementById("TD_" + dataElement).title = newCode.description;
+                }
+            } 
+            event.srcElement.focus();  // no produce el efecto deseado (el elemento obtiene el foco, pero no se ve resaltado)
+        }
+    })();
 }
 
 
@@ -232,62 +227,64 @@ function editIndicators()
     
     var winProperties = "font-size:10px; status:no; help:no";
 
-    // newIndicators contiene los indicadores devueltos por el cuadro de diálogo
-    var newIndicators = window.showModalDialog(URL_EDIT_INDICATORS, dialogArgs, winProperties);
+    (async function(){
+        // newIndicators contiene los indicadores devueltos por el cuadro de diálogo
+        var newIndicators = await window.showModalDialog(URL_EDIT_INDICATORS, dialogArgs, winProperties);
 
-    //Volvemos a setear variables (por showModalDialog)
-    field = top.globalParameter;
-    oldIndicators = getIndicators(field);
-    tag = field.tag;
+        //Volvemos a setear variables (por showModalDialog)
+        field = top.globalParameter;
+        oldIndicators = getIndicators(field);
+        tag = field.tag;
 
-    if ( null != newIndicators ) {
-      //  return;  // abortamos
-        newIndicators = newIndicators.replace(/ /g,"#");
-        updateIndicators(field,newIndicators);
-        // TO-DO: actualizar el .title para que se vean los nuevos valores
+        if ( null != newIndicators ) {
+            //  return;  // abortamos
+            newIndicators = newIndicators.replace(/ /g,"#");
+            updateIndicators(field,newIndicators);
+            // TO-DO: actualizar el .title para que se vean los nuevos valores
 
-        // Campo 505: el cambio del primer indicador puede producir un cambio en la estructura
-        // de subcampos (basic vs. enhanced)
-         if ( "505" == tag ) {
-            var fieldContent = getSubfields(field,"","empty");
-            if ( oldIndicators.substr(1,1) == "#" && newIndicators.substr(1,1) == "0" && fieldContent.search(/\^[rt]/) == -1 ) {
-                // basic => enhanced
-                enhance505(field,true);
-            } else if ( oldIndicators.substr(1,1) == "0" && newIndicators.substr(1,1) == "#"  && fieldContent.search(/\^[rt]/) != -1 ) {
-                // enhanced => basic
-                enhance505(field,false);
+            // Campo 505: el cambio del primer indicador puede producir un cambio en la estructura
+            // de subcampos (basic vs. enhanced)
+            if ( "505" == tag ) {
+                var fieldContent = getSubfields(field,"","empty");
+                if ( oldIndicators.substr(1,1) == "#" && newIndicators.substr(1,1) == "0" && fieldContent.search(/\^[rt]/) == -1 ) {
+                    // basic => enhanced
+                    enhance505(field,true);
+                } else if ( oldIndicators.substr(1,1) == "0" && newIndicators.substr(1,1) == "#"  && fieldContent.search(/\^[rt]/) != -1 ) {
+                    // enhanced => basic
+                    enhance505(field,false);
+                }
             }
-        }
 
 
-        // En ciertos casos (ej.: campo 246, ind2) podemos hacer que el cambio
-        // en un indicador produzca el cambio de un subfieldLabel.
-        // Si usamos etiquetas para el campo, entonces el cambio podrï¿½a ser a nivel
-        // de campo, y no de subcampo. Ademï¿½s, la etiqueta ya debe adecuarse al
-        // indicador cuando es creado el campo/subcampo.
-        /*if ( "246" == tag ) {
-            var ind2Value = newValues.substr(1,1);
-            var newLabel = xmlDatafield.selectNodes("indicator[@pos='2']/i[@value=" + ind2Value + "]/@label-" + LANG)[0].value;
-            firstSubfieldBox(field).parentNode.previousSibling.firstChild.firstChild.innerHTML = newLabel;
-        }*/
+            // En ciertos casos (ej.: campo 246, ind2) podemos hacer que el cambio
+            // en un indicador produzca el cambio de un subfieldLabel.
+            // Si usamos etiquetas para el campo, entonces el cambio podrï¿½a ser a nivel
+            // de campo, y no de subcampo. Ademï¿½s, la etiqueta ya debe adecuarse al
+            // indicador cuando es creado el campo/subcampo.
+            /*if ( "246" == tag ) {
+                var ind2Value = newValues.substr(1,1);
+                var newLabel = xmlDatafield.selectNodes("indicator[@pos='2']/i[@value=" + ind2Value + "]/@label-" + LANG)[0].value;
+                firstSubfieldBox(field).parentNode.previousSibling.firstChild.firstChild.innerHTML = newLabel;
+            }*/
 
-        // En los casos en que se usan nonfiling indicators, podemos hacer esto:
-        // [suspendido 2003/11/25, luego del cambio en editIndicators.htm]
-        /*
-        if ( tag.search(/240|245|440/) != -1 ) {
-            var subfield = firstSubfieldBox(field).value;
-            subfield = subfield.replace(/^{([^}]+)}/,"$1");  // quitamos marcas
-            var ind = newValues.substr(1,1);
-            if ( ind != 0 ) {
-                subfield = "{" + subfield.substr(0,ind) + "}" + subfield.substr(ind);
+            // En los casos en que se usan nonfiling indicators, podemos hacer esto:
+            // [suspendido 2003/11/25, luego del cambio en editIndicators.htm]
+            /*
+            if ( tag.search(/240|245|440/) != -1 ) {
+                var subfield = firstSubfieldBox(field).value;
+                subfield = subfield.replace(/^{([^}]+)}/,"$1");  // quitamos marcas
+                var ind = newValues.substr(1,1);
+                if ( ind != 0 ) {
+                    subfield = "{" + subfield.substr(0,ind) + "}" + subfield.substr(ind);
+                }
+                firstSubfieldBox(field).value = subfield;
             }
-            firstSubfieldBox(field).value = subfield;
-        }
-        */
+            */
 
-        // Foco al primer subcampo del campo
-        firstSubfieldBox(field).focus();
+            // Foco al primer subcampo del campo
+            firstSubfieldBox(field).focus();
         }
+    })();
     
 }
 
@@ -302,18 +299,19 @@ function editEjemplares()
 	
 	// El array ejemplares es pasado por referencia
 	// TO-DO: pasar el userID para usarlo en los ejemplares modificados
-	var newEjemplares = showModalDialog(URL_EDIT_EJEMPLARES, ejemplares, winProperties);
+	(async function(){
+        var newEjemplares = await showModalDialog(URL_EDIT_EJEMPLARES, ejemplares, winProperties);
 	
-	// Verificamos que la ventana realmente haya devuelto el array con los ejemplares
-	if ( "undefined" == typeof(newEjemplares) || null == newEjemplares ) {
-		return;  // abortamos
-	}
-	
-	ejemplares = newEjemplares;  // actualiza la variable global
-	
-	var bgColor = ( ejemplares.length > 0 ) ? HOLDINGS_BGCOLOR : "";
-	document.getElementById("ejemplaresBtn").style.backgroundColor = bgColor;
-	//document.getElementById("cantEjemplares").innerHTML = ejemplares.length;
+	    // Verificamos que la ventana realmente haya devuelto el array con los ejemplares
+	    if ( "undefined" == typeof(newEjemplares) || null == newEjemplares ) {
+	    	return;  // abortamos
+	    }
+    
+	    ejemplares = newEjemplares;  // actualiza la variable global
+    
+	    var bgColor = ( ejemplares.length > 0 ) ? HOLDINGS_BGCOLOR : "";
+	    document.getElementById("ejemplaresBtn").style.backgroundColor = bgColor;
+    })();
 }
 
 
@@ -323,14 +321,16 @@ function editPostItNote()
 {
     var winProperties = "font-size: 10px; dialogWidth: 610px; dialogHeight: 470px; status: no; help: no";
 
-    var newPostItNote = window.showModalDialog(URL_EDIT_POSTITNOTE, postItNote, winProperties);
+    (async function(){
+        var newPostItNote = await window.showModalDialog(URL_EDIT_POSTITNOTE, postItNote, winProperties);
 
-    if ( null != newPostItNote ) {
-        postItNote = newPostItNote;  // Actualiza la variable global
-        var bgColor = ( postItNote != "" ) ? POSTITNOTE_BGCOLOR : "";
-        document.getElementById("postItNoteBtn").style.backgroundColor = bgColor;
-        document.getElementById("postItNoteBtn").title = ( postItNote != "" ) ? postItNote.substr(2).replace(/\^\w/g,"\n\n") : "";
-    }
+        if ( null != newPostItNote ) {
+            postItNote = newPostItNote;  // Actualiza la variable global
+            var bgColor = ( postItNote != "" ) ? POSTITNOTE_BGCOLOR : "";
+            document.getElementById("postItNoteBtn").style.backgroundColor = bgColor;
+            document.getElementById("postItNoteBtn").title = ( postItNote != "" ) ? postItNote.substr(2).replace(/\^\w/g,"\n\n") : "";
+        }
+    })();
 
 }
 
@@ -350,14 +350,15 @@ function promptNewField()
         disabledTags[g_nonRepTags[i]] = isTagPresent(g_nonRepTags[i]);
     }
 
-    // Mostramos la ventana
-    var tags = window.showModalDialog(URL_SELECT_FIELD, window, winProperties);
+    (async function(){
+        var tags = await window.showModalDialog(URL_SELECT_FIELD, window, winProperties);
 
-    //(M.A) 31/03/2023 cambio condiciones del if por el siguiente (si se editó el array tags entonces se crea el campo nuevo).
-    if ( tags.length != 0 ) {
-        // Procesamos los datos devueltos por la ventana en el array tags
-        createFieldList(tags);
-    }
+        //(M.A) 31/03/2023 cambio condiciones del if por el siguiente (si se editó el array tags entonces se crea el campo nuevo).
+        if ( tags.length != 0 ) {
+            // Procesamos los datos devueltos por la ventana en el array tags
+            createFieldList(tags);
+        }
+    })();
 
 }
 
@@ -417,13 +418,16 @@ function promptNewSubfield()
     var dHeight = 480;
     
     var winProperties = "font-size:10px; dialogWidth:" + dWidth + "px; dialogHeight:" + dHeight + "px; status:no; help:no";
-    var codes = window.showModalDialog(URL_SELECT_SUBFIELD, dialogArgs, winProperties);
-    field = globalParameter;
 
-    if ( codes.length != 0  ) { //(M.A) VER CUANDO AGREGA EL SUBCAMPO
-        // Procesamos los datos devueltos por la ventana en el array codes
-        createSubfieldList(field,codes);
-    }
+    (async function(){
+        var codes = await window.showModalDialog(URL_SELECT_SUBFIELD, dialogArgs, winProperties);
+        field = globalParameter;
+
+        if ( codes.length != 0  ) { //(M.A) VER CUANDO AGREGA EL SUBCAMPO
+            // Procesamos los datos devueltos por la ventana en el array codes
+            createSubfieldList(field,codes);
+        }
+    })();
 }
 
 // -----------------------------------------------------------------------------
@@ -431,28 +435,10 @@ function showSpecialChars()
 // -----------------------------------------------------------------------------
 {
 	var winProperties = "font-size:10px; dialogWidth:350px; dialogHeight:100px; status:no; help:no; resizable:yes";
-	var specialChar = showModalDialog(HTDOCS + "html/specialChars.htm", null, winProperties);
+	(async function(){
+        var specialChar = await showModalDialog(HTDOCS + "html/specialChars.htm", null, winProperties);
+    })();
 }
-
-
-/*
-// -----------------------------------------------------------------------------
-function promptSaveChanges()
-// Abre una ventana que informa que el registro ha sido modificado.
-// -----------------------------------------------------------------------------
-{
-	var winProperties = "font-size:10px; dialogWidth:620px; dialogHeight:140px; dialogTop:80px; status:no; help:no";
-
-	// Mostramos la ventana
-	var answer = showModalDialog(URL_SAVE_CHANGES, window, winProperties);
-
-	if ( "undefined" == typeof(answer) || null == answer ) {
-		answer = "cancel";
-	}
-	
-	return answer;
-}
-*/
 
 // -----------------------------------------------------------------------------
 function catalis_confirm(question,w,h,pos)
@@ -462,12 +448,14 @@ function catalis_confirm(question,w,h,pos)
 	var winProperties = "dialogWidth:" + w + "px; dialogHeight:" + h + "px; status:no; help:no";
 	if ( "left" == pos ) winProperties += "; dialogLeft:10px";
 	
-	// Mostramos la ventana
-	var answer = showModalDialog(URL_CONFIRM_DIALOG, question, winProperties);
+	(async function(){
+        // Mostramos la ventana
+	    var answer = await showModalDialog(URL_CONFIRM_DIALOG, question, winProperties);
 	
-	if ( "undefined" == typeof(answer) || null == answer ) {
-		answer = false;
-	}
+	    if ( "undefined" == typeof(answer) || null == answer ) {
+		    answer = false;
+	    }
+    })();
 	
 	return answer;
 }
