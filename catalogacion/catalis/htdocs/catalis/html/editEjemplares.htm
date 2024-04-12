@@ -255,6 +255,7 @@ function usarSelectParaColeccion(database) {
 				["SA", "BC - Sector A"],
 				["SB", "BC - Sector B"],
 				["SC", "BC - Sector C"],
+				["SD", "BC - Sector D"],
 				["PA", "BC - Sector A - Andrés"],
 				["SAH", "BC - Sector A - Huber"],
 				["c-ms", "BC - Sector A - Cons."],
@@ -280,7 +281,7 @@ function usarSelectParaColeccion(database) {
 				["BGEOGRAFIA", "Bibl. Geografia"],
 				["BHUMANIDADES", "Bibl. Humanidades"],
 				["BMATEMATICA", "Bibl. Matemática"],
-				["DF", "Dpto. Física"],
+				["DF","Dpto. Física"],
 				["DI", "Dpto. Ingeniería"],
 				["BGEOGRAFIA", "Bibl. Geografía"],
 				["DG", "Dpto. Geología"],
@@ -306,7 +307,8 @@ function usarSelectParaColeccion(database) {
 				["sala", "ECO - Sala"],
 				["censos", "ECO - Censos"],
 				["estadisticas", "ECO - Estadísticas"],
-				["manual", "ECO - Manuales"]
+				["manual", "ECO - Manuales"],
+				["ECO-EXT", "ECO - Libros extraviados"]
 			];
 			break;
 		case 'Biblioteca Fundeme':
@@ -315,14 +317,14 @@ function usarSelectParaColeccion(database) {
 				["general","Sector General"],
 				["original", "Biblioteca Original"],
 				["obras", "Obras E.M.E"],
-				["brandariz", "Colección Brandariz"],
+				["brandariz", "Colección Brandariz"],						
 			];
 			break;
 		case 'Biblioteca Humanidades':
 			opciones = [
 				["", "--- Elegir sector ---"],
 				["CD","CD's y DVD's"],
-				["CONS", "Consulta"],
+				["CONS","Consulta"],
 				["CER", "CER"],
 				["CN", "Conicet"],
 				["DH", "Derechos Humanos"],
@@ -333,7 +335,7 @@ function usarSelectParaColeccion(database) {
 				["NODISP", "No Disponible"],
 				["Referencia", "Referencia"],				
 				["SG", "Sección Griega"],
-				["tablets", "Tablets"],
+				["tablets","Tablets"],
 				["BC", "Sección BC"],
 				["LEJA", "Donación Lejarraga"],
 			];
@@ -362,7 +364,8 @@ function usarSelectParaColeccion(database) {
                                 ["BIBADM-MANUALES", "BIBADM - MANUALES"],
                                 ["GABCOOP-MANUALES", "GABCOOP - MANUALES"],
 				["DM-NODISPONIBLE", "BIBADM - NO DISPONIBLE"],
-                                ["GABCOOP-NODISPONIBLE", "GABCOOP - NO DISPONIBLE"]
+                                ["GABCOOP-NODISPONIBLE", "GABCOOP - NO DISPONIBLE"],
+				["ADM-EXT", "ADM - LIBROS EXTRAVIADOS"]
 
 			];
 			break;
@@ -376,7 +379,7 @@ function usarSelectParaColeccion(database) {
 				["LUDO", "Ludoteca"],
 				["CE", "BCE"]
 			];
-		break;
+			break;
 		
 		default:
 			opciones = [
@@ -468,9 +471,9 @@ function newEjemplar()
 	document.getElementById("ejForm").style.visibility = "visible";
 	showEjemplar("nuevo-" + newIndex);
 
-	if( dialogArguments.database == "demo" || dialogArguments.database == "ucod-marc" ){
+	if( dialogArguments.database == "eunm" || dialogArguments.database == "ucod-marc" ){
 		inputInstitucion = document.getElementById("institucion")
-		inputInstitucion.disabled = true
+		//inputInstitucion.disabled = true
 		inputInstitucion.value = "AR-BaUNS"
 		// Uso funcion saveData para almacenar en el array ejemplares el cambio de institucion (ya que no se hizo por evento de cambio)
 		saveData("institucion");
@@ -717,9 +720,9 @@ function init()
 	// Si hay algún ejemplar, mostramos el primero de la lista
 	if ( ejemplares.length > 0 ) {
 		showEjemplar(ejemplares[0].inventario);
-		if( (window.dialogArguments.database == "demo") || (window.dialogArguments.database == "ucod-marc") ){
+		/*if( (window.dialogArguments.database == "eunm") || (window.dialogArguments.database == "ucod-marc") ){
 			document.getElementById("institucion").disabled = true
-		}
+		}*/
 	}
 	else {
 		document.getElementById("ejForm").style.visibility = "hidden";
