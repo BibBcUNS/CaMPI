@@ -1754,7 +1754,7 @@ async function borrarImagen(database, recordId, filetype){
         'body': formData
     }
     try {
-        await fetch("../catalis/php/borrarImagen.php", options);
+        await fetch("../htdocs/catalis/php/borrarImagen.php", options);
     } catch (error) {
         console.log(error)
     }
