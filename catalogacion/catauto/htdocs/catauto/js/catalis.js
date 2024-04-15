@@ -221,7 +221,7 @@ function setDimensions()
 {
   var _innerHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
   var _innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  var freeHeight = _innerHeight - 77; // quito la altura ocupada por las barras superiores
+  var freeHeight = _innerHeight - 85; // quito la altura ocupada por las barras superiores
   var freeWidth = _innerWidth;
 
   // Variable global con dimensiones
