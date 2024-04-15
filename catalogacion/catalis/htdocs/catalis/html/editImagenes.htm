@@ -32,7 +32,7 @@ function init()
   // parentWindow.f985 para los que ya tienen tapa definida
   var fileType = parentWindow.f985 ? parentWindow.f985.substr(4) : null;
 
-  var dummyCover = "../img/book-cover-placeholder.jpg";
+  var dummyCover = "../img/book-cover-placeholder-upload.jpg";
   //agrego esta línea por actualizaciones para IE11 en Windows 10. Ver #6779 (Gonzalo)
   document.getElementById("submit-subir").disabled = false;
 
@@ -91,6 +91,8 @@ function init()
     currentUrl = dummyCover;
   }
   document.getElementById("imagen-actual").src = currentUrl;
+
+  document.getElementById("imagen-actual").title = "Haga click para subir una imagen de tapa de libro";
 
   document.getElementById("imagen-seleccionada").src = dummyCover;
 
