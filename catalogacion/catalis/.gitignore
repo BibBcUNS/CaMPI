@@ -3,7 +3,7 @@
 /htdocs/catalis/img/e-libros
 /htdocs/catalis/img/ucod-marc
 /htdocs/catalis/img/demo
-/htdocs/catalis/img
+#/htdocs/catalis/img
 # opacmarc
 /cgi-bin/opacmarc
 
