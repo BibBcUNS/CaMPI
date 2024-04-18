@@ -1389,7 +1389,7 @@ function marc2aacr(materialType,f001,f005,f008,marcDatafields,ejemplares,imageFi
     }
     var documentImage = "";
     documentImage += "<div id='imageCell'>";
-    documentImage += "<p><img src='" + imageUrl + "' style='height: 200; min-width: 123px; margin: 10px'></p>";
+    documentImage += "<p><img src='" + imageUrl + "' style='height: 200; min-width: 123px;'></p>";
     documentImage += "</div>";
 
     if ( DISPLAY_CALL_NUMBER ) {

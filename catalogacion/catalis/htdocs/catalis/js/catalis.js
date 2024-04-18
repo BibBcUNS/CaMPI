@@ -194,6 +194,7 @@ function setDimensions()
 // resolución de pantalla.
 // -----------------------------------------------------------------------------
 {
+    top.userScreenResolution = window.screen.availWidth + "x" + window.screen.availHeight;
   var _innerHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
   var _innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   var freeHeight = _innerHeight - 77; // quito la altura ocupada por las barras superiores
@@ -225,6 +226,12 @@ function setDimensions()
   document.getElementById("docIframe").style.height = g_Dimensions.docIframeCollapsed.height + "px";
 
   document.getElementById("docFormWrapper").style.marginTop = g_Dimensions.docIframeWrapper.marginTop + "px";
+
+  if (userScreenResolution == "1366x728"){
+    document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height + 155 + "px";
+    document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height + 155 + "px";
+  }
+
 }
 
 
