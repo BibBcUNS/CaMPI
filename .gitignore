@@ -1,3 +1,29 @@
 .vscode
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# CATALOGACION  ----------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------------------------
+
 catalogacion/campicatalogacion.conf
 catalogacion/users
+
+#       Catalis ------------------------------------------------------- 
+catalogacion/catalis/bases
+catalogacion/catalis/logs
+catalogacion/catalis/apache
+catalogacion/catalis/htdocs/catalis/img/bibima
+catalogacion/catalis/htdocs/catalis/img/e-libros
+catalogacion/catalis/htdocs/catalis/img/ucod-marc
+catalogacion/catalis/htdocs/catalis/img/demo
+catalogacion/catalis/cgi-bin/wxis
+catalogacion/catalis/cgi-bin/opacmarc
+
+#       Catauto --------------------------------------------------------
+catalogacion/catauto/bases
+catalogacion/catauto/logs
+catalogacion/catauto/apache
+catalogacion/catauto/cgi-bin/wxis
+catalogacion/catauto/tmp
+
+#       Herramientas ---------------------------------------------------
+catalogacion/herramientas/downloads
