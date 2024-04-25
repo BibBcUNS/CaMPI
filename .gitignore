@@ -7,23 +7,37 @@
 catalogacion/campicatalogacion.conf
 catalogacion/users
 
-#       Catalis ------------------------------------------------------- 
+#       Catalis ------------------------------------------------------------------------------------
 catalogacion/catalis/bases
 catalogacion/catalis/logs
 catalogacion/catalis/apache
-catalogacion/catalis/htdocs/catalis/img/bibima
-catalogacion/catalis/htdocs/catalis/img/e-libros
-catalogacion/catalis/htdocs/catalis/img/ucod-marc
-catalogacion/catalis/htdocs/catalis/img/demo
 catalogacion/catalis/cgi-bin/wxis
 catalogacion/catalis/cgi-bin/opacmarc
 
-#       Catauto --------------------------------------------------------
+# Ignoro la carpeta img de catalis (imagenes subidas) excluyendo imagenes fijas necesarias
+catalogacion/catalis/htdocs/catalis/img/*
+!catalogacion/catalis/htdocs/catalis/img/1x1.gif
+!catalogacion/catalis/htdocs/catalis/img/book-cover-placeholder-upload.jpg
+!catalogacion/catalis/htdocs/catalis/img/book-cover-placeholder.jpg
+!catalogacion/catalis/htdocs/catalis/img/db-logo.png
+!catalogacion/catalis/htdocs/catalis/img/down.gif
+!catalogacion/catalis/htdocs/catalis/img/favIcon.ico
+!catalogacion/catalis/htdocs/catalis/img/favicon.ico
+!catalogacion/catalis/htdocs/catalis/img/inmabb-106x100.png
+!catalogacion/catalis/htdocs/catalis/img/inmabb-80x80.png
+!catalogacion/catalis/htdocs/catalis/img/left.gif
+!catalogacion/catalis/htdocs/catalis/img/notes.png
+!catalogacion/catalis/htdocs/catalis/img/right.gif
+!catalogacion/catalis/htdocs/catalis/img/stock_edit-16.png
+!catalogacion/catalis/htdocs/catalis/img/stick_save-disabled.png
+!catalogacion/catalis/htdocs/catalis/img/up.gif
+
+#       Catauto ----------------------------------------------------------------------------------------
 catalogacion/catauto/bases
 catalogacion/catauto/logs
 catalogacion/catauto/apache
 catalogacion/catauto/cgi-bin/wxis
 catalogacion/catauto/tmp
 
-#       Herramientas ---------------------------------------------------
+#       Herramientas ------------------------------------------------------------------------------------
 catalogacion/herramientas/downloads
