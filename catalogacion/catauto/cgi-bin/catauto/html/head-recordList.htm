@@ -150,6 +150,12 @@
         }
 
 		top.document.getElementById("cartel").style.display = "none";
+
+		// Les agrego a cada boton de la lista un efecto hover para enfatizar su posibilidad de click
+        let editRecordButtons = document.getElementsByClassName("miniEditButton");
+        for (const button of editRecordButtons) {
+            button.style.cursor = "pointer";
+        }
 	}
 	
 	window.onload = init;
