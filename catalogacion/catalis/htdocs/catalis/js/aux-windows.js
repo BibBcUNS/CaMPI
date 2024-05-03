@@ -107,7 +107,7 @@ function editCodedData()
         dialogLeft = event.clientX  ;
         dialogTop = event.clientY - 600  ; // con event.clientY - 600 hacemos que el puntero quede justo sobre la opción activa en el select
 
-        if(top.userScreenResolution == "1366x728"){
+        if(top.userScreenHeight < 768){
             dialogTop += 200;
         }
 

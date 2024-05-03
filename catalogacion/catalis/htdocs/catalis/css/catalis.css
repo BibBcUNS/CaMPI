@@ -131,10 +131,6 @@ a:hover {
     -ms-scrollbar-face-color: #C9C7BA;
 }
 
-#marcEditForm {
-    margin: 0;
-}
-
 /*---------------------------------------------------------------------------------------------------------------------*\
    ---------------------------------------------------- Botones ---------------------------------------------------------
 \*----------------------------------------------------------------------------------------------------------------------*/
@@ -223,6 +219,8 @@ a:hover {
 
 #theLeftPanel {
     margin-right: 201px; /* Esto deja el lugar necesario para el panel derecho */
+    height: 100%;
+    min-height: 720px;
 }
  
 #recordDiv {
@@ -230,10 +228,9 @@ a:hover {
     border: 1px solid #999;
     padding: 0px 3px 2px 3px; /* top: 0px normalmente */
     margin-left: 1px;
-    /*margin-top: -4px;*/ /* para compensar el espacio sobre el 1er TH */
-    height: 484px; /* final height dinamically set onload */
-    overflow-y: scroll; /* forzamos una scrollbar vertical, independientemente del contenido (IE only?) */
-    -ms-scrollbar-face-color: #C9C7BA;
+    overflow-y: scroll;
+    scrollbar-color: rgba(167, 44, 44, 0.458) rgb(232, 232, 232);
+    height: 99.4%;
 }
 
 .indSeparator {
@@ -339,6 +336,15 @@ a:hover {
     font: bold 13px "open sans", verdana, sans-serif;
 }
 
+/* Nuevos estilos para edicion de registro */
+#theMarcEditDiv{
+    height: calc(100vh - 78px);
+}
+
+#marcEditForm{
+    height: 100%;
+}
+
 
 /*---------------------------------------------------------------------------------------------------------------------*\
    ------------------------------------------------ SUBCAMPOS --------------------------------------------------------
@@ -409,7 +415,8 @@ iframe#docIframe {
     top: 0px;
     right: 2px;
     width: 198px;
-    height: 487px;  /* onload se ajusta a la resolución */
+    height: 100%;
+    min-height: 720px;
 }
  
 table.control {
