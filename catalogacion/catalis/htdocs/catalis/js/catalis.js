@@ -194,44 +194,33 @@ function setDimensions()
 // resolución de pantalla.
 // -----------------------------------------------------------------------------
 {
-    top.userScreenResolution = window.screen.availWidth + "x" + window.screen.availHeight;
-  var _innerHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-  var _innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  var freeHeight = _innerHeight - 77; // quito la altura ocupada por las barras superiores
-  var freeWidth = _innerWidth;
+    var _innerHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    var _innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    var freeHeight = _innerHeight - 77; // quito la altura ocupada por las barras superiores
+    var freeWidth = _innerWidth;
 
-  // Variable global con dimensiones
-  g_Dimensions = {
-    searchResultsIframe: {height: 0.580 * freeHeight},
-    recordVisualization: {height: 0.470 * freeHeight},
-    indexTerms: {height: freeHeight - 210},
-    theRightPanel: {height: 0.995*freeHeight},
-    recordDiv: {height: 0.992*freeHeight},
-    recordDivWithDocs: {height: 0.49 * freeHeight},
-    docIframe: {height: 0.49 * freeHeight + 14},
-    docIframeCollapsed: {height: DOCWIN_MIN_HEIGHT},
-    subfieldTextarea: {width: freeWidth - 444},
-    subfieldTextareaNoLabels: {width: freeWidth - 292},
-    docIframeWrapper: {marginTop: freeHeight - 686 }
-  };
+    // Variable global con dimensiones
+    g_Dimensions = {
+        searchResultsIframe: {height: 0.580 * freeHeight},
+        recordVisualization: {height: 0.470 * freeHeight},
+        indexTerms: {height: freeHeight - 210},
+        theRightPanel: {height: 0.995*freeHeight},
+        recordDiv: {height: 0.992*freeHeight},
+        recordDivWithDocs: {height: 0.49 * freeHeight},
+        docIframe: {height: 0.49 * freeHeight + 14},
+        docIframeCollapsed: {height: DOCWIN_MIN_HEIGHT},
+        subfieldTextarea: {width: freeWidth - 444},
+        subfieldTextareaNoLabels: {width: freeWidth - 292},
+        docIframeWrapper: {marginTop: freeHeight - 686 }
+    };
 
-  // Búsquedas
-  document.getElementById("searchResultsIframe").style.height = g_Dimensions.searchResultsIframe.height + "px";
-  document.getElementById("recordVisualization").style.height = g_Dimensions.recordVisualization.height - 50 + "px";
-  document.getElementById("indexTerms").style.height = g_Dimensions.indexTerms.height + "px";
+    // Búsquedas
+    document.getElementById("searchResultsIframe").style.height = g_Dimensions.searchResultsIframe.height + "px";
+    document.getElementById("recordVisualization").style.height = g_Dimensions.recordVisualization.height - 50 + "px";
+    document.getElementById("indexTerms").style.height = g_Dimensions.indexTerms.height + "px";
 
-  // Edición
-  document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height - 1 + "px";
-  document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height - 1 + "px";
-  document.getElementById("docIframe").style.height = g_Dimensions.docIframeCollapsed.height + "px";
 
-  document.getElementById("docFormWrapper").style.marginTop = g_Dimensions.docIframeWrapper.marginTop + "px";
-
-  if (userScreenResolution == "1366x728"){
-    document.getElementById("theRightPanel").style.height = g_Dimensions.theRightPanel.height + 155 + "px";
-    document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height + 155 + "px";
-  }
-
+    top.userScreenHeight = window.screen.availHeight;
 }
 
 
@@ -402,7 +391,7 @@ function docIframeHide()
 // Oculta el iframe con documentación
 // -----------------------------------------------------------------------------
 {
-    document.getElementById("recordDiv").style.height = g_Dimensions.recordDiv.height + "px";
+    document.getElementById("recordDiv").style.height = "99.4%";
     
     // Cambios en el iframe
     var docIframe = document.getElementById("docIframe");
@@ -432,11 +421,11 @@ function docIframeShow()
 // Muestra el iframe con documentación
 // -----------------------------------------------------------------------------
 {
-    document.getElementById("recordDiv").style.height = g_Dimensions.recordDivWithDocs.height + "px";
+    document.getElementById("recordDiv").style.height = "49%";
     
     // Cambios en el iframe
     var docIframe = document.getElementById("docIframe");
-    docIframe.style.height = g_Dimensions.docIframe.height + "px";
+    docIframe.style.height = "50%";
     docIframe.style.borderWidth = "1px";
     var docIframeWrapper = document.getElementById("docIframeWrapper");
     docIframeWrapper.style.display = "block";
