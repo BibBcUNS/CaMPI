@@ -209,8 +209,7 @@ function setDimensions()
         recordDivWithDocs: {height: 0.49 * freeHeight},
         docIframe: {height: 0.49 * freeHeight + 14},
         docIframeCollapsed: {height: DOCWIN_MIN_HEIGHT},
-        subfieldTextarea: {width: freeWidth - 444},
-        subfieldTextareaNoLabels: {width: freeWidth - 292},
+        subfieldTextarea: {width: "99.8%"},
         docIframeWrapper: {marginTop: freeHeight - 686 }
     };
 
@@ -241,13 +240,15 @@ function toggleSubfieldLabels()
     // Ajustamos el width de los textareas (subfieldBox).
     // ATENCION: Sería deseable que este ajuste se realizara automáticamente, pero
     // aún subsiste el problema de los URL largos.
-    var textareas = document.getElementById("recordDiv").getElementsByTagName("textarea");
-    for (var i=0; i < textareas.length; i++) {
-        if ( "subfieldBox" == textareas[i].className ) {
-            //textareas[i].style.width = "100%";
-      textareas[i].style.width = (( DISPLAY_SUBFIELD_LABELS ) ? g_Dimensions.subfieldTextarea.width : g_Dimensions.subfieldTextareaNoLabels.width) + "px";
-        }
+    // var textareas = document.getElementById("recordDiv").getElementsByTagName("textarea");
+
+    let elementos = document.getElementsByClassName("subfieldBoxCell");
+
+    for (const element of elementos) {
+        // Vuelvo a setear el width para que se adapte a la ausencia de los labels
+        element.style.width = "99.8%";
     }
+
 }
 
 
