@@ -129,15 +129,15 @@ body {
 
 #quickAccessWrapper{
     float: right;
-    margin-right: 257px;
+    margin-right: 315px;
 }
 
-#closeSessionWraper{
+#closeSessionWrapper{
     position: absolute;
     top: 0;
     right: 0;
     margin: 10px;
-    width: 265px;
+    width: 320px;
     display: flex;
     flex-direction: row;
     justify-content: center;
