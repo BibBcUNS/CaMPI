@@ -157,6 +157,7 @@ td.value {
 	margin: 0px 1px;
 	/* padding: 1px 0px; */
 	height: 23px;
+	cursor: pointer;
 }
 
 .buttonHigh {
@@ -398,6 +399,7 @@ col.subfieldLabelColumn {
 .subfieldLabelCell {
 	vertical-align: top;
 	padding-left: 2px;
+	width: 7%;
 }
 
 .subfieldLabel {
