@@ -145,7 +145,7 @@
       			<div title="Ir a Catauto..." id="goToCatauto" class="goToButton">Catauto</div>
     		</div>
 
-			<div id="closeSessionWraper" style="font-size: 19px;">
+			<div id="closeSessionWrapper" style="font-size: 19px;">
 				<div>Usuario: <span><?php echo($_POST['usuario']) ?></span> </div>
 				<button id="btnFinSesion">Cerrar Sesión</button>
 			</div>
