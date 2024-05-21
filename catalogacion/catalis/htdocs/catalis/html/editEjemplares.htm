@@ -677,11 +677,23 @@ function init()
 	for (var i=0; i < allInputs.length; i++) {
 		if ( allInputs[i].type == "text" ) {
 			allInputs[i].onkeyup = function(){
+				// Este evento tambien debería tomar eventos de CTRL+V
 				saveData(this.id)
-				return true;
+			}
+
+			// Agrego evento onpaste para tomar tambien los pegados con click derecho - pegar
+			allInputs[i].onpaste = function(){
+				// Tomo el elemento de this ahora porque lo pierdo en el setTimeOut
+				let id = this.id;
+
+				// Si intento saveData(id) acá no alcanza a tomar el valor de lo pegado
+				setTimeout(function(){
+					saveData(id);
+				}, 100);
 			}
 		}
 	}
+
 	var allTextareas = document.getElementsByTagName("textarea");
 	for (var i=0; i < allTextareas.length; i++) {
 		allTextareas[i].onchange = function() {
@@ -694,7 +706,7 @@ function init()
 	
 	window.returnValue = null;
 	
-	//Copia del array original que viene por parametro a la modal
+	// Copia del array original que viene por parametro a la modal (Con este método se realiza una copia profunda)
 	ejemplares = JSON.parse(JSON.stringify(oldEjemplares));
 
 	// De acá en más, trabajamos con el array ejemplares de *esta* ventana.

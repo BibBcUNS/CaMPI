@@ -504,8 +504,6 @@ function saveRecord()
                 // En caso de cambiar el formato de la imagen (jpg a png por ejemplo) debe eliminarse la vieja
                 filetype = originalRecord.substr(index985original, 12).substr(9);
                 borrarImagen(database, recordId, filetype);
-            }else{
-                console.log("No se debería eliminar la imagen.")
             }
     
             f985aux = "";
