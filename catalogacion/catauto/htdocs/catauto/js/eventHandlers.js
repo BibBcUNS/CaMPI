@@ -198,7 +198,6 @@ function setToolbarEvents()
 {
 	document.getElementById("btnNuevo").onclick = function(e) {
 		this.blur();
-		console.log(e)
 		showNewRecordMenu(e);
 	}
 	
@@ -234,8 +233,6 @@ function setToolbarEvents()
 		this.blur();
 		//rawEdit(serializeRecord(false,false,true,false));
 		top.globalParameter = serializeRecord(false, false, true, false);
-		console.log("globalParameter: ----------------------------------------------------------------------------");
-		console.log(top.globalParameter);
 		rawEdit();
 	}
 	

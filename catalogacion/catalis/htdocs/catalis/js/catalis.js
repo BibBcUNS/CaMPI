@@ -1346,10 +1346,6 @@ function handleNextTask(elementID, changedRecord)
             let iframe = document.getElementById("searchResultsIframe");
             let formBtnActualizar = iframe.contentDocument.querySelector("#btnActualizarListado");
             formBtnActualizar.submit();
-
-            //TO DO Resaltar y hacer scroll
-
-
             break;
         case 'btnPrevResult' :
             editRecord("prev");
@@ -1503,7 +1499,7 @@ function showPopup(x,y,width,height,refObject)
             (!clickedElement.id != "searchMessage") && (clickedElement.id != "testConditionSearchHelpLink") &&
             (!clickedElement.id != "searchMessage") && (clickedElement.id != "indexHelpLink") 
         ){
-            console.log("Kill xq no es menu")
+            // console.log("Kill xq no es menu")
             killmenu(); 
         }
     })
