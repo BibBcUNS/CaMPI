@@ -252,7 +252,6 @@ function showSubfieldMenuIE(subfield){
 }
 
 function showSubfieldMenuChrome(subfield){
-	console.log("ejecutando desde chrome")
 	var field = parentField(subfield,"subfield");
 
 	// Construimos el menú
