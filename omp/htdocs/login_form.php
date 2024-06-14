@@ -1,4 +1,6 @@
-<?php session_start();?>
+<?php
+header('Content-Type: text/html; charset=ISO-8859-1'); 
+session_start();?>
 <html>
   <head>
     <title>CaMPI - Login</title>
@@ -17,6 +19,10 @@ if (isset($_SESSION["s_username"]) && isset($_SESSION["s_permisos"])	&& in_array
 		case 'administracion':
 			echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=administracion/menu.php>";
 			break;
+		case 'reclamo_morosos':
+			echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=reclamo_morosos/menu.php>";
+			break;
+		
 		default: break;
 	}
 }

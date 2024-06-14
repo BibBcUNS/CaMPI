@@ -316,8 +316,7 @@ Considerar que v9996 es la contador de operaciones matcheadas
 <field action="replace" tag="4002" split="occ"><pft>
 		select v9999 
 			case 'mensual':
-				
-				('<td class="celda_encabezado" align="center">',v4002.2,/),
+				('<td class="celda_encabezado" align="center">',v4002.2,'<font size="-3"><br>',v4002*3,'</font>'/),
 			elsecase
 				(|<td class="celda_encabezado">|v4002|</td>|/),
 			endsel,

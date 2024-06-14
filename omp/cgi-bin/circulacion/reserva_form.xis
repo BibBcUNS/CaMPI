@@ -83,6 +83,7 @@ En caso de no ser submit se Muestra el Formulario
 </do>
    
 <!-- Si el formulario fue enviado realizamos los controles correspondientes. En caso contrario mostramos el formulario -->
+<!-- En v5400 me devuelve si hay disponibles (si/no) -->
 <flow action="jump"><pft>if a(v3500) then 'Mostrar Formulario' fi</pft></flow>
 
 
@@ -131,7 +132,7 @@ En caso de no ser submit se Muestra el Formulario
 <field action="define" tag=4001>Isis_Item</field>
 <loop>
 	<field action="replace" tag="4002"><pft>v4001^b,'_',v4001^c,'_',v4001^p</pft></field>
-	<field action="import" tag=list>3002,3004,3010</field>
+	<field action="import" tag=list>3002,3004,3010,5400</field>
 	<!--flow action=jump><pft>if (l(['reservas']v4002)=0) then 'el_registro_NO_existe' fi</pft></flow-->
 
 	<!--label>el_registro_existe</label-->
@@ -153,7 +154,7 @@ En caso de no ser submit se Muestra el Formulario
 		<field action=define tag=1102>Isis_Status</field>
 		<field action=define tag=1011>Isis_Lock</field>
 		<update>
-			<field action="import" tag=list>3002,3010,3004</field>
+			<field action="import" tag=list>3002,3010,3004,5400</field>
 			
 			<!-- esto lo hago para unificar reservas con nuevo registro o registro existente -->
 			<flow action=jump><pft>"registro_existente"d1</pft></flow>
@@ -161,16 +162,35 @@ En caso de no ser submit se Muestra el Formulario
 			<label>registro_existente</label>
 			
 			<field action=add tag=2><pft>
-				'^i',v3002,
-				'^f',v3010^f,
-				'^h',v3010^h,
-				'^u',v3004,
-				'^p',getenv('REMOTE_ADDR')
+				
 				</pft></field>
+
+
+			<flow action=jump><pft>if (v5400='si') then 'ESPERA' else 'RESERVA' fi</pft></flow> <!-- pregunto si hay disponible -->
+			<label>ESPERA</label> <!-- Si HAY hay disponible -->
+				<field action=add tag=3><pft>
+					'^i',v3002,
+					'^f',v3010^f,
+					'^h',v3010^h,
+					'^u',v3004,
+					'^e',if ref(['config']1,v16)='si' then 'CONFIRMADA' else 'PENDIENTE' fi,
+					'^p',getenv('REMOTE_ADDR')
+				</pft></field>
+				<flow action=jump>FIN_ESPERA</flow>
+			<label>RESERVA</label> <!-- NO hay disponible -->
+				<field action=add tag=2><pft>
+					'^i',v3002,
+					'^f',v3010^f,
+					'^h',v3010^h,
+					'^u',v3004,
+					'^p',getenv('REMOTE_ADDR')
+				</pft></field>
+			<label>FIN_ESPERA</label>
+			
 			<field action=replace tag=4050><pft>'^i',v3002,'^f',v3010^f,'^h',v3010</pft></field> <!-- ID-fecha-hora -->
 			<field action=replace tag=4040><pft>v1</pft></field>
 			<field action=export tag=list>4040,4050</field>
-			<field action=delete tag=list>3002,3004,3010,4040,4050</field>
+			<field action=delete tag=list>3002,3004,3010,4040,4050,5400</field>
 			<write>Unlock</write>
 		</update>
 	</do>

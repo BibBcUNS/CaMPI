@@ -114,6 +114,13 @@ Se exporta el campo v2000 con OK o código error -->
   <display><pft>'Content-type: text/html'/#</pft></display>
 
   <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+  <include>circulacion/controles/verificaSistemaActivo_inc.xis</include>
+  <flow action=jump><pft>if not v5000:'Error' then 'SISTEMA_HABILITADO' fi</pft></flow>
+      <display><h3 align="center" style="color:#ffffff;background-color:red;"><font size="+2" color="#ffffff">El sistema se encuentra fuera de servicio</font></h3></display>
+      <flow action=jump><pft>'FIN_DEVOLUCION'</pft></flow>
+  <label>SISTEMA_HABILITADO</label>
+
   <field action=cgi tag=2001>inventario</field>
   <field action=cgi tag=2002>operador</field>
 
@@ -228,8 +235,8 @@ Se exporta el campo v2000 con OK o código error -->
         			<field action=import tag=list>v2002</field>
         			
         			<!-- verifico reservas -->
-					<!-- si es un ejemplar de consulta ignoro este control -->
-					<flow action=jump><pft>if ref(['exist']l(['exist']v1000),v987)='CONS' then 'FIN_VERIFICO_RESERVAS' fi</pft></flow>
+					<!-- si es un ejemplar de consulta ignoro este control: Si es CONS o está activada la CUARENTENA (v14) -->
+					<flow action=jump><pft>if ref(['exist']l(['exist']v1000),v987)='CONS' or ref(['config']1,v14) = 'si' then 'FIN_VERIFICO_RESERVAS' fi</pft></flow>
 						<call name=verificarReservas><pft>'^i',v1000,'^o',v2002^i</pft></call> <!-- ^i es el ID del operador -->
 						<field action=export tag=list>4050</field> <!-- Reserva Caida y Espera Nueva -->
 					<label>FIN_VERIFICO_RESERVAS</label>
@@ -265,7 +272,13 @@ Se exporta el campo v2000 con OK o código error -->
     		<field action=define tag=1011>Isis_Lock</field>
     		<update>
     		  <field action=delete tag=985>ALL</field>
-    		  <field action=add tag=985>PERM</field>
+    		  <field action=add tag=985><pft>if ref(['config']1,v14)='si' then 'CUARENTENA' else 'PERM' fi</pft></field>
+          <field action=replace tag=986><pft>
+            if ref(['config']1,v14)='si' then 
+              '^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),
+              '^h',mid(date,10,6)
+            fi
+          </pft></field>
     		  <write>Unlock</write>
     		</update>
     		</do>
@@ -298,8 +311,9 @@ Se exporta el campo v2000 con OK o código error -->
         			<field action="delete" tag="list">3004,2002,4050</field>
         			<write>Unlock</write>
         			
-					<!-- Si hay una reserva se envia un mail al usuario notificando el ingreso del material-->
-					<flow action=jump><pft>if not v7:'EN=' then 'FIN_MAIL_RESERVAS' fi</pft></flow>
+					<!-- Si hay una nueva Espera se envia un mail al usuario notificando el ingreso del material-->
+          <!-- Evito el correo en caso que las esperas "NO" sean confirmadas inmediatamente (config [v16]) -->
+					<flow action=jump><pft>if ref(['config']1,v16)='no' OR not v7:'EN=' then 'FIN_MAIL_RESERVAS' fi</pft></flow>
 					<call name=mail_reservas><pft>(if v7^*='EN=' then v7 fi)</pft></call> 
 					
 					<label>FIN_MAIL_RESERVAS</label>
@@ -315,7 +329,7 @@ Se exporta el campo v2000 con OK o código error -->
         			<loop>
         			    <field action=add tag=3005><pft>mfn(1)</pft></field>
         			    <field action=replace tag=1000 split=occ><pft>(if v7^*='EN=' then v7^e fi)</pft></field> <!-- pongo aca las reservas -->
-						<display><htmlpft><pft>
+        				<display><htmlpft><pft>
 								'<script>
 									function grabar_movi_log() {
 									var xmlhttp = new XMLHttpRequest();
@@ -325,14 +339,15 @@ Se exporta el campo v2000 con OK o código error -->
 									campos_log = "'v2,'~',(f(iocc,2,0)'- 'v4^i),'~',(f(iocc,2,0)'- 'v4^t),'~',v3^f,'~',v3^h,'~',(f(iocc,2,0)'- 'v4^p),'~',(f(iocc,2,0)'- 'v4^v),'~',v5^a,'~',v5^b'";
 									formdata.append("mfn","'mfn'");
 									formdata.append("campos_log",campos_log);
-																		
+									
 									xmlhttp.onreadystatechange = function() {
 										if (xmlhttp.readyState == 4 && xmlhttp.status != 200) {
 											alert("Adevertencia!! No se pudo guardar el log. Error: "+xmlhttp.responseText);
 										}
 									};
 									xmlhttp.open("POST","/omp/circulacion/sendmail.php",true);
-									xmlhttp.send(formdata);					}
+									xmlhttp.send(formdata);
+					}
 									
 									grabar_movi_log();
 								</script>'
@@ -350,6 +365,8 @@ Se exporta el campo v2000 con OK o código error -->
         proc('a9001#Inventario Inexistente#'),
             proc('a9002#No se logró hallar el inventario especificado#'),
           cat(getenv('PATH_TRANSLATED'),'error_devolucion.html') fi</pft></htmlpft></display>
-    
+
+ <label>FIN_DEVOLUCION</label>
+
 </section>
 </IsisScript>

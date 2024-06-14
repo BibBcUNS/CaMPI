@@ -14,7 +14,7 @@ Ej. válidos:
 
     Parte 1:                                        Parte 2:
         - 2 ejs. 'CONS'                             - 1 ej. 'CONS'
-        - 10 ejs. 'permA'                          - 5 ejs. 'permB'
+        - 10 ejs. 'permA'                           - 5 ejs. 'permB'
     
 Ej. NO válido:
 
@@ -31,7 +31,7 @@ Método (no algoritmo):
         Por cada ejemplar accedemos a la base política con (tipo_usu, tipo_obj) y contamos la cantidad de ejemplares "reserbables"
         Entre los reserbables: Contamos cantidad de ejemplares prestados.
         Entre los reserbables: Contamos cantidad de esperas pendientes.
-        Nota: Se supone que la cantidad de ejemplares reservanles hace referencia
+        Nota: Se supone que la cantidad de ejemplares reservables hace referencia
            al grupo de libros que le interesa al lector. En realidad es cant. ej. prestables en (no consulta)
            Esto se debe a la ASUMPSION (*)
         
@@ -65,7 +65,7 @@ Campos utilizados:
     <loop>
         <field action="import" tag="list">5000,4001</field>
         <!--    5000 lista de errores
-                4001    Categ del usuario
+                4001 Categ del usuario
 
         <!--    Id parte para buscar en "partes" y recuperar los inventarios -->
         <field action="replace" tag="4002"><pft>v4000^b,'_',v4000^c,'_',v4000^p</pft></field>
@@ -96,9 +96,9 @@ Campos utilizados:
         
         <!-- cant. ejemp. reserbables -->
         <field action="replace" tag="4011"><pft>f(nocc(v4010),1,0)</pft></field>
-		
-        <!-- cant. ejemp. reservable PREStados -->
-        <field action="replace" tag="4012"><pft>f(size((if v4010^e='PRES' then '1' fi)),1,0)</pft></field>
+
+        <!-- cant. ejemp. reservable PREStados (incluye CUARENTENA, PENDIENTE, etc) -->
+        <field action="replace" tag="4012"><pft>f(size((if v4010^e<>'PERM' then '1' fi)),1,0)</pft></field>
         
         <!-- Esperas registradas para la parte -->
         <field action="replace" tag="4015"><pft>ref(['reservas']l(['reservas']v4002),f(nocc(v3),1,0))</pft></field>
@@ -106,19 +106,30 @@ Campos utilizados:
         <!--display><pft>
         'Ejs. de la parte: <br>',(v4008,'<br>'),'<br><br>',
         'Ejs. reservables: <br>',(v4010,'<br>'),'<br>',
-        'reserbables: ',v4011,'<br><br>',
+        'Reserbables: ',v4011,'<br><br>',
         'Cant reservables NO prestados: ',v4012,'<br><br>',
         'Esperas: ',v4015,
         '',</pft></display-->
         
-        <!-- Disponible: #prestados + #esperas < #ejemp_reservables -->
+        <!-- La evaluación la hago si NO permito "Encargar existentes". Esto es v15 de config. Si permito encargar existentes este control no arroja error -->
+        <!-- Disponible: #prestados (v4012) + #esperas (v4015) < #ejemp_reservables (v4011) -->
         <!-- Faltaría considerar el valor "Mínimo_Disponible" -->
         <field action="replace" tag="5000"><pft>
-            if (val(v4012) + val (v4015) < val(v4011)) then
-                'Error: Hay <b>',f(val(v4011)-val(v4012)-val (v4015),1,0),'</b> ejemplar/es disponible/s. [',v4000,']<br>'
+            if (ref(['config']1,v15) = 'no') and (val(v4012) + val (v4015) < val(v4011)) then
+                'Error: Hay ',f(val(v4011)-val(v4012)-val (v4015),1,0),' ejemplar/es disponible/s.'
             fi
         </pft></field>
-        <field action="export" tag="list">5000</field>
+
+        <!-- Valor devuelto en 5400:  SI hay disponibles, NO hay disponibles -->
+
+        <field action="replace" tag="5400"><pft>
+            if (val(v4012) + val (v4015) < val(v4011)) then
+                'si'
+            else
+                'no'
+            fi
+        </pft></field>
+        <field action="export" tag="list">5000,5400</field>
 
     </loop>
 </do>
