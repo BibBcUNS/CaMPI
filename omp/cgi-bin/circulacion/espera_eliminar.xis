@@ -1,6 +1,7 @@
 <IsisScript>
 
 <include>circulacion/menor_inc.xis</include>
+<include>circulacion/reserva_mail.xis</include>
 
 <section>
 <display><pft>'Content-type: text/html'/#</pft></display>
@@ -40,6 +41,7 @@
 <do task=update>
     <parm name=db>reservas</parm>
     <parm name=mfn><pft>v2005</pft></parm>
+    <parm name=fst><pft>cat('reservas.fst')</pft></parm>
     <field action=define tag=1101>Isis_Lock</field>
     <field action=define tag=1102>Isis_Status</field>
     <parm name=lockid><pft>v2002</pft></parm>
@@ -83,6 +85,7 @@
 		            '^f',v3010^f,
 		            '^h',v3010^h,
 		            '^o',v2002,
+                    '^e',if ref(['config']1,v16)='si' then 'CONFIRMADA' else 'PENDIENTE' fi,
 		            '^p',getenv('REMOTE_ADDR')
 		        </pft></field>
 		    
@@ -136,6 +139,12 @@
     </update>
 </do>
 <label>fin_update_movi</label>
+
+<!-- Evito el correo en dos casos: 1) Si no se genera espera. 2) Si las esperas no son confirmadas inmediatamente. -->
+<flow action=jump><pft>if v4052='' OR ref(['config']1,v16)='no' then 'FIN_MAIL' fi</pft></flow>
+<call name=mail_reservas><pft>v4052</pft></call> <!-- v4052 tiene los datos de la espera cerada -->
+<label>FIN_MAIL</label>
+
 
 <display><pft>
     if (val(v1102)=0) then

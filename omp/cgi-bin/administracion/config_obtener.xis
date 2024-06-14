@@ -17,7 +17,15 @@
 			  '"reservas":"',v9,'",',
 			  '"politicas":"',v10,'",',
 			  '"imprimir_papeleta":"',v11,'",',
-			  '"busqueda_x_nc":"',v12,'"',
+			  '"busqueda_x_nc":"',v12,'",',
+			  '"sistema_habilitado":"',v13,'",',
+			  '"en_cuarentena":"',v14,'",',
+			  '"encargar_disponible":"',v15,'",',
+			  '"retiro_inmediato":"',v16,'",',
+			  '"devolucion_espera_confirmada":"',v17,'",',
+			  '"mail_asunto":"',v18,'",',
+			  '"mail_nombre":"',v19,'",',
+			  '"plantilla_mail":"',v20,'"',
 			'}'
 		 </pft>
 	   </display>

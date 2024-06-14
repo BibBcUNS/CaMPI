@@ -1,12 +1,11 @@
 <IsisScript>
-
 <!-- Se utilizan los siguientes campos comunes a los scripts de control:
 v3000: invs_prestamo_A
 v3001: invs_prestamo_B
 v3002: lista de todos los inventarios (invs_prestamo_A + invs_prestamo_B)
 v3004: documento
 -->
-
+<include>fecha_funciones.xis</include>
 <section>
   <display><pft>'Content-type: text/html'/#</pft></display>
 	<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
@@ -88,7 +87,6 @@ v3004: documento
 	</style>
 	</head>	
 	<body onclick="window.parent.ocultar_control()">
-	
   </display>
   
 	<display><pft>

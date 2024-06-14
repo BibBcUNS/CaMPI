@@ -23,15 +23,24 @@
 							'"esperas":"',ref(['reservas']l(['reservas']v2000),f(nocc(v3),1,0)),'",',
 							'"ejemplares":[',
 								(
-									if s(ref(['exist']l(['exist']v2),v987))='OTRO' 
+									if s(ref(['exist']l(['exist']v2),v987))='PERM' 
 									then
 										'{"inventario":"',v2,'"',
 										',',
 										'"estado":"',ref(['exist']l(['exist']v2),v985),'"}'
 									fi
 								),
+							'],',
+							'"consulta":[',
+							    (
+								if s(ref(['exist']l(['exist']v2),v987))='CONS' 
+								then
+								    '{"inventario":"',v2,'"',
+								    ',',
+								    '"estado":"',ref(['exist']l(['exist']v2),v985),'"}'
+								    fi
+							    ),
 							']',
-		
 						'}'
 
 			</pft>

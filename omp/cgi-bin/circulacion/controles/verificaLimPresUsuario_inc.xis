@@ -32,6 +32,7 @@ Obs.: Este control depende de políticas definidas en la biblioteca.
 <!-- Obtenemos el límite de préstamos dado el tipo de usuario -->
 <field action="replace" tag="2010"><pft>
 	ref(['tipo_lector']l(['tipo_lector']v2000),v10)
+
 </pft></field>
 
 <!-- Obtenemos el total de préstamos actuales del usuario -->
@@ -50,9 +51,14 @@ Obs.: Este control depende de políticas definidas en la biblioteca.
 </pft></field>
 
 <field action="replace" tag="5000"><pft>
-   if val(v2020) + val(v2030) - val(v2040) > val(v2010) then
-      'Error: Límite de préstamos superado.'
-   fi
+	if a(v2010) then 
+			'Error: El usuario no tiene definido el límite de préstamos. Esto puede deberse a que no tiene definida la categoría en esta Biblioteca.'
+	else 
+   	if val(v2020) + val(v2030) - val(v2040) > val(v2010) then
+      	'Error: Límite de préstamos superado.'
+  		 fi,
+   fi,
+
 </pft></field>
 <flow action="jump"><pft>if v5000:'Error' then 'FinValidaLimPrestamos' fi</pft></flow>
 

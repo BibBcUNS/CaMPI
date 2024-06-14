@@ -1,4 +1,4 @@
-<?php  session_start(); ?>
+ï»¿<?php  session_start(); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
@@ -87,7 +87,7 @@ function determinar() {
 						window.document.consultas.criterio[2].click()};
 }
 
-/*Texto eliminado del input de texto de búsqueda:
+/*Texto eliminado del input de texto de bÃºsqueda:
 onkeyup='setTimeout("determinar()",100)' 
 */
 
@@ -97,6 +97,7 @@ var ultimo = "";
 function focus_expresion() {
 	document.consultas.expresion.focus()
 }
+
 </SCRIPT>
 </head>
 
@@ -118,12 +119,13 @@ function focus_expresion() {
 	style="border-top:0px;"
  onsubmit="
 		if (window.document.consultas.expresion.value =='$' || window.document.consultas.expresion.value =='') {
-				alert('Debe indicar una expresión válida')
+				alert('Debe indicar una expresiÃ³n vÃ¡lida')
 				return false;
 		}else{  return true;}
 	">
+	
 	<input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
-	<input type="hidden" name="operario_id" value="<? echo $usuario; ?>">
+	<input type="hidden" name="operario_id" value="<?php echo $usuario; ?>">
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td width="100%"><strong>Consultar por</strong></td></tr>
@@ -133,17 +135,22 @@ function focus_expresion() {
 		</td>
 	</tr>
 	<?php
-		include "json/JSON.php";
-		$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
-		$config_obtener = fread($ptr_config,1000);
-		fclose($ptr_config);
-		$json = new Services_JSON();
-		$config = $json->decode($config_obtener);
+		//include "json/JSON.php";
+
+		//$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
+		//$config_obtener = fread($ptr_config,3000);
+		//fclose($ptr_config);
+
+		//$json = new Services_JSON();
+		//$config = $json->decode($config_obtener);
+
+		$config = json_decode(file_get_contents("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis"));
+		
 		if ($config->busqueda_x_nc == 'si') {
 		?>
 			<tr>
 				<td width="100%">
-				<input type="radio" name="criterio" value="nc">Nº Control
+				<input type="radio" name="criterio" value="nc">NÂº Control
 				</td>
 			</tr>
 		<?php } // fi end ?>
@@ -213,14 +220,47 @@ $password=$_SESSION["s_password"];
       <td width="100%">
       <input type="hidden" name="operador" value="<?php echo $usuario.'-'.$password; ?>">
 	  <input type="text" id="lector" name="lector" size="10" accesskey="l"><input type="submit" value=" > ">
-	  <!--input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()"-->
+	  <input type="button" value=dni onclick="window.document.form_id.lector.value='DNI';window.document.form_id.lector.focus()">
 	  <input type="button" value="limpiar" onclick="window.document.form_id.lector.value='';window.document.form_id.lector.focus()">
 	  </td>
 	</tr>
   </table>
 </form>
-</font>
-</div>
+<?php //$permisos = $_SESSION["s_permisos"]; if (in_array('administracion',$permisos)):?>
+<?php if($config->en_cuarentena == 'si'): ?>
+	<form name="form_paso_a_disponibilidad" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/"
+		style="background-color:coral;padding:5px"
+		onsubmit="
+			if (window.document.form_paso_a_disponibilidad.inventario.value =='') {
+					alert('Debe indicar algun inventario')
+					return false;
+			}else{
+				window.document.form_paso_a_disponibilidad.operador.value=window.document.form_id.operador.value;
+				return true;}
+		">
+		<input type="hidden" name="IsisScript" value="circulacion/paso_a_disponibilidad.xis">
+		<table border="0" width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+				<td width="100%">Paso a Disponibilidad</td></tr>
+	    <tr>
+	      <td width="100%">
+	            <input type="text" name="inventario" id="inventario" value="" size="10" accesskey="D"> 
+	            <input type="submit" value=" Habilitar > ">
+	            <!-- input type="submit" value="Devolver" -->
+	            <input type="Hidden" name="operador">
+	            <input type="Hidden" name="clave">			
+	      </td></tr>
+	  </table>
+	</form>
+<?php endif; ?>
 
+
+<?php if($config->retiro_inmediato == 'no'): ?>
+<br><a href="/omp/cgi-bin/wxis.exe/omp/circulacion/?IsisScript=circulacion/pedidos_pendientes.xis&id_operador=<?php echo $usuario; ?>&ordenar_por=FECHA" target="principal">Pedidos Pendientes</a><br><br>
+<?php endif; ?>
+
+</div>
+<p>
+<a href="#" onClick='parent.abrirCerrarVentana()' target="indice">Informaci&oacute;n al usuario [activar/desactivar]</a></p>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php session_start(); 
+header('Content-Type: text/html; charset=ISO-8859-1');
 if (isset($_SESSION["s_username"])
 	&& isset($_SESSION["s_permisos"])
 	&& in_array('estadisticas' , $_SESSION["s_permisos"])) {?>
@@ -7,7 +8,7 @@ if (isset($_SESSION["s_username"])
 <head>
 <title>CaMPI - Estadísticas</title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">-->
 
 <script language="JavaScript">
 
@@ -352,7 +353,7 @@ function CargarTerminal(Ip) {
 	<table width="596" border="0" align="center" cellpadding="1" cellspacing="0" bgcolor="#D2E3AC" class="fichaencab">
  	<tr>
 		<th width="109" align="center" id="Celda1" style="cursor:hand" onclick="VerOcultar('Layer1','visible')">Operaciones</th>
-		<th width="87" align="center" id="Celda2" style="cursor:hand" onclick="VerOcultar('Layer2','visible')">Per&iacute;odo</th>	
+		<th width="87" align="center" id="Celda2" style="cursor:hand" onclick="VerOcultar('Layer2','visible')">Período</th>	
 		<th width="90" align="center" id="Celda3" style="cursor:hand" onclick="VerOcultar('Layer3','visible')">Lector</th>
 		<th width="96" align="center" id="Celda4" style="cursor:hand" onclick="VerOcultar('Layer4','visible')">Material</th>
 		<th width="113" align="center" id="Celda5" style="cursor:hand" onclick="VerOcultar('Layer5','visible')">Bibliotecario</th>
@@ -413,12 +414,25 @@ function CargarTerminal(Ip) {
       <td align="center">
           <select size="1" name="anio" 
 	onchange="comienzo_semana(window.document.form_stat.mes.options[window.document.form_stat.mes.selectedIndex].value,window.document.form_stat.anio.options[window.document.form_stat.anio.selectedIndex].value,1)">
+					    <option value="2005">2005</OPTION>          
+					    <option value="2006">2006</OPTION>          
+					    <option value="2007">2007</OPTION>          
+					    <option value="2008">2008</OPTION>
+					    <option value="2009">2009</OPTION>
 					    <option value="2010">2010</OPTION>
 					    <option value="2011">2011</OPTION>
 					    <option value="2012">2012</OPTION>
-					    <option value="2013">2013</OPTION>					
-					    <option value="2014" selected>2014</OPTION>
-					    <option value="2015">2015</OPTION>
+					    <option value="2013">2013</OPTION>	
+					    <option value="2014">2014</OPTION>
+					    <option value="2015">2015</OPTION>	
+					    <option value="2016">2016</OPTION>
+					    <option value="2017">2017</OPTION>
+					    <option value="2018">2018</OPTION>					
+					    <option value="2019">2019</OPTION>
+							<option value="2020">2020</OPTION>
+              <option value="2021">2021</OPTION>
+              <option value="2022" selected>2022</OPTION>
+              <option value="2023">2023</OPTION>
 				    </SELECT></TD>
       <td align="center">
          <select size="1" name="mes" 

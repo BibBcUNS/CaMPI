@@ -53,8 +53,6 @@
 
 <label>NUEVO</label>
 
-
-
 <display><pft>if val(v110)<>0 then 'CREAR_EXISTENTE' fi</pft></display>
 <flow action=exit><pft>if val(v110)<>0 then '1' fi</pft></flow>
 

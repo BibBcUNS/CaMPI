@@ -312,7 +312,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 
         <!-- v2030 tendrá tantas ocurrencias como reservas posea -->
         <!-- v2031 tendrá tantas ocurrencias como Esperas posea -->
-        <flow action=jump><pft>if ref(['config']1,v9)='no' then 'fin lista reservas' fi</pft></flow>
+        <flow action=jump><pft>if ref(['config']1,v9)='no' and ref(['config']1,v15)='no' then 'fin lista reservas' fi</pft></flow>
         <do task="search">
         <parm name="db">reservas</parm>
         <parm name="expression"><pft>v2</pft></parm>
@@ -335,7 +335,7 @@ y actualizo fechas de vto (si se utiliza calendario, puede haber cambiado)-->
 
         <field action=import tag=1000>1000,2030</field>
         <field action=replace tag=2002><pft>v1000^b</pft></field> 	<!-- v2002 contiene id operario -->
-        <field action=add tag=2003><pft>mfn</pft></field>      			<!-- v2003 tiene el mfn del lector -->
+        <field action=add tag=2003><pft>mfn</pft></field>			<!-- v2003 tiene el mfn del lector -->
         <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'formulario.html')</pft></htmlpft></display>
 </loop>
 </do>
@@ -360,10 +360,24 @@ v1000^c: mfn del reg. lector
   <field action=define tag=1011>Isis_Lock</field>
   <update>
     <write>Unlock</write>
-    <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'logo_prestamo.html')</pft></htmlpft></display>
+    <!--display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'logo_prestamo.html')</pft></htmlpft></display-->
    </update>
 </do>
-
+<display>
+    <!--##############################################--> 
+ 
+                </div>
+                <div CLASS="bottom"></div>
+            </div>
+        <div CLASS="clearer"></div>
+      </div>
+      <div CLASS="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+    <div id="footer"></div>
+  </body>
+</html>
+</display>
 <flow action=exit>Now</flow>
 
 <label>MODIFICA</label>
@@ -451,11 +465,12 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                 <field action=import tag=1000>1000,2001</field>
         
                 <!-- verifico reservas, por cada inventarios -->
-                <flow action=jump><pft>if ref(['exist']l(['exist']v3000^i),v987)='CONS' then 'FIN_VERIFICO_RESERVAS' fi</pft></flow>
-					<call name=verificarReservas><pft>'^i',v3000^i,'^o',v1000[1]^b</pft></call>
-					<field action=export tag=list previous=add>4050</field>
-					<!-- en 4050 se obtienen las las Reservas Caidas (RC) y Esperas Nuevas (EN) -->
-				<label>FIN_VERIFICO_RESERVAS</label>
+                <!-- NO verifico reservas si el libro pasa a cuarentena -->
+                <flow action=jump><pft>if ref(['exist']l(['exist']v3000^i),v987)='CONS' or ref(['config']1,v14)='si' then 'FIN_VERIFICO_RESERVAS' fi</pft></flow>
+          					<call name=verificarReservas><pft>'^i',v3000^i,'^o',v1000[1]^b</pft></call>
+          					<field action=export tag=list previous=add>4050</field>
+          					<!-- en 4050 se obtienen las las Reservas Caidas (RC) y Esperas Nuevas (EN) -->
+        				<label>FIN_VERIFICO_RESERVAS</label>
                                                 
                 <flow action=jump><pft>if s(mpu,v3000^i.1):'X' then 'FIN_BLOQUEO' fi</pft></flow>
         
@@ -558,6 +573,9 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 								<field action=replace tag=9020><pft>v9000</pft></field>
 								<!-- recupero el multiplicador para calcular los dias de suspension (en politicas, v14^x -->
 								<field action=replace tag=9030><pft>ref(['politicas']l(['politicas']'UO=',v2343,'-',v2344),v14^x)/</pft></field>
+                <!-- Si el multiplicador de sanción es 0 no aplico sanción -->
+                <flow action=jump><pft>if val(v9030)=0 then 'FIN_moroso' fi</pft></flow>
+
 								<!-- calculo los dias de supencion -->
 								<field action=replace tag=9040><pft>f(val(v9020)*val(v9030),1,0)</pft></field>
 								<!--display><pft>('<b>Días suspención=',v9040,'</b><BR>')</pft></display-->
@@ -815,6 +833,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                     <do task=update>
                     <parm name=db>reservas</parm>
                     <parm name=mfn><pft>v3351</pft></parm>
+                    <parm name=fst><pft>cat('reservas.fst')</pft></parm>
                     <parm name=lockid><pft>V1000^b</pft></parm>
                     <field action=define tag=1102>Isis_Status</field>
                     <field action=define tag=1011>Isis_Lock</field>                
@@ -825,7 +844,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                         <field action=add tag=4050><pft>"EC=",v1,'^i',v4000^i,'^f',v4000^f,'^h',v4000^h</pft></field>
                         <field action=export tag=4050 previous=add>4050</field>
                         <field action=delete tag=3><pft>v55</pft></field>
-                        <field action=delete tag=list>50,55,4000</field>
+                        <field action=delete tag=list>50,55,4000,4050</field>
                         <write>Unlock</write>
                     </update>
                     </do> <!-- update reservas -->
@@ -865,7 +884,7 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
         <display><pft>
           if val(v1102)<>0 then 
            '<marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error ! </marquee>
-            <p><big>No se pudo actualizar el registro lector. Error: ',v1102
+            <p><big>No se pudo actualizar el registro lector. Error: 0',v1102
             select val(v1102)
               case 5: '. Registro tomado por otro operador !</big></p>',
             endsel,
@@ -923,23 +942,33 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                             <field action=import tag=1001>1001</field>            
                 
                             <flow action=jump><pft>if v1001^t:'prestamo' then 'PRESTAMO' fi</pft></flow>
-                
-                            <field action=delete tag=985>ALL</field>
-                            <field action=add tag=985>PERM</field>
-                            <flow action=jump>GRABADO</flow>
+
+                            <!-- DEVOLUCIÓN -->
+                                <field action=delete tag=985>ALL</field>
+                                <field action=add tag=985><pft>
+                                  if ref(['config']1,v14)='si' then 'CUARENTENA' else 'PERM' fi
+                                </pft></field>
+                                <!-- esto es en caso de cuarentena activada -->
+                                <field action=replace tag=986><pft>
+                                  if ref(['config']1,v14)='si' then 
+                                    '^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),
+                                    '^h',mid(date,10,6)
+                                  fi
+                                </pft></field>
+                                <flow action=jump>GRABADO</flow>
                 
                             <label>PRESTAMO</label>
                 
-                            <field action=delete tag=985>ALL</field>
-                            <field action=add tag=985>PRES</field>
-                            <field action=import tag=2001>1</field>
-                            <field action=import tag=2002>2</field>
-                            <field action=add tag=998><pft>
-                              mpl,'^a',v2001,'^b',v2002,
-                              '^c',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^d',v1001^v
-                            </pft></field>
-                            <field action=delete tag=list>2001,2002</field>
-                            <field action=delete tag=998><pft>if nocc(v998)>3 then '1' fi</pft></field>
+                                <field action=delete tag=985>ALL</field>
+                                <field action=add tag=985>PRES</field>
+                                <field action=import tag=2001>1</field>
+                                <field action=import tag=2002>2</field>
+                                <field action=add tag=998><pft>
+                                  mpl,'^a',v2001,'^b',v2002,
+                                  '^c',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^d',v1001^v
+                                </pft></field>
+                                <field action=delete tag=list>986,2001,2002</field>
+                                <field action=delete tag=998><pft>if nocc(v998)>3 then '1' fi</pft></field>
                 
                             <label>GRABADO</label>
                 
@@ -1039,17 +1068,14 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                     <td width="7%"><b>Operación: ',mfn,'</b>',
                    '<td width="38%"><p align="right"><b>',v1.40,'<br>DNI ',v2,'</b>
                 </tr>
-              </table>'
-			     if getenv('REMOTE_ADDR') = '10.10.1.29' or 
-				 getenv('REMOTE_ADDR') = '10.10.1.132' or
-				 getenv('REMOTE_ADDR') = '127.0.0.1' then 
-			'<script type="text/javascript">
-				pu=window.open("","ventana_resultado","width=640","height=480","toolbar=no","location=no","titlebar=no","directories=no","status=no","menubar=no","scrollbars=yes","resizable=yes");
-				var doc=pu.document.open("text/html","replace");
+              </table><script type="text/javascript">
+				if (parent.checkCookie() == "verdadero"){
+				//pu=window.open("","ventana_resultado","width=640,height=480","toolbar=no","location=no","titlebar=no","directories=no","status=no","menubar=no","scrollbars=yes","resizable=yes");
+				var doc=parent.pu.document.open("text/html","replace");
 				var txt="<html><head><title>Información para el usuario</title></head><body>";
 				txt=txt+"<table border=1 width=100% align=center cellpadding=1 cellspacing=0>";
-				txt=txt+"<tr><td align=center colspan=3><font size=4>',v1.40,' &mdash; ',v2,'</font></td></tr>";
-			</script>',fi
+				txt=txt+"<tr><td align=center colspan=3><font size=4>',v1.40,' &mdash; ',v2,'</font></td></tr>";}
+			</script>'
             </pft></display>
           </loop>
         </do> <!-- list -->
@@ -1139,14 +1165,11 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                      <th width="45%" colspan="2">Préstamos:</th>
                      <td width="10%">&nbsp;</td>
                      <th width="45%" colspan="2">Préstamos:</th>
-                   </tr>'
-				   if getenv('REMOTE_ADDR') = '10.10.1.29' or 
-				   getenv('REMOTE_ADDR') = '10.10.1.132' or
-				   getenv('REMOTE_ADDR') = '127.0.0.1' then 
-					'<script type="text/javascript">
-				      txt=txt+"<tr bgcolor=#d0d0d0><td align=center colspan=3><font size=4><b>Préstamos</b></font></td></tr>";
-					  txt=txt+"<tr align=center><td><b>Vencimiento</b></td><td><b>Inventario</b></td><td><b>Ejemplar</b></td></tr>";
-				   </script>',fi,fi
+                   </tr><script type="text/javascript">
+				if (parent.checkCookie() == "verdadero"){
+				 txt=txt+"<tr bgcolor=#d0d0d0><td align=center colspan=3><font size=4><b>Préstamos</b></font></td></tr>";
+				 txt=txt+"<tr align=center><td><b>Vencimiento</b></td><td><b>Inventario</b></td><td><b>Ejemplar</b></td></tr>";}
+				   </script>',fi
                </pft></display>
         
                <display><pft>
@@ -1175,14 +1198,11 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
                         if (v1001^b.1:'!') then '
                  <marquee bgcolor="#FF0000" style="color: #FFFF9B; font-weight: bold">Error !</marquee>'
                         fi,v1001^b.60,
-                  '</td></tr>'
-			  if getenv('REMOTE_ADDR') = '10.10.1.29' or 
-				 getenv('REMOTE_ADDR') = '10.10.1.132' or
-				 getenv('REMOTE_ADDR') = '127.0.0.1' then 
-			'<!-- Listado de préstamos en ventana de información para el usuario -->
+                  '</td></tr><!-- Listado de préstamos en ventana de información para el usuario -->
 				<script type="text/javascript">
-				   txt=txt+"<tr><td><b>',v1001^v.10,'</b></td><td><b>',v1001^i,'</td><td>',v1001^b,'</b></td></tr>";
-				</script>',fi
+				if (parent.checkCookie() == "verdadero"){
+				   txt=txt+"<tr><td><b><font size=5>',v1001^v.10,'</font></b></td><td><b><font size=5>',v1001^i,'</font></td><td><font size=5>',v1001^b,'</font></b></td></tr>";}
+				</script>'
 			</pft></display>
         </loop>
         </do>   <!-- list -->
@@ -1206,13 +1226,11 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 			<!--script type="text/javascript">txt=txt+"<tr bgcolor=#d0d0d0><td align=center><font size=4><b>SANCIONADO hasta el ',v11^v[last],'</b></font></td></tr>";</script-->',
            fi/
         </pft></display>
-    <display><pft>if getenv('REMOTE_ADDR') = '10.10.1.29' or 
-				  getenv('REMOTE_ADDR') = '10.10.1.132' or
-				  getenv('REMOTE_ADDR') = '127.0.0.1' then 
-			'<script type="text/javascript">
+    <display><pft>'<script type="text/javascript">
+				if (parent.checkCookie() == "verdadero"){
 				txt=txt+"</table></body></html>";
 				doc.write(txt);
-				doc.close();</script>' fi</pft></display>
+				doc.close();}</script>'</pft></display>
         <label>IMPRIMIR_FIRMAS</label>
 
         <do task=mfnrange>
@@ -1250,11 +1268,13 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
             <field action=replace tag=1000 split=occ><pft>
                 (if (v7^*='EN=') then v7^e/ fi)
             </pft></field>
-            <flow action=jump><pft>if a(v1000) then 'no_hay_reservas' fi</pft></flow>
+
+            <!-- Salteo el envío de correo en caso que las Esperas no sean confirmadas inmediatamente. -->
+            <flow action=jump><pft>if ref(['config']1,v16)='no' OR a(v1000) then 'no_hay_reservas' fi</pft></flow>
             
             <label>si_hay_reservas</label>
             
-				<call name=mail_reservas><pft>(if v7^*='EN=' then v7 fi)</pft></call> 
+				    <call name=mail_reservas><pft>(if v7^*='EN=' then v7 fi)</pft></call> 
 								
                 <display><pft>
                     '<script>
@@ -1273,9 +1293,9 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 					'<script>function mostrar_reservas(){}</script>'
 				</pft></display>
                 
-        </loop>		
+        </loop>
         </do> <!-- mfnrange movi -->
-		
+        
 		<label>email_log</label>				
 			<do task=mfnrange>
 			<parm name=db>movi</parm>
@@ -1306,8 +1326,8 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 					</script>'
                 </pft></display>
 			</loop>
-		</do> <!-- mfnrange movi -->			
-						        
+		</do> <!-- mfnrange movi -->
+		
 </update>
 </do> <!-- update lector -->
 
@@ -1316,10 +1336,20 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 
 <section>
 		<display><pft>'Content-type: text/html'/#</pft></display>
+<trace>BR!</trace>
 		<parm name="buffersize">120000</parm>
 		<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 		<field action=replace tag=2222><pft>ref(['config']1,v10)</pft></field>
 		<field action=cgi tag=1000>opcion</field>
+		
+		<!--flow action=jump><pft>'EXIT'</pft></flow-->
+		<include>circulacion/controles/verificaSistemaActivo_inc.xis</include>
+		<flow action=jump><pft>if not v5000:'Error' then 'SISTEMA_HABILITADO' fi</pft></flow>
+		    <display><h3 align="center" style="color:#ffffff;background-color:red;"><font size="+2" color="#ffffff">El sistema se encuentra temporalmente fuera de servicio</font></h3></display>
+		    <flow action=jump><pft>'EXIT'</pft></flow>
+		<label>SISTEMA_HABILITADO</label>
+		                
+		
 		<flow action=jump><pft>v1000</pft></flow>
   
 		<!-- Esta parte valida al operario y presenta al lector -->
@@ -1333,11 +1363,11 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
   <head>
     <title>Circulación</title>
     <link REL="stylesheet" TYPE="text/css" HREF="/omp/css/style.css" />
-	<link REL="stylesheet" TYPE="text/css" HREF="/omp/css/jquery-ui.css"/>
+    <link REL="stylesheet" TYPE="text/css" HREF="/omp/css/jquery-ui.css"/>
 	<script src="/omp/webservices/jquery.js"></script>
 	<script src="/omp/webservices/jquery-ui.js"></script>
   </head>
-<script>
+	<script>
 	
 	$(function(){
 		$('#calendario1').datepicker({dateFormat: "dd/mm/yy"});
@@ -1512,6 +1542,58 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 		<field action=cgi tag=797>devolucion_98</field>
 		<field action=cgi tag=798>devolucion_99</field>
 		<field action=cgi tag=799>devolucion_100</field>
+		<field action=cgi tag=800>devolucion_101</field>
+		<field action=cgi tag=801>devolucion_102</field>
+		<field action=cgi tag=802>devolucion_103</field>
+		<field action=cgi tag=803>devolucion_104</field>
+		<field action=cgi tag=804>devolucion_105</field>
+		<field action=cgi tag=805>devolucion_106</field>
+		<field action=cgi tag=806>devolucion_107</field>
+		<field action=cgi tag=807>devolucion_108</field>
+		<field action=cgi tag=808>devolucion_109</field>
+		<field action=cgi tag=809>devolucion_110</field>
+		<field action=cgi tag=810>devolucion_111</field>
+		<field action=cgi tag=811>devolucion_112</field>
+		<field action=cgi tag=812>devolucion_113</field>
+		<field action=cgi tag=813>devolucion_114</field>
+		<field action=cgi tag=814>devolucion_115</field>
+		<field action=cgi tag=815>devolucion_116</field>
+		<field action=cgi tag=816>devolucion_117</field>
+		<field action=cgi tag=817>devolucion_118</field>
+		<field action=cgi tag=818>devolucion_119</field>
+		<field action=cgi tag=819>devolucion_120</field>
+		<field action=cgi tag=820>devolucion_121</field>
+		<field action=cgi tag=821>devolucion_122</field>
+		<field action=cgi tag=822>devolucion_123</field>
+		<field action=cgi tag=823>devolucion_124</field>
+		<field action=cgi tag=824>devolucion_125</field>
+		<field action=cgi tag=825>devolucion_126</field>
+		<field action=cgi tag=826>devolucion_127</field>
+		<field action=cgi tag=827>devolucion_128</field>
+		<field action=cgi tag=828>devolucion_129</field>
+		<field action=cgi tag=829>devolucion_130</field>
+		<field action=cgi tag=830>devolucion_131</field>
+		<field action=cgi tag=831>devolucion_132</field>
+		<field action=cgi tag=832>devolucion_133</field>
+		<field action=cgi tag=833>devolucion_134</field>
+		<field action=cgi tag=834>devolucion_135</field>
+		<field action=cgi tag=835>devolucion_136</field>
+		<field action=cgi tag=836>devolucion_137</field>
+		<field action=cgi tag=837>devolucion_138</field>
+		<field action=cgi tag=838>devolucion_139</field>
+		<field action=cgi tag=839>devolucion_140</field>
+		<field action=cgi tag=840>devolucion_141</field>
+		<field action=cgi tag=841>devolucion_142</field>
+		<field action=cgi tag=842>devolucion_143</field>
+		<field action=cgi tag=843>devolucion_144</field>
+		<field action=cgi tag=844>devolucion_145</field>
+		<field action=cgi tag=845>devolucion_146</field>
+		<field action=cgi tag=846>devolucion_147</field>
+		<field action=cgi tag=847>devolucion_148</field>
+		<field action=cgi tag=848>devolucion_149</field>
+		<field action=cgi tag=849>devolucion_150</field>
+		
+
 		<field action=cgi tag=220>dias_sancion</field>
 		<field action=cgi tag=231>invs_prestamo_A</field>
 		<field action=replace tag=231><pft>replace(v231,' ','')</pft></field>
@@ -1533,7 +1615,12 @@ v1000^g: fecha de los vencimientos de los prestamos (uno por prestamo, separado 
 			v760^x/v761^x/v762^x/v763^x/v764^x/v765^x/v766^x/v767^x/v768^x/v769^x/
 			v770^x/v771^x/v772^x/v773^x/v774^x/v775^x/v776^x/v777^x/v778^x/v779^x/
 			v780^x/v781^x/v782^x/v783^x/v784^x/v785^x/v786^x/v787^x/v788^x/v789^x/
-			v790^x/v791^x/v792^x/v793^x/v794^x/v795^x/v796^x/v797^x/v798^x/v799^x</pft>
+			v790^x/v791^x/v792^x/v793^x/v794^x/v795^x/v796^x/v797^x/v798^x/v799^x/
+			v800^x/v801^x/v802^x/v803^x/v804^x/v805^x/v806^x/v807^x/v808^x/v809^x/
+			v810^x/v811^x/v812^x/v813^x/v814^x/v815^x/v816^x/v817^x/v818^x/v819^x/
+			v820^x/v821^x/v822^x/v823^x/v824^x/v825^x/v826^x/v827^x/v828^x/v829^x/
+			v830^x/v831^x/v832^x/v833^x/v834^x/v835^x/v836^x/v837^x/v838^x/v839^x/
+			v840^x/v841^x/v842^x/v843^x/v844^x/v845^x/v846^x/v847^x/v848^x/v849^x</pft>
 		</field>
 
 		<!-- la función javascript "mostrar_reservas()" aletra si algún elemento devuelto presenta una reserva -->		

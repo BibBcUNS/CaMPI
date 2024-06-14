@@ -5,7 +5,6 @@ v3003: lista de ejemplares prestados al lector, a devolver
 v3004: documento
 Se asume que el DNI ya esta validado -->
 <flow action="jump"><pft>if v5000:'Error' or a(v3002) then 'FinVerificarEstado' fi</pft></flow>
-
 <!-- Se borran los campos que vamos a utilizar en este script, debido al include de otros scripts -->
 <field action="delete" tag="4000">ALL</field>
 <field action="delete" tag="4001">ALL</field>
@@ -45,17 +44,34 @@ Se asume que el DNI ya esta validado -->
        if s(s(v998[last]^d)*6.4,s(v998[last]^d)*3.2,s(v998[last]^d)*0.2) < s(s(date).8) then v977 fi)/)
 </pft></field-->
 
-<field action="add" tag="4001" split="occ"><pft>
-   ref(['lector']l(['lector']v3004),
-       (
-		if s(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < s(s(date).8)
-			then
-				v8^i
-			fi
-	    )/
-	)
-</pft></field>
 
+
+<list action=delete>now</list>
+<list action=load type=list><pft>ref(['lector']l(['lector']v3004),(v8/))</pft></list>
+<!-- v2003: tipo usuario -->
+<field action=replace tag=2003><pft>ref(['lector']l(['lector']v3004),v3)</pft></field>
+
+<do task=list>
+	<field action=define tag=1000>Isis_Item</field>
+	<loop>
+		<field action=import tag=list>2003</field>
+		<!-- sumo los días hábiles a la fecha de préstamo -->
+		<!-- v2010: fecha de prestamo: aaaammdd -->
+		<field action=replace tag=2010><pft>v1000^p*6.4,v1000^p*3.2,v1000^p*0.2</pft></field>
+		<!-- v2011: tipo objeto: -->
+		<field action=replace tag=2011><pft>ref(['exist']l(['exist']v1000^i),v987)</pft></field>
+		<!-- v2012: días prestamo -->
+		<field action=replace tag=2012><pft>ref(['politicas']l(['politicas']'UO=',v2003,'-',v2011),v11)/</pft></field>
+		<call name=SUMAH><pft>v2010,/,v2012</pft></call>
+		<field action="replace" tag=4001><pft>
+			if s(v9000) < s(s(date).8) then
+          		    v1000^i
+		    fi
+		</pft></field>
+		<field action=export tag=list previous=add>4001</field>
+		<flow action=skip><pft>if v4001:'Error' then 'Quit' fi</pft></flow>
+	</loop>
+</do>
 
 <field action="replace" tag="5000"><pft>
    if p(v4000) then
@@ -63,7 +79,7 @@ Se asume que el DNI ya esta validado -->
    fi
    if p(v4001) then
       if p(v4000) then '<br>' fi,
-      'Error: Devoluci�n atrasada:',(v4001+|;|)
+      'Error: Devolucion atrasada:',(v4001+|;|)
    fi
 </pft></field>
 

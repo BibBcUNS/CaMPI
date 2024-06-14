@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php 
+header('Content-Type: text/html; charset=ISO-8859-1'); 
+session_start(); ?>
 
 <?php
 if (isset($_SESSION["s_username"])) {
@@ -25,8 +27,7 @@ if (isset($_SESSION["s_username"])) {
 <?php
 
 // Muestro el título
-echo '<h2 style="text-align:center
-">Cancela Esperas Vencidas</h2>';
+echo '<h2 style="text-align:center">Cancela Esperas Vencidas</h2>';
 $url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/cancela_esperas.xis";
  $ptr_esperas = fopen($url,"r");
  $esperas = fread($ptr_esperas,8192);

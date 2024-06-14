@@ -98,7 +98,7 @@
   </head>
 <body>
     <div id="head"> 
-		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="title">Módulo de Circulacioón - OPEN MarcoPolo</div>
 		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
     </div> 
     <div id="body_wrapper">
@@ -110,12 +110,12 @@
 <!--#########################################-->		    </htmlpft></display> 
 
   <flow action=jump><pft>if p(v110) or v100='prestamos' then v100 else 'SALIDA' fi</pft></flow>
-<!----------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------- -->
   <label>nc</label>
 	<!--  La búsqueda por NC (nº de control) e inv (inventario) son equivalentes solo 
 	que el invertido para los NC utiliza el prefijo NC=. Para cada libro mostrado, se
 	muestran las partes, y para cada parte, los ejemplares prestados/reservados/en espera -->
-<!----------------------------------------------------------------------------->	
+<!--------------------------------------------------------------------------- -->	
   <label>inv</label>
   <trace>!BR</trace>
   <field action="add" tag="5009"><pft>ref(['config']1,mhu,v6)</pft></field> <!-- lee la base config para conocer el formato de catalogación (v6) -->
@@ -151,8 +151,8 @@
 					</loop>
 				</do>	
 				<display>
-					<table border="0" bgcolor="#FFFFFF" width="80%" align="center" cellspacing=0 cellpadding=0>
-					<tr><th colspan="4" align="center"><b>préstamos<b></th></tr>
+					<table border="0" bgcolor="#FFFFFF" width="90%" align="center">
+					<tr><th colspan="4" style="text-align:left"><b> Préstamos<b></th></tr>
 				</display>
 				<list action=delete>now</list>
 				<list action=load type=freq><pft>(v2/)</pft></list>
@@ -177,9 +177,23 @@
         </do>
 		<!-- Se muestran los inventarios si el operador tiene privilegios de administración -->
 		<field action=import tag=130>130</field>
-        <display><pft>if ref(['opera']l(['opera']v130),(v5|~|)):'administracion' then,
-		'<br><b>Inventarios: </b>',
-     	(v859^p,'[',ref(['exist']l(['exist']v859^p),v987),']',' - ') fi</pft></display>
+        <display><pft>
+        
+		if ref(['opera']l(['opera']v130),(v5|~|)):'administracion' then,
+			'<br><b>Inventarios [TipoObjeto]: Estado </b><br><br>',
+     		(v859^p
+			,' [',ref(['exist']l(['exist']v859^p),v987),']'
+				,' - ',
+				select ref(['exist']l(['exist']v859^p),v985)
+				case 'PERM': 'NO PRESTADO' 
+				case 'PRES': 'PRESTADO'
+				case 'CUARENTENA': 'En CUARENTENA desde el ',ref(['exist']l(['exist']v859^p),v986^f)
+				elsecase 'NO DISPONIBLE PARA PRESTAMO' 
+				endsel,
+				' <br>'
+			), 
+		fi
+		</pft></display>
 
     </loop>
   </do>
@@ -202,35 +216,30 @@
 </display>
   <flow action=exit>1</flow>
 
-<!----------------------------------------------------------------------------->	
+<!--------------------------------------------------------------------------- -->	
   <label>lector</label>
 
-  <flow action=jump><pft>if citype(v110)<>'A' then 'dni' fi</pft></flow>
+    <field action=replace tag=110><pft>mpu,v110</pft></field>
+    <flow action=jump><pft>if citype(v110)<>'A' then 'dni' fi</pft></flow>
 
-  <do task=keyrange>
+ <do task=search>
     <parm name=db>lector</parm>
-    <parm name=from><pft>v110</pft></parm>
-    <parm name=count>1500</parm>
+    <parm name=expression><pft>mpu,v110,'$'</pft></parm>
+    <parm name=count>2000</parm>
+    <parm name=gizmo>gizmo</parm>
     <field action=define tag=1102>Isis_Total</field>
     <field action=define tag=1103>Isis_Key</field>
     <field action=define tag=1104>Isis_Current</field>
     <loop>
-      <display><pft>if val(v1104)=1 then 
+	<display><pft>if val(v1104)=1 then 
         '<TABLE BORDER="1" WIDTH="90%" BGCOLOR="#FFFFF">
          <th WIDTH="60%" ALIGN="center">
            <b>Lector</b></th>
          <th WIDTH="20%" ALIGN="center">
            <b>Documento</b></th>
          ' fi
-      </pft></display>
-      <do task=search>
-        <parm name=db>lector</parm>
-        <parm name=expression><pft>v1103</pft></parm>
-        <!--parm name=gizmo>gizmo</parm-->
-        <loop>
-					<list action="load" type="freq"><pft>'^a',replace(v1,' ',''),'^b',v2,'^c',v1</pft></list> <!-- en ^a se borran los espacios para un mejor ordenamiento -->
-        </loop>
-      </do>
+        </pft></display>
+	<list action="load" type="freq"><pft>'^a',replace(v1,' ',''),'^b',v2,'^c',v1</pft></list>
     </loop>
   </do>
 	
@@ -245,7 +254,9 @@
          </tr>',</pft></display>
 		</loop>
 	</do>
-      <display></TABLE></display>
+      <display>
+        </TABLE>
+      </display>
 	
 <!--  <display><pft>if val(v1102)=0 then 
    '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display> -->
@@ -266,14 +277,13 @@
 </display>   
   <flow action=exit>1</flow>
 
-<!----------------------------------------------------------------------------->	
+<!--------------------------------------------------------------------------- -->	
   <label>dni</label>
-
   <do task=search>
     <parm name=db>lector</parm>
     <parm name=expression><pft>v110</pft></parm>
     <parm name=count>1</parm>
-    <!--parm name=gizmo>gizmo</parm-->
+    <parm name=gizmo>gizmo</parm>
     <field action=define tag=1102>Isis_Total</field>
     <loop>
       <display><htmlpft><pft>cat(getenv('PATH_TRANSLATED'),'lector.html')</pft></htmlpft></display>
@@ -297,13 +307,13 @@
 </display>
   <flow action=exit>1</flow>
 
-<!----------------------------------------------------------------------------->	
+<!--------------------------------------------------------------------------- -->	
   <label>prestamos</label>
 
-  <display><p aling="center">Préstamos morosos</p></display>
+  <display><p align="center">Préstamos morosos</p></display>
   <do task=mfnrange>
     <parm name=db>lector</parm>
-    <!--parm name=gizmo>gizmo</parm-->
+    <parm name=gizmo>gizmo</parm>
     <loop>
       <list action=load><pft>if p(v8) then 
        (if val(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < val(s(date).8) then '^a',v1,mpl,v8/,fi),fi
@@ -339,9 +349,9 @@
 </display>
   <flow action=exit>1</flow>
 
-<!----------------------------------------------------------------------------->	
+<!--------------------------------------------------------------------------- -->	
 <label>reserva</label>
-  
+ 
   <display><pft>
   '<center>',
   ref(['lector']l(['lector']v120),

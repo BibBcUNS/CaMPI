@@ -2,17 +2,28 @@
 <section>  
 <display><pft>'Content-type: text/html'/#</pft></display>
 
-<field action=cgi tag=1>reservas</field>
-<field action=cgi tag=2>politicas</field>
-<field action=cgi tag=3>impresion</field>
-<field action=cgi tag=4>busqueda_x_nc</field>
+<field action=cgi tag=9>reservas</field>
+<field action=cgi tag=10>politicas</field>
+<field action=cgi tag=11>impresion</field>
+<field action=cgi tag=12>busqueda_x_nc</field>
+<field action=cgi tag=13>sistema_habilitado</field>
+<field action=cgi tag=14>en_cuarentena</field>
+<field action=cgi tag=15>encargar_disponible</field>
+<field action=cgi tag=16>retiro_inmediato</field>
+<field action=cgi tag=18>mail_asunto</field>
+<field action=cgi tag=19>mail_nombre</field>
+<field action=cgi tag=20>plantilla_mail</field>
 <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 
 <flow action=jump><pft>
-	if (not '.si.no.':v1) 
-		or (not '.si.no.':v3)
-		or (not '.politicas.manual.':v2)
-		or (not '.si.no.':v4)
+	if (not '.politicas.manual.':v10)
+		or (not '.si.no.':v9) 
+		or (not '.si.no.':v11)
+		or (not '.si.no.':v12)
+		or (not '.si.no.':v13)
+		or (not '.si.no.':v14)
+		or (not '.si.no.':v15)
+		or (not '.si.no.':v16)
 	then
 		'Error'
 	fi
@@ -25,11 +36,19 @@
 	<field action=define tag=1103>Isis_Lock</field>
 	<parm name=lockid>ID</parm>
 	<update>
-        <field action=delete tag=list>9,10,11</field>
-		<field action=import tag=9>1</field>
-		<field action=import tag=10>2</field>
-		<field action=import tag=11>3</field>
-		<field action=import tag=12>4</field>
+        <field action=delete tag=list>9,10,11,13,14,15,16,17,18,19,20</field>
+		<field action=import tag=9>9</field>
+		<field action=import tag=10>10</field>
+		<field action=import tag=11>11</field>
+		<field action=import tag=12>12</field>
+		<field action=import tag=13>13</field>
+		<field action=import tag=14>14</field>
+		<field action=import tag=15>15</field>
+		<field action=import tag=16>16</field>
+		<field action=import tag=17>17</field>
+		<field action=import tag=18>18</field>
+		<field action=import tag=19>19</field>
+		<field action=import tag=20>20</field>
         <write>Unlock</write>
      </update>
      </do>

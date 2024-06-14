@@ -56,21 +56,23 @@ Si el ejemplar está reservado (sin importar quien lo reservó) no se puede pres
 	<!-- v1109: Cantidad de reservas asociadas a la parte indicada -->
 	<field action="replace" tag="1109"><pft>ref(['reservas']val(v1103),f(nocc(v2),1,0))</pft></field>
 
-	<!--  v1106: Cantidad total de ejemplares -->
+	<!--  v2000: Ejemplares de la parte -->
 	<field action="replace" tag="2000" split="occ"><pft>ref(['partes']l(['partes']v1001),(v2/))</pft></field>
-	<field action="replace" tag="1106"><pft>f(nocc(v2000),1,0)</pft></field>
+        <!--  v2001: ejemplares de la parte no 'CONS'-->
+        <field action="replace" tag="2001" split="occ"><pft>(ref(['exist']l(['exist']v2000),if not v987='CONS' then v977/ fi))</pft></field>
+	<!--  v1106: Cantidad total de ejemplares no 'CONS' -->
+	<field action="replace" tag="1106"><pft>f(nocc(v2001),1,0)</pft></field>
 	
 	<!--  v1107: Lista de los inventarios hermanos. 
 	Nota: Este dato ya fue evaluado dos lineas arriba (corregir) -->
 	<field action="replace" tag="1107" split="occ"><pft>ref(['partes']l(['partes']v1001),(v2/))</pft></field> 
 	
 	<!--  v1108: Cantidad de ejemplares prestados -->
-	<field action="replace" tag="1108"><pft>f(size((if ref(['exist']l(['exist']v1107),v985) = 'PRES' then '1' fi)),1,0)</pft></field>
+	<field action="replace" tag="1108"><pft>f(size((if ref(['exist']l(['exist']v1107),v985,':',v987) = 'PRES:PERM' then '1' fi)),1,0)</pft></field>
 
 	<!-- v1110: Contiene el DNI del usuario que posee el objeto si está prestado -->
 	<field action="replace" tag="1110"><pft>ref(['exist']l(['exist']v1001),if v985='PRES' then v998[LAST]^b fi)</pft></field>
 
-	<!--display><pft>v1104,':',s('~',v3004,'~')</pft></display-->
 	<field action="replace" tag="4000"><pft>
 	
 	    if (not v1104:s('~',v3004,'~')) then

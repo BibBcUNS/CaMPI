@@ -81,12 +81,23 @@ function cargar_sancion() {
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Categoría</b></td>
       <td width="40%">
-		<select name="categoria">
-			[pft](
-				'
-				<option value="',v2000,'" ',if (v2000=v3[1]) then ' SELECTED ' fi,'>',ref(['tipo_lector']l(['tipo_lector']v2000),v2),'</option>
-				'
-			)[/pft]
+		
+		[pft](v3[1])[/pft]
+		<!-- <option value="',v2000,'" ',if (v2000=v3[1]) then ' SELECTED ' fi,'>',ref(['tipo_lector']l(['tipo_lector']v2000),v2),'</option> -->
+
+		<select name="categoria" style="width:300px">
+			
+
+			[pft]
+			if v3[1]='' or v3[1]='SIN_CATEGORIA' then 
+			'<option value="" SELECTED>SIN CATEGORIA</option>',
+			
+			fi,
+			(	
+			'<option value="',v2000,'" ',if (v2000=v3[1]) then '  ' fi,'>',ref(['tipo_lector']l(['tipo_lector']v2000),v2),'</option>',
+			)
+
+			[/pft]
 		</select>
 
 	  </td>
@@ -105,20 +116,22 @@ function cargar_sancion() {
       	<select id="estado" name="estado" onchange="cargar_sancion()">
       		<option value="Habilitado" [pft]if s(mhu,v10).3='HAB' then 'selected' fi,mpl[/pft]>Habilitado</option>
       		<option value="Sancionado" [pft]if s(mhu,v10).3='SAN' then 'selected' fi,mpl[/pft]>Sancionado</option>
-      		<option value="Nohabilitado" [pft]if s(mhu,v10).3='NOH' then 'selected' fi,mpl[/pft]>No habilitado</option>
+		<option value="Nohabilitado" [pft]if s(mhu,v10).3='NOH' then 'selected' fi,mpl[/pft]>No habilitado</option>
       	</select>
       </td>
       <td width="20%" bgcolor="#BEE4FF"><b>Sanciones</b></td>
       <td><input type="text" id="sanciones" name="sanciones" size="25" value="[pft]v11+|%|[/pft]"></td>
-    </tr>    <tr>
-      <td colspan="3" bgcolor="#BEE4FF"><b>Vigencia de Datos</td>
-      <td><input type="text" name="vigencia_datos" size="10" value="[pft]
-	if val(s(v16)*6.4,s(v16)*3.2,s(v16)*0.2) < val(s(date).8) then
-		'31/12/',s(date).4,
-	else 
-		,v16,
-	fi[/pft]"></td>
     </tr>
+    <tr>
+      <td colspan="3" bgcolor="#BEE4FF"><b>Vigencia de Datos</td>
+      	<td><input type="text" name="vigencia_datos" size="10" value="[pft]
+			if val(s(v16)*6.4,s(v16)*3.2,s(v16)*0.2) < val(s(date).8) then
+				'31/12/',s(date).4,
+			else 
+				,v16,
+			fi[/pft]">
+		</td>
+	</tr>
   </table>
   [pft]
     if p(v8) then 

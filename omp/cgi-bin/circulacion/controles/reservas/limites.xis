@@ -1,5 +1,5 @@
 <!--
-Verifica que el usuario no supere el límite de reservas
+Verifica que el usuario no supere el límite de reservas. Vamos a coniderar la suma de Esperas + Reservas
 Límite 1: Límite total de reservas para el tipo de usuario.
 Límite 2: Límite de reservas respecto al típo de usuario y tipo de objeto. (pendiente) .
 
@@ -8,7 +8,7 @@ Obs.: Este control depende de políticas definidas en la biblioteca.
 -->
 <trace>!BR</trace>
 <!--
-   si reservados + a reservar > límite reservas total entonces
+   si reservados + esperas + a reservar > límite reservas total entonces
         Error: Límite total de reservas excedido
    sino
 	Creo un conjunto vacio para "tipos de objetos" y cantidad de reservas para ese tipo. (list freq)
@@ -27,27 +27,30 @@ Obs.: Este control depende de políticas definidas en la biblioteca.
 
 <flow action="jump"><pft>if v5000:'Error' then 'FinLimites' fi</pft></flow>
 
-<!-- Obtengo la categoría del usuario -->
+<!-- v3000: Obtengo la categoría del usuario -->
 <field action="replace" tag="3000"><pft>ref(['lector']l(['lector']v3002),v3)</pft></field>
 
-<!-- Obtengo el límite de reservas para el usuario -->
+<!-- v3010: Obtengo el límite de reservas para el usuario - LIMITE TOTAL -->
 <field action="replace" tag="3010"><pft>ref(['tipo_lector']l(['tipo_lector']v3000),v12)</pft></field>
 
-<!-- Obtengo la cantidad de reservas de dicho usuario -->
+<!-- v3020: Obtengo la cantidad de reservas de dicho usuario -->
 <field action="replace" tag="3020"><pft>f(npost(['reservas']'RES='v3002),1,0)</pft></field>
+
+<!-- v3021: Obtengo la cantidad de esperas de dicho usuario -->
+<field action="replace" tag="3021"><pft>f(npost(['reservas']'ESP='v3002),1,0)</pft></field>
 
 <!-- Obtengo la cantidad de reservas a realizar (vienen en v2020)  -->
 <field action="replace" tag="3030"><pft>f(nocc(v2060),1,0)</pft></field>
 
 <!-- Verificamos el límite total de reservas -->
 <field action="replace" tag="5000"><pft>
-   if val(v3020) + val(v3030) > val(v3010) then
+   if val(v3020) + val(v3021) + val(v3030) > val(v3010) then
       'Error: El usuario llegó a su límite de reservas.'
    fi
 </pft></field>
 <flow action="jump"><pft>if v5000:'Error' then 'FinLimites' fi</pft></flow>
 
-<!-- Creo una lista de partes reservados del lector -->
+<!-- v3040: Creo una lista de partes reservados del lector -->
 <do task=search>
 	<parm name=db>reservas</parm>
 	<parm name=expression><pft>'RES=',v3002</pft></parm>
@@ -57,19 +60,30 @@ Obs.: Este control depende de políticas definidas en la biblioteca.
 	<field action=export tag=3040 previous=replace>3040</field>
 </do>
 
-<!-- Creo una lista con los ID de partes reservadas y a reservar (ara contar el total por tipo de objetos) -->
+<!-- v3041: Creo una lista de partes con espera para lector -->
+<do task=search>
+	<parm name=db>reservas</parm>
+	<parm name=expression><pft>'ESP=',v3002</pft></parm>
+	<loop>
+		<field action=export tag=3041 previous=add>1</field>
+	</loop>
+	<field action=export tag=3041 previous=replace>3041</field>
+</do>
+
+<!-- Creo una lista con los ID de partes reservadas + esperas + a reservar (para contar el total por tipo de objetos) -->
 
 <field action=add tag=3050><pft>(v2060/)</pft></field>
 <field action=add tag=3050><pft>(v3040/)</pft></field>
+<field action=add tag=3050><pft>(v3041/)</pft></field>
 
 <list action="delete">now</list>
-<list action="load"><pft>(v2060/),(v3040/)</pft></list>
+<list action="load"><pft>(v2060/),(v3040/),(v3041/)</pft></list>
 <do task=list>
 	<field action=define tag=1000>Isis_Item</field>
 	<loop>
 		<field action=replace tag=8000><pft>v1000</pft></field>
 		<include>circulacion/controles/reservas/tipo_obj_no_cons.inc</include>
-		<!-- v8080 es la salida del include, es el tiop de objeto del la parte_id Pasado en v8000 -->
+		<!-- v8080 es la salida del include, es el tipo de objeto del la parte_id Pasado en v8000 -->
 		<field action=export previous=add tag=3060>8080</field>
 	</loop>
 </do>

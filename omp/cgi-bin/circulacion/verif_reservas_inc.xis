@@ -1,7 +1,10 @@
 <function name=verificarReservas tag=1 action=replace>
         <!-- Verifica si existe alguna reserva para el inventario devuelto.
         En caso de existir, la primera reserva (menor timestamp) pasa a espera (v3)
-        Recibe como parametro ^i el invatrario y ^o el operador (para lockid)
+        Recibe como parametro:
+         - ^i el invatrario
+         - ^o el operador (para lockid)
+         - ^e (confirmada) 'si' = espera CONFIRMAAD / 'no' = espera PENDIENTE
         -->
 
             <!-- Recupero el ID de la parte -->
@@ -63,6 +66,7 @@
                     '^f',v3010^f,
                     '^h',v3010^h,
                     '^u',v35^o,
+                    '^e',if ref(['config']1,v16)='si' then 'CONFIRMADA' else 'PENDIENTE' fi,
                     '^p',getenv('REMOTE_ADDR')
                 </pft></field>
 				

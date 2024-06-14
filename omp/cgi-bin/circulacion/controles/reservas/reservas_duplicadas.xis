@@ -1,5 +1,5 @@
 <!-- 
-Verificar Reservas duplicadas para el usuario
+Verificar Reservas duplicadas para el usuario (incluye esperas)
 Es decir si el usuario ya tiene reservado material similar (misma parte).
 Recibimos los mfn de partes en v4000. Si es cero el material no tiene reserva.
 Salida en 5000: El error encontrado. Vacio en caso de no encontrar error.
@@ -19,8 +19,9 @@ Salida en 5000: El error encontrado. Vacio en caso de no encontrar error.
 		por lo cual saltamos al siguiente registro. -->
 		<flow action=skip><pft>if (v4000='0') then 'Next' fi</pft></flow>
 		
+		<!-- genero la lista de Reservas y Espera -->
 		<field action="replace" tag="2900"><pft>
-			ref(['reservas']val(v4000),'~',(v2^i,'~'))
+			ref(['reservas']val(v4000),'~',(v2^i,'~'),(v3^i,'~'))
 		</pft></field>
 		
 		<!-- verifico si el id de usuario está entre los que tienen reservado -->
@@ -38,7 +39,7 @@ Salida en 5000: El error encontrado. Vacio en caso de no encontrar error.
 <field action="replace" tag="5000">
 	<pft>
 	if (not v4002='') then 
-		'Error: Ya tiene una reserva regitrada para el siguiente material:  <ul>',('<li>',v4002,'</li>'),'</ul>'
+		'Error: Ya tiene una reserva registrada para el  material seleccionado'
 	fi
 	</pft>
 </field>
