@@ -9,13 +9,20 @@ $modulo=$_POST['modulo'];
 if ($password==NULL or $username==NULL) {
    echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php?error=si&modulo=$modulo>";}
 else{
-   $cadena_archivo = "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=permisos_user.xis&user=".$username."&pwd=".$password;
-   $ptr_userpwd = fopen($cadena_archivo, "r");
-   $permisos = fread($ptr_userpwd,8192);
-   fclose($ptr_userpwd);
-   include "circulacion/json/JSON.php";
-   $json = new Services_JSON();
-   $permisos = $json->decode($permisos);
+   //$cadena_archivo = "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=permisos_user.xis&user=".$username."&pwd=".$password;
+   
+   //$ptr_userpwd = fopen($cadena_archivo, "r");
+   //$permisos = fread($ptr_userpwd,8192);
+   //fclose($ptr_userpwd);
+
+   #include "circulacion/json/JSON.php";
+   #$json = new Services_JSON();
+   #$permisos = $json->decode($permisos);
+
+   //$permisos=json_decode($permisos);
+
+   $permisos=json_decode(file_get_contents("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=permisos_user.xis&user=".$username."&pwd=".$password));
+
    if(!in_array($modulo,$permisos)) {
 	  echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login_form.php?error=si&modulo=$modulo>";}
    else{
@@ -31,6 +38,9 @@ else{
 			break;
 		case 'administracion':
 			echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=administracion/menu.php>";
+			break;
+		case 'reclamo_morosos':
+			echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=reclamo_morosos/menu.php>";
 			break;
 		default: break;
 	}

@@ -13,7 +13,8 @@
 		<field action=replace tag=200><pft>
 			if val(v900)>0 then
 				if p(v8) then 'ADEUDA',
-				else 'OK',fi,
+				else 'OK' ,
+				fi,
 			fi
 		</pft></field>
 		<field action=export tag=200>200</field>

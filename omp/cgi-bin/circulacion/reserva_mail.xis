@@ -20,7 +20,6 @@
 			</loop>			
 	</do>
 <flow action=jump><pft>if size(v2004^e)=0 then 'fin_reserva_mail' fi</pft></flow>
-
 <!-- Busco en la base marc el titulo de la obra y lo exporto anexandolo al campo 2004 con el formato ^a Titulo ^c Autor -->	
 	<do task=search>
 		<parm name=db>marc</parm>
@@ -38,35 +37,35 @@
 			<field action=delete tag=list>2004</field>
 			</loop>			
 	</do>
-	<display><pft>'<script>
-						function enviar_reserva_mail() {
-							var xmlhttp = new XMLHttpRequest();
-							var formdata = new FormData();	
-							var mensaje = new String();
-							var email = new String();
 
-							email = "'v2004^e'";
-							mensaje = "Estimado Usuario/a:<br>\
-Le informamos que a partir del dia de la fecha y durante 24 horas se encuentra diponible y reservado para usted un ejemplar de <br> 'v2004^a,v2004^c'<br>\
-Lo/a esperamos a la brevedad para su retiro<br>\
-<br>\
-UNS<br>\
-Biblioteca Central\
-							";
-							formdata.append("email",email);
-							formdata.append("mensaje",mensaje);
-																
-							xmlhttp.onreadystatechange = function() {
-								if (xmlhttp.readyState == 4 && xmlhttp.status != 200) {
-											alert("Adevertencia!! No se pudo guardar el log. Error: "+xmlhttp.responseText);
-										}
-							};
-							xmlhttp.open("POST","/omp/circulacion/sendmail_reserva.php",true);
-							xmlhttp.send(formdata);		
-						}
-						
-						enviar_reserva_mail();
-	</script>'</pft></display>
-			
+
+<!-- Cargo la plantilla y reemplazo los datos -->
+<field action=replace tag=123><pft>
+	ref(['config']1,v5),
+	'/mail_esperas/mail_espera_',
+	s(date).8,'_',
+	s(date)*9.6,'_',
+	v1^i,'.log'
+</pft></field>
+<file action=create type=output><pft>v123</pft></file>
+<display><pft>
+	replace(
+		ref(['config']1,v20),
+		'[[OBJETO]]',
+		s(v2004^a,v2004^c)
+	)
+</pft></display>
+<file action=close type=output>now</file>
+
+<display><pft>system(
+	'mail',
+	' -r ',"'"n0,'sistemasbibliotecas@uns.edu.ar ("',ref(['config']1,v19),'")',"'"n0,
+	' -s "$(echo -e "',ref(['config']1,v18),'\nContent-Type: text/plain; charset=UTF-8")"',
+	' -b sistemasbibliotecas@uns.edu.ar',
+	' ',v2004^e,
+	' < "',v123,'"'
+)</pft></display>
+	
+		
 <label>fin_reserva_mail</label>	
 </function>

@@ -97,6 +97,11 @@
           }
 	}
 
+	function cancelarSinPreguntar() {
+		window.parent.principal.document.control.operacion.value="CANCELA";
+        window.parent.principal.document.control.submit();
+	}
+
 	function iniciar() {
 		if (window.parent.principal.document.control.dias_prestamo_A) {
 			var _Fecha = new Date();
@@ -104,7 +109,7 @@
 			_Fecha.setMonth([pft]f(val(mid(date,5,2))-1,1,0)[/pft]);
 			_Fecha.setDate([pft]mid(date,7,2)[/pft]);
 			var j = 0;
-			for (i = 0; i < 61; i++) {
+			for (i = 0; i < 361; i++) {
 				var _QueDia = _Fecha.getDay();
 			switch (_QueDia) {
 				case 1 : _QueDia = "Lunes   "; break;
@@ -116,7 +121,7 @@
 				}
 			  if (_Fecha.getDate() < 10) {_Dia = "0" + _Fecha.getDate()} else {_Dia = _Fecha.getDate()};
 			  if (_Fecha.getMonth() < 9) {_Mes = "0" + eval(_Fecha.getMonth()+1)} else {_Mes = eval(_Fecha.getMonth()+1)};
-			  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60)) 
+			  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60 || i == 63 || i == 180 || i == 360)) 
 				{if (i == 0) {_Cant = "Hoy"} else {if (i == 1) {_Cant = i + " día"} else {_Cant = i + " días"}};
 				 window.parent.principal.document.control.dias_prestamo_A.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getFullYear());
 				 window.parent.principal.document.control.dias_prestamo_A.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getFullYear();
@@ -129,7 +134,7 @@
 			_Fecha.setMonth([pft]f(val(mid(date,5,2))-1,1,0)[/pft]);
 			_Fecha.setDate([pft]mid(date,7,2)[/pft]);
 			var j = 0;
-			for (i = 0; i < 61; i++) {
+			for (i = 0; i < 361; i++) {
 				var _QueDia = _Fecha.getDay();
 			switch (_QueDia) {
 				case 1 : _QueDia = "Lunes   "; break;
@@ -141,7 +146,7 @@
 				}
 			  if (_Fecha.getDate() < 10) {_Dia = "0" + _Fecha.getDate()} else {_Dia = _Fecha.getDate()};
 			  if (_Fecha.getMonth() < 9) {_Mes = "0" + eval(_Fecha.getMonth()+1)} else {_Mes = eval(_Fecha.getMonth()+1)};
-			  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60)) 
+			  if (_Fecha.getDay() !="0" && (i < 11 || i == 15 || i == 20 || i == 30 || i == 45 || i == 50 || i == 55 || i == 60 || i == 63 || i == 180 || i == 360)) 
 				{if (i == 0) {_Cant = "Hoy"} else {if (i == 1) {_Cant = i + " día"} else {_Cant = i + " días"}};
 				 window.parent.principal.document.control.dias_prestamo_B.options[j] = new Option(_Cant + " -> " + _QueDia + _Dia + "/" + _Mes +  "/" + _Fecha.getFullYear());
 				 window.parent.principal.document.control.dias_prestamo_B.options[j].value = _Dia + "/" + _Mes +  "/" + _Fecha.getFullYear();
@@ -158,6 +163,32 @@
 	function ocultar_control() {
 		document.getElementById("control_div").style.display="none";
 	}
+
+	function confirmar_espera(formulario) {
+			reserva_id = formulario.reserva_id.value;
+			usuario_id = formulario.usuario_id.value;
+			operario_id = formulario.operario_id.value;
+			isisScript = "circulacion/espera_confirmar.xis";
+
+			var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			    	formulario.confirmar.disabled=true;
+			    	formulario.confirmar.classList.remove("boton-confirmar");
+			    	formulario.confirmar.classList.add("boton-confirmado");
+			    	formulario.confirmar.value="Confirmado!";
+			    	/*document.getElementById("resultado").innerHTML = this.responseText;*/
+
+			    }
+			  };
+			  xhttp.open("GET",
+			  	"?IsisScript="+isisScript+
+			  	"&usuario_id="+usuario_id+
+			  	"&operario_id="+operario_id+
+			  	"&reserva_id="+reserva_id
+			  , true);
+			  xhttp.send();
+		}
 	// End -->
 	</script>
 	
@@ -230,11 +261,11 @@
 
 <table width="100%" border="0">
   <tr>
-     <td height="24%" align="center"><img src="/omp/circulacion/fotos/',v2,'.jpg" style="height:150px;width:130px;margin-left:10px" align="middle" OnError="this.src=',"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,'"></td>',
-   '<td width="76%"><b>',v1,'</b>
+     <td height="24%" align="center"><img src="/omp/circulacion/fotos/',v2,'.jpg" style="height:150px;width:150px;margin-left:10px" align="middle" OnError="this.src=',"'"n0,'/omp/circulacion/fotos/falta_foto.gif',"'"n0,'"></td>',
+   '<td width="76%"><b>',v1,'</b> 
    <br>Categoría: ',ref(['tipo_lector']l(['tipo_lector']v3),v2),
 	if v2001:'1' then
-		'<br><marquee bgcolor="#FF0000" width=90% style="color: #FFFF9B; font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',fi,
+		'<br><br><marquee bgcolor="#FF0000" width=90% style="color: #FFFF9B; font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',fi,
 
 	'<br><a href="JavaScript:presenta_observaciones()"><font face="Arial" size="3">Observaciones al Lector</font></a> ',
    
@@ -321,7 +352,7 @@ if p(v8) then
 		<input type="button" value="Renovar" style="width:60px; font-size:0.8em;text-decoration:none" onclick="javascript:window.document.control.devolucion_',f(iocc,1,0),'.checked=true;window.document.control.invs_prestamo_A.value += ',"'"n0,replace(v8^i,' ',''),'\n',"'"n0,';renovar(',"'"n0,f(iocc,1,0),"'"n0,')">
 	</div>','</td>',
    '<td width="60%">',v8^b,'<br>',
-		ref(['marc']l(['marc'],v8^i),s(v859[1]^h,'. ',v859[1]^i)),
+		ref(['marc']l(['marc'],v8^i),s(v859[1]^h,'. ',v859[1]^i)),'  ',
 		ref(['partes']l(['partes'],v8^i),v1^p),
    '</td>',
    '<td align="center" width="15%"',
@@ -397,7 +428,7 @@ fi,
                                     size="1"
                                     onclick="window.document.control.dias_vto_A.value='----';">
                         </select><br>
-                        
+          
                         <center>
                         Calendario:
                         <INPUT style="TEXT-ALIGN: center" onclick="window.document.control.Vto_AB.value='A'" 
@@ -418,7 +449,7 @@ fi,
                                     size="1"
                                     onclick="window.document.control.dias_vto_B.value='----';">
                         </select><br>
-                
+                 
                         <center>
                         Calendario:
                         <INPUT style="TEXT-ALIGN: center" onclick="window.document.control.Vto_AB.value='B'"
@@ -444,9 +475,10 @@ fi,
 </table>
 
 </form>
-<br>',
-
-if ref(['config']1,v9)='si' then
+<br>
+<!-- verifico si etán habilitadas reservas y encargues -->
+',
+if ref(['config']1,v9)='si' or ref(['config']1,v15)='si' then
 	'<table border="0" width="90%" cellspacing="10" bgcolor="#EEEEEE">
 		<th colspan="2">Reservas</th>
 		<tr>
@@ -504,7 +536,7 @@ if ref(['config']1,v9)='si' then
 			if p(v2031) then
 			'<table border="1" width="100%" bgcolor="FFFFFF" cellpadding="4" cellspacing="0">
 				<tr valign="middle" style="font-weight:normal">
-					<th align="left">Esperas registradas</th><th>Fecha/hora</th>',
+					<th align="left">Esperas registradas</th><th>Fecha/hora</th><th>Estado</th>',
 					if ref(['opera']l(['opera']v1000^b),(v5|~|)):'administracion' then
 						'<th>Eliminar</th>',
 					fi,
@@ -529,7 +561,19 @@ if ref(['config']1,v9)='si' then
 					if v2031^p<>'' then 'Parte: ',v2031^p,'</font><br>' fi,
 					/*'<font color="gray">',v2031^c,if v2031^p<>'' then '[',v2031^p,']' fi, '<br>'*/
 					'</td>
+
 					<td align="center" width="15%">',v2031^f,'<br>',v2031^h,'</td>',
+					'<td align="center">',if (v2031^e='CONFIRMADA') then '<span style="color:green">Confirmada</span>' else
+						'<form name="listo_',f(iocc,1,0),'" method="POST"
+							action="/omp/cgi-bin/wxis.exe/omp/circulacion/" valign="middle">
+							<input type="hidden" name="IsisScript"   value="circulacion/espera_confirmar.xis">
+							<input type="hidden" name="usuario_id"  value="',v2[1],'">
+							<input type="hidden" name="operario_id" value="',v2002[1],'">
+							<input type="hidden" name="reserva_id"  value="^b',v2031^b,'^c',v2031^c,'^p',v2031^p,'">
+							<!--input type="submit" value="Confirmar"-->
+							<input type=button name="confirmar" class="boton-confirmar" onclick=confirmar_espera(this.parentNode) value="Confirmar">
+						</form>'
+					fi,'</td>',
 					if ref(['opera']l(['opera']v1000[1]^b),(v5|~|)):'administracion' then
 					'<td align="center" width="12%">
 						<form name="eliminar_',f(iocc,1,0),'" method="POST"
@@ -548,9 +592,10 @@ if ref(['config']1,v9)='si' then
 				'<h6>El usuario no registra Esperas</h6>'
 			fi
 		'</td>
-		</tr>
+		</tr>',
 		
-		<tr>
+		if (ref(['config']1,v9)='si') then
+		'<tr> <!-- Muestro el formulario de busqueda si las reservas están habilitadas -->
 			<td>
 				<form name="consultas" method="POST" action="/omp/cgi-bin/wxis.exe/omp/circulacion/">
 				<input type="hidden" name="IsisScript" value="circulacion/consulta.xis">
@@ -570,8 +615,8 @@ if ref(['config']1,v9)='si' then
 								',if ref(['config']1,v12)='si' then
 									'<input type="radio" name="campo" value="NC" checked /> NC',
 								fi,'
-<br />                            	<input type="checkbox" name="tipo" value="completa" />Palabras completa
-                                
+								<br />
+								<input type="checkbox" name="tipo" value="completa" />Palabras completa
                             </td>
                             
                             
@@ -584,9 +629,9 @@ if ref(['config']1,v9)='si' then
                     </table>
 				</form>
 			</td>
-		</tr>
+		</tr>' fi,
 		
-	</table>',
+	'</table>',
 
 fi,
 

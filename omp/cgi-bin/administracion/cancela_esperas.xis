@@ -29,9 +29,9 @@
 		<field action=replace tag=1900><pft>mfn(1)</pft></field>
 		<field action=import tag=2000>2000</field>
 		<field action=import tag=5555>5555</field>
-		<!-- Cargo la lista con los campos v3-->
+		<!-- Cargo la lista con los campos v3. Solo contemplo esperas "CONFIRMADA" -->
 		<list action=delete>now</list>
-		<list action=load><pft>(v3/)</pft></list>
+		<list action=load><pft>(if v3^e='CONFIRMADA' then v3/ fi)</pft></list>
 		
 		<do task=list>
 		<!-- Recorro la lista generada-->	
@@ -115,17 +115,30 @@
 						<field action=add tag=555><pft>'RC=',v444</pft></field>
 						<field action=add tag=555><pft>'EN=',if p(v444) then '^i',v444^i,'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',,'^p',v554 fi</pft></field>
 						<field action=export tag=5555>555</field>
-						<field action=export tag=5554>1</field>
+						<!--field action=export tag=5554>1</field-->
+						
+						<flow action=jump><pft>if p(v444) then 'EXPORTAR_ESPERA' else 'NO_EXPORTAR_ESPERA' fi</pft></flow>
+						<!-- En el caso que v444 tenga algo (lo que indica una espera nueva) se exporta para armar una lista para el envio de mails
+						en el campo 5554. Concatenandolo con el campo v1 queda con la siguiente estructura ^bbase^cNro de control ^p parte ^i DNI para cada nueva espera-->
+						<label>EXPORTAR_ESPERA</label>
+							<field action=replace tag=5554><pft>v1,'^i',v444^i</pft></field>
+							<field action=export tag=5554>5554</field>
+						<label>NO_EXPORTAR_ESPERA</label>
 						
 						<!-- FALTA OBTENER EL OPERADOR -->
-						<proc><pft>if p(v2) then (if iocc=val(v30[1]^o) then 'a3~^i',v2^i,'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',,'^p',v554,'~' fi/) fi</pft></proc>
+						<proc><pft>if p(v2) then (if iocc=val(v30[1]^o) then
+							'a3~^i',v2^i,
+							'^f',v553*6.2,'/',v553*4.2,'/',v553*0.4,
+							'^h',v553*9.2,':',v553*11.2,':',v553*13.2,'^i',
+							'^e',if (ref(['config']1,v16)='si') then 'CONFIRMADA' else 'PENDIENTE' fi,
+							'^p',v554,'~' fi/) fi</pft></proc>
 						<field action=delete tag=2><pft>v30^o</pft></field>
-						<proc><pft>'d30d200d444d553d554d555'</pft></proc>
+						<proc><pft>'d30d200d444d553d554d555d5554'</pft></proc>
 				        <write>Unlock</write>
 				     </update>
 				  </do>
 				  
-				  <field action=export tag=5554>5554</field>
+				  <field action=export tag=5554 previous=add>5554</field>
 				 <field action=export tag=5555 previous=add>5555</field>
 				<field action=export tag=6000 previous=add>6000</field><!-- para contar las esperas caidas-->
 				<label>FIN_BAJAR_ESPERA</label>
@@ -155,16 +168,29 @@
 			 </update>
 		  </do>
 		  <label>NO_GRABAR_EN_MOVI</label>
+		  
 		  <field action=export tag=6000 previous=add>6000</field><!-- para contar las esperas caidas-->
-		  <field action=export tag=5555>5555</field><!-- Datos del usuario para el envio del mail-->
-		  <field action=export tag=5554>5554</field><!-- Datos del libro para el envio del mail-->
+		  <field action=export tag=5554 previous=add>5554</field><!-- Datos del libro y usuario para el envio del mail-->
 	</loop>
 </do>
-<!-- Se envia un correo al usuario notificando de la espera nueva -->
-<flow action=jump><pft>if not v5555:'EN=' or a(v5555) or a(v5554)then 'FIN_MAIL_RESERVAS' fi</pft></flow>
-			<call name=mail_reservas><pft>v5554,(if v5555^*='EN=' then v5554,v5555 fi)</pft></call> 
-		<label>FIN_MAIL_RESERVAS</label>
+<!-- Se envia un correo al usuario notificando de la espera nueva. Evito los envíos en caso que las esperas NO se confirmen inmediatamente -->
+<flow action=jump><pft>if ref(['config']1,v16)='no' then 'FIN_MAILS' fi</pft></flow>
+<list action=load><pft>(v5554/)</pft></list>
+<!-- 5554 trae la lista con los datos para el envio de mail Datos del Libro y DNI-->
+<do task=list>		
+			<field action=define tag=1001>Isis_Current</field>
+			<field action=define tag=1002>Isis_Items</field>
+			<field action=define tag=1>Isis_Item</field>
+			<loop>
+				<display><pft>v1</pft></display>
+				<call name=mail_reservas><pft>v1</pft></call>
+			</loop>
+</do>
+
+<label>FIN_MAILS</label>
+			
 <display><pft>'Ha/n caído ',f(nocc(v6000),1,0),' espera/s.'</pft></display>
+			
 <!--
 
 RESERVAS:

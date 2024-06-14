@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php 
+header('Content-Type: text/html; charset=ISO-8859-1'); 
+session_start(); ?>
 <!-- La función que indica los días que son sábados y domingos....
 hasta la versión de php que tengo, funsiona solo hasta el 17 de Enero de 2038 -->
 

@@ -1,6 +1,7 @@
 <?php
 //tabbertabdefault
 session_start();
+header('Content-Type: text/html; charset=ISO-8859-1');
 if (!isset($_SESSION["s_username"])) {
 	echo "<META HTTP-EQUIV=Refresh CONTENT=0;URL=login.html>";
 }
@@ -233,7 +234,7 @@ function crear_politica() {
    global $campos_nombre;
 
 $ptr_lista_tipos_lector = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/lista_tipos_lector.xis","r");
-$lista_tipos_lector = fread($ptr_lista_tipos_lector,1000);
+$lista_tipos_lector = fread($ptr_lista_tipos_lector,4000);
 fclose($ptr_lista_tipos_lector);
 $lista_tipos_lector = explode  ('~', $lista_tipos_lector);
 
@@ -296,8 +297,7 @@ function crear_tipo_lector() {
 	echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 	
 	// Muestro el título
-	echo '<tr><td colspan=2><h2 style="text-align:center
-">Crear un nuevo tipo de lector</h2></td></tr>';
+	echo '<tr><td colspan=2><h2 style="text-align=center">Crear una nueva política de circulación</h2></td></tr>';
 		
 	for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
 	   {
@@ -347,8 +347,7 @@ echo '<input type=hidden name=formulario value="politicas">';
 echo '<input type=hidden name=registro value="EXISTENTE">';
 echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 // Muestro el título
-echo '<tr><td colspan=2><h2 style="text-align:center
-">Editar una política de circulación</h2></td></tr>';
+echo '<tr><td colspan=2><h2 style="text-align:center">Editar una política de circulación</h2></td></tr>';
 	
 for ($i=0;$i<=(count($campos_nombre)-1);$i++)
    {
@@ -400,8 +399,7 @@ echo '<input type=hidden name=formulario value="tipo_lector">';
 echo '<input type=hidden name=registro value="EXISTENTE">';
 echo "<table border=0 cellspacing=0 cellpadding=0 align='center'>";
 // Muestro el título
-echo '<tr><td colspan=2><h2 style="text-align:center
-">Editar un tipo de lector</h2></td></tr>';
+echo '<tr><td colspan=2><h2 style="text-align:center">Editar una política de circulación</h2></td></tr>';
 	
 for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
    {
@@ -466,23 +464,17 @@ function guardar_tipo_lector() {
 	global $class_tipo_lector;
 	
 	$parametros_guardar='record='.$_POST['registro'];
-	
 	for ($i=0;$i<=(count($campos_nombre_TL)-1);$i++)
 	{
 		$campo_actual="campo".$i;
 		$parametros_guardar=$parametros_guardar."&campo".$i."=".urlEncode($_POST[$campo_actual]);
-	
 	}
-
-
-			$url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&".$parametros_guardar;
-			$ptr_tipo_lector = fopen($url,"r");
-			$tipo_lector = fread($ptr_tipo_lector,8192);
-			
-			fclose($ptr_tipo_lector);
-			$class_tipo_lector = 'tabbertabdefault';
-			return $tipo_lector;
-	
+	$url="http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/tipo_lector_guardar.xis&".$parametros_guardar;
+	$ptr_tipo_lector = fopen($url,"r");
+	$tipo_lector = fread($ptr_tipo_lector,8192);			
+	fclose($ptr_tipo_lector);
+	$class_tipo_lector = 'tabbertabdefault';
+	return $tipo_lector;
 }	
 
 //********************************************************************//
@@ -514,8 +506,7 @@ if (isset($_POST["formulario"])) {
 		  editar_politica();
 		elseif($_POST["opcion"]=='Guardar'):
 		  if (guardar_politica()=='CREAR_EXISTENTE') {
-			echo '<h2 style="text-align:center
-;color:red">La identificación de la política ya existe. Cree una política nueva!</h2>';
+			echo '<h2 style="text-align:center;color:red">La identificación de la política ya existe. Cree una política nueva!</h2>';
 			crear_politica();
 		  }
 		  else {
@@ -535,8 +526,7 @@ if (isset($_POST["formulario"])) {
 		  editar_tipo_lectOr();
 		elseif($_POST["opcion"]=='Guardar'):
 		  if (guardar_tipo_lector()=='CREAR_EXISTENTE') {
-			echo '<h2 style="text-align:center
-;color:red">Error: Categoría ID ya existe.</h2>';
+			echo '<h2 style="text-align:center;color:red">Tipo de lector ya existe. Cree una política nueva!</h2>';
 			crear_tipo_lector();
 		  }
 		  else
@@ -559,7 +549,6 @@ if (isset($_POST["formulario"])) {
 					}
 			
 			}
-
 		elseif($_POST["opcion"]=='Borrar'):
 		  borrar_tipo_lector();
 		  mostrar_politicas();

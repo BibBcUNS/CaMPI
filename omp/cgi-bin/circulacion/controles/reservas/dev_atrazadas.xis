@@ -7,33 +7,34 @@ TAGS:
 -->
 
 <flow action="jump"><pft>if v5000:'Error' then 'fin_dev_atrazadas' fi</pft></flow>
-
+<field action=delete tag=list>4000</field>
 <field action=replace tag=4000><pft>
 ref(['lector']l(['lector']v3002),
 	(
 		if p(v8) then 
-	      if val(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) > val(s(date).8) then '0'
+	      if val(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) > val(s(date).8) then ''
 	      else if val(s(v8^v)*6.4,s(v8^v)*3.2,s(v8^v)*0.2) < val(s(date).8) then '1'
-	           else if a(v8^o) then '0'
+	           else if a(v8^o) then ''
 	                else select s(v8^o).1
 	                     case 'm': if val(mid(date,10,6)) > val('100000') then 
-	                                  '1' else '0' fi,
+	                                  '1' else '' fi,
 	                     case 's': if val(mid(date,10,4)) > 
-	                                  val(s(mid(v8^o,7,2),mid(v8^o,10,2))) then '1' else '0' fi,
+	                                  val(s(mid(v8^o,7,2),mid(v8^o,10,2))) then '1' else '' fi,
 	                     endsel,
 	                fi
 	           fi
 	       fi
-	       else '0' fi
+	       else '' fi
 	)
 )
 </pft></field>
 
 <field action=replace tag=5000><pft>
-if val(v4000)>0
+if size(v4000)>0
 then
-	'Error: El usuario tiene una devolución atrasada.'
+	'Error: El usuario tiene devolución/es atrasada.'
 fi
 </pft></field>
+
 
 <label>fin_dev_atrazadas</label>
