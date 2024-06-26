@@ -1,0 +1,174 @@
+<IsisScript>
+<include>circulacion/reserva_mail.xis</include>
+<section>
+<!-- LISTA DE TAGS:
+
+Parametros:
+2060		lista de los identificadores de partes a ser reservadas.
+3002		Identificador del usuario.
+3500		Indica si se invocó al script para realizar una reserva (o si es sólo para mostrar el formulario).
+
+Uso local:
+4000		Items en la eliminación de repetidos (lista de ident de partes)
+
+-->
+
+<display><pft>'Content-type: text/html'/</pft></display>
+<display><pft>'Set-Cookie: CUSTOMER=WILE_E_COYOTE;'/#</pft></display>
+
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+<!-- ENCABEZADO DE PÁGINA -->
+<display>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+</display>
+<!--
+Verificamos si se está recibiendo el formulario de reserva
+En caso de no ser submit se Muestra el Formulario
+-->
+<field action="cgi" tag="2060" split="occ">partes_id</field>
+<field action="cgi" tag="3002">usuario_id</field>
+<field action="cgi" tag="3500">submit</field>
+
+<!-- Muestro los datos del usuario -->
+  <!--display><pft>ref(['lector']l(['lector']v3002),v2)</pft></display-->
+
+<!-- Elimino elementos repetidos de la lista de id_partes -->
+<list action="delete"></list>
+<list action="load" type="freq"><pft>(v2060/)</pft></list>	<!-- cargo la lista (sin repetidos) -->
+<field action="delete" tag="2060">All</field>						<!-- limpio v2060 -->
+<do task="list">															<!-- recorro la lista -->
+<field action="define" tag="4000">Isis_Item</field>
+<loop>
+	<field action="import" tag=list>2060</field>
+	<field action="add" tag="2060"><pft>v4000</pft></field> <!-- agrego los items a v2060 -->
+	<field action="export" tag="list">2060</field>
+</loop>
+</do>
+
+<field action="add" tag="2020" split="occ"><pft>
+	(
+		f(l(['reservas']
+			v2060^b,'_',v2060^c,'_',v2060^p
+		),1,0)/
+	)
+</pft></field>
+
+<!-- Realizo los controles y verifico el resultado. / En v5400 me devuelve si hay disponibles (si/no) -->
+<include>circulacion/controles/reservas/controles_inc.xis</include>
+
+<!-- Si el resultado fue exitoso paso a realizar la reserva. En caso contrario muestro el error y luego el formulario -->
+<flow action=jump><pft>if(not v5000:'Error') then 'CONTROL_OK' fi</pft></flow>
+<display><pft>
+	'{"estado":"error","mensaje":"',(v5000),'"}'
+</pft></display>
+<flow action=jump>FIN</flow>
+
+<label>CONTROL_OK</label>
+<!-- Obtengo la fecha y hora -->
+<field action=replace tag=3010><pft>
+	'^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^h',mid(date,10,2),':',mid(date,12,2),':',mid(date,14,2)</pft></field>
+
+<!-- cargo la lista con todo los identificadores de partes. -->
+<list action=delete>now</list>
+<list action="load" type="list"><pft>(replace(v2060,'~','^')/)</pft></list>
+
+<do task="list">
+<field action="define" tag=4001>Isis_Item</field>
+<loop>
+	<field action="replace" tag="4002"><pft>v4001^b,'_',v4001^c,'_',v4001^p</pft></field>
+	<field action="import" tag=list>3002,3010,5400</field>
+	<!--flow action=jump><pft>if (l(['reservas']v4002)=0) then 'el_registro_NO_existe' fi</pft></flow-->
+
+	<!--label>el_registro_existe</label-->
+
+	<!-- 2030: recupero todos los id_usuario que reservaron el material en cuestión -->
+	<field action=replace split=occ tag=2030><pft>ref(['reservas']l(['reservas']v4002),(v2/))</pft></field>
+	
+	<field action=replace tag=5000><pft>f(l(['reservas']v4002),1,0)</pft></field>
+	
+	<do task="update">
+	    <parm name="db">reservas</parm>
+	    <parm name="fst"><pft>cat('reservas.fst')</pft></parm>
+	    <parm name=mfn><pft>if v5000='0' then 'New' else v5000 fi</pft></parm>
+		<parm name=expire>90</parm>
+		<parm name=lockid><pft>v3002</pft></parm>
+		<field action=define tag=1102>Isis_Status</field>
+		<field action=define tag=1011>Isis_Lock</field>
+		<update>
+			<field action="import" tag=list>3002,3010,5400</field>
+			
+			<!-- esto lo hago para unificar reservas con nuevo registro o registro existente -->
+			<flow action=jump><pft>"registro_existente"d1</pft></flow>
+			<field action=import tag=1>4001</field>
+			<label>registro_existente</label>
+			
+			<flow action=jump><pft>if (v5400='si') then 'ESPERA' else 'RESERVA' fi</pft></flow> <!-- pregunto si hay disponible -->
+			<label>ESPERA</label> <!-- Si HAY hay disponible -->
+				<field action=add tag=3><pft>
+					'^i',v3002,
+					'^f',v3010^f,
+					'^h',v3010^h,
+					'^u',v3002,
+					'^e',if ref(['config']1,v16)='si' then 'CONFIRMADA' else 'PENDIENTE' fi,
+					'^p',getenv('REMOTE_ADDR')
+					</pft></field>
+				<flow action=jump>FIN_RESERVA</flow>
+			<label>RESERVA</label> <!-- Si NO HAY hay disponible -->
+				<field action=add tag=2><pft>
+					'^i',v3002,
+					'^f',v3010^f,
+					'^h',v3010^h,
+					'^u',v3002,
+					'^p',getenv('REMOTE_ADDR')
+					</pft></field>
+			<label>FIN_RESERVA</label>
+
+			<field action=replace tag=4050><pft>'^c',v1^c,'^i',v3002,'^f',v3010^f,'^h',v3010</pft></field> <!-- ID-fecha-hora -->
+			<field action=replace tag=4040><pft>v1</pft></field>
+			<field action=export tag=list>4040,4050</field>
+			<field action=delete tag=list>3002,3010,4040,4050,5400</field>
+			<write>Unlock</write>
+		</update>
+	</do>
+
+	<label>listo</label>
+	<field action=export tag=list>4040,4050</field>
+	</loop>
+</do>
+
+<!-- Estas líneas que me interesaría agregar tiran error si las activo y habilito la fst-->
+
+<do task=update>
+<parm name=db>movi</parm>
+<parm name=mfn>New</parm>
+<parm name=fst><pft>cat('movi.fst')</pft></parm>
+<field action=define tag=1102>Isis_Status</field>
+<field action=define tag=1011>Isis_Lock</field>
+<update>
+	<field action=import tag=list>3002,4040,4050,5400</field> <!-- En 3002 el ID del Lector. En 4050 datos de la res -->
+	<field action=add tag=1><pft>ref(['lector']l(['lector']v3002),v1)</pft></field>
+	<field action=add tag=2><pft>v3002</pft></field>
+	<field action=import tag=3>3010</field>
+	<field action=replace tag=4><pft>'^tauto_reserva',v4040</pft></field>
+	<field action=import tag=5>3002</field>
+	<field action=add tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
+	<!-- Si hay disponible (v4500) genero el log de Espera Nueva (EN), si no hay disponible el log es de Reserva Nueva (RN) -->
+	<field action=add tag=7><pft>if (v5400='si') then 'EN=' else 'RN=' fi,v4050,'^u',v5,'^p',v6</pft></field>
+	<field action="delete" tag="list">2002,3002,4040,4050,5400</field>
+	<field action="export" tag="list">7</field>
+	<write>Unlock</write>
+	</update>
+</do>
+
+<!-- Evito el correo en dos casos: 1) Si no se genera espera. 2) Si las esperas no son confirmadas inmediatamente. -->
+<flow action=jump><pft>if (not v7^*='EN=' OR ref(['config']1,v16)='no') then 'FIN_MAIL' fi</pft></flow>
+<call name=mail_reservas><pft>v7</pft></call> <!-- v4052 tiene los datos de la espera cerada -->
+<label>FIN_MAIL</label>
+
+<display>{"estado":"ok","mensaje":"La operaci&oacute;n se ha realizado correctamentes"}</display>
+
+<label>FIN</label>
+
+</section>
+</IsisScript>

@@ -1,0 +1,172 @@
+<IsisScript>
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <trace>!On</trace>
+  <display><pft>
+      system('/opt/cisis/retag /var/www/circulacion/campi-dcic/omp/bases/lector/lector unlock')
+  </pft></display>
+
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+
+  <field action=cgi tag=100>credencial</field> <!-- valores posibles: documento/mfn -->
+  <field action=cgi tag=300>id_operador</field>
+  
+  <!-- Si se invoca la script desde el menú, el operador o bibliotecario no estara identificado, por lo tanto se define la fecha y la ip como parámetro que se usará como lockid -->
+
+  <field action="add" tag="1000"><pft>f(l(['lector']v100),1,0)</pft></field>
+
+  <flow action=jump><pft>if val(v1000)=0 then 'CREDENCIAL_INEXISTENTE' else 'CREDENCIAL_EXISTENTE' fi</pft></flow>
+
+  <label>CREDENCIAL_INEXISTENTE</label> <!-- Es el caso correcto, se va a crear un lector cuya credencial aún no existe en la BD -->
+
+      <field action="replace" tag="300"><pft>if a(v300) then getenv('REMOTE_ADDR'),x1,s(date).8 fi</pft></field> 
+
+        <do task=update>
+        <parm name=db>lector</parm>
+        <parm name=mfn>New</parm>
+        <parm name=lockid><pft>v300</pft></parm>
+        <parm name=expire>30</parm>
+        <parm name="fst"><pft>cat('lector.fst')</pft></parm>
+
+        <field action=define tag=1102>Isis_Status</field>
+        <field action=define tag=1011>Isis_Lock</field>
+        <update>
+          <field action=cgi tag=1>nombre</field>
+          <field action=cgi tag=2>credencial</field>
+          <field action=cgi tag=3>categoria</field>
+          <field action=cgi tag=6>domicilio</field>
+          <field action=cgi tag=7>telefono</field>
+	  <field action="replace" tag="10">Habilitado</field>
+          <field action=cgi tag=12>email</field>
+          <field action=cgi tag=20>notificacion_proximo_a_vencer</field>
+
+          <write>Unlock</write>
+          <field action="add" tag="1000"><pft>mfn</pft></field> <!-- exporta el mfn por si es un uevo -->
+          <field action="export" tag="1000" previous="delete">1000</field>
+          <field action="export" tag="list">1102</field>
+        </update>
+      </do>
+
+      <!-- DESBLOQUEO -->
+      <field action=cgi tag=130>mfn_lector</field>
+      <do task=update>
+        <parm name=db>lector</parm>
+        <parm name=mfn><pft>v1000</pft></parm>
+        <parm name=lockid><pft>getenv('REMOTE_ADDR'),x1,s(date).8</pft></parm>
+        <field action=define tag=1102>Isis_Status</field>
+        <field action=define tag=1011>Isis_Lock</field>
+        <update>
+           <write>Unlock</write>
+        </update>
+      </do>
+      
+      <display>{"estado":"ok","message":"Se creo un nuevo usuario"}</display>
+      <flow action=exit>1</flow>
+
+  <label>CREDENCIAL_EXISTENTE</label> <!-- Se actualizará el registro de un usuario existente en la BD -->
+
+      <label>BLOQUEO</label>
+
+      <do task=update>
+        <parm name=db>lector</parm>
+        <parm name=mfn><pft>v1000</pft></parm>
+        <parm name=lockid><pft>v300</pft></parm>
+        <parm name=expire>30</parm>
+        <field action=define tag=1102>Isis_Status</field>
+        <field action=define tag=1011>Isis_Lock</field>
+        <update>
+          <write>Lock</write>
+          <field action="export" tag="list">1102</field>
+        </update>
+      </do>
+      <display><pft>
+            if val(v1102)>0 then
+              '{"estado":"error","mensaje":"No se pudo tomar el registro en la BD Campi (error 0001)"}'
+            fi</pft></display>
+
+      <flow action=exit><pft>if val(v1102)>0 then 'Now' fi</pft></flow>
+
+      <do task=mfnrange>
+        <parm name=db>lector</parm>
+        <parm name=from><pft>v1000</pft></parm>
+        <parm name=count>1</parm>
+        <parm name=gizmo>oemansi</parm>
+        <field action=define tag=1102>Isis_Status</field>
+        <loop>
+          <field action=import tag=list>110,120,300</field>
+          <display><pft>
+            if val(v1102)>0 then
+              '{"status":"error","mensaje":"No se pudo tomar el registro en la BD Campi (error 0002)}"'
+            fi</pft></display>
+           <flow action="skip"><pft>if val(v1102)>0 then 'Next' fi</pft></flow>     
+        <do task=mfnrange>
+          <parm name=db>tipo_lector</parm>
+          <loop>
+            <field action=export previous=add tag=2000>1</field>
+          </loop>
+        </do>
+        </loop>
+      </do>
+
+      <label>Grabar</label>
+      
+      <parm name="uctab"><pft>cat('uc.tab')</pft></parm> <!-- Se convierten del ansi al ascii los códigos especiales que van al diccionario -->
+      <parm name="actab"><pft>cat('ac.tab')</pft></parm> <!-- Se convierten del ansi al ascii los códigos especiales que van al diccionario -->
+
+        <do task=update>
+        <parm name=db>lector</parm>
+        <parm name=mfn><pft>v1000</pft></parm>
+        <parm name=lockid><pft>v300</pft></parm>
+        <parm name=expire>30</parm>
+        <parm name="fst"><pft>cat('lector.fst')</pft></parm>
+
+        <field action=define tag=1102>Isis_Status</field>
+        <field action=define tag=1011>Isis_Lock</field>
+        <update>
+
+          <field action="delete" tag="list">1,6,7,12,20</field>
+          <field action=cgi tag=1>nombre</field>
+          <field action=cgi tag=6>domicilio</field>
+          <field action=cgi tag=7>telefono</field>
+          <field action=cgi tag=12>email</field>
+          <field action=cgi tag=20>notificacion_proximo_a_vencer</field>
+          
+          <field action=cgi tag=3000>categoria</field>
+
+          <flow action=jump><pft>if a(v3000) then 'NO_INDICA_CATEGORIA' fi</pft></flow>
+            <field action="replace" tag="3"><pft>v3000</pft></field>
+          <label>NO_INDICA_CATEGORIA</label>
+          
+          <field action=cgi tag=3001>eliminar_sanciones</field>
+          <flow action=jump><pft>if v3001<>'1' then 'ELIMINAR_SANCION' fi</pft></flow>
+            <field action="delete" tag="list">11</field>
+            <field action="replace" tag="10">Habilitado</field>
+          <label>ELIMINAR_SANCION</label>
+          <field action="delete" tag="list">3000,3001</field>
+
+          <write>Unlock</write>
+          <field action="add" tag="1000"><pft>mfn</pft></field> <!-- exporta el mfn por si es un uevo -->
+          <field action="export" tag="1000" previous="delete">1000</field>
+          <field action="export" tag="list">1102</field>
+        </update>
+      </do>
+
+      <!-- DESBLOQUEO -->
+      <field action=cgi tag=130>mfn_lector</field>
+      <do task=update>
+        <parm name=db>lector</parm>
+        <parm name=mfn><pft>V1000</pft></parm>
+        <parm name=lockid><pft>getenv('REMOTE_ADDR'),x1,s(date).8</pft></parm>
+        <field action=define tag=1102>Isis_Status</field>
+        <field action=define tag=1011>Isis_Lock</field>
+        <update>
+           <write>Unlock</write>
+        </update>
+      </do>
+      
+        <display>{"estado":"ok","message":"Los datos del usuario fueron actualizados."}</display>
+        <flow action=exit>1</flow>
+
+</section>
+</IsisScript>
