@@ -1,0 +1,43 @@
+<IsisScript>
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <trace>!On</trace>
+  <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  <field action=cgi tag=110>usuario_id</field>
+
+
+  <do task=search>
+    <parm name=db>lector</parm>
+    <parm name=count>1</parm>
+    <parm name=expression><pft>v110</pft></parm>
+    <loop>
+  		<field action=import tag=1000>1000</field>
+		<field action=replace tag=2000><pft>v1^b,'_',v1^c,'_',v1^p</pft></field>
+		<field action=replace tag=1000>
+			<pft>
+				'"id":"',v1,'",'
+				'"nombre":"',v2,'",'
+				'"categoria":"',v3,'",'
+				'"prestamos":', if p(v8) then '["',('Inv: ',v8^i,' - Vto: ',v8^v+|","|),'"]' else '[]' fi,','
+				'"sanciones":', if p(v11) then '["',(v11^d,' dias - Fecha: ',v11^f,' - Vto: ',v11^v+|","|),'"]' else '[]' fi
+			</pft>
+		</field>
+		<field action=export tag=1000>1000</field>
+    	
+	</loop>
+  </do>
+
+  <field action=replace tag=1000>
+  	<pft>
+		replace(
+			v1000,
+			'""',
+			'","'
+		)
+	</pft>
+  </field>
+  <display><pft>'{',v1000,'}'</pft></display>	
+
+
+</section>
+</IsisScript>

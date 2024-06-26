@@ -1,0 +1,232 @@
+<IsisScript>
+<include>fecha_funciones.xis</include>
+<!-- Se utilizan los siguientes campos comunes a los scripts de control:
+v3000: invs_prestamo_A
+v3002: lista de todos los inventarios (invs_prestamo_A + invs_prestamo_B)
+v3004: documento
+-->
+
+<function name=renovar action=replace tag=2000> <!-- ^l<lector>^i<inventario> -->
+	<field action=replace tag=2001><pft>f(l(['lector']v2000^l),1,0)</pft></field>
+	<field action=replace tag=3001><pft>f(l(['exist']v2000^i),1,0)</pft></field>
+	<!-- CON ESTO TENGO QUE ACTUALIZAR EXIST -->
+	<field action=replace tag=2002><pft>v2000^i</pft></field>
+	<!-- v2001 = mfn Lector !--> 
+	<!-- v2002 = Inventario a renovar !--> 
+
+	<!-- Primero guardo en la tabla lector -->
+	<do task=update>
+	<parm name=db>lector</parm>
+	<parm name=mfn><pft>v2001</pft></parm>
+	<parm name=lockid><pft>v2000^l</pft></parm>
+	<parm name=expire>10</parm> 
+	<field action=define tag=1102>Isis_Status</field>
+	<field action=define tag=1011>Isis_Lock</field>
+	<update>
+			<field action=import tag=list>2000,2001,2002</field>
+			
+			<!-- v2001 = ID Lector !--> 
+			<!-- v2002 = Inventario a renovar !--> 
+			<flow action=jump><pft>if ref(['config']1,v10)='manual' then 'fin_recalcular' fi</pft></flow>
+
+				<!-- obtengo la ocurrencia del campo 8 con el inventario corresondiente -->
+				<field action=replace tag=2005><pft>(if v8^i=v2002[1] then f(iocc,1,0) fi)</pft></field>
+				<!-- obtengo la ocurrencia de v8 con el préstamo correspondiente al inventario v2002 -->
+				<field action=replace tag=2006><pft>(if v8^i=v2002[1] then v8 fi)</pft></field>
+				
+				<!-- tipo objeto: -->
+				<field action=replace tag=2344><pft>ref(['exist']l(['exist']v2002),v987)</pft></field>
+				<!-- días prestamo v2 tiene la credencial del lector): -->
+				<field action=replace tag=2345><pft>ref(['politicas']l(['politicas']'UO=',v3,'-',v2344),v11)/</pft></field>
+				<!-- Nueva fecha de préstamo (fecha actual): -->
+				<field action=replace tag=2346><pft>mid(date,1,4),mid(date,5,2),mid(date,7,2)</pft></field>
+
+				<!-- dumo los días hábiles a la fecha de préstamo -->
+				<call name=SUMAH><pft>v2346/v2345</pft></call>
+				<!-- nueva fecha de vencimiento -->
+				<field action=replace tag=2007><pft>v9000*6.2,'/',v9000*4.2,'/',v9000*0.4</pft></field>
+				
+				<!-- borro la ocurrencia de v8 a ser actualizado -->
+				<field action=delete tag=8><pft>v2005</pft></field>
+				
+				<!-- nuevo vencimiento -->
+				<field action=replace tag=2007><pft>v9000*6.2,'/',v9000*4.2,'/',v9000*0.4</pft></field>
+				<!-- fecha actual (préstamo) -->
+				<field action=replace tag=2008><pft>mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4)</pft></field>
+				
+				<!--proc><pft>'a8~',replace(v2006,s('^v',v2006^v),s('^v',v2007)),'~'</pft></proc-->
+				<!-- modifico la fecha de vencimiento del préstamos correspondiente  -->
+				<field action=replace tag=2010><pft>replace(v2006,s('^v',v2006^v),s('^v',v2007))</pft></field>
+				<!-- modifico la fecha de préstamo -->
+				<field action=add tag=8><pft>replace(v2010,s('^p',v2010^p),s('^p',v2008))</pft></field>
+
+				<!--field action=replace tag=8000><pft>v8[last]</pft></field-->
+				<field action=replace tag=8000><pft>v8[last]</pft></field>
+			
+			<label>fin_recalcular</label>
+			
+			<field action=export tag=list>1,2,3,8000</field>
+		    <field action=delete tag=list>1102,1011,2000,2001,2002,2005,2006,2007,2008,2010,2344,2345,2346,8000,9000</field>
+		    <write>Unlock</write>
+	</update>
+	</do>
+	<file action=close type=database>lector</file>
+
+	<!-- Ahora lo guardo en la tabla exist -->
+	<do task=update>
+	    <parm name=db>exist</parm>
+	    <parm name=mfn><pft>v3001</pft></parm>
+	    <parm name=lockid><pft>v2000^l</pft></parm>
+	    <parm name=expire>10</parm> 
+	    <field action=define tag=1102>Isis_Status</field>
+	    <field action=define tag=1011>Isis_Lock</field>
+		<update>
+			<write>Lock</write>
+		</update>
+    </do>
+	<do task=update>
+		<parm name=db>exist</parm>
+		<parm name=mfn><pft>v3001</pft></parm>
+		<parm name=lockid><pft>v2000^l</pft></parm>
+		<parm name=expire>10</parm> 
+		<field action=define tag=1102>Isis_Status</field>
+		<field action=define tag=1011>Isis_Lock</field>
+		<update>
+				<field action=import tag=list>1,2,2000,2001,2002,8000</field>
+				<field action=add tag=998><pft>
+                  mpl,
+                  '^a',v1,
+                  '^b',v2,
+                  '^c',v8000^p,
+                  '^d',v8000^v
+                </pft></field>
+				<field action=delete tag=998><pft>if nocc(v998)>3 then '1' fi</pft></field>
+				
+			    <field action=delete tag=list>1102,1011,1,2,2000,2001,2002,8000</field>
+			    <write>Unlock</write>
+		</update>
+		</do>
+	<file action=close type=database>exist</file>
+
+ 	<field action=replace tag=4><pft>'^trenovacion^i',v2000^i,'^p',</pft></field>
+	<do task=update>
+        <parm name=db>movi</parm>
+        <parm name=mfn>New</parm>
+        <parm name=lockid><pft>v1000^b</pft></parm>
+        <parm name=expire>30</parm>
+        <parm name=fst><pft>cat('movi.fst')</pft></parm>
+        <field action=define tag=1102>Isis_Status</field>
+        <field action=define tag=1011>Isis_Lock</field>
+        <update>
+        	<!-- 1: nombre y apellido -->
+        	<field action=import  tag=1>1</field>
+        	<!-- 2: dni -->
+        	<field action=import  tag=2>2</field>
+        	<field action=replace tag=3><pft>'^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^h',mid(date,10,6)</pft></field>
+        	<!-- 13: tipo de usuario -->
+        	<field action=import  tag=13>3</field>
+        	<!-- 8000: v8 del prestamo renovado -->
+        	<field action=import  tag=8000>8000</field>
+        	<!-- 4: '^trenovacion' + datos de la renovación -->
+        	<field action=replace tag=4><pft>'^trenovacion',v8000</pft></field>
+        	<!-- 5: ID Operador, en movi se registra el DNI del usuario como ID de operador (pq es autorenovación) -->
+        	<field action=replace tag=5><pft>v2</pft></field>
+        	<!-- 6: IP remoto -->
+        	<field action=replace tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
+
+        	<field action=delete tag=list>1102,1011,8000</field>   
+        	<write>Unlock</write>     
+        </update>
+    </do>
+
+    <return action=export tag=8>8000</return>
+
+</function>
+
+<section>
+ 	<display><pft>'Content-type: text/html'/#</pft></display>
+	<parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+	<field action="cgi" 		tag="3004">documento</field>
+	<field action="cgi" 		tag="3010">inventarios</field>
+	<field action="replace" 	tag="3011" split="occ"><pft>(v3010/)</pft></field>
+
+<field action="replace" tag="3002"><pft>'ahora tiene algo'</pft></field>
+<!-- Esto es porque VerificarEstadoUsuario se realiza solo si hay algún inventario en v3002 -->
+<include>circulacion/controles/verificaSistemaActivo_inc.xis</include>
+<include>circulacion/controles/verificaEstadoUsuario_inc.xis</include>
+<field action=delete tag=list>3002</field>
+
+<include>circulacion/controles/validaInventarios_inc.xis</include>
+<!-- HASTA ACÁ LA VALIDACIÓN GENERAL. Cualquier error aca impide la renovación de cualquier libro -->
+
+
+    <field action=replace tag=2001><pft>f(l(['lector']v3004),1,0)</pft></field>
+    <do task=update>
+	    <parm name=db>lector</parm>
+	    <parm name=mfn><pft>v2001</pft></parm>
+	    <parm name=lockid><pft>v3004</pft></parm>
+	    <parm name=expire>5</parm> 
+	    <field action=define tag=1102>Isis_Status</field>
+	    <field action=define tag=1011>Isis_Lock</field>
+		
+		<update>
+			<write>Lock</write>
+		</update>
+		
+		<update>
+		    <field action=import tag=list>3004</field>
+			<field action=replace tag=5000><pft>
+			    if (not v1011^i=v3004) then 'Error: Por favor intente más tarde. Si el problema persiste pongase en contacto con el personal de la biblioteca. Muchas gracias.' fi</pft>
+	    		</field>
+			<field action=export tag=5000 previous=add>5000</field>    		
+			
+			<flow action=jump><pft>if v5000:'Error' then 'NO_LOCK' fi</pft></flow>
+				<write>Lock</write>
+			<label>NO_LOCK</label>
+
+		</update>
+    </do>
+	<display><pft>
+		if v5000:'Error' then 
+			'[{"estado":"error",',
+			'"mensaje":"',replace(v5000,'Error:',''),'"}]'
+		fi,
+	</pft></display>
+
+<flow action=jump><pft>if v5000:'Error' then 'FIN_RENOVACION' fi</pft></flow>
+<!--include>circulacion/controles/verificaDispInv_inc.xis</include--> <!-- esto no lo controlo: Porque el usuario ya los tiene prestados. -->
+<!--include>circulacion/controles/verificaPresDup_inc.xis</include--> <!-- esto no lo controlo: Porque ya los tiene prestados. -->
+<!--Ejemplo de salida JSON: [{"estado":"success","mensaje":""},{"estado":"error","mensaje":"Libro reservado"},..] -->
+		<!--list action="load" type="freq" previous="delete"><pft>(v3011/)</pft></list>
+		<do task="list">
+	           <field action="define" tag="3002">Isis_Item</field>
+	           <loop-->
+	        	<field action=replace tag=3002><pft>v3011</pft></field>
+	           		<include>circulacion/controles/verificaEspRes_one_inc.xis</include>
+				<flow action=jump><pft>if v5000:'Error' then 'NO_SE_PUEDE_RENOVAR' else 'SE_PUEDE_RENOVAR' fi</pft></flow>
+				<label>SE_PUEDE_RENOVAR</label>
+					<!-- renovar(^l<lector>^i<inventario>) -->
+					<call name=renovar><pft>'^l',v3004,'^i',v3002</pft></call>
+					<!-- Resultado en v8  -->
+					<field action=replace tag=6000><pft>'{',
+						'"inventario":"',v3002,'",',
+						'"estado":"ok",',
+						'"mensaje":"Inventario ',v3002,' -  Nueva fecha de vencimiento: ',v8^v,'"',
+					'}'</pft></field>
+					<flow action=jump><pft>'FIN_RENOVAR'</pft></flow>
+				<label>NO_SE_PUEDE_RENOVAR</label>
+					<field action=replace tag=6000><pft>'{',
+						'"estado":"error",',
+						'"mensaje":"Inventario ',v3002,' - ',replace(v5000,'Error:',''),'"'
+					'}'</pft></field>
+				<label>FIN_RENOVAR</label>
+				<field action=export previous=add tag=6000>6000</field>
+		   <!--/loop>
+		</do-->
+		<display><pft>'[',(v6000+|,|),']'</pft></display>
+
+
+<label>FIN_RENOVACION</label>
+
+</section>
+</IsisScript>
