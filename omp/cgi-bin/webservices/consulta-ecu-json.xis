@@ -1,0 +1,171 @@
+<IsisScript>
+<include>fecha_funciones.xis</include>
+
+<section>
+  <display><pft>'Content-type: text/html; charset=iso-8859-1'/#</pft></display>
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  <field action=cgi tag=110>expresion</field> <!-- Tipo y Nro de Documento -->
+  <field action=cgi tag=111>tipo</field>
+  <field action=cgi tag=112>campo</field>
+  <field action=cgi tag=120>usuario_id</field>
+  <!--field action=cgi tag=130>operario_id</field-->
+
+  <field action="add" tag="1000"><pft>f(l(['lector']v110),1,0)</pft></field> <!-- MFN del Registro Lector, búsca por DNI --> 
+
+  <display>{</display>
+
+  <label>dni</label>
+
+  <do task=search>
+    <parm name=db>lector</parm>
+    <parm name=expression><pft>v110</pft></parm>
+    <parm name=count>1</parm>
+    <!--parm name=gizmo>gizmo</parm-->
+    <field action=define tag=1102>Isis_Total</field>
+    <loop>
+      <flow action=jump><pft>if ref(['config']1,v10)='manual' then 'fin_recaNcular' fi</pft></flow>
+           <!-------------------------------------------------------------
+           ---- caNcula las nuevas fechas de vto de los prestamos --------
+           ----------------------------------------------------------- -->
+                <flow action=jump><pft>if a(v8) then 'no_hay_prestamos' fi</pft></flow>
+                <!-- caNcula las nuevas fechas de vto de los prestamos -->
+                  <list action=delete>now</list>
+                  <list action=load type=list><pft>(v8/)</pft></list>
+                  <do task=list>
+                  <field action=define tag=1001>Isis_Item</field>
+                      <loop>
+                          <field action=import tag=list>3</field>
+                          <!-- tipo objeto: -->
+                          <field action=replace tag=2344><pft>ref(['exist']l(['exist']v1001^i),v987)</pft></field>
+                          <!-- días prestamo v2 tiene la credencial del lector): -->
+                          <field action=replace tag=2345><pft>ref(['politicas']l(['politicas']'UO=',v3,'-',v2344),v11)/</pft></field>
+                          <!-- fecha de préstamo: -->
+                          <field action=replace tag=2346><pft>v1001^p*6.4,v1001^p*3.2,v1001^p*0.2</pft></field> 
+                
+                          <call name=SUMAH><pft>v2346/v2345</pft></call> <!-- sumo a la fecha de prestamo (v2346) la cantidad de días de prestamo (v2345) -->
+
+                          <field action=replace tag=3000><pft>v9000*6.2,'/',v9000*4.2,'/',v9000*0.4</pft></field>
+                          <field action=export previous=add tag=3000>3000</field>
+                      </loop>
+                  </do>
+                  <!-- formo las cadenas para el reemplazo de las fechas -->
+                  <field action=replace tag=2000 split=occ><pft>('^v',v8^v/)</pft></field> <!-- fechas de dev. registradas (a ser reemplazada) -->
+                  <field action=replace tag=3000 split=occ><pft>('^v',v3000/)</pft></field> <!-- nueva fecha de devolución -->
+                  
+                  <!-- por cada ocurrencia del v8 se creo una occ de v2000 (fecha orig) y v3000 (nva fecha) -->
+                  <field action=replace tag=8 split=occ><pft>(replace(v8,v2000,v3000)/)</pft></field>
+                <label>no_hay_prestamos</label>
+          
+        <label>fin_recaNcular</label>
+	<!-- préstamos -->
+      <field action=replace tag=3908 split=occ><pft>
+        if p(v8) then ('{"inventario":"',v8^i,'","titulo":"',replace(v8^b,'"','\"'),'","fecha_prestamo":"',v8^p,'","fecha_vencimiento":"',v8^v,'"}'/) fi
+      </pft></field>
+      <!-- sanciones -->
+      <field action=replace tag=3911 split=occ><pft>
+        if p(v11) then ('{"fecha":"',v11^f,'","dias":"',v11^d,'","vencimiento":"',v11^v,'"}'/) fi
+      </pft></field>
+      
+      <!--display><pft>
+        if p(v8) then ('{"inventario":"',v8^i,'","titulo":"',replace(v8^b,'"','\"'),'","fecha_prestamo":"',v8^p,'","fecha_vencimiento":"',v8^v,'"}',
+    	if (iocc<nocc(v8)) then ',' fi)
+	    fi
+	</pft></display-->
+	<field action=export tag=list>3908,3911</field>
+    </loop>
+  </do>
+<display><pft>'"prestamos":[',(v3908+|,|),'],'</pft></display>
+<display><pft>'"sanciones":[',(v3911+|,|),']'</pft></display>
+
+<!-- esperas en v4000 -->
+<do task=search>
+    <parm name=db>reservas</parm>
+    <parm name=expression><pft>v110</pft></parm>
+    <field action=define tag=1102>Isis_Total</field>
+    <field action=define tag=1103>Isis_Current</field>
+
+	<loop>
+		<field action=import tag=list>110</field>
+		<field action=replace tag=4000><pft>
+		    (if v3^i=v110[1] then 
+			'{"titulo":"',
+			   replace(
+			     ref(['marc']l(['marc']'LC='v1[1]^c),
+		                if s(v100,v110,v111)>'' then 
+		                  v100^a,v110^a,v111^a
+		                else
+		                  if p(v700) then 
+		                    v700[1]^a
+	        	          else 
+		                    v710[1]^a,|, |v710[1]^b,
+	        	          fi,
+	                	fi,' : ',
+		                v245^a," "v245^n," "v245^p," "v245^h," "v245^f,
+		                if v245^b.1=';' or v245^b.1='=' then 
+		                  " "v245^b 
+		                else
+		                  " "v245^b
+		                fi,' ',
+		                v250^a
+		          ),'"','\"'),
+		          ' ',v1[1]^p,'",',
+    				'"fecha":"',v3^f,'",',
+            '"estado":"',v3^e,'",',
+            '"estado_detalle":"',
+                if v3^e='CONFIRMADA' then 'Ya puede pasar a retirar el material'
+                else 'En proceso de preparaci&oacute;n' fi
+            ,'",',
+            '"parte_id":"',v1[1],'"',
+			'}'
+		    fi)
+		</pft></field>
+		<field action=export tag=4000 previous=add>4000</field>
+    </loop>
+  </do>
+
+<!-- reservas en v4001 -->
+<do task=search>
+    <parm name=db>reservas</parm>
+    <parm name=expression><pft>v110</pft></parm>
+    <field action=define tag=1102>Isis_Total</field>
+    <field action=define tag=1103>Isis_Current</field>
+    <loop>
+		<field action=import tag=list>110</field>
+		<field action=replace tag=4001><pft>
+		    (if v2^i=v110[1] then 
+			'{"titulo":"',
+         replace(
+          ref(['marc']l(['marc']'LC='v1[1]^c),
+                if s(v100,v110,v111)>'' then 
+                  v100^a,v110^a,v111^a
+                else
+                  if p(v700) then 
+                    v700[1]^a
+                  else 
+                    v710[1]^a,|, |v710[1]^b,
+                  fi,
+                fi,' : ',
+                v245^a," "v245^n," "v245^p," "v245^h," "v245^f,
+                if v245^b.1=';' or v245^b.1='=' then 
+                  " "v245^b 
+                else
+                  " "v245^b
+                fi,' ',
+                v250^a
+          ),
+        '"','\"'),' <b>',v1[1]^p,'</b>",',
+        '"fecha":"',v2^f,'",',
+	      '"parte_id":"',v1[1],'"',
+			'}',
+		    fi)
+		</pft></field>
+		<field action=export tag=4001 previous=add>4001</field>
+    </loop>
+  </do>
+
+<display><pft>',"esperas":[',(v4000+|,|),'],"reservas":[',(v4001+|,|),']'</pft></display>
+
+<display>}</display>
+
+  </section>
+</IsisScript>
