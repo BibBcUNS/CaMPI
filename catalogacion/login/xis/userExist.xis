@@ -14,7 +14,7 @@
 
 <parm name="cipar"><pft>
 	/* ----- BASE DE DATOS (USERS) ----- */
-    'USERS.*=',          '/var/www/campi-catalogacion/users/users.*'/
+    'USERS.*=',          '/var/www/CaMPI/catalogacion/users/users.*'/
 </pft></parm> 
 
 <field action=cgi tag=100>user</field>
