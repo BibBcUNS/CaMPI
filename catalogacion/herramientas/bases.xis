@@ -8,13 +8,13 @@
 
 <parm name="cipar"><pft>
 	/* ----- BASE DE DATOS (BIBLIOGRÁFICA) ----- */
-	'BIBLIO.*=',          v6003^b,'/catalis/',v2104,'/biblio.*'/
+	'BIBLIO.*=',          '/var/www/CaMPI/catalogacion/catalis/demo/biblio.*'/
 	'CONTROL-NUMBER.TXT=',v6003^b,'/catalis/',v2104,'/cn.txt'/
 	'DB-DESCR.TXT=',      v6003^b,'/catalis/',v2104,'/db-descr.txt'/
 	
 	/* ----- Usuarios, permisos ----- */
 	/*'IP-TABLE=',            v6003^c,'/catalis/config/ip-table.txt'/*/
-	'USERS.*=',             '/var/www/catalis/bases/catalis/users/users.*'/
+	'USERS.*=',             '/var/www/CaMPI/catalogacion/users/users.*'/
 	
 	/* ----- Directorio para archivos temporales ----- */
 	'CI_TEMPDIR=',v6003^t,/

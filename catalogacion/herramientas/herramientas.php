@@ -162,7 +162,7 @@
 					<p>Base:    
 					<select id="selectBase" name="base">
 						<?php
-							$basesxis = file_get_contents("https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/bases.xis&usuario=$usuario");
+							$basesxis = file_get_contents("http://campicatalogacion.local/catalis/cgi-bin/wxis?IsisScript=../../herramientas/bases.xis&usuario=$usuario");
 							$bases = explode(":", $basesxis);
 							for($i=0;$i<count($bases)-1;$i++){
 								echo "<option value=$bases[$i]>$bases[$i]</option>";
