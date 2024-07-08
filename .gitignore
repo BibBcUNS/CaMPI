@@ -44,6 +44,9 @@ catalogacion/catauto/tmp
 #       Herramientas ------------------------------------------------------------------------------------
 catalogacion/herramientas/downloads
 !catalogacion/herramientas/downloads/procesar.php
+catalogacion/herramientas/union_registros/logMover.txt
+catalogacion/herramientas/union_registros/logerrorMover.txt
+catalogacion/herramientas/union_registros/backups
 
 # ------------------------------------------------------------------------------------------------------------------------------------
 # HTDOCS  ----------------------------------------------------------------------------------------------------------------------
