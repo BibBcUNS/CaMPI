@@ -1,0 +1,38 @@
+<IsisScript>
+<section>
+
+<display><pft>'Content-type: text/html; charset=iso-8859-1'/#</pft></display>
+
+<field action=cgi tag=2000>usuario</field>
+<field action=cgi tag=2001>pw</field>
+
+
+
+<parm name="cipar"><pft>
+	/* ----- Usuarios, permisos ----- */
+	'USERS.*=',             '/var/www/CaMPI/catalogacion/users/users.*'/
+</pft></parm>
+
+<do task="search">
+	<parm name="db">USERS</parm>
+	<parm name="expression"><pft>v2000</pft></parm>
+	<field action=define tag=1001>Isis_Current</field>
+	<field action=define tag=1002>Isis_Total</field>		
+	<field action=define tag=1005>Isis_Keys</field>
+	<field action=define tag=1009>Isis_ErrorInfo</field>
+
+	<loop>
+		<field action=export tag=3000>3</field>
+	</loop>
+</do>
+
+
+
+<display><pft>
+if v2001=v3000 then	'OK' else 'ERROR' fi
+</pft></display>
+
+
+<label>FIN</label>
+</section>
+</IsisScript>
