@@ -7,6 +7,14 @@
     margin: 0;
 }
 
+.navbar{
+    background-color: brown;
+}
+
+.catauto-background{
+    background-color: rgb(0, 53, 148) !important;
+}
+
 #divForm{
     padding: 5px;
     display: flex;

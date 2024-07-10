@@ -35,7 +35,7 @@
     
 </head>
 <body>
-    <nav class="navbar mb-4" style="background-color: brown;">
+    <nav <?php if($modulo == 'catauto'){echo('class="navbar mb-4 catauto-background"');}else{echo('class="navbar mb-4"');}; ?> >
 		<div style="margin: auto;">
 		    <h1 style="color: #FED;font-family: georgia, 'times new roman', serif ;"> <b>CaMPI Catalogación</b></h1>  
 		</div>           
@@ -43,7 +43,7 @@
     <br>
 
     <div id="divForm">
-		<form id="loginForm" name="entrada" action="login_valida.php" method="POST">
+		<form <?php if($modulo == 'catauto'){echo('class="catauto-background"');}?> id="loginForm" name="entrada" action="login_valida.php" method="POST">
 			<!-- Decidimos el titulo dependiendo del modulo seleccionado -->
 			<h2 id="titleLogin"><?php if($modulo != "herramientas"){echo(str_replace("c", "C", $modulo) . " | Log In");}else{echo(str_replace("h", "H", $modulo) . " | Log In");}  ?></h2>
 			<div id="inputsDiv">
