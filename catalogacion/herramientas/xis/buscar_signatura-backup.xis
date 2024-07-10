@@ -1,0 +1,54 @@
+<IsisScript>
+<section>
+<display><pft>'Content-type: text/html;charset=iso-8859-1'/#</pft></display>
+
+<field action=cgi tag=2000>inventario</field>
+<field action=cgi tag=2001>base</field>
+<parm name=cipar><pft>
+'campi.*=/var/www/catalogacion/catalis/bases/catalis_pack_en_produccion/catalis/',v2001,'/biblio.*',/
+</pft></parm>
+
+
+<do task=search>
+<parm name=db>campi</parm>
+<parm name=expression><pft>'-INV=',v2000</pft></parm>
+<loop>
+<field action=import tag=4545>2000</field>
+<field action=import tag=4546>2001</field>
+	<display><pft>
+
+
+(
+    if v859^p = v4545[1] then	
+		if (v4546[1]:'ucod-marc' or v4546[1]:'eunm' or v4546[1]:'allbc') then
+			'<table align=center  width=200><tr><td align=center><FONT SIZE=2><b>',v859^k,v859^h,' ',v859^i,'</b></font></td><td align=center><FONT SIZE=2><b>',
+			if v859^3 = ''
+				then v859^v
+				else v859^3
+			fi,
+			'</b></font></td><td align=center><FONT SIZE=2><b>',v859^t,'</b></font></td></tr></table>'
+		,fi,
+		
+		if v4546[1]:'agrono' then
+			'<table align=center  width=200><tr><td align=center><FONT SIZE=2><b>',v859^k,v859^h,' ',v859^i,'</b></font></td><td align=center><FONT SIZE=2><b>',
+			if v859^3 = ''
+				then v859^v
+				else v859^3
+			fi,
+			'</b></font></td><td align=center><FONT SIZE=2><b>
+			
+			',if p(v859^t) then ,'Ej.',v859^t,fi,'</b></font></td></tr></table>'
+		,fi,
+	,fi,
+)
+
+
+</pft></display>
+
+</loop>
+
+</do>
+
+</section>
+</IsisScript>
+

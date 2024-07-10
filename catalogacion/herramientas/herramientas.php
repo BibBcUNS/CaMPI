@@ -192,7 +192,7 @@
 				<p>Seleccione la Base de datos de la cual quiere Imprimir etiquetas:<br> <br>
 					<select name=base>
 						<?php
-							$basesxis = file_get_contents("https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/bases.xis&usuario=$usuario");
+							$basesxis = file_get_contents("http://campicatalogacion.local/catalis/cgi-bin/wxis?IsisScript=../../herramientas/bases.xis&usuario=$usuario");
 							$bases = explode(":", $basesxis);
 							for($i=0; $i<count($bases)-1; $i++){
 								echo "<option value=$bases[$i]>$bases[$i]</option>";
@@ -304,7 +304,7 @@
 					<?php
 						echo '<option selected value=""></option>';
 
-						$basexis = file_get_contents("https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/bases.xis&usuario=$usuario");
+						$basexis = file_get_contents("http://campicatalogacion.local/catalis/cgi-bin/wxis?IsisScript=../../herramientas/bases.xis&usuario=$usuario");
 						$bases = explode(":",$basesxis);
 						for($i=0;$i<count($bases)-1;$i++){
 							// Esto es una restricción QUE HAY QUE BORRAR
