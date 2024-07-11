@@ -629,10 +629,6 @@ function createSubfield( code, sfText, label, fieldTag )
   else if ( "245h" == tag_code ) {    // DGM
     newSubfieldBox.readOnly = true;
   }
-  else if ( "5" == code ) {   // Institution code
-    newSubfieldBox.value = g_MARCOrganizationCode;
-    newSubfieldBox.readOnly = (g_MARCOrganizationCode != "");
-  }
   else if ( "7" == code ) {   // Control subfield for 76x-78x
     newSubfieldBox.readOnly = true;
     newSubfieldBox.onclick = function() {
