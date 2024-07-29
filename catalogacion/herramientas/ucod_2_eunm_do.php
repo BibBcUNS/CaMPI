@@ -5,7 +5,9 @@
 	$fuente=$_POST['fuente'];
 	$destino=$_POST['destino'];
 
-	$verificar = file_get_contents("https://campi-catalogacion.uns.edu.ar/catalis/cgi-bin/wxis?IsisScript=catalis/xis/herramientas/verificarpw.xis&usuario=$usuario&pw=$pw");
+	// Importo las variables de configuracion para que funcione en el entorno configurado
+	$configs = include("config/config.php");
+	$verificar = file_get_contents( $configs['host'] . "/catalis/cgi-bin/wxis?IsisScript=../../herramientas/verificarpw.xis&usuario=$usuario&pw=$pw");
 	if ($verificar != 'OK') {
 ?>  
 
@@ -45,7 +47,7 @@ else {
 		</nav>
 <?php
 			$nc_fuente = str_pad($nc_fuente,6,"0", STR_PAD_LEFT);
-			shell_exec('cd /var/www/campi-catalogacion/catalis/htdocs/herramientas/union_registros;sh ./ucod_2_eunm.sh '.$nc_fuente.' '.$usuario.' '.$fuente.' '.$destino);
+			shell_exec('cd /var/www/CaMPI/catalogacion/catalis/htdocs/herramientas/union_registros;sh ./ucod_2_eunm.sh '.$nc_fuente.' '.$usuario.' '.$fuente.' '.$destino);
 			echo '<div style="background: brown; border: 1px solid #F0F0F0;	padding: 18px; margin: 6px 0; font-size: 16px;">'.
 				'El registro con N&uacute;mero de Control (NC) <b style="font-size:1.5em">'.$nc_fuente.'</b> en la base <font style="font-size:1.1em">'.$fuente.' </font> fue movido al final de la base <font style="font-size:1.1em">'.$destino.' </font>'.
 				 /*'<br><form action=herramientas.php>'.
