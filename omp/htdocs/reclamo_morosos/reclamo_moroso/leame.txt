@@ -1,0 +1,28 @@
+Configure el servidor de correo y las cuentas de correo.
+
+* Deberá indicar la dirección de su servidor de correo en la linea:
+
+define ('SMTP_SERVER','direccion.de.su.servidor.de.correo.');
+Ej. define ('SMTP_SERVER','smtp.arnet.com.ar');
+
+* Indique su cuenta de e-mail
+
+define ('USER','mi_cuenta@yahoo.com.ar');
+Ej. define ('USER','omp@rect.uner.edu.ar');
+
+* Especifique la clave de acceso a la cuenta.
+define ('PASS','clave');
+
+* Defina la dirección de correo correspondiente a From.
+Ej. define ('FROM','biblioteca@rect.uner.edu.ar');
+
+* Indique el nombre con el cual se mostrará la procedencia del correo.
+Ej. define ('FROMDETA','Biblioteca Open MarcoPolo');
+
+* Estableca la dirección donde desea enviar una copia de su correo.
+Ej. define ('BCC','mibiblioteca@yahoo.com.ar');
+
+* Por último, defina el Asunto del correo.
+Ej. define ('SUBJECT','Reclamo bibliográfico');
+
+
