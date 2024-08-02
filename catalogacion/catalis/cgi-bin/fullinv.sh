@@ -18,7 +18,7 @@
 # ---------------------------------------------------------------------
 
 PATH=/opt/cisis:$PATH
-CIPAR=/var/www/catalis/cgi-bin/catalis_pack_en_produccion/fullinv.cip
+CIPAR=./fullinv.cip
 #mx cipar=$CIPAR db=$1 gizmo=DICTGIZ fst=@BIBLIO.FST actab=AC-ANSI.TAB uctab=UC-ANSI.TAB stw=@BIBLIO.STW fullinv=$1 tell=500
 mx cipar=$CIPAR db=$1                fst=@BIBLIO.FST actab=AC-ANSI.TAB uctab=UC-ANSI.TAB stw=@BIBLIO.STW fullinv=$1 tell=500
 

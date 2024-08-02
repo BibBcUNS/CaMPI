@@ -4,10 +4,10 @@
 # Modificar rutas según corresponda
 # -----------------------------------------------------------------
 
-AC-ANSI.TAB=/var/www/campi-catalogacion/catalis/bases/common/ac-ansi.tab
-BIBLIO.FST=/var/www/campi-catalogacion/catalis/bases/common/biblio.fst
-BIBLIO.STW=/var/www/campi-catalogacion/catalis/bases/common/biblio.stw
-COUNTRY.*=/var/www/campi-catalogacion/catalis/bases/common/country.*
-DICTGIZ.*=/var/www/campi-catalogacion/catalis/bases/common/dictgiz.*
-HEADSORT.PFT=/var/www/campi-catalogacion/catalis/bases/common/headsort.pft
-UC-ANSI.TAB=/var/www/campi-catalogacion/catalis/bases/common/uc-ansi.tab
+AC-ANSI.TAB=/root_path/catalis/bases/common/ac-ansi.tab
+BIBLIO.FST=/root_path/catalis/bases/common/biblio.fst
+BIBLIO.STW=/root_path/catalis/bases/common/biblio.stw
+COUNTRY.*=/root_path/catalis/bases/common/country.*
+DICTGIZ.*=/root_path/catalis/bases/common/dictgiz.*
+HEADSORT.PFT=/root_path/catalis/bases/common/headsort.pft
+UC-ANSI.TAB=/root_path/catalis/bases/common/uc-ansi.tab

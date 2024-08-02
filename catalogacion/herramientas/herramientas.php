@@ -1,9 +1,10 @@
 	<?php
+		// Importo las variables de configuracion para que funcione en el entorno configurado
+		$configs = include("config/config.php");
+		
 		$usuario = $_POST["usuario"];
 		$pw = $_POST["password"];
 
-		// Importo las variables de configuracion para que funcione en el entorno configurado
-		$configs = include("config/config.php");
 
 	?>
 	<!-- Aca comienzan las herramientas, en caso de log correcto -->
@@ -348,7 +349,7 @@
 						echo '<option selected value=""></option>';
 						for($i=0;$i<count($bases)-1;$i++){
 							// Esto es una restricción QUE HAY QUE BORRAR
-							if ($bases[$i] == "ucod-marc"  || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "eunm" || $bases[$i] == "huber" || $bases[$i] == "demo")
+							if ($bases[$i] == "ucod-marc"  || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "eunm" || $bases[$i] == "huber" || $bases[$i] == "demo" || $bases[$i] == "demo-dev")
 							echo "<option value=$bases[$i]>$bases[$i]</option>";
 						}
 					?>
@@ -362,7 +363,7 @@
 						echo '<option selected value=""></option>';		
 						for($i=0; $i<count($bases)-1; $i++){
 							// Esto es una restricción QUE HAY QUE BORRAR
-							if ($bases[$i] == "eunm" || $bases[$i] == "ead" || $bases[$i] == "eeo" || $bases[$i] == "eunm-ebook"  || $bases[$i] == "ucod-marc" || $bases[$i] == "demo")
+							if ($bases[$i] == "eunm" || $bases[$i] == "ead" || $bases[$i] == "eeo" || $bases[$i] == "eunm-ebook"  || $bases[$i] == "ucod-marc" || $bases[$i] == "demo" || $bases[$i] == "demo-dev" )
 							echo "<option value=$bases[$i]>$bases[$i]</option>";
 						}
 					?>
