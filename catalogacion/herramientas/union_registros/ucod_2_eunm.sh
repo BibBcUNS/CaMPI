@@ -2,6 +2,8 @@
 
 PATH=$PATH:/opt/cisis
 
+root_path="/var/www/CaMPI/catalogacion"
+
 script_name=$0;
 nc_fuente=$1;
 usuario=$2;
@@ -13,13 +15,13 @@ destino=$4;
 #cn_txt=/var/www/bases/catalis/catalis_pack_en_produccion/catalis/carpc/cn.txt
 
 
-path_fuente=/var/www/campi-catalogacion/catalis/bases/catalis/$fuente/biblio
-path_destino=/var/www/campi-catalogacion/catalis/bases/catalis/$destino/biblio
-cn_txt=/var/www/campi-catalogacion/catalis/bases/catalis/$destino/cn.txt
+path_fuente=$root_path/catalis/bases/catalis/$fuente/biblio
+path_destino=$root_path/catalis/bases/catalis/$destino/biblio
+cn_txt=$root_path/catalis/bases/catalis/$destino/cn.txt
 
 # haciendo backup de las bases
-./bkup.sh $destino
-./bkup.sh $fuente
+./bkup.sh $destino $root_path
+./bkup.sh $fuente $root_path
 
 nro=$(cat $cn_txt)
 nro=$(expr $nro + 1) # expr permite tomar el nro como decimal a pesar de los ceros a la izquierda
@@ -70,7 +72,7 @@ echo Generando el invertido de $destino >> logMover.txt
 echo ---------------------------------------------- >> logMover.txt
 echo Generando el invertido de $destino >> logerrorMover.txt
 echo ---------------------------------------------- >> logerrorMover.txt
-/var/www/campi-catalogacion/catalis/cgi-bin/fullinv.sh $path_destino >> logMover.txt 2>> logerrorMover.txt
+$root_path/catalis/cgi-bin/fullinv.sh $path_destino >> logMover.txt 2>> logerrorMover.txt
 
 echo ==================================================================== >> logMover.txt
 echo ==================================================================== >> logerrorMover.txt

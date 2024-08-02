@@ -3,6 +3,8 @@
 
 PATH=$PATH:/opt/cisis
 
+root_path="/var/www/CaMPI/catalogacion/"
+
 # registrando la actividad en el LOG
 
 # se realiza la copia de seguridad.
@@ -15,9 +17,9 @@ echo $0 $* >> backups/$1/logerror-unir.txt
 echo ---------------------------------------- >> backups/$1/log-unir.txt
 echo ---------------------------------------- >> backups/$1/logerror-unir.txt
 
-base=/var/www/campi-catalogacion/catalis/bases/catalis/$1/biblio
+base=$root_path/catalis/bases/catalis/$1/biblio
 base_backup_count=$(cat backups/$1/count.txt)
-base_backup=/var/www/campi-catalogacion/catalis/htdocs/herramientas/union_registros/backups/$1/$base_backup_count/biblio
+base_backup=$root_path/catalis/htdocs/herramientas/union_registros/backups/$1/$base_backup_count/biblio
 
 # muevo el campo de un registro al otro y borro el registro origen.
 # =ref(['biblio']l(['biblio']'-NC=011300'),v859)
