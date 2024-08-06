@@ -817,7 +817,7 @@
 		<subfield code="8" repet="R" label-spa="Vínculo de campo y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="370" repet="R" label-spa="Lugar asociado" oblig="ALL" template="##a">
+	<datafield tag="370" repet="R" label-spa="Lugar asociado" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="a" repet="NR" label-spa="Lugar de nacimiento" label-eng="Place of birth" />
@@ -841,7 +841,7 @@
 		<subfield code="8" repet="R" label-spa="Vínculo de campo y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="371" repet="R" label-spa="Dirección" oblig="ALL" template="##a">
+	<datafield tag="371" repet="R" label-spa="Dirección" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="a" repet="R" label-spa="Dirección" label-eng="Address"/>
@@ -862,7 +862,7 @@
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-	<datafield tag="372" repet="R" label-spa="Campo de actividad" oblig="ALL" template="##a">
+	<datafield tag="372" repet="R" label-spa="Campo de actividad" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="a" repet="R" label-spa="Campo de actividad" label-eng="Field of activity" />
@@ -878,7 +878,7 @@
 		<subfield code="8" repet="R" label-spa="Vínculo de campo y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="373" repet="R" label-spa="Grupo asociado" oblig="ALL" template="##a">
+	<datafield tag="373" repet="R" label-spa="Grupo asociado" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="a" repet="R" label-spa="Grupo asociado" label-eng="Associated group" />
@@ -896,7 +896,7 @@
 		<subfield code="8" repet="R" label-spa="Enlace entre campos y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="374" repet="R" label-spa="Ocupación" oblig="ALL" template="##a">
+	<datafield tag="374" repet="R" label-spa="Ocupación" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="a" repet="R" label-spa="Ocupación" label-eng="Occupation" />
@@ -912,7 +912,7 @@
 		<subfield code="8" repet="R" label-spa="Enlace entre campos y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="375" repet="R" label-spa="Género" oblig="ALL" template="##a">
+	<datafield tag="375" repet="R" label-spa="Género" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="a" repet="R" label-spa="Género" label-eng="Gender" />
@@ -928,7 +928,7 @@
 		<subfield code="8" repet="R" label-spa="Enlace entre campos y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="376" repet="R" label-spa="Información sobre las familias" oblig="ALL" template="##a">
+	<datafield tag="376" repet="R" label-spa="Información sobre las familias" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="a" repet="R" label-spa="Tipo de familia" label-eng="Type of family" />
@@ -946,7 +946,7 @@
 		<subfield code="8" repet="R" label-spa="Enlace entre campos y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="377" repet="R" label-spa="Lengua asociada" oblig="ALL" template="##a">
+	<datafield tag="377" repet="R" label-spa="Lengua asociada" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" label-eng="Source of code" label-spa="Fuente del código">
 			<i value="#" label-eng="MARC language code" label-spa="Código MARC de lengua" />
@@ -962,7 +962,7 @@
 		<subfield code="8" repet="R" label-spa="Enlace entre campos y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="378" repet="NR" label-spa="Forma completa del nombre personal" oblig="ALL" template="##q">
+	<datafield tag="378" repet="NR" label-spa="Forma completa del nombre personal" template="##q">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="q" repet="NR" label-spa="Forma completa del nombre personal" label-eng="Fuller form of personal name" />
@@ -973,7 +973,7 @@
 		<subfield code="8" repet="R" label-spa="Enlace entre campos y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="380" repet="R" label-spa="Forma de la obra" oblig="ALL" template="##a">
+	<datafield tag="380" repet="R" label-spa="Forma de la obra" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="a" repet="R" label-spa="Forma de obra" label-eng="Form of work" />
@@ -985,7 +985,7 @@
 		<subfield code="8" repet="R" label-spa="Enlace entre campos y número de secuencia" label-eng="Field link and sequence number"/>
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<datafield tag="381" repet="R" label-spa="Otras características distintivas de obra o expresión" oblig="ALL" template="##a">
+	<datafield tag="381" repet="R" label-spa="Otras características distintivas de obra o expresión" template="##a">
 		<indicator pos="1" />
 		<indicator pos="2" />
 		<subfield code="a" repet="R" label-spa="Otras características distintivas" label-eng="Other distinguishing characteristic" />
