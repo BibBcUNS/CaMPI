@@ -66,11 +66,7 @@ function setSearchFormEvents()
 		return false;
 	}
 	
-
 	
-	document.getElementById("etiqDisplayBtn").onclick = function() {
-		viewRecordDetails(event,null,"etiq");
-	}
 	
 	document.getElementById("marcDisplayBtn").onclick = function() {
 		viewRecordDetails(event,null,"marc");
