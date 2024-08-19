@@ -1,0 +1,212 @@
+<IsisScript>
+
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  
+  <field action=cgi tag=120>usuario_id</field>
+  <field action=cgi tag=130>id_operador</field>
+  <field action=cgi tag=140>ordenar_por</field>
+
+  <display><htmlpft>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Circulacion</title>
+    <link REL="stylesheet" TYPE="text/css" HREF="/omp/css/style.css" >	
+    <STYLE>
+    	.boton-confirmar,.boton-confirmado {
+    		width:100px;
+    		font-size:0.8em;
+    		width:80px;
+    	}
+    	.boton-confirmar {
+    		background-color:DarkSeaGreen;
+    	}
+    	.boton-confirmado {
+   		}
+   		.fecha_hora {
+   			font-size:0.8em;
+   		}
+   		.titulo {
+   			font-size:0.9em;
+   		}
+    </STYLE>
+	<SCRIPT LANGUAGE="JavaScript">
+		function asignar(documento) {
+	        window.parent.indice.document.form_id.lector.value = "";
+	        window.parent.indice.document.form_id.lector.value = documento;
+	        window.parent.indice.document.consultas.expresion.value = "";
+	        window.parent.indice.document.consultas.expresion.value = documento;		
+		}
+
+		function confirmar_espera(formulario) {
+			reserva_id = formulario.reserva_id.value;
+			usuario_id = formulario.usuario_id.value;
+			operario_id = formulario.operario_id.value;
+			isisScript = "circulacion/espera_confirmar.xis";
+
+			var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			    	formulario.confirmar.disabled=true;
+			    	formulario.confirmar.classList.remove("boton-confirmar");
+			    	formulario.confirmar.classList.add("boton-confirmado");
+			    	formulario.confirmar.value="Confirmado!";
+			    	/*document.getElementById("resultado").innerHTML = this.responseText;*/
+
+			    }
+			  };
+			  xhttp.open("GET",
+			  	"?IsisScript="+isisScript+
+			  	"&usuario_id="+usuario_id+
+			  	"&operario_id="+operario_id+
+			  	"&reserva_id="+reserva_id
+			  , true);
+			  xhttp.send();
+		}
+		
+		usuario_id="[pft]v120[/pft]";
+	</SCRIPT>
+
+  </head>
+<body>
+    <div id="head"> 
+		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/images/logocampi.gif" width="120" height="54"></div>
+    </div> 
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div CLASS="top"></div>
+								<div CLASS="content">
+   
+<!--#########################################-->		    </htmlpft></display> 
+
+
+<trace>!BR</trace>
+<do task=search>
+    <parm name=db>reservas</parm>
+    <parm name=expression><pft>'ESP_PEND$'</pft></parm>
+    <field action=define tag=1102>Isis_Total</field>
+    <loop>
+		<!-- MUESTRO INFORMACIÓN  -->
+		<field action=import tag=list>140</field>
+
+		<!-- el primer valor define el orden para el "do task list sort" -->
+		<field action=add tag=10><pft>(if v3^e='PENDIENTE' then
+				select v140[1]
+					case 'FECHA': mid(v3^f,7,4),mid(v3^f,4,2),mid(v3^f,0,2),'-',v3^h
+					case 'USUARIO': v3^i
+					case 'SIGNATURA': ref(['marc']l(['marc']'NC='v1[1]^c),v859[1]^h,'-',v859[1]^i)
+					elsecase v3^i
+				endsel,
+				'^i',v3^i,
+				'^f',v3^f,
+				'^h',v3^h,
+				'^b',v1[1]^b,
+				'^c',v1[1]^c,
+				'^p',v1[1]^p,
+				'^t',
+					ref(['marc']l(['marc']'NC='v1[1]^c),
+		                if s(v100,v110,v111)>'' then 
+		                  v100^a,v110^a,v111^a
+		                else
+		                  if p(v700) then 
+		                    v700[1]^a
+	        	          else 
+		                    v710[1]^a,|, |v710[1]^b,
+	        	          fi,
+	                	fi,' : ',
+		                v245^a," "v245^n," "v245^p," "v245^h," "v245^f,
+		                if v245^b.1=';' or v245^b.1='=' then 
+		                  " "v245^b 
+		                else
+		                  " "v245^b
+		                fi,' ',
+		                v250^a,
+		          	),
+				'^s',
+					ref(['marc']l(['marc']'NC='v1[1]^c),
+						v859[1]^h,'-',v859[1]^i 
+		          	),
+		          
+		fi/)</pft></field>
+		<!-- v3^i para el ordenamiento, v3 los datos de la espera, y en ^r el id de la pa(R)te -->
+		<field action=export previous=add tag=list>10</field> <!-- exporto la lista de ESPERAS PENDIENTES en v10 para luego ordenarla -->
+    </loop>
+</do>
+
+<display><htmlpft>
+	<table id="pedidos_pendientes" border=1 width="100%" cellspacing=0>
+		<tr style="text-align:center">
+			<td width="120px"><a href="?IsisScript=circulacion/pedidos_pendientes.xis&id_operador=[pft]v130[/pft]&ordenar_por=USUARIO">Usuario</a>
+				[pft]if v140='USUARIO' then '&uparrow;' fi[/pft]</td>
+			<td width="90px"><a href="?IsisScript=circulacion/pedidos_pendientes.xis&id_operador=[pft]v130[/pft]&ordenar_por=FECHA">Fecha/Hra</a> [pft]if v140='FECHA' then '&uparrow;' fi[/pft]</td>
+			<td>Título</td>
+			<td width="120px"><a href="?IsisScript=circulacion/pedidos_pendientes.xis&id_operador=[pft]v130[/pft]&ordenar_por=SIGNATURA">Signatura</a>
+				[pft]if v140='SIGNATURA' then '&uparrow;' fi[/pft]</td>
+			<td width="30px">Parte</td>
+			<td width="30px">Confirmar</td>
+		</tr>
+</htmlpft></display>
+<list action=delete>now</list>
+<list action=load type=sort><pft>(v10/)</pft></list>
+<do task=list>
+	<field action=define tag=3>Isis_Item</field>
+	<loop>
+			<field action=import tag=list>130</field>
+		<display><pft>
+			'<!--tr><td colspan=6>',v3,'</td></tr-->'
+			'<tr>'
+				'<td><center><a HREF="JavaScript:asignar(',"'"n0,v3^i,"'"n0,')"  style="text-decoration:none">',v3^i,'</a></center></td>',
+				'<td align=center class="fecha_hora">',v3^f,'<br>',v3^h,'</td>',
+				'<td class=titulo>',v3^t,'</td>',
+				'<td>',v3^s,'</td>',
+				'<td><center>',v3^p,'</center></td>',
+				'<td><center>',
+					'<form method="POST"
+						action="/omp/cgi-bin/wxis.exe/omp/circulacion/" valign="middle" target="confirmar">
+						<input type="hidden" name="IsisScript"   value="circulacion/espera_confirmar.xis">
+						<input type="hidden" name="usuario_id"  value="',v3^i,'">
+						<input type="hidden" name="operario_id" value="',v130,'">
+						<input type="hidden" name="reserva_id"  value="^b',v3^b,'^c',v3^c,'^p',v3^p,'">
+						<input type=button name="confirmar" class="boton-confirmar" onclick=confirmar_espera(this.parentNode) value="Confirmar">
+						<!--^b',v3^b,'^c',v3^c,'^p',v3^p,'-->
+					</form>'
+				,'</center></td>',
+			'</tr>'
+		</pft></display>
+	</loop>
+</do>
+
+
+
+
+<display>
+	</table>
+	<!--div id="resultado">Ver resultado aqui</div-->
+</display>
+<display><pft>if val(v1102)=0 then 
+   '<p>&nbsp;</p><center><h2>No se encontraron registros</h2></center>' fi</pft></display>
+<display>
+<!--##################################################-->	
+<br><br> 
+								</div>
+								<div CLASS="bottom"></div>
+						</div>
+        <div CLASS="clearer"></div>
+      </div>
+      <div CLASS="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+		<div id="footer"></div>
+  </body>
+</html>
+</display>
+<flow action=exit>1</flow>
+
+   
+</section>
+</IsisScript>

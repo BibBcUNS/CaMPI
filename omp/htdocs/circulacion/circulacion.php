@@ -55,7 +55,7 @@ if (checkCookie() == "verdadero" ) {
   <frame name="principal" src="logo_prestamo.html" scrolling="auto">
   <noframes>
   <body>
-  <p>Esta p?ina usa marcos, pero su explorador no los admite.</p>
+  <p>Esta página usa marcos, pero su explorador no los admite.</p>
   </body>
   </noframes>
 </frameset>

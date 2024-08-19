@@ -1,0 +1,6 @@
+<!-- Verifica que el Sistema esté habilitado para circulación: Campo v13 de config -->
+<field action="replace" tag="5000"><pft>
+   if ref(['config']1,v9) = 'no' and ref(['config']1,v15) = 'no' then
+      'Error: Las reservas estan temporalmente deshabilitadas.'
+   fi
+</pft></field>

@@ -1,0 +1,7 @@
+<!-- Verifica que el Sistema esté habilitado para circulación: Campo v13 de config -->
+
+<field action="replace" tag="5000"><pft>
+   if ref(['config']1,v13) <> 'si' then
+      'Error: El sistema no se encuentra habilitado en este momento.'
+   fi
+</pft></field>

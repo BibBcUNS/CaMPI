@@ -1,0 +1,118 @@
+<IsisScript>
+
+<include>circulacion/menor_inc.xis</include>
+<include>circulacion/reserva_mail.xis</include>
+
+<section>
+<display><pft>'Content-type: text/html'/#</pft></display>
+<display>
+<html>
+    <head>
+        <title>Confirmar de Espera</title>
+    </head>
+    <body>
+</display>
+
+<display>
+    <input type="button" name="usuario" value="  [usuario]  " onClick="javascript:top.frames['indice'].document.form_id.submit();"><br>
+</display>
+
+<trace>!BR</trace>
+<parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+<field action=cgi tag=2000>reserva_id</field>
+<field action=cgi tag=2001>usuario_id</field>
+<field action=cgi tag=2002>operario_id</field>
+
+<display><pft>
+    '<center>',
+    ref(['lector']l(['lector']v2001),
+        '<font style="color:#039"><big>',v1,'</big></font>',", ",v3,
+        if v2001:'1' then
+            ' <marquee bgcolor="#FF0000" width=90% style="color: #FFFF9B; font-weight: bold" height="19">¡ Lector MOROSO !</marquee>',
+        fi,     
+   ),
+   '</center><hr>'
+   </pft>
+</display>
+
+<!-- v2005: Obtengo el mfn de la reserva con reserva_id -->
+<field action=replace tag=2005><pft>f(l(['reservas']v2000^b,'_',v2000^c,'_',v2000^p),1,0)</pft></field>
+
+<!-- Obtengo la fecha y hora -->
+<field action=add tag=3010><pft>
+    '^f',mid(date,7,2),'/',mid(date,5,2),'/',mid(date,1,4),'^h',mid(date,10,2),':',mid(date,12,2),':',mid(date,14,2)
+</pft></field>
+
+<do task=update>
+    <parm name=db>reservas</parm>
+    <parm name=mfn><pft>v2005</pft></parm>
+    <field action=define tag=1101>Isis_Lock</field>
+    <field action=define tag=1102>Isis_Status</field>
+    <parm name=lockid><pft>v2002</pft></parm>
+    <update>
+        <field action=import tag=list>2001,2002,3010</field> <!-- id del lector -->
+        <!-- v4001: Número de ocurrencia de espera del lector en cuestión -->
+        <field action=replace tag=4001><pft>(if v3^i=v2001[1] then f(iocc,1,0) fi)</pft></field>
+        <!-- En 4050 exporto los datos de la espera caida -->
+        <field action=occ tag=4050 from=3><pft>v4001</pft></field>
+        <field action=export tag=list>4050</field> <!-- espera caida -->
+        
+        <!-- Elimino la ocurrencia correspondiente del campo v3 -->       
+        <field action=delete tag=3><pft>v4001</pft></field>
+        <field action=delete tag=4001>ALL</field>
+
+        <!-- Agrego la Espera "CONFIRMADA" y con la fecha actualizada -->
+        <field action=add tag=3><pft>    
+            replace(replace(v4050,
+                    '^ePENDIENTE','^eCONFIRMADA'),
+                    s('^f',v4050^f,'^h',v4050^h),v3010)
+        </pft></field>
+
+        <!-- EN 33 pongo la info para el mail -->
+        
+        <field action=delete tag=list>5,10,30,3010,2001,2002,4001,4050,4051,4052</field>
+
+        <write>Unlock</write>
+        <field action=add tag=33><pft>'^c',v1^c,v3[LAST]</pft></field>
+        <field action=export tag=list>33,1101,1102</field>
+     </update>
+</do>
+
+<!-- No registro en la base movi si ocurre un error en la grabación -->
+<flow action=jump><pft>if val(v1102)<>0 then 'fin_update_movi' fi</pft></flow>
+
+
+<do task=update>
+<parm name=db>movi</parm>
+<parm name=mfn>New</parm>
+<parm name=fst><pft>cat('movi.fst')</pft></parm>
+<field action=define tag=1102>Isis_Status</field>
+<field action=define tag=1011>Isis_Lock</field>
+<update>
+    <field action=import tag=list>2000,2001,2002,4050,4051,4052</field> 
+    <!-- importa parte_id (2000), el DNI (2001), el operario (2002),
+    DNI de la nueva espera (4050) -->
+    <field action=add tag=1><pft>ref(['lector']l(['lector']v2001),v1)</pft></field>
+    <field action=add tag=2><pft>v2001</pft></field>
+    <field action=import tag=3>3010</field>
+    <field action=replace tag=4><pft>'^tespera_confirmada',v2000</pft></field>
+    <field action=import tag=5>2002</field>
+    <field action=add tag=6><pft>getenv('REMOTE_ADDR')</pft></field>
+    <field action=export tag=1102>1102</field>
+    <field action="delete" tag="list">2000,2001,2002,4050,4051,4052</field>
+    <write>Unlock</write>
+    </update>
+</do>
+<label>fin_update_movi</label>
+<call name=mail_reservas><pft>v33</pft></call> <!-- v4052 tiene los datos de la espera cerada -->
+
+<display><pft>
+    if (val(v1102)=0) then
+        '<img src="/omp/circulacion/images/ok.gif"> La espera ha sido confirmada.<br>',
+    else
+        ' Error!: No fue posible eliminar la espera. (',v1102,')'
+    fi,
+    '</body>'
+</pft></display>
+</section>
+</IsisScript>

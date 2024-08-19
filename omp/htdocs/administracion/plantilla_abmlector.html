@@ -42,7 +42,7 @@ function cargar_sancion() {
 </script>
 <table border="0" width="90%" bgcolor="#FFFFFF">
   <tr>
-    <th width="40%">Registro de Lector:
+    <th width="40%">Registrob de Lector:
       [pft]if v120:'Nuevo' then v120 else 'MFN: ',f(val(mfn),1,0) fi[/pft]</th>
     <tr>
     <td><big>
@@ -61,22 +61,36 @@ function cargar_sancion() {
   <table border="0" bgcolor="#FFFFFF" align="center">
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Nombre</b></td>
-      <td width="40%"><input type="text" name="nombre" size="40" value="[pft]v1[/pft]"></td>
-      <td width="20%" bgcolor="#BEE4FF"><b>Documento</b></td>
-      <td><input type="text" name="documento" size="15" value="[pft]v2[/pft]">
-					<input type="hidden" name="documento_anterior" value="[pft]v2[/pft]"></td>
+      <td width="40%">
+      	<input type="text" name="nombre" size="40" value="[pft]v1[/pft]" READONLY disabled="disabled">
+            
+      </td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Documento</b>
+      	          </td>
+      <td>
+      <select  name="tipoid" style="display:[pft]if not v120:'Nuevo' then 'none' fi[/pft]" READONLY disabled="disabled">
+            <option value="DNI" selected>DNI</option>
+            <option value="LE">LE</option>
+            <option value="LC">LC</option>
+            <option value="PAS">PAS</option>
+            <option value="CI">CI</option>
+    	    <option value="DNT">DNT</option>	   
+ 	  </select> 
+      <input type="text" name="documento" size="15" value="[pft]v2[/pft]" [pft]if not v120:'Nuevo' then 'READONLY' fi[/pft] READONLY disabled="disabled">
+	<input type="hidden" name="documento_anterior" value="[pft]v2[/pft]"></td>
+    <!-- [pft]if not v120:'Nuevo' then 'disabled="disabled"' fi[/pft]-->
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Domicilio (local)</b></td>
-      <td width="40%"><input type="text" name="domicilio" size="40" value="[pft]v6[/pft]"></td>
+      <td width="40%"><input type="text" name="domicilio" size="40" value="[pft]v6[/pft]" READONLY disabled="disabled"></td>
       <td width="20%" bgcolor="#BEE4FF"><b>Teléfono (local)</b></td>
-      <td><input type="text" name="telefono" size="15" value="[pft]v7[/pft]"></td>
+      <td><input type="text" name="telefono" size="15" value="[pft]v7[/pft]" READONLY disabled="disabled"></td>
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Domicilio (origen)</b></td>
-      <td width="40%"><input type="text" name="domicilio_origen" size="40" value="[pft]v14[/pft]"></td>
+      <td width="40%"><input type="text" name="domicilio_origen" size="40" value="[pft]v14[/pft]" READONLY disabled="disabled"></td>
       <td width="20%" bgcolor="#BEE4FF"><b>Teléfono (origen)</b></td>
-      <td><input type="text" name="telefono_origen" size="15" value="[pft]v15[/pft]"></td>
+      <td><input type="text" name="telefono_origen" size="15" value="[pft]v15[/pft]" READONLY disabled="disabled"></td>
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Categoría</b></td>
@@ -102,13 +116,13 @@ function cargar_sancion() {
 
 	  </td>
       <td width="20%" bgcolor="#BEE4FF"><b>Legajo</b></td>
-      <td><input type="text" name="legajo" size="15" value="[pft]v4[/pft]"></td>
+      <td><input type="text" name="legajo" size="15" value="[pft]v4[/pft]" READONLY disabled="disabled"></td>
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>email</td>
-      <td width="40%"><input type="text" name="email" size="40" value="[pft]v12[/pft]"></td>
+      <td width="40%"><input type="text" name="email" size="40" value="[pft]v12[/pft]" READONLY disabled="disabled"></td>
       <td width="20%" bgcolor="#BEE4FF"><b>Matrícula</b></td>
-      <td><input type="text" name="matricula" size="15" value="[pft]v5[/pft]"></td>
+      <td><input type="text" name="matricula" size="15" value="[pft]v5[/pft]" READONLY disabled="disabled"></td>
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Estado</td>

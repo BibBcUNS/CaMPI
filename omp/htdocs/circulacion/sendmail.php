@@ -16,7 +16,7 @@
 	fwrite($gestor,"OPERADOR: ".$opapellido.", ".$opnombre."\r\n");
 	fclose($gestor);
 	$message = file_get_contents($mfn.".log",true);
-	mail("correo@dominio.com.ar","Movi Log CaMPI",$message);
-	//unlink($mfn.".log");
+	mail("sistemasbibliotecas@uns.edu.ar","Movi Log CAMPI-DCIC No Reply",$message);
+	unlink($mfn.".log");
 	print $mfn;	
 	?>

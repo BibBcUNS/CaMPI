@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <title>Módulo de Circulación - MarcoPolo </title>
+    <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >	
+		<SCRIPT LANGUAGE="JavaScript">
+	<!--
+
+	function asignar(documento) {
+		window.parent.indice.document.form_id.lector.value = [pft]"'"n0,"'"n0[/pft];
+		window.parent.indice.document.form_id.lector.value = documento;
+		window.parent.indice.document.consultas.expresion.value = [pft]"'"n0,"'"n0[/pft];
+		window.parent.indice.document.consultas.expresion.value = documento;
+
+	}
+	
+	function mostrar_reservas() {
+		[pft]
+			if p(v1000) then
+				'alert("Se registran RESERVAS para los siguientes ejemplares:\n\n ',
+	                    		(' - ',v1000+|\n|),
+	                    '")'
+			fi
+		[/pft]		
+	}
+	
+	
+	//  End -->
+	</script>
+  </head>
+  <body onLoad="mostrar_reservas();window.parent.indice.document.form_paso_a_disponibilidad.inventario.value = '';" >
+    <div id="head"> 
+		<div id="title">Módulo de Circulación - OPEN MarcoPolo</div>
+		<div id="logo"><img src="/omp/circulacion/images/logocampi.gif" width="120" height="54"></div>
+    </div>
+    <div id="body_wrapper">
+      <div id="body">
+					 <div id="all">
+					 			<div class="top"></div>
+								<div class="content">
+         
+<!----------------------------------------------------------------------------->		   
+
+<table align="center" cellspacing="1" cellpadding="1" border="0" width="90%">
+
+<tr>
+    <td>&nbsp;</td>
+    <th align="center">Operación exitosa !</th>
+</tr>
+<tr>
+    <td><p>&nbsp;</p></td>
+    <td height="40"><p align="center"><font size="+1">Paso a disponibilidad</font></p>
+		<p align="center"><font face="Verdana" sixe="+2">Operación Nro: <strong>[pft]v3005[/pft]</strong></font></p><br>
+		<font face="Verdana">
+			Inventario:<strong><i>[pft]v4^i[/pft]</i></strong><br>
+			Fecha: [pft]v3^f[/pft]<br>
+			Hora: [pft]v3^h[/pft]<br>
+		</font>
+	</td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td height="40"><p align="center"><font face="Verdana">Procesado por por: <u>[pft]v5^a,|, |v5^b[/pft]</u></font></td>
+</tr>
+</table>
+<!------------------------------------------------------------------------------------------------->  
+								</div>
+								<div class="bottom"></div>
+						</div>
+        <div class="clearer"></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div id="end_body"></div>
+
+           <div id="footer"></div>
+
+</body>
+</html>

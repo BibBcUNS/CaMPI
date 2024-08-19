@@ -431,8 +431,15 @@ function CargarTerminal(Ip) {
 					    <option value="2019">2019</OPTION>
 							<option value="2020">2020</OPTION>
               <option value="2021">2021</OPTION>
-              <option value="2022" selected>2022</OPTION>
+              <option value="2022">2022</OPTION>
               <option value="2023">2023</OPTION>
+              <option value="2024" selected>2024</OPTION>					
+					    <option value="2025">2025</OPTION>
+							<option value="2026">2026</OPTION>
+              <option value="2027">2027</OPTION>
+              <option value="2028">2028</OPTION>
+              <option value="2029">2029</OPTION>	
+              <option value="2030">2030</OPTION>		
 				    </SELECT></TD>
       <td align="center">
          <select size="1" name="mes" 

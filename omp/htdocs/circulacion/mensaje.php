@@ -1,8 +1,8 @@
  <?php 
  $email=$_GET['email']; 
  $message=$_POST['mess'];
- $cabeceras = 'From: biblioteca@example.com' . "\r\n" .
-    'Reply-To: biblioteca@example.com' . "\r\n" .
+ $cabeceras = 'From: sistemasbibliotecas@uns.edu.ar' . "\r\n" .
+    'Reply-To: bc@uns.edu.ar' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 
 mail($para, $titulo, $mensaje, $cabeceras);

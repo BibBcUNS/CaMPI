@@ -1,0 +1,90 @@
+<!--
+v3002: lista de todos los inventarios a prestar (invs_prestamo_A + invs_prestamo_B)
+v3004: DNI lector
+-->
+
+<!-- Se asume que el ejemplar no se encuentra prestado.
+Si el ejemplar está reservado (sin importar quien lo reservó) no se puede prestar/renovar.
+-->
+<!-- Algoritmo que se implementa:
+
+	Si el lector está en espera para ese libro
+		Ok
+    sino
+		Si hay Reservas
+			Error: Objeto Reservado
+		sino
+			Si es Renovación
+				OK
+			sino
+				Si Total_Ejemplares - Prestados - Espera > Min_Cant_Disponible
+					OK
+				sino
+					Error: Objeto en espera para otro usuario
+					
+	TRADUCCION. Condición de error:
+-->
+<trace>!BR</trace>
+
+	<!--este control es ignorado para los objetos de tipo CONS -->
+	<flow action=skip><pft>if ref(['exist']l(['exist']v3002),v987)='CONS' then 'Next' fi</pft></flow>
+
+	<!--field action=import tag=3004>3004</field-->
+	<!-- v1100: Identificador de la parte a la que pertenece el nro. de inv indicado  -->
+	<field action="replace" tag="1100"><pft>ref(['partes']l(['partes']v3002),v1)</pft></field>
+	
+	<!-- v1102: Cadena para búsqueda -->
+	<field action="replace" tag="1102"><pft>v1100^b,'_',v1100^c,'_',v1100^p</pft></field>
+	
+	<!-- v1103: mfn del registro correspondiente a la parte indicada -->
+	<field action="replace" tag="1103"><pft>f(l(['reservas']v1102),1,0)</pft></field>
+	
+	<!-- v1104: Conjunto de DNIs de lectores en espera asociados a la parte indicada (cadena de DNIs) -->
+	<field action="replace" tag="1104"><pft>'~',ref(['reservas']val(v1103),(v3^i,'~'))</pft></field>
+	
+	<!-- v1105: Cantidad de esperas asociadas a la parte indicada -->
+	<field action="replace" tag="1105"><pft>ref(['reservas']val(v1103),f(nocc(v3),1,0))</pft></field>
+
+	<!-- v1109: Cantidad de reservas asociadas a la parte indicada -->
+	<field action="replace" tag="1109"><pft>ref(['reservas']val(v1103),f(nocc(v2),1,0))</pft></field>
+	
+
+	<!--  v1106: Cantidad total de ejemplares -->
+	<field action="replace" tag="2000" split="occ"><pft>ref(['partes']l(['partes']v3002),(v2/))</pft></field>
+	<field action="replace" tag="1106"><pft>f(nocc(v2000),1,0)</pft></field>
+
+	<!--  v1107: Lista de los inventarios hermanos. 
+	Nota: Este dato ya fue evaluado dos lineas arriba (corregir) -->
+	<field action="replace" tag="1107" split="occ"><pft>ref(['partes']l(['partes']v3002),(v2/))</pft></field> 
+	
+	<!--  v1108: Cantidad de ejemplares prestados -->
+	<field action="replace" tag="1108"><pft>f(size((if ref(['exist']l(['exist']v1107),v985) = 'PRES' then '1' fi)),1,0)</pft></field>
+
+	<!-- v1110: Contiene el DNI del usuario que posee el objeto si está prestado -->
+	<field action="replace" tag="1110"><pft>ref(['exist']l(['exist']v3002),if v985='PRES' then v998[LAST]^b fi)</pft></field>
+
+	<field action="replace" tag="4000"><pft>
+	
+	    if (not v1104:s('~',v3004,'~')) then
+			if val(v1109)>0 then
+    			v3002			/* El libro tiene reservas */
+			else
+				if (not v3004=v1110) then
+					if (not val(v1106)-val(v1108)-val(v1105)>0) then
+						v3002	/* No hay ejemplares disponibles (todos prestados y/o con esperas o reservas) */
+					fi
+				fi
+			fi
+		fi
+					
+				
+    </pft></field>
+	<field action="replace" tag="5000"><pft>
+	   if v4000='' then
+	      mhl,'ok'
+	   else
+	      mhl,'Error: Objeto con espera o reserva: ',(v4000+|;|)
+	   fi
+	</pft></field>
+	
+<label>verificaRes</label>

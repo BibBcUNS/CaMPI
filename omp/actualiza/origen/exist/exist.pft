@@ -1,0 +1,5 @@
+f2,cl4,m(3937,-3937)
+"MFN del Registro Bibl. (900):",tab(3937),v900/
+"Inventario del ejemplar (977):",tab(3937),v977/
+"Disponibilidad (985):",tab(3937),v985/
+(if p(v998) then 'Prestamos (998):',tab(3937),v998/fi)

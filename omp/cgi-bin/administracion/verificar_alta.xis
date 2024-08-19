@@ -44,7 +44,7 @@
 <IsisScript>
 
 <section>
-  <display><pft>'Content-type: text/html'/#</pft></display>
+  <display><pft>'Content-type: text/html; charset=ISO-8859-1'/#</pft></display>
 	<trace>!BR</trace>
 
   <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
@@ -56,6 +56,7 @@
 <head>
     <title>Módulo de Administración </title>
     <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
+    <meta  http-equiv="Content-type" content="text/html; charset=ISO-8859-1">
 </head>	
 	  <body>
     <div id="head">

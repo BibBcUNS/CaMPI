@@ -1,0 +1,9 @@
+config.*=/path_to/omp/bases/config/config.*
+marc.*=/path_to/omp/bases/marc/marc.*
+gizmo.*=/path_to/omp/bases/gizmo/gizmo.*
+lector.*=/path_to/omp/bases/lector/lector.*
+exist.*=/path_to/omp/bases/exist/exist.*
+partes.*=/path_to/omp/bases/partes/partes.*
+isbd.pft=/path_to/omp/bases/marc/omp_isbdopac.pft
+consulta.pft=/path_to/omp/bases/marc/omp_consultaopac.pft
+CI_TEMPDIR=/path_to/omp/bases/temp

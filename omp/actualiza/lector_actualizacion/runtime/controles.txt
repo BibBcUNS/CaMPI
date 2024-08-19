@@ -1,0 +1,11 @@
+- Registros
+142932
+- Prestamos
+242
+242
+- Sancionados
+30
+30
+- Sanciones
+12
+12

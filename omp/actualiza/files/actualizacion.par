@@ -1,0 +1,15 @@
+partes.*=destino/partes/partes.*
+marc.*=destino/marc/marc.*
+marc_exist.*=destino/marc/exist/exist.*
+marc_exist.fst=destino/marc/exist/exist.fst
+ej_estados.*=temp/ej_estados/ej_estados.*
+nc_p_i.*=temp/nc_p_i/nc_p_i.*
+def_ejemplares.pft=files/def_ejemplares.pft
+dcic.*=origen/bibliografica/dcic/biblio.*
+biblio.*=origen/bibliografica/biblio.*
+inv.fst=files/inv.fst
+nc_p.fst=files/nc_p.fst
+exist.*=origen/exist/exist.*
+exist_nueva.*=destino/exist/exist.*
+uctab.tab=files/ucans.tab
+actab.tab=files/acans.tab
