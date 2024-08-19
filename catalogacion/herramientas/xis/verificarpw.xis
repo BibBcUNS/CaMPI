@@ -10,7 +10,7 @@
 
 <parm name="cipar"><pft>
 	/* ----- Usuarios, permisos ----- */
-	'USERS.*=',             '/var/www/CaMPI/catalogacion/users/users.*'/
+	'USERS.*=',             '/PATH_TO/catalogacion/users/users.*'/
 </pft></parm>
 
 <do task="search">

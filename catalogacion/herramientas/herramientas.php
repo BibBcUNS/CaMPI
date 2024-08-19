@@ -1,6 +1,11 @@
 	<?php
+		// Importo las variables de configuracion para que funcione en el entorno configurado
+		$configs = include("config/config.php");
+		
 		$usuario = $_POST["usuario"];
 		$pw = $_POST["password"];
+
+
 	?>
 	<!-- Aca comienzan las herramientas, en caso de log correcto -->
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -63,7 +68,7 @@
 					return false;
 				}
 			}
-			// Controlamos que el campo DESTINO no estÃ¡ vacio
+			// Controlamos que el campo DESTINO no está vacio
 			if (passForm.mfn_destino.value == "") {
 				alert("Debe indicar el REGISTRO DESTINO")
 				passForm.base.focus()
@@ -104,14 +109,14 @@
 				return false
 			}
 
-			// Controlamos que el campo MFN DESTINO no setï¿½ vacio		
+			// Controlamos que el campo MFN DESTINO no setee vacio		
 			if (passForm.nc_fuente.value == "") {
 				alert("Debe indicar NÚMERO de registro")
 				passForm.nc_fuente.focus()
 				return false
 			}
 
-			// Controlamos que el NC sea un nï¿½mero.
+			// Controlamos que el NC sea un número.
 			if (!EsEntero(passForm.nc_fuente.value)) {
 				alert("El NÚMERO de registro no es válido")
 				passForm.nc_fuente.focus()
@@ -158,11 +163,11 @@
 			----------------------------------------------------------------------------------------------------->
 			<div id="divDescargaBase">
 				<form onsubmit="return validForm(this)" action="downloads/procesar.php" method="post">
-					<h2>Descarga de Base de Datos </h2>
+					<h2>Descarga de Base de Datos</h2>
 					<p>Base:    
 					<select id="selectBase" name="base">
 						<?php
-							$basesxis = file_get_contents("http://campicatalogacion.local/catalis/cgi-bin/wxis?IsisScript=../../herramientas/bases.xis&usuario=$usuario");
+							$basesxis = file_get_contents( $configs['host'] . "/catalis/cgi-bin/wxis?IsisScript=../../herramientas/bases.xis&usuario=$usuario");
 							$bases = explode(":", $basesxis);
 							for($i=0;$i<count($bases)-1;$i++){
 								echo "<option value=$bases[$i]>$bases[$i]</option>";
@@ -192,7 +197,7 @@
 				<p>Seleccione la Base de datos de la cual quiere Imprimir etiquetas:<br> <br>
 					<select name=base>
 						<?php
-							$basesxis = file_get_contents("http://campicatalogacion.local/catalis/cgi-bin/wxis?IsisScript=../../herramientas/bases.xis&usuario=$usuario");
+							$basesxis = file_get_contents( $configs['host'] . "/catalis/cgi-bin/wxis?IsisScript=../../herramientas/bases.xis&usuario=$usuario");
 							$bases = explode(":", $basesxis);
 							for($i=0; $i<count($bases)-1; $i++){
 								echo "<option value=$bases[$i]>$bases[$i]</option>";
@@ -304,7 +309,7 @@
 					<?php
 						echo '<option selected value=""></option>';
 
-						$basexis = file_get_contents("http://campicatalogacion.local/catalis/cgi-bin/wxis?IsisScript=../../herramientas/bases.xis&usuario=$usuario");
+						$basexis = file_get_contents( $configs['host'] . "/catalis/cgi-bin/wxis?IsisScript=../../herramientas/bases.xis&usuario=$usuario");
 						$bases = explode(":",$basesxis);
 						for($i=0;$i<count($bases)-1;$i++){
 							// Esto es una restricción QUE HAY QUE BORRAR
@@ -344,7 +349,7 @@
 						echo '<option selected value=""></option>';
 						for($i=0;$i<count($bases)-1;$i++){
 							// Esto es una restricción QUE HAY QUE BORRAR
-							if ($bases[$i] == "ucod-marc"  || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "eunm" || $bases[$i] == "huber" || $bases[$i] == "demo")
+							if ($bases[$i] == "ucod-marc"  || $bases[$i] == "bibadm" || $bases[$i] == "bibeco" || $bases[$i] == "eunm" || $bases[$i] == "huber" || $bases[$i] == "demo" || $bases[$i] == "demo-dev")
 							echo "<option value=$bases[$i]>$bases[$i]</option>";
 						}
 					?>
@@ -358,7 +363,7 @@
 						echo '<option selected value=""></option>';		
 						for($i=0; $i<count($bases)-1; $i++){
 							// Esto es una restricción QUE HAY QUE BORRAR
-							if ($bases[$i] == "eunm" || $bases[$i] == "ead" || $bases[$i] == "eeo" || $bases[$i] == "eunm-ebook"  || $bases[$i] == "ucod-marc" || $bases[$i] == "demo")
+							if ($bases[$i] == "eunm" || $bases[$i] == "ead" || $bases[$i] == "eeo" || $bases[$i] == "eunm-ebook"  || $bases[$i] == "ucod-marc" || $bases[$i] == "demo" || $bases[$i] == "demo-dev" )
 							echo "<option value=$bases[$i]>$bases[$i]</option>";
 						}
 					?>

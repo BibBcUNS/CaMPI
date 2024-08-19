@@ -271,12 +271,12 @@ function showRecordDetails(receivedRecord)
 	// Botones
 	//document.getElementById("aacrDisplayBtn").disabled = "";
 	document.getElementById("marcDisplayBtn").disabled = "";
-	document.getElementById("etiqDisplayBtn").disabled = "";
+	
 	document.getElementById("editRecordBtn").disabled = "";
 	
 	//document.getElementById("aacrDisplayBtn").style.backgroundColor = "";
 	document.getElementById("marcDisplayBtn").style.backgroundColor = "";
-	document.getElementById("etiqDisplayBtn").style.backgroundColor = "";
+
 	document.getElementById("postItNoteDisplayBtn").style.backgroundColor = "";	
 	document.getElementById(recordDisplayStyle + "DisplayBtn").style.backgroundColor = DISPLAY_STYLE_BGCOLOR;
 	
