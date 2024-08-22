@@ -92,7 +92,7 @@
 	<relator code="fnd" name="Funder" />
 	<relator code="fpy" name="First party" />
 	<relator code="frg" name="Forger" />
-	<relator code="-grt" name="Graphic technician" />
+	<relator code="grt" name="Graphic technician" />
 	<relator code="hnr" name="Honoree" />
 	<relator code="hst" name="Host" />
 	<relator code="ill" name="Illustrator" />

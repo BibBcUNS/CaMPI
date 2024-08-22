@@ -221,7 +221,7 @@ function readCodesAndTitle(dataElement)
 		case "relator" :
 			// TO-DO: pensar de qué manera se puede acotar la larga lista, en función del tipo
 			// de documento (video, musica, libro, etc.)
-			xmlCodes = callingWindowObject.xmlRelatorCodes;
+			xmlCodes = callingWindowObject.xmlData.xmlRelatorCodes;
 			Codes = top.selectNodesChrome("/" + "/relator", xmlCodes);
 			title = "Relator codes";
 			break;

@@ -605,7 +605,7 @@ function createSubfield( code, sfText, label, fieldTag )
     }
     newSubfieldBox.style.fontFamily = "lucida console, monospace";
     newSubfieldBox.style.fontSize = "14px";
-    newSubfieldBox.style.lineHeight = "17px";
+    newSubfieldBox.style.lineHeight = "21px";
   }
   else if ( fieldTag.search(/041|044/) != -1 ) {   // Language & country codes
     newSubfieldBox.readOnly = true;  // ATENCION: esta propiedad produce un bug al subir/bajar un subcampo $4 vacío
