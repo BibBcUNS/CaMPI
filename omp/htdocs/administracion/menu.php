@@ -37,6 +37,7 @@ if (isset($_SESSION["s_username"])
 				btn.value = texto;
 			}
 		}
+
 	</script>
 
   <body>
@@ -389,7 +390,7 @@ if (isset($_SESSION["s_username"])
 ?>
 
 <td colspan="2">
-	<form action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" target=resultado_grabar name=config_form> <!-- onSubmit="disable_button(document.config_form.grabar)" -->
+	<form id="config-form" action="/omp/cgi-bin/wxis.exe/omp/administracion/" method="post" target=resultado_grabar name=config_form> <!-- onSubmit="disable_button(document.config_form.grabar)" -->
 	<table width="100%" class="tabla-configuracion">
 		<tr>
             <td width="110px">
@@ -492,12 +493,12 @@ if (isset($_SESSION["s_username"])
         </tr><tr>
             <td align="right" valign="top">Cuerpo</td>
             <td>
-                <textarea name="plantilla_mail" class="plantilla_mail" rows=15 ><?php echo $config->plantilla_mail ?></textarea>
+                <textarea name="plantilla_mail" class="plantilla_mail" rows=15 disabled><?php echo $config->plantilla_mail ?></textarea>
                 <br>
                 <span style="font-size: 0.8em">
                     <ul>
                     <li>[[OBJETO]] <i>será reemplazado por los datos del libro (título / autor)</i></li>
-                    <li><i>No puede utilizar comillas en <b>Asunto</b> ni <b>Remitente</b></i></li>
+                    <li><i>No puede utilizar comillas dobles en ninguna de las tres secciones ( <b>Asunto</b>, <b>Remitente</b>, <b>Cuerpo</b>). Si introduce comillas dobles serán reemplazadas por comillas simples.</i></li>
                     </ul>
                 </span>
             </td>
@@ -528,6 +529,25 @@ if (isset($_SESSION["s_username"])
     </div>
     <div id="end_body"></div>
 		<div id="footer"></div>
+    <script>
+
+        let inputsNames = ["mail_asunto", "mail_nombre", "plantilla_mail"];
+        let configForm = document.getElementById("config-form");
+
+        // Realizo controles básicos sobre los campos del mail para que no haya comillas dobles
+        inputsNames.forEach(function(e){
+            configForm[e].addEventListener("blur", function(e){
+                e.target.value = e.target.value.replaceAll('"',"'");
+            });
+        });
+
+		// Realizo nuevo control al hacer submit del formulario
+		configForm.addEventListener("submit", function(e){
+			e.target.mail_asunto.value = e.target.mail_asunto.value.replaceAll('"', "'");
+			e.target.mail_nombre.value = e.target.mail_nombre.value.replaceAll('"', "'");
+			e.target.plantilla_mail.value = e.target.plantilla_mail.value.replaceAll('"', "'");
+		});
+	</script>
   </body>
 </html>
 <?php
