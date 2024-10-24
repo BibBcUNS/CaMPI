@@ -1033,14 +1033,17 @@ function marc2aacr(materialType,f001,f005,f008,marcDatafields,ejemplares,imageFi
                 // Limpio el ISBN sacando guiones (sino se rompe la vista AACR)
                 let isbnCleaned = fields_byTag["020"][i].replaceAll("-","");
 
-                var isbn_pattern = new RegExp(/^(\d{13}|\d{12}X|\d{10}|\d{9}X)/); // the order of testing is important
+                var isbn_pattern = new RegExp(/^(\d{13}|\d{12}X|\d{12}x|\d{10}|\d{9}X|\d{9}x)/); // the order of testing is important
                 var myISBN = isbn_pattern.exec(isbnCleaned.substr(4))[0];
+                myISBN = myISBN.replaceAll("x", "X");
 
-                // Lo "normalizamos"
                 var newISBN = ISBN.hyphenate(myISBN);
 
                 // Y sustituimos el ISBN original (eliminando los subcampos $z si los hubiese)
-                description += fields_byTag["020"][i].substr(4).replace(/\^z[^\^]+/g,"").replace(myISBN,newISBN).replace(/\^\w/g," ");
+                description += fields_byTag["020"][i].substr(4)
+                                                     .replace("x","X")
+                                                     .replace(/\^z[^\^]+/g,"")
+                                                     .replace(myISBN,newISBN).replace(/\^\w/g," ");
             }
         }
     }
