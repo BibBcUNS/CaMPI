@@ -1030,20 +1030,26 @@ function marc2aacr(materialType,f001,f005,f008,marcDatafields,ejemplares,imageFi
                 //var RE_ISBN = /^\d[ -]?\d?[ -]?\d?[ -]?\d?[ -]?\d?[ -]?\d?[ -]?\d?[ -]?\d?[ -]?\d?[ -]?[\dxX]?/;
                 //var myISBN = RE_ISBN.exec(fields_byTag["020"][i].substr(4))[0];
 
-                // Limpio el ISBN sacando guiones (sino se rompe la vista AACR)
-                let isbnCleaned = fields_byTag["020"][i].replaceAll("-","");
+                try {
+                    // Limpio el ISBN sacando guiones (sino se rompe la vista AACR)
+                    let isbnCleaned = fields_byTag["020"][i].replaceAll("-","");
 
-                var isbn_pattern = new RegExp(/^(\d{13}|\d{12}X|\d{12}x|\d{10}|\d{9}X|\d{9}x)/); // the order of testing is important
-                var myISBN = isbn_pattern.exec(isbnCleaned.substr(4))[0];
-                myISBN = myISBN.replaceAll("x", "X");
+                    var isbn_pattern = new RegExp(/^(\d{13}|\d{12}X|\d{12}x|\d{10}|\d{9}X|\d{9}x)/); // the order of testing is important
+                    var myISBN = isbn_pattern.exec(isbnCleaned.substr(4))[0];
+                    myISBN = myISBN.replaceAll("x", "X");
 
-                var newISBN = ISBN.hyphenate(myISBN);
+                    var newISBN = ISBN.hyphenate(myISBN);
 
-                // Y sustituimos el ISBN original (eliminando los subcampos $z si los hubiese)
-                description += fields_byTag["020"][i].substr(4)
-                                                     .replace("x","X")
-                                                     .replace(/\^z[^\^]+/g,"")
-                                                     .replace(myISBN,newISBN).replace(/\^\w/g," ");
+                    // Y sustituimos el ISBN original (eliminando los subcampos $z si los hubiese)
+                    description += fields_byTag["020"][i].substr(4)
+                                                         .replace("x","X")
+                                                         .replace(/\^z[^\^]+/g,"")
+                                                         .replace(myISBN,newISBN).replace(/\^\w/g," ");
+                } catch (error) {
+                    description += "-";
+                    console.log("Error en conversión ISBN (marc2aacr.js línea 1033)");
+                    console.log(error)
+                }
             }
         }
     }
