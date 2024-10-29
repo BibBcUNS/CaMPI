@@ -3,6 +3,8 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
+
+	$modulo = $_GET['modulo'];
 ?>
 <html>
 <head>
@@ -10,9 +12,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../css/login.css">
+	<link rel="shortcut icon" href=<?php if($modulo == 'catauto'){echo('../../img/favicon-catauto.ico');}else{echo('../../img/favicon.ico');}; ?> type="image/x-icon">
 
-    <?php
-        $modulo = $_GET['modulo'];
+	<?php
 
         if(isset($_SESSION["s_username"]) && isset($_SESSION["s_permiso"])){
             switch($modulo) {
