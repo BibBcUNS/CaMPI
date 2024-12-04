@@ -57,15 +57,23 @@
 </pft></display>
 <file action=close type=output>now</file>
 
-<display><pft>system(
-	'mail',
-	' -r ',"'"n0,'sistemasbibliotecas@uns.edu.ar ("',ref(['config']1,v19),'")',"'"n0,
-	' -s "$(echo -e "',ref(['config']1,v18),'\nContent-Type: text/plain; charset=UTF-8")"',
-	' -b sistemasbibliotecas@uns.edu.ar',
-	' ',v2004^e,
-	' < "',v123,'"'
-)</pft></display>
-	
+<field action=replace tag=124><pft>
+	replace(
+	replace(
+	  ref(['config']1,v20),
+	  '\n',
+	  '\\n'
+	),
+	'[[OBJETO]]',
+	s(v2004^a,v2004^c)
+	)
+</pft></field>
+
+<display><pft>
+system(
+	'echo ', v124,' | mutt -s "', ref(['config']1, v19),'" ',v2004^e ,''
+)
+</pft></display>
 		
 <label>fin_reserva_mail</label>	
 </function>
