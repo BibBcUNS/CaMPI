@@ -256,7 +256,7 @@ function createField(tag, ind, subfields)
     for (var j=0; j <= 1; j++) {
       var newInd = document.createElement("span");
       if ( xmlDatafield && xmlDatafield.getElementsByTagName("indicator")[j].getElementsByTagName("i").length == 0 ) {
-        newInd.style.visibility = "hidden";
+        // newInd.style.visibility = "hidden";
         oneIndicatorOnly = true;
       }
       newInd.innerHTML = ( ind ) ? ind.substr(j,1) : fieldTemplate.substr(j,1);

@@ -483,7 +483,9 @@
 			<i value="1" label-eng="Surname" label-spa="Apellido" />
 			<i value="3" label-eng="Family name" label-spa="Nombre de familia" />
 		</indicator>
-		<indicator pos="2" />
+		<indicator pos="2" label-eng="Undefined" >
+			<i value="#" label-eng="Undefined" label-spa="Indefinido"/>
+		</indicator>
 		<subfield code="a" repet="NR" label-spa="Nombre personal" label-eng="Personal name" oblig="ALL" />
 		<subfield code="b" repet="NR" label-spa="Numeración" label-eng="Numeration" />
 		<subfield code="c" repet="R" label-spa="Títulos, etc." label-eng="Titles, etc." />
@@ -518,7 +520,9 @@
 			<i value="1" label-spa="Nombre de jurisdicción" label-eng="Jurisdiction name"/>
 			<i value="2" label-spa="Nombre en orden directo" label-eng="Name in direct order"/>
 		</indicator>
-		<indicator pos="2" />
+		<indicator pos="2" label-eng="Undefined">
+			<i value="#" label-eng="Undefined" />
+		</indicator>
 		<subfield code="a" repet="NR" label-spa="Nombre corporativo o de jurisdicción" oblig="ALL" />
 		<subfield code="b" repet="R" label-spa="Unidad subordinada" />
 		<subfield code="c" repet="NR" label-spa="Lugar de reunión" />
@@ -551,7 +555,9 @@
 			<i value="1" label-eng="Jurisdiction name" />
 			<i value="2" label-eng="Name in direct order" />
 		</indicator>
-		<indicator pos="2" />
+		<indicator pos="2" label-eng="Undefined">
+			<i value="#" label-eng="Undefined" />
+		</indicator>
 		<subfield code="a" repet="NR" label-spa="Nombre de reunión" label-eng="Meeting name or jurisdiction name as entry element" oblig="ALL" />
 		<subfield code="c" repet="NR" label-spa="Lugar" label-eng="Location of meeting" />
 		<subfield code="d" repet="NR" label-spa="Fecha" label-eng="Date of meeting" />
