@@ -45,8 +45,10 @@ function loadTemplates() {
 		
 		datafields :
 			'100 1#^a^d\n' +
+			'377 ##^a^l\n' +
 			'400 1#^a^d\n' +
-			'670 ##^a^b\n' 
+			'670 ##^a^b\n' +
+			'678 0#^a'
 			
 	}
 	<!--  Plantilla para autores -->
@@ -54,9 +56,11 @@ function loadTemplates() {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
-		f008   : '######n|#ac|nnaabn' + '##########' + '|a#|ac#####d',
+		f008   : '######n|#acznnaabn' + '##########' + '#a#|ac#####d',
 		
 		datafields :
+			'035 ##^a\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'110 1#^a^d\n' +
 			'410 1#^a^d\n' +
 			'670 ##^a^b\n' 
@@ -68,9 +72,11 @@ function loadTemplates() {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
-		f008   : '######n|#ac|nnaabn' + '##########' + '|a#|ac#####d',
+		f008   : '######n|#acznnaabn' + '##########' + '#a#|ac#####d',
 		
 		datafields :
+			'035 ##^a\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'111 1#^a^d\n' +
 			'411 1#^a^d\n' +
 			'670 ##^a^b\n' 
@@ -84,9 +90,11 @@ function loadTemplates() {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
-		f008   : '######n|#ac|nnaabn' + '##########' + '|a#|ac#####d',
+		f008   : '######n|#acznnaabn' + '##########' + '#a#|ac#####d',
 		
 		datafields :
+			'035 ##^a\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'130 #0^a^d\n' +
 			'430 #0^a\n' +
 			'670 ##^a^b\n' 
@@ -97,9 +105,11 @@ function loadTemplates() {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
-		f008   : '######n|#ac|nnaabn' + '##########' + '|a#|ac#####d',
+		f008   : '######n|#acznnaabn' + '##########' + '#a#|ac#####d',
 		
 		datafields :
+			'035 ##^a\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'150 ##^a\n' +
 			'450 ##^a\n' +
 			'670 ##^a^b\n' 
@@ -110,9 +120,11 @@ function loadTemplates() {
 		html_help : "",
 		leader : 'nzo',
 		f001   : "[pendiente]",
-		f008   : '######n|#ac|nnaabn' + '##########' + '|a#|ac#####d',
+		f008   : '######n|#acznnaabn' + '##########' + '#a#|ac#####d',
 		
 		datafields :
+			'035 ##^a\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'151 ##^a\n' +
 			'451 ##^a\n' +
 			'670 ##^a^b\n' 
