@@ -55,14 +55,13 @@
 		<br>&nbsp;&nbsp;<b>africa or asia</b>&nbsp;&nbsp;o&nbsp;&nbsp;<b>africa + asia</b>
 		<p>Por comodidad, los términos son conectados por defecto con el operador <b>AND</b>, y a todos ellos se les agrega el operador de truncamiento <b>$</b>.
 		<p>No es necesario prestar atención a acentos u otros diacríticos, ni a las mayúsculas.
-		<p>Por el momento, sólo están disponibles en el diccionario <b>palabras individuales</b>, por lo tanto en lugar de <b>Pérez, José</b> puede escribir <b>perez jose</b>.
-		<p><b>Campos indizados:</b> 020, 022, 041, 1xx, 240, 245, 4xx, 6xx, 7xx, más leader/06 y algunas porciones del campo 008.
+		<p>La puntuación coma (,), punto (.) y guion (-) generan error de búsqueda, no utilizarlos;
+		<p>Sólo están disponibles en el diccionario <b>palabras individuales</b>, por lo tanto en lugar de <b>Pérez, José</b> puede escribir <b>perez jose</b>; del mismo modo, al escriir <b>departamento ingeniería</b> los resultados abarcarán los departamentos de distintas ingenierías.
 		<p>Algunos prefijos:
-		<br>&nbsp;&nbsp;<b>-F=1984</b> -> fecha de publicación 1984
-		<br>&nbsp;&nbsp;<b>-LANG=fre</b> -> idioma francés
-		<br>&nbsp;&nbsp;<b>-SN=0123456789</b> -> Standard Number (ISBN, ISSN)
-		<br>&nbsp;&nbsp;<b>-TYPE=j</b> -> tipo de registro = grabación musical, según Leader/06
-		<!--br>&nbsp;&nbsp;<b>!POSTITNOTE</b> -> notas de catalogación-->
+		<br>&nbsp;&nbsp;<b>-NC=002697</b> -> busca por número de control
+		<br>&nbsp;&nbsp;<b>-SN=05197201</b> -> números normalizados (ISBN, ISSN)
+		<br>&nbsp;&nbsp;<b>-ANOTACION-</b> -> indica registros con anotaciones (campo 980)
+		<br>&nbsp;&nbsp;<b>-CREADO_POR=MS-</b> -> recupera registros posteriores a oct. 2023, se colocan iniciales de quien lo haya creado
 		<br><br>Para recorrer el diccionario, haga click en la solapa "Índice".
 	</div>
 
@@ -83,10 +82,12 @@
 		demora mayor.
 		<p>Ejemplos:
 		<ul style="margin: 3px 2em;">
-			<li><b>p(v240)</b> (campo 240 presente)
-			<li><b>nocc(v246) > 1</b> (más de una ocurrencia del campo 246)
-			<li><b>v008*35.3=&#39;spa&#39; and v245^a.3 = &#39;El &#39; and v245*1.1&lt;&gt;&#39;3&#39;</b> (2o. indicador incorrecto en el campo 245)
-			<li><b>v245 : ' ='</b> (posible presencia de títulos paralelos)
+			<li><b>p(v368)</b> (presencia de un campo, 368 en el ejemplo)
+			<li><b>v373:'Universidad Nacional del Sur'</b> (busca el texto en todos los subcampos de un campo, 373 en el ejemplo)
+			<li><b>v043^a:'s-ag---'</b> (busca el texto en un subcampo en particular del campo, 043 en este caso)
+			<li><b>nocc(v500) > 1</b> (más de una ocurrencia del campo, 500 en el ejemplo)
+			<li><b>a(v040)</b> (ausencia de un campo, la expresion de búsqueda puede incluir subcampos)
+			<li><b>p(v400) AND a(v670)</b> (presencia de un campo y ausencia de otro. La expresión de búsqueda puede incluir subcampos)
 		</ul>
 	</div>
 	
