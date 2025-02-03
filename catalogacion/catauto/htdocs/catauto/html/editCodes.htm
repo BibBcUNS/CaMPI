@@ -198,21 +198,9 @@ function readCodesAndTitle(dataElement)
 	xmlFixedField = callingWindowObject.xmlFixedField;
 	
 	switch ( dataElement ) {
-		
-		/*
-		case "f008_06" :
-			Para Continuing Resources podemos agregar "/ estado de publicación"
-		*/
-		
 		case "f008_15_17" :
-		case "f044" :
-			xmlCodes = callingWindowObject.xmlData.xmlCountryCodes;
-			Codes = top.selectNodesChrome("/" + "/country", xmlCodes);
-			title = "008/15-17 · Lugar de publicación";
-			break;
-			
 		case "f008_35_37" :
-		case "f041" :
+		case "f377" :
 			xmlCodes = callingWindowObject.xmlData.xmlLanguageCodes;
 			Codes = top.selectNodesChrome("/" + "/language", xmlCodes);
 			title = "008/35-37 · Idioma";

@@ -610,29 +610,10 @@ function createSubfield( code, sfText, label, fieldTag )
     newSubfieldBox.style.fontSize = "14px";
     newSubfieldBox.style.lineHeight = "21px";
   }
-  else if ( fieldTag.search(/041|044/) != -1 ) {   // Language & country codes
+  else if ( tag_code == "377a" ) {   // Language & country codes
     newSubfieldBox.readOnly = true;  // ATENCION: esta propiedad produce un bug al subir/bajar un subcampo $4 vacío
     newSubfieldBox.onclick = function() {
       top.globalParameter = "f" + fieldTag;
-      window.top.globalObject = event.srcElement;
-      editCodedData();
-    }
-    newSubfieldBox.style.fontFamily = "lucida console, monospace";
-    newSubfieldBox.style.fontSize = "14px";
-    newSubfieldBox.style.lineHeight = "17px";
-  }
-  else if ( "2" == code ) {   // Source of heading or term
-    //newSubfieldBox.readOnly = true;
-    //newSubfieldBox.ondblclick = function() {showCodeTable("source")}
-    //newSubfieldBox.style.width = "5em";
-  }
-  else if ( "245h" == tag_code ) {    // DGM
-    newSubfieldBox.readOnly = true;
-  }
-  else if ( "7" == code ) {   // Control subfield for 76x-78x
-    newSubfieldBox.readOnly = true;
-    newSubfieldBox.onclick = function() {
-      top.globalParameter = "subfield7";
       window.top.globalObject = event.srcElement;
       editCodedData();
     }
@@ -647,9 +628,6 @@ function createSubfield( code, sfText, label, fieldTag )
   // ------------------------------------------------------------------------------
   
   newSubfieldBox.onchange = function() {
-    
-    //for ( var pp in this ) alert(pp + "=" + this[pp]);
-    //alert(this.scrollHeight + " -- " + this.offsetHeight);
     
     // ATENCION: tenemos lo que parece ser un bug, detectado al jugar con
     // el campo 773. Por un lado, el onchange del $z no anda, y por otro,
