@@ -133,13 +133,16 @@ if (isset($_SESSION["s_username"])
         Doc. <input type="radio" name="id_lector" value="mfn">
         MFN<br />
         <input type="submit" value="Presentar">
-        </form>
-        <!--form method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" style="display:inline">
+	</form>
+
+ <!-- Este boton 'Nuevo' Se comenta cuando se utiliza la plataforma de usuarios, y se descomenta cuando no -->
+
+        <form method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" style="display:inline">
         <input type="hidden" name="IsisScript" value="administracion/abmlector.xis">
         <input type="hidden" name="opcion" value="Registro Nuevo">
         <input type="hidden" name="invocado" value="menu.html">
         <input type="submit" value="Nuevo">
-        </form--></strong>
+        </form></strong>
     </td>
 </tr>
 <tr>
@@ -374,19 +377,10 @@ if (isset($_SESSION["s_username"])
 
 </td-->
 <?php
-	//include "../circulacion/json/JSON.php";
+    // $configA = json_decode(file_get_contents("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis"));
 
-	//$ptr_config = fopen("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis","r");
-	
-    //$config_obtener = fread($ptr_config,2000);
-    //$config_obtener = str_replace("\r\n", '\r\n', $config_obtener);
-
-    //fclose($ptr_config);
-	//$json = new Services_JSON();
-	//$config = $json->decode($config_obtener);
-
-    $config=json_decode(str_replace("\r\n", '\r\n', file_get_contents("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis")));
-
+    $config = json_decode(str_replace("\r\n", '\r\n', file_get_contents("http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/omp/cgi-bin/wxis.exe/omp/administracion/?IsisScript=administracion/config_obtener.xis")));
+    
 ?>
 
 <td colspan="2">
@@ -493,7 +487,7 @@ if (isset($_SESSION["s_username"])
         </tr><tr>
             <td align="right" valign="top">Cuerpo</td>
             <td>
-                <textarea name="plantilla_mail" class="plantilla_mail" rows=15 disabled><?php echo $config->plantilla_mail ?></textarea>
+                <textarea name="plantilla_mail" class="plantilla_mail" rows=15 ><?php echo $config->plantilla_mail ?></textarea>
                 <br>
                 <span style="font-size: 0.8em">
                     <ul>
@@ -529,26 +523,25 @@ if (isset($_SESSION["s_username"])
     </div>
     <div id="end_body"></div>
 		<div id="footer"></div>
-    <script>
+	<script>
 
-        let inputsNames = ["mail_asunto", "mail_nombre", "plantilla_mail"];
-        let configForm = document.getElementById("config-form");
+        	let inputsNames = ["mail_asunto", "mail_nombre", "plantilla_mail"];
+		let configForm = document.getElementById("config-form");
 
-        // Realizo controles básicos sobre los campos del mail para que no haya comillas dobles
-        inputsNames.forEach(function(e){
-            configForm[e].addEventListener("blur", function(e){
-                e.target.value = e.target.value.replaceAll('"',"'");
-            });
-        });
-
-		// Realizo nuevo control al hacer submit del formulario
+		// Al hacer submit del formulario vuelvo a reemplazar las comillas dobles por simples
 		configForm.addEventListener("submit", function(e){
-			e.target.mail_asunto.value = e.target.mail_asunto.value.replaceAll('"', "'");
-			e.target.mail_nombre.value = e.target.mail_nombre.value.replaceAll('"', "'");
-			e.target.plantilla_mail.value = e.target.plantilla_mail.value.replaceAll('"', "'");
+            		// Realizo controles básicos sobre los campos del mail para que no haya comillas dobles
+		    	inputsNames.forEach(function(id){
+				e.target[id].value = e.target[id].value.replaceAll('"', "'");
+		    	});
+            
+            		// Reemplazo los saltos de línea por string literal \n para que se guarde asi en base.
+            		// Al recuperar el registro luego, se arma un JSON, de esta manera sin saltos de linea no se rompe.
+            		e.target.plantilla_mail.value = e.target.plantilla_mail.value.replaceAll('\n',"\\n");
 		});
-	</script>
-  </body>
+
+	</script> 
+ </body>
 </html>
 <?php
 }else{

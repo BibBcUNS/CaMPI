@@ -47,7 +47,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 <IsisScript>
 
 <section>
-  <display><pft>'Content-type: text/html; charset=ISO-8859-1'/#</pft></display>
+  <display><pft>'Content-type: text/html'/#</pft></display>
   <trace>!On</trace>
   <parm name=cipar><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
 
@@ -65,12 +65,12 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 <html>
 <head>
    <title>Open MarcoPolo - Módulo Administración</title>
-   <meta  http-equiv="Content-type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="/omp/css/style.css" >
 
+<!-- Esta función se deja comentada cuando se utiliza la plataforma de usuarios, y se descomenta cuando no -->
     
 		<SCRIPT language="JavaScript">
-		<!--
+		
 			function verificar_datos() {
 				if (window.document.form_abm.documento.value=="" || window.document.form_abm.nombre.value=="") {
 					alert ("Ingrese Nombre y Documento");
@@ -95,7 +95,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
 					}
 				}
 			}
-		-->		
+				
 		</SCRIPT>
 
 </head>
@@ -125,7 +125,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
   <label>Registro Nuevo</label>
 
   <field action="add" tag="10">Habilitado</field>
-        <do task=mfnrange>
+  <do task=mfnrange>
 			<parm name=db>tipo_lector</parm>
 			<loop>
 				<field action=export previous=add tag=2000>1</field>
@@ -280,23 +280,33 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
     <field action=define tag=1102>Isis_Status</field>
     <field action=define tag=1011>Isis_Lock</field>
     <update>
-      <field action="delete" tag="list">3,10,11,17</field>
-
       <field action=import tag=130>130</field>
-      <field action=cgi tag=25>tipoid</field>
-	    <field action=cgi tag=26>documento</field>
-	    <!--field action=replace tag=2><pft>
-	    	if v130='New' then v25,v26 else v26 fi /* Si es un registro nuevo concatenamos el tipo */
-	    </pft></field-->
-
+      <field action=cgi tag=25>tipoid</field> 
+      <field action="delete" tag="list">1/20</field>
+      <field action=cgi tag=1>nombre</field>
+      <field action=cgi tag=2>documento</field>
+      <field action=replace tag=2><pft>
+	if v130='New' then v25,v2 else v2 fi /* Si es un registro Nuevo concatenamos el tipo */
+      </pft></field>
       <field action=cgi tag=3>categoria</field>
+      <field action=cgi tag=4>legajo</field>
+      <field action=cgi tag=5>matricula</field>
+      <field action=cgi tag=6>domicilio</field>
+      <field action=cgi tag=7>telefono</field>
+      <field action=cgi tag=8>prestamos</field>
+      <field action="replace" tag="8" split="occ"><pft>(v8/)</pft></field>
+      <field action=cgi tag=9>reservas</field>
+      <field action="replace" tag="9" split="occ"><pft>(v9/)</pft></field>
       <field action=cgi tag=10>estado</field>
       <field action=cgi tag=11>sanciones</field>
       <field action="replace" tag="11" split="occ"><pft>replace(v11,'%',s(/#))</pft></field>
-      
-      <field action=cgi tag=17>observaciones_lector</field>
+      <field action=cgi tag=12>email</field>
+      <field action=cgi tag=14>domicilio_origen</field>
+      <field action=cgi tag=15>telefono_origen</field>
+      <field action=cgi tag=16>vigencia_datos</field>	
+	  <field action=cgi tag=17>observaciones_lector</field>
       <field action="replace" tag="17" split="occ"><pft>(v17/)</pft></field>
-      <field action="delete" tag="list">130,25,26</field>
+      <field action="delete" tag="list">130,25</field>
       <write>Unlock</write>
 			<field action="add" tag="130"><pft>mfn</pft></field> <!-- exporta el mfn por si es un uevo -->
 			<field action="export" tag="130" previous="delete">130</field>
@@ -336,7 +346,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
     <parm name="db">lector</parm>
     <parm name="from"><pft>v130</pft></parm>
 		<parm name="count">1</parm>
-		<!--parm name="gizmo">ansioem</parm-->
+    <parm name="gizmo">ansioem</parm>		
 		<loop>
 		  <do task="update">
 		    <parm name="db">lector</parm>
@@ -422,7 +432,7 @@ Esta script realiza alta, baja y modif. a la base LECTOR -->
     <parm name=db>lector</parm>
     <parm name=from><pft>v130</pft></parm>
     <parm name=count>1</parm>
-	<parm name="gizmo">oemansi</parm>
+		<parm name="gizmo">oemansi</parm>
     <field action=define tag=1102>Isis_Status</field>
     <loop>
       <field action=import tag=list>110,120</field>

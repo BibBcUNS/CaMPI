@@ -39,10 +39,15 @@ function cargar_sancion() {
 	
     }
 }
+
 </script>
+
+
+<!-- ------------------------ CODIGO EN CASO DE QUE NO SE USE LA PLATAFORMA DE USUARUIS -------------------------------- -->
+
 <table border="0" width="90%" bgcolor="#FFFFFF">
   <tr>
-    <th width="40%">Registrob de Lector:
+    <th width="40%">Registro de Lector:
       [pft]if v120:'Nuevo' then v120 else 'MFN: ',f(val(mfn),1,0) fi[/pft]</th>
     <tr>
     <td><big>
@@ -61,36 +66,31 @@ function cargar_sancion() {
   <table border="0" bgcolor="#FFFFFF" align="center">
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Nombre</b></td>
-      <td width="40%">
-      	<input type="text" name="nombre" size="40" value="[pft]v1[/pft]" READONLY disabled="disabled">
-            
-      </td>
-      <td width="20%" bgcolor="#BEE4FF"><b>Documento</b>
-      	          </td>
-      <td>
-      <select  name="tipoid" style="display:[pft]if not v120:'Nuevo' then 'none' fi[/pft]" READONLY disabled="disabled">
-            <option value="DNI" selected>DNI</option>
-            <option value="LE">LE</option>
-            <option value="LC">LC</option>
-            <option value="PAS">PAS</option>
-            <option value="CI">CI</option>
-    	    <option value="DNT">DNT</option>	   
- 	  </select> 
-      <input type="text" name="documento" size="15" value="[pft]v2[/pft]" [pft]if not v120:'Nuevo' then 'READONLY' fi[/pft] READONLY disabled="disabled">
-	<input type="hidden" name="documento_anterior" value="[pft]v2[/pft]"></td>
-    <!-- [pft]if not v120:'Nuevo' then 'disabled="disabled"' fi[/pft]-->
+      <td width="40%"><input type="text" name="nombre" size="40" value="[pft]v1[/pft]"></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Documento</b></td>
+      <td>   <select name="tipoid" style="display:[pft]if not v120:'Nuevo' then 'none' fi[/pft]">
+		      <option value="DNI" selected>DNI</option> 
+		      <option value="LE">LE</option> 
+		      <option value="LC">LC</option> 
+		      <option value="PAS">PAS</option> 
+		      <option value="CI">CI</option> 
+		      <option value="DNT">DNT</option>
+		</select>
+	
+	<input type="text" name="documento" size="15" value="[pft]v2[/pft]" [pft]if not v120:'Nuevo' then 'disabled="disabled"' fi[/pft]>
+	<input type="hidden" name="documento_anterior" value="[pft]v2[/pft]" ></td>
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Domicilio (local)</b></td>
-      <td width="40%"><input type="text" name="domicilio" size="40" value="[pft]v6[/pft]" READONLY disabled="disabled"></td>
+      <td width="40%"><input type="text" name="domicilio" size="40" value="[pft]v6[/pft]"></td>
       <td width="20%" bgcolor="#BEE4FF"><b>Teléfono (local)</b></td>
-      <td><input type="text" name="telefono" size="15" value="[pft]v7[/pft]" READONLY disabled="disabled"></td>
+      <td><input type="text" name="telefono" size="15" value="[pft]v7[/pft]"></td>
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Domicilio (origen)</b></td>
-      <td width="40%"><input type="text" name="domicilio_origen" size="40" value="[pft]v14[/pft]" READONLY disabled="disabled"></td>
+      <td width="40%"><input type="text" name="domicilio_origen" size="40" value="[pft]v14[/pft]"></td>
       <td width="20%" bgcolor="#BEE4FF"><b>Teléfono (origen)</b></td>
-      <td><input type="text" name="telefono_origen" size="15" value="[pft]v15[/pft]" READONLY disabled="disabled"></td>
+      <td><input type="text" name="telefono_origen" size="15" value="[pft]v15[/pft]"></td>
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Categoría</b></td>
@@ -103,26 +103,35 @@ function cargar_sancion() {
 			
 
 			[pft]
-			if v3[1]='' or v3[1]='SIN_CATEGORIA' then 
+			 if v3[1]='' or v3[1]='SIN_CATEGORIA' then 
 			'<option value="" SELECTED>SIN CATEGORIA</option>',
 			
 			fi,
 			(	
-			'<option value="',v2000,'" ',if (v2000=v3[1]) then ' SELECTED ' fi,'>',ref(['tipo_lector']l(['tipo_lector']v2000),v2),'</option>',
+			'<option value="',v2000,'" ',if (v2000=v3[1]) then ' SELECTED ' fi,'>',ref(['tipo_lector']l(['tipo_lector']v2000),v2),'</option>'
 			)
 
 			[/pft]
-		</select>
+		</select> 
+
+			<!--	<select name="categoria" style="width:300px">
+                        [pft](
+                                '
+                                <option value="',v2000,'" ',if (v2000=v3[1]) then ' SELECTED ' fi,'>',ref(['tipo_lector']l(['tipo_lector']v2000),v2),'</option>
+                                '
+                        )[/pft]
+                </select> -->
+
 
 	  </td>
       <td width="20%" bgcolor="#BEE4FF"><b>Legajo</b></td>
-      <td><input type="text" name="legajo" size="15" value="[pft]v4[/pft]" READONLY disabled="disabled"></td>
+      <td><input type="text" name="legajo" size="15" value="[pft]v4[/pft]"></td>
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>email</td>
-      <td width="40%"><input type="text" name="email" size="40" value="[pft]v12[/pft]" READONLY disabled="disabled"></td>
+      <td width="40%"><input type="text" name="email" size="40" value="[pft]v12[/pft]"></td>
       <td width="20%" bgcolor="#BEE4FF"><b>Matrícula</b></td>
-      <td><input type="text" name="matricula" size="15" value="[pft]v5[/pft]" READONLY disabled="disabled"></td>
+      <td><input type="text" name="matricula" size="15" value="[pft]v5[/pft]"></td>
     </tr>
     <tr>
       <td width="20%" bgcolor="#BEE4FF"><b>Estado</td>
@@ -179,6 +188,185 @@ function cargar_sancion() {
   [/pft]
 
 </form>
+
+<!-- ------------------------------------------------- FIN CODIGO SIN PLATAFORMA USUARIOS --------------------------------- -->
+
+
+<!-- ------------------------ CODIGO EN CASO DE QUE SE USE LA PLATAFORMA DE USUARioS -------------------------------- -->
+
+<!--
+
+<table border="0" width="90%" bgcolor="#FFFFFF">
+  <tr>
+    <th width="40%">Registro de Lector:
+      [pft]if v120:'Nuevo' then v120 else 'MFN: ',f(val(mfn),1,0) fi[/pft]</th>
+    <tr>
+    <td><big>
+			[pft]
+				select v120 
+					case 'Registro Nuevo':  'Complete los datos del nuevo registro',
+					case 'Presentar':       'Edición del registro',
+					case 'Grabar':	        'Grabado del registro',
+					case 'Borrar':	        'Borrado del registro'
+				endsel[/pft]</big></td></tr>
+</table>
+
+-->
+
+<!--
+
+<form name="form_abm" method="POST" action="/omp/cgi-bin/wxis.exe/omp/administracion/" onsubmit="return verificar_datos()" target="Verifica"> 
+  <input type="hidden" name="IsisScript" value="administracion/verificar_alta.xis">
+  <table border="0" bgcolor="#FFFFFF" align="center">
+    <tr>
+      <td width="20%" bgcolor="#BEE4FF"><b>Nombre</b></td>
+      <td width="40%"><input type="text" name="nombre" size="40" value="[pft]v1[/pft]" READONLY disabled="disabled" ></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Documento</b></td>
+      <td>   <select name="tipoid" style="display:[pft]if not v120:'Nuevo' then 'none' fi[/pft]" READONLY disabled="disabled" >
+		      <option value="DNI" selected>DNI</option> 
+		      <option value="LE">LE</option> 
+		      <option value="LC">LC</option> 
+		      <option value="PAS">PAS</option> 
+		      <option value="CI">CI</option> 
+		      <option value="DNT">DNT</option>
+		</select>
+	
+	<input type="text" name="documento" size="15" value="[pft]v2[/pft]" [pft]if not v120:'Nuevo' then 'READONLY' fi[/pft] READONLY disabled="disabled" >
+	<input type="hidden" name="documento_anterior" value="[pft]v2[/pft]" ></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#BEE4FF"><b>Domicilio (local)</b></td>
+      <td width="40%"><input type="text" name="domicilio" size="40" value="[pft]v6[/pft]" READONLY disabled="disabled" ></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Teléfono (local)</b></td>
+      <td><input type="text" name="telefono" size="15" value="[pft]v7[/pft]" READONLY disabled="disabled" ></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#BEE4FF"><b>Domicilio (origen)</b></td>
+      <td width="40%"><input type="text" name="domicilio_origen" size="40" value="[pft]v14[/pft]" READONLY disabled="disabled" ></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Teléfono (origen)</b></td>
+      <td><input type="text" name="telefono_origen" size="15" value="[pft]v15[/pft]" READONLY disabled="disabled" ></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#BEE4FF"><b>Categoría</b></td>
+      <td width="40%">
+
+
+
+
+
+		[pft](v3[1])[/pft]
+
+-->
+
+		<!-- <option value="',v2000,'" ',if (v2000=v3[1]) then ' SELECTED ' fi,'>',ref(['tipo_lector']l(['tipo_lector']v2000),v2),'</option> -->
+
+<!--
+
+		<select name="categoria" style="width:300px">
+			
+
+			[pft]
+			 if v3[1]='' or v3[1]='SIN_CATEGORIA' then 
+			'<option value="" SELECTED>SIN CATEGORIA</option>',
+			
+			fi,
+			(	
+			'<option value="',v2000,'" ',if (v2000=v3[1]) then ' SELECTED ' fi,'>',ref(['tipo_lector']l(['tipo_lector']v2000),v2),'</option>'
+			)
+
+			[/pft]
+		</select>
+
+-->
+
+			<!--	<select name="categoria" style="width:300px">
+                        [pft](
+                                '
+                                <option value="',v2000,'" ',if (v2000=v3[1]) then ' SELECTED ' fi,'>',ref(['tipo_lector']l(['tipo_lector']v2000),v2),'</option>
+                                '
+                        )[/pft]
+                </select> -->
+
+<!--
+
+	</td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Legajo</b></td>
+      <td><input type="text" name="legajo" size="15" value="[pft]v4[/pft]" READONLY disabled="disabled" ></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#BEE4FF"><b>email</td>
+      <td width="40%"><input type="text" name="email" size="40" value="[pft]v12[/pft]" READONLY disabled="disabled" ></td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Matrícula</b></td>
+      <td><input type="text" name="matricula" size="15" value="[pft]v5[/pft]" READONLY disabled="disabled" ></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#BEE4FF"><b>Estado</td>
+      <td width="40%">
+      	<select id="estado" name="estado" onchange="cargar_sancion()">
+      		<option value="Habilitado" [pft]if s(mhu,v10).3='HAB' then 'selected' fi,mpl[/pft]>Habilitado</option>
+      		<option value="Sancionado" [pft]if s(mhu,v10).3='SAN' then 'selected' fi,mpl[/pft]>Sancionado</option>
+		<option value="Nohabilitado" [pft]if s(mhu,v10).3='NOH' then 'selected' fi,mpl[/pft]>No habilitado</option>
+      	</select>
+      </td>
+      <td width="20%" bgcolor="#BEE4FF"><b>Sanciones</b></td>
+      <td><input type="text" id="sanciones" name="sanciones" size="25" value="[pft]v11+|%|[/pft]"></td>
+    </tr>
+    <tr>
+      <td colspan="3" bgcolor="#BEE4FF"><b>Vigencia de Datos</td>
+      	<td><input type="text" name="vigencia_datos" size="10" value="[pft]
+			if val(s(v16)*6.4,s(v16)*3.2,s(v16)*0.2) < val(s(date).8) then
+				'31/12/',s(date).4,
+			else 
+				,v16,
+			fi[/pft]">
+		</td>
+	</tr>
+  </table>
+
+-->
+
+<!--
+	[pft]
+    if p(v8) then 
+'    <input type="Hidden" name="prestamos" value="',(v8/),'">'/ fi,
+    if p(v9) then 
+'    <input type="Hidden" name="reservas" value="',(v9/),'">'/ fi,
+    if p(v17) then 
+'    <input type="Hidden" name="observaciones_lector" value="',(v17/),'">'/ fi,[/pft]
+	<br>
+  
+	[pft]
+'    		<input type="hidden" name="id_operador" value="',v300,'">'/
+'		<input type="hidden" name="link_regreso" value="',v400,'">'/
+			select v120 
+			case 'Registro Nuevo':  
+'    		<input type="hidden" name="mfn_lector" value="New">'/
+'    		<input type="submit" value="Grabar" name="opcion">'/
+'    		<input type="Button" value="Cancelar" name="opcion" onclick="Javascript:history.go(-1)">'/		
+  				case 'Presentar':
+'		<input type="hidden" name="mfn_lector" value="',mfn,'">'/
+'    		<input type="submit" value="Grabar" name="opcion">'/
+			if p(v400) then
+'   		 		<input type="submit" value="Borrar" name="opcion">'/
+			fi
+'	   	<input type="submit" value="Cancelar" name="opcion" onclick="window.document.form_abm.documento.value=window.document.form_abm.documento_anterior.value">'/					
+			case 'Borrar':
+'		<input type="hidden" name="mfn_lector" value="',mfn,'">'/
+' 	 	<input type="submit" value="Cancelar" name="opcion">'/
+'    <		input type="submit" value="Confirma el BORRADO ?" name="opcion">'/
+		endsel
+  [/pft]
+
+</form>
+
+-->
+
+
+<!-- ------------------------------------------------- FIN CODIGO PARA PLATAFORMA USUARIOS --------------------------------- -->
+
+
+
+
 <!--###################################################-->		
 
 								</div>
