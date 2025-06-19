@@ -166,7 +166,7 @@ En caso de no ser submit se Muestra el Formulario
 <call name=mail_reservas><pft>v7</pft></call> <!-- v4052 tiene los datos de la espera cerada -->
 <label>FIN_MAIL</label>
 
-<display>{"estado":"ok","mensaje":"La operaci&oacute;n se ha realizado correctamentes"}</display>
+<display>{"estado":"ok","mensaje":"La operaci&oacute;n se ha realizado correctamente"}</display>
 
 <label>FIN</label>
 
