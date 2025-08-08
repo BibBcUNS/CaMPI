@@ -1,0 +1,109 @@
+<IsisScript>
+<section>
+  <display><pft>'Content-type: text/html'/#</pft></display>
+  <parm name="cipar"><pft>cat(getenv('PATH_TRANSLATED'),'cipar.par')</pft></parm>
+  <field action=cgi tag=110>nc</field>
+
+
+  <field action=replace tag=1000>[</field>  
+  
+  <do task=search>
+    <parm name=db>partes</parm>
+    <parm name=expression><pft>'-NC=',v110</pft></parm>
+    <loop>
+		<field action=import tag=list>1000,110</field>
+		<field action=replace tag=859 split=occ><pft>ref(['marc']l(['marc']'NC=',v110),(v859/))</pft></field>
+		<!--display><pft>(v1859,'<br>')</pft></display-->
+		<!--display><pft>mfn,':',(v1859,' - '),'<br>'</pft></display-->
+		<!--list action=load><pft>(v859/)</pft></list>
+		<do task=list>
+		<field action=define tag=1859>Isis_Item</field>
+		<loop>
+			<field action=import tag=list>2500,2501</field>
+			<field action=add tag=2500><pft>if s(mhu,v1859^v)=s(mhu,v1^p) then '{"',v1859^p,'":"',v1859^b,'"}' fi</pft></field>
+			<field action=add tag=2501><pft>if s(mhu,v1859^v)=s(mhu,v1^p) then v1859^p,'-',v1859^b fi</pft></field>
+			<field action=export tag=2500>2500</field>
+			<field action=export tag=2501>2501</field>
+		</loop>
+		</do-->
+		<field action=replace tag=2000><pft>v1^b,'_',v1^c,'_',v1^p</pft></field>
+
+		<!-- creo para cada v2 una ocurrencia v3 con el sector de ese inventario -->
+		<list action=delete>now</list>
+		<list action=load><pft>(v2/)</pft></list>
+		<do task=list>
+		<field action=define tag=1002>Isis_Item</field>
+		<loop>
+			<field action=import tag=list>3,859</field>
+			<field action=add tag=3><pft>(if s(mhu,v859^p)=v1002[1] then v859^b fi)</pft></field>
+			<field action=export tag=list>3</field>
+		</loop>
+		</do>
+		<!--display><pft>('<b>++</b>',v3,'++')</pft></display>
+		
+		<flow action=exit>now</flow-->
+		
+		<field action=replace tag=1000>
+			<pft>
+				v1000,
+					
+						'{',
+							'"parte":"',v1^p,'", ',
+							'"signatura":"',ref(['marc']l(['marc']'NC=',v110),v859[1]^k,' ',v859[1]^h,' ', v859[1]^i),'",',
+							'"reservas":"',ref(['reservas']l(['reservas']v2000),f(nocc(v2),1,0)),'",',
+							'"esperas":"',ref(['reservas']l(['reservas']v2000),f(nocc(v3),1,0)),'",',
+							'"ejemplares_domicilio":[',
+								(
+									if s(ref(['exist']l(['exist']v2),v987))='PERM' 
+									then
+										'{"inventario":"',v2,'"',
+										',',
+										'"estado":"',ref(['exist']l(['exist']v2),v985),'"',
+										',',
+										'"tipoObj":"',ref(['exist']l(['exist']v2),v987),'"',
+										',',
+										'"sector":"',v3,'"}'
+									fi
+								),
+							'],',
+							'"ejemplares_consulta":[',
+							    (
+								if s(ref(['exist']l(['exist']v2),v987))='CONS' or s(ref(['exist']l(['exist']v2),v987))='SALA'
+									or s(ref(['exist']l(['exist']v2),v987))='MANUALES' or s(ref(['exist']l(['exist']v2),v987))='BACIC' 
+                                    then
+                                            '{"inventario":"',v2,'"',
+                                            ',',
+                                            '"estado":"',ref(['exist']l(['exist']v2),v985),'"',
+                                            ',',
+                                            '"tipoObj":"',ref(['exist']l(['exist']v2),v987),'"',
+                                            ',',
+											'"sector":"',v3,'"}'
+                                    fi
+
+						    ),
+							']',
+						'}'
+
+			</pft>
+		</field>
+		<field action=export tag=1000>1000</field>
+    	
+	</loop>
+  </do>
+
+  <field action=replace tag=1000><pft>v1000,']'</pft></field>
+  
+  <field action=replace tag=1000>
+  	<pft>
+		replace(
+			v1000,
+			'}{',
+			'},{'
+		)
+	</pft>
+  </field>
+  <display><pft>v1000</pft></display>	
+
+
+</section>
+</IsisScript>
