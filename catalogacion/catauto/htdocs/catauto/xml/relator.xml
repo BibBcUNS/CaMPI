@@ -175,6 +175,7 @@
 	<relator code="stl" name="Storyteller" />
 	<relator code="stn" name="Standards body" />
 	<relator code="str" name="Stereotyper" />
+	<relator code="tch" name="Teacher" />
 	<relator code="ths" name="Thesis advisor" />
 	<relator code="trc" name="Transcriber" />
 	<relator code="trl" name="Translator" />
