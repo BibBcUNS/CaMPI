@@ -70,8 +70,10 @@ function removeSubfield(subfield)
 		subfield.parentNode.removeChild(subfield);
 		//focusedSubfieldBox.focus();
 		
-		// Efectos colaterales del remove de un subcampo
-		updatePunctuation(field);
+		// Actualizar puntuación
+		let tag_code = field.querySelector("TR TD DIV").innerHTML + subfield.querySelector("TR TD DIV").innerHTML;
+		updatePunctuation(field, tag_code);
+
 		if ( "245" == field.tag ) {
 			refreshTitleBar();
 		}
@@ -417,27 +419,26 @@ function moveSubfield(subfield, dir)
 // Devuelve una referencia al subcampo desplazado.
 // -----------------------------------------------------------------------------
 {
-	// NOTA: swapNode is Microsoft (IE) only
-	var mSubfield;
 	switch ( dir ) {
 		case "up" :
-			swapElements(subfield, subfield.previousSibling)
+			swapElements(subfield, subfield.previousSibling);
 			break;
 		case "down" :
-			swapElements(subfield.nextSibling, subfield)
+			swapElements(subfield.nextSibling, subfield);
 			break;
 		default :
 			alert("moveSubfield error: dir=" + dir);
 			break;
 	}
 
-	// Efectos colaterales del movimiento
-	var field = parentField(mSubfield,"subfield");
-	updatePunctuation(field);  // ATENCION: ¿testeamos primero si se trata de un campo para el que hay puntuación automática?
+	// Actualizar puntuación
+	var field = parentField(subfield,"subfield");
+	let tag_code = field.querySelector("TR TD DIV").innerHTML + subfield.querySelector("TR TD DIV").innerHTML;
+	updatePunctuation(field, tag_code);
 	if ( "245" == field.tag ) {
 		refreshTitleBar();
 	}
 
-	return mSubfield;
+	return subfield;
 }
 

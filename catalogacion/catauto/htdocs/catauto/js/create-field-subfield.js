@@ -694,16 +694,8 @@ function createSubfield( code, sfText, label, fieldTag )
       catalisMessage(msg, true);
       return;
     }
-    
-    // ATENCION: esta regex nos da la lista de tags que admiten ajuste automático
-    // de la puntuación. ¿No sería mejor definirla en otro sitio, más cercano al
-    // código donde se maneja la puntuación de tales campos?
-    
-    var AUTO_PUNCT_TAGS = /020.|[167]00.|[167]10.|[1678]11.|24[05].|250.|254.|26[04].|300.|310.|321.|4[49]0.|50[0124]a|510.|773[^xz]|830./;
-    
-    if ( AUTOMATIC_PUNCTUATION && tag_code.search(AUTO_PUNCT_TAGS) != -1 ) {
-      updatePunctuation(parentField(this, "subfieldBox"));
-    }
+
+    updatePunctuation(parentField(this, "subfieldBox"), tag_code);
     
     // ----------------------------------
     // Campo 245
