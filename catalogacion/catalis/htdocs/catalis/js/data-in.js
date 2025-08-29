@@ -114,12 +114,12 @@ function createRecord(newRecParams)
         document.getElementById("ejemplaresBtn").style.backgroundColor = "";
     }
 
-  // Tipo de archivo de imagen
-  f985 = "";
-  mostrarImagen();
+    // Tipo de archivo de imagen
+    f985 = "";
+    mostrarImagen();
 
-  // Etiquetas generadas
-  f993 = "";
+    // Etiquetas generadas
+    f993 = "";
 
     // Original record state = el contenido de la plantilla
     originalRecord = serializeRecord(true,true,true,true);
@@ -221,12 +221,12 @@ function showRecordInForm(receivedRecord)
     //form.recordOK.checked = (receivedRecord.OK == "OK");
     //form.recordOK.parentNode.className = (receivedRecord.OK == "OK") ? "recordOK" : "recordNotOK";
 
-  // Tipo de archivo de imagen
-  f985 = receivedRecord.f985;
-  mostrarImagen();
+    // Tipo de archivo de imagen
+    f985 = receivedRecord.f985;
+        mostrarImagen();
 
-  // Etiquetas generadas
-  f993 = receivedRecord.f993;
+    // Etiquetas generadas
+    f993 = receivedRecord.f993;
 
     // Save original record state
     originalRecord = serializeRecord(true,true,true,true);
@@ -249,11 +249,16 @@ function showRecordInForm(receivedRecord)
     document.getElementById("btnPrevResult").style.backgroundImage = ( 1 == g_editResultIndex ) ? "url('" + HTDOCS + "img/1x1.gif')" : "url('" + HTDOCS + "img/left.gif')";
     document.getElementById("btnNextResult").style.backgroundImage = ( totalResults == g_editResultIndex ) ? "url('" + HTDOCS + "img/1x1.gif')" : "url('" + HTDOCS + "img/right.gif')";
 
-    // Quitamos el cartel de "Solicitando el registro..."
-    document.getElementById("cartel").style.display = "none";
-
-    // Foco al primer subcampo del campo 245
-    setTimeout('firstSubfieldBox(document.getElementById("field245")).focus()',100);
+    // Uso setTimeout por problemas de asincronía en la petición del registro
+    setTimeout( ()=> {
+        // Foco al primer subcampo del campo 245
+        firstSubfieldBox(document.getElementById("field245")).focus()
+        // Ajusto tamaño de los textarea del registro en edicion
+        top.updateTextareaHeight();
+        // Quitamos el cartel de "Solicitando el registro..."
+        document.getElementById("cartel").style.display = "none";
+    } , 500);
+    
 }
 
 
