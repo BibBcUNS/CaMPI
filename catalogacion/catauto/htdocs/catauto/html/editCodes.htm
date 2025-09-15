@@ -196,15 +196,19 @@ function readCodesAndTitle(dataElement)
 //-----------------------------------------------------------
 {
 	xmlFixedField = callingWindowObject.xmlFixedField;
-	
 	switch ( dataElement ) {
 		case "f008_15_17" :
-		case "f008_35_37" :
-		case "f377" :
+			xmlCodes = callingWindowObject.xmlData.xmlCountryCodes;
+			Codes = top.selectNodesChrome("/" + "/country", xmlCodes);
+			title = "008/15-17 · Lugar de publicación";
+			break;
+
+		case "f377a":
+		case "f377l":
 			xmlCodes = callingWindowObject.xmlData.xmlLanguageCodes;
 			Codes = top.selectNodesChrome("/" + "/language", xmlCodes);
-			title = "008/35-37 · Idioma";
-			break;
+			title = "377 - Código de lengua";
+		break;
 			
 		case "relator" :
 			// TO-DO: pensar de qué manera se puede acotar la larga lista, en función del tipo
@@ -241,11 +245,6 @@ function renderMenu(dataElement,activeCode,sortBy)
 	switch (g_codeType) {
 	
 		case "single" :
-			
-			/*if ( "f008_15_17" == dataElement ) {
-				document.getElementById("alphabet").style.display = "block";
-			}*/
-			
 			var newSelect = document.createElement("select");
 			newSelect.id = "codeList";
 			newSelect.size = (Codes.length <= 15) ? Codes.length : 8; //Math.min(15,Codes.length)
@@ -257,8 +256,17 @@ function renderMenu(dataElement,activeCode,sortBy)
 			//newSelect.onchange = singleCodeChange;
 			for (var i=0; i < Codes.length; i++) {
 				var newOption = document.createElement("option");
+
 				newOption.value = Codes[i].getAttribute("code");
-				newOption.selected = (newOption.value == activeCode);
+				newOption.languageName = Codes[i].getAttribute("name");
+
+				// Marcamos opción como activa si es igual a la pasada por parámetro
+				if (dialogArguments[1] == "f377a"){
+					newOption.selected = (newOption.value == activeCode);
+				}else if (dialogArguments[1] == "f377l"){
+					newOption.selected = (newOption.languageName == activeCode);
+				}
+				
 				newSelect.appendChild(newOption);
 				
 				var myValue = newOption.value.replace(/([^^#])#/g,"$1 "); // "mx#" se muestra como "mx "; la expr.reg. podría quizás cambiarse por /(\w)#/g

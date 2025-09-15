@@ -67,7 +67,7 @@ function rawEdit(aacr)
 
 // -----------------------------------------------------------------------------
 function editCodedData()
-// Para editar códigos del "fixed field" (leader & 008), campos 041, 044, etc.
+// Para editar códigos del "fixed field" (leader & 008), v377, etc.
 // -----------------------------------------------------------------------------
 {
 	let dataElement = top.globalParameter;
@@ -78,14 +78,14 @@ function editCodedData()
 
     var winProperties;
 
-    if ( dataElement.search(/relator|f041|f044/) != -1 ) {  //Codigos de theLeftPanel
+    if ( dataElement.search(/relator|f377a|f377l/) != -1 ) {  // Códigos de theLeftPanel
 
         if( dataElement == "subfield7"){
-            URL = HTDOCS + "html/subfield-7.htm"; //Diferente plantilla para subfield-7
+            URL = HTDOCS + "html/subfield-7.htm"; // Diferente plantilla para subfield-7
         }
 
         var srcObject = event.srcElement;
-        var activeCode = srcObject.value;  // TO-DO: evt for mozilla
+        var activeCode = srcObject.value; 
         var codeType = "single";
 
         dialogLeft = event.clientX;
@@ -94,7 +94,7 @@ function editCodedData()
         winProperties = "visibility: hidden; font-size:10px; dialogWidth: $dialogWidthToReplace; dialogHeight: $dialogHeightToReplace; status:no; help:no";
 
 
-    } else {  //Codigos de theRightPanel
+    } else {  // Códigos de theRightPanel
 
         var form = document.getElementById("marcEditForm");
         var activeCode = form[dataElement].value;
@@ -126,7 +126,7 @@ function editCodedData()
     winProperties = winProperties.replace("$dialogWidthToReplace", dialogWidth+"px");
     winProperties = winProperties.replace("$dialogHeightToReplace", dialogHeight+"px");
 
-
+    // Luego de hacer el seteo de la URL a abrir, abrimos la ventana modal...
     (async function(){
         var newCode = await window.showModalDialog(URL, dialogArgs, winProperties);
         let objEvent = window.top.globalObject;
@@ -137,7 +137,7 @@ function editCodedData()
         
         
         if ( null != newCode ) {
-            if ( dataElement.search(/relator|f041|f044/) != -1 ) {
+            if ( dataElement.search(/relator|f377a|f377l/) != -1 ) {
                 objEvent.value = newCode.value;
             } else {
                 document.getElementById("marcEditForm")[dataElement].value = newCode.value;

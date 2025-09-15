@@ -610,10 +610,10 @@ function createSubfield( code, sfText, label, fieldTag )
     newSubfieldBox.style.fontSize = "14px";
     newSubfieldBox.style.lineHeight = "21px";
   }
-  else if ( tag_code == "377a" ) {   // Language & country codes
+  else if ( tag_code == "377a" || tag_code == "377l" ) {   // Language & country codes
     newSubfieldBox.readOnly = true;  // ATENCION: esta propiedad produce un bug al subir/bajar un subcampo $4 vacío
     newSubfieldBox.onclick = function() {
-      top.globalParameter = "f" + fieldTag;
+      top.globalParameter = "f" + tag_code;
       window.top.globalObject = event.srcElement;
       editCodedData();
     }
