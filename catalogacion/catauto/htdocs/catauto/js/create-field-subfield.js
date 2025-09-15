@@ -612,14 +612,15 @@ function createSubfield( code, sfText, label, fieldTag )
   }
   else if ( tag_code == "377a" || tag_code == "377l" ) {   // Language & country codes
     newSubfieldBox.readOnly = true;  // ATENCION: esta propiedad produce un bug al subir/bajar un subcampo $4 vacío
+    
+    // Si no tiene valor (porque se acaba de crear) entonces le asignamos un espacio en blanco (por problemas con height)
+    newSubfieldBox.value = newSubfieldBox.value === '' ? ' ' : newSubfieldBox.value;
+    
     newSubfieldBox.onclick = function() {
       top.globalParameter = "f" + tag_code;
       window.top.globalObject = event.srcElement;
       editCodedData();
     }
-    newSubfieldBox.style.fontFamily = "lucida console, monospace";
-    newSubfieldBox.style.fontSize = "14px";
-    newSubfieldBox.style.lineHeight = "17px";
   }
   
   
