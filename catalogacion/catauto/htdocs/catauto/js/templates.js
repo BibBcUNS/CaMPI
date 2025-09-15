@@ -39,15 +39,6 @@ function loadTemplates() {
 	// Actualmente están las plantillas para nombre personal, nombre corporativo, 
 	// nombre de reunión, título uniforme, temático, nombre geográfico
 
-	let codigo_institucional = '';
-
-	// El código institucional AR-BaUNS puede ser tanto para GB como para STT
-	if( ACTIVE_USER_ID == 'GB' || ACTIVE_USER_ID == 'STT' || ACTIVE_USER_ID == 'TEST' ){
-		codigo_institucional = 'AR-BaUNS'
-	}else if( ACTIVE_USER_ID == 'MS' ){
-		codigo_institucional = 'AR-BaBDC'
-	}
-
 	templates["NOMBRE PERSONAL"] = {
 		html_help : "",
 		leader : 'nzo',
@@ -55,8 +46,8 @@ function loadTemplates() {
 		f008   : '######n|#acznnaabn' + '##########' + '#a#|ac#####d',
 		
 		datafields :
-			'035 ##^a('+ codigo_institucional +')\n' +
-			'040 ##^a' + codigo_institucional + '^bspa^c' + codigo_institucional + '^eaacr\n' +
+			'035 ##^a\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'100 1#^a^d\n' +
 			'377 ##^a^l\n' +
 			'400 1#^a^d\n' +
@@ -73,7 +64,7 @@ function loadTemplates() {
 		
 		datafields :
 			'035 ##^a\n' +
-			'040 ##^a' + codigo_institucional + '^bspa^c'+codigo_institucional+'^eaacr\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'110 1#^a^d\n' +
 			'410 1#^a^d\n' +
 			'670 ##^a^b\n' 
@@ -88,7 +79,7 @@ function loadTemplates() {
 		
 		datafields :
 			'035 ##^a\n' +
-			'040 ##^a'+ codigo_institucional +'^bspa^c'+ codigo_institucional +'^eaacr\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'111 1#^a^d\n' +
 			'411 1#^a^d\n' +
 			'670 ##^a^b\n' 
@@ -103,7 +94,7 @@ function loadTemplates() {
 		
 		datafields :
 			'035 ##^a\n' +
-			'040 ##^a'+ codigo_institucional +'^bspa^c'+ codigo_institucional +'^eaacr\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'130 #0^a^d\n' +
 			'430 #0^a\n' +
 			'670 ##^a^b\n' 
@@ -118,7 +109,7 @@ function loadTemplates() {
 		
 		datafields :
 			'035 ##^a\n' +
-			'040 ##^a'+ codigo_institucional +'^bspa^c'+ codigo_institucional +'^eaacr\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'150 ##^a\n' +
 			'450 ##^a\n' +
 			'670 ##^a^b\n' 
@@ -133,7 +124,7 @@ function loadTemplates() {
 		
 		datafields :
 			'035 ##^a\n' +
-			'040 ##^a'+ codigo_institucional +'^bspa^c'+ codigo_institucional +'^eaacr\n' +
+			'040 ##^a^bspa^c^eaacr\n' +
 			'151 ##^a\n' +
 			'451 ##^a\n' +
 			'670 ##^a^b\n' 
