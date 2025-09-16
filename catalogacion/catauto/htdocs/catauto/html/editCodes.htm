@@ -39,7 +39,11 @@ function singleCodeChange()
 {
 	var selectedCode = new Object();
 	var menu = document.getElementById("codeList");
-	selectedCode.value = menu.options[menu.selectedIndex].value;
+	if (dialogArguments[1] == "f377l"){
+		selectedCode.value = menu.options[menu.selectedIndex].languageName;
+	}else{
+		selectedCode.value = menu.options[menu.selectedIndex].value;
+	}
 	selectedCode.description = menu.options[menu.selectedIndex].innerHTML;
 	return selectedCode;
 }
