@@ -342,13 +342,13 @@ fi,
 	/* Agrego campos 100^d y 100^q a el listado principal para mejor identificacion del registro */
 	if p(v100^d) then
 	'<div style="display: inline">'
-	 	' | ', v100^d
+	 	v100^d
 	'</div>'
 	fi,
 
 	if p(v100^q) then
 	'<div style="display: inline">'
-	 	' | ', v100^q
+	 	' ', v100^q
 	'</div>'
 	fi,
 
