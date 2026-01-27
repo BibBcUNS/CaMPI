@@ -1040,6 +1040,10 @@ function marc2aacr(materialType,f001,f005,f008,marcDatafields,ejemplares,imageFi
 
                     var newISBN = ISBN.hyphenate(myISBN);
 
+                    if (newISBN === null){
+                        newISBN = myISBN;
+                    }
+
                     // Y sustituimos el ISBN original (eliminando los subcampos $z si los hubiese)
                     description += fields_byTag["020"][i].substr(4)
                                                          .replace("x","X")
