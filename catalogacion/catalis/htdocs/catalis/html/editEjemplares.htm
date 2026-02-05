@@ -118,11 +118,6 @@ function saveData(dataId)
 		return;
 	}
 	
-	// Eliminamos espacios múltiples y espacios extremos
-	formElement.value = formElement.value.replace(/\s+/g," ");
-	formElement.value = formElement.value.replace(/^\s/,"");
-	formElement.value = formElement.value.replace(/\s$/,"");
-	
 	// Almacenamos el cambio
 	ejemplares[activeEj][dataId] = formElement.value;
 	
@@ -214,7 +209,7 @@ function usarSelectParaColeccion(database) {
 	//No es necesario que estén todas. Si no está en esta lista toma el caso por defecto
 	//Viene como parametro database (el nombre de la base en la que estoy)
 	bibliotecas=[
-		   ["Biblioteca Central",["eunm","ucod-marc","demo","bibima","huber"]],
+		   ["Biblioteca Central",["eunm","ucod-marc","demo", "demo-dev","bibima","huber"]],
 		   ["Biblioteca Administracion",["ead","bibadm", "gabcoop"]],
 		   ["Biblioteca Economia",["eeo","bibeco"]],
 		   ["Biblioteca Humanidades",["bham"]],
@@ -695,26 +690,21 @@ function init()
 	document.getElementById("btnNewEjemplar").onclick = newEjemplar;
 	document.getElementById("btnConfirmarBaja").onclick = darDeBaja;
 	document.getElementById("btnConfirmarAlta").onclick = darDeAlta;
-	var allInputs = document.getElementsByTagName("input");
 
-	for (var i=0; i < allInputs.length; i++) {
-		if ( allInputs[i].type == "text" ) {
-			allInputs[i].onkeyup = function(){
-				// Este evento tambien debería tomar eventos de CTRL+V
-				saveData(this.id)
-			}
+	let allInputs = document.getElementsByClassName("trim");
+	for (let i = 0; i < allInputs.length; i++) {
+ 		if (allInputs[i].type === "text") {
 
-			// Agrego evento onpaste para tomar tambien los pegados con click derecho - pegar
-			allInputs[i].onpaste = function(){
-				// Tomo el elemento de this ahora porque lo pierdo en el setTimeOut
-				let id = this.id;
+ 		  allInputs[i].addEventListener("input", function () {
+ 		    saveData(this.id);
+ 		  });
 
-				// Si intento saveData(id) acá no alcanza a tomar el valor de lo pegado
-				setTimeout(function(){
-					saveData(id);
-				}, 100);
-			}
-		}
+ 		  // Cuando sale del input: se limpia
+ 		  allInputs[i].addEventListener("blur", function () {
+ 		    this.value = this.value.replace(/\s/g, '');
+ 		  });
+
+ 		}
 	}
 
 	var allTextareas = document.getElementsByTagName("textarea");
@@ -885,18 +875,18 @@ window.onload = init;
 				<tbody>
 					<tr>
 						<td class="ejLabel">Inventario</td>
-						<td><input id="inventario" type="text" size="15" style="background: #FF9;"></td>
+						<td><input class="trim" id="inventario" type="text" size="15" style="background: #FF9;"></td>
 						<!--Asignar al grabar-->
 					</tr>
 					<tr>
 						<td class="ejLabel">Parte</td>
-						<td><input id="parte" type="text" size="15">
+						<td><input class="trim" id="parte" type="text" size="15">
 							<span style="font-size: 11px;"><em>e.g.</em> Vol. 1 &#183; Tomo III</span>
 						</td>
 					</tr>
 					<tr>
 						<td class="ejLabel">Nro. de ejemplar</td>
-						<td><input id="numeroEj" type="text" size="10"></td>
+						<td><input class="trim" id="numeroEj" type="text" size="10"></td>
 					</tr>
 				</tbody>
 				
@@ -919,19 +909,19 @@ window.onload = init;
 								<tr>
 									<td>
 										Prefijo
-										<input id="STprefijo" type="text" style="width: 40px;">
+										<input class="trim" id="STprefijo" type="text" style="width: 40px;">
 									</td>
 									<td>
 										Clase
-										<input id="STclase" type="text" style="width: 90px;">
+										<input class="trim" id="STclase" type="text" style="width: 90px;">
 									</td>
 									<td>
 										Librística
-										<input id="STlibristica" type="text" style="width: 114px;">
+										<input class="trim" id="STlibristica" type="text" style="width: 114px;">
 									</td>
 									<td>
 										Volumen
-										<input id="STvolumen" type="text" style="width: 46px;">
+										<input class="trim" id="STvolumen" type="text" style="width: 46px;">
 									</td>
 								</tr>
 							</table>
