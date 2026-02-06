@@ -691,14 +691,23 @@ function init()
 	document.getElementById("btnConfirmarBaja").onclick = darDeBaja;
 	document.getElementById("btnConfirmarAlta").onclick = darDeAlta;
 
-	let allInputs = document.getElementsByClassName("trim");
-	for (let i = 0; i < allInputs.length; i++) {
- 		if (allInputs[i].type === "text") {
- 		  allInputs[i].addEventListener("input", function () {
-			this.value = this.value.replace(/\s/g, '');
- 		    saveData(this.id);
- 		  });
+	// Añado evento "input" para limpiar campos que deben trimearse y guardar
+	let inputsToTrim = document.getElementsByClassName("trim");
+	for (let i = 0; i < inputsToTrim.length; i++) {
+ 		if (inputsToTrim[i].type === "text") {
+			inputsToTrim[i].addEventListener("input", function () {
+			  	this.value = this.value.replace(/\s/g, '');
+				saveData(this.id);
+			});
  		}
+	}
+
+	// Añado evento "input" para limpiar campos restantes
+	let allInputs = document.getElementsByTagName("input");
+	for (var i=0; i < allInputs.length; i++) {
+		allInputs[i].addEventListener("input", function(){
+			saveData(this.id);
+		}); 
 	}
 
 	var allTextareas = document.getElementsByTagName("textarea");
