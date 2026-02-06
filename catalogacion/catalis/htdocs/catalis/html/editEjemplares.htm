@@ -694,16 +694,10 @@ function init()
 	let allInputs = document.getElementsByClassName("trim");
 	for (let i = 0; i < allInputs.length; i++) {
  		if (allInputs[i].type === "text") {
-
  		  allInputs[i].addEventListener("input", function () {
+			this.value = this.value.replace(/\s/g, '');
  		    saveData(this.id);
  		  });
-
- 		  // Cuando sale del input: se limpia
- 		  allInputs[i].addEventListener("blur", function () {
- 		    this.value = this.value.replace(/\s/g, '');
- 		  });
-
  		}
 	}
 
