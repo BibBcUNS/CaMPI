@@ -1,227 +1,227 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <field043>
-    <option code='a' name='Asia' />
-    <option code='a-af' name='Afghanistan' />
-    <option code='a-ai' name='Armenia (Republic)' />
-    <option code='a-ba' name='Bahrain' />
-    <option code='a-bg' name='Bangladesh' />
-    <option code='a-br' name='Burma' />
-    <option code='a-bt' name='Bhutan' />
-    <option code='a-bx' name='Brunei' />
-    <option code='a-cb' name='Cambodia' />
-    <option code='a-cc' name='China' />
+    <option code='a------' name='Asia' />
+    <option code='a-af---' name='Afghanistan' />
+    <option code='a-ai---' name='Armenia (Republic)' />
+    <option code='a-ba---' name='Bahrain' />
+    <option code='a-bg---' name='Bangladesh' />
+    <option code='a-br---' name='Burma' />
+    <option code='a-bt---' name='Bhutan' />
+    <option code='a-bx---' name='Brunei' />
+    <option code='a-cb---' name='Cambodia' />
+    <option code='a-cc---' name='China' />
     <option code='a-cc-hk' name='Hong Kong (China)' />
     <option code='a-cc-im' name='Inner Mongolia (China)' />
     <option code='a-cc-pe' name='Beijing (China)' />
     <option code='a-cc-sm' name='Shanghai (China)' />
     <option code='a-cc-ti' name='Tibet (China)' />
-    <option code='a-ce' name='Sri Lanka' />
-    <option code='a-ch' name='Taiwan' />
-    <option code='a-cy' name='Cyprus' />
-    <option code='a-em' name='Timor-Leste' />
-    <option code='a-gs' name='Georgia (Republic)' />
-    <option code='a-ii' name='India' />
-    <option code='a-io' name='Indonesia' />
-    <option code='a-iq' name='Iraq' />
-    <option code='a-ir' name='Iran' />
-    <option code='a-is' name='Israel' />
-    <option code='a-ja' name='Japan' />
-    <option code='a-jo' name='Jordan' />
-    <option code='a-kn' name='Korea (North)' />
-    <option code='a-ko' name='Korea (South)' />
-    <option code='a-kr' name='Korea' />
-    <option code='a-ku' name='Kuwait' />
-    <option code='a-kz' name='Kazakhstan' />
-    <option code='a-le' name='Lebanon' />
-    <option code='a-ls' name='Laos' />
-    <option code='a-mk' name='Oman' />
-    <option code='a-mp' name='Mongolia' />
-    <option code='a-my' name='Malaysia' />
-    <option code='a-np' name='Nepal' />
-    <option code='a-nw' name='New Guinea' />
-    <option code='a-ph' name='Philippines' />
-    <option code='a-pk' name='Pakistan' />
-    <option code='a-pp' name='Papua New Guinea' />
-    <option code='a-qa' name='Qatar' />
-    <option code='a-si' name='Singapore' />
-    <option code='a-su' name='Saudi Arabia' />
-    <option code='a-sy' name='Syria' />
-    <option code='a-ta' name='Tajikistan' />
-    <option code='a-th' name='Thailand' />
-    <option code='a-ts' name='United Arab Emirates' />
-    <option code='a-tu' name='Turkey' />
-    <option code='a-uz' name='Uzbekistan' />
-    <option code='a-vt' name='Vietnam' />
-    <option code='a-ye' name='Yemen (Republic)' />
-    <option code='ac' name='Asia, Central' />
-    <option code='ae' name='East Asia' />
-    <option code='ai' name='Indochina' />
-    <option code='am' name='Malaya' />
-    <option code='aopf' name='Paracel Islands' />
-    <option code='aoxp' name='Spratly Islands' />
-    <option code='ap' name='Persian Gulf' />
-    <option code='as' name='Southeast Asia' />
-    <option code='aw' name='Middle East' />
-    <option code='awba' name='West Bank' />
-    <option code='awgz' name='Gaza Strip' />
-    <option code='az' name='South Asia' />
-    <option code='b' name='Commonwealth countries' />
-    <option code='cc' name='Caribbean Area; Caribbean Sea' />
-    <option code='cl' name='Latin America' />
-    <option code='e' name='Europe' />
-    <option code='e-aa' name='Albania' />
-    <option code='e-an' name='Andorra' />
-    <option code='e-au' name='Austria' />
-    <option code='e-be' name='Belgium' />
-    <option code='e-bn' name='Bosnia and Herzegovina' />
-    <option code='e-bu' name='Bulgaria' />
-    <option code='e-bw' name='Belarus' />
-    <option code='e-ci' name='Croatia' />
-    <option code='e-cs' name='Czechoslovakia' />
-    <option code='e-dk' name='Denmark' />
-    <option code='e-er' name='Estonia' />
-    <option code='e-fi' name='Finland' />
-    <option code='e-fr' name='France' />
-    <option code='e-ge' name='Germany (East)' />
-    <option code='e-gg' name='Guernsey' />
-    <option code='e-gi' name='Gibraltar' />
-    <option code='e-gr' name='Greece' />
-    <option code='e-gw' name='Germany (West)' />
-    <option code='e-gx' name='Germany' />
-    <option code='e-hu' name='Hungary' />
-    <option code='e-ic' name='Iceland' />
-    <option code='e-ie' name='Ireland' />
-    <option code='e-im' name='Isle of Man' />
-    <option code='e-it' name='Italy' />
-    <option code='e-je' name='Jersey' />
-    <option code='e-kv' name='Kosovo' />
-    <option code='e-lh' name='Liechtenstein' />
-    <option code='e-li' name='Lithuania' />
-    <option code='e-lu' name='Luxembourg' />
-    <option code='e-lv' name='Latvia' />
-    <option code='e-mc' name='Monaco' />
-    <option code='e-mm' name='Malta' />
-    <option code='e-mo' name='Montenegro' />
-    <option code='e-mv' name='Moldova' />
-    <option code='e-ne' name='Netherlands' />
-    <option code='e-no' name='Norway' />
-    <option code='e-pl' name='Poland' />
-    <option code='e-po' name='Portugal' />
-    <option code='e-rb' name='Serbia' />
-    <option code='e-rm' name='Romania' />
-    <option code='e-ru' name='Russia (Federation)' />
-    <option code='e-sm' name='San Marino' />
-    <option code='e-sp' name='Spain' />
-    <option code='e-sw' name='Sweden' />
-    <option code='e-sz' name='Switzerland' />
-    <option code='e-uk' name='Great Britain' />
+    <option code='a-ce---' name='Sri Lanka' />
+    <option code='a-ch---' name='Taiwan' />
+    <option code='a-cy---' name='Cyprus' />
+    <option code='a-em---' name='Timor-Leste' />
+    <option code='a-gs---' name='Georgia (Republic)' />
+    <option code='a-ii---' name='India' />
+    <option code='a-io---' name='Indonesia' />
+    <option code='a-iq---' name='Iraq' />
+    <option code='a-ir---' name='Iran' />
+    <option code='a-is---' name='Israel' />
+    <option code='a-ja---' name='Japan' />
+    <option code='a-jo---' name='Jordan' />
+    <option code='a-kn---' name='Korea (North)' />
+    <option code='a-ko---' name='Korea (South)' />
+    <option code='a-kr---' name='Korea' />
+    <option code='a-ku---' name='Kuwait' />
+    <option code='a-kz---' name='Kazakhstan' />
+    <option code='a-le---' name='Lebanon' />
+    <option code='a-ls---' name='Laos' />
+    <option code='a-mk---' name='Oman' />
+    <option code='a-mp---' name='Mongolia' />
+    <option code='a-my---' name='Malaysia' />
+    <option code='a-np---' name='Nepal' />
+    <option code='a-nw---' name='New Guinea' />
+    <option code='a-ph---' name='Philippines' />
+    <option code='a-pk---' name='Pakistan' />
+    <option code='a-pp---' name='Papua New Guinea' />
+    <option code='a-qa---' name='Qatar' />
+    <option code='a-si---' name='Singapore' />
+    <option code='a-su---' name='Saudi Arabia' />
+    <option code='a-sy---' name='Syria' />
+    <option code='a-ta---' name='Tajikistan' />
+    <option code='a-th---' name='Thailand' />
+    <option code='a-ts---' name='United Arab Emirates' />
+    <option code='a-tu---' name='Turkey' />
+    <option code='a-uz---' name='Uzbekistan' />
+    <option code='a-vt---' name='Vietnam' />
+    <option code='a-ye---' name='Yemen (Republic)' />
+    <option code='ac-----' name='Asia, Central' />
+    <option code='ae-----' name='East Asia' />
+    <option code='ai-----' name='Indochina' />
+    <option code='am-----' name='Malaya' />
+    <option code='aopf---' name='Paracel Islands' />
+    <option code='aoxp---' name='Spratly Islands' />
+    <option code='ap-----' name='Persian Gulf' />
+    <option code='as-----' name='Southeast Asia' />
+    <option code='aw-----' name='Middle East' />
+    <option code='awba---' name='West Bank' />
+    <option code='awgz---' name='Gaza Strip' />
+    <option code='az-----' name='South Asia' />
+    <option code='b------' name='Commonwealth countries' />
+    <option code='cc-----' name='Caribbean Area; Caribbean Sea' />
+    <option code='cl-----' name='Latin America' />
+    <option code='e------' name='Europe' />
+    <option code='e-aa---' name='Albania' />
+    <option code='e-an---' name='Andorra' />
+    <option code='e-au---' name='Austria' />
+    <option code='e-be---' name='Belgium' />
+    <option code='e-bn---' name='Bosnia and Herzegovina' />
+    <option code='e-bu---' name='Bulgaria' />
+    <option code='e-bw---' name='Belarus' />
+    <option code='e-ci---' name='Croatia' />
+    <option code='e-cs---' name='Czechoslovakia' />
+    <option code='e-dk---' name='Denmark' />
+    <option code='e-er---' name='Estonia' />
+    <option code='e-fi---' name='Finland' />
+    <option code='e-fr---' name='France' />
+    <option code='e-ge---' name='Germany (East)' />
+    <option code='e-gg---' name='Guernsey' />
+    <option code='e-gi---' name='Gibraltar' />
+    <option code='e-gr---' name='Greece' />
+    <option code='e-gw---' name='Germany (West)' />
+    <option code='e-gx---' name='Germany' />
+    <option code='e-hu---' name='Hungary' />
+    <option code='e-ic---' name='Iceland' />
+    <option code='e-ie---' name='Ireland' />
+    <option code='e-im---' name='Isle of Man' />
+    <option code='e-it---' name='Italy' />
+    <option code='e-je---' name='Jersey' />
+    <option code='e-kv---' name='Kosovo' />
+    <option code='e-lh---' name='Liechtenstein' />
+    <option code='e-li---' name='Lithuania' />
+    <option code='e-lu---' name='Luxembourg' />
+    <option code='e-lv---' name='Latvia' />
+    <option code='e-mc---' name='Monaco' />
+    <option code='e-mm---' name='Malta' />
+    <option code='e-mo---' name='Montenegro' />
+    <option code='e-mv---' name='Moldova' />
+    <option code='e-ne---' name='Netherlands' />
+    <option code='e-no---' name='Norway' />
+    <option code='e-pl---' name='Poland' />
+    <option code='e-po---' name='Portugal' />
+    <option code='e-rb---' name='Serbia' />
+    <option code='e-rm---' name='Romania' />
+    <option code='e-ru---' name='Russia (Federation)' />
+    <option code='e-sm---' name='San Marino' />
+    <option code='e-sp---' name='Spain' />
+    <option code='e-sw---' name='Sweden' />
+    <option code='e-sz---' name='Switzerland' />
+    <option code='e-uk---' name='Great Britain' />
     <option code='e-uk-en' name='England' />
     <option code='e-uk-ni' name='Northern Ireland' />
     <option code='e-uk-st' name='Scotland' />
     <option code='e-uk-wl' name='Wales' />
-    <option code='e-un' name='Ukraine' />
-    <option code='e-ur' name='Russia. Russian Empire. Soviet Union. Former Soviet Republics' />
-    <option code='e-urc' name='Central Chernozem Region (Russia)' />
-    <option code='e-ure' name='Siberia, Eastern (Russia)' />
-    <option code='e-urf' name='Russian Far East (Russia)' />
-    <option code='e-urn' name='Soviet Union, Northwestern' />
-    <option code='e-urs' name='Siberia (Russia)' />
-    <option code='e-urw' name='Siberia, Western (Russia)' />
-    <option code='e-vc' name='Vatican City' />
-    <option code='e-xn' name='North Macedonia' />
-    <option code='e-xo' name='Slovakia' />
-    <option code='e-xr' name='Czech Republic' />
-    <option code='e-xv' name='Slovenia' />
-    <option code='e-yu' name='Serbia and Montenegro; Yugoslavia' />
-    <option code='eb' name='Baltic States' />
-    <option code='ec' name='Europe, Central' />
-    <option code='ee' name='Europe, Eastern' />
-    <option code='en' name='Europe, Northern' />
-    <option code='es' name='Europe, Southern' />
-    <option code='ev' name='Scandinavia' />
-    <option code='ew' name='Europe, Western' />
-    <option code='f' name='Africa' />
-    <option code='f-ae' name='Algeria' />
-    <option code='f-ao' name='Angola' />
-    <option code='f-bd' name='Burundi' />
-    <option code='f-bs' name='Botswana' />
-    <option code='f-cd' name='Chad' />
-    <option code='f-cf' name='Congo (Brazzaville)' />
-    <option code='f-cg' name='Congo (Democratic Republic)' />
-    <option code='f-cm' name='Cameroon' />
-    <option code='f-cx' name='Central African Republic' />
-    <option code='f-dm' name='Benin' />
-    <option code='f-ea' name='Eritrea' />
-    <option code='f-eg' name='Equatorial Guinea' />
-    <option code='f-et' name='Ethiopia' />
-    <option code='f-ft' name='Djibouti' />
-    <option code='f-gh' name='Ghana' />
-    <option code='f-gm' name='Gambia' />
-    <option code='f-go' name='Gabon' />
-    <option code='f-gv' name='Guinea' />
-    <option code='f-iv' name="C�te d'Ivoire" />
-    <option code='f-ke' name='Kenya' />
-    <option code='f-lb' name='Liberia' />
-    <option code='f-lo' name='Lesotho' />
-    <option code='f-ly' name='Libya' />
-    <option code='f-mg' name='Madagascar' />
-    <option code='f-ml' name='Mali' />
-    <option code='f-mr' name='Morocco' />
-    <option code='f-mu' name='Mauritania' />
-    <option code='f-mw' name='Malawi' />
-    <option code='f-mz' name='Mozambique' />
-    <option code='f-ng' name='Niger' />
-    <option code='f-nr' name='Nigeria' />
-    <option code='f-pg' name='Guinea-Bissau' />
-    <option code='f-rh' name='Zimbabwe' />
-    <option code='f-rw' name='Rwanda' />
-    <option code='f-sa' name='South Africa' />
-    <option code='f-sd' name='South Sudan' />
-    <option code='f-sf' name='Sao Tome and Principe' />
-    <option code='f-sg' name='Senegal' />
-    <option code='f-sj' name='Sudan' />
-    <option code='f-sl' name='Sierra Leone' />
-    <option code='f-so' name='Somalia' />
-    <option code='f-sq' name='Eswatini' />
-    <option code='f-ss' name='Western Sahara' />
-    <option code='f-sx' name='Namibia' />
-    <option code='f-tg' name='Togo' />
-    <option code='f-ti' name='Tunisia' />
-    <option code='f-tz' name='Tanzania' />
-    <option code='f-ua' name='Egypt' />
-    <option code='f-ug' name='Uganda' />
-    <option code='f-uv' name='Burkina Faso' />
-    <option code='f-za' name='Zambia' />
-    <option code='fc' name='Africa, Central' />
-    <option code='fd' name='Sahara' />
-    <option code='fe' name='Africa, Eastern' />
-    <option code='ff' name='Africa, North' />
-    <option code='fh' name='Africa, Northeast' />
-    <option code='fq' name='Africa, French-speaking Equatorial' />
-    <option code='fs' name='Africa, Southern' />
-    <option code='fw' name='Africa, West' />
-    <option code='i-bi' name='British Indian Ocean Territory' />
-    <option code='i-cq' name='Comoros' />
-    <option code='i-fs' name='Terres australes et antarctiques fran�aises' />
-    <option code='i-hm' name='Heard and McDonald Islands' />
-    <option code='i-mf' name='Mauritius' />
-    <option code='i-my' name='Mayotte' />
-    <option code='i-re' name='R�union' />
-    <option code='i-se' name='Seychelles' />
-    <option code='i-xa' name='Christmas Island (Indian Ocean)' />
-    <option code='i-xb' name='Cocos (Keeling) Islands' />
-    <option code='i-xc' name='Maldives' />
-    <option code='lnbm' name='Bermuda Islands' />
-    <option code='lnca' name='Canary Islands' />
-    <option code='lncv' name='Cabo Verde' />
-    <option code='lnfa' name='Faroe Islands' />
-    <option code='lsbv' name='Bouvet Island' />
-    <option code='lsfk' name='Falkland Islands' />
-    <option code='lsxj' name='Saint Helena' />
-    <option code='lsxs' name='South Georgia and South Sandwich Islands' />
-    <option code='n' name='North America' />
-    <option code='n-cn' name='Canada' />
+    <option code='e-un---' name='Ukraine' />
+    <option code='e-ur---' name='Russia. Russian Empire. Soviet Union. Former Soviet Republics' />
+    <option code='e-urc--' name='Central Chernozem Region (Russia)' />
+    <option code='e-ure--' name='Siberia, Eastern (Russia)' />
+    <option code='e-urf--' name='Russian Far East (Russia)' />
+    <option code='e-urn--' name='Soviet Union, Northwestern' />
+    <option code='e-urs--' name='Siberia (Russia)' />
+    <option code='e-urw--' name='Siberia, Western (Russia)' />
+    <option code='e-vc---' name='Vatican City' />
+    <option code='e-xn---' name='North Macedonia' />
+    <option code='e-xo---' name='Slovakia' />
+    <option code='e-xr---' name='Czech Republic' />
+    <option code='e-xv---' name='Slovenia' />
+    <option code='e-yu---' name='Serbia and Montenegro; Yugoslavia' />
+    <option code='eb-----' name='Baltic States' />
+    <option code='ec-----' name='Europe, Central' />
+    <option code='ee-----' name='Europe, Eastern' />
+    <option code='en-----' name='Europe, Northern' />
+    <option code='es-----' name='Europe, Southern' />
+    <option code='ev-----' name='Scandinavia' />
+    <option code='ew-----' name='Europe, Western' />
+    <option code='f------' name='Africa' />
+    <option code='f-ae---' name='Algeria' />
+    <option code='f-ao---' name='Angola' />
+    <option code='f-bd---' name='Burundi' />
+    <option code='f-bs---' name='Botswana' />
+    <option code='f-cd---' name='Chad' />
+    <option code='f-cf---' name='Congo (Brazzaville)' />
+    <option code='f-cg---' name='Congo (Democratic Republic)' />
+    <option code='f-cm---' name='Cameroon' />
+    <option code='f-cx---' name='Central African Republic' />
+    <option code='f-dm---' name='Benin' />
+    <option code='f-ea---' name='Eritrea' />
+    <option code='f-eg---' name='Equatorial Guinea' />
+    <option code='f-et---' name='Ethiopia' />
+    <option code='f-ft---' name='Djibouti' />
+    <option code='f-gh---' name='Ghana' />
+    <option code='f-gm---' name='Gambia' />
+    <option code='f-go---' name='Gabon' />
+    <option code='f-gv---' name='Guinea' />
+    <option code='f-iv---' name="C�te d'Ivoire" />
+    <option code='f-ke---' name='Kenya' />
+    <option code='f-lb---' name='Liberia' />
+    <option code='f-lo---' name='Lesotho' />
+    <option code='f-ly---' name='Libya' />
+    <option code='f-mg---' name='Madagascar' />
+    <option code='f-ml---' name='Mali' />
+    <option code='f-mr---' name='Morocco' />
+    <option code='f-mu---' name='Mauritania' />
+    <option code='f-mw---' name='Malawi' />
+    <option code='f-mz---' name='Mozambique' />
+    <option code='f-ng---' name='Niger' />
+    <option code='f-nr---' name='Nigeria' />
+    <option code='f-pg---' name='Guinea-Bissau' />
+    <option code='f-rh---' name='Zimbabwe' />
+    <option code='f-rw---' name='Rwanda' />
+    <option code='f-sa---' name='South Africa' />
+    <option code='f-sd---' name='South Sudan' />
+    <option code='f-sf---' name='Sao Tome and Principe' />
+    <option code='f-sg---' name='Senegal' />
+    <option code='f-sj---' name='Sudan' />
+    <option code='f-sl---' name='Sierra Leone' />
+    <option code='f-so---' name='Somalia' />
+    <option code='f-sq---' name='Eswatini' />
+    <option code='f-ss---' name='Western Sahara' />
+    <option code='f-sx---' name='Namibia' />
+    <option code='f-tg---' name='Togo' />
+    <option code='f-ti---' name='Tunisia' />
+    <option code='f-tz---' name='Tanzania' />
+    <option code='f-ua---' name='Egypt' />
+    <option code='f-ug---' name='Uganda' />
+    <option code='f-uv---' name='Burkina Faso' />
+    <option code='f-za---' name='Zambia' />
+    <option code='fc-----' name='Africa, Central' />
+    <option code='fd-----' name='Sahara' />
+    <option code='fe-----' name='Africa, Eastern' />
+    <option code='ff-----' name='Africa, North' />
+    <option code='fh-----' name='Africa, Northeast' />
+    <option code='fq-----' name='Africa, French-speaking Equatorial' />
+    <option code='fs-----' name='Africa, Southern' />
+    <option code='fw-----' name='Africa, West' />
+    <option code='i-bi---' name='British Indian Ocean Territory' />
+    <option code='i-cq---' name='Comoros' />
+    <option code='i-fs---' name='Terres australes et antarctiques fran�aises' />
+    <option code='i-hm---' name='Heard and McDonald Islands' />
+    <option code='i-mf---' name='Mauritius' />
+    <option code='i-my---' name='Mayotte' />
+    <option code='i-re---' name='R�union' />
+    <option code='i-se---' name='Seychelles' />
+    <option code='i-xa---' name='Christmas Island (Indian Ocean)' />
+    <option code='i-xb---' name='Cocos (Keeling) Islands' />
+    <option code='i-xc---' name='Maldives' />
+    <option code='lnbm---' name='Bermuda Islands' />
+    <option code='lnca---' name='Canary Islands' />
+    <option code='lncv---' name='Cabo Verde' />
+    <option code='lnfa---' name='Faroe Islands' />
+    <option code='lsbv---' name='Bouvet Island' />
+    <option code='lsfk---' name='Falkland Islands' />
+    <option code='lsxj---' name='Saint Helena' />
+    <option code='lsxs---' name='South Georgia and South Sandwich Islands' />
+    <option code='n------' name='North America' />
+    <option code='n-cn---' name='Canada' />
     <option code='n-cn-ab' name='Alberta' />
     <option code='n-cn-bc' name='British Columbia' />
     <option code='n-cn-mb' name='Manitoba' />
@@ -235,9 +235,9 @@
     <option code='n-cn-qu' name='Qu�bec (Province)' />
     <option code='n-cn-sn' name='Saskatchewan' />
     <option code='n-cn-yk' name='Yukon Territory' />
-    <option code='n-gl' name='Greenland' />
-    <option code='n-mx' name='Mexico' />
-    <option code='n-us' name='United States' />
+    <option code='n-gl---' name='Greenland' />
+    <option code='n-mx---' name='Mexico' />
+    <option code='n-us---' name='United States' />
     <option code='n-us-ak' name='Alaska' />
     <option code='n-us-al' name='Alabama' />
     <option code='n-us-ar' name='Arkansas' />
@@ -289,96 +289,96 @@
     <option code='n-us-wi' name='Wisconsin' />
     <option code='n-us-wv' name='West Virginia' />
     <option code='n-us-wy' name='Wyoming' />
-    <option code='n-usn' name='New England' />
-    <option code='n-xl' name='Saint Pierre and Miquelon' />
-    <option code='nc' name='Central America' />
-    <option code='ncbh' name='Belize' />
-    <option code='nccr' name='Costa Rica' />
-    <option code='nces' name='El Salvador' />
-    <option code='ncgt' name='Guatemala' />
-    <option code='ncho' name='Honduras' />
-    <option code='ncnq' name='Nicaragua' />
-    <option code='ncpn' name='Panama' />
-    <option code='nwaq' name='Antigua and Barbuda' />
-    <option code='nwaw' name='Aruba' />
-    <option code='nwbb' name='Barbados' />
-    <option code='nwbf' name='Bahamas' />
-    <option code='nwcj' name='Cayman Islands' />
-    <option code='nwco' name='Cura�ao' />
-    <option code='nwcu' name='Cuba' />
-    <option code='nwdq' name='Dominica' />
-    <option code='nwdr' name='Dominican Republic' />
-    <option code='nwgd' name='Grenada' />
-    <option code='nwgp' name='Guadeloupe' />
-    <option code='nwht' name='Haiti' />
-    <option code='nwjm' name='Jamaica' />
-    <option code='nwmj' name='Montserrat' />
-    <option code='nwmq' name='Martinique' />
-    <option code='nwpr' name='Puerto Rico' />
-    <option code='nwsc' name='Saint-Barth�lemy' />
-    <option code='nwsn' name='Sint Maarten' />
-    <option code='nwst' name='Saint-Martin' />
-    <option code='nwsv' name='Swan Islands (Honduras)' />
-    <option code='nwtc' name='Turks and Caicos Islands' />
-    <option code='nwtr' name='Trinidad and Tobago' />
-    <option code='nwuc' name='United States Miscellaneous Caribbean Islands' />
-    <option code='nwvb' name='British Virgin Islands' />
-    <option code='nwvi' name='Virgin Islands of the United States' />
-    <option code='nwxa' name='Anguilla' />
-    <option code='nwxi' name='Saint Kitts and Nevis' />
-    <option code='nwxk' name='Saint Lucia' />
-    <option code='nwxm' name='Saint Vincent and the Grenadines' />
-    <option code='po' name='Oceania' />
-    <option code='poas' name='American Samoa' />
-    <option code='pobp' name='Solomon Islands' />
-    <option code='poci' name='Caroline Islands' />
-    <option code='pocw' name='Cook Islands' />
-    <option code='poea' name='Easter Island' />
-    <option code='pofj' name='Fiji' />
-    <option code='pofp' name='French Polynesia' />
-    <option code='pogg' name='Galapagos Islands' />
-    <option code='pogu' name='Guam' />
-    <option code='poji' name='Johnston Island' />
-    <option code='pomi' name='Micronesia (Federated States)' />
-    <option code='ponl' name='New Caledonia' />
-    <option code='ponn' name='Vanuatu' />
-    <option code='ponu' name='Nauru' />
-    <option code='popc' name='Pitcairn Island' />
-    <option code='popl' name='Palau' />
-    <option code='pops' name='Polynesia' />
-    <option code='posh' name='Samoan Islands' />
-    <option code='potl' name='Tokelau' />
-    <option code='poto' name='Tonga' />
-    <option code='pott' name='Micronesia' />
-    <option code='potv' name='Tuvalu' />
-    <option code='powf' name='Wallis and Futuna Islands' />
-    <option code='powk' name='Wake Island' />
-    <option code='pows' name='Samoa' />
-    <option code='poxd' name='Mariana Islands' />
-    <option code='poxe' name='Marshall Islands' />
-    <option code='poxf' name='Midway Islands' />
-    <option code='poxh' name='Niue' />
-    <option code='s' name='South America' />
-    <option code='s-ag' name='Argentina' />
-    <option code='s-bl' name='Brazil' />
-    <option code='s-bo' name='Bolivia' />
-    <option code='s-ck' name='Colombia' />
-    <option code='s-cl' name='Chile' />
-    <option code='s-ec' name='Ecuador' />
-    <option code='s-fg' name='French Guiana' />
-    <option code='s-gy' name='Guyana' />
-    <option code='s-pe' name='Peru' />
-    <option code='s-py' name='Paraguay' />
-    <option code='s-sr' name='Suriname' />
-    <option code='s-uy' name='Uruguay' />
-    <option code='s-ve' name='Venezuela' />
-    <option code='t' name='Antarctic Ocean; Antarctica' />
-    <option code='u' name='Australasia' />
-    <option code='u-at' name='Australia' />
+    <option code='n-usn--' name='New England' />
+    <option code='n-xl---' name='Saint Pierre and Miquelon' />
+    <option code='nc-----' name='Central America' />
+    <option code='ncbh---' name='Belize' />
+    <option code='nccr---' name='Costa Rica' />
+    <option code='nces---' name='El Salvador' />
+    <option code='ncgt---' name='Guatemala' />
+    <option code='ncho---' name='Honduras' />
+    <option code='ncnq---' name='Nicaragua' />
+    <option code='ncpn---' name='Panama' />
+    <option code='nwaq---' name='Antigua and Barbuda' />
+    <option code='nwaw---' name='Aruba' />
+    <option code='nwbb---' name='Barbados' />
+    <option code='nwbf---' name='Bahamas' />
+    <option code='nwcj---' name='Cayman Islands' />
+    <option code='nwco---' name='Cura�ao' />
+    <option code='nwcu---' name='Cuba' />
+    <option code='nwdq---' name='Dominica' />
+    <option code='nwdr---' name='Dominican Republic' />
+    <option code='nwgd---' name='Grenada' />
+    <option code='nwgp---' name='Guadeloupe' />
+    <option code='nwht---' name='Haiti' />
+    <option code='nwjm---' name='Jamaica' />
+    <option code='nwmj---' name='Montserrat' />
+    <option code='nwmq---' name='Martinique' />
+    <option code='nwpr---' name='Puerto Rico' />
+    <option code='nwsc---' name='Saint-Barth�lemy' />
+    <option code='nwsn---' name='Sint Maarten' />
+    <option code='nwst---' name='Saint-Martin' />
+    <option code='nwsv---' name='Swan Islands (Honduras)' />
+    <option code='nwtc---' name='Turks and Caicos Islands' />
+    <option code='nwtr---' name='Trinidad and Tobago' />
+    <option code='nwuc---' name='United States Miscellaneous Caribbean Islands' />
+    <option code='nwvb---' name='British Virgin Islands' />
+    <option code='nwvi---' name='Virgin Islands of the United States' />
+    <option code='nwxa---' name='Anguilla' />
+    <option code='nwxi---' name='Saint Kitts and Nevis' />
+    <option code='nwxk---' name='Saint Lucia' />
+    <option code='nwxm---' name='Saint Vincent and the Grenadines' />
+    <option code='po-----' name='Oceania' />
+    <option code='poas---' name='American Samoa' />
+    <option code='pobp---' name='Solomon Islands' />
+    <option code='poci---' name='Caroline Islands' />
+    <option code='pocw---' name='Cook Islands' />
+    <option code='poea---' name='Easter Island' />
+    <option code='pofj---' name='Fiji' />
+    <option code='pofp---' name='French Polynesia' />
+    <option code='pogg---' name='Galapagos Islands' />
+    <option code='pogu---' name='Guam' />
+    <option code='poji---' name='Johnston Island' />
+    <option code='pomi---' name='Micronesia (Federated States)' />
+    <option code='ponl---' name='New Caledonia' />
+    <option code='ponn---' name='Vanuatu' />
+    <option code='ponu---' name='Nauru' />
+    <option code='popc---' name='Pitcairn Island' />
+    <option code='popl---' name='Palau' />
+    <option code='pops---' name='Polynesia' />
+    <option code='posh---' name='Samoan Islands' />
+    <option code='potl---' name='Tokelau' />
+    <option code='poto---' name='Tonga' />
+    <option code='pott---' name='Micronesia' />
+    <option code='potv---' name='Tuvalu' />
+    <option code='powf---' name='Wallis and Futuna Islands' />
+    <option code='powk---' name='Wake Island' />
+    <option code='pows---' name='Samoa' />
+    <option code='poxd---' name='Mariana Islands' />
+    <option code='poxe---' name='Marshall Islands' />
+    <option code='poxf---' name='Midway Islands' />
+    <option code='poxh---' name='Niue' />
+    <option code='s------' name='South America' />
+    <option code='s-ag---' name='Argentina' />
+    <option code='s-bl---' name='Brazil' />
+    <option code='s-bo---' name='Bolivia' />
+    <option code='s-ck---' name='Colombia' />
+    <option code='s-cl---' name='Chile' />
+    <option code='s-ec---' name='Ecuador' />
+    <option code='s-fg---' name='French Guiana' />
+    <option code='s-gy---' name='Guyana' />
+    <option code='s-pe---' name='Peru' />
+    <option code='s-py---' name='Paraguay' />
+    <option code='s-sr---' name='Suriname' />
+    <option code='s-uy---' name='Uruguay' />
+    <option code='s-ve---' name='Venezuela' />
+    <option code='t------' name='Antarctic Ocean; Antarctica' />
+    <option code='u------' name='Australasia' />
+    <option code='u-at---' name='Australia' />
     <option code='u-at-ac' name='Australian Capital Territory' />
-    <option code='u-atc' name='Central Australia' />
-    <option code='u-ate' name='Eastern Australia' />
-    <option code='u-atn' name='Northern Australia' />
+    <option code='u-atc--' name='Central Australia' />
+    <option code='u-ate--' name='Eastern Australia' />
+    <option code='u-atn--' name='Northern Australia' />
     <option code='u-at-ne' name='New South Wales' />
     <option code='u-at-no' name='Northern Territory' />
     <option code='u-at-qn' name='Queensland' />
@@ -386,6 +386,6 @@
     <option code='u-at-tm' name='Tasmania' />
     <option code='u-at-vi' name='Victoria' />
     <option code='u-at-we' name='Western Australia' />
-    <option code='u-cs' name='Coral Sea Islands' />
-    <option code='u-nz' name='New Zealand' />
+    <option code='u-cs---' name='Coral Sea Islands' />
+    <option code='u-nz---' name='New Zealand' />
 </field043>
