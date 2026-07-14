@@ -78,7 +78,7 @@ function editCodedData()
 
     var winProperties;
 
-    if ( dataElement.search(/relator|f377a|f377l/) != -1 ) {  // Códigos de theLeftPanel
+    if ( dataElement.search(/relator|f377a|f377l|f043a|f043c/) != -1 ) {  // Códigos de theLeftPanel
 
         if( dataElement == "subfield7"){
             URL = HTDOCS + "html/subfield-7.htm"; // Diferente plantilla para subfield-7
@@ -137,7 +137,7 @@ function editCodedData()
         
         
         if ( null != newCode ) {
-            if ( dataElement.search(/relator|f377a|f377l/) != -1 ) {
+            if ( dataElement.search(/relator|f377a|f377l|f043a|f043c/) != -1 ) {
                 objEvent.value = newCode.value;
             } else {
                 document.getElementById("marcEditForm")[dataElement].value = newCode.value;

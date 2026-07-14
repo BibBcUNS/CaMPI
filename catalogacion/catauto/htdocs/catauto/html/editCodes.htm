@@ -204,8 +204,18 @@ function readCodesAndTitle(dataElement)
 		case "f008_15_17" :
 			xmlCodes = callingWindowObject.xmlData.xmlCountryCodes;
 			Codes = top.selectNodesChrome("/" + "/country", xmlCodes);
-			title = "008/15-17 · Lugar de publicación";
-			break;
+			title = "008/15-17 · Lugar de publicación";	
+		break;
+		case "f043a" :
+			xmlCodes = callingWindowObject.xmlData.xmlField043;
+			Codes = top.selectNodesChrome("/" + "/option", xmlCodes);
+			title = "043a - Código de área geográfica";
+		break;
+		case "f043c" :
+			xmlCodes = callingWindowObject.xmlData.xmlProvincias;
+			Codes = top.selectNodesChrome("/" + "/provincia", xmlCodes);
+			title = "043c - Código ISO - Provincias de Argentina";
+		break;
 
 		case "f377a":
 		case "f377l":
@@ -264,13 +274,14 @@ function renderMenu(dataElement,activeCode,sortBy)
 				newOption.value = Codes[i].getAttribute("code");
 				newOption.languageName = Codes[i].getAttribute("name");
 
-				// Marcamos opción como activa si es igual a la pasada por parámetro
-				if (dialogArguments[1] == "f377a"){
-					newOption.selected = (newOption.value == activeCode);
-				}else if (dialogArguments[1] == "f377l"){
+				// Si el campo tenia valor, marcamos la opcion activa correspondiente
+				if(dialogArguments[1] == "f377l"){
+					// Por excepcion, este campo toma el valor de languageName
 					newOption.selected = (newOption.languageName == activeCode);
+				}else{
+					newOption.selected = (newOption.value == activeCode);
 				}
-				
+
 				newSelect.appendChild(newOption);
 				
 				var myValue = newOption.value.replace(/([^^#])#/g,"$1 "); // "mx#" se muestra como "mx "; la expr.reg. podría quizás cambiarse por /(\w)#/g

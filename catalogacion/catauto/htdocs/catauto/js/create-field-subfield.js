@@ -610,7 +610,7 @@ function createSubfield( code, sfText, label, fieldTag )
     newSubfieldBox.style.fontSize = "14px";
     newSubfieldBox.style.lineHeight = "21px";
   }
-  else if ( tag_code == "377a" || tag_code == "377l" ) {   // Language & country codes
+  else if ( tag_code == "377a" || tag_code == "377l" || tag_code == "043a" || tag_code == "043c" ) {   // Language & country codes
     newSubfieldBox.readOnly = true;  // ATENCION: esta propiedad produce un bug al subir/bajar un subcampo $4 vacío
     
     // Si no tiene valor (porque se acaba de crear) entonces le asignamos un espacio en blanco (por problemas con height)

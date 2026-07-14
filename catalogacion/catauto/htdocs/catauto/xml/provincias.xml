@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- Listado proveniente de https://www.iso.org/obp/ui/#iso:code:3166:AR -->
+
+<provincias>
+    <provincia code="ar-b" name="Buenos Aires" />
+    <provincia code="ar-c" name="Ciudad Autónoma de Buenos Aires" />
+    <provincia code="ar-s" name="Santa Fe" />
+    <provincia code="ar-e" name="Entre Ríos" />
+    <provincia code="ar-h" name="Chaco" />
+    <provincia code="ar-a" name="Salta" />
+    <provincia code="ar-x" name="Córdoba" />
+    <provincia code="ar-d" name="San Luis" />
+    <provincia code="ar-w" name="Corrientes" />
+    <provincia code="ar-u" name="Chubut" />
+    <provincia code="ar-p" name="Formosa" />
+    <provincia code="ar-n" name="Misiones" />
+    <provincia code="ar-q" name="Neuquén" />
+    <provincia code="ar-l" name="La Pampa" />
+    <provincia code="ar-f" name="La Rioja" />
+    <provincia code="ar-m" name="Mendoza" />
+    <provincia code="ar-j" name="San Juan" />
+    <provincia code="ar-d" name="San Luis" />
+    <provincia code="ar-z" name="Santa Cruz" />
+    <provincia code="ar-v" name="Tierra del Fuego" />
+    <provincia code="ar-t" name="Tucumán" />
+    <provincia code="ar-k" name="Catamarca" />
+    <provincia code="ar-y" name="Jujuy" />
+    <provincia code="ar-r" name="Río Negro" />
+</provincias>

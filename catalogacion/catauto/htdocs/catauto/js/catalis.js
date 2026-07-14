@@ -149,20 +149,19 @@ function getXMLFile(sourceURL)
 function loadXML() //(M.A) importa cada uno de los archivos XML
 // -----------------------------------------------------------------------------
 {
-	// URLs de documentos XML
-	//URL_COUNTRY_CODES = HTDOCS + "xml/country.xml";
 	URL_FIXED_FIELD = HTDOCS + "xml/fixedField.xml";
 	URL_LANGUAGE_CODES = HTDOCS + "xml/language.xml";
 	URL_RELATOR_CODES = HTDOCS + "xml/relator.xml";
 	URL_MARC21 = HTDOCS + "xml/marc21.xml";
-	
-	// Cargamos los documentos
+	URL_FIELD043 = HTDOCS + "xml/field043.xml";
+	URL_PROVINCIAS = HTDOCS + "xml/provincias.xml";
+
 	importXML("xmlMARC21" , URL_MARC21);
 	importXML("xmlLanguageCodes", URL_LANGUAGE_CODES);
 	importXML("xmlFixedField", URL_FIXED_FIELD);
 	importXML("xmlRelatorCodes", URL_RELATOR_CODES);
-
-	//xmlCountryCodes = importXML(URL_COUNTRY_CODES);
+	importXML("xmlField043", URL_FIELD043);
+	importXML("xmlProvincias", URL_PROVINCIAS);
 }
 
 
