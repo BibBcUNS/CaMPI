@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <field043>
+    <option code='s-ag---' name='Argentina' />
     <option code='a------' name='Asia' />
     <option code='a-af---' name='Afghanistan' />
     <option code='a-ai---' name='Armenia (Republic)' />
@@ -359,7 +360,6 @@
     <option code='poxf---' name='Midway Islands' />
     <option code='poxh---' name='Niue' />
     <option code='s------' name='South America' />
-    <option code='s-ag---' name='Argentina' />
     <option code='s-bl---' name='Brazil' />
     <option code='s-bo---' name='Bolivia' />
     <option code='s-ck---' name='Colombia' />
