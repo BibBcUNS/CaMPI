@@ -115,6 +115,11 @@ function punctuation(tag,sf)
 				sf = sf.replace(",^c", "^c");
 			}
 
+			// Sin puntuación cuando le sigue ^q
+			if (/\^a[^^]*\^q/.test(sf)){
+				sf = sf.replace(",^q", "^q")
+			}
+
 			// Subcampo ^b 
 			// Finaliza en coma cuando le sigue otro subcampo (coma ya colocada anteriormente)
 
@@ -305,6 +310,11 @@ function punctuation(tag,sf)
 			// Sin puntuación cuando le sigue un ^c que inicia con parentesis
 			if (/\^a[^^]*,\^c\(/.test(sf) ){
 				sf = sf.replace(",^c", "^c");
+			}
+
+			// Sin puntuación cuando le sigue ^q
+			if (/\^a[^^]*\^q/.test(sf)){
+				sf = sf.replace(",^q", "^q")
 			}
 
 			// Subcampo ^b
