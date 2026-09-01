@@ -1139,12 +1139,18 @@
 	</datafield>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="400" repet="R" label-spa="Véase - Nombre personal" label-eng="Véase - Personal name" template="0#a">
+
 		<indicator pos="1" label-eng="Type of personal name entry element" label-spa="Tipo de elemento de entrada">
 			<i value="0" label-eng="Forename" label-spa="Nombre propio" />
 			<i value="1" label-eng="Surname" label-spa="Apellido" />
 			<i value="3" label-eng="Family name" label-spa="Nombre de familia" />
 		</indicator>
-		<indicator pos="2" />
+
+		<indicator pos="2" label-eng="Preferred variant heading">
+			<i value="#" label-eng="No information provided" />
+			<i value="1" label-eng="Preferred variant heading" />
+		</indicator>
+
 		<subfield code="a" repet="NR" label-spa="Nombre personal" oblig="ALL" />
 		<subfield code="b" repet="NR" label-spa="Numeración" />
 		<subfield code="c" repet="R" label-spa="Títulos u otras palabras asociadas al nombre" />
@@ -1183,7 +1189,12 @@
 			<i value="1" label-spa="Nombre de jurisdicción" label-eng="Jurisdiction name"/>
 			<i value="2" label-spa="Nombre en orden directo" label-eng="Name in direct order" />
 		</indicator>
-		<indicator pos="2" />
+		
+		<indicator pos="2" label-eng="Preferred variant heading">
+			<i value="#" label-eng="No information provided" />
+			<i value="1" label-eng="Preferred variant heading" />
+		</indicator>
+
 		<subfield code="a" repet="NR" label-spa="Nombre corporativo a de jurisdicción" oblig="ALL" />
 		<subfield code="b" repet="R"  label-spa="Unidad subordinada" />
 		<subfield code="c" repet="NR" label-spa="Lugar de reunión" />
@@ -1221,7 +1232,12 @@
 			<i value="1" label-spa="Nombre de jurisdicción" label-eng="Jurisdiction name"/>
 			<i value="2" label-spa="Nombre en orden directo" label-eng="Name in direct order" />
 		</indicator>
-		<indicator pos="2" />
+		
+		<indicator pos="2" label-eng="Preferred variant heading">
+			<i value="#" label-eng="No information provided" />
+			<i value="1" label-eng="Preferred variant heading" />
+		</indicator>
+
 		<subfield code="a" repet="NR" label-spa="Nombre de reunión o de jurisdicción" oblig="ALL" />
 
 		<subfield code="c" repet="NR" label-spa="Lugar de reunión" />
@@ -1341,7 +1357,12 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<datafield tag="451" repet="R" label-spa="Referencia de Véase - Nombre geográfico" template="##a">
 		<indicator pos="1" />
-		<indicator pos="2" />
+		
+		<indicator pos="2" label-eng="Preferred variant heading">
+			<i value="#" label-eng="No information provided" />
+			<i value="1" label-eng="Preferred variant heading" />
+		</indicator>
+		
 		<subfield code="a" repet="NR" label-spa="Nombre geográfico" oblig="ALL" />
 		<subfield code="g" repet="R" label-spa="Información miscelánea" label-eng="Miscellaneous information"/>
 		<subfield code="i" repet="NR" label-spa="Frase de instrucción" />
