@@ -158,7 +158,9 @@
     <option code="b"   name="Microficha" name-eng="Microfiche" /> 
     <option code="c"   name="Microopaque" /> 
     <option code="d"   name="Large print" /> 
-    <option code="f"   name="Braille" /> 
+    <option code="f"   name="Braille" />
+    <option code="o"   name="En línea" />
+    <option code="q"   name="Electrónica de acceso directo" />
     <option code="r"   name="Regular print reproduction" /> 
     <option code="s"   name="Electrónico" name-eng="Electronic" /> 
     <option code="|"   name="No se codifica" />
@@ -189,6 +191,7 @@
     <option code="v"   name="Legal cases and case notes" /> 
     <option code="w"   name="Law reports and digests" />
     <option code="z"   name="Tratados" /> 
+    <option code="6"   name="Cómics/Novelas gráficas" /> 
     <option code="|"   name="No se codifica" />
   </dataElement>
 
@@ -228,7 +231,6 @@
   <dataElement pos="f008_BK_33" name="008/33 · Forma literaria" label-eng="Literary form">
     <option code="0"   name="No ficción (sin especificar)" name-eng="Not fiction (not further specified)" /> 
     <option code="1"   name="Ficción (sin especificar)" name-eng="Fiction (not further specified)" />
-    <option code="c"   name="Tiras cómicas (?)" name-eng="Comic strips" />
     <option code="d"   name="Dramas" />
     <option code="e"   name="Ensayos" name-eng="Essays" />
     <option code="f"   name="Novelas" name-eng="Novels" />
